@@ -52,21 +52,16 @@ module.exports = (grunt) ->
         options:
           livereload: true
         files: ["src/react/**/*.js"]
-        tasks: ["coffee:compile"]
-      lib:
-        options:
-          livereload: true
-        files: ["app/lib/**/*.js"]
-        tasks: "copy:lib"
+        tasks: ["react"]
       less:
         options:
           livereload: true
-        files: ["app/less/**/*.less"]
+        files: ["src/less/**/*.less"]
         tasks: ["less", "cssmin", "clean"]
       html:
         options:
           livereload: true
-        files: ["app/html/**/*.html"]
+        files: ["src/html/**/*.html"]
         tasks: ["copy:html"]
     
   grunt.loadNpmTasks "grunt-contrib-copy"

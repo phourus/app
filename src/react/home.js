@@ -12,7 +12,7 @@ if(typeof module !== 'undefined' && module.exports){
 /**
 * @jsx React.DOM
 */
-var Post = React.createClass({
+var Home = React.createClass({
      componentDidMount: function(){       
          var self = this;
          $.ajax({
@@ -26,12 +26,12 @@ var Post = React.createClass({
          });
      },
      render: function() {
-          return React.DOM.h1({onClick: function(){ alert('hey'); }}, this.props.title);
+          return React.DOM.h1(null, 'Home');
      }
 });
 if(typeof module !== 'undefined' && module.exports){
-    module.exports = Post;
+    module.exports = Home;
 }else{
     var cnt = document.getElementById('content');
-    React.renderComponent(Post({}), cnt);
+    React.renderComponent(Home({}), cnt);
 }
