@@ -6,8 +6,6 @@ var fs = require('fs');
 
 var phourus = express();
 
-
-
 phourus.get('/stream', function(req, res){
     var template = fs.readFile('build/template.html', 'utf8', function(err, out){
         var component = renderComponent('home');
@@ -26,7 +24,6 @@ phourus.get('/data', function(req, res){
 
 function renderComponent(id){
     var component = require('./build/react/' + id);
-    console.log(component);
     return React.renderToString(component());    
 }
 
