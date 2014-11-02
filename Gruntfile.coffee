@@ -1,20 +1,21 @@
 module.exports = (grunt) ->
   
   grunt.initConfig
- 
-    concat:
-      lib:
-        src: ["src/lib/*.js"]
-        dest: "build/lib.cat.js"  
      
     uglify:
       app:
         files:
           "build/app.min.js": "src/app.js"
-      lib:
-        files:
-          "build/lib.min.js": "build/lib.cat.js"
               
+    react:
+      app:
+        files: [
+          expand: true
+          cwd: "src/react"
+          src: ["**/*"]
+          dest: "build/react"
+        ]
+        
     less:
       build: 
         files: 
@@ -26,12 +27,12 @@ module.exports = (grunt) ->
           "build/style.min.css": "build/style.css"
     
     copy:
-      react:
+      html:
         files: [
           expand: true
-          cwd: "app/html"
+          cwd: "src/html"
           src: ["**/*.html"]
-          dest: "build/html"
+          dest: "build/"
           ext: ".html"
         ]
       assets:
@@ -41,33 +42,16 @@ module.exports = (grunt) ->
           src: ["**/*"]
           dest: "build/assets"
         ]
-      html:
-        files: [
-          expand: true
-          cwd: "app"
-          src: ["html/**/*"]
-          dest: "build/"
-        ]
-      lib:
-        files: [
-          expand: true
-          cwd: "app/lib"
-          src: ["**/*.js"]
-          dest: "build/lib"
-          ext: ".js"
-        ]
-      index:
-      	files:
-      	  "build/index.html": "build/html/index.html"
+      css:
+        files: "build/style.min.css": "style.min.css"
     
-    clean: ['build/lib.cat.css']
-    
-    ###
+    clean: ['build/lib.cat.js']
+
     watch:
       app:
         options:
           livereload: true
-        files: ["app/coffee/**/*.coffee"]
+        files: ["src/react/**/*.js"]
         tasks: ["coffee:compile"]
       lib:
         options:
@@ -84,15 +68,14 @@ module.exports = (grunt) ->
           livereload: true
         files: ["app/html/**/*.html"]
         tasks: ["copy:html"]
-    ###
-   
-  grunt.loadNpmTasks "grunt-contrib-concat"
+    
   grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks "grunt-contrib-cssmin"
   grunt.loadNpmTasks "grunt-contrib-less"
+  grunt.loadNpmTasks "grunt-react"
   grunt.loadNpmTasks "grunt-contrib-uglify"
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-watch"
   
 
-  grunt.registerTask "default", ["concat", "uglify", "less", "cssmin", "copy", "clean"]
+  grunt.registerTask "default", ["react", "less", "cssmin", "copy", "uglify", "clean"]
