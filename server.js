@@ -17,6 +17,13 @@ phourus.get('/stream', function(req, res){
     });   
 });
 
+phourus.get('/data', function(req, res){
+    var out = {};
+    out.title = "Test AJAX";
+    out.content = "Worked";
+    res.send(out, 200);
+});
+
 function renderComponent(id){
     var component = require('./build/react/' + id);
     console.log(component);
