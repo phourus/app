@@ -1,0 +1,285 @@
+@media screen and (min-width: 1100px) {
+  #footer .mid {
+    .left {
+      width: 70%;
+      
+      #signin {
+        display: block;
+      }
+      #signup {
+        width: 40%;
+      }
+      #signorg {
+        width: 60%;
+      }
+    }
+    #contact {
+      width: 30%;
+    }
+  }
+  
+  
+}
+
+@media screen and (min-width: 1200px) {
+
+  #sidebar {
+    width: 15%;
+  }
+  
+  #content {
+    width: 78%;
+  }
+  
+}
+
+@media screen and (max-width: 1200px) {
+
+  #sidebar {
+    width: 19%;
+  }
+  
+  #content {
+    width: 74%;
+  }
+  
+}
+
+@media screen and (max-width: 1100px) {
+
+  #sidebar {
+    width: 20%;
+  }
+  
+  #content {
+    width: 73%;
+  }
+  
+}
+
+@media screen and (max-width: 960px) {
+
+  #sidebar {
+    width: 23%;
+  }
+  
+  #content {
+    width: 70%;
+  }
+  
+}
+
+@media screen and (max-width: 800px) {
+  #main {
+	  display: table;
+	  
+	  #content {
+	    display: table-header-group;
+	    width: 100%;
+	  }
+		  
+	  #sidebar {
+	    display: table-footer-group;
+	    float: none;
+	    width: 100%;
+	    
+	    div {
+	      float: left;
+	      width: 33%;
+	      
+	      img {
+	        display: none;
+	      }
+	    }
+	  } 
+	  
+	  #footer {
+    	display: none;  
+	  }
+  }
+  
+  
+  
+  #header {
+    height: 80px;
+    img {
+      height: 50px;
+    }
+    
+    #brand {
+      .Cols(4);
+    }
+    #slogan {
+      margin-top: -30px !important;
+      margin-left: 50px !important; 
+    }
+    nav {
+      .Cols(8);
+      ul li a {
+        padding-top: 30px;
+        height: 50px;
+      }
+    } 
+  }  
+}
+
+@media screen and (max-width: 500px) {
+  #header {
+	  position: fixed;
+  }
+  div#spacer {
+	  height: 40px!important;
+  }
+  #main {
+	  
+	  #content {
+	    width: 100%;
+	    float: none;
+	    background-color: transparent;
+	    
+	    
+	    .stream {
+		    ul.tabs li {
+		    	width: 20%;
+		    	
+		    	a {
+			    	width: 100%;
+			    }
+		    }
+	    }
+	    
+	    .post {
+		    
+		    .stats { display: none; }
+		    .basic {
+			    width: 100%;
+			    float: none;
+		    }
+		    #body {
+			    width: 90%;
+			    margin: 10px 0px 10px 5%;
+		    }
+	    }
+	  }
+		  
+	  #sidebar {
+	    display: none;
+	    width: 0%;
+	    float: none;
+	    
+	    div {
+	      float: left;
+	      width: 33%;
+	      
+	      img {
+	        display: none;
+	      }
+	    }
+	  } 
+	  
+	  div.item {
+		  font-size: 80%;
+		  
+		  img {
+			  width: 50%;
+			  height: 50%;
+		  }
+	  }
+	  
+	  #stream .item {
+	  	  background-color: transparent;
+		  .type {
+			  display: none;
+		  }
+		  
+		  .social {
+			  ul li {
+				  margin-right: 0px;
+			  }
+		  }
+	  }
+	  
+	  #footer {
+    	  display: block;
+	  }
+  }
+  
+  
+  
+  #header {
+    height: 40px;
+    .flyout {
+	    .Cols(4);
+	    display: block;
+	    
+	    a {
+		    text-decoration: none;
+		    margin: 5px;
+		    color: #555;
+	    }
+	    a:hover {
+		    color: @gold-light;
+		    font-weight: bold;
+	    }
+    }
+    
+    nav#www {
+	    display: none !important; // Javascript is taking precedence
+    }
+    nav#mobile {
+	    display: block !important; // Javascript is taking precedence
+	    .Cols(2);
+	    
+	    
+	    a.search:hover {
+		    color: @blue-dark;
+	    }
+	    
+	    a.create:hover {
+		    color: @green-light;
+	    }
+    }
+    img {
+      height: 30px;
+    }
+    
+    #brand {
+      .Cols(6);
+      
+      a img {
+	      margin-top: 7px !important;
+      }
+    }
+    #slogan {
+      display: none; 
+    }
+  }  
+  
+  .form {
+        textarea {
+            width: 280px;
+        }
+      #description {
+          width: 280px;
+          text-align: center;
+      }
+  }
+  #fields fieldset ul li .bbf-editor input, select {
+    width: 280px;
+  }
+
+  #footer {
+  	height: 40px;
+  	position: fixed;
+  	bottom: 0px;
+  	background-image: none;
+  	
+	  .inner {
+		  display: none;
+	  }
+	  .bottom {
+		  padding-top: 0px;
+		  display: none;
+	  }
+  }
+}

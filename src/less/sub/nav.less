@@ -1,0 +1,92 @@
+/* NAV */
+nav {
+  float: left;
+  width: 60%;
+  margin: 0px;    
+  height: 100%;
+
+  ul {
+    padding: 0px 0px 0px 0px;
+    margin: 0px auto;
+    float: right;
+    width: 100%;
+    height: 100%;
+  
+    li {
+      list-style: none;   
+      padding: 0px;
+      cursor: pointer;
+      float: left;
+      width: 20%;
+      height: 100%;
+    
+      a {
+        margin: 0px 0px 0px 0px;
+        padding: 40px 0px 0px 0px;
+        color: #555;
+        font-size: 1em;
+        letter-spacing: 2px;
+        letter-spacing: 1px;    
+        text-decoration: none;
+        display: block;
+        text-align: left; 
+        margin: 0px 0px 0px 0px;
+        height: 60px;
+        text-align: center;
+        font-family: @century;
+        border-bottom: solid 4px;
+      }
+      a:hover {
+        font-weight: bold;
+        color: #444;
+      }
+      a.companies:hover { background-color: #d6edd7; }
+      a.govs:hover { background-color: #f7e1e1; }
+      a.schools:hover { background-color: #daeef8; }
+      a.groups:hover { background-color: #ffeeda; }
+      
+      a.companies { border-color: @green-light; }
+      a.govs { border-color: @red-light; }
+      a.schools { border-color: @blue-light; }
+      a.groups { border-color: #f90; }
+      
+      a:hover {
+        background-color: #eee;
+      }
+      ul {
+        display: none;
+        float: left;
+        width: 200px;	
+        position: absolute;
+        
+        li {
+          display: list-item;
+          list-style: none;	
+          float: none;
+          height: 20px;
+          margin-top: 4px;
+          
+          a {
+            color: #111;
+            font-size: 0.9em;
+            text-align: left;
+          }
+        }
+      }
+    }
+    li:hover ul {
+      display: block;
+    }
+  }
+}
+
+nav#mobile {
+	ul li {
+		width: intrinsic;
+		a {
+			border-bottom: none;
+			background-color: transparent;
+			padding-top: 5px !important;
+		}
+	}
+}

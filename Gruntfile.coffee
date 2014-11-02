@@ -45,7 +45,7 @@ module.exports = (grunt) ->
       css:
         files: "build/style.min.css": "style.min.css"
     
-    clean: ['build/lib.cat.js']
+    clean: ['build/lib.cat.js', 'build/style.css']
 
     watch:
       app:

@@ -1,0 +1,127 @@
+/** BUTTONS **/
+button.button, a.button, input.button, input#searchsubmit {
+  display: block;
+  font-family: @century;
+  font-size: 0.9em !important;
+  color: #eee !important;
+  width: 160px;
+  height: 40px;
+  text-align: center;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: none;
+  text-decoration: none;
+  margin: 4px;
+  float: left;
+  .insetlight()
+}
+
+.button.dark {
+  .inset(#555);
+}
+
+#sidebar .button, #footer .button, #footing .button {
+  .inset(#555);
+}
+  
+a.button {
+  padding-top: 8px;
+  height: 32px;
+}
+
+button.button:hover, a.button:hover, input.button:hover, input#searchsubmit:hover {
+cursor: pointer;
+text-shadow: 0px -1px 0px rgba(000,000,000,0), 0px 0px 0px rgba(000,000,000,0);
+font-weight: normal !important;
+}
+
+/** GREEN **/
+button.green.button, a.green.button, input.green.button, input#searchsubmit.green {
+.button-gradient(#0b0, #090);
+}
+
+button.green.button:hover, a.green.button:hover, input.green.button:hover, input#searchsubmit.green:hover {
+.button-gradient(#090, #0b0);
+}
+
+/** BLUE **/
+button.blue.button, a.blue.button, input.blue.button, input#searchsubmit.blue {
+.button-gradient(#08f, #05c);
+}
+
+button.blue.button:hover, a.blue.button:hover, input.blue.button:hover, input#searchsubmit.blue:hover {
+.button-gradient(#05c, #08f);
+}
+
+/** RED **/
+button.red.button, a.red.button, input.red.button, input#searchsubmit.red {
+.button-gradient(#d00, #a00);
+}
+
+button.red.button:hover, a.red.button:hover, input.red.button:hover, input#searchsubmit.red:hover {
+.button-gradient(#a00, #d00);
+}
+
+/** ORANGE **/
+button.orange.button, a.orange.button, input.orange.button, input#searchsubmit.orange {
+.button-gradient(#f60, #f90);
+}
+
+button.orange.button:hover, a.orange.button:hover, input.orange.button:hover, input#searchsubmit.orange:hover {
+.button-gradient(#f90, #f60);
+}
+
+/** HOME **/
+a.button-home {
+display: block;
+width: 200px;
+height: 200px;  
+cursor: pointer;
+float: left;
+}
+
+/* Original
+a.button-home#button-earth { background-image: url('/assets/elements/white/earth.png'); }
+a.button-home#button-mind { background-image: url('/assets/elements/white/mind.png'); }
+a.button-home#button-voice { background-image: url('/assets/elements/white/voice.png'); }
+a.button-home#button-self { background-image: url('/assets/elements/white/self.png'); }
+a.button-home#button-earth:hover { background-image: url('/assets/elements/black/earth.png'); }
+a.button-home#button-mind:hover { background-image: url('/assets/elements/black/mind.png'); }
+a.button-home#button-voice:hover { background-image: url('/assets/elements/black/voice.png'); }
+a.button-home#button-self:hover { background-image: url('/assets/elements/black/self.png'); }
+*/
+
+a.button-home#button-earth { background-image: url('/assets/elements/color/earth.png'); }
+a.button-home#button-mind { background-image: url('/assets/elements/color/mind.png'); }
+a.button-home#button-voice { background-image: url('/assets/elements/color/voice.png'); }
+a.button-home#button-self { background-image: url('/assets/elements/color/self.png'); }
+/*
+a.button-home#button-earth:hover { background-image: url('/assets/elements/white/earth.png'); }
+a.button-home#button-mind:hover { background-image: url('/assets/elements/white/mind.png'); }
+a.button-home#button-voice:hover { background-image: url('/assets/elements/white/voice.png'); }
+a.button-home#button-self:hover { background-image: url('/assets/elements/white/self.png'); }*/
+
+/** GOOGLE **/
+button.social {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 325px;
+  height: 50px;
+  cursor: pointer;  
+} 
+#google { background-image: url('/assets/buttons/google/login/normal.png'); }
+#google:hover { background-image: url('/assets/buttons/google/login/over.png'); }
+#google.logout { background-image: url('/assets/buttons/google/logout/normal.png'); } 
+#google.logout:hover { background-image: url('/assets/buttons/google/logout/over.png'); }
+
+#facebook { background-image: url('/assets/buttons/facebook/login/normal.png'); }
+#facebook:hover { background-image: url('/assets/buttons/facebook/login/over.png'); }
+#facebook.logout { background-image: url('/assets/buttons/facebook/logout/normal.png'); }
+#facebook.logout:hover { background-image: url('/assets/buttons/facebook/logout/over.png'); }
+
+#linkedin { background-image: url('/assets/buttons/linkedin/login/normal.png'); }
+#linkedin:hover { background-image: url('/assets/buttons/linkedin/login/over.png'); }
+#linkedin.logout { background-image: url('/assets/buttons/linkedin/logout/normal.png'); }
+#linkedin.logout:hover { background-image: url('/assets/buttons/linkedin/logout/over.png'); }

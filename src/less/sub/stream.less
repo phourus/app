@@ -1,0 +1,158 @@
+/** STREAM **/
+.stream, #widgets {
+
+  input#term {
+    width: 40%;  
+  }
+  
+  button#search {
+    height: 49px;
+    margin: 0px;
+    width: 15%;
+  }
+  
+  a#add {
+    width: 20%;
+  }
+  
+  a#advanced {
+    img {
+      margin: -2px 0px 0px 5px;
+    }
+  }
+  
+  #stream {      
+    padding: 4px;
+    margin: 0px;
+    /*background-color: #fafafa;
+    border: solid 1px #ccc; 
+    .box_shadow;*/
+    p {
+      margin: 0px;    
+    }
+    h3 {
+      text-align: center; 
+    }
+  }  
+  
+  #create {
+    width: 300px;
+    float: right;
+    margin-top: -20px;
+    width: 400px;
+    
+    select {
+      width: 200px; 
+      float: right;
+      margin-top: 4px;
+      height: 40px;
+    }  
+    
+    .button {
+      float: right;
+    }
+  }
+  
+  #filter.hide {
+	  display: none;
+  }
+  #filter {
+    width: 98%;
+    float: left;
+    background-color: #fafafa;
+    border: solid 1px #eee;
+    padding: 1%;
+    margin-bottom: 40px;
+    
+    h3 {
+      margin: 0px 0px 10px 0px;
+      padding: 0px;
+      font-style: italic;
+    }
+    
+    ul#mode {
+      padding: 0px;
+      margin: 0px;
+      width: 90%;
+    }
+    
+    div.types {
+      width: 90%;
+      
+      div {
+        .Cols(3);
+        
+		button {
+			width: 80px;
+		}
+		button.off {
+			.button-gradient(#fff, #ccc);
+			color: #333 !important;
+		}     
+		button.off.green:hover {
+			.button-gradient(#0b0, #fff);
+		} 
+		button.off.blue:hover {
+			.button-gradient(#08f, #fff);
+		} 
+		button.off.red:hover {
+			.button-gradient(#a00, #fff);
+		} 
+		button.off.orange:hover {
+			.button-gradient(#f90, #fff);
+		} 
+      }
+    }
+  }
+  
+  #paging {
+    margin-top: 20px;
+    font-size: 0.7em;
+    font-style: italic;
+    color: #444;
+    padding: 0 4% 0 4%;
+    
+    a#prev, a#next {
+      display: block;
+      width: 25%;
+      float: left;
+      text-decoration: none;
+      color: #333;
+    }
+    
+    a#prev {
+      width: 25%;
+    }
+    
+    a#prev:hover, a#next:hover {
+      color: @green-light;
+    }
+    a#next {
+      text-align: right;
+    }
+    div.totals {
+      width: 20%;
+    }
+    div.viewing {
+      text-align: right;
+      width: 30%;
+    }
+    div {
+      float: left;
+    }
+  }
+  #sort_by {
+    float: right; 
+    margin: 0px 0px 10px 0px; 
+    padding: 0px;
+    color: #777;
+    font-size: 0.9em;
+    font-style: italic;
+    text-transform: none;
+    font-weight: normal;
+  }
+  select#sort, select#direction {
+    width: 120px;   
+    font-size: 0.9em;
+  }  
+}

@@ -1,0 +1,284 @@
+#main {
+  width: 100%;
+  overflow: hidden;
+}
+
+#content.homepage {
+  background: none;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}  
+
+/** FORM/SINGLE **/
+div#footing {
+background-color: #333; 
+padding: 0px;
+border: solid 1px #eee;
+width: 100%;
+margin: 0px;
+}
+
+/** CONTENT **/
+#content {
+  width: 78%;  
+  padding: 20px 1.5% 0px 1.5%;  
+  margin: 20px 0% 20px 2%;
+  font-size: 1em;
+  float: left;
+  background-color: #fff;
+  .box-shadow();
+  height: 100%;
+  min-height: 600px; 
+  
+  p.summary {
+    font-size: 1.2em;
+    font-style: italic;
+    margin-top: 40px;   
+  }  
+  h4 {
+    text-align: left;   
+    padding: 0px;
+    margin: 10px 0px 0px 0px;
+  }
+  
+  .contact {
+    textarea {
+      width: 800px;
+    }
+  }
+  
+  .terms, .privacy {
+    ul {
+      margin: 20px;
+    }
+  }
+  
+  #org_menu.show {
+    width: 15%;
+    margin-right: 2%;
+  }
+  
+  #org_menu {
+    float: left;
+    text-align: right;
+    margin-top: 20px;
+    
+    ul {
+      display: none;
+      li {
+        list-style: none;
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  
+  /** WIDGETS **/
+  #widgets.full {
+    width: 100%;
+  }
+  #widgets {
+    float: left;
+    width: 80%;
+    
+    .left {
+    width: 500px;
+    float: left;  
+    }
+    
+    .right {
+    width: 240px;
+    float: right;
+    }
+    
+    #award {
+    width: 47%;
+    float: left;
+    }
+    
+    #press {
+    width: 47%;
+    float: right;  
+    }
+    
+    #award, #press {
+      img {
+        border: none;
+        float: left;
+      }
+      
+      h4 {
+        clear: both;
+      }
+      div {
+        background-color: #f7f7f7;
+        padding: 10px;
+        margin: 4px;
+      }
+      
+      div:hover {
+        background-color: #fafafa;
+        cursor: pointer;
+      }
+    }  
+    .item {
+      img.star {
+        margin: 0px -8px 0px 0px;
+        padding: 0px;
+        border: none;
+      }
+    }
+  }
+  
+  .user {
+    
+    > div:not(.heading) {
+      float: left;
+      width: 30%;
+      background-color: #f7f7f7;
+      margin: 1%;
+      border: solid 1px #eee;
+      border-left: solid 4px #ccc;
+        
+      #upload {    
+        #pic {
+          background: none;
+          .box-shadow(0px, 0px, 0px, #fff);
+        }
+      }
+         
+      h3 { 
+        clear: both;
+        font-size: 0.9em;
+        font-weight: normal;
+        font-family: @century;
+        letter-spacing: 2px;
+        background-color: #222;
+        background-image: url('/assets/layout/texture.png');
+        border-bottom: groove 2px #333;
+        margin: 0px 0px 0px -4px;
+        padding: 12px 10px 10px 20px;
+        color: #eee;
+        text-transform: uppercase;
+        
+        a {
+          color: #ddd;
+          font-size: 1em;
+        }
+      } 
+      
+      label {
+        color: #333;
+        font-size: 0.9em;
+      }
+          
+      input, select {
+        width: 80%;
+        height: 80%;
+      }
+      
+      input[disabled=disabled] {
+        color: #ccc;
+      }   
+    }
+  }
+  
+  .orgs {
+    
+    div#settings {
+    width: 100%;
+    background-color: #fafafa;
+    border-bottom: solid 2px #333;
+    
+      div.toggle {
+	      text-align: center;
+	      font-size: 1em;
+	      font-weight: bold;
+	      font-style: italic;
+	      cursor: pointer;
+	      color: #333;
+      }
+      div.toggle:hover {
+	      background-color: @blue-light;
+      }
+      div#filters {
+	      display: none;
+      }
+      div.show {
+	      display: block;
+      }
+      .zip { 
+        height: 60px; 
+        text-align: left;
+        
+        input {
+          width: 120px;
+          height: 28px;
+          float: left;
+        }
+        
+        button {
+          width: 60px;
+          margin-top: 0px;
+          float: left;
+        }
+      }
+      
+      .or {
+        font-family: @palatino;
+        text-align: left;
+        font-size: 2em;
+        font-weight: bold;   
+        margin: 20px 0px;
+        font-style: italic;
+      }
+      .state {
+        height: 60px;
+        
+        select {
+          width: 160px;
+        }
+      }  
+    }
+
+    span {
+      font-size: 1.3em;
+    }
+    
+  }
+  
+ .form {
+   select#types {
+    width: 180px;
+    text-transform: capitalize;
+    font-family: @perpetua;
+    font-size: 0.6em;
+  }
+ } 
+}
+
+body.agency {
+
+  #content {
+    font-family: @palatino;
+    font-size: 1.3em;
+    line-height: 200%;
+  }
+  
+  #sidebar h3 {
+    color: #ddd;
+    font-size: 1.2em;
+    font-family: @palatino;
+  }
+}
+
+
+
+
+div#gmap {
+height: 350px;	
+width: 100%;
+border: solid 2px #333;
+}

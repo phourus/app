@@ -1,0 +1,162 @@
+#footer {
+  clear: both;
+  float: right;
+  width: 100%; 
+  background-color: #393939;
+  margin: 0px;  
+  padding-top: 10px;
+  color: #eee;
+  height: 440px;
+  border-top: groove 2px #333;
+  background-image: url('/assets/layout/footer.png');
+  background-position: right top;
+  background-repeat: no-repeat;
+  
+  a {
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  .inner {
+    width: 90%;
+    margin: 20px 5%;  
+  }
+  
+  .mid {
+    margin-bottom: 35px;
+    border-top: dashed 2px #444;
+    border-bottom: dashed 2px #444;
+    height: 240px;
+    overflow: hidden;
+    
+    .left {
+      width: 50%;
+    }
+    
+    #contact {
+      width: 50%;
+      
+      p {
+        font-family: @century;
+        font-size: 0.8em;
+      }
+    }
+  }
+  
+  .bottom {
+    background-color: #313131;
+    color: #eee;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7em;
+    text-decoration: none;
+    float: none;
+    clear: both;
+    line-height: 20px;
+    padding: 20px 0px 10px 0px;
+  }
+  
+  div {
+    float: left;
+    
+    h3 {
+      margin: 0px;
+      padding: 0px;
+    }
+    img {
+      border: none;
+      float: left;
+      height: 40px;
+    }
+    
+    input {
+      height: 24px;
+      width: 120px;
+      margin-top: 7px;
+    }
+  }
+  
+  #signup {
+    width: 100%;
+    
+    h3 {
+      width: 250px;
+    }
+  }
+  
+  #signorg {
+    width: 100%;
+    h3 {
+      width: 340px; 
+    }
+  }
+  
+  #signup, #signorg, #signin, #contact {
+    h3 {
+      font-family: @century;
+      margin-top: 6px;
+      font-size: 0.8em;
+      color: #fff;
+    }
+    
+    div {
+      margin-top: -8px;
+      color: #bbb;
+      font-size: 0.8em;
+      
+      h3, div {
+        font-size: 1em;
+      }
+    }
+  }
+  
+  #signin {
+    display: none;
+    margin-top: 80px;
+    
+    h3 {
+      width: 200px;
+    }
+  }
+  
+  
+  
+  .login {
+    width: 60px;
+    float: right;
+  }
+  
+  .mobile {
+	  width: 80%;
+	  margin: 0 10%;
+	  
+	  a {
+		  width: 128px;
+		  height: 128px;
+		  background-repeat: no-repeat;
+		  background-size: 32px 32px;
+		  border: none;
+		  background-color: transparent;
+		  cursor: pointer;
+		  .Cols(2, 10);
+		  text-align: center;
+		  background-position: center top;
+		  color: #999;
+	  }
+	  a:hover, a.world:hover, a.mind:hover, a.voice:hover, a.self:hover {
+		  color: #555;
+	  }
+	  a.world {
+          color: @green-light;
+	  }
+	  a.mind {
+          color: @blue-light;
+	  }
+	  a.voice {
+          color: @red-light;
+	  }
+	  a.self {
+          color: @gold-light;
+	  }
+  }
+}

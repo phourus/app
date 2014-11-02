@@ -1,0 +1,152 @@
+@import 'sub/404.less';
+@import 'sub/about.less';
+@import 'sub/alerts.less';
+@import 'sub/auth.less';
+@import 'sub/buttons.less';
+@import 'sub/calendar.less';
+@import 'sub/content.less';
+@import 'sub/footer.less';
+@import 'sub/fonts.less';
+@import 'sub/forms.less';
+@import 'sub/grid.less';
+@import 'sub/header.less';
+@import 'sub/home.less';
+@import 'sub/items.less';
+@import 'sub/lists.less';
+@import 'sub/mixins.less';
+@import 'sub/nav.less';
+@import 'sub/post.less';
+@import 'sub/responsive.less';
+@import 'sub/sidebar.less';
+@import 'sub/stream.less';
+@import 'sub/tables.less';
+/*
+@import 'sub/bootstrap-responsive.css';
+@import 'sub/bootstrap-min.css';
+@import 'sub/reset.css';
+*/
+
+/** COLORS **/
+@orange: #E47911;
+@blue: #004b91;
+@purple: #003399;
+
+@blue-light: #72afc3;
+@blue-dark: #4f9db6;
+@red-light: #d65e35;
+@red-dark: #cc3300;
+@green-light: #a7c266;
+@green-dark: #98b849;
+@gold-light: #df9d1a;
+@gold-dark: #e6b657;
+
+/** BODY **/
+body {
+  background-color: #eee;
+  background-image: url('/assets/layout/texture-light.png');
+  margin: 0px;
+  padding: 0px;
+  color: #333;
+  font-family: @arial;  
+  font-size: 100%;
+  line-height: 25px;
+  letter-spacing: 0px;
+}
+
+div#spacer {
+  height: 0px;   
+}
+
+/** HEADINGS **/
+h1 {
+  margin: 0px 0px 4px 0px;
+  padding: 0px 0px 10px 0px;   
+  letter-spacing: 1px;
+  font-size: 1.8em;
+  font-weight: normal;
+  font-family: @arial;
+  color: #444;
+  text-transform: uppercase;
+  
+  a {
+    text-decoration: none;
+    text-shadow: 1px 1px #fff;
+    color: #555;
+  }
+}
+
+h2 {
+  margin: 5px 0px 5px 0px;
+  padding: 4px 0px 4px 0px;
+  text-shadow: 1px 1px #fff;
+  color: #444;
+      
+  a {
+  text-decoration: none;
+  }
+}
+
+/* LINKS */
+a {
+color: #333;   
+  img {
+    border: none;
+  } 
+}
+
+a:hover {
+color: #1488c1; 
+}
+
+a.title {
+font-size: 1.5em;
+font-weight: normal;
+text-align: center;
+width: 100%;
+display: block; 
+cursor: pointer;
+color: #18b;
+}
+
+a.title:hover {
+color: #f90;    
+}
+
+a.edit {    
+font-size: 1em;
+color: #18b;
+}
+
+a.edit:hover {  
+font-size: 1em;
+color: #f90;
+}
+
+/** IMG **/
+img {
+margin: 4px;
+border: solid 1px #ccc;
+padding: 2px;
+}
+
+.icon {
+border: none;
+float: left;
+}
+
+/** CLEAR **/
+div.clear {
+clear:both;
+margin: 0px;
+padding: 0px;
+width: 0px;
+height: 0px;    
+}
+
+i.fa-plus {
+    color: @green-light;
+}
+
+i.fa-minus {
+    color: @red-light;
+}
