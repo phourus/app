@@ -63,6 +63,16 @@ module.exports = (grunt) ->
           livereload: true
         files: ["src/html/**/*.html"]
         tasks: ["copy:html"]
+
+    jslint: 
+        react:
+            src: ["build/react/*.js"]
+                    
+    csslint:
+        strict:
+            options:
+                import: 2
+            src: ["build/style.min.css"]    
     
   grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks "grunt-contrib-cssmin"
@@ -72,5 +82,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-watch"
   
+  grunt.loadNpmTasks "grunt-jslint"
+  grunt.loadNpmTasks "grunt-contrib-csslint"
+  
 
   grunt.registerTask "default", ["react", "less", "cssmin", "copy", "uglify", "clean"]
+  grunt.registerTask "lint", ["jslint", "csslint"]
