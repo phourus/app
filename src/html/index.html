@@ -4,41 +4,31 @@
       <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" name="viewport">
       <link rel="stylesheet" href="/style.min.css" type="text/css">   
       <link rel="shortcut icon" href="/assets/other/favicon.ico" type="image/x-icon"> 
-  <body id="body">
-      <div id="mask"></div>
-      <div id="alerts"></div>
-      <header id="header"><div class="flyout"><a href="#!home" class="fa fa-reorder fa-2x"></a></div>
-<div id="brand">
+  <body class="body">
+      <div class="mask"></div>
+      <div class="alerts"></div>
+      <header class="header">
+<div class="brand">
 	<a href="#!about">
-		<img src="/assets/logos/logo-new.png" style="margin:10px 0px 0px 0px;padding:0px;" height="70">	
+		<img src="/assets/logos/logo-new.png">	
 	</a>
-	<div id="slogan">A platform for <strong>meaningful</strong> information</div>
 </div>
-<nav id="www" style="display: block;">
-	<ul>
-        <li><a href="#!stream" class="stream">[Home]</a></li>
-        <li><a href="#!companies" class="companies">World</a></li>
-        <li><a href="#!schools" class="schools">Mind</a></li>
-        <li><a href="#!govs" class="govs">Voice</a></li>   
-        <li><a href="#!groups" class="groups">Self</a></li>   
-    </ul>
-</nav>
-<nav id="mobile" style="display: none;">
+<nav class="nav">
 	<ul>
         <li><a href="javascript:void(0)" class="search fa fa-filter fa-2x"></a></li>
         <li><a href="#add/blogs" class="create fa fa-plus fa-2x"></a></li>
     </ul>
 </nav></header>
-      <div id="spacer"></div>
-      <div id="home"></div>
-      <div id="main">
-        <div id="sidebar" style="display: none;"></div>
-        <div id="content" class="homepage"><div class="home"><div id="hook">
-  <div id="what">
+      <div class="spacer"></div>
+      <div class="home"></div>
+      <div class="main">
+        <div class="sidebar" style="display: none;"></div>
+        <div class="content" class="homepage"><div class="landing"><div class="hook">
+  <div class="what">
     <h3>What is Phourus</h3>
     <p>Phourus is a platform built to discuss and enhance government, religion, economics and education.</p> 
   </div>
-  <div id="why">
+  <div class="why">
     <h3>Why Phourus</h3>
     <p>For the first time in history, people have the technology to govern themselves. Phourus is merely a starting point.</p>
   </div>
@@ -62,8 +52,8 @@
 
 <div class="left">
   <h3>Not yet a member? Signup for free here:</h3>
-  <div id="register-home">
-    <div id="fields"><form class="bbf-form"><fieldset>                <ul><li class="bbf-field field-email">        <label for="c13_email">Email</label>        <div class="bbf-editor"><input id="c13_email" name="email" placeholder="your email address" type="text"></div>        <div class="bbf-help"></div>        <div class="bbf-error"></div>      </li><li class="bbf-field field-password">        <label for="c13_password">Password</label>        <div class="bbf-editor"><input id="c13_password" name="password" placeholder="desired password" type="password"></div>        <div class="bbf-help"></div>        <div class="bbf-error"></div>      </li></ul>      </fieldset></form></div>
+  <div class="register-home">
+    <div class="fields"><form class="bbf-form"><fieldset>                <ul><li class="bbf-field field-email">        <label for="c13_email">Email</label>        <div class="bbf-editor"><input class="c13_email" name="email" placeholder="your email address" type="text"></div>        <div class="bbf-help"></div>        <div class="bbf-error"></div>      </li><li class="bbf-field field-password">        <label for="c13_password">Password</label>        <div class="bbf-editor"><input class="c13_password" name="password" placeholder="desired password" type="password"></div>        <div class="bbf-help"></div>        <div class="bbf-error"></div>      </li></ul>      </fieldset></form></div>
     <div class="clear"></div>
     <a href="javascript:void(0)" class="button blue register">Sign Up</a><br clear="all">
   </div>
@@ -74,7 +64,7 @@
 <div class="right">
   <h3>Already a member? Login here:</h3>
   <div class="auth">
-    <fieldset id="auth-home"><input type="text" placeholder="email" class="email">
+    <fieldset class="auth-home"><input type="text" placeholder="email" class="email">
 <input type="password" value="phourus" class="password">
 <a href="#" class="login button green">Login</a>
 <a href="#!forgot" class="forgot">Forgot Password?</a></fieldset>
@@ -88,19 +78,19 @@
 
 </div></div>
         <div class="clear"></div>
-        <footer id="footer"><div class="inner">
+        <footer class="footer"><div class="inner">
   <div><img src="/assets/logos/logo-white.png" height="50"></div>
   <div class="clear"></div>
   <div class="mid">
     <div class="left">
-      <div id="signup">
+      <div class="signup">
         <img src="/assets/icons/footer/signup.png">
         <h3>Not yet a member of Phourus?</h3>
         <div>Create a free account</div>
         <div class="clear"></div>
         <a href="/#!signup" class="button blue">Signup Now</a>  
       </div> 
-      <div id="signorg">
+      <div class="signorg">
         <img src="/assets/icons/footer/signorg.png">
         <h3>Want to sign up an organization for Phourus?</h3>
         <div>Company | Gov | Schools | Groups</div>
@@ -108,14 +98,14 @@
         <a href="/#!orgs/signup" class="button red">Signup an Org</a>  
       </div>
       <div class="clear"></div>
-      <div id="signin">
+      <div class="signin">
         <div>
           <img src="/assets/icons/footer/login.png">
           <h3>Already a member?</h3>
           <div>Login here</div>
         </div>     
         <div class="auth">
-          <div id="auth-footer"><input type="text" placeholder="email" class="email">
+          <div class="auth-footer"><input type="text" placeholder="email" class="email">
 <input type="password" value="phourus" class="password">
 <a href="#" class="login button green">Login</a>
 <a href="#!forgot" class="forgot">Forgot Password?</a></div>
@@ -124,7 +114,7 @@
     </div>
   </div>
     
-    <div id="contact">
+    <div class="contact">
       <img src="/assets/icons/footer/contact.png">
       <h3>Contact</h3>
       <div>For more information</div>

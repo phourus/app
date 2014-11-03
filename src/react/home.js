@@ -1,4 +1,5 @@
-if(typeof module !== 'undefined' && module.exports){
+"use strict";
+if (typeof module !== 'undefined' && module.exports) {
     var React = require('react');
 }
 /** MAP **/
@@ -13,25 +14,25 @@ if(typeof module !== 'undefined' && module.exports){
 * @jsx React.DOM
 */
 var Home = React.createClass({
-     componentDidMount: function(){       
+     componentDidMount: function () {       
          var self = this;
          $.ajax({
              url: "/data",
-             success: function(data){
+             success: function (data) {
                  self.setProps(data);
              },
-             failure: function(err){
+             failure: function (err) {
                  console.log(err);
              }
          });
      },
-     render: function() {
+     render: function () {
           return React.DOM.h1(null, 'Home');
      }
 });
-if(typeof module !== 'undefined' && module.exports){
+if (typeof module !== 'undefined' && module.exports) {
     module.exports = Home;
-}else{
+} else{
     var cnt = document.getElementById('content');
     React.renderComponent(Home({}), cnt);
 }

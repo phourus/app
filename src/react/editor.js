@@ -1,18 +1,19 @@
+"use strict";
 // Form, Help
-if(typeof module !== 'undefined' && module.exports){
+if (typeof module !== 'undefined' && module.exports) {
     var React = require('react');
 }
 /**
 * @jsx React.DOM
 */
 var Editor = React.createClass({
-     render: function() {
+     render: function () {
           return React.DOM.h1(null, 'Editor');
      }
 });
-if(typeof module !== 'undefined' && module.exports){
+if (typeof module !== 'undefined' && module.exports) {
     module.exports = Editor;
-}else{
+} else{
     var cnt = document.getElementById('content');
     React.renderComponent(Editor({}), cnt);
 }

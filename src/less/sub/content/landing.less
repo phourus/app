@@ -1,7 +1,90 @@
-/** HOME **/
+.landing {
+  margin-top: 40px;
+  
+  .hook {
+    margin: auto; 
+    width: 880px;
+    
+    .what, .why {
+      width: 400px;
+      float: left;
+      text-align: center;
+      margin-right: 40px;
+      
+        .heading {
+          font-family: @palatino;
+          border-bottom: dotted 1px #333;  
+        }
+        
+        p {
+          width: inherit;
+          
+        }
+      }
+    .icons {
+      width: 480px;
+      margin: auto;
+    }
+  }
+
+  
+  .title {
+    text-align: center;
+    font-size: 2.2em;
+    
+  }
+  
+
+  
+  img {
+    width: 100px;
+    height: 100px;
+    border: none;
+  }
+  .left {
+    width: 48%;
+    margin-right: 1%;
+    float: left;
+    text-align: right;
+    
+    .button {
+      float: right;
+    }
+  }
+  .right {
+    width: 48%;
+    padding-left: 1%;
+    border-left: dotted 1px #333;
+    float: left
+  }
+  
+  .register-home {
+    float: right;
+    
+    .fields {
+      label {
+        display: none;
+      }
+      
+      input {
+        width: 350px;
+        height: 36px;
+        padding: 4px;
+      }      
+      
+    }
+    
+    a.register {
+        margin-top: -6px;
+        margin-right: 20px;
+      }
+  }
+}
+
+/** ABOUT **/
 .about {
   
-  h1 {
+  .heading1 {
     padding-top: 40px;
     font-size: 3em;
     font-family: @arial;
@@ -13,14 +96,14 @@
     margin-bottom: 20px;
   }
   
-  h2 {
+  .heading2 {
     text-shadow: none;
     font-weight: normal;
     color: #fafafa;
     font-size: 1.5em;
   }
   
-  h3 {
+  .heading3 {
     font-weight: normal;
     font-style: italic;
     font-size: 1.9em;
@@ -34,9 +117,9 @@
     border: none;
   }
   
-  #signup, #signorg {
+  .signup, .signorg {
   
-    h3 {
+    .heading {
       font-size: 1.3em;
       color: #fafafa;
     }
@@ -111,17 +194,16 @@
     background-color: #e6b657;
   }
   
-  .learn#learn-earth:hover { color: @green-dark; }
-  .learn#learn-voice:hover { color: @red-dark; }
-  .learn#learn-mind:hover { color: @blue-dark; }
-  .learn#learn-self:hover { color: @gold-dark; }
+  .learn.earth:hover { color: @green-dark; }
+  .learn.voice:hover { color: @red-dark; }
+  .learn.mind:hover { color: @blue-dark; }
+  .learn.self:hover { color: @gold-dark; }
   
   .learn {
     width: 200px;
     float: left;
     text-align: center;
     font-size: 0.9em;
-    text-decoration: none;
     
     span {
       font-size: 1.3em;
@@ -163,7 +245,7 @@
     a {
       margin-right: 20px;
     }
-    h3 {
+    .heading {
       padding: 30px 0px 0px 0px;
       font-size: 1.2em;
       margin: 20px 0px 15px 0px;
@@ -208,7 +290,7 @@
     }
   }
   
-  .element#element-earth {
+  .element.element-earth {
     display: block;
   }
   
@@ -223,12 +305,12 @@
     }    
   }
     
-  #signup {
+  .signup {
     float: left;
     width: 350px;
   }
   
-  #signorg {
+  .signorg {
     float: left;
     width: 500px;
     padding-left: 10px;  
@@ -267,10 +349,10 @@
   }
 }
 
-h4.red { color: #cc3300; }
-h4.blue { color: #4f9db6; }
-h4.green { color: #98b849; }
-h4.gold { color: #df9d1a; }
+.red { color: #cc3300; }
+.blue { color: #4f9db6; }
+.green { color: #98b849; }
+.gold { color: #df9d1a; }
 
 .about, .signorg {
 
@@ -279,11 +361,11 @@ h4.gold { color: #df9d1a; }
   margin: auto;
   padding: 20px 0px 10px 0px;
   border-bottom: dashed 1px #ccc;
-    h3, h4 {
+    .heading3, .heading4 {
       margin: 0px;
     }
     
-    h3 {
+    .heading3 {
       font-weight: normal;
       font-style: italic;
       font-size: 1.4em;
@@ -318,9 +400,6 @@ h4.gold { color: #df9d1a; }
   .org.r {
     text-align: right;
     
-    h4 {
-      text-align: right !important;
-    }
     img {
       margin: 0px 0px 0px 20px;
       float: right;

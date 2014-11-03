@@ -1,27 +1,27 @@
 /** STREAM **/
-.stream, #widgets {
+.home, .widgets {
 
-  input#term {
+  input.term {
     width: 40%;  
   }
   
-  button#search {
+  button.search {
     height: 49px;
     margin: 0px;
     width: 15%;
   }
   
-  a#add {
+  a.add {
     width: 20%;
   }
   
-  a#advanced {
+  a.advanced {
     img {
       margin: -2px 0px 0px 5px;
     }
   }
   
-  #stream {      
+  .stream {      
     padding: 4px;
     margin: 0px;
     /*background-color: #fafafa;
@@ -30,16 +30,9 @@
     p {
       margin: 0px;    
     }
-    h3 {
-      text-align: center; 
-    }
   }  
   
-  #create {
-    width: 300px;
-    float: right;
-    margin-top: -20px;
-    width: 400px;
+  .create {
     
     select {
       width: 200px; 
@@ -53,10 +46,10 @@
     }
   }
   
-  #filter.hide {
+  .filter.hide {
 	  display: none;
   }
-  #filter {
+  .filter {
     width: 98%;
     float: left;
     background-color: #fafafa;
@@ -64,13 +57,7 @@
     padding: 1%;
     margin-bottom: 40px;
     
-    h3 {
-      margin: 0px 0px 10px 0px;
-      padding: 0px;
-      font-style: italic;
-    }
-    
-    ul#mode {
+    ul.mode {
       padding: 0px;
       margin: 0px;
       width: 90%;
@@ -105,29 +92,28 @@
     }
   }
   
-  #paging {
+  .paging {
     margin-top: 20px;
     font-size: 0.7em;
     font-style: italic;
     color: #444;
     padding: 0 4% 0 4%;
     
-    a#prev, a#next {
+    a.prev, a.next {
       display: block;
       width: 25%;
       float: left;
-      text-decoration: none;
       color: #333;
     }
     
-    a#prev {
+    a.prev {
       width: 25%;
     }
     
-    a#prev:hover, a#next:hover {
+    a.prev:hover, a.next:hover {
       color: @green-light;
     }
-    a#next {
+    a.next {
       text-align: right;
     }
     div.totals {
@@ -141,7 +127,7 @@
       float: left;
     }
   }
-  #sort_by {
+  .sort_by {
     float: right; 
     margin: 0px 0px 10px 0px; 
     padding: 0px;
@@ -151,7 +137,7 @@
     text-transform: none;
     font-weight: normal;
   }
-  select#sort, select#direction {
+  select.sort, select.direction {
     width: 120px;   
     font-size: 0.9em;
   }  

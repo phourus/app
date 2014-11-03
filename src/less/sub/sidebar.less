@@ -1,5 +1,5 @@
 /* SIDEBAR */
-#sidebar {
+.sidebar {
   float: left;
   text-align: left;
   border-right: solid 2px #000;
@@ -11,7 +11,7 @@
   color: #eee;
   font-size: 1em;
   
-  #auth-sidebar {
+  .auth-sidebar {
     input {
       width: 90%;
     }
@@ -37,7 +37,7 @@
     margin: 0px 0px 0px 10px;
   }
   /*border-right: solid 1px #ccc;*/
-  h3 { 
+  .title { 
     clear: both;
     font-size: 0.9em;
     font-weight: normal;
@@ -57,22 +57,21 @@
     }
   }
   
-  h3.user, h3.notifications, h3.history {
+  .title.user, .title.notifications, .title.history {
     background-position: left center;
     background-repeat: no-repeat;
   }
-  h3.user { background-image: url('/assets/icons/sidebar/user.png'); }
-  h3.history { background-image: url('/assets/icons/sidebar/history.png'); }
-  h3.notifications { background-image: url('/assets/icons/sidebar/notifications.png'); }
+  .user { background-image: url('/assets/icons/sidebar/user.png'); }
+  .history { background-image: url('/assets/icons/sidebar/history.png'); }
+  .notifications { background-image: url('/assets/icons/sidebar/notifications.png'); }
   
-  h3.collapsible { 
+  .title.collapsible { 
     cursor: pointer;  
   }
   a {
     font-size: 0.8em;
     letter-spacing: 2px;
     color: #eee;
-    text-decoration: none; 
     font-weight: normal;
   }
   ul li a:hover {
@@ -86,7 +85,6 @@
   a.action {
     color: #18b;   
     font-size: 0.7em; 
-    text-decoration: none;
   }
   a.action:hover {
     color: #f90;
@@ -98,25 +96,25 @@
     margin-left: 10px;
   }
   
-  ul#user {
+  ul.user {
     li a {
       color: @blue-light;
     }  
   }
   
-  ul#notifications {
+  ul.notifications {
     li a {
       color: @red-light;
     }
   }
   
-  ul#history {
+  ul.history {
     li a {
       color: @green-light;
     }
   }
   
-  ul#stats {
+  ul.stats {
     li {
       color: @green-light;
       font-size: 85%;
@@ -157,16 +155,16 @@
  
 
 /** ELEMENT SPECIFIC **/
-#sidebar {
-  h3.earth { border-color: #1a5; }  
-  h3.mind { border-color: #18c; }  
-  h3.voice { border-color: #e42; } 
-  h3.self { border-color: #f90; }
+.sidebar {
+  .earth { border-color: #1a5; }  
+  .mind { border-color: #18c; }  
+  .voice { border-color: #e42; } 
+  .self { border-color: #f90; }
   
   /** HOVER **/
-  h3.core:hover { color: #ccc; }
-  h3.earth:hover { color: #1a5; }
-  h3.mind:hover { color: #18c; }
-  h3.voice:hover { color: #e42; }
-  h3.self:hover { color: #f90; }
+  .core:hover { color: #ccc; }
+  .earth:hover { color: #1a5; }
+  .mind:hover { color: #18c; }
+  .voice:hover { color: #e42; }
+  .self:hover { color: #f90; }
 }

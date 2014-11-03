@@ -6,41 +6,26 @@
 	  <link rel="stylesheet" href="/style.min.css" type="text/css">	 
 	  <link rel="shortcut icon" href="/assets/other/favicon.ico" type="image/x-icon">  
     </head>
-    <body id="body">
-        <div id="mask" style="display: none;"></div>
-        <div id="alerts"></div>
-        <header id="header">
-            <div class="flyout">
-            	<a href="#!home" class="fa fa-reorder fa-2x"></a>
-            </div>
-            <div id="brand">
+    <body class="body">
+        <div class="mask" style="display: none;"></div>
+        <div class="alerts"></div>
+        <header class="header">
+            <div class="brand">
             	<a href="#!about">
-            		<img src="/assets/logos/logo-new.png" style="margin:10px 0px 0px 0px;padding:0px;" height="70" /> 
+            		<img src="/assets/logos/logo-new.png" /> 
             	</a>
-            	<div id="slogan">A platform for <strong>meaningful</strong> information</div>
             </div>
-            <nav id="www" style="display: block;">
-            	<ul>
-            		<li><a href="#!stream" class="stream">[Home]</a></li>
-            		<li><a href="#!companies" class="companies">World</a></li>
-            		<li><a href="#!schools" class="schools">Mind</a></li>
-            		<li><a href="#!govs" class="govs">Voice</a></li>   
-            		<li><a href="#!groups" class="groups">Self</a></li>	  
-            	</ul>
-            </nav>
-            <nav id="mobile" style="display: none;">
-            	<ul>
-            		<li><a href="javascript:void(0)" class="search fa fa-filter fa-2x"></a></li>
-            		<li><a href="#add/blogs" class="create fa fa-plus fa-2x"></a></li>
-            	</ul>
+            <nav class="nav">
+            	<a href="javascript:void(0)" class="search fa fa-filter fa-2x"></a>
+            	<a href="#add/blogs" class="create fa fa-plus fa-2x"></a>
             </nav>
         </header>
-        <div id="spacer"></div>
-        <div id="main">
-            <div id="sidebar" style="display: block;">
-                <h3>Login</h3>
+        <div class="spacer"></div>
+        <div class="main">
+            <div class="sidebar" style="display: block;">
+                <div class="title">Login</div>
 				<p>Login below to access your Phourus account</p>
-				<div id="auth-sidebar">
+				<div class="auth-sidebar">
 				    <input type="text" placeholder="email" class="email">
 					<input type="password" value="phourus" class="password">
 					<a href="#" class="login button green">Login</a>
@@ -48,78 +33,22 @@
 					<br clear="all">
 				</div>
 				<div>
-				  <h3>Signup</h3>
+				  <div class="title">Signup</div>
 				  <p>Sign up now to get full access to Phourus</p>
 				  <a href="#!signup" class="button blue">Signup Now</a>
 				  <br clear="all"><br>
 				</div>
-				<div>
-				  <h3>Organizations</h3>
-				  <p>If you would like to register an Organization for Phourus, click the button below</p>
-				  <a href="#!orgs/signup" class="button red">Sign up an Org</a>
-				  <br clear="all"><br>
-				</div>
             </div>
-            <div id="content" class="">$CONTENT</div>
-            <footer id="footer">
-                <div class="inner">
-					  <div><img src="/assets/logos/logo-white.png" height="50"></div>
-					  <div class="clear"></div>
-					  <div class="mid">
-						<div class="left">
-						  <div id="signup">
-							<i class="fa fa-2x fa-user"></i>
-							<h3>Not yet a member of Phourus?</h3>
-							<div>Create a free account</div>
-							<div class="clear"></div>
-							<a href="/#!signup" class="button blue">Signup Now</a>	
-						  </div> 
-						  <div id="signorg">
-							<i class="fa fa-2x fa-group"></i>
-							<h3>Want to sign up an organization for Phourus?</h3>
-							<div>Company | Gov | Schools | Groups</div>
-							<div class="clear"></div>
-							<a href="/#!orgs/signup" class="button red">Signup an Org</a>  
-						  </div>
-						  <div class="clear"></div>
-						  <div id="signin">
-							<div>
-							  <i class="fa fa-2x fa-login"></i>
-							  <h3>Already a member?</h3>
-							  <div>Login here</div>
-							</div>	   
-							<div class="auth">
-                                <div id="auth-footer"><input type="text" placeholder="email" class="email">
-					<input type="password" value="phourus" class="password">
-					<a href="#" class="login button green">Login</a>
-					<a href="#!forgot" class="forgot">Forgot Password?</a></div>
-							</div>
-						  <div class="clear"></div>
-						</div>
-					  </div>
-						
-						<div id="contact">
-						  <i class="fa fa-2x fa-envelope"></i>
-						  <h3>Contact</h3>
-						  <div>For more information</div>
-						  <br clear="all">
-						  <p>Phourus is founded on social collaboration and should evolve to meet the requirements of it's users, but can only do so with sufficient feedback. We welcome ideas on how to improve Phourus, and would like to know of any issues you may encounter while using this site. Please use <a href="/#contact">the contact page</a> to let us know what you think.</p>
-						</div>
-					  </div>
-					</div>
-					<div class="bottom">
-						© 2013 Phourus LLC. All Rights Reserved.<br>
-						<a href="/#!home">Home</a> | <a href="#!contact">Contact</a> | <a href="#terms">Terms &amp; Conditions</a> | <a href="#privacy">Privacy Policy</a>
-					</div>
-					<div class="mobile">
-						<a href="#!stream" class="stream fa fa-home fa-2x"></a>
-						<a href="#!companies" class="world"></a>
-						<a href="#!schools" class="mind"></a>
-						<a href="#!govs" class="voice"></a>
-						<a href="#!groups" class="self"></a>
-					</div>
-					<br clear="all">
-				</footer>
+            <div class="content" class="">$CONTENT</div>
+            <footer class="footer">
+                © 2013 Phourus LLC. All Rights Reserved.
+                <br>
+				<a href="/#!home">Home</a> | 
+				<a href="#!contact">Contact</a> | 
+				<a href="#terms">Terms &amp; Conditions</a> | 
+				<a href="#privacy">Privacy Policy</a>
+				<br clear="all">
+            </footer>
 			</div><!-- main -->
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
 		<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script> 

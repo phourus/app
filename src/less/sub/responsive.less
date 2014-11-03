@@ -1,33 +1,14 @@
 @media screen and (min-width: 1100px) {
-  #footer .mid {
-    .left {
-      width: 70%;
-      
-      #signin {
-        display: block;
-      }
-      #signup {
-        width: 40%;
-      }
-      #signorg {
-        width: 60%;
-      }
-    }
-    #contact {
-      width: 30%;
-    }
-  }
-  
-  
+    
 }
 
 @media screen and (min-width: 1200px) {
 
-  #sidebar {
+  .sidebar {
     width: 15%;
   }
   
-  #content {
+  .content {
     width: 78%;
   }
   
@@ -35,11 +16,11 @@
 
 @media screen and (max-width: 1200px) {
 
-  #sidebar {
+  .sidebar {
     width: 19%;
   }
   
-  #content {
+  .content {
     width: 74%;
   }
   
@@ -47,11 +28,11 @@
 
 @media screen and (max-width: 1100px) {
 
-  #sidebar {
+  .sidebar {
     width: 20%;
   }
   
-  #content {
+  .content {
     width: 73%;
   }
   
@@ -59,26 +40,26 @@
 
 @media screen and (max-width: 960px) {
 
-  #sidebar {
+  .sidebar {
     width: 23%;
   }
   
-  #content {
+  .content {
     width: 70%;
   }
   
 }
 
 @media screen and (max-width: 800px) {
-  #main {
+  .main {
 	  display: table;
 	  
-	  #content {
+	  .content {
 	    display: table-header-group;
 	    width: 100%;
 	  }
 		  
-	  #sidebar {
+	  .sidebar {
 	    display: table-footer-group;
 	    float: none;
 	    width: 100%;
@@ -93,23 +74,23 @@
 	    }
 	  } 
 	  
-	  #footer {
+	  .footer {
     	display: none;  
 	  }
   }
   
   
   
-  #header {
+  .header {
     height: 80px;
     img {
       height: 50px;
     }
     
-    #brand {
+    .brand {
       .Cols(4);
     }
-    #slogan {
+    .slogan {
       margin-top: -30px !important;
       margin-left: 50px !important; 
     }
@@ -124,15 +105,15 @@
 }
 
 @media screen and (max-width: 500px) {
-  #header {
+  .header {
 	  position: fixed;
   }
-  div#spacer {
+  div.spacer {
 	  height: 40px!important;
   }
-  #main {
+  .main {
 	  
-	  #content {
+	  .content {
 	    width: 100%;
 	    float: none;
 	    background-color: transparent;
@@ -155,14 +136,14 @@
 			    width: 100%;
 			    float: none;
 		    }
-		    #body {
+		    .body {
 			    width: 90%;
 			    margin: 10px 0px 10px 5%;
 		    }
 	    }
 	  }
 		  
-	  #sidebar {
+	  .sidebar {
 	    display: none;
 	    width: 0%;
 	    float: none;
@@ -186,7 +167,7 @@
 		  }
 	  }
 	  
-	  #stream .item {
+	  .stream .item {
 	  	  background-color: transparent;
 		  .type {
 			  display: none;
@@ -199,21 +180,20 @@
 		  }
 	  }
 	  
-	  #footer {
+	  .footer {
     	  display: block;
 	  }
   }
   
   
   
-  #header {
+  .header {
     height: 40px;
     .flyout {
 	    .Cols(4);
 	    display: block;
 	    
 	    a {
-		    text-decoration: none;
 		    margin: 5px;
 		    color: #555;
 	    }
@@ -223,10 +203,10 @@
 	    }
     }
     
-    nav#www {
+    nav.www {
 	    display: none !important; // Javascript is taking precedence
     }
-    nav#mobile {
+    nav.mobile {
 	    display: block !important; // Javascript is taking precedence
 	    .Cols(2);
 	    
@@ -243,14 +223,14 @@
       height: 30px;
     }
     
-    #brand {
+    .brand {
       .Cols(6);
       
       a img {
 	      margin-top: 7px !important;
       }
     }
-    #slogan {
+    .slogan {
       display: none; 
     }
   }  
@@ -259,27 +239,12 @@
         textarea {
             width: 280px;
         }
-      #description {
+      .description {
           width: 280px;
           text-align: center;
       }
   }
-  #fields fieldset ul li .bbf-editor input, select {
+  .fields fieldset ul li .bbf-editor input, select {
     width: 280px;
-  }
-
-  #footer {
-  	height: 40px;
-  	position: fixed;
-  	bottom: 0px;
-  	background-image: none;
-  	
-	  .inner {
-		  display: none;
-	  }
-	  .bottom {
-		  padding-top: 0px;
-		  display: none;
-	  }
   }
 }
