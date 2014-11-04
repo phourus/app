@@ -86,5 +86,5 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-csslint"
   
 
-  grunt.registerTask "default", ["react", "less", "cssmin", "copy", "uglify", "clean"]
+  grunt.registerTask "default", ["react", "less", "cssmin", "copy", "clean"]
   grunt.registerTask "lint", ["jslint", "csslint"]
