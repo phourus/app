@@ -24,7 +24,7 @@ var respond = function(req, res){
     res.send(out, 200);
 }
 
-phourus.get('/home', respond);
+phourus.get('/search', respond);
 phourus.get('/post/:id', respond);
 phourus.get('/editor', respond);
 phourus.get('/profile/:id', respond);
@@ -38,7 +38,7 @@ var compile = function(id){
     var file = fs.readFileSync('build/template.html', 'utf8');
     var component = renderComponent(id);
     file = file.replace('$CONTENT', component);
-    file = file.replace('$SCRIPT', '<script type="text/javascript" src="react/' + id + '.js"></script>');
+    file = file.replace('$SCRIPT', '<script type="text/javascript" src="/react/' + id + '.js"></script>');
     return file;   
 }
 
@@ -50,7 +50,7 @@ phourus.get('/data', function(req, res){
 });
 
 //phourus.all('', function(req, res) { res.redirect(__dirname); });
-phourus.use('', express.static(__dirname + '/build'));
+phourus.use(express.static(__dirname + '/build'));
 
 function renderComponent(id){
     var component = require('./build/react/' + id);
