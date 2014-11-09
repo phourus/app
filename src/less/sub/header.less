@@ -1,11 +1,30 @@
 header {
   .Row(100%);
-  height: 70px;
+  height: 40px;
+  position: fixed;
   
   border-bottom: solid 1px #bbb;
   background-color: #fff;
-  
+      
   .brand {
-	.Cols(10);   
+	.Cols(10);  
+    
+    a img {
+        height: 80%;
+    } 
   }
+
+    nav {
+      .Cols(1);
+      text-align: right;
+        
+      a {
+        color: #555;   
+        text-align: center;
+      }
+      a:hover {
+        font-weight: bold;
+        color: #444;
+      }
+    }
 }

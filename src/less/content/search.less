@@ -1,0 +1,82 @@
+.search {
+    
+    .map {
+        
+    }
+    
+    .groups {
+        
+    }
+    
+    .filter {
+       .Row(100%);
+       
+       .sort {
+            .Row(100%);         
+       }
+       
+       .dates {
+              label {
+           .Row(100%);
+           }
+           select {
+                .Cols(5);
+           } 
+           
+           select.date {
+               .Cols(2);
+           }       
+       }
+
+  
+    }
+    
+    .types {
+        .Row(100%);
+    
+        button {
+    
+        }
+    }
+    
+    .pagination {
+        
+    }
+    
+    .posts {
+        
+    }
+    
+    .postItem {
+        .Row(100%);
+        border-top: solid 4px #333;
+        
+        .type {
+            .Row(100%);
+        }
+        .pic, .basic, .detail, .stats {
+            .Cols(6);
+        }
+        .pic {
+            
+            img {
+                width: 90%;
+            }
+        }
+
+        .content {
+            display: block;
+        }
+    }
+}
+
+@media (min-width: 800px) {
+    .search {
+        
+        .postItem {
+                .pic, .basic, .detail, .stats {
+                    .Cols(3);
+                }
+        }
+    }
+}
