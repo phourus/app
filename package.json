@@ -18,12 +18,19 @@
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-copy": "0.5.x",
     "grunt-contrib-csslint": "^0.3.1",
-    "grunt-contrib-cssmin": "0.8.x",
     "grunt-contrib-less": "0.11.x",
     "grunt-contrib-uglify": "0.4.x",
     "grunt-contrib-watch": "0.6.x",
     "grunt-jslint": "^1.1.12",
-    "grunt-react": "0.10.*",
-    "grunt-remove": "0.1.x"
+    "grunt-remove": "0.1.x",
+    "reactify": "^0.15.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"]
   }
 }
