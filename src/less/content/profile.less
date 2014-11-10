@@ -1,0 +1,39 @@
+.profile {
+    
+    .heading {
+        .Row(100%);
+        
+        .basic, .details, .stats  {
+            .Cols(4);
+        }
+    }
+    
+    .tabs {
+        .Row(100%);
+        background-color: #ddd;
+        height: 30px;
+        
+        ul {
+            .Row(100%);
+            
+            li {
+                .Cols(2, 10);
+                a {
+                    display: block;
+                    height: 100%;
+                    background-color: #aaa;
+                    width: 100%;
+                }
+                
+                a:hover {
+                    background-color: #000;
+                    color: #fff;
+                }
+            }
+            
+            li.selected a {
+                background-color: #fff;
+            }
+        }
+    }
+}

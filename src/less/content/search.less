@@ -1,7 +1,30 @@
 .search {
     
-    .map {
+    .keywords {
+        .Row(100%);
+        height: 60px;
         
+        input {
+            .Cols(10);
+            max-width: none;
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            font-size: 2em;
+        }
+        
+        button {
+            .Cols(2);
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+        
+    }
+    #map {
+        width: 100%;
+        min-height: 450px;
+        max-height: 600px;
     }
     
     .groups {
@@ -16,7 +39,7 @@
        }
        
        .dates {
-              label {
+            label {
            .Row(100%);
            }
            select {
@@ -35,12 +58,20 @@
         .Row(100%);
     
         button {
-    
+            .Cols(1, 3);
         }
     }
     
     .pagination {
+        .Row(100%);
         
+        a {
+            .Cols(2);
+        }
+        
+        div {
+            .Cols(4);
+        }
     }
     
     .posts {
@@ -77,6 +108,10 @@
                 .pic, .basic, .detail, .stats {
                     .Cols(3);
                 }
+        }
+        
+        .types {
+        
         }
     }
 }

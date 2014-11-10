@@ -1,11 +1,14 @@
 /* SIDEBAR */
 .sidebar {
+  display: none;
   .Cols(2);
+  background-color: #2a2a2a;
+  /*
   text-align: left;
   border-right: solid 2px #000;
-  background-color: #2a2a2a;
-  .box-shadow();
+  
   color: #eee;
+  
   font-size: 1em;
   
   .auth-sidebar {
@@ -33,7 +36,7 @@
     cursor: pointer;
     margin: 0px 0px 0px 10px;
   }
-  /*border-right: solid 1px #ccc;*/
+
   .title { 
     clear: both;
     font-size: 0.9em;
@@ -147,7 +150,7 @@
   input, button {
     margin: 16px 0px 0px 0px;
   }
-
+*/
 }
  
 
@@ -164,4 +167,10 @@
   .mind:hover { color: #18c; }
   .voice:hover { color: #e42; }
   .self:hover { color: #f90; }
+}
+
+@media (min-width: 800px) {
+    .sidebar {
+        display: inline-block;
+    }
 }
