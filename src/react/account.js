@@ -1,15 +1,5 @@
-"use strict";
-/** PROFILE **/
-// Pic, Stats, Game, Contact
+var React = require('react');
 
-/** VIEWS **/
-// History, Notifications, Groups, Org Accounts
-if (typeof module !== 'undefined' && module.exports) {
-    var React = require('react');
-}
-/**
-* @jsx React.DOM
-*/
 var Account = React.createClass({
      getDefaultProps: function () {
         return {
@@ -158,9 +148,4 @@ var Password = React.createClass({
           schema.contact = "TextArea"
 */
   
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Account;
-} else{
-    var cnt = document.getElementById('content');
-    React.renderComponent(Account({}), cnt);
-}
+module.exports = Account;

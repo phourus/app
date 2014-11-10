@@ -1,10 +1,7 @@
+/** @jsx React.DOM */
 "use strict";
-if (typeof module !== 'undefined' && module.exports) {
-    var React = require('react');
-}
-/**
-* @jsx React.DOM
-*/
+var React = require('react');
+
 var Sidebar = React.createClass({
      componentDidMount: function () {       
          var token = 1;
@@ -203,9 +200,4 @@ var Membership = React.createClass({
     }
 });
 
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Sidebar;
-} else{
-    var cnt = document.getElementById('content');
-    React.renderComponent(Sidebar({}), cnt);
-}
+module.exports = Sidebar;

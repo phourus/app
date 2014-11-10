@@ -1,18 +1,6 @@
+/** @jsx React.DOM */
 "use strict";
-if (typeof module !== 'undefined' && module.exports) {
-	var React = require('react');
-}
-/** MAP **/
-// Location filter, overlays
-
-/** FILTERS **/
-// Groups, Types, Sort, Search, Pagination
-
-/** STREAM **/
-// iPost
-/**
-* @jsx React.DOM
-*/		
+var React = require('react');
 
 var Search = React.createClass({
 	 getDefaultProps: function () {
@@ -24,14 +12,17 @@ var Search = React.createClass({
 		 this.setProps(obj);
 	 },
 	 componentDidMount: function () {
-    	 Map.render();
+    	 if (window && window.Map) {
+        	 Map.render();
+    	 }	 
 	 },
 	 render: function () {
 		  return (
 			<div className="search">
-				<input ref="term" type="text" placeholder="search for" />
-				<button class="button green" id="search"><i class="fa fa-search" /></button>
-				<h2>Narrow your search</h2>
+				<div className="keywords">
+    				<input ref="term" type="text" placeholder="search for" />
+    				<button className="button green" id="search"><i className="fa fa-search" /></button>
+				</div>
 				<div id="map"></div>
 				<Groups />
 				<Filter />
@@ -42,92 +33,6 @@ var Search = React.createClass({
 		  )
 	 }
 });
-
-var Map = {
-	map: {},
-    markers: [],
-	windows: [],
-	clusters: [],
-	init: [
-	    {id: 1, title: "Jesse", address: "100 White Cap Lane"}
-	],
-	//geocoder: new google.maps.Geocoder(),
-	config: {
-		zoom: 4,
-		center: new google.maps.LatLng(38, -95),
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	},
-	/*
-	go: function (location) {
-	  this.geocoder.geocode({'address': location}, function(results, status){
-		if (status == 'OK') {
-		  var loc = results[0].geometry.location;
-		  this.map.setZoom(6);
-		  this.map.panTo(loc);
-		} else {
-		  console.log("Geocode was not successful for the following reason: " + status);
-		}
-	  }); 
-	},	 
-	update: function (data) { 
-	    for (var i = 0, l = data.length; i < l; i++) {
-    	    this.createMarker(data[i].id, data[i].title, data[i].address);
-	    }
-	    this.clusterize();
-	},
-    createMarker: function (key, title, address) {
-	  this.geocoder.geocode({'address': address}, function (results, status) {
-		if (status == 'OK') {
-		  var loc = results[0].geometry.location;
-		  var data = {
-    		  lat: loc.d,
-    		  lng: loc.e
-		  };
-		  
-    	  var pos = new google.maps.LatLng(data.lat, data.lng);
-    	  var point = {
-    		position: pos,
-    		map: this.map,
-    		//icon: image,
-    		title: title
-    	  }
-	  
-          this.markers[key] = new google.maps.Marker(point);
-    	  //var html = _.template(tWindow, {address: data.address, org: data.org, pic: self.pic});
-    	  this.windows[key] = new google.maps.InfoWindow({content: ''});
-    	  var cntx = this;
-    	  google.maps.event.addListener(this.markers[key], 'click', function (event) {
-              cntx.map.panTo(event.latLng);
-    		  cntx.map.setZoom(10);
-    		  cntx.windows[key].open(map, cntx.markers[key]); 	  
-    	  }); 
-					   
-		} else {
-		  console.log("Geocode was not successful for the following reason: " + status);
-		  console.log(key, title, address);
-        }
-	  });
-	},
-	clusterize: function () {
-		   try {
-				this.clusters = new MarkerClusterer(this.map, this.markers)
-		   } catch(error) {
-			   console.log(error);
-		   }
-	},
-	// This function is responsible for listening to location & profile filters, and plot users/orgs meeting criteria on map
-	componentWillReceiveProps: function () {
-        /*$.ajax({
-            url: "/rest/profiles?distance=50&lat=1232.43&lng=44343.32",
-            success: this.update        
-        });	*
-	},	 */
-	render: function () {
-	    console.log(this.config);
-		this.map = new google.maps.Map($("#map"), this.config);
-		//this.update(this.init);
-	}
-}
 
 var Groups = React.createClass({
 	render: function () {
@@ -187,14 +92,14 @@ var Types = React.createClass({
 			<div className="types">
 			  <h3>Filter by:</h3>
 			  <div>
-				  <button class="button green" id="blogs"><i class="fa fa-laptop" /> Blogs</button>
-				  <button class="button green" id="events"><i class="fa fa-calendar" /> Events</button>
-				  <button class="button blue" id="subjects"><i class="fa fa-puzzle-piece" /> Subjects</button>
-				  <button class="button blue" id="questions"><i class="fa fa-question" />Questions</button>
-				  <button class="button red" id="debates"><i class="fa fa-bullhorn" />Debates</button>
-				  <button class="button red" id="bills"><i class="fa fa-line-chart" />Bills</button>
-				  <button class="button orange" id="beliefs"><i class="fa fa-road" />Paths</button>
-				  <button class="button orange" id="quotes"><i class="fa fa-quote-right" />Quotes</button>
+				  <button className="button green" id="blogs"><i className="fa fa-laptop" /> Blogs</button>
+				  <button className="button green" id="events"><i className="fa fa-calendar" /> Events</button>
+				  <button className="button blue" id="subjects"><i className="fa fa-puzzle-piece" /> Subjects</button>
+				  <button className="button blue" id="questions"><i className="fa fa-question" />Questions</button>
+				  <button className="button red" id="debates"><i className="fa fa-bullhorn" />Debates</button>
+				  <button className="button red" id="bills"><i className="fa fa-line-chart" />Bills</button>
+				  <button className="button orange" id="beliefs"><i className="fa fa-road" />Paths</button>
+				  <button className="button orange" id="quotes"><i className="fa fa-quote-right" />Quotes</button>
 			  </div>
 			</div>
 		);
@@ -205,10 +110,10 @@ var Pagination = React.createClass({
 	render: function () {
 		return (
 			<div className="pagination">
-				<a href="javascript:void(0)" ref="prev" class="fa fa-backward fa-3x"></a>
-				<div class="viewing"></div>
-				<div class="totals"></div>
-				<a href="javascript:void(0)" ref="next" class="fa fa-forward fa-3x"></a>
+				<a href="javascript:void(0)" ref="prev" className="fa fa-backward fa-3x"></a>
+				<div className="viewing"></div>
+				<div className="totals"></div>
+				<a href="javascript:void(0)" ref="next" className="fa fa-forward fa-3x"></a>
 			</div>
 		);
 	}	 
@@ -260,15 +165,17 @@ var PostItem = React.createClass({
 			
 		}
 		return (
-			<div className="postItem">
-				<h2>{this.props.meta.title}</h2>
+			<div className="postItem" key={this.props.post.id}>
+				<h2><a href="/post/1">{this.props.meta.title}</a></h2>
 				<div className="type fa fa-bell">{this.props.post.type}</div>
 				<div className="pic">
-					<img src="/assets/logos/logo-new.png" />
+					<a href="/profile/1">
+					    <img src="/assets/logos/logo-new.png" />
+                    </a>
 				</div>
 				<div className="basic">
-				  <h3>By {this.props.user.user.first} {this.props.user.user.last}</h3>
-				  <span class="created">{this.props.post.created}</span>
+				  <h3>By <a href="/profile/1">{this.props.user.user.first} {this.props.user.user.last}</a></h3>
+				  <span className="created">{this.props.post.created}</span>
 				</div>
 				<div className="detail">
 				  <ul>
@@ -276,7 +183,7 @@ var PostItem = React.createClass({
 				  </ul> 
 				</div>
 				<div className="stats">
-				  <div class="influence">{this.props.stats.influence}</div>
+				  <div className="influence">{this.props.stats.influence}</div>
 				  <li>Views: {this.props.stats.views}</li>
 				  <li>Comments: {this.props.stats.comments}</li>
 				  <li>Popularity: {this.props.stats.thumbs}</li>
@@ -287,10 +194,4 @@ var PostItem = React.createClass({
 	}	 
 });
 
-
-if (typeof module !== 'undefined' && module.exports) {
-	module.exports = Search;
-} else{
-	var cnt = document.getElementById('content');
-	React.renderComponent(Search({}), cnt);
-}
+module.exports = Search;

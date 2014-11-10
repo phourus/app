@@ -1,15 +1,12 @@
+/** @jsx React.DOM */
 "use strict";
+var React = require('react');
+
 /** POST **/
 // Post, Author
 
 /** INTERACT **/
 // Views, Comments, Likes
-if (typeof module !== 'undefined' && module.exports) {
-    var React = require('react');
-}
-/**
-* @jsx React.DOM
-*/
 var Post = React.createClass({
      getDefaultProps: function () {
          return {
@@ -35,6 +32,7 @@ var Post = React.createClass({
      render: function () {
           return (
             <div>
+                <a href="">Go Back</a>
                 <h1>{this.props.post.title}</h1>
                 <div class="basic">
                   <h3>By {this.props.user.first} {this.props.user.last}</h3>
@@ -194,10 +192,4 @@ var Comment = React.createClass({
        );       
    } 
 });
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Post;
-} else{
-    var cnt = document.getElementById('content');
-    React.renderComponent(Post({}), cnt);
-}
+module.exports = Post;
