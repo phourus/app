@@ -5,7 +5,9 @@ var React = require('react');
 // Leaderboards, Milestones
 var Game = React.createClass({
      render: function () {
-          return React.DOM.h1(null, 'Game');
+        return (
+            <h1>Game</h1>
+        );
      }
 });
 module.exports = Game;

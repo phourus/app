@@ -19,6 +19,22 @@ var Profile = React.createClass({
            widget: 'about'
        }  
      },
+     componentDidMount: function () {
+		var update = this.props.update;
+		$.ajax({
+			url: "/rest/account",
+			dataType: "json",
+			success: function (data) {
+				update({posts: data});
+			},
+			error: function (err) {
+				console.log(err);
+			}
+		});		
+	 },
+     update: function (obj) {
+		 this.setProps(obj);
+	 },
      render: function () {
           return (
             <div className="profile">

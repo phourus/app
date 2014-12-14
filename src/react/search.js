@@ -11,11 +11,6 @@ var Search = React.createClass({
 	 update: function (obj) {
 		 this.setProps(obj);
 	 },
-	 componentDidMount: function () {
-    	 if (window && window.Map) {
-        	 Map.render();
-    	 }	 
-	 },
 	 render: function () {
 		  return (
 			<div className="search">
@@ -122,23 +117,26 @@ var Pagination = React.createClass({
 /** POSTS **/
 var Posts = React.createClass({
 	componentDidMount: function () {
-		var update = this.props.update;
-		$.ajax({
-			url: "/rest/posts",
-			dataType: "json",
-			success: function (data) {
-				update({posts: data});
-			},
-			error: function (err) {
-				console.log(err);
-			}
-		});		
+		var update = this.props.update;	
+        $.ajax({
+          url: '/rest/post/?search=&types=blogs;events;subjects;questions;debates;bills;beliefs;timeline;quotes&mode=phourus&org_id=0&user_id=0&sort=influence&direction=DESC&page=0&limit=10',
+          dataType: 'json',
+          success: function(data) {
+            
+            update({posts: data});
+          }.bind(this),
+          error: function(err) {
+            console.error(err);
+          }.bind(this)
+        });
 	},
 	render: function () {
 		var data = this.props.posts;
-		var list = data.map(function (item, i) {
+		var list = [];
+		list = data.map(function (item, i) {
 		   return <PostItem key={item.id} post={item.post} meta={item.meta} address={item.address} user={item.user} stats={item.stats} />;
 		});
+
 		return (
 			<div className="posts">{list}</div>
 		);
