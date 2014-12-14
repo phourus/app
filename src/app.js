@@ -1,3 +1,18 @@
+"use strict";
+//require('node-jsx').install();
+var Search = require('./react/search');
+var Post = require('./react/post');
+var Editor = require('./react/editor');
+var Account = require('./react/account');
+var Profile = require('./react/profile');
+var Game = require('./react/game');
+var General = require('./react/general');
+var Landing = require('./react/general');
+var Map = require('./map');
+var React = require('react');
+
+var container = document.getElementById('content');   
+
 //page('', landing);
 page.base('/');
 page('search', search);
@@ -6,138 +21,48 @@ page('account', account);
 page('editor', editor);
 page('editor/:id', editor);
 page('profile/*', profile);
-page('game', game);
+//page('game', game);
 //page('*', general);
 page();
     
-function landing () {
-    console.log('landing');  
+  
+function landing (route) {
+    var params = {};
+    //React.render(new Landing(params), container); 
 }
 
-function search () {
-    console.log('search');
-    /*LazyLoad.js('react/search.js', function(){
-        React.renderComponent(new Search(params), document.getElementById('content'));
-    });*/    
+function search (route) {
+    var params = {};   
+    React.render(<Search />, container); 
+    Map.render(); 
 }
 
-function post (ctx) {
-    var id = ctx.params[0];
-    console.log('post %s', id);    
+function post (route) {
+    var params = {};  
+    React.render(<Post />, container); 
 }
 
-function account () {
-    console.log('account');    
+function account (route) {
+    var params = {};  
+    //React.render(<Account />, container);    
 }
 
-function editor (ctx) {
-    var id = ctx.params[0];
-    console.log('editor %s', id);    
+function editor (route) {
+    var params = {};  
+    React.render(<Editor />, container);   
 }
 
-function profile (ctx) {
-    var id = ctx.params[0];
-    var widget = ctx.params[1];
-    console.log('profile %s %s', id, widget);
+function profile (route) {
+    var params = {};  
+    React.render(<Profile />, container); 
 }
 
-function game (ctx) {
-    var page = ctx.params[0];
-    console.log('game');
+function game (route) {
+    var params = {};  
+    React.render(<Game />, container); 
 }
 
-function general (ctx) {
-    var page = ctx.params[0];
-    console.log('general %s', page);
+function general (route) {
+    var params = {};  
+    React.render(<General />, container); 
 }
-
-
-var Session = function () {
-    
-}
-
-var Map = {
-	map: {},
-    markers: [],
-	windows: [],
-	clusters: [],
-	init: [
-	    {id: 1, title: "Jesse", address: "100 White Cap Lane"}
-	],
-	//geocoder: new google.maps.Geocoder(),
-	/*
-	go: function (location) {
-	  this.geocoder.geocode({'address': location}, function(results, status){
-		if (status == 'OK') {
-		  var loc = results[0].geometry.location;
-		  this.map.setZoom(6);
-		  this.map.panTo(loc);
-		} else {
-		  console.log("Geocode was not successful for the following reason: " + status);
-		}
-	  }); 
-	},	 
-	update: function (data) { 
-	    for (var i = 0, l = data.length; i < l; i++) {
-    	    this.createMarker(data[i].id, data[i].title, data[i].address);
-	    }
-	    this.clusterize();
-	},
-    createMarker: function (key, title, address) {
-	  this.geocoder.geocode({'address': address}, function (results, status) {
-		if (status == 'OK') {
-		  var loc = results[0].geometry.location;
-		  var data = {
-    		  lat: loc.d,
-    		  lng: loc.e
-		  };
-		  
-    	  var pos = new google.maps.LatLng(data.lat, data.lng);
-    	  var point = {
-    		position: pos,
-    		map: this.map,
-    		//icon: image,
-    		title: title
-    	  }
-	  
-          this.markers[key] = new google.maps.Marker(point);
-    	  //var html = _.template(tWindow, {address: data.address, org: data.org, pic: self.pic});
-    	  this.windows[key] = new google.maps.InfoWindow({content: ''});
-    	  var cntx = this;
-    	  google.maps.event.addListener(this.markers[key], 'click', function (event) {
-              cntx.map.panTo(event.latLng);
-    		  cntx.map.setZoom(10);
-    		  cntx.windows[key].open(map, cntx.markers[key]); 	  
-    	  }); 
-					   
-		} else {
-		  console.log("Geocode was not successful for the following reason: " + status);
-		  console.log(key, title, address);
-        }
-	  });
-	},
-	clusterize: function () {
-		   try {
-				this.clusters = new MarkerClusterer(this.map, this.markers)
-		   } catch(error) {
-			   console.log(error);
-		   }
-	},
-	// This function is responsible for listening to location & profile filters, and plot users/orgs meeting criteria on map
-	componentWillReceiveProps: function () {
-        /*$.ajax({
-            url: "/rest/profiles?distance=50&lat=1232.43&lng=44343.32",
-            success: this.update        
-        });	*
-	},	 */
-	render: function () {
-	   var config = {
-		zoom: 4,
-		center: new google.maps.LatLng(38, -95),
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var cnt = $("#map");
-		new google.maps.Map(cnt[0], config);
-		//this.update(this.init);
-	}
-}		

@@ -25,18 +25,19 @@ module.exports = function(grunt) {
     },*/
     browserify: {
       options: {
-        exclude: ["react"],
+        //exclude: ["react"],
         transform: ["reactify"]
       },
       app: {
         files: [
-          {
+          /*{
             expand: true,
             cwd: "src/react",
             src: ["*"],
             dest: "build/react",
             ext: ".js"
-          }
+          },*/
+          {"build/app.js": "src/app.js"}
         ]
       }
     },
@@ -74,6 +75,11 @@ module.exports = function(grunt) {
             src: ["**/*"],
             dest: "build/assets"
           }
+        ]
+      },
+      app: {
+          files: [
+            //{"build/app.js": "src/app.js"}
         ]
       }
     },
