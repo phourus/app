@@ -1,10 +1,10 @@
-jest.dontMock('../build/react/sidebar');
+jest.dontMock('../src/react/sidebar');
 var React, Sidebar, TestUtils;
 
 describe('Sidebar Test', function() {
  it('case 1', function() {
     React = require('react/addons');
-    Sidebar = require('../build/react/sidebar');
+    Sidebar = require('../src/react/sidebar');
     TestUtils = React.addons.TestUtils;
  });
 });

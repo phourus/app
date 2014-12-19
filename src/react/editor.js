@@ -21,17 +21,7 @@ var Editor = React.createClass({
 		 this.setProps(obj);
 	 },
 	 create: function () {
-    	 $.ajax({
-			url: "/rest/post",
-			method: "POST",
-			dataType: "json",
-			success: function (data) {
-				update({posts: data});
-			},
-			error: function (err) {
-				console.log(err);
-			}
-		});
+
 	 },
 	 save: function () {
     	 $.ajax({

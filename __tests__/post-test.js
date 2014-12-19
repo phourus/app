@@ -1,12 +1,38 @@
-jest.dontMock('../build/react/post');
-var React, Post, TestUtils;
+jest.dontMock('../src/react/post');
+var React, Post, TestUtils, model;
 
 describe('Post', function() {
- it('case 1', function() {
     React = require('react/addons');
-    Post = require('../build/react/post');
+    Post = require('../src/react/post');
     TestUtils = React.addons.TestUtils;
- });
+    
+    model = {
+         title: "My first Phourus post",
+         created: "2 weeks ago",
+         influence: 65,
+         element: 'voice',
+         scope: 'local',
+         type: 'debate',   
+         user: {
+             first: "Jesse",
+             last: "Drelick" 
+         },
+         stats: {
+             influence: 62,
+         }   
+     };
+     
+    beforeEach(function () {
+        post = TestUtils.renderIntoDocument(<Post />);
+    });
+
+    it('should have default properties', function () {
+    
+    });
+    
+    it('should accept a Post model', function () {
+        post.setProps(model);
+    });
 });
 
 describe('Post: Details', function() {

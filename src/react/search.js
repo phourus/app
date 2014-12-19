@@ -1,29 +1,53 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
+var Actions = require('../actions');
 
 var Search = React.createClass({
 	 getDefaultProps: function () {
 		return {
-			posts: []  
+			posts: [],
+			search: '',
+			types: '',
+			sort: 'influence',
+			direction: 'DESC',
+			page: 1,
+			limit: 10,
+			total: 0
 		};	
 	 },
+	 search: function () {
+	     var val = this.refs.term.getDOMNode().value;
+         this.update({search: val});
+	 },
 	 update: function (obj) {
-		 this.setProps(obj);
+	    var props = this.props;
+	    for (var k in obj) { 
+	        props[k] = obj[k]; 
+	    }
+	    
+		 this.setProps(props, function () {
+    		 Actions.posts.collection(props);
+		 });
+	 },
+     componentDidMount: function () {
+         this.update({});
 	 },
 	 render: function () {
 		  return (
 			<div className="search">
+			    <h1>Test</h1>
 				<div className="keywords">
-    				<input ref="term" type="text" placeholder="search for" />
-    				<button className="button green" id="search"><i className="fa fa-search" /></button>
+    				<input ref="term" className="term" type="text" placeholder="search for" value={this.props.search} />
+    				<button className="button green" ref="search" onClick={this.search}><i className="fa fa-search" /></button>
 				</div>
 				<div id="map"></div>
-				<Groups />
-				<Filter />
-				<Types />
+				<Groups update={this.update} />
+				<Filter update={this.update} />
+				<Dates />
+				<Types update={this.update} />
 				<Posts update={this.update} posts={this.props.posts} />
-				<Pagination />
+				<Pagination update={this.update} page={this.props.page} total={this.props.total} limit={this.props.limit} />
 			</div>
 		  )
 	 }
@@ -38,63 +62,82 @@ var Groups = React.createClass({
 });
 
 var Filter = React.createClass({
+	sort: function (e) {
+    	this.props.update({sort: e.target.value});
+	},
+	direction: function (e) {
+        this.props.update({direction: e.target.value});	
+	},
 	render: function () {
 		return (
 			<div className="filter">
-			  <div className="sort">
+			  <div>
 				<h3>Sort by:</h3>
-				  <select id="sort">
+				  <select className="sort" onChange={this.sort} ref="sort">
 					  <option value="influence">Influence</option>
 					  <option value="comments">Comments</option>
 					  <option value="thumbs">Thumbs</option>
 					  <option value="views">Views</option>
 				  </select>
-				  <select id="direction">
+				  <select className="direction" onChange={this.direction} ref="direction">
 					  <option value="DESC">High to Low</option>
 					  <option value="ASC">Low to High</option>
 				  </select>
 			  </div>
-			  <div className="dates">
-				<label>Start:</label>
-				<select>
-				  <option>January</option>
-				</select>
-				<select className="date">
-					<option>1</option>
-				</select>
-				<select>
-					<option>2014</option>
-				</select>
-				<label>End:</label>
-				<select>
-					<option>January</option>
-				</select>
-				<select className="date">
-					<option>1</option>
-				</select>
-				<select>
-					<option>2015</option>
-				</select>
-			  </div>
-			</div>
+           </div>
 		);
 	}	 
 });
 
+var Dates = React.createClass({
+    dates: function () {
+        
+    },
+	render: function () {
+		return (
+		  <div className="dates">
+			<label>Start:</label>
+			<select>
+			  <option>January</option>
+			</select>
+			<select className="date">
+				<option>1</option>
+			</select>
+			<select>
+				<option>2014</option>
+			</select>
+			<label>End:</label>
+			<select>
+				<option>January</option>
+			</select>
+			<select className="date">
+				<option>1</option>
+			</select>
+			<select>
+				<option>2015</option>
+			</select>
+		  </div>
+		);
+	}	
+});
+
 var Types = React.createClass({
+	toggle: function (e) {
+        console.log(e.target.id);	
+	},
 	render: function () {
 		return (
 			<div className="types">
 			  <h3>Filter by:</h3>
 			  <div>
-				  <button className="button green" id="blogs"><i className="fa fa-laptop" /> Blogs</button>
-				  <button className="button green" id="events"><i className="fa fa-calendar" /> Events</button>
-				  <button className="button blue" id="subjects"><i className="fa fa-puzzle-piece" /> Subjects</button>
-				  <button className="button blue" id="questions"><i className="fa fa-question" />Questions</button>
-				  <button className="button red" id="debates"><i className="fa fa-bullhorn" />Debates</button>
-				  <button className="button red" id="bills"><i className="fa fa-line-chart" />Bills</button>
-				  <button className="button orange" id="beliefs"><i className="fa fa-road" />Paths</button>
-				  <button className="button orange" id="quotes"><i className="fa fa-quote-right" />Quotes</button>
+				  <button className="button green" id="blogs" onClick={this.toggle} ><i className="fa fa-laptop" /> Blogs</button>
+				  <button className="button green" id="events" onClick={this.toggle}><i className="fa fa-calendar" /> Events</button>
+				  <button className="button blue" id="subjects" onClick={this.toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
+				  <button className="button blue" id="questions" onClick={this.toggle}><i className="fa fa-question" />Questions</button>
+				  <button className="button red" id="debates" onClick={this.toggle}><i className="fa fa-bullhorn" />Debates</button>
+				  <button className="button red" id="bills" onClick={this.toggle}><i className="fa fa-line-chart" />Bills</button>
+				  <button className="button orange" id="beliefs" onClick={this.toggle}><i className="fa fa-road" />Paths</button>
+				  <button className="button orange" id="quotes" onClick={this.toggle}><i className="fa fa-quote-right" />Quotes</button>
 			  </div>
 			</div>
 		);
@@ -102,13 +145,24 @@ var Types = React.createClass({
 });
 
 var Pagination = React.createClass({
+	next: function () {
+	    if ( Math.ceil(this.props.page * this.props.limit) < this.props.total ) {
+    	    this.props.update({page: this.props.page + 1});
+	    }
+	},
+	previous: function () {
+        if (this.props.page > 1) {
+    	    this.props.update({page: this.props.page - 1});
+	    }
+	},
 	render: function () {
+		var pages = Math.ceil(this.props.total / this.props.limit);
 		return (
 			<div className="pagination">
-				<a href="javascript:void(0)" ref="prev" className="fa fa-backward fa-3x"></a>
-				<div className="viewing"></div>
-				<div className="totals"></div>
-				<a href="javascript:void(0)" ref="next" className="fa fa-forward fa-3x"></a>
+				<a href="javascript:void(0)" ref="prev" className="prev fa fa-backward fa-3x" onClick={this.previous}></a>
+				<div className="viewing">Page {this.props.page} of {pages}</div>
+				<div className="totals">{this.props.total}</div>
+				<a href="javascript:void(0)" ref="next" className="next fa fa-forward fa-3x" onClick={this.next}></a>
 			</div>
 		);
 	}	 
@@ -116,20 +170,6 @@ var Pagination = React.createClass({
 
 /** POSTS **/
 var Posts = React.createClass({
-	componentDidMount: function () {
-		var update = this.props.update;	
-        $.ajax({
-          url: '/rest/post/?search=&types=blogs;events;subjects;questions;debates;bills;beliefs;timeline;quotes&mode=phourus&org_id=0&user_id=0&sort=influence&direction=DESC&page=0&limit=10',
-          dataType: 'json',
-          success: function(data) {
-            
-            update({posts: data});
-          }.bind(this),
-          error: function(err) {
-            console.error(err);
-          }.bind(this)
-        });
-	},
 	render: function () {
 		var data = this.props.posts;
 		var list = [];
@@ -142,14 +182,17 @@ var Posts = React.createClass({
 		);
 	}	 
 });
+
 /*
-					<li><strong>Positive:</strong> {this.props.meta.positive}</li>
-					<li><strong>Category:</strong> {this.props.meta.category}</li>
-					<li><strong>Element:</strong> {this.props.meta.element}</li> 
-					<li><strong>Date/Time:</strong> {this.props.post.date}</li>
-					<li><strong>Address:</strong> {this.props.address.city}</li>
-					<li><strong>Difficulty:</strong> {this.props.meta.difficulty}</li> 
-					<li><strong>Scope:</strong> {this.props.meta.scope}</li>*/
+<li><strong>Positive:</strong> {this.props.meta.positive}</li>
+<li><strong>Category:</strong> {this.props.meta.category}</li>
+<li><strong>Element:</strong> {this.props.meta.element}</li> 
+<li><strong>Date/Time:</strong> {this.props.post.date}</li>
+<li><strong>Address:</strong> {this.props.address.city}</li>
+<li><strong>Difficulty:</strong> {this.props.meta.difficulty}</li> 
+<li><strong>Scope:</strong> {this.props.meta.scope}</li>
+*/
+
 var PostItem = React.createClass({
 	render: function () {
 		var meta = [];

@@ -1,36 +1,32 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
+var Actions = require('../actions');
 
 var Profile = React.createClass({
      getDefaultProps: function () {
        return {
-           profile: {
-               username: "jessedrelick",
-               type: "individual"       
-           },
+           profile: {},
            stats: {
-               people: 1434,
-               members: 143,
-               pending: 22,
-               influence: 55
-           },
-           view: 'info',
-           widget: 'about'
+               influence: 0
+           }
        }  
+     },
+     getInitialState: function () {
+         return {
+             id: null,
+             type: null,
+             view: 'info',
+             widget: 'about'
+         }
      },
      componentDidMount: function () {
 		var update = this.props.update;
-		$.ajax({
-			url: "/rest/account",
-			dataType: "json",
-			success: function (data) {
-				update({posts: data});
-			},
-			error: function (err) {
-				console.log(err);
-			}
-		});		
+		if (this.state.type === 'org') {
+    		Actions.orgs.single(this.state.id);
+		} else {
+    		Actions.users.single(this.state.id);
+		}
 	 },
      update: function (obj) {
 		 this.setProps(obj);

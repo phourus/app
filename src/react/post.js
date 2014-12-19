@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
+var Actions = require('../actions');
 
 /** POST **/
 // Post, Author
@@ -28,6 +29,15 @@ var Post = React.createClass({
                  influence: 62,
              }
          }
+     },
+     getInitialState: function () {
+         return {
+             id: null
+         }
+     },
+     componentDidMount: function () {
+         var post = Actions.posts.single(this.state.id);
+         this.setProps(post);
      },
      render: function () {
           return (

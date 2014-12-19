@@ -1,12 +1,45 @@
-jest.dontMock('../build/react/profile');
+jest.dontMock('../src/react/profile');
 var React, Profile, TestUtils;
 
 describe('Profile', function() {
- it('case 1', function() {
     React = require('react/addons');
-    Profile = require('../build/react/profile');
+    Profile = require('../src/react/profile');
     TestUtils = React.addons.TestUtils;
- });
+    var orgProfile = {
+        org: {
+            
+        },
+        stats: {
+           people: 1434,
+           members: 143,
+           pending: 22,
+           influence: 55
+       }
+    };
+    var userProfile = {
+        user: {
+            
+        },
+        stats: {
+            
+        }
+    };
+    
+    beforeEach(function () {
+       profile = TestUtils.renderIntoDocument(<Profile />); 
+    });
+    
+    it('should have default properties', function() {
+        expect(profile.props.profile).toEqual({});
+    });
+    
+    it('should accept a User model', function() {
+    
+    });
+    
+    it('should accept an Org model', function () {
+        
+    });
 });
 
 describe('Profile: Heading', function() {

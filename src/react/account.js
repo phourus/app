@@ -1,31 +1,32 @@
 var React = require('react');
+var Actions = require('../actions');
 
 var Account = React.createClass({
      getDefaultProps: function () {
         return {
-            id: 123,
-            pic: "/assets/logos/logo-new.png",
+            id: null,
+            pic: "",
+            username: "",
+            first: "",
+            last: "",
+            email: "",
+            phone: "",
+            company: "",
+            occupation: "",
+            website: "",
+            dob: "",
+            gender: "",
             address: {
-                street: "100 White Cap Lane",
-                city: "Newport Coast",
-                state: "CA",
-                zip: "92657"
+                street: "",
+                city: "",
+                state: "",
+                zip: ""
             }
-            
         }  
      },
      componentDidMount: function () {
 		var update = this.props.update;
-		$.ajax({
-			url: "/rest/account",
-			dataType: "json",
-			success: function (data) {
-				update({posts: data});
-			},
-			error: function (err) {
-				console.log(err);
-			}
-		});		
+        Actions.account.get();
 	 },
      update: function (obj) {
 		 this.setProps(obj);
@@ -69,11 +70,11 @@ var Info = React.createClass({
           <div>
             <h3>My Basic Info</h3>
             <div id="user_basic">
-                <input ref="username" type="text" value={this.props.info.username} />
-                <input ref="first" type="text" value={this.props.info.first} />
-                <input ref="last" type="text" value={this.props.info.last} />
-                <input ref="email" type="text" value={this.props.info.email} />
-                <input ref="phone" type="text" value={this.props.info.phone} /> 
+                <input ref="username" className="username" type="text" value={this.props.info.username} />
+                <input ref="first" className="first" type="text" value={this.props.info.first} />
+                <input ref="last" className="last" type="text" value={this.props.info.last} />
+                <input ref="email" className="email" type="text" value={this.props.info.email} />
+                <input ref="phone" className="phone" type="text" value={this.props.info.phone} /> 
             </div>
             <button id="save_basic" class="button green save">Save Info</button>
           </div>
@@ -87,11 +88,11 @@ var Details = React.createClass({
           <div>
             <h3>My Details</h3>
             <div id="user_detail">
-                <input ref="company" type="text" value={this.props.details.company} />
-                <input ref="occupation" type="text" value={this.props.details.occupation} />
-                <input ref="website" type="text" value={this.props.details.website} />
-                <input ref="dob" type="datetime" value={this.props.details.dob} />
-                <select ref="gender">{this.props.details.gender}</select>
+                <input ref="company" className="company" type="text" value={this.props.details.company} />
+                <input ref="occupation" className="occupation" type="text" value={this.props.details.occupation} />
+                <input ref="website" className="website" type="text" value={this.props.details.website} />
+                <input ref="dob" className="dob" type="datetime" value={this.props.details.dob} />
+                <input ref="gender" className="gender" value={this.props.details.gender} />
             </div>
             <button id="save_detail" class="button green save">Save Info</button>
           </div>
@@ -108,10 +109,10 @@ var Address = React.createClass({
           <div>
             <h3>My Address</h3>
             <div id="user_address">
-                <input ref="street" type="text" value={this.props.address.street} />
-                <input ref="zip" type="text" value={this.props.address.zip} />
-                <input ref="city" type="text" value={this.props.address.city} />
-                <select ref="state" type="text" value={this.props.address.city}></select>
+                <input ref="street" className="street" type="text" value={this.props.address.street} />
+                <input ref="zip" className="zip" type="text" value={this.props.address.zip} />
+                <input ref="city" className="city" type="text" value={this.props.address.city} />
+                <input ref="state" className="state" type="text" value={this.props.address.state} />
             </div>
             <button id="save_address" class="button green save">Save Info</button>
           </div>

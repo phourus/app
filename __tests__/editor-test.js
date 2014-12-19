@@ -1,10 +1,10 @@
-jest.dontMock('../build/react/editor');
+jest.dontMock('../src/react/editor');
 var React, Editor, TestUtils;
 
 describe('Editor', function() {
  it('case 1', function() {
     React = require('react/addons');
-    Editor = require('../build/react/editor');
+    Editor = require('../src/react/editor');
     TestUtils = React.addons.TestUtils;
  });
 });

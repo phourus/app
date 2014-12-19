@@ -1,9 +1,9 @@
-jest.dontMock('../build/react/landing');
+jest.dontMock('../src/react/landing');
 var React, Landing, TestUtils;
 describe('Landing Test', function() {
  it('case 1', function() {
     React = require('react/addons');
-    Landing = require('../build/react/landing');
+    Landing = require('../src/react/landing');
     TestUtils = React.addons.TestUtils;
  });
 });

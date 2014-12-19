@@ -3,11 +3,25 @@ var Map = {
     markers: [],
 	windows: [],
 	clusters: [],
-	init: [
-	    {id: 1, title: "Jesse", address: "100 White Cap Lane"}
-	],
-	//geocoder: new google.maps.Geocoder(),
-	/*
+	geocoder: {},
+	container: '#map',
+	config: {
+		zoom: 4,
+		x: 38,
+		y: -95
+    },
+	init: function () {
+    	this.geocoder = new google.maps.geocode();
+    	this.config.center = new google.maps.LatLng(this.x, this.y);
+    	this.config.mapTypeId = google.maps.MapTypeId.ROADMAP;
+        this.map = new google.maps.Map($(this.container)[0], this.config);
+	},
+    render: function (data) {
+        for (var i = 0, l = data.length; i < l; i++) {
+    	    this.createMarker(data[i].id, data[i].title, data[i].address);
+	    }
+	    this.clusterize();
+	},
 	go: function (location) {
 	  this.geocoder.geocode({'address': location}, function(results, status){
 		if (status == 'OK') {
@@ -19,12 +33,6 @@ var Map = {
 		}
 	  }); 
 	},	 
-	update: function (data) { 
-	    for (var i = 0, l = data.length; i < l; i++) {
-    	    this.createMarker(data[i].id, data[i].title, data[i].address);
-	    }
-	    this.clusterize();
-	},
     createMarker: function (key, title, address) {
 	  this.geocoder.geocode({'address': address}, function (results, status) {
 		if (status == 'OK') {
@@ -59,29 +67,11 @@ var Map = {
 	  });
 	},
 	clusterize: function () {
-		   try {
-				this.clusters = new MarkerClusterer(this.map, this.markers)
-		   } catch(error) {
-			   console.log(error);
-		   }
-	},
-	// This function is responsible for listening to location & profile filters, and plot users/orgs meeting criteria on map
-	componentWillReceiveProps: function () {
-        /*$.ajax({
-            url: "/rest/profiles?distance=50&lat=1232.43&lng=44343.32",
-            success: this.update        
-        });	*
-	},	 */
-	render: function () {
-	   var config = {
-		zoom: 4,
-		center: new google.maps.LatLng(38, -95),
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var cnt = $("#map");
-		new google.maps.Map(cnt[0], config);
-		//this.update(this.init);
+	   try {
+			this.clusters = new MarkerClusterer(this.map, this.markers);
+	   } catch(error) {
+		   console.log(error);
+	   }
 	}
 }	
-
 module.exports = Map;
