@@ -11,10 +11,12 @@
   "dependencies": {
     "express": "4.0.x",
     "node-jsx": "^0.12.0",
-    "react": "0.12.x"
+    "react": "0.12.x",
+    "socket.io-client": "^1.2.1"
   },
   "devDependencies": {
     "grunt": "0.4.x",
+    "grunt-browserify": "^3.2.1",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-copy": "0.5.x",
     "grunt-contrib-csslint": "^0.3.1",
@@ -30,7 +32,11 @@
     "test": "jest"
   },
   "jest": {
+    "testDirectoryName": "tests",
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"]
+    "collectCoverage": true,
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
   }
 }
