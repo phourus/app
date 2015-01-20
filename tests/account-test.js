@@ -1,10 +1,13 @@
+/** @jsx React.DOM **/
+jest.genMockFromModule('socket.io-client');
 jest.dontMock('../src/react/account');
-var React, Account, TestUtils, account, model;
+var React, Account, TestUtils, view, model, account;
 
 describe('Account', function() {
     React = require('react/addons');
     Account = require('../src/react/account');
     TestUtils = React.addons.TestUtils;
+
     model = {
         id: 123,
         pic: "/assets/logos/logo-new.png",
@@ -17,7 +20,7 @@ describe('Account', function() {
         occupation: "Software dude",
         website: "www.phourus.com",
         dob: "7-9-87",
-        gender: "hmmm",
+        gender: "M",
         address: {
             street: "100 White Cap Lane",
             city: "Newport Coast",
@@ -25,47 +28,48 @@ describe('Account', function() {
             zip: "92657"
         }
     }
+
     beforeEach(function() {
-        account = TestUtils.renderIntoDocument(<Account />);
+        view = TestUtils.renderIntoDocument(<Account />);  
     });
     
     it('should have default properties', function () {
-        expect(account.props.id).toEqual(null);
-        expect(account.props.pic).toEqual("");
-        expect(account.props.username).toEqual("");
-        expect(account.props.first).toEqual("");
-        expect(account.props.last).toEqual("");
-        expect(account.props.email).toEqual("");
-        expect(account.props.phone).toEqual("");
-        expect(account.props.company).toEqual("");
-        expect(account.props.occupation).toEqual("");
-        expect(account.props.website).toEqual("");
-        expect(account.props.dob).toEqual("");
-        expect(account.props.gender).toEqual("");
-        expect(account.props.address.street).toEqual("");
-        expect(account.props.address.city).toEqual("");
-        expect(account.props.address.state).toEqual("");
-        expect(account.props.address.zip).toEqual("");
+        expect(view.props.id).toBeNull();
+        expect(view.props.pic).toEqual("");
+        expect(view.props.username).toEqual("");
+        expect(view.props.first).toEqual("");
+        expect(view.props.last).toEqual("");
+        expect(view.props.email).toEqual("");
+        expect(view.props.phone).toEqual("");
+        expect(view.props.company).toEqual("");
+        expect(view.props.occupation).toEqual("");
+        expect(view.props.website).toEqual("");
+        expect(view.props.dob).toEqual("");
+        expect(view.props.gender).toEqual("");
+        expect(view.props.address.street).toEqual("");
+        expect(view.props.address.city).toEqual("");
+        expect(view.props.address.state).toEqual("");
+        expect(view.props.address.zip).toEqual("");
     });
     
     it('should accept an Account model', function() {
-        account.setProps(model);
-        expect(account.props.id).toEqual(model.id);
-        expect(account.props.pic).toEqual(model.pic);
-        expect(account.props.username).toEqual(model.username);
-        expect(account.props.first).toEqual(model.first);
-        expect(account.props.last).toEqual(model.last);
-        expect(account.props.email).toEqual(model.email);
-        expect(account.props.phone).toEqual(model.phone);
-        expect(account.props.company).toEqual(model.company);
-        expect(account.props.occupation).toEqual(model.occupation);
-        expect(account.props.website).toEqual(model.website);
-        expect(account.props.dob).toEqual(model.dob);
-        expect(account.props.gender).toEqual(model.gender);
-        expect(account.props.address.street).toEqual(model.address.street);
-        expect(account.props.address.city).toEqual(model.address.city);
-        expect(account.props.address.state).toEqual(model.address.state);
-        expect(account.props.address.zip).toEqual(model.address.zip);
+        view.setProps(model);
+        expect(view.props.id).toEqual(model.id);
+        expect(view.props.pic).toEqual(model.pic);
+        expect(view.props.username).toEqual(model.username);
+        expect(view.props.first).toEqual(model.first);
+        expect(view.props.last).toEqual(model.last);
+        expect(view.props.email).toEqual(model.email);
+        expect(view.props.phone).toEqual(model.phone);
+        expect(view.props.company).toEqual(model.company);
+        expect(view.props.occupation).toEqual(model.occupation);
+        expect(view.props.website).toEqual(model.website);
+        expect(view.props.dob).toEqual(model.dob);
+        expect(view.props.gender).toEqual(model.gender);
+        expect(view.props.address.street).toEqual(model.address.street);
+        expect(view.props.address.city).toEqual(model.address.city);
+        expect(view.props.address.state).toEqual(model.address.state);
+        expect(view.props.address.zip).toEqual(model.address.zip);
     });
 });
 

@@ -1,3 +1,5 @@
+/** @jsx React.DOM **/
+jest.genMockFromModule('socket.io-client');
 jest.dontMock('../src/react/profile');
 var React, Profile, TestUtils;
 

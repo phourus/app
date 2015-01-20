@@ -1,5 +1,5 @@
 jest.dontMock('../src/react/post');
-var React, Post, TestUtils, model;
+var React, Post, TestUtils, model, view;
 
 describe('Post', function() {
     React = require('react/addons');
@@ -23,15 +23,16 @@ describe('Post', function() {
      };
      
     beforeEach(function () {
-        post = TestUtils.renderIntoDocument(<Post />);
+        view = TestUtils.renderIntoDocument(<Post />);
     });
 
     it('should have default properties', function () {
-    
+        var props = view.props;
+        
     });
     
     it('should accept a Post model', function () {
-        post.setProps(model);
+        view.setProps(model);
     });
 });
 
