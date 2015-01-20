@@ -16,13 +16,15 @@
             	</a>
             </div>
             <nav class="nav">
-            	<a href="./search" class="search fa fa-search"></a>
-            	<a href="./editor" class="create fa fa-plus"></a>
+                <a href="javascript: void(0)" onClick="page('/game')" class="game fa fa-trophy"></a>
+            	<a href="javascript: void(0)" onClick="page('/search')" class="search fa fa-search"></a>
+            	<a href="javascript: void(0)" onClick="page('/editor')" class="editor fa fa-pencil"></a>
+            	<a href="javascript: void(0)" onClick="page('/account')" class="account fa fa-user"><span class="notifications">13</span></a>
             </nav>
         </header>
         <div class="spacer"></div>
         <div class="main">
-            <div class="sidebar">
+            <!--<div class="sidebar">
                 <div class="title">Login</div>
 				<p>Login below to access your Phourus account</p>
 				<div class="auth-sidebar">
@@ -38,7 +40,7 @@
 				  <a href="./signup" class="button blue">Signup Now</a>
 				  <br clear="all"><br>
 				</div>
-            </div>
+            </div>-->
             <div id="content" class="">$CONTENT</div>
             <footer class="footer">
                 © 2013 Phourus LLC. All Rights Reserved.

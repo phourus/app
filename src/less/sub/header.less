@@ -7,7 +7,7 @@ header {
   background-color: #fff;
       
   .brand {
-	.Cols(10);  
+	.Cols(5);  
     
     a img {
         height: 80%;
@@ -15,9 +15,14 @@ header {
   }
 
     nav {
-      .Cols(1);
+      .Cols(6);
       text-align: right;
         
+      .fa {
+        font-size: 1.5em;
+        margin-right: 5px;   
+      }
+      
       a {
         color: #555;   
         text-align: center;
@@ -26,12 +31,26 @@ header {
         color: #444;
       }
       
+      a.fa-trophy:hover {
+          color: @red-light;
+      }
+      
       a.fa-search:hover {
           color: @blue-dark;
       }
       
-      a.fa-plus:hover {
+      a.fa-pencil:hover {
           color: @green-dark;
+      }
+      
+      a.fa-user:hover {
+          color: @gold-dark;  
+      }
+      
+      .notifications {
+          background-color: @red-light;
+          color: #fff;
+          font-size: 0.6em;
       }
     }
 }
