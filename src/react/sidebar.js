@@ -189,7 +189,7 @@ var Membership = React.createClass({
                   <a href="#" class="button green">Join Org</a>
                   <br clear="all" /><br />
                 </div>
-                            <div>
+                <div>
                   <h3 class="favorite">Favorite</h3>
                   <p>Click "Add to Favorites" below to add this user to your Favorites list</p>
                   <a href="#" class="button green">Add to Favorites</a>

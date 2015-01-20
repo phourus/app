@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var Actions = require('../actions');
+var posts = require('../objects/posts');
+var comments = require('../objects/comments');
 
 /** POST **/
 // Post, Author
@@ -12,47 +13,56 @@ var Post = React.createClass({
      getDefaultProps: function () {
          return {
              post: {
-                 title: "My first Phourus post",
-                 created: "2 weeks ago",
-                 influence: 65,
-                 element: 'voice',
-                 scope: 'local',
-                 type: 'debate'      
+                 id: null,
+                 title: "",
+                 created: "",
+                 influence: null,
+                 element: '',
+                 scope: '',
+                 type: ''      
              },
 
              user: {
-                 first: "Jesse",
-                 last: "Drelick" 
+                 first: "",
+                 last: "" 
              },
              
              stats: {
-                 influence: 62,
-             }
+                 influence: null
+             },
+             
+             comments: []
          }
      },
-     getInitialState: function () {
-         return {
-             id: null
-         }
+     update: function (obj) {
+        this.setProps(obj);  
      },
-     componentDidMount: function () {
-         var post = Actions.posts.single(this.state.id);
-         this.setProps(post);
+     componentDidMount: function () {         
+         var self = this;
+         posts.on('returnSingle', function (data) {
+             self.setProps({post: data}, function () {
+                 comments.collection({post_id: data.id});
+             });
+         });
+         comments.on('returnCollection', function (data) {
+             self.update({comments: data});
+         });
+         posts.single(this.props.id);
      },
      render: function () {
           return (
             <div>
                 <a href="">Go Back</a>
                 <h1>{this.props.post.title}</h1>
-                <div class="basic">
+                <div className="basic">
                   <h3>By {this.props.user.first} {this.props.user.last}</h3>
-                  <span class="created">{this.props.created}</span>
-                  <div class="type">{this.props.post.type}</div>
+                  <span className="created">{this.props.created}</span>
+                  <div className="type">{this.props.post.type}</div>
                 </div>
                 <Details post={this.props.post} />
                 <Stats stats={this.props.stats} />
                 <div>{this.props.post.content}</div>
-                <Interact stats={this.props.stats} />
+                <Interact stats={this.props.stats} postID={this.props.post.id} update={this.update} comments={this.props.comments} />
             </div>
           );
      }
@@ -61,7 +71,7 @@ var Post = React.createClass({
 var Details = React.createClass({
    render: function () {
        return (
-         <ul class="detail">
+         <ul className="detail">
             <li><strong>Positive:</strong> {this.props.post.positive}</li>
             <li><strong>Category:</strong> {this.props.post.category}</li>
             <li><strong>Element:</strong> {this.props.post.element}</li>
@@ -78,8 +88,8 @@ var Stats = React.createClass({
    render: function () {
        return (
            <div>
-               <div class="influence">{this.props.stats.influence}</div>
-               <i class="fa fa-2x fa-bell" /> 
+               <div className="influence">{this.props.stats.influence}</div>
+               <i className="fa fa-2x fa-bell" /> 
            </div>
        );
    }  
@@ -91,7 +101,7 @@ var Interact = React.createClass({
            <div>
                 <Thumbs stats={this.props.stats} />
                 <Views stats={this.props.stats} />
-                <Comments stats={this.props.stats} />
+                <Comments stats={this.props.stats} postID={this.props.postID} update={this.props.update} comments={this.props.comments} />
            </div>
        );
    }  
@@ -100,8 +110,8 @@ var Interact = React.createClass({
 var Views = React.createClass({
     render: function () {
         return (
-          <div class="views">
-            <i class="fa fa-eye fa-2x" />
+          <div className="views">
+            <i className="fa fa-eye fa-2x" />
             <div>{this.props.stats.views} views</div>
          </div>
         );
@@ -115,10 +125,10 @@ var Thumbs = React.createClass({
        var icon = '';
        if(this.props.stats.popularity > 50){ 
          c = 'positive'; 
-         <i class="fa fa-plus fa-2x" />
+         <i className="fa fa-plus fa-2x" />
        } else if (this.props.stats.popularity < 50) { 
          c = 'negative'; 
-         <i class="fa fa-minus fa-2x" />
+         <i className="fa fa-minus fa-2x" />
        } 
        if (this.props.stats.positive === 1) {
            current = 'like';
@@ -126,12 +136,12 @@ var Thumbs = React.createClass({
            current = 'dislike';
        }
        return (  
-          <div class="thumb">
+          <div className="thumb">
             <p>You have decided you {current} this post. Click the button below to change your mind.</p>
             {icon}
             <div>
                 {this.props.stats.positive} / {this.props.stats.thumbs}
-                <em class="{c}">({this.props.popularity}% popularity)</em>
+                <em className="{c}">({this.props.popularity}% popularity)</em>
             </div>
           </div>
        );
@@ -139,22 +149,43 @@ var Thumbs = React.createClass({
 });
 
 var Comments = React.createClass({
+    add: function () {
+        var model = {};
+        model.content = this.refs.comment.getDOMNode().value;
+        model.post_id = this.props.postID;
+        comments.add(model);
+    },
+    componentDidMount: function () {
+         var self = this;
+         comments.on('returnAdd', function (data) {
+             console.log(data);
+         });         
+    },
     render: function () {
           var pic = "You must be logged-in to comment";
           var token = null;
           if (token === null) { 
             //pic = <a href="#user/{this.props.id}"><img src="{this.props.pic}" width="100"></a>
           }
+        var data = this.props.comments.rows;
+		var comments = [];
+		if (data) {
+		    console.log(data);
+            comments= data.map(function (item, i) {
+    		   var user = {id: 1, first: "JESSE", last: "drelick", influence: 66, username: "jdrelick", pic: ""};
+    		   return <Comment key={item.id} comment={item} user={user} />;
+    		});
+		}
         return (
             <div>
-                <h2 class="comments">
-                    <i class="fa fa-comments" /> Comments
+                <h2 className="comments">
+                    <i className="fa fa-comments" /> Comments
                 </h2>
-                <div id="comments"></div>
-                <div class="create">
-                    <div class="pic">{pic}</div>
-                    <textarea placeholder="Comment goes here"></textarea>
-                    <button class="button green add">Post Comment</button>
+                <div id="comments">{comments}</div>
+                <div className="create">
+                    <div className="pic">{pic}</div>
+                    <textarea ref="comment" placeholder="Comment goes here"></textarea>
+                    <button className="button green add" onClick={this.add}>Post Comment</button>
                 </div>
             </div>
         );
@@ -164,9 +195,10 @@ var Comments = React.createClass({
 var Comment = React.createClass({
    render: function () {
        var textarea = '';
+/*
        if (owner === true) {
-           //textarea =   <textarea>{this.props.id}</textarea>
-           /* actions = 
+           textarea =   <textarea>{this.props.id}</textarea>
+           actions = 
                    <% if(owner === true){ %>
           <div class="actions-admin">
             <button class="button blue edit">Edit Comment</button>
@@ -180,24 +212,25 @@ var Comment = React.createClass({
             <button class="button green confirm">Confirm Delete</button>
             <button class="button red cancel">Cancel</button>
           </div>
-            */
+           
        }
+*/
        return (
-           <div class="item" id="{this.props.id}">
-              <div class="pic">
+           <div className="item" id="{this.props.id}">
+              <div className="pic">
                 <a href="#user/{this.props.user.id}">
-                    <img src="{this.props.pic}" width="100" onerror="this.src='/assets/pics/default.png'" />
+                    <img src="{this.props.user.pic}" width="100" onerror="this.src='/assets/pics/default.png'" />
                 </a>
-                <a href="#user/{this.props.user.id}" class="username">
+                <a href="#user/{this.props.user.id}" className="username">
                     {this.props.user.username} ({this.props.user.influence})
                 </a>
               </div>
-              <div class="comment">
-                <span class="date">{this.props.date}</span>
-                <span>{this.props.comment}</span>
+              <div className="comment">
+                <span className="date">{this.props.date}</span>
+                <span>{this.props.comment.content}</span>
                 {textarea}
               </div>
-              <div class="actions">{actions}</div>
+              <div className="actions"></div>
             </div>
        );       
    } 

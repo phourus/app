@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var Actions = require('../actions');
+var users = require('../objects/users');
+var orgs = require('../objects/orgs');
 
 var Profile = React.createClass({
      getDefaultProps: function () {
@@ -22,10 +23,24 @@ var Profile = React.createClass({
      },
      componentDidMount: function () {
 		var update = this.props.update;
-		if (this.state.type === 'org') {
-    		Actions.orgs.single(this.state.id);
+        var self = this;
+         
+		if (this.props.type === 'org') {
+            orgs.on('returnSingle', function (data) {
+                 console.log(data);
+                 self.setProps({profile: data}, function () {
+                    console.log('props set');
+                 });
+             });
+    		orgs.single(this.props.id);
 		} else {
-    		Actions.users.single(this.state.id);
+            users.on('returnSingle', function (data) {
+                 console.log(data);
+                 self.setProps({profile: data}, function () {
+                    console.log('props set');
+                 });
+             });
+    		users.single(this.props.id);
 		}
 	 },
      update: function (obj) {
@@ -211,7 +226,7 @@ var ViewExtras = React.createClass({
         
         return (
           <div className="viewExtras">
-              <ul class="extras">  
+              <ul className="extras">  
                 {specific} 
                 <li><h3>COMMON</h3></li>
                 <li><a href="/profile/1/extras">Jobs</a></li>
@@ -228,7 +243,7 @@ var ViewExtras = React.createClass({
 var Widget = React.createClass({
     render: function () {
         return (
-            <div className="widget"></div>
+            <div className="widget">Widget</div>
         );
     }
 });
