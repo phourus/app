@@ -1,3 +1,5 @@
+var localStorage = require('localStorage');
+
 var token = {
     get: function () {
       var token = localStorage.getItem('token'); 
