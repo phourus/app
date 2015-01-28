@@ -42,13 +42,13 @@ describe('Post: Details', function() {
  });
 });
 
-describe('Post: Stats', function() {
+describe('Post: Tags', function() {
  it('case 1', function() {
 
  });
 });
 
-describe('Post: Interact', function() {
+describe('Post: Links', function() {
  it('case 1', function() {
 
  });
@@ -60,7 +60,7 @@ describe('Post: Views', function() {
  });
 });
 
-describe('Post: Thumbs', function() {
+describe('Post: Votes', function() {
  it('case 1', function() {
 
  });
