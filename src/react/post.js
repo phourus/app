@@ -3,6 +3,7 @@
 var React = require('react');
 var posts = require('../objects/posts');
 var comments = require('../objects/comments');
+var thumbs = require('../objects/thumbs');
 
 /** POST **/
 // Post, Author
@@ -10,46 +11,20 @@ var comments = require('../objects/comments');
 /** INTERACT **/
 // Views, Comments, Likes
 var Post = React.createClass({
-     getDefaultProps: function () {
-         return {
-             post: {
-                 id: null,
-                 title: "",
-                 created: "",
-                 influence: null,
-                 element: '',
-                 scope: '',
-                 type: ''      
-             },
-
-             user: {
-                 first: "",
-                 last: "" 
-             },
-             
-             stats: {
-                 influence: null
-             },
-             
-             comments: []
-         }
-     },
-     update: function (obj) {
-        this.setProps(obj);  
-     },
      componentDidMount: function () {         
          var self = this;
          posts.on('returnSingle', function (data) {
-             self.setProps({post: data}, function () {
+             self.props.update('post', {post: data}, function () {
                  comments.collection({post_id: data.id});
              });
          });
          comments.on('returnCollection', function (data) {
-             self.update({comments: data});
+             self.props.update('post', {comments: data});
          });
          posts.single(this.props.id);
      },
      render: function () {
+          console.log(this.props.post);
           return (
             <div>
                 <a href="">Go Back</a>
@@ -60,15 +35,16 @@ var Post = React.createClass({
                   <div className="type">{this.props.post.type}</div>
                 </div>
                 <Details post={this.props.post} />
-                <Stats stats={this.props.stats} />
                 <div>{this.props.post.content}</div>
-                <Interact stats={this.props.stats} postID={this.props.post.id} update={this.update} comments={this.props.comments} />
+                <Interact post={this.props.post} update={this.update} comments={this.props.comments} />
             </div>
           );
      }
 });
 
 var Details = React.createClass({
+   //<div className="influence">{this.props.post.influence}</div>
+
    render: function () {
        return (
          <ul className="detail">
@@ -84,24 +60,13 @@ var Details = React.createClass({
    }  
 });
 
-var Stats = React.createClass({
-   render: function () {
-       return (
-           <div>
-               <div className="influence">{this.props.stats.influence}</div>
-               <i className="fa fa-2x fa-bell" /> 
-           </div>
-       );
-   }  
-});
-
 var Interact = React.createClass({
    render: function () {
        return (
            <div>
-                <Thumbs stats={this.props.stats} />
-                <Views stats={this.props.stats} />
-                <Comments stats={this.props.stats} postID={this.props.postID} update={this.props.update} comments={this.props.comments} />
+                <Thumbs post={this.props.post} thumb={this.props.thumb} />
+                <Views post={this.props.post} />
+                <Comments post={this.props.post} postID={this.props.postID} update={this.props.update} comments={this.props.comments} />
            </div>
        );
    }  
@@ -112,27 +77,51 @@ var Views = React.createClass({
         return (
           <div className="views">
             <i className="fa fa-eye fa-2x" />
-            <div>{this.props.stats.views} views</div>
+            <div>{this.props.post.views} views</div>
          </div>
         );
     }    
 });
 
 var Thumbs = React.createClass({
+   componentDidMount: function () {
+     var self = this;
+     thumbs.on('returnSingle', function (data) {
+         if (data) {
+             self.props.update({thumb: data.positive});
+         }
+     });
+     thumbs.single(this.props.post.id);
+   },
+   like: function () {
+       var model = {};
+       model.post_id = this.props.post.id;
+       model.positive = 1;
+       console.log(model);
+       thumbs.add(model);
+   },
+   dislike: function () {
+       var model = {};
+       model.post_id = this.props.post.id;
+       model.positive = 0;
+       console.log(model);
+       thumbs.add(model);
+   },
    render: function () {
        var c = ''; 
        var current = '';
        var icon = '';
-       if(this.props.stats.popularity > 50){ 
+       var popularity = (this.props.post.likes / this.props.post.dislikes);
+       if(popularity > 50){ 
          c = 'positive'; 
          <i className="fa fa-plus fa-2x" />
-       } else if (this.props.stats.popularity < 50) { 
+       } else if (popularity < 50) { 
          c = 'negative'; 
          <i className="fa fa-minus fa-2x" />
        } 
-       if (this.props.stats.positive === 1) {
+       if (this.props.thumb === 1) {
            current = 'like';
-       } else if (this.props.stats.positive === 0) {
+       } else if (this.props.thumb === 0) {
            current = 'dislike';
        }
        return (  
@@ -140,7 +129,9 @@ var Thumbs = React.createClass({
             <p>You have decided you {current} this post. Click the button below to change your mind.</p>
             {icon}
             <div>
-                {this.props.stats.positive} / {this.props.stats.thumbs}
+                <button className="button green small" onClick={this.like}><i className="fa fa-2x fa-thumbs-o-up" /></button>
+                <button className="button red small" onClick={this.dislike}><i className="fa fa-2x fa-thumbs-o-down" /></button>
+                {this.props.post.positive} / {this.props.post.thumbs}
                 <em className="{c}">({this.props.popularity}% popularity)</em>
             </div>
           </div>

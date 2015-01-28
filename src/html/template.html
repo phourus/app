@@ -3,10 +3,11 @@
 	  <title>Phourus.com</title>
 	  <meta charset="utf-8">
 	  <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" name="viewport">
-	  <link rel="stylesheet" href="/style.min.css" type="text/css">	 
+	  <link rel="stylesheet" href="/style.css" type="text/css">
 	  <link rel="shortcut icon" href="/assets/other/favicon.ico" type="image/x-icon">  
     </head>
     <body class="body">
+        
         <div class="mask" style="display: none;"></div>
         <div class="alerts"></div>
         <header class="header">
@@ -16,42 +17,25 @@
             	</a>
             </div>
             <nav class="nav">
-                <a href="javascript: void(0)" onClick="page('/game')" class="game fa fa-trophy"></a>
-            	<a href="javascript: void(0)" onClick="page('/search')" class="search fa fa-search"></a>
-            	<a href="javascript: void(0)" onClick="page('/editor')" class="editor fa fa-pencil"></a>
-            	<a href="javascript: void(0)" onClick="page('/account')" class="account fa fa-user"><span class="notifications">13</span></a>
+                <a href="/game" class="game fa fa-trophy"></a>
+            	<a href="/search" class="search fa fa-search"></a>
+            	<a href="/editor" class="editor fa fa-pencil"></a>
+            	<a href="/account" class="account fa fa-user"><span class="notifications">13</span></a>
             </nav>
         </header>
         <div class="spacer"></div>
         <div class="main">
-            <!--<div class="sidebar">
-                <div class="title">Login</div>
-				<p>Login below to access your Phourus account</p>
-				<div class="auth-sidebar">
-				    <input type="text" placeholder="email" class="email">
-					<input type="password" value="phourus" class="password">
-					<a href="#" class="login button green">Login</a>
-					<a href="./forgot" class="forgot">Forgot Password?</a>
-					<br clear="all">
-				</div>
-				<div>
-				  <div class="title">Signup</div>
-				  <p>Sign up now to get full access to Phourus</p>
-				  <a href="./signup" class="button blue">Signup Now</a>
-				  <br clear="all"><br>
-				</div>
-            </div>-->
             <div id="content" class="">$CONTENT</div>
             <footer class="footer">
                 © 2013 Phourus LLC. All Rights Reserved.
                 <br>
 				<a href="./">Home</a> | 
-				<a href="./contact">Contact</a> | 
-				<a href="./terms">Terms &amp; Conditions</a> | 
-				<a href="./privacy">Privacy Policy</a>
+				<a href="./about">About</a> | 
+				<a href="./terms">Terms</a>
 				<br clear="all">
             </footer>
-			</div><!-- main -->
+        </div>
+        <!-- main -->
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> 
 		<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script> 
 <!-- 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/react/0.12.0/react.js"></script> -->
@@ -60,7 +44,9 @@
 		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
 		<script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js"></script>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
+<script src="//cdn.jsdelivr.net/editor/0.1.0/editor.js"></script>
+<script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
 		<script type="text/javascript" src="/app.js"></script>
-		$SCRIPT
 	</body>
 </html>

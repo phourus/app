@@ -2,25 +2,12 @@
 "use strict";
 var React = require('react');
 var posts = require('../objects/posts');
+var moment = require('moment');
 
 var Search = React.createClass({
-	 getDefaultProps: function () {
-		return {
-			posts: [],
-			exclude: [],
-			search: '',
-			sort: 'influence',
-			direction: 'DESC',
-			page: 1,
-			limit: 10,
-			total: 0,
-			datesVisible: false,
-			typesVisible: false
-		};	
-	 },
 	 search: function () {
 	     var val = this.refs.term.getDOMNode().value;
-         this.update({search: val});
+         this.props.update('search', {search: val});
 	 },
 	 toggleFilter: function (e) {
     	var id = e.currentTarget.id;
@@ -28,16 +15,7 @@ var Search = React.createClass({
     	var obj = {};
     	var visibility = this.props[prop] == true ? false : true;
     	obj[prop] = visibility;
-    	this.setProps(obj);
-	 },
-	 update: function (obj) {
-	    var props = this.props;
-	    for (var k in obj) { 
-	        props[k] = obj[k]; 
-	    }
-		 this.setProps(props, function () {
-    		 posts.collection(props);
-		 });
+    	this.props.update(obj);
 	 },
      componentDidMount: function () {
          var self = this;
@@ -47,7 +25,7 @@ var Search = React.createClass({
                 console.log('props set');
              });
          });
-         this.update({});
+         posts.collection();
 	 },
 	 render: function () {
 		  var visible = "fa fa-minus-square-o";
@@ -261,7 +239,7 @@ var PostItem = React.createClass({
 				</div>
 				<div className="basic">
 				  <h3>By <a href="/profile/1">{this.props.user.first} {this.props.user.last}</a></h3>
-				  <span className="created">{this.props.post.createdAt}</span>
+				  <span className="created">{moment(this.props.post.createdAt).fromNow()}</span>
 				  <span className="created">{this.props.user}</span>
 				</div>
 				<div className="detail">
