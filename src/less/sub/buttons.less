@@ -1,9 +1,3 @@
-button.off {
-    .button-gradient(#fff, #eee) !important;
-}
-
-
-/** BUTTONS **/
 button.button, a.button, input.button, input.searchsubmit {
   display: block;
   font-family: @century;
@@ -12,20 +6,23 @@ button.button, a.button, input.button, input.searchsubmit {
   width: 160px;
   height: 40px;
   text-align: center;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
   border: none;
   margin: 4px;
-  .insetlight()
 }
 
-.button.dark {
-  .inset(#555);
+.button.small {
+    width: 40px;
+    height: 40px;
+    display: inline;
 }
 
-.sidebar .button, .footer .button, .footing .button {
-  .inset(#555);
+.button.tiny {
+    width: 20px;
+    height: 20px;
+    display: inline;
 }
   
 a.button {
@@ -41,38 +38,38 @@ font-weight: normal !important;
 
 /** GREEN **/
 button.green.button, a.green.button, input.green.button, input.searchsubmit.green {
-.button-gradient(#0b0, #090);
+    background-color: #090;
 }
 
 button.green.button:hover, a.green.button:hover, input.green.button:hover, input.searchsubmit.green:hover {
-.button-gradient(#090, #0b0);
+    background-color: #0b0;
 }
 
 /** BLUE **/
 button.blue.button, a.blue.button, input.blue.button, input.searchsubmit.blue {
-.button-gradient(#08f, #05c);
+background-color: #05c;
 }
 
 button.blue.button:hover, a.blue.button:hover, input.blue.button:hover, input.searchsubmit.blue:hover {
-.button-gradient(#05c, #08f);
+background-color: #08f;
 }
 
 /** RED **/
 button.red.button, a.red.button, input.red.button, input#searchsubmit.red {
-.button-gradient(#d00, #a00);
+background-color: #a00;
 }
 
 button.red.button:hover, a.red.button:hover, input.red.button:hover, input.searchsubmit.red:hover {
-.button-gradient(#a00, #d00);
+background-color: #d00;
 }
 
 /** ORANGE **/
 button.orange.button, a.orange.button, input.orange.button, input.searchsubmit.orange {
-.button-gradient(#f60, #f90);
+background-color: #f60;
 }
 
 button.orange.button:hover, a.orange.button:hover, input.orange.button:hover, input#searchsubmit.orange:hover {
-.button-gradient(#f90, #f60);
+background-color: #f90;
 }
 
 /** HOME **/
