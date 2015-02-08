@@ -20,5 +20,11 @@ socket.deactivate = function () {
 socket.password = function (current, changed) {
     socket.emit('password', current, changed);  
 };
+socket.notifications = function (params) {
+    socket.emit('notifications', params);
+};
+socket.history = function (params) {
+    socket.emit('history', params);  
+};
 
 module.exports = socket;
