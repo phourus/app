@@ -9,6 +9,16 @@ div.alerts {
 		padding: 10px;
 		margin: 5px;
 		border: solid 1px;
+		
+		.msg {
+    		color: #222;
+    		line-height: 0.5em;
+		}
+		
+		.code {
+    		color: #555;
+    		font-size: 0.7em;
+		}
 	}
 	.close {
   	font-weight: bold;
@@ -16,16 +26,20 @@ div.alerts {
 	.close:hover {
   	color: #fff;
 	}
-	.complete {
+	.green {
   	border-color: #093; 
     background-color: #CFC;
 	}
-	.message {
+	.yellow {
     border-color: #FF3; 
     background-color: #FFC;
 	}
-	.error {
+	.red {
   	border-color:  #F00;    
   	background-color: #Faa; 
+	}
+	
+	button {
+    	float: right;
 	}
 }
