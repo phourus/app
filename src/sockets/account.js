@@ -3,28 +3,28 @@ var io = require('socket.io-client');
 var socket = io('http://localhost:3000/account', {query: 'token=' + token.get()});
 
 socket.register = function (email, password) {
-    socket.emit('register', email, password);
+    socket.emit('postRegister', email, password);
 };
 socket.login = function (username, password) {
-    socket.emit('login', username, password);
+    socket.emit('postLogin', username, password);
 };
 socket.get = function () {
-    socket.emit('get');  
+    socket.emit('getGet');  
 };
 socket.edit = function (model) {
-    socket.emit('edit', model);
+    socket.emit('putEdit', model);
 };
 socket.deactivate = function () {
-    socket.emit('deactivate');
+    socket.emit('delDeactivate');
 };
 socket.password = function (current, changed) {
-    socket.emit('password', current, changed);  
+    socket.emit('putPassword', current, changed);  
 };
 socket.notifications = function (params) {
-    socket.emit('notifications', params);
+    socket.emit('getNotifications', params);
 };
 socket.history = function (params) {
-    socket.emit('history', params);  
+    socket.emit('getHistory', params);  
 };
 
 module.exports = socket;
