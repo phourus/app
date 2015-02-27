@@ -1,5 +1,6 @@
 "use strict";
 var React = require('react');
+var Mutant = require('react-mutant');
 var Router = require('react-router-component');
 var Locations = Router.Locations;
 var Location = Router.Location;
@@ -18,95 +19,119 @@ var Landing = require('./react/landing');
 var Map = require('./map');
 var View404 = require('./react/404');
 
+var validAlert = {
+    color: React.PropTypes.string,
+    msg: React.PropTypes.string,
+    code: React.PropTypes.number
+}
+
+var searchMutant = new Mutant({
+    posts: [],
+    exclude: [],
+    search: '',
+    sort: 'influence',
+    direction: 'DESC',
+    page: 1,
+    limit: 10,
+    total: 0,
+    datesVisible: false,
+    typesVisible: false
+});
+
+var postMutant = new Mutant({
+    post: {
+        id: null,
+        title: "",
+        created: "",
+        influence: null,
+        element: '',
+        scope: '',
+        type: ''    
+    },
+    user: {
+        id: null
+    },
+    comments: {
+        rows: [],
+        total: 0
+    }
+});
+
+var accountMutant = new Mutant({
+    user: {
+        id: null,
+        pic: "",
+        username: "",
+        first: "",
+        last: "",
+        email: "",
+        phone: "",
+        company: "",
+        occupation: "",
+        website: "",
+        dob: "",
+        gender: "",
+        address: {
+            street: "",
+            city: "",
+            state: "",
+            zip: ""
+        }
+    },
+    notifications: [],
+    history: []
+
+});
+
+var profileMutant = new Mutant({
+    id: "",
+    type: "",
+    view: "",
+    profile: {}
+});
+
+var editorMutant = new Mutant({
+    post: {},
+    posts: [],
+    link: {
+        url: "",
+        caption: ""
+    }
+});
+
 var App = React.createClass({
     getDefaultProps: function () {
        return {
-          alert: {},
-          search: {
-			posts: [],
-			exclude: [],
-			search: '',
-			sort: 'influence',
-			direction: 'DESC',
-			page: 1,
-			limit: 10,
-			total: 0,
-			datesVisible: false,
-			typesVisible: false
-          },
-          post: {
-             post: {
-                 id: null,
-                 title: "",
-                 created: "",
-                 influence: null,
-                 element: '',
-                 scope: '',
-                 type: ''      
-             },
-
-             user: {
-                 first: "",
-                 last: "" 
-             },
-             
-             comments: []
-         },
-         account: {
-            user: {
-                id: null,
-                pic: "",
-                username: "",
-                first: "",
-                last: "",
-                email: "",
-                phone: "",
-                company: "",
-                occupation: "",
-                website: "",
-                dob: "",
-                gender: "",
-                address: {
-                    street: "",
-                    city: "",
-                    state: "",
-                    zip: ""
-                }
-            },
-            notifications: [],
-            history: []
-         },
-         profile: {
-             id: "",
-             type: "",
-             view: "",
-             profile: {}
-         },
-         editor: {
-			 post: {},
-			 posts: [],
-			 link: {
-    			 url: "",
-    			 caption: ""
-			 }
-         },
-         leaders: {
-             
-         },
-         general: {
-             
-         }
+          alerts: new Mutant({alerts: []}, {mixins: {someFN: function() { return 'hey'; }}, validate: validAlert}),
+          search: searchMutant,
+          post: postMutant,
+          account: accountMutant,
+          profile: profileMutant,
+          editor: editorMutant,
+          leaders: {},
+          general: {}
        } 
     },
-    update: function (key, obj) {
-        var updated = {};
-        var props = this.props[key];
-        for (var k in obj) { 
-	        props[k] = obj[k]; 
-	    }
-	    updated[key] = props;
-	    updated.alert = {};
-        this.setProps(updated);
+    componentWillMount: function () {
+        var self = this;
+        this.props.alerts.mutant.on('update', function (mutant) {
+            self.setProps({alerts: mutant});
+        });
+        this.props.account.mutant.on('update', function (mutant) {
+            self.setProps({account: mutant});
+        });
+        this.props.profile.mutant.on('update', function (mutant) {
+            self.setProps({profile: mutant});
+        });
+        this.props.post.mutant.on('update', function (mutant) {
+            self.setProps({post: mutant});
+        });
+        this.props.editor.mutant.on('update', function (mutant) {
+            self.setProps({editor: mutant});
+        });
+        this.props.search.mutant.on('update', function (mutant) {
+            self.setProps({search: mutant});
+        });
     },
     render: function () {
         return  (
@@ -125,10 +150,10 @@ var App = React.createClass({
                     </nav>
                 </header>
                 <div className="spacer"></div>
-                <Alerts {...this.props.alert} />
+                <Alerts {...this.props.alerts} />
                 <div className="main">
                     <div id="content">
-                        <Content {...this.props} update={this.update} />
+                        <Content {...this.props} />
                     </div>
                     <footer className="footer">
                         © 2013 Phourus LLC. All Rights Reserved.
@@ -145,33 +170,38 @@ var App = React.createClass({
 });
 
 var Alerts = React.createClass({
+    remove: function (e) {
+        var id = e.currentTarget.id;
+        var alerts = this.props.alerts;
+        alerts.splice(id, 1);
+    },
     render: function () {
-        var alert;
-        console.log(this.props);
-        if (this.props.type) {
-            alert = <Alert {...this.props} />
+        var list = [];
+        if (this.props.alerts) {
+            for (var i in this.props.alerts) {
+                list.push(<Alert {...this.props.alerts[i]} id={i} remove={this.remove} />);
+            }
         }
-/*
-        var list = this.props.alerts.map(function (item) {
-            return <Alert {...item} />; 
-        }); 
-*/
         return (
-            <div>
-                {alert}
+            <div className="alerts">
+                {list}
             </div>
         );
     }
 });
 
 var Alert = React.createClass({
+    propTypes: {
+      color: React.PropTypes.string,
+      msg: React.PropTypes.string,
+      code: React.PropTypes.number  
+    },
     render: function () {
-        console.log(this.props);
         return (
-            <div className={this.props.type + " alert"}>
-                <div>{this.props.msg}</div>
-                <div>HTTP Status Code: {this.props.code}</div>
-                <div>X</div>
+            <div className={this.props.color + " alert"}>
+                <button id={this.props.id} className="remove fa fa-remove" onClick={this.props.remove}></button>
+                <div className="msg">{this.props.msg}</div>
+                <div className="code">HTTP Status Code: {this.props.code}</div>
             </div>
         );
     } 
@@ -181,14 +211,14 @@ var Content = React.createClass({
     render: function () {
         return (
             <Locations path={this.props.path}>
-                <Location path="/" handler={Landing} update={this.props.update} />
-                <Location path="/search" handler={Search} update={this.props.update} {...this.props.search} />
-                <Location path="/post/:id" handler={Post} update={this.props.update} {...this.props.post} />
-                <Location path="/leaders" handler={Leaders} update={this.props.update} {...this.props.leaders} />
-                <Location path={/^\/editor\/?([a-zA-Z0-9]*)?/} handler={Factory} update={this.props.update} {...this.props.editor} />
-                <Location path={/^\/account\/?(notifications|history|password)?/} handler={Account} update={this.props.update} {...this.props.account} />
-                <Location path={/^\/(about|terms)/} handler={General} update={this.props.update} {...this.props.general} />
-                <Location path={/^\/(org|user)\/([0-9]*)\/?([a-zA-Z]*)?/} handler={Profile} update={this.props.update} {...this.props.profile} />
+                <Location path="/" handler={Landing} />
+                <Location path="/search" handler={Search} {...this.props.search} />
+                <Location path={/^\/post\/?([a-zA-Z0-9]*)?/} handler={Post} {...this.props.post} />
+                <Location path="/leaders" handler={Leaders} {...this.props.leaders} />
+                <Location path={/^\/editor\/?([a-zA-Z0-9]*)?/} handler={Factory} {...this.props.editor} />
+                <Location path={/^\/account\/?(notifications|history|password)?/} handler={Account}{...this.props.account} />
+                <Location path={/^\/(about|terms)/} handler={General} {...this.props.general} />
+                <Location path={/^\/(org|user)\/([0-9]*)\/?([a-zA-Z]*)?/} handler={Profile}{...this.props.profile} />
                 <NotFound handler={View404} />
             </Locations>
         );

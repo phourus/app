@@ -1,11 +1,25 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var posts = require('../objects/posts');
-var comments = require('../objects/comments');
-var thumbs = require('../objects/thumbs');
+var Router = require('react-router-component');
+var Link = Router.Link;
+var posts = require('../sockets/posts');
+var comments = require('../sockets/comments');
+var thumbs = require('../sockets/thumbs');
+var moment = require('moment');
+var msg = function (color, msg, code) {}
 
 /** POST **/
+var fa = {
+    blog: "bookmark",
+    event: "calendar",
+    subject: "book",
+    question: "question",
+    debate: "microphone",
+    poll: "pie-chart",
+    quote: "quote-right",
+    belief: "cloud"
+}
 // Post, Author
 
 /** INTERACT **/
@@ -13,82 +27,132 @@ var thumbs = require('../objects/thumbs');
 var Post = React.createClass({
      componentDidMount: function () {         
          var self = this;
-         posts.on('returnSingle', function (data) {
-             self.props.update('post', {post: data}, function () {
-                 comments.collection({post_id: data.id});
-             });
+         posts.on('single', function (code, data) {
+            if (code != 200) {
+                msg('red', 'Post could not be loaded', code);
+                return;
+            }
+             self.props.mutant.set({post: data, user: data.user});
          });
-         comments.on('returnCollection', function (data) {
-             self.props.update('post', {comments: data});
+         comments.on('collection', function (code, data) {
+            if (code != 200) {
+                msg('yellow', 'Comments could not be loaded', code);
+                return;
+            }
+            self.props.mutant.set({comments: data});
          });
-         posts.single(this.props.id);
+         posts.single(this.props._[0]);
+         comments.collection({postId: this.props._[0]});
      },
      render: function () {
-          console.log(this.props.post);
           return (
             <div>
-                <a href="">Go Back</a>
-                <h1>{this.props.post.title}</h1>
-                <div className="basic">
-                  <h3>By {this.props.user.first} {this.props.user.last}</h3>
-                  <span className="created">{this.props.created}</span>
-                  <div className="type">{this.props.post.type}</div>
+                <div className="heading">
+                    <Meta post={this.props.post} />
+                    <h1>{this.props.post.title}</h1>
+                    <div className="basic">
+                      <span>By <Link href={"/user/" + this.props.user.id}>{this.props.user.first} {this.props.user.last}</Link> </span>
+                      <Tags tags={this.props.post.tags} />
+                      <br />
+                      <span>Originally by {this.props.post.author}</span>
+                      <br />
+                      <span className="created">{moment(this.props.post.createdAt).fromNow()} </span>
+                      <span className="views">
+                        <i className="fa fa-eye" />
+                        <span> {this.props.post.views} views</span>
+                     </span>
+                    </div>
                 </div>
-                <Details post={this.props.post} />
-                <div>{this.props.post.content}</div>
-                <Interact post={this.props.post} update={this.update} comments={this.props.comments} />
+                <div className="content">{this.props.post.content}</div>
+                <Links />
+                <Author />
+                <Thumbs post={this.props.post} thumb={this.props.thumb} />
+                <Comments post={this.props.post} comments={this.props.comments} />
             </div>
           );
      }
 });
 
-var Details = React.createClass({
-   //<div className="influence">{this.props.post.influence}</div>
-
+var Meta = React.createClass({
    render: function () {
+       var meta = [];
+       var capitalized = "";
+       var t = this.props.post.type;
+       if (t.length > 0) {
+          capitalized = t[0].toUpperCase() + t.slice(1);
+       }
+       for (var i in this.props.post) {
+			if (['difficulty', 'scope', 'zip'].indexOf(i) !== -1 && this.props.post[i] !== null) {
+				meta.push(<br />);
+				meta.push(<span><strong>{i}:</strong> {this.props.post[i]}</span>);
+			}
+		}
        return (
-         <ul className="detail">
-            <li><strong>Positive:</strong> {this.props.post.positive}</li>
-            <li><strong>Category:</strong> {this.props.post.category}</li>
-            <li><strong>Element:</strong> {this.props.post.element}</li>
-            <li><strong>Date/Time:</strong> {this.props.post.date}</li>
-            <li><strong>Address:</strong> {this.props.post.address}</li>
-            <li><strong>Difficulty:</strong> {this.props.post.difficulty}</li> 
-            <li><strong>Scope:</strong> {this.props.post.scope}</li> 
-         </ul>
-       );
-   }  
-});
-
-var Interact = React.createClass({
-   render: function () {
-       return (
-           <div>
-                <Thumbs post={this.props.post} thumb={this.props.thumb} />
-                <Views post={this.props.post} />
-                <Comments post={this.props.post} postID={this.props.postID} update={this.props.update} comments={this.props.comments} />
-           </div>
-       );
-   }  
-});
-
-var Views = React.createClass({
-    render: function () {
-        return (
-          <div className="views">
-            <i className="fa fa-eye fa-2x" />
-            <div>{this.props.post.views} views</div>
+         <div className="meta">
+            <div>
+                <span className={t + " type"}>
+                    <i className={"fa fa-" + fa[t]} /> {capitalized}
+                </span>
+                <div>
+                    {meta}
+                </div>
+            </div>
+            <ul className="breadcrumb">
+                <li>{this.props.post.element}</li>
+                <li>{this.props.post.category}</li>
+                <li>{this.props.post.category}</li>
+            </ul>
          </div>
+       );
+   }  
+});
+
+var Tags = React.createClass({
+    render: function () {
+        var tags = [];
+        for (var i in this.props.tags) {
+            tags.push(<span className="tag">{this.props.tags[i].tag}</span>);
+        }
+        return (
+            <span className="tags">
+                <i className="fa fa-tag" />
+                {tags}
+            </span>
         );
     }    
+});
+
+var Links = React.createClass({
+    render: function () {
+        var links;
+        if (!this.props.post || !this.props.post.tags) {
+            return <div></div>
+        }
+        links = this.props.post.links;
+        return (
+            <div className="links">
+                {links}
+            </div>
+        );
+    }    
+});
+
+var Author = React.createClass({
+      render: function () {
+        return (
+            <div className="author">
+            </div>
+        );
+    }  
 });
 
 var Thumbs = React.createClass({
    componentDidMount: function () {
      var self = this;
-     thumbs.on('returnSingle', function (data) {
-         if (data) {
-             self.props.update({thumb: data.positive});
+     thumbs.on('single', function (code, data) {
+         if (code != 200) {
+            msg('yellow', 'Thumbs could not be loaded', code);
+            return;
          }
      });
      thumbs.single(this.props.post.id);
@@ -97,14 +161,12 @@ var Thumbs = React.createClass({
        var model = {};
        model.post_id = this.props.post.id;
        model.positive = 1;
-       console.log(model);
        thumbs.add(model);
    },
    dislike: function () {
        var model = {};
        model.post_id = this.props.post.id;
        model.positive = 0;
-       console.log(model);
        thumbs.add(model);
    },
    render: function () {
@@ -124,15 +186,19 @@ var Thumbs = React.createClass({
        } else if (this.props.thumb === 0) {
            current = 'dislike';
        }
+       // <p>You have decided you {current} this post. Click the button below to change your mind.</p>
        return (  
           <div className="thumb">
-            <p>You have decided you {current} this post. Click the button below to change your mind.</p>
+
             {icon}
             <div>
-                <button className="button green small" onClick={this.like}><i className="fa fa-2x fa-thumbs-o-up" /></button>
-                <button className="button red small" onClick={this.dislike}><i className="fa fa-2x fa-thumbs-o-down" /></button>
-                {this.props.post.positive} / {this.props.post.thumbs}
                 <em className="{c}">({this.props.popularity}% popularity)</em>
+                <span><i className="fa fa-arrow-up" />{this.props.post.positive}</span> 
+                <span><i className="fa fa-arrow-down" />{this.props.post.thumbs}</span>
+                <button className="button green medium inline" onClick={this.like}><i className="fa fa-2x fa-arrow-circle-o-up" /> Like</button>
+                <button className="button red medium inline" onClick={this.dislike}><i className="fa fa-2x fa-arrow-circle-o-down" /> Dislike</button>
+                
+                
             </div>
           </div>
        );
@@ -140,20 +206,18 @@ var Thumbs = React.createClass({
 });
 
 var Comments = React.createClass({
-    add: function () {
-        var model = {};
-        model.content = this.refs.comment.getDOMNode().value;
-        model.post_id = this.props.postID;
-        comments.add(model);
-    },
+
     componentDidMount: function () {
          var self = this;
-         comments.on('returnAdd', function (data) {
-             console.log(data);
+         comments.on('add', function (code, data) {
+            if (code != 201) {
+                msg('red', 'Comment could not be created', code);
+                return;
+            }
          });         
     },
     render: function () {
-          var pic = "You must be logged-in to comment";
+          var create = <h3>You must be logged-in to comment</h3>
           var token = null;
           if (token === null) { 
             //pic = <a href="#user/{this.props.id}"><img src="{this.props.pic}" width="100"></a>
@@ -161,26 +225,46 @@ var Comments = React.createClass({
         var data = this.props.comments.rows;
 		var comments = [];
 		if (data) {
-		    console.log(data);
             comments= data.map(function (item, i) {
-    		   var user = {id: 1, first: "JESSE", last: "drelick", influence: 66, username: "jdrelick", pic: ""};
+    		   var user = {id: 1, first: "JESSE", last: "drelick", influence: 66, username: "jdrelick", img: 1};
     		   return <Comment key={item.id} comment={item} user={user} />;
     		});
 		}
+		
+		if (1) {
+    		create = <Create />
+		}
         return (
             <div>
-                <h2 className="comments">
-                    <i className="fa fa-comments" /> Comments
-                </h2>
-                <div id="comments">{comments}</div>
-                <div className="create">
-                    <div className="pic">{pic}</div>
-                    <textarea ref="comment" placeholder="Comment goes here"></textarea>
-                    <button className="button green add" onClick={this.add}>Post Comment</button>
-                </div>
+                <div className="comments">{comments}</div>
+                {create}
             </div>
         );
     }
+});
+
+var Create = React.createClass({
+    add: function () {
+        var model = {};
+        model.content = this.refs.comment.getDOMNode().value;
+        model.post_id = this.props.postID;
+        comments.add(model);
+    },
+   render: function () {
+       return (
+        <div className="create">
+            <div className="pic">
+                <a href="/account">
+                    <img src={"/assets/avatars/1.jpg"} />
+                </a>
+            </div>
+            <textarea ref="comment" placeholder="Comment goes here"></textarea>
+            <button className="button green add" onClick={this.add}>
+                <i className="fa fa-comment" /> Post Comment
+            </button>
+        </div>
+       );
+   } 
 });
 
 var Comment = React.createClass({
@@ -207,19 +291,18 @@ var Comment = React.createClass({
        }
 */
        return (
-           <div className="item" id="{this.props.id}">
+           <div className="comment" ref={this.props.id}>
               <div className="pic">
-                <a href="#user/{this.props.user.id}">
-                    <img src="{this.props.user.pic}" width="100" onerror="this.src='/assets/pics/default.png'" />
-                </a>
-                <a href="#user/{this.props.user.id}" className="username">
-                    {this.props.user.username} ({this.props.user.influence})
+                <a href={"/user/" + this.props.user.id}>
+                    <img src={"/assets/avatars/" + this.props.user.img + ".jpg"} width="100" />
                 </a>
               </div>
-              <div className="comment">
-                <span className="date">{this.props.date}</span>
-                <span>{this.props.comment.content}</span>
-                {textarea}
+              <div className="content">
+                <a className="username" href={"/user/" + this.props.user.id} >
+                    {this.props.user.username} ({this.props.user.influence})
+                </a>
+                <p>{this.props.comment.content}</p>
+                <span className="date">{moment(this.props.comment.createdAt).fromNow()}</span>
               </div>
               <div className="actions"></div>
             </div>

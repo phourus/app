@@ -1,57 +1,47 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var users = require('../objects/users');
-var orgs = require('../objects/orgs');
+var Router = require('react-router-component');
+var Link = Router.Link;
+var NavigatableMixin = Router.NavigatableMixin;
+var users = require('../sockets/users');
+var orgs = require('../sockets/orgs');
+var msg = function (color, msg, code) {}
 
 var Profile = React.createClass({
-     getDefaultProps: function () {
-       return {
-           profile: {},
-           stats: {
-               influence: 0
-           }
-       }  
-     },
-     getInitialState: function () {
-         return {
-             id: null,
-             type: null,
-             view: 'info',
-             widget: 'about'
-         }
-     },
      componentDidMount: function () {
-		var update = this.props.update;
+		var type, id, view;
         var self = this;
-         
-		if (this.props.type === 'org') {
-            orgs.on('returnSingle', function (data) {
-                 console.log(data);
-                 self.setProps({profile: data}, function () {
-                    console.log('props set');
-                 });
+        
+        type = this.props._[0];
+        id = this.props._[1];
+        view = (['posts', 'rank', 'members', 'events', 'reviews'].indexOf(this.props._[2]) !== -1) ? this.props._[2] : "about";
+        
+		if (type === 'org') {
+            orgs.on('single', function (code, data) {
+                if (code != 200) {
+                msg('red', 'Organization could not be loaded', code);
+                return;
+            }
+                 self.props.mutant.set({id: id, type: type, profile: data, view: view});
              });
-    		orgs.single(this.props.id);
+    		orgs.single(id);
 		} else {
-            users.on('returnSingle', function (data) {
-                 console.log(data);
-                 self.setProps({profile: data}, function () {
-                    console.log('props set');
-                 });
+            users.on('single', function (code, data) {
+            if (code != 200) {
+                msg('yellow', 'User could not be loaded', code);
+                return;
+            }
+                 self.props.mutant.set({id: id, type: type, profile: data, view: view});
              });
-    		users.single(this.props.id);
+    		users.single(id);
 		}
 	 },
-     update: function (obj) {
-		 this.setProps(obj);
-	 },
-     render: function () {
+     render: function () {        
           return (
             <div className="profile">
-                <Heading profile={this.props.profile} stats={this.props.stats} />
-                <Tabs />
-                <Views widget={this.props.widget} profile={this.props.profile} stats={this.props.stats} />
+                <Heading {...this.props} />
+                <Views {...this.props} />
             </div>
           );
      }
@@ -61,10 +51,10 @@ var Heading = React.createClass({
     render: function () {
         return (
             <div className="heading">
-                <h1>{this.props.profile.username}</h1>
-                <Basic className="basic" />
-                <Details className="details" stats={this.props.stats} profile={this.props.profile} />
-                <Stats className="stats" />
+                <h1>{this.props.profile.username || this.props.profile.shortname}</h1>
+                <Basic className="basic" {...this.props} />
+                <Details className="details" {...this.props} />
+                <Stats className="stats" {...this.props} />
             </div>
         );
     }    
@@ -79,7 +69,9 @@ var Basic = React.createClass({
 });
 
 var Details = React.createClass({
+    mixin: [NavigatableMixin],
     render: function () {
+/*
         var details;
         switch(this.props.profile.type){
             case 'individual':
@@ -108,42 +100,66 @@ var Details = React.createClass({
             	</ul>	 
             </div>
         );
+*/
+        var type, id;
+        type = "/" + this.props._[0] + "/";
+        id = this.props._[1];
+        return (
+            <ul>
+                <li><Link href={type + id + "/posts"}>1032 Posts</Link></li>
+                <li><Link href={type + id + "/members"}>244 Members</Link></li>
+                <li><Link href={type + id + "/events"}>15 Events</Link></li>
+                <li><Link href={type + id + "/reviews"}>22 Reviews</Link></li>
+            </ul>
+        );
     } 
 });
 
 var Stats = React.createClass({
     render: function () {
-        return (
-          <div className="stats">Stats</div>      
-        );
-    } 
-});
+        var type, id;
+        type = "/" + this.props._[0] + "/";
+        id = this.props._[1];
 
-var Tabs = React.createClass({
-    render: function () {
         return (
-          <div className="tabs">
-              <ul>
-                <li><a href="/profile/1/about" className="selected">Info</a></li>
-                <li><a href="/profile/1/posts">Posts</a></li>
-                <li><a href="/profile/1/rank">Rank</a></li>
-                <li><a href="/profile/1/users">Members</a></li>
-                <li><a href="/profile/1/extras">Extras</a></li>
-              </ul>
-          </div>
+          <div className="stats">
+            <div className="influence">67</div>
+            <Link href={type + id + "/rank"}>View Rank</Link>
+          </div>      
         );
     } 
 });
 
 var Views = React.createClass({
     render: function () {
+        var view;
+        view = (['posts', 'rank', 'members', 'events', 'reviews'].indexOf(this.props._[2]) !== -1) ? this.props._[2] : "about";
+        switch (view) {
+            case 'about':
+                view = <ViewInfo {...this.props} />
+            break;
+            case 'reviews':
+                view = <ViewReviews {...this.props} />
+            break;
+            case 'events':
+                view = <ViewEvents {...this.props} />
+            break;
+            case 'posts':
+                view = <ViewPosts {...this.props} />
+            break;
+            case 'membership':
+                view = <ViewMembership {...this.props} />
+            break;
+            case 'rank':
+                view = <ViewRank {...this.props} />
+            break;
+            case 'extras':
+                view = <ViewExtras {...this.props} />
+            break;
+        }
         return (
             <div className="views">
-                <ViewInfo path="/profile/1/info" widget={this.props.widget} />
-                <ViewPosts path="/profile/1/posts" />
-                <ViewMembership path="/profile/1/membership" />
-                <ViewRank path="/profile/1/rank" />
-                <ViewExtras widget={this.props.widget} profile={this.props.profile} />
+                {view}
             </div>
         );
     } 
@@ -152,17 +168,19 @@ var Views = React.createClass({
 
 var ViewInfo = React.createClass({
     render: function () {
+        var clout, contact;
+        clout = 'clout goes here';
+        contact = 'contact goes here';
         return (
           <div className="viewInfo">
-              <ul>
-                <li><a href="/profile/1/about">About</a></li>
-                <li><a href="/profile/1/social">Social</a></li>
-                <li><a href="/profile/1/reviews">Reviews</a></li>
-                <li><a href="/profile/1/clout">Clout</a></li>
-                <li><a href="/profile/1/events">Events</a></li>
-                <li><a href="/profile/1/contact">Contact</a></li>
-              </ul>
-              <Widget widget={this.props.widget} />
+              <h3>About</h3>
+              {this.props.profile.about}
+              <h3>Social</h3>
+              Social info here
+              <h3>Clout</h3>
+              {clout}
+              <h3>Contact</h3>
+              {contact}
           </div>
         );
     }
@@ -188,6 +206,22 @@ var ViewMembership = React.createClass({
     render: function () {
         return (
             <div className="viewMembership">Membership</div>
+        );
+    }    
+});
+
+var ViewReviews = React.createClass({
+    render: function () {
+        return (
+            <div className="viewReviews">Reviews</div>
+        );
+    }    
+});
+
+var ViewEvents = React.createClass({
+    render: function () {
+        return (
+            <div className="viewEvents">Events</div>
         );
     }    
 });

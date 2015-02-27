@@ -4,60 +4,51 @@ var React = require('react');
 var Router = require('react-router-component');
 var Link = Router.Link;
 var NavigatableMixin = Router.NavigatableMixin;
-var account = require('../objects/account');
+var account = require('../sockets/account');
 var token = require('../token');
 var View401 = require('./401');
+var msg = function (color, msg, code) {}
 
 var Account = React.createClass({
      mixins: [NavigatableMixin],
      save: function () {
         account.edit(this.props.user);
      },
-     change: function (e) { 
-		var user = this.props.user;
-		user[e.target.className] = e.currentTarget.value;
-        this.props.update('account', {user: user});
-     },
      componentDidMount: function () {
 		var self = this;
-		var update = this.props.update;
-         account.on('returnGet', function (code, data) {
+         account.on('get', function (code, data) {
              if (code != 200) {
-                 self.props.update("alert", {type: "yellow", msg: 'account could not be loaded', code: code}); 
+                 msg('yellow', 'Account could not be loaded', code);
                  return;
              }
-             self.props.update('account', data);
+             self.props.mutant.set({user: data});
          });
-         account.on('returnEdit', function (code, data) {
+         account.on('edit', function (code, data) {
             if (code == 204) {
-                self.props.update("alert", {type: "green", msg: 'account updated', code: code}); 
-            } else {
-                self.props.update("alert", {type: "red", msg: 'account could not be updated', code: code});
-            }
+                msg('green', 'Account updated', code);
+                return;
+            } 
+            msg('red', 'Account could not be updated', code);
          });
-         account.on('returnPassword', function (code, data) {
+         account.on('password', function (code, data) {
             if (code == 204) {
-                self.props.update("alert", {type: "green", msg: 'password updated', code: code}); 
-            } else {
-                self.props.update("alert", {type: "red", msg: 'password could not be updated', code: code});
+                msg('green', 'Password updated', code);
+                return;
             }
+            msg('red', 'Password could not be updated', code);
          });
-         account.on('returnDeactivate', function (code, data) {
+         account.on('deactivate', function (code, data) {
             if (code == 202) {
-                self.props.update("alert", {type: "green", msg: 'account deactivated', code: code}); 
-            } else {
-                self.props.update("alert", {type: "red", msg: 'account could not be deactivated', code: code});
+                msg('green', 'Account deactivated', code);
+                return;
             }
+            msg('red', 'Account could not be deactivated', code);
          });
          account.get();
 	 },
      deactivate: function () {
        account.deactivate();  
      },
-     logout: function () {
-	    token.remove()
-	    this.forceUpdate();
-	 },
 	 history: function () {
     	 this.navigate('/account/history');
 	 },
@@ -68,7 +59,6 @@ var Account = React.createClass({
         var button, view, password;
         button = <button className="button blue" onClick={this.history}>View History</button>;
         view = <Notifications {...this.props} />;
-        console.log(this.props._);
         if (this.props._[0] == 'history') {
             button = <button className="button blue" onClick={this.notifications}>View Notifications</button>;
             view = <History {...this.props} />;
@@ -78,18 +68,16 @@ var Account = React.createClass({
             button = '';
             password = <Password />;
         }
-        
         if (token.get() !== false) {
             return (
-                <div>
-                    <PicUploader pic={this.props.user.pic} id={this.props.user.id} />
-                    <Link href="/account/password">Change my password</Link>
-                    <br />
-                    <a onClick={this.logout}>Logout</a>
-                    <br />
-                    <Info {...this.props.user} change={this.change} />
-                    <Details {...this.props.user} change={this.change} />
-                    <button className="button green save" onClick={this.save}>Save Info</button>
+                <div className="account">
+                    <h1>My Account</h1>
+                    <div className="heading">
+                        <PicUploader {...this.props.user} mutant={this.props.mutant} />
+                        <Info {...this.props.user} mutant={this.props.mutant} />
+                        <Details {...this.props.user} mutant={this.props.mutant} />
+                    </div>
+                    
                     {password}
                     {button}
                     {view}      
@@ -97,52 +85,61 @@ var Account = React.createClass({
             );
         } else {
             return (
-                <View401 update={this.props.update} force={this.force} />
+                <View401 force={this.force} />
             );
         } 
      }
 });
 
-//                     <Address {...this.props} change={this.change} />
 var PicUploader = React.createClass({
+    logout: function () {
+	    token.remove()
+	    this.forceUpdate();
+	 },
     render: function () {
-        // <input type="submit" ref="submit" value="Upload" className="button blue" />
         return (
-            <div>   
-                <h3>Photo Upload</h3>
+            <div className="uploader">   
                 <div className="pic">
-                    <img src="{this.props.pic}" onerror="this.src='/assets/pics/default.png'" height="200" />
+                    <img src={"/assets/avatars/" + this.props.img + ".jpg"} height="200" />
                 </div>
                 <form action="/rest/pic/{this.props.id}" method="post" encType="multipart/form-data" target="upload">
                   <input type="file" ref="pic" id="pic" />
                   <input type="hidden" ref="type" value="user" />
                   
                 </form>
+                    <Link href="/account/password">Change my password</Link>
+                    <br />
+                    <a onClick={this.logout}>Logout</a>
+                    <br />
             </div>
         );
     }    
 });
 
 var Info = React.createClass({
+    change: function (e) {
+        var user = this.props.mutant.get().user;
+        user[e.target.className] = e.target.value;
+        this.props.mutant.set({user: user});
+    },
     render: function () {
         return (
-          <div>
-            <h3>My Basic Info</h3>
+          <div className="info">
             <div id="user_basic">
                 <label>Username</label>
                 <input ref="username" className="username" type="text" value={this.props.username} disabled="true" />
                 <br />
                 <label>First</label>
-                <input ref="first" className="first" type="text" value={this.props.first} onChange={this.props.change} />
+                <input ref="first" className="first" type="text" value={this.props.first} onChange={this.change} />
                 <br />
                 <label>Last</label>
-                <input ref="last" className="last" type="text" value={this.props.last} onChange={this.props.change} />
+                <input ref="last" className="last" type="text" value={this.props.last} onChange={this.change} />
                 <br />
                 <label>Email</label>
-                <input ref="email" className="email" type="text" value={this.props.email} onChange={this.props.change} />
+                <input ref="email" className="email" type="text" value={this.props.email} onChange={this.change} />
                 <br />
                 <label>Phone</label>
-                <input ref="phone" className="phone" type="text" value={this.props.phone} onChange={this.props.change} /> 
+                <input ref="phone" className="phone" type="text" value={this.props.phone} onChange={this.change} /> 
                 <br />
             </div>
           </div>
@@ -151,25 +148,29 @@ var Info = React.createClass({
 });
 
 var Details = React.createClass({
+    change: function (e) {
+        var user = this.props.mutant.get().user;
+        user[e.target.className] = e.target.value;
+        this.props.mutant.set({user: user});
+    },
     render: function () {
         return (
-          <div>
-            <h3>My Details</h3>
+          <div className="details">
             <div id="user_detail">
                 <label>Company</label>
-                <input ref="company" className="company" type="text" value={this.props.company} onChange={this.props.change} />
+                <input ref="company" className="company" type="text" value={this.props.company} onChange={this.change} />
                 <br />
                 <label>Occupation</label>
-                <input ref="occupation" className="occupation" type="text" value={this.props.occupation} onChange={this.props.change} />
+                <input ref="occupation" className="occupation" type="text" value={this.props.occupation} onChange={this.change} />
                 <br />
                 <label>Website</label>
-                <input ref="website" className="website" type="text" value={this.props.website} onChange={this.props.change} />
+                <input ref="website" className="website" type="text" value={this.props.website} onChange={this.change} />
                 <br />
                 <label>Date of Birth</label>
-                <input ref="dob" className="dob" type="datetime" value={this.props.dob} onChange={this.props.change} />
+                <input ref="dob" className="dob" type="datetime" value={this.props.dob} onChange={this.change} />
                 <br />
                 <label>Gender</label>
-                <select ref="gender" className="gender" value={this.props.gender} onChange={this.props.change}>
+                <select ref="gender" className="gender" value={this.props.gender} onChange={this.change}>
                     <option value="">Private</option>
                     <option value="M">Male</option>
                     <option value="F">Female</option>
@@ -182,9 +183,6 @@ var Details = React.createClass({
     }    
 });
 
-        /*                      states = []
-          _.each @states, (val, key, obj) ->
-            states.push {label: val, val: key}*/
 var Address = React.createClass({
     render: function () {
         return (
@@ -246,12 +244,12 @@ var Password = React.createClass({
 var Notifications = React.createClass({
     componentDidMount: function () {
         var self = this;
-        account.on('returnNotifications', function (code, data) {
+        account.on('notifications', function (code, data) {
              if (code != 200) {
-                self.props.update("alert", {type: "yellow", msg: 'notifications could not be loaded', code: code}); 
+                msg('yellow', 'Notifications could not be loaded', code);
                 return;
              }
-             self.props.update("account", {notifications: data});
+             self.props.mutant.set({notifications: data});
          });
          account.notifications({});
     },
@@ -261,16 +259,16 @@ var Notifications = React.createClass({
         var thumbs = this.props.notifications[2] || [];
         
         views = views.map(function (item) {
-           return <li>A <a href={"/user/" + item.viewer_id}>user</a> viewed your profile</li>;
+           return <li><img src={"/assets/avatars/" + item.viewer.img + ".jpg"} /><a href={"/user/" + item.viewer.id}>{item.viewer.username}</a> viewed your profile</li>;
         });
         comments = comments.map(function (item) {
-           return <li>A <a href={"/user/" + item.user_id}>user</a> commented on your 
-                <a href={"/post/" + item.post_id}>post</a>
+           return <li><img src={"/assets/avatars/" + item.user.img + ".jpg"} /> <a href={"/user/" + item.userId}>{item.user.username}</a> commented on your post 
+                <a href={"/post/" + item.post.id}>{" \"" + item.post.title  + "\""}</a>
             </li>;
         });
         thumbs = thumbs.map(function (item) {
-           return <li>A <a href={"/user/" + item.user_id}>user</a> {(item.positive) ? "dis": ""}liked your 
-                <a href={"/post/" + item.post_id}>post</a>
+           return <li><img src={"/assets/avatars/" + item.user.img + ".jpg"} /><a href={"/user/" + item.user.id}>{item.user.username}</a> {(item.positive) ? "dis": ""} liked your post  
+                <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a>
             </li>;
         });
         return (<div><h3>Notifications</h3><ul>{views}</ul><ul>{comments}</ul><ul>{thumbs}</ul></div>);
@@ -280,12 +278,12 @@ var Notifications = React.createClass({
 var History = React.createClass({
     componentDidMount: function () {
         var self = this;
-        account.on('returnHistory', function (code, data) {
+        account.on('history', function (code, data) {
              if (code != 200) {
-                self.props.update("alert", {type: "yellow", msg: 'history could not be loaded', code: code}); 
+                msg('yellow', 'History could not be loaded', code);
                 return;
              }
-             self.props.update("account", {history: data});
+             self.props.mutant.set({history: data});
          });
          account.history({});
     },
@@ -295,38 +293,24 @@ var History = React.createClass({
         var thumbs = this.props.history[2] || [];
         
         views = views.map(function (item) {
-           return <li>A <a href={"/user/" + item.viewer_id}>user</a> viewed your profile</li>;
+           return <li><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed <img src={"/assets/avatars/1.jpg"} /><a href={"/user/"}></a></li>;
         });
         comments = comments.map(function (item) {
-           return <li>You commented on your a 
-                <a href={"/user/" + item.user_id}>users</a> 
-                <a href={"/post/" + item.post_id}>post</a>
+           return <li><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-comment" /> You commented on 
+           <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a> by
+                <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a> 
             </li>;
         });
         thumbs = thumbs.map(function (item) {
-           return <li>You {(item.positive) ? "dis": ""}liked a
-                <a href={"/user/" + item.user_id}>users</a>  
-                <a href={"/post/" + item.post_id}>post</a>
+           return <li><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-thumb" /> You {(item.positive) ? "dis": ""}liked
+                <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a> by
+                <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a>  
+                
             </li>;
         });
         return (<div><h3>History</h3><ul>{views}</ul><ul>{comments}</ul><ul>{thumbs}</ul></div>);
 
     }
 });
-
-/*
-
-        when "orgs"
-          schema.name = "Text"
-          schema.type = "Text"
-          schema.shortname = "Text"
-          schema.video = "Text"
-          schema.channel = "Text"
-          schema.email = "Text"
-          schema.phone = "Text"
-          schema.address = "Text"
-          schema.about = "TextArea"
-          schema.contact = "TextArea"
-*/
   
 module.exports = Account;

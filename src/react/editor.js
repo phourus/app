@@ -1,47 +1,67 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var posts = require('../objects/posts');
-var tags = require('../objects/tags');
-var links = require('../objects/links');
+var Router = require('react-router-component');
+var Link = Router.Link;
+var NavigatableMixin = Router.NavigatableMixin;
+var posts = require('../sockets/posts');
+var tags = require('../sockets/tags');
+var links = require('../sockets/links');
 var token = require('../token');
 var moment = require('moment');
+var tax = require('../taxonomy');
 //var RTE = require('rte');
+var msg = function (color, msg, code) {}
 
 var View401 = require('./401');
 
 var Editor = React.createClass({
-	 getInitialState: function () {
-    	 return {
-        	 mode: "list"
-    	 }
-	 },
+	 mixins: [NavigatableMixin],
 	 componentDidMount: function () {
+		var id;
 		var self = this;
-		posts.on('returnAdd', function (data) {
-			 alert('post created');
-			 // message('green', 'Post created');
-			 //posts.account();
+		
+        posts.on('single', function (code, data) {
+            if (code != 200) {
+                msg('yellow', 'Post could not be loaded', code);
+                return;
+             }
+			 self.props.mutant.set({post: data});
+		 });	
+		posts.on('add', function (code, data) {
+			 if (code != 201) {
+			    msg('red', 'Post could not be created', code);
+                return;
+             }
+             msg('green', 'Post created successfully', code);
 			 self.reset();
 		 }); 
-		posts.on('returnSingle', function (data) {
-			 //self.setProps({post: data});
-			 //self.setState({mode: 'form'});
-		 });	 
-		 posts.on('returnSave', function (data) {
-			 alert('post updated');
-			 // message('green', 'Post saved');
-			 //posts.account();
+		 posts.on('save', function (code, data) {
+			 if (code != 204) {
+			    msg('red', 'Post could not be saved', code);
+                return;
+             }
 			 self.reset();
 		 });
-		 posts.on('returnAccount', function (data) {
-			 self.props.update('editor', {posts: data.rows, total: data.total});
+		 posts.on('account', function (code, data) {
+             if (code != 200) {
+                msg('yellow', 'Posts could not be loaded', code);
+                return;
+             }
+			 self.props.mutant.set({posts: data.rows, total: data.total});
 		 });
-		 posts.account();		
+		 
+         id = this.props._[0] || "";
+		 if (id == "add") {
+    		 this.add();
+		 } else if (id.length > 1) {
+    		 posts.single(id);
+		 } else {
+    		 posts.account();
+		 }
 	 },
 	 save: function () {
 		 var model = this.getValues();
-		 console.log(model);
 		 if (this.props.post.id === null) {
 			 posts.add(model);
 		 } else {
@@ -49,19 +69,20 @@ var Editor = React.createClass({
 		 }
 	 },
 	 list: function () {
-    	//this.setState({mode: 'list'}); 
+    	this.navigate('/editor'); 
 	 },
 	 reset: function () {
-    	 this.props.update('editor', {post: {}, link: {url: "", caption: ""}});
+    	 this.props.mutant.set({post: {}, link: {url: "", caption: ""}});
 	 },
 	 change: function (id, e) {		
 		var post = this.props.post;
 		post[id] = e.currentTarget.value;
-		this.props.update('editor', {post: post});		
+		this.props.mutant.set({post: post});		
 	 },
 	 add: function () {
 		 //this.setState({mode: 'form'});
-		 this.props.update('editor', {post: {}, link: {url: "", caption: ""}});
+		 this.props.mutant.set({post: {}, link: {url: "", caption: ""}});
+		 this.navigate('/editor/add');
 	 },
 	 getValues: function () {
 		var model = {};
@@ -70,22 +91,20 @@ var Editor = React.createClass({
 		model.title = form.title.getDOMNode().value;
 		model.content = form.rte.refs.content.getDOMNode().value;
 		model.privacy = form.privacy.getDOMNode().value;
-		console.log(form.details.refs.type);
 		model.type = form.details.refs.type.getDOMNode().value;
 		//	
 		return model;
 	 },
 	 render: function () {
-		var view;
-		console.log('render');
-		console.log(this.props);
+		var id, view;
+		 
 		if (token.get() === false) {
             return (<View401 />);
 		}
 		view = '';
-		view = <List ref="list" posts={this.props.posts} update={this.update} add={this.add} />
-        if (this.state.mode == 'form') {
-            view = <Fields ref="form" {...this.props} update={this.update} change={this.change} list={this.list} save={this.save} />
+		view = <List ref="list" posts={this.props.posts} add={this.add} />
+        if (this.props._[0] && this.props._[0].length > 1) {
+            view = <Fields ref="form" {...this.props} change={this.change} list={this.list} save={this.save} />
         }
         return (
             <div className="editor">
@@ -97,15 +116,24 @@ var Editor = React.createClass({
 });
 
 var List = React.createClass({
+	mixins: [NavigatableMixin],
+	add: function () {
+        this.navigate("/editor/add");	
+	},
 	edit: function (e) {
 		var id = e.currentTarget.id;
-		posts.single(id);
+		this.navigate("/editor/" + id);
 	},
 	render: function () {
 		var rows;
 		var self = this;
 		rows = this.props.posts.map(function (item) {
-		   return <tr key={item.id}><td>{moment(item.createdAt).fromNow()}</td><td><a href={'post/' + item.id}>{item.title}</a></td><td>{item.type}</td><td><button id={item.id} className="edit button blue" onClick={self.edit}>Edit</button></td></tr>;
+		   return <tr key={item.id}>
+    		    <td>{moment(item.createdAt).fromNow()}</td>
+    		    <td><Link href={'post/' + item.id}>{item.title}</Link></td>
+    		    <td>{item.type}</td>
+    		    <td><button id={item.id} className="edit button blue" onClick={self.edit}>Edit</button></td>
+		    </tr>;
 		});
 		if (!rows.length) {
     		rows = <tr><td colSpan="4">
@@ -114,7 +142,7 @@ var List = React.createClass({
 		}
 		return (
 			<div className="list">
-				<button className="add button green" onClick={this.props.add}>Add New Post</button>
+				<button className="add button green" onClick={this.add}>Add New Post</button>
 				<table ref="posts" className="posts">
 					<thead>
 						<th>Created</th><th>Title</th><th>Type</th><th>Edit</th>
@@ -167,11 +195,11 @@ var Fields = React.createClass({
 					<option value="phourus">Members only</option>
 					<option value="public">Public</option>
 				</select>
-				<Tags ref="tags" post={this.props.post}update={this.props.update}></Tags>
+				<Tags ref="tags" {...this.props}></Tags>
 				<TextEditor ref="rte" post={this.props.post} change={this.props.change}></TextEditor>
 				<h3>Post Details</h3>
-				<Details ref="details" update={this.props.update} post={this.props.post} change={this.props.change}></Details>
-				<Links ref="links" post={this.props.post} link={this.props.link} update={this.props.update}></Links>
+				<Details ref="details" post={this.props.post} change={this.props.change}></Details>
+				<Links ref="links" {...this.props}></Links>
 				<div ref="actions" className="actions">
                     <button ref="save" className="button green" onClick={this.props.save}>
                         {this.props.post.id ? "Update Post" : "Create New Post"}
@@ -204,14 +232,13 @@ var Details = React.createClass({
 	    var value = e.currentTarget.value;
 	    var post = this.props.post;
     	post.type = value;
-    	this.props.update({post: post});
+    	this.props.mutant.set({post: post});
 	},
 	render: function () {
 	  var type = this.props.post.type;
 	  if (!type) {
     	  //type = 'blog';
 	  }
-	  //console.log(type);
 	  return (	
 		<div>
 			<div>Please select a type before saving</div>
@@ -255,17 +282,29 @@ var Tags = React.createClass({
    },
    componentDidMount: function () {
         var self = this;
-        tags.on('returnCollection', function (data) {
+        tags.on('collection', function (code, data) {
+            if (code != 200) {
+                msg('yellow', 'Tags could not be loaded', code);
+                return;
+            }
             var post = self.props.post;
             post.tags = data;
-            self.props.update({post: post});
+            self.props.mutant.set({post: post});
         });
-        tags.on('returnAdd', function (data) {
+        tags.on('add', function (code, data) {
+            if (code != 201) {
+                msg('yellow', 'Tag could not be created', code);
+                return;
+            }
             var post = self.props.post;
             post.tags.push(data);
-            self.props.update({post: post});
+            self.props.mutant.set({post: post});
         });
-        tags.on('returnRemove', function (data) {
+        tags.on('remove', function (code, data) {
+            if (code != 204) {
+                msg('yellow', 'Tag could not be removed', code);
+                return;
+            }
             tags.collection({post_id: self.props.post.id});
         });
         tags.collection({post_id: this.props.post.id});
@@ -307,7 +346,7 @@ var Links = React.createClass({
        links.remove(id);
    },
    edit: function (model) {;
-        this.props.update({link: model});
+        this.props.mutant.set({link: model});
    },
    save: function () {
        var link = {};
@@ -322,21 +361,33 @@ var Links = React.createClass({
        var link = this.props.link;
        link.url = url;
        link.caption = caption;
-       this.props.update({link: link});
+       this.props.mutant.set({link: link});
    },
    componentDidMount: function () {
         var self = this;
-        links.on('returnCollection', function (data) {
+        links.on('collection', function (code, data) {
+            if (code != 200) {
+                msg('yellow', 'Links could not be loaded', code);
+                return;
+            }
             var post = self.props.post;
             post.links = data;
-            self.props.update({post: post});
+            self.props.mutant.set({post: post});
         });
-        links.on('returnAdd', function (data) {
+        links.on('add', function (code, data) {
+            if (code != 201) {
+                msg('yellow', 'Link could not be created', code);
+                return;
+            }
             var post = self.props.post;
             post.links.push(data);
-            self.props.update({post: post});
+            self.props.mutant.set({post: post});
         });
-        links.on('returnRemove', function (data) {
+        links.on('remove', function (code, data) {
+            if (code != 204) {
+                msg('red', 'Link could not be removed', code);
+                return;
+            }
             links.collection({post_id: self.props.post.id});
         });
         links.collection({post_id: this.props.post.id});
@@ -370,6 +421,24 @@ var Links = React.createClass({
    } 
 });
 
+var Select = React.createClass({
+    render: function () {
+        var list =[];
+        if (!this.props.data) {
+            return (<div>Missing option</div>);
+        }
+        list = this.props.data.map(function (item) {
+            return <option value={item.value}>{item.label}</option>;
+        });
+        
+        return (
+            <select>
+                {list}
+            </select>
+        );
+    }    
+});
+
 var Meta = React.createClass({
 	render: function () {
         var element, type;
@@ -380,10 +449,10 @@ var Meta = React.createClass({
     	/** SHARED FIELDS **/
     	element =		   
     	<select ref="element" value={this.props.post.element} onChange={this.props.change.bind(null, 'element')}>
-    		<option>World</option>
-    		<option>Mind</option>
-    		<option>Voice</option>
-    		<option>Self</option>
+    		<option value="world">World</option>
+    		<option value="mind">Mind</option>
+    		<option value="voice">Voice</option>
+    		<option value="self">Self</option>
     	</select>
     	
     	switch (type) {
@@ -394,13 +463,11 @@ var Meta = React.createClass({
         			{element}
         			<br />
         			<label>Category:</label>
-        			<select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')}>
-        				<option>Factual</option>
-        				<option>Opinion</option>
-        				<option>Idea</option>
-        				<option>Humor</option>
-        				<option>Rant</option>
-        			</select>
+        			<Select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')} data={tax.blogs[this.props.post.element]}>
+        			</Select>
+        			<label>Subcategory:</label>
+        			<Select ref="subcategory" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'subcategory')} data={tax.blogs.subcategory}>
+        			</Select>        			
         			<br />
         			<label>Positive?</label>
         			<input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this.props.change.bind(null, 'positive')} />
@@ -415,13 +482,8 @@ var Meta = React.createClass({
         			{element}
         			<br />
         			<label>Category:</label>
-        			<select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')}>
-        				<option>Category 1</option>
-        				<option>Category 2</option>
-        				<option>Category 3</option>
-        				<option>Category 4</option>
-        				<option>Category 5</option>
-        			</select>
+        			<Select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')} data={tax.events[this.props.post.element]}>
+        			</Select>
         			<br />
         			<label>Date</label>
         			<input ref="date" value={this.props.post.date} onChange={this.props.change.bind(null, 'date')} />
@@ -436,22 +498,12 @@ var Meta = React.createClass({
     		   return (
         		   <div>
         		    <label>Category:</label>
-        			<select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')}>
-        				<option>Category 1</option>
-        				<option>Category 2</option>
-        				<option>Category 3</option>
-        				<option>Category 4</option>
-        				<option>Category 5</option>
-        			</select>
+        			<Select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')} data={tax.subjects.category}>
+        			</Select>
         			<br />
         			<label>Subcategory:</label>
-        			<select ref="subcategory" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'subcategory')}>
-        				<option>Subcategory 1</option>
-        				<option>Subcategory 2</option>
-        				<option>Subcategory 3</option>
-        				<option>Subcategory 4</option>
-        				<option>Subcategory 5</option>
-        			</select>
+        			<Select ref="subcategory" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'subcategory')} data={tax.subjects[this.props.post.category]}>
+        			</Select>
         			<br />
         			<label>Difficulty:</label>
         			<select ref="difficulty" value={this.props.post.difficulty} onChange={this.props.change.bind(null, 'difficulty')}>
@@ -467,22 +519,12 @@ var Meta = React.createClass({
     		    return ( 
         		    <div>
         		    <label>Category:</label>
-        			<select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')}>
-        				<option>Category 1</option>
-        				<option>Category 2</option>
-        				<option>Category 3</option>
-        				<option>Category 4</option>
-        				<option>Category 5</option>
-        			</select>
+        			<Select ref="category" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'category')} data={tax.subjects.category}>
+        			</Select>
         			<br />
         			<label>Subcategory:</label>
-        			<select ref="subcategory" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'subcategory')}>
-        				<option>Subcategory 1</option>
-        				<option>Subcategory 2</option>
-        				<option>Subcategory 3</option>
-        				<option>Subcategory 4</option>
-        				<option>Subcategory 5</option>
-        			</select>
+        			<Select ref="subcategory" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'subcategory')} data={tax.subjects[this.props.post.category]}>
+        			</Select>
         			<br />
         			<label>Difficulty:</label>
         			<select ref="difficulty" value={this.props.post.difficulty} onChange={this.props.change.bind(null, 'difficulty')}>
@@ -498,22 +540,8 @@ var Meta = React.createClass({
     		   return (
         		   <div>
         		    <label>Category:</label>
-        			<select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')}>
-        				<option>Category 1</option>
-        				<option>Category 2</option>
-        				<option>Category 3</option>
-        				<option>Category 4</option>
-        				<option>Category 5</option>
-        			</select>
-        			<br />
-        			<label>Subcategory:</label>
-        			<select ref="subcategory" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'subcategory')}>
-        				<option>Subcategory 1</option>
-        				<option>Subcategory 2</option>
-        				<option>Subcategory 3</option>
-        				<option>Subcategory 4</option>
-        				<option>Subcategory 5</option>
-        			</select>
+        			<Select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')} data={tax.debates.category}>
+        			</Select>
         			<br />
         			<label>Scope:</label>
         			<select ref="scope" value={this.props.post.scope} onChange={this.props.change.bind(null, 'scope')}>
@@ -532,22 +560,8 @@ var Meta = React.createClass({
     		  return (
         		  <div>
         		    <label>Category:</label>
-        			<select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')}>
-        				<option>Category 1</option>
-        				<option>Category 2</option>
-        				<option>Category 3</option>
-        				<option>Category 4</option>
-        				<option>Category 5</option>
-        			</select>
-        			<br />
-        			<label>Subcategory:</label>
-        			<select ref="subcategory" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'subcategory')}>
-        				<option>Subcategory 1</option>
-        				<option>Subcategory 2</option>
-        				<option>Subcategory 3</option>
-        				<option>Subcategory 4</option>
-        				<option>Subcategory 5</option>
-        			</select>
+        			<Select ref="category" value={this.props.post.category} onChange={this.props.change.bind(null, 'category')} data={tax.beliefs.category}>
+        			</Select>
         			<br />
         		  </div>
     		  );

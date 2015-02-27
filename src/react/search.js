@@ -1,13 +1,17 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var posts = require('../objects/posts');
+var Router = require('react-router-component');
+var Link = Router.Link;
+var NavigatableMixin = Router.NavigatableMixin;
+var posts = require('../sockets/posts');
 var moment = require('moment');
+var msg = function (color, msg, code) {}
 
 var Search = React.createClass({
 	 search: function () {
 	     var val = this.refs.term.getDOMNode().value;
-         this.props.update('search', {search: val});
+         this.props.mutant.set({search: val});
 	 },
 	 toggleFilter: function (e) {
     	var id = e.currentTarget.id;
@@ -15,17 +19,18 @@ var Search = React.createClass({
     	var obj = {};
     	var visibility = this.props[prop] == true ? false : true;
     	obj[prop] = visibility;
-    	this.props.update(obj);
+    	this.props.mutant.set(obj);
 	 },
      componentDidMount: function () {
          var self = this;
-         posts.on('returnCollection', function (data) {
-             console.log(data);
-             self.setProps({posts: data.rows, total: data.count}, function () {
-                console.log('props set');
-             });
+         posts.on('collection', function (code, data) {
+             if (code != 200) {
+                msg('red', 'Posts could not be loaded', code);
+                return;
+            }
+             self.props.mutant.set({posts: data.rows, total: data.count});
          });
-         posts.collection();
+         posts.collection({});
 	 },
 	 render: function () {
 		  var visible = "fa fa-minus-square-o";
@@ -38,14 +43,14 @@ var Search = React.createClass({
     				<button className="button green" ref="search" onClick={this.search}><i className="fa fa-search" /></button>
 				</div>
                 <h3 id="dates" onClick={this.toggleFilter}><i className={this.props.datesVisible ? visible : hidden} /> Date Range:</h3>
-				<Dates update={this.update} datesVisible={this.props.datesVisible} />
+				<Dates datesVisible={this.props.datesVisible} />
 				<hr />
 				<h3 id="types" onClick={this.toggleFilter}><i className={this.props.typesVisible ? visible : hidden} /> Toggle Content:</h3>
-				<Types update={this.update} typesVisible={this.props.typesVisible} exclude={this.props.exclude} />
+				<Types typesVisible={this.props.typesVisible} exclude={this.props.exclude} />
 				<hr />
-				<Filter update={this.update} sortVisible={this.props.sortVisible} />
-				<Pagination ref="pagination" update={this.update} page={this.props.page} total={this.props.total} limit={this.props.limit} />
-				<Posts update={this.update} posts={this.props.posts} />
+				<Filter sortVisible={this.props.sortVisible} />
+				<Pagination ref="pagination" page={this.props.page} total={this.props.total} limit={this.props.limit} />
+				<Posts posts={this.props.posts} />
 			</div>
 		  )
 	 }
@@ -61,10 +66,10 @@ var Groups = React.createClass({
 
 var Filter = React.createClass({
 	sort: function (e) {
-    	this.props.update({sort: e.target.value});
+    	this.props.mutant.set({sort: e.target.value});
 	},
 	direction: function (e) {
-        this.props.update({direction: e.target.value});	
+        this.props.mutant.set({direction: e.target.value});	
 	},
 	render: function () {
 		return (
@@ -136,7 +141,7 @@ var Types = React.createClass({
 	    } else {
     	    exclude.push(type);
 	    }
-	    this.props.update({exclude: exclude});
+	    this.props.mutant.set({exclude: exclude});
 	},
 	off: function (type) {
     	var exclude = this.props.exclude;
@@ -166,12 +171,12 @@ var Types = React.createClass({
 var Pagination = React.createClass({
 	next: function () {
 	    if ( Math.ceil(this.props.page * this.props.limit) < this.props.total ) {
-    	    this.props.update({page: this.props.page + 1});
+    	    this.props.mutant.set({page: this.props.page + 1});
 	    }
 	},
 	previous: function () {
         if (this.props.page > 1) {
-    	    this.props.update({page: this.props.page - 1});
+    	    this.props.mutant.set({page: this.props.page - 1});
 	    }
 	},
 	render: function () {
@@ -195,9 +200,13 @@ var Posts = React.createClass({
 	render: function () {
 		var data = this.props.posts;
 		var list = [];
-		list = data.map(function (item, i) {
-		   var user = {first: "JESSE", last: "drelick"};
-		   return <PostItem key={item.id} post={item} user={user} />;
+		
+		list = data.map(function (item, i) {   
+		   var location = {};
+		   if (item.user.locations && item.user.locations.length > 0) {
+    		   location = item.user.locations[0];
+		   }
+		   return <PostItem key={item.id} post={item} user={item.user} location={location} />;
 		});
 
 		return (
@@ -217,30 +226,31 @@ var Posts = React.createClass({
 */
 
 var PostItem = React.createClass({
+	mixins: [NavigatableMixin],
 	render: function () {
 		var meta = [];
 		var post = this.props.post;
 		for (var i = 0, keys = Object.keys(post); i < keys.length; i++) {
 			var key = keys[i];
 			var value = post[keys[i]];
-			if (['id', 'user_id', 'type', 'content', 'date', 'title', 'post_id', 'privacy', 'views', 'comments', 'thumbs', 'popularity', 'influence', 'createdAt', 'updatedAt'].indexOf(key) === -1 && value !== null) {
+			if (['element', 'category', 'subcategory', 'difficulty', 'scope', 'zip', 'author', 'vote'].indexOf(key) !== -1 && value !== null) {
 				meta.push(<li>{key}: {value}</li>);
 			}
 			
 		}
 		return (
 			<div className="postItem" key={this.props.post.id}>
-				<h2><a href="./post/1">{this.props.post.title}</a></h2>
+				<h2><Link href={"/post/" + this.props.post.id}>{this.props.post.title}</Link></h2>
 				<div className="type"><i className="fa fa-bell" /> {this.props.post.type}</div>
 				<div className="pic">
-					<a href="/profile/1">
-					    <img src="/assets/default.png" />
-                    </a>
+					<Link href={"/user/" + this.props.post.id}>
+					    <img src={"/assets/avatars/" + this.props.user.img + ".jpg"} />
+                    </Link>
 				</div>
 				<div className="basic">
-				  <h3>By <a href="/profile/1">{this.props.user.first} {this.props.user.last}</a></h3>
-				  <span className="created">{moment(this.props.post.createdAt).fromNow()}</span>
-				  <span className="created">{this.props.user}</span>
+				  <h3>By <Link href={"/user/" + this.props.post.id}>{this.props.post.user.first} {this.props.post.user.last}</Link></h3>
+				  <div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
+				  <div className="location">{this.props.location.city} {this.props.location.state}</div>
 				</div>
 				<div className="detail">
 				  <ul>
@@ -250,7 +260,7 @@ var PostItem = React.createClass({
 				<div className="stats">
 				  <div className="influence">{this.props.post.influence}</div>
 				  <li>Views: {this.props.post.views}</li>
-				  <li>Comments: {this.props.post.comments}</li>
+				  <li>Comments: {this.props.post.totalComments}</li>
 				  <li>Popularity: {this.props.post.thumbs}</li>
 				</div>
 				<div className="content">{this.props.post.content}</div>
