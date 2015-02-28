@@ -60,6 +60,12 @@ var Editor = React.createClass({
     		 posts.account();
 		 }
 	 },
+	 componentWillUnmount: function () {
+    	 posts.off('single');
+    	 posts.off('add');
+    	 posts.off('save');
+    	 posts.off('account');
+	 },
 	 save: function () {
 		 var model = this.getValues();
 		 if (this.props.post.id === null) {
@@ -309,6 +315,11 @@ var Tags = React.createClass({
         });
         tags.collection({post_id: this.props.post.id});
    },
+   componentWillUnmount: function () {
+       tags.off('collection');
+       tags.off('add');
+       tags.off('remove');
+   },
    render: function () {
         var tags, list, self;
         self = this;
@@ -391,6 +402,11 @@ var Links = React.createClass({
             links.collection({post_id: self.props.post.id});
         });
         links.collection({post_id: this.props.post.id});
+   },
+   componentWillUnmount: function () {
+       links.off('collection');
+       links.off('add');
+       links.off('remove');
    },
    render: function () {
         var links, list, self;

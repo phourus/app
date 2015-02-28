@@ -24,6 +24,10 @@ var View401 = React.createClass({
              msg('red', 'Login unsuccessful', code);
          }); 
 	 },
+	 componentWillUnmount: function () {
+    	 account.off('register');
+    	 account.off('login');
+	 },
 	 register: function () {
     	this.setState({mode: "register"}); 
 	 },

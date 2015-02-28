@@ -44,6 +44,10 @@ var Post = React.createClass({
          posts.single(this.props._[0]);
          comments.collection({postId: this.props._[0]});
      },
+     componentWillUnmount: function () {
+         posts.off('single');
+         comments.off('collection');
+     },
      render: function () {
           return (
             <div>
@@ -157,6 +161,9 @@ var Thumbs = React.createClass({
      });
      thumbs.single(this.props.post.id);
    },
+   componentWillUnmount: function () {
+       thumbs.off('single');
+   },
    like: function () {
        var model = {};
        model.post_id = this.props.post.id;
@@ -206,7 +213,6 @@ var Thumbs = React.createClass({
 });
 
 var Comments = React.createClass({
-
     componentDidMount: function () {
          var self = this;
          comments.on('add', function (code, data) {
@@ -215,6 +221,9 @@ var Comments = React.createClass({
                 return;
             }
          });         
+    },
+    componentWillUnmount: function () {
+        comments.off('add');    
     },
     render: function () {
           var create = <h3>You must be logged-in to comment</h3>

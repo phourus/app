@@ -46,6 +46,12 @@ var Account = React.createClass({
          });
          account.get();
 	 },
+	 componentWillUnmount: function () {
+    	account.off('get'); 
+    	account.off('edit'); 
+    	account.off('password'); 
+    	account.off('deactivate'); 
+	 },
      deactivate: function () {
        account.deactivate();  
      },
@@ -253,6 +259,9 @@ var Notifications = React.createClass({
          });
          account.notifications({});
     },
+    componentWillUnmount: function () {
+        account.off('notifications');
+    },
     render: function () {
         var views = this.props.notifications[0] || [];
         var comments = this.props.notifications[1] || [];
@@ -286,6 +295,9 @@ var History = React.createClass({
              self.props.mutant.set({history: data});
          });
          account.history({});
+    },
+    componentWillUnmount: function () {
+        account.off('history');
     },
     render: function () {
         var views = this.props.history[0] || [];

@@ -37,6 +37,10 @@ var Profile = React.createClass({
     		users.single(id);
 		}
 	 },
+	 componentWillUnmount: function () {
+    	 orgs.off('single');
+    	 users.off('single');
+	 },
      render: function () {        
           return (
             <div className="profile">

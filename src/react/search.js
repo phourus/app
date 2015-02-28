@@ -32,6 +32,9 @@ var Search = React.createClass({
          });
          posts.collection({});
 	 },
+	 componentWillUnmount: function () {
+    	 posts.off('collection');
+	 },
 	 render: function () {
 		  var visible = "fa fa-minus-square-o";
 		  var hidden = "fa fa-plus-square-o";
