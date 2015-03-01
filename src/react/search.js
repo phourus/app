@@ -237,12 +237,12 @@ var PostItem = React.createClass({
 			var key = keys[i];
 			var value = post[keys[i]];
 			if (['element', 'category', 'subcategory', 'difficulty', 'scope', 'zip', 'author', 'vote'].indexOf(key) !== -1 && value !== null) {
-				meta.push(<li>{key}: {value}</li>);
+				meta.push(<li key={key} >{key}: {value}</li>);
 			}
 			
 		}
 		return (
-			<div className="postItem" key={this.props.post.id}>
+			<div className="postItem">
 				<h2><Link href={"/post/" + this.props.post.id}>{this.props.post.title}</Link></h2>
 				<div className="type"><i className="fa fa-bell" /> {this.props.post.type}</div>
 				<div className="pic">

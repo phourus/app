@@ -12,7 +12,7 @@ var Alerts = React.createClass({
         var list = [];
         if (this.props.alerts) {
             for (var i in this.props.alerts) {
-                list.push(<Alert {...this.props.alerts[i]} id={i} remove={this.remove} />);
+                list.push(<Alert key={id} {...this.props.alerts[i]} id={i} remove={this.remove} />);
             }
         }
         return (

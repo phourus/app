@@ -76,7 +76,7 @@ var Filter = React.createClass({
 var Select = React.createClass({
     render: function () {
         var list = this.props.data.map(function (item) {
-            return <option value={item.value}>{item.label}</option>;
+            return <option key={item.label} value={item.value}>{item.label}</option>;
         });
         return (
             <select>

@@ -87,8 +87,7 @@ var Meta = React.createClass({
        }
        for (var i in this.props.post) {
 			if (['difficulty', 'scope', 'zip'].indexOf(i) !== -1 && this.props.post[i] !== null) {
-				meta.push(<br />);
-				meta.push(<span><strong>{i}:</strong> {this.props.post[i]}</span>);
+				meta.push(<div key={i}><strong>{i}:</strong> {this.props.post[i]}</div>);
 			}
 		}
        return (
@@ -115,7 +114,7 @@ var Tags = React.createClass({
     render: function () {
         var tags = [];
         for (var i in this.props.tags) {
-            tags.push(<span className="tag">{this.props.tags[i].tag}</span>);
+            tags.push(<span className="tag" key={i}>{this.props.tags[i].tag}</span>);
         }
         return (
             <span className="tags">

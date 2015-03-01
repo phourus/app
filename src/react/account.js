@@ -268,15 +268,15 @@ var Notifications = React.createClass({
         var thumbs = this.props.notifications[2] || [];
         
         views = views.map(function (item) {
-           return <li><img src={"/assets/avatars/" + item.viewer.img + ".jpg"} /><a href={"/user/" + item.viewer.id}>{item.viewer.username}</a> viewed your profile</li>;
+           return <li key={item.id}><img src={"/assets/avatars/" + item.viewer.img + ".jpg"} /><a href={"/user/" + item.viewer.id}>{item.viewer.username}</a> viewed your profile</li>;
         });
         comments = comments.map(function (item) {
-           return <li><img src={"/assets/avatars/" + item.user.img + ".jpg"} /> <a href={"/user/" + item.userId}>{item.user.username}</a> commented on your post 
+           return <li key={item.id}><img src={"/assets/avatars/" + item.user.img + ".jpg"} /> <a href={"/user/" + item.userId}>{item.user.username}</a> commented on your post 
                 <a href={"/post/" + item.post.id}>{" \"" + item.post.title  + "\""}</a>
             </li>;
         });
         thumbs = thumbs.map(function (item) {
-           return <li><img src={"/assets/avatars/" + item.user.img + ".jpg"} /><a href={"/user/" + item.user.id}>{item.user.username}</a> {(item.positive) ? "dis": ""} liked your post  
+           return <li key={item.id}><img src={"/assets/avatars/" + item.user.img + ".jpg"} /><a href={"/user/" + item.user.id}>{item.user.username}</a> {(item.positive) ? "dis": ""} liked your post  
                 <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a>
             </li>;
         });
@@ -305,16 +305,16 @@ var History = React.createClass({
         var thumbs = this.props.history[2] || [];
         
         views = views.map(function (item) {
-           return <li><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed <img src={"/assets/avatars/1.jpg"} /><a href={"/user/"}></a></li>;
+           return <li key={item.id}><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed <img src={"/assets/avatars/1.jpg"} /><a href={"/user/"}></a></li>;
         });
         comments = comments.map(function (item) {
-           return <li><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-comment" /> You commented on 
+           return <li key={item.id}><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-comment" /> You commented on 
            <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a> by
                 <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a> 
             </li>;
         });
         thumbs = thumbs.map(function (item) {
-           return <li><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-thumb" /> You {(item.positive) ? "dis": ""}liked
+           return <li key={item.id}><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-thumb" /> You {(item.positive) ? "dis": ""}liked
                 <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a> by
                 <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a>  
                 

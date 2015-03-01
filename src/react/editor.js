@@ -444,7 +444,7 @@ var Select = React.createClass({
             return (<div>Missing option</div>);
         }
         list = this.props.data.map(function (item) {
-            return <option value={item.value}>{item.label}</option>;
+            return <option key={item.label} value={item.value}>{item.label}</option>;
         });
         
         return (
