@@ -8,6 +8,7 @@ var NotFound = Router.NotFound;
 var Link = Router.Link;
 
 // JSX       
+var Alerts = require('./react/alerts');
 var Search = require('./react/search');
 var Post = require('./react/post');
 var Factory = require('./react/editor');
@@ -18,12 +19,6 @@ var General = require('./react/general');
 var Landing = require('./react/landing');
 var Map = require('./map');
 var View404 = require('./react/404');
-
-var validAlert = {
-    color: React.PropTypes.string,
-    msg: React.PropTypes.string,
-    code: React.PropTypes.number
-}
 
 var searchMutant = new Mutant({
     posts: [],
@@ -102,7 +97,7 @@ var editorMutant = new Mutant({
 var App = React.createClass({
     getDefaultProps: function () {
        return {
-          alerts: new Mutant({alerts: []}, {mixins: {someFN: function() { return 'hey'; }}, validate: validAlert}),
+          alerts: [],
           search: searchMutant,
           post: postMutant,
           account: accountMutant,
@@ -114,9 +109,6 @@ var App = React.createClass({
     },
     componentWillMount: function () {
         var self = this;
-        this.props.alerts.mutant.on('update', function (mutant) {
-            self.setProps({alerts: mutant});
-        });
         this.props.account.mutant.on('update', function (mutant) {
             self.setProps({account: mutant});
         });
@@ -167,44 +159,6 @@ var App = React.createClass({
             </div>    
         );
     }
-});
-
-var Alerts = React.createClass({
-    remove: function (e) {
-        var id = e.currentTarget.id;
-        var alerts = this.props.alerts;
-        alerts.splice(id, 1);
-    },
-    render: function () {
-        var list = [];
-        if (this.props.alerts) {
-            for (var i in this.props.alerts) {
-                list.push(<Alert {...this.props.alerts[i]} id={i} remove={this.remove} />);
-            }
-        }
-        return (
-            <div className="alerts">
-                {list}
-            </div>
-        );
-    }
-});
-
-var Alert = React.createClass({
-    propTypes: {
-      color: React.PropTypes.string,
-      msg: React.PropTypes.string,
-      code: React.PropTypes.number  
-    },
-    render: function () {
-        return (
-            <div className={this.props.color + " alert"}>
-                <button id={this.props.id} className="remove fa fa-remove" onClick={this.props.remove}></button>
-                <div className="msg">{this.props.msg}</div>
-                <div className="code">HTTP Status Code: {this.props.code}</div>
-            </div>
-        );
-    } 
 });
 
 var Content = React.createClass({
