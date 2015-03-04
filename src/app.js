@@ -1,11 +1,23 @@
 "use strict";
 var React = require('react');
 var Mutant = require('react-mutant');
+
+var Router = require('react-router');
+var Route = Router.Route;
+var DefaultRoute = Router.DefaultRoute;
+var NotFoundRoute = Router.NotFoundRoute;
+var Redirect = Router.Redirect;
+var RouteHandler = Router.RouteHandler;
+var HistoryLocation = Router.HistoryLocation
+//var Link = Router.Link;
+
+/*
 var Router = require('react-router-component');
 var Locations = Router.Locations;
 var Location = Router.Location;
 var NotFound = Router.NotFound;
 var Link = Router.Link;
+*/
 
 // JSX       
 var Alerts = require('./react/alerts');
@@ -126,6 +138,16 @@ var App = React.createClass({
         });
     },
     render: function () {
+        //<Content {...this.props} />
+/*
+        //                        <Link href="/leaders" className="game fa fa-trophy"></Link>
+                    	<Link href="/search" className="search fa fa-search"></Link>
+                    	<Link href="/editor" className="editor fa fa-pencil"></Link>
+                    	<Link href="/account" className="account fa fa-user"><span className="notifications">13</span></Link>
+                    	        				<Link href="/">Home</Link> | 
+        				<Link href="./about">About</Link> | 
+        				<Link href="./terms">Terms</Link>
+*/
         return  (
             <div>
                 <header className="header">
@@ -135,24 +157,19 @@ var App = React.createClass({
                     	</a>
                     </div>
                     <nav className="nav">
-                        <Link href="/leaders" className="game fa fa-trophy"></Link>
-                    	<Link href="/search" className="search fa fa-search"></Link>
-                    	<Link href="/editor" className="editor fa fa-pencil"></Link>
-                    	<Link href="/account" className="account fa fa-user"><span className="notifications">13</span></Link>
+
                     </nav>
                 </header>
                 <div className="spacer"></div>
                 <Alerts {...this.props.alerts} />
                 <div className="main">
                     <div id="content">
-                        <Content {...this.props} />
+                        <RouteHandler />
                     </div>
                     <footer className="footer">
                         © 2013 Phourus LLC. All Rights Reserved.
                         <br />
-        				<Link href="/">Home</Link> | 
-        				<Link href="./about">About</Link> | 
-        				<Link href="./terms">Terms</Link>
+
         				<br clear="all" />
                     </footer>
                 </div>
@@ -161,6 +178,7 @@ var App = React.createClass({
     }
 });
 
+/*
 var Content = React.createClass({
     render: function () {
         return (
@@ -178,5 +196,58 @@ var Content = React.createClass({
         );
     }
 });
+*/
+
+
+
+/*
+    <Route name="editor" path="/editor" handler={Factory}>
+      <Route name="list" path="/list" handler={Factory.List} />
+      <Route name="add" path="/add" handler={Factory.Add} />
+      <Route name="post" path="/:id" handler={Factory.Post} />
+    </Route>
+    <Route name="account" path="/account" handler={Account}>
+      <Route name="notifications" path="/notifications" handler={Notifications} />
+      <Route name="history" path="/history" handler={History} />
+      <Route name="edit" path="/edit" handler={Edit} />
+      <Route name="password" path="/password" handler={Password} />
+    </Route>
+    <Route name="user" path="/user/:id" handler={Profile}>
+      <Route name="about" path="/about" handler={About} />
+      <Route name="posts" path="/posts" handler={Posts} />
+      <Route name="orgs" path="/orgs" handler={Orgs} />
+      <Route name="events" path="/events" handler={Events} />
+      <Route name="reviews" path="/reviews" handler={Reviews} />
+      <Route name="rank" path="/rank" handler={Rank} />
+    </Route>
+    <Route name="org" path="/org/:id" handler={Profile}>
+      <Route name="about" path="/about" handler={About} />
+      <Route name="posts" path="/posts" handler={Posts} />
+      <Route name="members" path="/members" handler={Members} />
+      <Route name="events" path="/events" handler={Events} />
+      <Route name="reviews" path="/reviews" handler={Reviews} />
+      <Route name="rank" path="/rank" handler={Rank} />
+    </Route>
+*/
+
+//<Redirect from="company" to="about" />
+var routes = (
+  <Route handler={App} path="/">
+    <DefaultRoute handler={Landing} />
+    <Route name="leaders" handler={Leaders}  />
+    <Route name="search" handler={Search} {...searchMutant} />
+    <Route name="post" path="/post/:id" handler={Post} {...postMutant} />
+    <Route name="general" handler={General} />
+    <NotFoundRoute handler={View404}/>
+  </Route>
+);
+
+try {
+  Router.run(routes, function (Handler) {
+      React.render(<Handler />, document.getElementById("app"));
+    });  
+} catch (e) {
+    console.error(e);
+}
 
 module.exports = App;

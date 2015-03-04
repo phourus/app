@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var Router = require('react-router-component');
+var Router = require('react-router');
 var Link = Router.Link;
 var posts = require('../sockets/posts');
 var comments = require('../sockets/comments');
@@ -25,8 +25,10 @@ var fa = {
 /** INTERACT **/
 // Views, Comments, Likes
 var Post = React.createClass({
+     mixins: [Router.State],
      componentDidMount: function () {         
          var self = this;
+         var params = this.getParams();
          posts.on('single', function (code, data) {
             if (code != 200) {
                 msg('red', 'Post could not be loaded', code);
@@ -41,14 +43,17 @@ var Post = React.createClass({
             }
             self.props.mutant.set({comments: data});
          });
-         posts.single(this.props._[0]);
-         comments.collection({postId: this.props._[0]});
+         console.log(params);
+         posts.single(params.id);
+         comments.collection({postId: params.id});
      },
      componentWillUnmount: function () {
          posts.off('single');
          comments.off('collection');
      },
      render: function () {
+          var params = this.getParams();
+          console.log(params);
           return (
             <div>
                 <div className="heading">

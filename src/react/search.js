@@ -9,6 +9,20 @@ var moment = require('moment');
 var msg = function (color, msg, code) {}
 
 var Search = React.createClass({
+	 getDefaultProps: function () {
+    	 return {
+        posts: [],
+        exclude: [],
+        search: '',
+        sort: 'influence',
+        direction: 'DESC',
+        page: 1,
+        limit: 10,
+        total: 0,
+        datesVisible: false,
+        typesVisible: false
+        }
+	 },
 	 search: function () {
 	     var val = this.refs.term.getDOMNode().value;
          this.props.mutant.set({search: val});
@@ -38,7 +52,6 @@ var Search = React.createClass({
 	 render: function () {
 		  var visible = "fa fa-minus-square-o";
 		  var hidden = "fa fa-plus-square-o";
-
 		  return (
 			<div className="search">
 				<div className="keywords">
