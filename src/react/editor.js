@@ -12,11 +12,27 @@ var moment = require('moment');
 var tax = require('../taxonomy');
 //var RTE = require('rte');
 var msg = function (color, msg, code) {}
+var Mutant = require('react-mutant');
 
 var View401 = require('./401');
 
 var Editor = React.createClass({
 	 mixins: [NavigatableMixin],
+	 getDefaultProps: function () {
+    	return new Mutant({
+            post: {},
+            posts: [],
+            link: {
+                url: "",
+                caption: ""
+            }
+        }); 
+	 },
+     componentWillMount: function () {
+        this.props.mutant.on('update', function (mutant) {
+            self.setProps(mutant);
+        });  
+     },
 	 componentDidMount: function () {
 		var id;
 		var self = this;

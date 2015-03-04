@@ -7,22 +7,23 @@ var NavigatableMixin = Router.NavigatableMixin;
 var posts = require('../sockets/posts');
 var moment = require('moment');
 var msg = function (color, msg, code) {}
+var Mutant = require('react-mutant');
 
 var Search = React.createClass({
 	 getDefaultProps: function () {
-    	 return {
-        posts: [],
-        exclude: [],
-        search: '',
-        sort: 'influence',
-        direction: 'DESC',
-        page: 1,
-        limit: 10,
-        total: 0,
-        datesVisible: false,
-        typesVisible: false
-        }
-	 },
+    	 return new Mutant({
+            posts: [],
+            exclude: [],
+            search: '',
+            sort: 'influence',
+            direction: 'DESC',
+            page: 1,
+            limit: 10,
+            total: 0,
+            datesVisible: false,
+            typesVisible: false
+        });	 
+     },
 	 search: function () {
 	     var val = this.refs.term.getDOMNode().value;
          this.props.mutant.set({search: val});
@@ -35,6 +36,11 @@ var Search = React.createClass({
     	obj[prop] = visibility;
     	this.props.mutant.set(obj);
 	 },
+     componentWillMount: function () {
+        this.props.mutant.on('update', function (mutant) {
+            self.setProps(mutant);
+        });  
+     },
      componentDidMount: function () {
          var self = this;
          posts.on('collection', function (code, data) {

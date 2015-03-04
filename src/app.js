@@ -9,15 +9,8 @@ var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
 var RouteHandler = Router.RouteHandler;
 var HistoryLocation = Router.HistoryLocation
-//var Link = Router.Link;
-
-/*
-var Router = require('react-router-component');
-var Locations = Router.Locations;
-var Location = Router.Location;
-var NotFound = Router.NotFound;
 var Link = Router.Link;
-*/
+var Mutant = require('react-mutant');
 
 // JSX       
 var Alerts = require('./react/alerts');
@@ -32,122 +25,24 @@ var Landing = require('./react/landing');
 var Map = require('./map');
 var View404 = require('./react/404');
 
-var searchMutant = new Mutant({
-    posts: [],
-    exclude: [],
-    search: '',
-    sort: 'influence',
-    direction: 'DESC',
-    page: 1,
-    limit: 10,
-    total: 0,
-    datesVisible: false,
-    typesVisible: false
-});
-
-var postMutant = new Mutant({
-    post: {
-        id: null,
-        title: "",
-        created: "",
-        influence: null,
-        element: '',
-        scope: '',
-        type: ''    
-    },
-    user: {
-        id: null
-    },
-    comments: {
-        rows: [],
-        total: 0
-    }
-});
-
-var accountMutant = new Mutant({
-    user: {
-        id: null,
-        pic: "",
-        username: "",
-        first: "",
-        last: "",
-        email: "",
-        phone: "",
-        company: "",
-        occupation: "",
-        website: "",
-        dob: "",
-        gender: "",
-        address: {
-            street: "",
-            city: "",
-            state: "",
-            zip: ""
-        }
-    },
-    notifications: [],
-    history: []
-
-});
-
-var profileMutant = new Mutant({
-    id: "",
-    type: "",
-    view: "",
-    profile: {}
-});
-
-var editorMutant = new Mutant({
-    post: {},
-    posts: [],
-    link: {
-        url: "",
-        caption: ""
-    }
-});
-
 var App = React.createClass({
     getDefaultProps: function () {
-       return {
-          alerts: [],
-          search: searchMutant,
-          post: postMutant,
-          account: accountMutant,
-          profile: profileMutant,
-          editor: editorMutant,
-          leaders: {},
-          general: {}
-       } 
+        profile: new Mutant({
+            id: "",
+            type: "",
+            view: "",
+            profile: {}
+        })
     },
-    componentWillMount: function () {
+     componentWillMount: function () {
         var self = this;
-        this.props.account.mutant.on('update', function (mutant) {
-            self.setProps({account: mutant});
-        });
+/*
         this.props.profile.mutant.on('update', function (mutant) {
             self.setProps({profile: mutant});
-        });
-        this.props.post.mutant.on('update', function (mutant) {
-            self.setProps({post: mutant});
-        });
-        this.props.editor.mutant.on('update', function (mutant) {
-            self.setProps({editor: mutant});
-        });
-        this.props.search.mutant.on('update', function (mutant) {
-            self.setProps({search: mutant});
-        });
-    },
-    render: function () {
-        //<Content {...this.props} />
-/*
-        //                        <Link href="/leaders" className="game fa fa-trophy"></Link>
-                    	<Link href="/search" className="search fa fa-search"></Link>
-                    	<Link href="/editor" className="editor fa fa-pencil"></Link>
-                    	<Link href="/account" className="account fa fa-user"><span className="notifications">13</span></Link>
-                    	        				<Link href="/">Home</Link> | 
-        				<Link href="./about">About</Link> | 
-        				<Link href="./terms">Terms</Link>
+        });  
 */
+     },
+    render: function () {
         return  (
             <div>
                 <header className="header">
@@ -157,7 +52,10 @@ var App = React.createClass({
                     	</a>
                     </div>
                     <nav className="nav">
-
+                        <Link to="leaders" className="game fa fa-trophy"></Link>
+                    	<Link to="search" className="search fa fa-search"></Link>
+                    	<Link to="general" className="editor fa fa-pencil"></Link>
+                    	<Link to="post" params={{id: 1}} className="account fa fa-user"><span className="notifications">13</span></Link>
                     </nav>
                 </header>
                 <div className="spacer"></div>
@@ -169,7 +67,9 @@ var App = React.createClass({
                     <footer className="footer">
                         © 2013 Phourus LLC. All Rights Reserved.
                         <br />
-
+                        <Link to="leaders">Home</Link> | 
+        				<Link to="general">About</Link> | 
+        				<Link to="general">Terms</Link>
         				<br clear="all" />
                     </footer>
                 </div>
@@ -177,28 +77,6 @@ var App = React.createClass({
         );
     }
 });
-
-/*
-var Content = React.createClass({
-    render: function () {
-        return (
-            <Locations path={this.props.path}>
-                <Location path="/" handler={Landing} />
-                <Location path="/search" handler={Search} {...this.props.search} />
-                <Location path={/^\/post\/?([a-zA-Z0-9]*)?/} handler={Post} {...this.props.post} />
-                <Location path="/leaders" handler={Leaders} {...this.props.leaders} />
-                <Location path={/^\/editor\/?([a-zA-Z0-9]*)?/} handler={Factory} {...this.props.editor} />
-                <Location path={/^\/account\/?(notifications|history|password)?/} handler={Account}{...this.props.account} />
-                <Location path={/^\/(about|terms)/} handler={General} {...this.props.general} />
-                <Location path={/^\/(org|user)\/([0-9]*)\/?([a-zA-Z]*)?/} handler={Profile}{...this.props.profile} />
-                <NotFound handler={View404} />
-            </Locations>
-        );
-    }
-});
-*/
-
-
 
 /*
     <Route name="editor" path="/editor" handler={Factory}>
@@ -212,14 +90,12 @@ var Content = React.createClass({
       <Route name="edit" path="/edit" handler={Edit} />
       <Route name="password" path="/password" handler={Password} />
     </Route>
-    <Route name="user" path="/user/:id" handler={Profile}>
-      <Route name="about" path="/about" handler={About} />
-      <Route name="posts" path="/posts" handler={Posts} />
-      <Route name="orgs" path="/orgs" handler={Orgs} />
-      <Route name="events" path="/events" handler={Events} />
-      <Route name="reviews" path="/reviews" handler={Reviews} />
-      <Route name="rank" path="/rank" handler={Rank} />
-    </Route>
+<Route name="about" path="/about" handler={About} />
+<Route name="posts" path="/posts" handler={Posts} />
+<Route name="orgs" path="/orgs" handler={Orgs} />
+<Route name="events" path="/events" handler={Events} />
+<Route name="reviews" path="/reviews" handler={Reviews} />
+<Route name="rank" path="/rank" handler={Rank} />
     <Route name="org" path="/org/:id" handler={Profile}>
       <Route name="about" path="/about" handler={About} />
       <Route name="posts" path="/posts" handler={Posts} />
@@ -235,9 +111,12 @@ var routes = (
   <Route handler={App} path="/">
     <DefaultRoute handler={Landing} />
     <Route name="leaders" handler={Leaders}  />
-    <Route name="search" handler={Search} {...searchMutant} />
-    <Route name="post" path="/post/:id" handler={Post} {...postMutant} />
+    <Route name="search" handler={Search} />
+    <Route name="post" path="/post/:id" handler={Post} />
     <Route name="general" handler={General} />
+    <Route name="user" path="/user/:id" handler={Profile}>
+        
+    </Route>
     <NotFoundRoute handler={View404}/>
   </Route>
 );

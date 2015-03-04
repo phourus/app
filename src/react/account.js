@@ -8,11 +8,43 @@ var account = require('../sockets/account');
 var token = require('../token');
 var View401 = require('./401');
 var msg = function (color, msg, code) {}
+var Mutant = require('react-mutant');
 
 var Account = React.createClass({
      mixins: [NavigatableMixin],
+     getDefaultProps: function () {
+         return new Mutant({
+            user: {
+                id: null,
+                pic: "",
+                username: "",
+                first: "",
+                last: "",
+                email: "",
+                phone: "",
+                company: "",
+                occupation: "",
+                website: "",
+                dob: "",
+                gender: "",
+                address: {
+                    street: "",
+                    city: "",
+                    state: "",
+                    zip: ""
+                }
+            },
+            notifications: [],
+            history: []
+        });
+     },  
      save: function () {
         account.edit(this.props.user);
+     },
+     componentWillMount: function () {
+        this.props.mutant.on('update', function (mutant) {
+            self.setProps(mutant);
+        });  
      },
      componentDidMount: function () {
 		var self = this;

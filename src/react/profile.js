@@ -1,21 +1,24 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var Router = require('react-router-component');
+var Router = require('react-router');
 var Link = Router.Link;
 var NavigatableMixin = Router.NavigatableMixin;
 var users = require('../sockets/users');
 var orgs = require('../sockets/orgs');
 var msg = function (color, msg, code) {}
+var Mutant = require('react-mutant');
 
 var Profile = React.createClass({
+     mixins: [Router.State],
      componentDidMount: function () {
 		var type, id, view;
         var self = this;
-        
-        type = this.props._[0];
-        id = this.props._[1];
-        view = (['posts', 'rank', 'members', 'events', 'reviews'].indexOf(this.props._[2]) !== -1) ? this.props._[2] : "about";
+        var params = this.getParams();
+        type = 'user';
+        //type = this.params.view;
+        //id = this.params.id;
+        //view = (['posts', 'rank', 'members', 'events', 'reviews'].indexOf(this.props._[2]) !== -1) ? this.props._[2] : "about";
         
 		if (type === 'org') {
             orgs.on('single', function (code, data) {
@@ -45,7 +48,6 @@ var Profile = React.createClass({
           return (
             <div className="profile">
                 <Heading {...this.props} />
-                <Views {...this.props} />
             </div>
           );
      }
@@ -105,72 +107,42 @@ var Details = React.createClass({
             </div>
         );
 */
-        var type, id;
-        type = "/" + this.props._[0] + "/";
-        id = this.props._[1];
-        return (
-            <ul>
-                <li><Link href={type + id + "/posts"}>1032 Posts</Link></li>
+/*
+                <li><Link to={type + id + "/posts"}>1032 Posts</Link></li>
                 <li><Link href={type + id + "/members"}>244 Members</Link></li>
                 <li><Link href={type + id + "/events"}>15 Events</Link></li>
                 <li><Link href={type + id + "/reviews"}>22 Reviews</Link></li>
+*/
+
+        var type, id;
+        //type = "/" + this.props._[0] + "/";
+        //id = this.props._[1];
+        return (
+            <ul>
             </ul>
         );
     } 
 });
 
 var Stats = React.createClass({
+    mixins: [Router.State],
+    //<Link href={type + id + "/rank"}>View Rank</Link>
     render: function () {
         var type, id;
-        type = "/" + this.props._[0] + "/";
-        id = this.props._[1];
+        var params = this.getParams();
+        //type = "/" + params.view + "/";
+        //id = params.view;
 
         return (
           <div className="stats">
             <div className="influence">67</div>
-            <Link href={type + id + "/rank"}>View Rank</Link>
+            
           </div>      
         );
     } 
 });
 
-var Views = React.createClass({
-    render: function () {
-        var view;
-        view = (['posts', 'rank', 'members', 'events', 'reviews'].indexOf(this.props._[2]) !== -1) ? this.props._[2] : "about";
-        switch (view) {
-            case 'about':
-                view = <ViewInfo {...this.props} />
-            break;
-            case 'reviews':
-                view = <ViewReviews {...this.props} />
-            break;
-            case 'events':
-                view = <ViewEvents {...this.props} />
-            break;
-            case 'posts':
-                view = <ViewPosts {...this.props} />
-            break;
-            case 'membership':
-                view = <ViewMembership {...this.props} />
-            break;
-            case 'rank':
-                view = <ViewRank {...this.props} />
-            break;
-            case 'extras':
-                view = <ViewExtras {...this.props} />
-            break;
-        }
-        return (
-            <div className="views">
-                {view}
-            </div>
-        );
-    } 
-});
-
-
-var ViewInfo = React.createClass({
+Profile.Info = React.createClass({
     render: function () {
         var clout, contact;
         clout = 'clout goes here';

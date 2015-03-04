@@ -8,6 +8,7 @@ var comments = require('../sockets/comments');
 var thumbs = require('../sockets/thumbs');
 var moment = require('moment');
 var msg = function (color, msg, code) {}
+var Mutant = require('react-mutant');
 
 /** POST **/
 var fa = {
@@ -26,6 +27,33 @@ var fa = {
 // Views, Comments, Likes
 var Post = React.createClass({
      mixins: [Router.State],
+     getDefaultProps: function () {
+       return new Mutant({
+            post: {
+                id: null,
+                title: "",
+                created: "",
+                influence: null,
+                element: '',
+                scope: '',
+                type: ''    
+            },
+            user: {
+                id: null,
+                first: "",
+                last: ""
+            },
+            comments: {
+                rows: [],
+                total: 0
+            }
+        });  
+     }, 
+     componentWillMount: function () {
+        this.props.mutant.on('update', function (mutant) {
+            self.setProps(mutant);
+        });  
+     },
      componentDidMount: function () {         
          var self = this;
          var params = this.getParams();
@@ -60,7 +88,7 @@ var Post = React.createClass({
                     <Meta post={this.props.post} />
                     <h1>{this.props.post.title}</h1>
                     <div className="basic">
-                      <span>By <Link href={"/user/" + this.props.user.id}>{this.props.user.first} {this.props.user.last}</Link> </span>
+                      <span>By <Link to="user" params={{id: this.props.user.id}}>{this.props.user.first} {this.props.user.last}</Link> </span>
                       <Tags tags={this.props.post.tags} />
                       <br />
                       <span>Originally by {this.props.post.author}</span>
