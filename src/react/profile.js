@@ -3,7 +3,7 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
-var NavigatableMixin = Router.NavigatableMixin;
+var RouteHandler = Router.RouteHandler;
 var users = require('../sockets/users');
 var orgs = require('../sockets/orgs');
 var msg = function (color, msg, code) {}
@@ -11,6 +11,13 @@ var Mutant = require('react-mutant');
 
 var Profile = React.createClass({
      mixins: [Router.State],
+     getDefaultProps: function () {
+        return new Mutant({
+            id: "",
+            type: "",
+            profile: {}
+        });
+     },
      componentDidMount: function () {
 		var type, id, view;
         var self = this;
@@ -23,20 +30,20 @@ var Profile = React.createClass({
 		if (type === 'org') {
             orgs.on('single', function (code, data) {
                 if (code != 200) {
-                msg('red', 'Organization could not be loaded', code);
-                return;
-            }
-                 self.props.mutant.set({id: id, type: type, profile: data, view: view});
-             });
+                    msg('red', 'Organization could not be loaded', code);
+                    return;
+                }
+                self.props.mutant.set({id: id, type: type, profile: data, view: view});
+            });
     		orgs.single(id);
 		} else {
             users.on('single', function (code, data) {
-            if (code != 200) {
-                msg('yellow', 'User could not be loaded', code);
-                return;
-            }
-                 self.props.mutant.set({id: id, type: type, profile: data, view: view});
-             });
+                if (code != 200) {
+                    msg('yellow', 'User could not be loaded', code);
+                    return;
+                }
+                //self.props.mutant.set({id: id, type: type, profile: data, view: view});
+            });
     		users.single(id);
 		}
 	 },
@@ -48,6 +55,7 @@ var Profile = React.createClass({
           return (
             <div className="profile">
                 <Heading {...this.props} />
+                <RouteHandler />
             </div>
           );
      }
@@ -75,7 +83,6 @@ var Basic = React.createClass({
 });
 
 var Details = React.createClass({
-    mixin: [NavigatableMixin],
     render: function () {
 /*
         var details;
@@ -142,7 +149,7 @@ var Stats = React.createClass({
     } 
 });
 
-Profile.Info = React.createClass({
+Profile.About = React.createClass({
     render: function () {
         var clout, contact;
         clout = 'clout goes here';
@@ -150,7 +157,7 @@ Profile.Info = React.createClass({
         return (
           <div className="viewInfo">
               <h3>About</h3>
-              {this.props.profile.about}
+              About
               <h3>Social</h3>
               Social info here
               <h3>Clout</h3>
@@ -162,7 +169,7 @@ Profile.Info = React.createClass({
     }
 });
 
-var ViewPosts = React.createClass({
+Profile.Posts = React.createClass({
     render: function () {
         return (
             <div className="viewPosts">Posts</div>
@@ -170,7 +177,7 @@ var ViewPosts = React.createClass({
     }
 });
 
-var ViewRank = React.createClass({
+Profile.Rank = React.createClass({
     render: function () {
         return (
             <div className="viewRank">Rank</div>
@@ -178,7 +185,7 @@ var ViewRank = React.createClass({
     }    
 });
 
-var ViewMembership = React.createClass({
+Profile.Members = React.createClass({
     render: function () {
         return (
             <div className="viewMembership">Membership</div>
@@ -186,7 +193,7 @@ var ViewMembership = React.createClass({
     }    
 });
 
-var ViewReviews = React.createClass({
+Profile.Reviews = React.createClass({
     render: function () {
         return (
             <div className="viewReviews">Reviews</div>
@@ -194,7 +201,7 @@ var ViewReviews = React.createClass({
     }    
 });
 
-var ViewEvents = React.createClass({
+Profile.Events = React.createClass({
     render: function () {
         return (
             <div className="viewEvents">Events</div>
@@ -202,7 +209,7 @@ var ViewEvents = React.createClass({
     }    
 });
 
-var ViewExtras = React.createClass({
+var Premium = React.createClass({
     render: function () {
         var specific;
         switch(this.props.profile.type){

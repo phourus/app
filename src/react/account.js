@@ -1,9 +1,8 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var Router = require('react-router-component');
-var Link = Router.Link;
-var NavigatableMixin = Router.NavigatableMixin;
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 var account = require('../sockets/account');
 var token = require('../token');
 var View401 = require('./401');
@@ -11,7 +10,6 @@ var msg = function (color, msg, code) {}
 var Mutant = require('react-mutant');
 
 var Account = React.createClass({
-     mixins: [NavigatableMixin],
      getDefaultProps: function () {
          return new Mutant({
             user: {
@@ -96,29 +94,19 @@ var Account = React.createClass({
      render: function () { 
         var button, view, password;
         button = <button className="button blue" onClick={this.history}>View History</button>;
-        view = <Notifications {...this.props} />;
-        if (this.props._[0] == 'history') {
-            button = <button className="button blue" onClick={this.notifications}>View Notifications</button>;
-            view = <History {...this.props} />;
-        }
-        if (this.props._[0] == 'password') {
-            view = '';
-            button = '';
-            password = <Password />;
-        }
         if (token.get() !== false) {
             return (
                 <div className="account">
                     <h1>My Account</h1>
                     <div className="heading">
                         <PicUploader {...this.props.user} mutant={this.props.mutant} />
-                        <Info {...this.props.user} mutant={this.props.mutant} />
-                        <Details {...this.props.user} mutant={this.props.mutant} />
+
                     </div>
                     
                     {password}
                     {button}
-                    {view}      
+                    <RouteHandler />
+                         
                 </div>
             );
         } else {
@@ -135,6 +123,7 @@ var PicUploader = React.createClass({
 	    this.forceUpdate();
 	 },
     render: function () {
+    //<Link href="/account/password">Change my password</Link>
         return (
             <div className="uploader">   
                 <div className="pic">
@@ -145,10 +134,23 @@ var PicUploader = React.createClass({
                   <input type="hidden" ref="type" value="user" />
                   
                 </form>
-                    <Link href="/account/password">Change my password</Link>
+                    
                     <br />
                     <a onClick={this.logout}>Logout</a>
                     <br />
+            </div>
+        );
+    }    
+});
+
+Account.Edit = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <Info {...this.props.user} mutant={this.props.mutant} />
+                <Details {...this.props.user} mutant={this.props.mutant} />
+                <Address />
+                <Social />
             </div>
         );
     }    
@@ -255,7 +257,7 @@ var Social = React.createClass({
     }    
 });
 
-var Password = React.createClass({
+Account.Password = React.createClass({
     change: function () {
          var current = this.refs.current.getDOMNode().value;
          var changed = this.refs.changed.getDOMNode().value;
@@ -279,7 +281,7 @@ var Password = React.createClass({
     }    
 });
 
-var Notifications = React.createClass({
+Account.Notifications = React.createClass({
     componentDidMount: function () {
         var self = this;
         account.on('notifications', function (code, data) {
@@ -316,7 +318,7 @@ var Notifications = React.createClass({
     }
 });
 
-var History = React.createClass({
+Account.History = React.createClass({
     componentDidMount: function () {
         var self = this;
         account.on('history', function (code, data) {

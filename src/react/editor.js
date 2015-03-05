@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var Router = require('react-router-component');
-var Link = Router.Link;
-var NavigatableMixin = Router.NavigatableMixin;
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
+
 var posts = require('../sockets/posts');
 var tags = require('../sockets/tags');
 var links = require('../sockets/links');
@@ -17,7 +17,6 @@ var Mutant = require('react-mutant');
 var View401 = require('./401');
 
 var Editor = React.createClass({
-	 mixins: [NavigatableMixin],
 	 getDefaultProps: function () {
     	return new Mutant({
             post: {},
@@ -117,28 +116,22 @@ var Editor = React.createClass({
 		//	
 		return model;
 	 },
-	 render: function () {
-		var id, view;
-		 
+	 render: function () {		 
 		if (token.get() === false) {
             return (<View401 />);
 		}
-		view = '';
-		view = <List ref="list" posts={this.props.posts} add={this.add} />
-        if (this.props._[0] && this.props._[0].length > 1) {
-            view = <Fields ref="form" {...this.props} change={this.change} list={this.list} save={this.save} />
-        }
+        //<Fields ref="form" {...this.props} change={this.change} list={this.list} save={this.save} />
+        //<List ref="list" posts={this.props.posts} add={this.add} />
         return (
             <div className="editor">
             	<h1>Content Factory</h1>
-            	{view}
+            	<RouteHandler />
             </div>
         );
 	 }
 });
 
-var List = React.createClass({
-	mixins: [NavigatableMixin],
+Editor.List = React.createClass({
 	add: function () {
         this.navigate("/editor/add");	
 	},
@@ -199,7 +192,7 @@ var List = React.createClass({
 	<button className="fa fa-list-ol"></button>
 </div>
 */
-var Fields = React.createClass({
+Editor.Fields = React.createClass({
 	render: function () {		
         var remove, privacy;
         if (this.props.post.id) {
