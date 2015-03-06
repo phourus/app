@@ -1,11 +1,10 @@
-/** @jsx React.DOM */
 "use strict";
+var babel = require('babel/register');
 var fs = require('fs');
 var express = require('express');
 var React = require('react');
 var Router = require('react-router');
 
-require('node-jsx').install();
 var routes = require('./src/routes');
 
 var phourus = express();
