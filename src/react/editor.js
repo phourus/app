@@ -17,7 +17,8 @@ var Mutant = require('react-mutant');
 var View401 = require('./401');
 
 var Editor = React.createClass({
-	 getDefaultProps: function () {
+	 mixins: [Router.State],
+	 getInitialState: function () {
     	return new Mutant({
             post: {},
             posts: [],
@@ -25,24 +26,22 @@ var Editor = React.createClass({
                 url: "",
                 caption: ""
             }
-        }); 
+        });
 	 },
-     componentWillMount: function () {
-        this.props.mutant.on('update', function (mutant) {
-            self.setProps(mutant);
-        });  
-     },
 	 componentDidMount: function () {
 		var id;
 		var self = this;
-		
+		var params;
+		this.state.mutant.on('update', function (mutant) {
+				self.setState(mutant);
+		});
         posts.on('single', function (code, data) {
             if (code != 200) {
                 msg('yellow', 'Post could not be loaded', code);
                 return;
              }
-			 self.props.mutant.set({post: data});
-		 });	
+			 self.state.mutant.set({post: data});
+		 });
 		posts.on('add', function (code, data) {
 			 if (code != 201) {
 			    msg('red', 'Post could not be created', code);
@@ -50,7 +49,7 @@ var Editor = React.createClass({
              }
              msg('green', 'Post created successfully', code);
 			 self.reset();
-		 }); 
+		 });
 		 posts.on('save', function (code, data) {
 			 if (code != 204) {
 			    msg('red', 'Post could not be saved', code);
@@ -63,17 +62,14 @@ var Editor = React.createClass({
                 msg('yellow', 'Posts could not be loaded', code);
                 return;
              }
-			 self.props.mutant.set({posts: data.rows, total: data.total});
+			 self.state.mutant.set({posts: data.rows, total: data.total});
 		 });
-		 
-         id = this.props._[0] || "";
-		 if (id == "add") {
-    		 this.add();
-		 } else if (id.length > 1) {
-    		 posts.single(id);
-		 } else {
-    		 posts.account();
+
+     params = this.getParams()
+		 if (params.id) {
+			posts.single(id);
 		 }
+    	//posts.account();
 	 },
 	 componentWillUnmount: function () {
     	 posts.off('single');
@@ -83,26 +79,26 @@ var Editor = React.createClass({
 	 },
 	 save: function () {
 		 var model = this.getValues();
-		 if (this.props.post.id === null) {
+		 if (this.state.post.id === null) {
 			 posts.add(model);
 		 } else {
-			 posts.save(this.props.post.id, model);
+			 posts.save(this.state.post.id, model);
 		 }
 	 },
 	 list: function () {
-    	this.navigate('/editor'); 
+    	this.navigate('/editor');
 	 },
 	 reset: function () {
-    	 this.props.mutant.set({post: {}, link: {url: "", caption: ""}});
+    	 this.state.mutant.set({post: {}, link: {url: "", caption: ""}});
 	 },
-	 change: function (id, e) {		
-		var post = this.props.post;
+	 change: function (id, e) {
+		var post = this.state.post;
 		post[id] = e.currentTarget.value;
-		this.props.mutant.set({post: post});		
+		this.state.mutant.set({post: post});
 	 },
 	 add: function () {
 		 //this.setState({mode: 'form'});
-		 this.props.mutant.set({post: {}, link: {url: "", caption: ""}});
+		 this.state.mutant.set({post: {}, link: {url: "", caption: ""}});
 		 this.navigate('/editor/add');
 	 },
 	 getValues: function () {
@@ -113,10 +109,10 @@ var Editor = React.createClass({
 		model.content = form.rte.refs.content.getDOMNode().value;
 		model.privacy = form.privacy.getDOMNode().value;
 		model.type = form.details.refs.type.getDOMNode().value;
-		//	
+		//
 		return model;
 	 },
-	 render: function () {		 
+	 render: function () {
 		if (token.get() === false) {
             return (<View401 />);
 		}
@@ -125,7 +121,7 @@ var Editor = React.createClass({
         return (
             <div className="editor">
             	<h1>Content Factory</h1>
-            	<RouteHandler />
+            	<RouteHandler {...this.state} change={this.change} />
             </div>
         );
 	 }
@@ -133,7 +129,7 @@ var Editor = React.createClass({
 
 Editor.List = React.createClass({
 	add: function () {
-        this.navigate("/editor/add");	
+        this.navigate("/editor/add");
 	},
 	edit: function (e) {
 		var id = e.currentTarget.id;
@@ -193,7 +189,7 @@ Editor.List = React.createClass({
 </div>
 */
 Editor.Fields = React.createClass({
-	render: function () {		
+	render: function () {
         var remove, privacy;
         if (this.props.post.id) {
             remove = <button ref="remove" className="button red">Delete Post</button>
@@ -230,7 +226,7 @@ Editor.Fields = React.createClass({
 var TextEditor = React.createClass({
 	componentDidMount: function () {
         //var rte = new RTE();
-        //rte.render(); 
+        //rte.render();
 	},
 	render: function () {
       var content = this.props.post.content || "";
@@ -254,7 +250,7 @@ var Details = React.createClass({
 	  if (!type) {
     	  //type = 'blog';
 	  }
-	  return (	
+	  return (
 		<div>
 			<div>Please select a type before saving</div>
 			<form ref="type">
@@ -276,19 +272,19 @@ var Details = React.createClass({
 			<Meta ref="meta" post={this.props.post} change={this.props.change} />
 		</div>
 	  );
-	 }	   
+	 }
 });
 
 var Tags = React.createClass({
    add: function () {
         var model = {};
         model.tag = this.refs.tag.getDOMNode().value;
-        
+
         if (model.tag !== null && this.props.post.id) {
             model.post_id = this.props.post.id;
             tags.add(model);
             return;
-        } 
+        }
         console.error('post must have an id first');
    },
    remove: function (e) {
@@ -346,7 +342,7 @@ var Tags = React.createClass({
 			<ul ref="list">{list}</ul>
 		 </div>
 	   );
-   } 
+   }
 });
 
 var Links = React.createClass({
@@ -377,7 +373,7 @@ var Links = React.createClass({
    change: function (e) {
        var url = this.refs.url.getDOMNode().value;
        var caption = this.refs.caption.getDOMNode().value;
-       
+
        var link = this.props.link;
        link.url = url;
        link.caption = caption;
@@ -425,8 +421,8 @@ var Links = React.createClass({
 	   list = links.map(function (item) {
     	   return (
     	        <li key={item.id}>
-    	            <button id={item.id} className="button red tiny remove" onClick={self.remove}>X</button> 
-    	            {item.url} 
+    	            <button id={item.id} className="button red tiny remove" onClick={self.remove}>X</button>
+    	            {item.url}
     	            <button className="button blue small edit" onClick={self.edit.bind(null, item)}>Edit</button>
     	       </li>
     	   );
@@ -443,7 +439,7 @@ var Links = React.createClass({
 			<ul ref="list">{list}</ul>
 		 </div>
 	   );
-   } 
+   }
 });
 
 var Select = React.createClass({
@@ -455,13 +451,13 @@ var Select = React.createClass({
         list = this.props.data.map(function (item) {
             return <option key={item.label} value={item.value}>{item.label}</option>;
         });
-        
+
         return (
             <select>
                 {list}
             </select>
         );
-    }    
+    }
 });
 
 var Meta = React.createClass({
@@ -472,17 +468,17 @@ var Meta = React.createClass({
     	}
     	type = this.props.post.type.toLowerCase();
     	/** SHARED FIELDS **/
-    	element =		   
+    	element =
     	<select ref="element" value={this.props.post.element} onChange={this.props.change.bind(null, 'element')}>
     		<option value="world">World</option>
     		<option value="mind">Mind</option>
     		<option value="voice">Voice</option>
     		<option value="self">Self</option>
     	</select>
-    	
+
     	switch (type) {
     		case "blog":
-    		  return ( 
+    		  return (
         		  <div>
         		    <label>Element:</label>
         			{element}
@@ -492,7 +488,7 @@ var Meta = React.createClass({
         			</Select>
         			<label>Subcategory:</label>
         			<Select ref="subcategory" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'subcategory')} data={tax.blogs.subcategory}>
-        			</Select>        			
+        			</Select>
         			<br />
         			<label>Positive?</label>
         			<input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this.props.change.bind(null, 'positive')} />
@@ -501,7 +497,7 @@ var Meta = React.createClass({
     		  );
     		  break;
     		case "event":
-    		   return ( 
+    		   return (
         		   <div>
         		    <label>Element:</label>
         			{element}
@@ -518,7 +514,7 @@ var Meta = React.createClass({
         			<br />
         		  </div>
     		  )
-    		  break;   
+    		  break;
     		case "subject":
     		   return (
         		   <div>
@@ -541,7 +537,7 @@ var Meta = React.createClass({
     		  )
     		  break;
     		case "question":
-    		    return ( 
+    		    return (
         		    <div>
         		    <label>Category:</label>
         			<Select ref="category" value={this.props.post.subcategory} onChange={this.props.change.bind(null, 'category')} data={tax.subjects.category}>
@@ -592,14 +588,14 @@ var Meta = React.createClass({
     		  );
     		  break;
     		case "quote":
-    		  return ( 
+    		  return (
         		  <div>
             		  <label>Source/Author</label>
             		  <input ref="author" value={this.props.post.author} onChange={this.props.change.bind(null, 'author')} />
-            		  <br /> 
+            		  <br />
         		  </div>
     		  );
-    		  break;	  
+    		  break;
     	}
 	}
 });

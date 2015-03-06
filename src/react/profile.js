@@ -11,7 +11,7 @@ var Mutant = require('react-mutant');
 
 var Profile = React.createClass({
      mixins: [Router.State],
-     getDefaultProps: function () {
+     getInitialState: function () {
         return new Mutant({
             id: "",
             type: "",
@@ -26,7 +26,7 @@ var Profile = React.createClass({
         //type = this.params.view;
         //id = this.params.id;
         //view = (['posts', 'rank', 'members', 'events', 'reviews'].indexOf(this.props._[2]) !== -1) ? this.props._[2] : "about";
-        
+
 		if (type === 'org') {
             orgs.on('single', function (code, data) {
                 if (code != 200) {
@@ -51,11 +51,11 @@ var Profile = React.createClass({
     	 orgs.off('single');
     	 users.off('single');
 	 },
-     render: function () {        
+     render: function () {
           return (
             <div className="profile">
-                <Heading {...this.props} />
-                <RouteHandler />
+                <Heading {...this.state} />
+                <RouteHandler {...this.state} />
             </div>
           );
      }
@@ -71,15 +71,15 @@ var Heading = React.createClass({
                 <Stats className="stats" {...this.props} />
             </div>
         );
-    }    
+    }
 });
 
 var Basic = React.createClass({
     render: function () {
         return (
-          <div className="basic">Basic</div>      
+          <div className="basic">Basic</div>
         );
-    } 
+    }
 });
 
 var Details = React.createClass({
@@ -110,7 +110,7 @@ var Details = React.createClass({
                     {details}
             		<li><strong>Members:</strong> {this.props.stats.members}</li>
             		<li><strong>Pending:</strong> {this.props.stats.pending}</li>
-            	</ul>	 
+            	</ul>
             </div>
         );
 */
@@ -128,7 +128,7 @@ var Details = React.createClass({
             <ul>
             </ul>
         );
-    } 
+    }
 });
 
 var Stats = React.createClass({
@@ -143,10 +143,10 @@ var Stats = React.createClass({
         return (
           <div className="stats">
             <div className="influence">67</div>
-            
-          </div>      
+
+          </div>
         );
-    } 
+    }
 });
 
 Profile.About = React.createClass({
@@ -182,7 +182,7 @@ Profile.Rank = React.createClass({
         return (
             <div className="viewRank">Rank</div>
         );
-    }    
+    }
 });
 
 Profile.Members = React.createClass({
@@ -190,7 +190,7 @@ Profile.Members = React.createClass({
         return (
             <div className="viewMembership">Membership</div>
         );
-    }    
+    }
 });
 
 Profile.Reviews = React.createClass({
@@ -198,7 +198,7 @@ Profile.Reviews = React.createClass({
         return (
             <div className="viewReviews">Reviews</div>
         );
-    }    
+    }
 });
 
 Profile.Events = React.createClass({
@@ -206,7 +206,7 @@ Profile.Events = React.createClass({
         return (
             <div className="viewEvents">Events</div>
         );
-    }    
+    }
 });
 
 var Premium = React.createClass({
@@ -240,11 +240,11 @@ var Premium = React.createClass({
                 specific = <li><a href="/profile/1/extras">Donate</a></li>;
             break;
         }
-        
+
         return (
           <div className="viewExtras">
-              <ul className="extras">  
-                {specific} 
+              <ul className="extras">
+                {specific}
                 <li><h3>COMMON</h3></li>
                 <li><a href="/profile/1/extras">Jobs</a></li>
                 <li><a href="/profile/1/extras">Org Chart</a></li>
@@ -254,7 +254,7 @@ var Premium = React.createClass({
               <Widget widget={this.props.widget} />
           </div>
         );
-    } 
+    }
 });
 
 var Widget = React.createClass({

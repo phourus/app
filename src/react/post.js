@@ -27,7 +27,7 @@ var fa = {
 // Views, Comments, Likes
 var Post = React.createClass({
      mixins: [Router.State],
-     getDefaultProps: function () {
+     getInitialState: function () {
        return new Mutant({
             post: {
                 id: null,
@@ -36,7 +36,7 @@ var Post = React.createClass({
                 influence: null,
                 element: '',
                 scope: '',
-                type: ''    
+                type: ''
             },
             user: {
                 id: null,
@@ -47,31 +47,28 @@ var Post = React.createClass({
                 rows: [],
                 total: 0
             }
-        });  
-     }, 
-     componentWillMount: function () {
-        this.props.mutant.on('update', function (mutant) {
-            self.setProps(mutant);
-        });  
+        });
      },
-     componentDidMount: function () {         
+     componentDidMount: function () {
          var self = this;
          var params = this.getParams();
+         this.state.mutant.on('update', function (mutant) {
+             self.setState(mutant);
+         });
          posts.on('single', function (code, data) {
             if (code != 200) {
                 msg('red', 'Post could not be loaded', code);
                 return;
             }
-             self.props.mutant.set({post: data, user: data.user});
+             self.state.mutant.set({post: data, user: data.user});
          });
          comments.on('collection', function (code, data) {
             if (code != 200) {
                 msg('yellow', 'Comments could not be loaded', code);
                 return;
             }
-            self.props.mutant.set({comments: data});
+            self.state.mutant.set({comments: data});
          });
-         console.log(params);
          posts.single(params.id);
          comments.collection({postId: params.id});
      },
@@ -81,30 +78,29 @@ var Post = React.createClass({
      },
      render: function () {
           var params = this.getParams();
-          console.log(params);
           return (
             <div>
                 <div className="heading">
-                    <Meta post={this.props.post} />
-                    <h1>{this.props.post.title}</h1>
+                    <Meta post={this.state.post} />
+                    <h1>{this.state.post.title}</h1>
                     <div className="basic">
-                      <span>By <Link to="user" params={{id: this.props.user.id}}>{this.props.user.first} {this.props.user.last}</Link> </span>
-                      <Tags tags={this.props.post.tags} />
+                      <span>By <Link to="user" path={`/user/${this.state.user.id}`} params={{id: this.state.user.id}}>{this.state.user.first} {this.state.user.last}</Link> </span>
+                      <Tags tags={this.state.post.tags} />
                       <br />
-                      <span>Originally by {this.props.post.author}</span>
+                      <span>Originally by {this.state.post.author}</span>
                       <br />
-                      <span className="created">{moment(this.props.post.createdAt).fromNow()} </span>
+                      <span className="created">{moment(this.state.post.createdAt).fromNow()} </span>
                       <span className="views">
                         <i className="fa fa-eye" />
-                        <span> {this.props.post.views} views</span>
+                        <span> {this.state.post.views} views</span>
                      </span>
                     </div>
                 </div>
-                <div className="content">{this.props.post.content}</div>
+                <div className="content">{this.state.post.content}</div>
                 <Links />
                 <Author />
-                <Thumbs post={this.props.post} thumb={this.props.thumb} />
-                <Comments post={this.props.post} comments={this.props.comments} />
+                <Thumbs post={this.state.post} thumb={this.state.thumb} />
+                <Comments post={this.state.post} comments={this.state.comments} />
             </div>
           );
      }
@@ -140,7 +136,7 @@ var Meta = React.createClass({
             </ul>
          </div>
        );
-   }  
+   }
 });
 
 var Tags = React.createClass({
@@ -155,7 +151,7 @@ var Tags = React.createClass({
                 {tags}
             </span>
         );
-    }    
+    }
 });
 
 var Links = React.createClass({
@@ -170,7 +166,7 @@ var Links = React.createClass({
                 {links}
             </div>
         );
-    }    
+    }
 });
 
 var Author = React.createClass({
@@ -179,7 +175,7 @@ var Author = React.createClass({
             <div className="author">
             </div>
         );
-    }  
+    }
 });
 
 var Thumbs = React.createClass({
@@ -209,39 +205,39 @@ var Thumbs = React.createClass({
        thumbs.add(model);
    },
    render: function () {
-       var c = ''; 
+       var c = '';
        var current = '';
        var icon = '';
        var popularity = (this.props.post.likes / this.props.post.dislikes);
-       if(popularity > 50){ 
-         c = 'positive'; 
+       if(popularity > 50){
+         c = 'positive';
          <i className="fa fa-plus fa-2x" />
-       } else if (popularity < 50) { 
-         c = 'negative'; 
+       } else if (popularity < 50) {
+         c = 'negative';
          <i className="fa fa-minus fa-2x" />
-       } 
+       }
        if (this.props.thumb === 1) {
            current = 'like';
        } else if (this.props.thumb === 0) {
            current = 'dislike';
        }
        // <p>You have decided you {current} this post. Click the button below to change your mind.</p>
-       return (  
+       return (
           <div className="thumb">
 
             {icon}
             <div>
                 <em className="{c}">({this.props.popularity}% popularity)</em>
-                <span><i className="fa fa-arrow-up" />{this.props.post.positive}</span> 
+                <span><i className="fa fa-arrow-up" />{this.props.post.positive}</span>
                 <span><i className="fa fa-arrow-down" />{this.props.post.thumbs}</span>
                 <button className="button green medium inline" onClick={this.like}><i className="fa fa-2x fa-arrow-circle-o-up" /> Like</button>
                 <button className="button red medium inline" onClick={this.dislike}><i className="fa fa-2x fa-arrow-circle-o-down" /> Dislike</button>
-                
-                
+
+
             </div>
           </div>
        );
-   } 
+   }
 });
 
 var Comments = React.createClass({
@@ -252,15 +248,15 @@ var Comments = React.createClass({
                 msg('red', 'Comment could not be created', code);
                 return;
             }
-         });         
+         });
     },
     componentWillUnmount: function () {
-        comments.off('add');    
+        comments.off('add');
     },
     render: function () {
           var create = <h3>You must be logged-in to comment</h3>
           var token = null;
-          if (token === null) { 
+          if (token === null) {
             //pic = <a href="#user/{this.props.id}"><img src="{this.props.pic}" width="100"></a>
           }
         var data = this.props.comments.rows;
@@ -271,7 +267,7 @@ var Comments = React.createClass({
     		   return <Comment key={item.id} comment={item} user={user} />;
     		});
 		}
-		
+
 		if (1) {
     		create = <Create />
 		}
@@ -305,7 +301,7 @@ var Create = React.createClass({
             </button>
         </div>
        );
-   } 
+   }
 });
 
 var Comment = React.createClass({
@@ -314,7 +310,7 @@ var Comment = React.createClass({
 /*
        if (owner === true) {
            textarea =   <textarea>{this.props.id}</textarea>
-           actions = 
+           actions =
                    <% if(owner === true){ %>
           <div class="actions-admin">
             <button class="button blue edit">Edit Comment</button>
@@ -328,7 +324,7 @@ var Comment = React.createClass({
             <button class="button green confirm">Confirm Delete</button>
             <button class="button red cancel">Cancel</button>
           </div>
-           
+
        }
 */
        return (
@@ -347,7 +343,7 @@ var Comment = React.createClass({
               </div>
               <div className="actions"></div>
             </div>
-       );       
-   } 
+       );
+   }
 });
 module.exports = Post;

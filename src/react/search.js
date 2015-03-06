@@ -1,16 +1,15 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
-var Router = require('react-router-component');
+var Router = require('react-router');
 var Link = Router.Link;
-var NavigatableMixin = Router.NavigatableMixin;
 var posts = require('../sockets/posts');
 var moment = require('moment');
 var msg = function (color, msg, code) {}
 var Mutant = require('react-mutant');
 
 var Search = React.createClass({
-	 getDefaultProps: function () {
+	 getInitialState: function () {
     	 return new Mutant({
             posts: [],
             exclude: [],
@@ -22,33 +21,31 @@ var Search = React.createClass({
             total: 0,
             datesVisible: false,
             typesVisible: false
-        });	 
+        });
      },
 	 search: function () {
 	     var val = this.refs.term.getDOMNode().value;
-         this.props.mutant.set({search: val});
+       this.state.mutant.set({search: val});
 	 },
 	 toggleFilter: function (e) {
     	var id = e.currentTarget.id;
     	var prop = id + "Visible";
     	var obj = {};
-    	var visibility = this.props[prop] == true ? false : true;
+    	var visibility = this.state[prop] == true ? false : true;
     	obj[prop] = visibility;
-    	this.props.mutant.set(obj);
+    	this.state.mutant.set(obj);
 	 },
-     componentWillMount: function () {
-        this.props.mutant.on('update', function (mutant) {
-            self.setProps(mutant);
-        });  
-     },
      componentDidMount: function () {
          var self = this;
+				this.state.mutant.on('update', function (mutant) {
+						self.setState(mutant);
+				});
          posts.on('collection', function (code, data) {
              if (code != 200) {
                 msg('red', 'Posts could not be loaded', code);
                 return;
             }
-             self.props.mutant.set({posts: data.rows, total: data.count});
+             self.state.mutant.set({posts: data.rows, total: data.count});
          });
          posts.collection({});
 	 },
@@ -64,15 +61,15 @@ var Search = React.createClass({
     				<input ref="term" className="term" type="text" placeholder="search for" />
     				<button className="button green" ref="search" onClick={this.search}><i className="fa fa-search" /></button>
 				</div>
-                <h3 id="dates" onClick={this.toggleFilter}><i className={this.props.datesVisible ? visible : hidden} /> Date Range:</h3>
-				<Dates datesVisible={this.props.datesVisible} />
+                <h3 id="dates" onClick={this.toggleFilter}><i className={this.state.datesVisible ? visible : hidden} /> Date Range:</h3>
+				<Dates datesVisible={this.state.datesVisible} />
 				<hr />
-				<h3 id="types" onClick={this.toggleFilter}><i className={this.props.typesVisible ? visible : hidden} /> Toggle Content:</h3>
-				<Types typesVisible={this.props.typesVisible} exclude={this.props.exclude} />
+				<h3 id="types" onClick={this.toggleFilter}><i className={this.state.typesVisible ? visible : hidden} /> Toggle Content:</h3>
+				<Types typesVisible={this.state.typesVisible} exclude={this.state.exclude} />
 				<hr />
 				<Filter sortVisible={this.props.sortVisible} />
-				<Pagination ref="pagination" page={this.props.page} total={this.props.total} limit={this.props.limit} />
-				<Posts posts={this.props.posts} />
+				<Pagination ref="pagination" page={this.state.page} total={this.state.total} limit={this.state.limit} />
+				<Posts posts={this.state.posts} />
 			</div>
 		  )
 	 }
@@ -83,7 +80,7 @@ var Groups = React.createClass({
 		return (
 			<div className="groups">Groups</div>
 		);
-	}	
+	}
 });
 
 var Filter = React.createClass({
@@ -91,7 +88,7 @@ var Filter = React.createClass({
     	this.props.mutant.set({sort: e.target.value});
 	},
 	direction: function (e) {
-        this.props.mutant.set({direction: e.target.value});	
+        this.props.mutant.set({direction: e.target.value});
 	},
 	render: function () {
 		return (
@@ -114,12 +111,12 @@ var Filter = React.createClass({
 			  </div>
            </div>
 		);
-	}	 
+	}
 });
 
 var Dates = React.createClass({
     dates: function () {
-        
+
     },
 	render: function () {
 		return (
@@ -150,12 +147,12 @@ var Dates = React.createClass({
 			</div>
 		  </div>
 		);
-	}	
+	}
 });
 
 var Types = React.createClass({
 	toggle: function (e) {
-	    var type = e.currentTarget.id;	
+	    var type = e.currentTarget.id;
 	    var exclude = this.props.exclude;
 	    var index = exclude.indexOf(type);
 	    if (index > -1) {
@@ -187,7 +184,7 @@ var Types = React.createClass({
 			  </div>
 			</div>
 		);
-	}	 
+	}
 });
 
 var Pagination = React.createClass({
@@ -214,7 +211,7 @@ var Pagination = React.createClass({
 				<button href="javascript:void(0)" ref="next" className="button blue" onClick={this.next}>Next</button>
 			</div>
 		);
-	}	 
+	}
 });
 
 /** POSTS **/
@@ -222,8 +219,8 @@ var Posts = React.createClass({
 	render: function () {
 		var data = this.props.posts;
 		var list = [];
-		
-		list = data.map(function (item, i) {   
+
+		list = data.map(function (item, i) {
 		   var location = {};
 		   if (item.user.locations && item.user.locations.length > 0) {
     		   location = item.user.locations[0];
@@ -234,21 +231,20 @@ var Posts = React.createClass({
 		return (
 			<div className="posts">{list}</div>
 		);
-	}	 
+	}
 });
 
 /*
 <li><strong>Positive:</strong> {this.props.meta.positive}</li>
 <li><strong>Category:</strong> {this.props.meta.category}</li>
-<li><strong>Element:</strong> {this.props.meta.element}</li> 
+<li><strong>Element:</strong> {this.props.meta.element}</li>
 <li><strong>Date/Time:</strong> {this.props.post.date}</li>
 <li><strong>Address:</strong> {this.props.address.city}</li>
-<li><strong>Difficulty:</strong> {this.props.meta.difficulty}</li> 
+<li><strong>Difficulty:</strong> {this.props.meta.difficulty}</li>
 <li><strong>Scope:</strong> {this.props.meta.scope}</li>
 */
 
 var PostItem = React.createClass({
-	mixins: [NavigatableMixin],
 	render: function () {
 		var meta = [];
 		var post = this.props.post;
@@ -258,26 +254,26 @@ var PostItem = React.createClass({
 			if (['element', 'category', 'subcategory', 'difficulty', 'scope', 'zip', 'author', 'vote'].indexOf(key) !== -1 && value !== null) {
 				meta.push(<li key={key} >{key}: {value}</li>);
 			}
-			
+
 		}
 		return (
 			<div className="postItem">
-				<h2><Link href={"/post/" + this.props.post.id}>{this.props.post.title}</Link></h2>
+				<h2><Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link></h2>
 				<div className="type"><i className="fa fa-bell" /> {this.props.post.type}</div>
 				<div className="pic">
-					<Link href={"/user/" + this.props.post.id}>
+					<Link to="user" params={{id: this.props.user.id}}>
 					    <img src={"/assets/avatars/" + this.props.user.img + ".jpg"} />
                     </Link>
 				</div>
 				<div className="basic">
-				  <h3>By <Link href={"/user/" + this.props.post.id}>{this.props.post.user.first} {this.props.post.user.last}</Link></h3>
+				  <h3>By <Link to="user" params={{id: this.props.user.id}}>{this.props.post.user.first} {this.props.post.user.last}</Link></h3>
 				  <div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
 				  <div className="location">{this.props.location.city} {this.props.location.state}</div>
 				</div>
 				<div className="detail">
 				  <ul>
 					{meta}
-				  </ul> 
+				  </ul>
 				</div>
 				<div className="stats">
 				  <div className="influence">{this.props.post.influence}</div>
@@ -288,7 +284,7 @@ var PostItem = React.createClass({
 				<div className="content">{this.props.post.content}</div>
 			</div>
 		);
-	}	 
+	}
 });
 
 module.exports = Search;

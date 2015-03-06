@@ -10,7 +10,7 @@ var msg = function (color, msg, code) {}
 var Mutant = require('react-mutant');
 
 var Account = React.createClass({
-     getDefaultProps: function () {
+     getInitialState: function () {
          return new Mutant({
             user: {
                 id: null,
@@ -35,29 +35,27 @@ var Account = React.createClass({
             notifications: [],
             history: []
         });
-     },  
+     },
      save: function () {
         account.edit(this.props.user);
      },
-     componentWillMount: function () {
-        this.props.mutant.on('update', function (mutant) {
-            self.setProps(mutant);
-        });  
-     },
      componentDidMount: function () {
-		var self = this;
+		     var self = this;
+         this.state.mutant.on('update', function (mutant) {
+             self.setState(mutant);
+         });
          account.on('get', function (code, data) {
              if (code != 200) {
                  msg('yellow', 'Account could not be loaded', code);
                  return;
              }
-             self.props.mutant.set({user: data});
+             self.state.mutant.set({user: data});
          });
          account.on('edit', function (code, data) {
             if (code == 204) {
                 msg('green', 'Account updated', code);
                 return;
-            } 
+            }
             msg('red', 'Account could not be updated', code);
          });
          account.on('password', function (code, data) {
@@ -77,13 +75,13 @@ var Account = React.createClass({
          account.get();
 	 },
 	 componentWillUnmount: function () {
-    	account.off('get'); 
-    	account.off('edit'); 
-    	account.off('password'); 
-    	account.off('deactivate'); 
+    	account.off('get');
+    	account.off('edit');
+    	account.off('password');
+    	account.off('deactivate');
 	 },
      deactivate: function () {
-       account.deactivate();  
+       account.deactivate();
      },
 	 history: function () {
     	 this.navigate('/account/history');
@@ -91,7 +89,7 @@ var Account = React.createClass({
 	 notifications: function () {
     	 this.navigate('/account');
 	 },
-     render: function () { 
+     render: function () {
         var button, view, password;
         button = <button className="button blue" onClick={this.history}>View History</button>;
         if (token.get() !== false) {
@@ -99,21 +97,18 @@ var Account = React.createClass({
                 <div className="account">
                     <h1>My Account</h1>
                     <div className="heading">
-                        <PicUploader {...this.props.user} mutant={this.props.mutant} />
-
+                        <PicUploader {...this.state.user} mutant={this.state.mutant} />
                     </div>
-                    
                     {password}
                     {button}
-                    <RouteHandler />
-                         
+                    <RouteHandler {...this.state} />
                 </div>
             );
         } else {
             return (
                 <View401 force={this.force} />
             );
-        } 
+        }
      }
 });
 
@@ -125,22 +120,22 @@ var PicUploader = React.createClass({
     render: function () {
     //<Link href="/account/password">Change my password</Link>
         return (
-            <div className="uploader">   
+            <div className="uploader">
                 <div className="pic">
                     <img src={"/assets/avatars/" + this.props.img + ".jpg"} height="200" />
                 </div>
                 <form action="/rest/pic/{this.props.id}" method="post" encType="multipart/form-data" target="upload">
                   <input type="file" ref="pic" id="pic" />
                   <input type="hidden" ref="type" value="user" />
-                  
+
                 </form>
-                    
+
                     <br />
                     <a onClick={this.logout}>Logout</a>
                     <br />
             </div>
         );
-    }    
+    }
 });
 
 Account.Edit = React.createClass({
@@ -149,11 +144,11 @@ Account.Edit = React.createClass({
             <div>
                 <Info {...this.props.user} mutant={this.props.mutant} />
                 <Details {...this.props.user} mutant={this.props.mutant} />
-                <Address />
+                <Address {...this.props.user} mutant={this.props.mutant} />
                 <Social />
             </div>
         );
-    }    
+    }
 });
 
 var Info = React.createClass({
@@ -179,12 +174,12 @@ var Info = React.createClass({
                 <input ref="email" className="email" type="text" value={this.props.email} onChange={this.change} />
                 <br />
                 <label>Phone</label>
-                <input ref="phone" className="phone" type="text" value={this.props.phone} onChange={this.change} /> 
+                <input ref="phone" className="phone" type="text" value={this.props.phone} onChange={this.change} />
                 <br />
             </div>
           </div>
         );
-    }    
+    }
 });
 
 var Details = React.createClass({
@@ -220,7 +215,7 @@ var Details = React.createClass({
             </div>
           </div>
         );
-    }    
+    }
 });
 
 var Address = React.createClass({
@@ -240,7 +235,7 @@ var Address = React.createClass({
             </div>
           </div>
         );
-    }    
+    }
 });
 
 var Social = React.createClass({
@@ -248,13 +243,13 @@ var Social = React.createClass({
         return (
           <div id="social">
             <h3>Verify Social Accounts</h3>
-            <button id="facebook" className="social"></button> 
+            <button id="facebook" className="social"></button>
             <button id="linkedin" className="social"></button>
             <button id="linkedin" className="social"></button>
             <button id="google" className="social"></button>
           </div>
         );
-    }    
+    }
 });
 
 Account.Password = React.createClass({
@@ -278,7 +273,7 @@ Account.Password = React.createClass({
             <button id="save_password" className="button green save" onClick={this.change}>Update Password</button>
           </div>
         );
-    }    
+    }
 });
 
 Account.Notifications = React.createClass({
@@ -300,17 +295,17 @@ Account.Notifications = React.createClass({
         var views = this.props.notifications[0] || [];
         var comments = this.props.notifications[1] || [];
         var thumbs = this.props.notifications[2] || [];
-        
+
         views = views.map(function (item) {
            return <li key={item.id}><img src={"/assets/avatars/" + item.viewer.img + ".jpg"} /><a href={"/user/" + item.viewer.id}>{item.viewer.username}</a> viewed your profile</li>;
         });
         comments = comments.map(function (item) {
-           return <li key={item.id}><img src={"/assets/avatars/" + item.user.img + ".jpg"} /> <a href={"/user/" + item.userId}>{item.user.username}</a> commented on your post 
+           return <li key={item.id}><img src={"/assets/avatars/" + item.user.img + ".jpg"} /> <a href={"/user/" + item.userId}>{item.user.username}</a> commented on your post
                 <a href={"/post/" + item.post.id}>{" \"" + item.post.title  + "\""}</a>
             </li>;
         });
         thumbs = thumbs.map(function (item) {
-           return <li key={item.id}><img src={"/assets/avatars/" + item.user.img + ".jpg"} /><a href={"/user/" + item.user.id}>{item.user.username}</a> {(item.positive) ? "dis": ""} liked your post  
+           return <li key={item.id}><img src={"/assets/avatars/" + item.user.img + ".jpg"} /><a href={"/user/" + item.user.id}>{item.user.username}</a> {(item.positive) ? "dis": ""} liked your post
                 <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a>
             </li>;
         });
@@ -337,26 +332,26 @@ Account.History = React.createClass({
         var views = this.props.history[0] || [];
         var comments = this.props.history[1] || [];
         var thumbs = this.props.history[2] || [];
-        
+
         views = views.map(function (item) {
            return <li key={item.id}><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed <img src={"/assets/avatars/1.jpg"} /><a href={"/user/"}></a></li>;
         });
         comments = comments.map(function (item) {
-           return <li key={item.id}><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-comment" /> You commented on 
+           return <li key={item.id}><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-comment" /> You commented on
            <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a> by
-                <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a> 
+                <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a>
             </li>;
         });
         thumbs = thumbs.map(function (item) {
            return <li key={item.id}><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-thumb" /> You {(item.positive) ? "dis": ""}liked
                 <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a> by
-                <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a>  
-                
+                <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a>
+
             </li>;
         });
         return (<div><h3>History</h3><ul>{views}</ul><ul>{comments}</ul><ul>{thumbs}</ul></div>);
 
     }
 });
-  
+
 module.exports = Account;
