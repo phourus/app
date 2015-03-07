@@ -1,6 +1,6 @@
 "use strict";
-var Reflux = require('reflux');
-var Actions = require('../actions/alerts');
+let Reflux = require('reflux');
+let Actions = require('../actions/alerts');
 
 module.exports = Reflux.createStore({
   _id: 0,

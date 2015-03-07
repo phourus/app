@@ -1,8 +1,7 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
+let React = require('react');
 
-var View404 = React.createClass({
+let View404 = React.createClass({
     render: function () {
         return (
             <div>

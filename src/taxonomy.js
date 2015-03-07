@@ -1,14 +1,14 @@
 "use strict";
-var blogs = {};
-var events = {};
-var subjects = {};
-var debates = {};
-var polls = {};
-var beliefs = {};
-var filters = {};
+let blogs = {};
+let events = {};
+let subjects = {};
+let debates = {};
+let polls = {};
+let beliefs = {};
+let filters = {};
 
 // shared
-var members = [];
+let members = [];
 
 subjects.category = [
 {label: "English", value:"english"},
@@ -100,7 +100,7 @@ blogs.world = [
 ];
 
 blogs.mind = subjects.category;
- 
+
 blogs.voice = [
 {label: "Rights", value:"rights"},
 {label: "Financial", value:"financial"},
@@ -237,7 +237,7 @@ filters.groups = {
         {label: "Charter School", value:"llp"},
         {label: "Certification Program", value:"llc"},
         {label: "Private Education/Tutoring", value:"corp"}
-    ]   
+    ]
     // focus
 }
 

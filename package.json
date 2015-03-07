@@ -22,6 +22,7 @@
     "socket.io-client": "^1.2.1"
   },
   "devDependencies": {
+    "babelify": "^5.0.4",
     "gulp": "^3.8.11",
     "gulp-livereload": "^3.4.0",
     "reactify": "^0.15.2"

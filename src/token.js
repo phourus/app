@@ -1,11 +1,11 @@
-var localStorage = require('localStorage');
+let localStorage = require('localStorage');
 
-var token = {
+let token = {
     get: function () {
-      var token = localStorage.getItem('token'); 
+      let token = localStorage.getItem('token'); 
       if (!token) {
           token = false;
-      } 
+      }
       return token;
     },
     save: function (token) {

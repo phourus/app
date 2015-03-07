@@ -1,22 +1,22 @@
 'use strict';
-var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var NotFoundRoute = Router.NotFoundRoute;
-var HistoryLocation = Router.HistoryLocation
+let React = require('react');
+let Router = require('react-router');
+let Route = Router.Route;
+let DefaultRoute = Router.DefaultRoute;
+let NotFoundRoute = Router.NotFoundRoute;
+let HistoryLocation = Router.HistoryLocation
 
-var App = require('./app');
-var Search = require('./react/search');
-var Post = require('./react/post');
-var Factory = require('./react/editor');
-var Account = require('./react/account');
-var Profile = require('./react/profile');
-var Leaders = require('./react/leaders');
-var General = require('./react/general');
-var Landing = require('./react/landing');
-var Map = require('./map');
-var View404 = require('./react/404');
+let App = require('./app');
+let Search = require('./react/search');
+let Post = require('./react/post');
+let Factory = require('./react/editor');
+let Account = require('./react/account');
+let Profile = require('./react/profile');
+let Leaders = require('./react/leaders');
+let General = require('./react/general');
+let Landing = require('./react/landing');
+let Map = require('./map');
+let View404 = require('./react/404');
 
 module.exports = (
   <Route handler={App} path="/">
@@ -42,9 +42,9 @@ module.exports = (
         <DefaultRoute handler={Profile.About} />
         <Route name="about" path="about" handler={Profile.About} />
         <Route name="posts" path="posts" handler={Profile.Posts} />
-        <Route name="rank" path="rank" handler={Profile.Rank} /> 
+        <Route name="rank" path="rank" handler={Profile.Rank} />
         <Route name="events" path="events" handler={Profile.Events} />
-        <Route name="reviews" path="reviews" handler={Profile.Reviews} />    
+        <Route name="reviews" path="reviews" handler={Profile.Reviews} />
     </Route>
     <NotFoundRoute handler={View404}/>
   </Route>

@@ -1,4 +1,4 @@
-var Map = {
+let Map = {
 	map: {},
     markers: [],
 	windows: [],
@@ -17,7 +17,7 @@ var Map = {
         this.map = new google.maps.Map($(this.container)[0], this.config);
 	},
     render: function (data) {
-        for (var i = 0, l = data.length; i < l; i++) {
+        for (let i = 0, l = data.length; i < l; i++) {
     	    this.createMarker(data[i].id, data[i].title, data[i].address);
 	    }
 	    this.clusterize();
@@ -25,41 +25,41 @@ var Map = {
 	go: function (location) {
 	  this.geocoder.geocode({'address': location}, function(results, status){
 		if (status == 'OK') {
-		  var loc = results[0].geometry.location;
+			let loc = results[0].geometry.location;
 		  this.map.setZoom(6);
 		  this.map.panTo(loc);
 		} else {
 		  console.log("Geocode was not successful for the following reason: " + status);
 		}
-	  }); 
-	},	 
+	  });
+	},
     createMarker: function (key, title, address) {
 	  this.geocoder.geocode({'address': address}, function (results, status) {
 		if (status == 'OK') {
-		  var loc = results[0].geometry.location;
-		  var data = {
+			let loc = results[0].geometry.location;
+			let data = {
     		  lat: loc.d,
     		  lng: loc.e
 		  };
-		  
-    	  var pos = new google.maps.LatLng(data.lat, data.lng);
-    	  var point = {
+
+			  let pos = new google.maps.LatLng(data.lat, data.lng);
+				let point = {
     		position: pos,
     		map: this.map,
     		//icon: image,
     		title: title
     	  }
-	  
+
           this.markers[key] = new google.maps.Marker(point);
-    	  //var html = _.template(tWindow, {address: data.address, org: data.org, pic: self.pic});
+    	  //let html = _.template(tWindow, {address: data.address, org: data.org, pic: self.pic});
     	  this.windows[key] = new google.maps.InfoWindow({content: ''});
-    	  var cntx = this;
+				let cntx = this;
     	  google.maps.event.addListener(this.markers[key], 'click', function (event) {
               cntx.map.panTo(event.latLng);
     		  cntx.map.setZoom(10);
-    		  cntx.windows[key].open(map, cntx.markers[key]); 	  
-    	  }); 
-					   
+    		  cntx.windows[key].open(map, cntx.markers[key]);
+    	  });
+
 		} else {
 		  console.log("Geocode was not successful for the following reason: " + status);
 		  console.log(key, title, address);
@@ -73,5 +73,5 @@ var Map = {
 		   console.log(error);
 	   }
 	}
-}	
+}
 module.exports = Map;

@@ -1,18 +1,17 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
-var account = require('../sockets/account');
-var token = require('../token');
-var msg = require('../actions/alerts').add;
+let React = require('react');
+let account = require('../sockets/account');
+let token = require('../token');
+let msg = require('../actions/alerts').add;
 
-var View401 = React.createClass({
+let View401 = React.createClass({
     getInitialState: function () {
         return {
             mode: "login"
         }
     },
     componentDidMount: function () {
-		var self = this;
+        let self = this;
         account.on('register', function (code, data) {
              msg('green', 'Registration complete', code);
          });
@@ -35,7 +34,7 @@ var View401 = React.createClass({
     	this.setState({mode: "forgot"});
 	 },
     render: function () {
-        var component;
+        let component;
         if (this.state.mode == "forgot") {
             component = <Forgot />;
         } else if (this.state.mode == "register") {
@@ -51,13 +50,12 @@ var View401 = React.createClass({
     }
 });
 
-var Login = React.createClass({
+let Login = React.createClass({
 	 login: function () {
-	     var username, password, self;
-	     self = this;
-         username = this.refs.username.getDOMNode().value;
-         password = this.refs.password.getDOMNode().value;
-	     account.login(username, password);
+	   let self = this;
+     let username = this.refs.username.getDOMNode().value;
+     let password = this.refs.password.getDOMNode().value;
+	   account.login(username, password);
 	 },
      render: function () {
           return (
@@ -75,11 +73,11 @@ var Login = React.createClass({
      }
 });
 
-var Register = React.createClass({
+let Register = React.createClass({
      register: function () {
-         var email = this.refs.email.getDOMNode().value;
-         var password = this.refs.password.getDOMNode().value;
-         var confirm = this.refs.confirm.getDOMNode().value;
+         let email = this.refs.email.getDOMNode().value;
+         let password = this.refs.password.getDOMNode().value;
+         let confirm = this.refs.confirm.getDOMNode().value;
          if (password === confirm) {
              account.register(email, password);
          }
@@ -97,7 +95,7 @@ var Register = React.createClass({
      }
 });
 
-var Forgot = React.createClass({
+let Forgot = React.createClass({
     request: function () {
 
     },

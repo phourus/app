@@ -1,11 +1,11 @@
-var token = require('../token');
-var io = require('socket.io-client');
-var socket = io('http://localhost:3000/posts', {query: 'token=' + token.get()});
+let token = require('../token');
+let io = require('socket.io-client');
+let socket = io('http://localhost:3000/posts', {query: 'token=' + token.get()});
 
 socket.single = function (id) {
     socket.emit('getSingle', id);
 };
-socket.collection = function (params) {        
+socket.collection = function (params) {
     socket.emit('getCollection', params);
 };
 socket.add = function (model) {

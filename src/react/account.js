@@ -1,15 +1,14 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
-var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
-var account = require('../sockets/account');
-var token = require('../token');
-var View401 = require('./401');
-var msg = require('../actions/alerts').add;
-var Mutant = require('react-mutant');
+let React = require('react');
+let Router = require('react-router');
+let RouteHandler = Router.RouteHandler;
+let account = require('../sockets/account');
+let token = require('../token');
+let View401 = require('./401');
+let msg = require('../actions/alerts').add;
+let Mutant = require('react-mutant');
 
-var Account = React.createClass({
+let Account = React.createClass({
      getInitialState: function () {
          return new Mutant({
             user: {
@@ -40,7 +39,7 @@ var Account = React.createClass({
         account.edit(this.props.user);
      },
      componentDidMount: function () {
-		     var self = this;
+         let self = this;
          this.state.mutant.on('update', function (mutant) {
              self.setState(mutant);
          });
@@ -90,7 +89,7 @@ var Account = React.createClass({
     	 this.navigate('/account');
 	 },
      render: function () {
-        var button, view, password;
+        let button, view, password;
         button = <button className="button blue" onClick={this.history}>View History</button>;
         if (token.get() !== false) {
             return (
@@ -112,7 +111,7 @@ var Account = React.createClass({
      }
 });
 
-var PicUploader = React.createClass({
+let PicUploader = React.createClass({
     logout: function () {
 	    token.remove()
 	    this.forceUpdate();
@@ -151,9 +150,9 @@ Account.Edit = React.createClass({
     }
 });
 
-var Info = React.createClass({
+let Info = React.createClass({
     change: function (e) {
-        var user = this.props.mutant.get().user;
+        let user = this.props.mutant.get().user;
         user[e.target.className] = e.target.value;
         this.props.mutant.set({user: user});
     },
@@ -182,9 +181,9 @@ var Info = React.createClass({
     }
 });
 
-var Details = React.createClass({
+let Details = React.createClass({
     change: function (e) {
-        var user = this.props.mutant.get().user;
+      let user = this.props.mutant.get().user;
         user[e.target.className] = e.target.value;
         this.props.mutant.set({user: user});
     },
@@ -218,7 +217,7 @@ var Details = React.createClass({
     }
 });
 
-var Address = React.createClass({
+let Address = React.createClass({
     render: function () {
         return (
           <div>
@@ -238,7 +237,7 @@ var Address = React.createClass({
     }
 });
 
-var Social = React.createClass({
+let Social = React.createClass({
     render: function () {
         return (
           <div id="social">
@@ -254,9 +253,9 @@ var Social = React.createClass({
 
 Account.Password = React.createClass({
     change: function () {
-         var current = this.refs.current.getDOMNode().value;
-         var changed = this.refs.changed.getDOMNode().value;
-         var verify = this.refs.verify.getDOMNode().value;
+      let current = this.refs.current.getDOMNode().value;
+      let changed = this.refs.changed.getDOMNode().value;
+      let verify = this.refs.verify.getDOMNode().value;
          if (changed === verify) {
              account.password(current, changed);
          }
@@ -278,7 +277,7 @@ Account.Password = React.createClass({
 
 Account.Notifications = React.createClass({
     componentDidMount: function () {
-        var self = this;
+        let self = this;
         account.on('notifications', function (code, data) {
              if (code != 200) {
                 msg('yellow', 'Notifications could not be loaded', code);
@@ -292,9 +291,9 @@ Account.Notifications = React.createClass({
         account.off('notifications');
     },
     render: function () {
-        var views = this.props.notifications[0] || [];
-        var comments = this.props.notifications[1] || [];
-        var thumbs = this.props.notifications[2] || [];
+        let views = this.props.notifications[0] || [];
+        let comments = this.props.notifications[1] || [];
+        let thumbs = this.props.notifications[2] || [];
 
         views = views.map(function (item) {
            return <li key={item.id}><img src={"/assets/avatars/" + item.viewer.img + ".jpg"} /><a href={"/user/" + item.viewer.id}>{item.viewer.username}</a> viewed your profile</li>;
@@ -315,7 +314,7 @@ Account.Notifications = React.createClass({
 
 Account.History = React.createClass({
     componentDidMount: function () {
-        var self = this;
+        let self = this;
         account.on('history', function (code, data) {
              if (code != 200) {
                 msg('yellow', 'History could not be loaded', code);
@@ -329,9 +328,9 @@ Account.History = React.createClass({
         account.off('history');
     },
     render: function () {
-        var views = this.props.history[0] || [];
-        var comments = this.props.history[1] || [];
-        var thumbs = this.props.history[2] || [];
+        let views = this.props.history[0] || [];
+        let comments = this.props.history[1] || [];
+        let thumbs = this.props.history[2] || [];
 
         views = views.map(function (item) {
            return <li key={item.id}><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed <img src={"/assets/avatars/1.jpg"} /><a href={"/user/"}></a></li>;

@@ -1,10 +1,9 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
-var tax = require('../taxonomy');
-var msg = require('../actions/alerts').add;
+let React = require('react');
+let tax = require('../taxonomy');
+let msg = require('../actions/alerts').add;
 
-var Leaders = React.createClass({
+let Leaders = React.createClass({
      render: function () {
         return (
           <div>
@@ -19,7 +18,7 @@ var Leaders = React.createClass({
      }
 });
 
-var Profile = React.createClass({
+let Profile = React.createClass({
     render: function () {
         return (
             <div>
@@ -40,7 +39,7 @@ var Profile = React.createClass({
     }
 });
 
-var Filter = React.createClass({
+let Filter = React.createClass({
    render: function () {
        return (
          <div>
@@ -74,9 +73,9 @@ var Filter = React.createClass({
    }
 });
 
-var Select = React.createClass({
+let Select = React.createClass({
     render: function () {
-        var list = this.props.data.map(function (item) {
+        let list = this.props.data.map(function (item) {
             return <option key={item.label} value={item.value}>{item.label}</option>;
         });
         return (
@@ -87,7 +86,7 @@ var Select = React.createClass({
     }
 });
 
-var Micro = React.createClass({
+let Micro = React.createClass({
     render: function () {
 /*
         if (this.props.type) {
@@ -166,7 +165,7 @@ var Micro = React.createClass({
     }
 });
 
-var Map = React.createClass({
+let Map = React.createClass({
     render: function () {
         return (
             <div>Map</div>
@@ -174,9 +173,9 @@ var Map = React.createClass({
     }
 });
 
-var List = React.createClass({
+let List = React.createClass({
     render: function () {
-        var list = <Item />;
+        let list = <Item />;
         return (
             <div>
                 {list}
@@ -185,7 +184,7 @@ var List = React.createClass({
     }
 });
 
-var Item = React.createClass({
+let Item = React.createClass({
     render: function () {
         return (
             <div>Item</div>

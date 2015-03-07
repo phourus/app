@@ -1,29 +1,28 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
-var Store = require('../stores/alerts');
-var Actions = require('../actions/alerts');
+let React = require('react');
+let Store = require('../stores/alerts');
+let Actions = require('../actions/alerts');
 
-var Alerts = React.createClass({
+let Alerts = React.createClass({
     getInitialState: function () {
       return {
         alerts: []
       }
     },
     remove: function (e) {
-        var id = e.currentTarget.id;
+      let id = e.currentTarget.id;
         Actions.remove(id);
     },
     componentDidMount: function () {
-      var self = this;
+      let self = this;
       Store.listen(function (data) {
         self.setState({alerts: data});
       });
     },
     render: function () {
-        var list = [];
-        for (var k in this.state.alerts) {
-            var alert = this.state.alerts[k];
+      let list = [];
+        for (let k in this.state.alerts) {
+          let alert = this.state.alerts[k];
             list.push(<Alert key={alert.id} id={alert.id} {...alert} remove={this.remove} />);
         }
         return (
@@ -34,7 +33,7 @@ var Alerts = React.createClass({
     }
 });
 
-var Alert = React.createClass({
+let Alert = React.createClass({
     propTypes: {
       color: React.PropTypes.string,
       msg: React.PropTypes.string,

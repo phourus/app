@@ -1,13 +1,13 @@
 "use strict";
-var React = require('react');
+let React = require('react');
 
-var Router = require('react-router');
-var Link = Router.Link;
-var RouteHandler = Router.RouteHandler;
+let Router = require('react-router');
+let Link = Router.Link;
+let RouteHandler = Router.RouteHandler;
 
-var Alerts = require('./react/alerts');
+let Alerts = require('./react/alerts');
 
-var App = React.createClass({
+let App = React.createClass({
     render: function () {
         return  (
             <div>

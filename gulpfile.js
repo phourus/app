@@ -1,12 +1,14 @@
 'use strict';
 
 var browserify = require('browserify');
+var babelify = require('babelify');
+//var reactify = require('reactify');
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
-var reactify = require('reactify');
+
 var less = require('gulp-less');
 var cssmin = require('gulp-cssmin');
 
@@ -18,7 +20,7 @@ gulp.task('javascript', function() {
     entries: ['./src/browser.js'],
     debug: true
   })
-  .transform(reactify)
+  .transform(babelify)
   //.exclude('react')
   //.exclude('socket.io-client');
 
@@ -45,9 +47,9 @@ gulp.task('css', function () {
 
 gulp.task('copy', function () {
    gulp.src('./src/html/*.html')
-    .pipe(gulp.dest('./build'))       
+    .pipe(gulp.dest('./build'))
    gulp.src('./assets/**/*')
-    .pipe(gulp.dest('./build/assets')) 
+    .pipe(gulp.dest('./build/assets'))
 });
 
 gulp.task('watch', function () {

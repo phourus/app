@@ -1,9 +1,8 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
+let React = require('react');
 
 // terms, privacy
-var General = React.createClass({
+let General = React.createClass({
      render: function () {
           return React.DOM.h1(null, 'General Page');
      }

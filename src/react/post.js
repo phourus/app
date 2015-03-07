@@ -1,17 +1,16 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
-var posts = require('../sockets/posts');
-var comments = require('../sockets/comments');
-var thumbs = require('../sockets/thumbs');
-var moment = require('moment');
-var msg = require('../actions/alerts').add;
-var Mutant = require('react-mutant');
+let React = require('react');
+let Router = require('react-router');
+let Link = Router.Link;
+let posts = require('../sockets/posts');
+let comments = require('../sockets/comments');
+let thumbs = require('../sockets/thumbs');
+let moment = require('moment');
+let msg = require('../actions/alerts').add;
+let Mutant = require('react-mutant');
 
 /** POST **/
-var fa = {
+let fa = {
     blog: "bookmark",
     event: "calendar",
     subject: "book",
@@ -25,7 +24,7 @@ var fa = {
 
 /** INTERACT **/
 // Views, Comments, Likes
-var Post = React.createClass({
+let Post = React.createClass({
      mixins: [Router.State],
      getInitialState: function () {
        return new Mutant({
@@ -50,8 +49,8 @@ var Post = React.createClass({
         });
      },
      componentDidMount: function () {
-         var self = this;
-         var params = this.getParams();
+         let self = this;
+         let params = this.getParams();
          this.state.mutant.on('update', function (mutant) {
              self.setState(mutant);
          });
@@ -77,7 +76,7 @@ var Post = React.createClass({
          comments.off('collection');
      },
      render: function () {
-          var params = this.getParams();
+          let params = this.getParams();
           return (
             <div>
                 <div className="heading">
@@ -106,15 +105,15 @@ var Post = React.createClass({
      }
 });
 
-var Meta = React.createClass({
+let Meta = React.createClass({
    render: function () {
-       var meta = [];
-       var capitalized = "";
-       var t = this.props.post.type;
+       let meta = [];
+       let capitalized = "";
+       let t = this.props.post.type;
        if (t.length > 0) {
           capitalized = t[0].toUpperCase() + t.slice(1);
        }
-       for (var i in this.props.post) {
+       for (let i in this.props.post) {
 			if (['difficulty', 'scope', 'zip'].indexOf(i) !== -1 && this.props.post[i] !== null) {
 				meta.push(<div key={i}><strong>{i}:</strong> {this.props.post[i]}</div>);
 			}
@@ -139,10 +138,10 @@ var Meta = React.createClass({
    }
 });
 
-var Tags = React.createClass({
+let Tags = React.createClass({
     render: function () {
-        var tags = [];
-        for (var i in this.props.tags) {
+        let tags = [];
+        for (let i in this.props.tags) {
             tags.push(<span className="tag" key={i}>{this.props.tags[i].tag}</span>);
         }
         return (
@@ -154,9 +153,9 @@ var Tags = React.createClass({
     }
 });
 
-var Links = React.createClass({
+let Links = React.createClass({
     render: function () {
-        var links;
+        let links;
         if (!this.props.post || !this.props.post.tags) {
             return <div></div>
         }
@@ -169,7 +168,7 @@ var Links = React.createClass({
     }
 });
 
-var Author = React.createClass({
+let Author = React.createClass({
       render: function () {
         return (
             <div className="author">
@@ -178,9 +177,9 @@ var Author = React.createClass({
     }
 });
 
-var Thumbs = React.createClass({
+let Thumbs = React.createClass({
    componentDidMount: function () {
-     var self = this;
+     let self = this;
      thumbs.on('single', function (code, data) {
          if (code != 200) {
             msg('yellow', 'Thumbs could not be loaded', code);
@@ -193,22 +192,22 @@ var Thumbs = React.createClass({
        thumbs.off('single');
    },
    like: function () {
-       var model = {};
+       let model = {};
        model.post_id = this.props.post.id;
        model.positive = 1;
        thumbs.add(model);
    },
    dislike: function () {
-       var model = {};
+       let model = {};
        model.post_id = this.props.post.id;
        model.positive = 0;
        thumbs.add(model);
    },
    render: function () {
-       var c = '';
-       var current = '';
-       var icon = '';
-       var popularity = (this.props.post.likes / this.props.post.dislikes);
+       let c = '';
+       let current = '';
+       let icon = '';
+       let popularity = (this.props.post.likes / this.props.post.dislikes);
        if(popularity > 50){
          c = 'positive';
          <i className="fa fa-plus fa-2x" />
@@ -240,9 +239,9 @@ var Thumbs = React.createClass({
    }
 });
 
-var Comments = React.createClass({
+let Comments = React.createClass({
     componentDidMount: function () {
-         var self = this;
+         let self = this;
          comments.on('add', function (code, data) {
             if (code != 201) {
                 msg('red', 'Comment could not be created', code);
@@ -254,16 +253,16 @@ var Comments = React.createClass({
         comments.off('add');
     },
     render: function () {
-          var create = <h3>You must be logged-in to comment</h3>
-          var token = null;
+          let create = <h3>You must be logged-in to comment</h3>
+          let token = null;
           if (token === null) {
             //pic = <a href="#user/{this.props.id}"><img src="{this.props.pic}" width="100"></a>
           }
-        var data = this.props.comments.rows;
-		var comments = [];
+        let data = this.props.comments.rows;
+		let comments = [];
 		if (data) {
             comments= data.map(function (item, i) {
-    		   var user = {id: 1, first: "JESSE", last: "drelick", influence: 66, username: "jdrelick", img: 1};
+    		   let user = {id: 1, first: "JESSE", last: "drelick", influence: 66, username: "jdrelick", img: 1};
     		   return <Comment key={item.id} comment={item} user={user} />;
     		});
 		}
@@ -280,9 +279,9 @@ var Comments = React.createClass({
     }
 });
 
-var Create = React.createClass({
+let Create = React.createClass({
     add: function () {
-        var model = {};
+        let model = {};
         model.content = this.refs.comment.getDOMNode().value;
         model.post_id = this.props.postID;
         comments.add(model);
@@ -304,9 +303,9 @@ var Create = React.createClass({
    }
 });
 
-var Comment = React.createClass({
+let Comment = React.createClass({
    render: function () {
-       var textarea = '';
+       let textarea = '';
 /*
        if (owner === true) {
            textarea =   <textarea>{this.props.id}</textarea>

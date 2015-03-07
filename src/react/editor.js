@@ -1,22 +1,20 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
-var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
+let React = require('react');
+let Router = require('react-router');
+let RouteHandler = Router.RouteHandler;
 
-var posts = require('../sockets/posts');
-var tags = require('../sockets/tags');
-var links = require('../sockets/links');
-var token = require('../token');
-var moment = require('moment');
-var tax = require('../taxonomy');
-//var RTE = require('rte');
-var msg = require('../actions/alerts').add;
-var Mutant = require('react-mutant');
+let posts = require('../sockets/posts');
+let tags = require('../sockets/tags');
+let links = require('../sockets/links');
+let token = require('../token');
+let moment = require('moment');
+let tax = require('../taxonomy');
+//let RTE = require('rte');
+let msg = require('../actions/alerts').add;
+let Mutant = require('react-mutant');
+let View401 = require('./401');
 
-var View401 = require('./401');
-
-var Editor = React.createClass({
+let Editor = React.createClass({
 	 mixins: [Router.State],
 	 getInitialState: function () {
     	return new Mutant({
@@ -29,9 +27,9 @@ var Editor = React.createClass({
         });
 	 },
 	 componentDidMount: function () {
-		var id;
-		var self = this;
-		var params;
+		let id;
+		let self = this;
+		let params;
 		this.state.mutant.on('update', function (mutant) {
 				self.setState(mutant);
 		});
@@ -78,7 +76,7 @@ var Editor = React.createClass({
     	 posts.off('account');
 	 },
 	 save: function () {
-		 var model = this.getValues();
+		 let model = this.getValues();
 		 if (this.state.post.id === null) {
 			 posts.add(model);
 		 } else {
@@ -92,7 +90,7 @@ var Editor = React.createClass({
     	 this.state.mutant.set({post: {}, link: {url: "", caption: ""}});
 	 },
 	 change: function (id, e) {
-		var post = this.state.post;
+		let post = this.state.post;
 		post[id] = e.currentTarget.value;
 		this.state.mutant.set({post: post});
 	 },
@@ -102,9 +100,9 @@ var Editor = React.createClass({
 		 this.navigate('/editor/add');
 	 },
 	 getValues: function () {
-		var model = {};
+		let model = {};
 		// title, content, privacy, type
-		var form = this.refs.form.refs;
+		let form = this.refs.form.refs;
 		model.title = form.title.getDOMNode().value;
 		model.content = form.rte.refs.content.getDOMNode().value;
 		model.privacy = form.privacy.getDOMNode().value;
@@ -132,12 +130,12 @@ Editor.List = React.createClass({
         this.navigate("/editor/add");
 	},
 	edit: function (e) {
-		var id = e.currentTarget.id;
+		let id = e.currentTarget.id;
 		this.navigate("/editor/" + id);
 	},
 	render: function () {
-		var rows;
-		var self = this;
+		let rows;
+		let self = this;
 		rows = this.props.posts.map(function (item) {
 		   return <tr key={item.id}>
     		    <td>{moment(item.createdAt).fromNow()}</td>
@@ -190,7 +188,7 @@ Editor.List = React.createClass({
 */
 Editor.Fields = React.createClass({
 	render: function () {
-        var remove, privacy;
+        let remove, privacy;
         if (this.props.post.id) {
             remove = <button ref="remove" className="button red">Delete Post</button>
         }
@@ -223,13 +221,13 @@ Editor.Fields = React.createClass({
 	}
 });
 
-var TextEditor = React.createClass({
+let TextEditor = React.createClass({
 	componentDidMount: function () {
-        //var rte = new RTE();
+        //let rte = new RTE();
         //rte.render();
 	},
 	render: function () {
-      var content = this.props.post.content || "";
+      let content = this.props.post.content || "";
 	  return (
 		<div>
 			<textarea ref="content" placeholder="insert content here" value={content} onChange={this.props.change.bind(null, 'content')}></textarea>
@@ -238,15 +236,15 @@ var TextEditor = React.createClass({
 	 }
 });
 
-var Details = React.createClass({
+let Details = React.createClass({
 	select: function (e) {
-	    var value = e.currentTarget.value;
-	    var post = this.props.post;
+	    let value = e.currentTarget.value;
+	    let post = this.props.post;
     	post.type = value;
     	this.props.mutant.set({post: post});
 	},
 	render: function () {
-	  var type = this.props.post.type;
+	  let type = this.props.post.type;
 	  if (!type) {
     	  //type = 'blog';
 	  }
@@ -259,7 +257,7 @@ var Details = React.createClass({
     			<input type="radio" name="type" value="event" onChange={this.select} checked={(type == 'event') ? true : false} />
     			<strong>Event:</strong> Virtual or real-world event<br />
     			<input type="radio" name="type" value="subject" onChange={this.select} checked={(type == 'subject') ? true : false} />
-    			<strong>Subject:</strong> Share your knowledge or expertise with the community on a variety of Subjects<br />
+    			<strong>Subject:</strong> Share your knowledge or expertise with the community on a letiety of Subjects<br />
     			<input type="radio" name="type" value="question" onChange={this.select} checked={(type == 'question') ? true : false} />
     			<strong>Question:</strong> Need help or clarification on a topic? Ask it with a Question<br />
     			<input type="radio" name="type" value="debate" onChange={this.select} checked={(type == 'debate') ? true : false} />
@@ -275,9 +273,9 @@ var Details = React.createClass({
 	 }
 });
 
-var Tags = React.createClass({
+let Tags = React.createClass({
    add: function () {
-        var model = {};
+        let model = {};
         model.tag = this.refs.tag.getDOMNode().value;
 
         if (model.tag !== null && this.props.post.id) {
@@ -288,17 +286,17 @@ var Tags = React.createClass({
         console.error('post must have an id first');
    },
    remove: function (e) {
-       var id = e.currentTarget.id;
+       let id = e.currentTarget.id;
        tags.remove(id);
    },
    componentDidMount: function () {
-        var self = this;
+        let self = this;
         tags.on('collection', function (code, data) {
             if (code != 200) {
                 msg('yellow', 'Tags could not be loaded', code);
                 return;
             }
-            var post = self.props.post;
+            let post = self.props.post;
             post.tags = data;
             self.props.mutant.set({post: post});
         });
@@ -307,7 +305,7 @@ var Tags = React.createClass({
                 msg('yellow', 'Tag could not be created', code);
                 return;
             }
-            var post = self.props.post;
+            let post = self.props.post;
             post.tags.push(data);
             self.props.mutant.set({post: post});
         });
@@ -326,7 +324,7 @@ var Tags = React.createClass({
        tags.off('remove');
    },
    render: function () {
-        var tags, list, self;
+        let tags, list, self;
         self = this;
         tags = this.props.post.tags || [];
 
@@ -345,10 +343,10 @@ var Tags = React.createClass({
    }
 });
 
-var Links = React.createClass({
+let Links = React.createClass({
    add: function () {
         if (this.props.post.id) {
-            var model = {};
+            let model = {};
             model.url = this.props.link.url;
             model.caption = this.props.link.caption;
             model.post_id = this.props.post.id;
@@ -358,35 +356,35 @@ var Links = React.createClass({
         console.error('post must have an id first');
    },
    remove: function (e) {
-       var id = e.currentTarget.id;
+       let id = e.currentTarget.id;
        links.remove(id);
    },
    edit: function (model) {;
         this.props.mutant.set({link: model});
    },
    save: function () {
-       var link = {};
+       let link = {};
        link.url = this.props.link.url;
        link.caption = this.props.link.caption;
        links.save(this.props.link.id,  link);
    },
    change: function (e) {
-       var url = this.refs.url.getDOMNode().value;
-       var caption = this.refs.caption.getDOMNode().value;
+       let url = this.refs.url.getDOMNode().value;
+       let caption = this.refs.caption.getDOMNode().value;
 
-       var link = this.props.link;
+       let link = this.props.link;
        link.url = url;
        link.caption = caption;
        this.props.mutant.set({link: link});
    },
    componentDidMount: function () {
-        var self = this;
+        let self = this;
         links.on('collection', function (code, data) {
             if (code != 200) {
                 msg('yellow', 'Links could not be loaded', code);
                 return;
             }
-            var post = self.props.post;
+            let post = self.props.post;
             post.links = data;
             self.props.mutant.set({post: post});
         });
@@ -395,7 +393,7 @@ var Links = React.createClass({
                 msg('yellow', 'Link could not be created', code);
                 return;
             }
-            var post = self.props.post;
+            let post = self.props.post;
             post.links.push(data);
             self.props.mutant.set({post: post});
         });
@@ -414,7 +412,7 @@ var Links = React.createClass({
        links.off('remove');
    },
    render: function () {
-        var links, list, self;
+        let links, list, self;
         self = this;
         links = this.props.post.links || [];
 
@@ -442,9 +440,9 @@ var Links = React.createClass({
    }
 });
 
-var Select = React.createClass({
+let Select = React.createClass({
     render: function () {
-        var list =[];
+        let list =[];
         if (!this.props.data) {
             return (<div>Missing option</div>);
         }
@@ -460,9 +458,9 @@ var Select = React.createClass({
     }
 });
 
-var Meta = React.createClass({
+let Meta = React.createClass({
 	render: function () {
-        var element, type;
+        let element, type;
     	if (!this.props.post.type) {
     		return <div>Please select a type</div>;
     	}

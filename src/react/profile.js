@@ -1,15 +1,14 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
-var RouteHandler = Router.RouteHandler;
-var users = require('../sockets/users');
-var orgs = require('../sockets/orgs');
-var msg = require('../actions/alerts').add;
-var Mutant = require('react-mutant');
+let React = require('react');
+let Router = require('react-router');
+let Link = Router.Link;
+let RouteHandler = Router.RouteHandler;
+let users = require('../sockets/users');
+let orgs = require('../sockets/orgs');
+let msg = require('../actions/alerts').add;
+let Mutant = require('react-mutant');
 
-var Profile = React.createClass({
+let Profile = React.createClass({
      mixins: [Router.State],
      getInitialState: function () {
         return new Mutant({
@@ -19,9 +18,9 @@ var Profile = React.createClass({
         });
      },
      componentDidMount: function () {
-		var type, id, view;
-        var self = this;
-        var params = this.getParams();
+		let type, id, view;
+        let self = this;
+        let params = this.getParams();
         type = 'user';
         //type = this.params.view;
         //id = this.params.id;
@@ -61,7 +60,7 @@ var Profile = React.createClass({
      }
 });
 
-var Heading = React.createClass({
+let Heading = React.createClass({
     render: function () {
         return (
             <div className="heading">
@@ -74,7 +73,7 @@ var Heading = React.createClass({
     }
 });
 
-var Basic = React.createClass({
+let Basic = React.createClass({
     render: function () {
         return (
           <div className="basic">Basic</div>
@@ -82,10 +81,10 @@ var Basic = React.createClass({
     }
 });
 
-var Details = React.createClass({
+let Details = React.createClass({
     render: function () {
 /*
-        var details;
+        let details;
         switch(this.props.profile.type){
             case 'individual':
                 details = <li></li>;
@@ -121,7 +120,7 @@ var Details = React.createClass({
                 <li><Link href={type + id + "/reviews"}>22 Reviews</Link></li>
 */
 
-        var type, id;
+        let type, id;
         //type = "/" + this.props._[0] + "/";
         //id = this.props._[1];
         return (
@@ -131,12 +130,12 @@ var Details = React.createClass({
     }
 });
 
-var Stats = React.createClass({
+let Stats = React.createClass({
     mixins: [Router.State],
     //<Link href={type + id + "/rank"}>View Rank</Link>
     render: function () {
-        var type, id;
-        var params = this.getParams();
+        let type, id;
+        let params = this.getParams();
         //type = "/" + params.view + "/";
         //id = params.view;
 
@@ -151,7 +150,7 @@ var Stats = React.createClass({
 
 Profile.About = React.createClass({
     render: function () {
-        var clout, contact;
+        let clout, contact;
         clout = 'clout goes here';
         contact = 'contact goes here';
         return (
@@ -209,9 +208,9 @@ Profile.Events = React.createClass({
     }
 });
 
-var Premium = React.createClass({
+let Premium = React.createClass({
     render: function () {
-        var specific;
+        let specific;
         switch(this.props.profile.type){
             case 'individual':
                 specific = <li></li>;
@@ -257,7 +256,7 @@ var Premium = React.createClass({
     }
 });
 
-var Widget = React.createClass({
+let Widget = React.createClass({
     render: function () {
         return (
             <div className="widget">Widget</div>
