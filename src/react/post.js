@@ -330,7 +330,7 @@ let Comment = React.createClass({
            <div className="comment" ref={this.props.id}>
               <div className="pic">
                 <a href={"/user/" + this.props.user.id}>
-                    <img src={"/assets/avatars/" + this.props.user.img + ".jpg"} width="100" />
+                    <img src={`/assets/avatars/${this.props.user.img}.jpg`} width="100" />
                 </a>
               </div>
               <div className="content">

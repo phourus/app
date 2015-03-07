@@ -139,7 +139,7 @@ Editor.List = React.createClass({
 		rows = this.props.posts.map(function (item) {
 		   return <tr key={item.id}>
     		    <td>{moment(item.createdAt).fromNow()}</td>
-    		    <td><Link href={'post/' + item.id}>{item.title}</Link></td>
+    		    <td><Link href={`post/${item.id}`}>{item.title}</Link></td>
     		    <td>{item.type}</td>
     		    <td><button id={item.id} className="edit button blue" onClick={self.edit}>Edit</button></td>
 		    </tr>;

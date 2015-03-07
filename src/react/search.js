@@ -261,7 +261,7 @@ let PostItem = React.createClass({
 				<div className="type"><i className="fa fa-bell" /> {this.props.post.type}</div>
 				<div className="pic">
 					<Link to="user" params={{id: this.props.user.id}}>
-					    <img src={"/assets/avatars/" + this.props.user.img + ".jpg"} />
+					    <img src={`/assets/avatars/${this.props.user.img}.jpg`} />
                     </Link>
 				</div>
 				<div className="basic">

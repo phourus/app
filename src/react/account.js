@@ -123,15 +123,13 @@ let PicUploader = React.createClass({
                 <div className="pic">
                     <img src={"/assets/avatars/" + this.props.img + ".jpg"} height="200" />
                 </div>
-                <form action="/rest/pic/{this.props.id}" method="post" encType="multipart/form-data" target="upload">
+                <form action={`/rest/pic/${this.props.id}`} method="post" encType="multipart/form-data" target="upload">
                   <input type="file" ref="pic" id="pic" />
                   <input type="hidden" ref="type" value="user" />
-
                 </form>
-
-                    <br />
-                    <a onClick={this.logout}>Logout</a>
-                    <br />
+                <br />
+                <a onClick={this.logout}>Logout</a>
+                <br />
             </div>
         );
     }
@@ -256,9 +254,9 @@ Account.Password = React.createClass({
       let current = this.refs.current.getDOMNode().value;
       let changed = this.refs.changed.getDOMNode().value;
       let verify = this.refs.verify.getDOMNode().value;
-         if (changed === verify) {
-             account.password(current, changed);
-         }
+     if (changed === verify) {
+         account.password(current, changed);
+     }
     },
     render: function () {
         return (
@@ -296,16 +294,16 @@ Account.Notifications = React.createClass({
         let thumbs = this.props.notifications[2] || [];
 
         views = views.map(function (item) {
-           return <li key={item.id}><img src={"/assets/avatars/" + item.viewer.img + ".jpg"} /><a href={"/user/" + item.viewer.id}>{item.viewer.username}</a> viewed your profile</li>;
+           return <li key={item.id}><img src={`/assets/avatars/${item.viewer.img}.jpg`} /><a href={`/user/${item.viewer.id}`}>{item.viewer.username}</a> viewed your profile</li>;
         });
         comments = comments.map(function (item) {
-           return <li key={item.id}><img src={"/assets/avatars/" + item.user.img + ".jpg"} /> <a href={"/user/" + item.userId}>{item.user.username}</a> commented on your post
-                <a href={"/post/" + item.post.id}>{" \"" + item.post.title  + "\""}</a>
+           return <li key={item.id}><img src={`/assets/avatars/${item.user.img}.jpg`} /> <a href={`/user/${item.userId}`}>{item.user.username}</a> commented on your post
+                <a href={`/post/${item.post.id}`}>{` \"${item.post.title}\"`}</a>
             </li>;
         });
         thumbs = thumbs.map(function (item) {
-           return <li key={item.id}><img src={"/assets/avatars/" + item.user.img + ".jpg"} /><a href={"/user/" + item.user.id}>{item.user.username}</a> {(item.positive) ? "dis": ""} liked your post
-                <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a>
+           return <li key={item.id}><img src={`/assets/avatars/${item.user.img}.jpg`} /><a href={`/user/${item.user.id}`}>{item.user.username}</a> {(item.positive) ? "dis": ""} liked your post
+                <a href={`/post/${item.post.id}`}>{` \"${item.post.title}\"`}</a>
             </li>;
         });
         return (<div><h3>Notifications</h3><ul>{views}</ul><ul>{comments}</ul><ul>{thumbs}</ul></div>);
@@ -336,15 +334,15 @@ Account.History = React.createClass({
            return <li key={item.id}><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed <img src={"/assets/avatars/1.jpg"} /><a href={"/user/"}></a></li>;
         });
         comments = comments.map(function (item) {
-           return <li key={item.id}><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-comment" /> You commented on
+           return <li key={item.id}><img src={`/assets/avatars/${item.post.user.img}.jpg`} /><i className="fa fa-comment" /> You commented on
            <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a> by
-                <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a>
+                <a href={`/user/${item.post.user.id}`}> {item.post.user.username}</a>
             </li>;
         });
         thumbs = thumbs.map(function (item) {
-           return <li key={item.id}><img src={"/assets/avatars/" + item.post.user.img + ".jpg"} /><i className="fa fa-thumb" /> You {(item.positive) ? "dis": ""}liked
-                <a href={"/post/" + item.post.id}>{" \"" + item.post.title + "\""}</a> by
-                <a href={"/user/" + item.post.user.id}> {item.post.user.username}</a>
+           return <li key={item.id}><img src={`/assets/avatars/${item.post.user.img}.jpg`} /><i className="fa fa-thumb" /> You {(item.positive) ? "dis": ""}liked
+                <a href={`/post/${item.post.id}`}>{` \"${item.post.title}\"`}</a> by
+                <a href={`/user/${item.post.user.id}`}> {item.post.user.username}</a>
 
             </li>;
         });
