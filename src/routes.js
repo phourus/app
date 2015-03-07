@@ -1,10 +1,7 @@
 'use strict';
 let React = require('react');
 let Router = require('react-router');
-let Route = Router.Route;
-let DefaultRoute = Router.DefaultRoute;
-let NotFoundRoute = Router.NotFoundRoute;
-let HistoryLocation = Router.HistoryLocation
+let { Route, DefaultRoute, NotFoundRoute, HistoryLocation } = Router;
 
 let App = require('./app');
 let Search = require('./react/search');

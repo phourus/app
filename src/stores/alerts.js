@@ -10,7 +10,7 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.remove, this._remove);
   },
   _add: function (color, msg, code) {
-    var id = this._id;
+    let id = this._id;
     this._alerts.push({id: id, color: color, msg: msg, code: code});
     this._id++;
     this.trigger(this._alerts);

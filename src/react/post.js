@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let Link = Router.Link;
+let { Link } = Router;
 let posts = require('../sockets/posts');
 let comments = require('../sockets/comments');
 let thumbs = require('../sockets/thumbs');

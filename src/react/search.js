@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let Link = Router.Link;
+let { Link } = Router;
 let posts = require('../sockets/posts');
 let moment = require('moment');
 let msg = require('../actions/alerts').add;

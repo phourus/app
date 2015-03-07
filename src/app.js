@@ -2,8 +2,7 @@
 let React = require('react');
 
 let Router = require('react-router');
-let Link = Router.Link;
-let RouteHandler = Router.RouteHandler;
+let { Link, RouteHandler} = Router;
 
 let Alerts = require('./react/alerts');
 

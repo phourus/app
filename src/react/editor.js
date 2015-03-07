@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let RouteHandler = Router.RouteHandler;
+let { RouteHandler } = Router;
 
 let posts = require('../sockets/posts');
 let tags = require('../sockets/tags');
