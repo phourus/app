@@ -1,19 +1,30 @@
 /** @jsx React.DOM */
 "use strict";
 var React = require('react');
+var Store = require('../stores/alerts');
+var Actions = require('../actions/alerts');
 
 var Alerts = React.createClass({
+    getInitialState: function () {
+      return {
+        alerts: []
+      }
+    },
     remove: function (e) {
         var id = e.currentTarget.id;
-        var alerts = this.props.alerts;
-        alerts.splice(id, 1);
+        Actions.remove(id);
+    },
+    componentDidMount: function () {
+      var self = this;
+      Store.listen(function (data) {
+        self.setState({alerts: data});
+      });
     },
     render: function () {
         var list = [];
-        if (this.props.alerts) {
-            for (var i in this.props.alerts) {
-                list.push(<Alert key={id} {...this.props.alerts[i]} id={i} remove={this.remove} />);
-            }
+        for (var k in this.state.alerts) {
+            var alert = this.state.alerts[k];
+            list.push(<Alert key={alert.id} id={alert.id} {...alert} remove={this.remove} />);
         }
         return (
             <div className="alerts">
@@ -27,7 +38,7 @@ var Alert = React.createClass({
     propTypes: {
       color: React.PropTypes.string,
       msg: React.PropTypes.string,
-      code: React.PropTypes.number  
+      code: React.PropTypes.number
     },
     render: function () {
         return (
@@ -37,7 +48,7 @@ var Alert = React.createClass({
                 <div className="code">HTTP Status Code: {this.props.code}</div>
             </div>
         );
-    } 
+    }
 });
 
 module.exports = Alerts;

@@ -5,7 +5,7 @@ var Router = require('react-router');
 var Link = Router.Link;
 var posts = require('../sockets/posts');
 var moment = require('moment');
-var msg = function (color, msg, code) {}
+var msg = require('../actions/alerts').add;
 var Mutant = require('react-mutant');
 
 var Search = React.createClass({

@@ -7,7 +7,7 @@ var posts = require('../sockets/posts');
 var comments = require('../sockets/comments');
 var thumbs = require('../sockets/thumbs');
 var moment = require('moment');
-var msg = function (color, msg, code) {}
+var msg = require('../actions/alerts').add;
 var Mutant = require('react-mutant');
 
 /** POST **/

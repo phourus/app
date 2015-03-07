@@ -2,6 +2,7 @@
 "use strict";
 var React = require('react');
 var tax = require('../taxonomy');
+var msg = require('../actions/alerts').add;
 
 var Leaders = React.createClass({
      render: function () {
@@ -70,7 +71,7 @@ var Filter = React.createClass({
             <Micro type="groups" />
          </div>
        );
-   } 
+   }
 });
 
 var Select = React.createClass({
@@ -83,7 +84,7 @@ var Select = React.createClass({
                 {list}
             </select>
         );
-    }    
+    }
 });
 
 var Micro = React.createClass({
@@ -117,8 +118,8 @@ var Micro = React.createClass({
                     <Select data={tax.companies.type}></Select>
                     <label>Size</label>
                     <Select data={tax.companies.size}></Select>
-                  </div>           
-                );            
+                  </div>
+                );
             break;
             case 'school':
                 return (
@@ -129,8 +130,8 @@ var Micro = React.createClass({
                     <Select data={tax.schools.type}></Select>
                     <label>Size</label>
                     <Select data={tax.schools.size}></Select>
-                  </div>              
-                );            
+                  </div>
+                );
             break;
             case 'gov':
                 return (
@@ -141,8 +142,8 @@ var Micro = React.createClass({
                     <Select data={tax.govs.type}></Select>
                     <label>Size</label>
                     <Select data={tax.govs.size}></Select>
-                  </div>  
-                );            
+                  </div>
+                );
             break;
             case 'groups':
                 return (
@@ -153,16 +154,16 @@ var Micro = React.createClass({
                     <Select data={tax.filters.groups.type}></Select>
                     <label>Size</label>
                     <Select data={tax.filters.groups.size}></Select>
-                  </div>  
-                );            
+                  </div>
+                );
             break;
-            default: 
+            default:
                 return (
                     <div></div>
                 );
             break;
         }
-    }    
+    }
 });
 
 var Map = React.createClass({

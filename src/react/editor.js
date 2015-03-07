@@ -11,7 +11,7 @@ var token = require('../token');
 var moment = require('moment');
 var tax = require('../taxonomy');
 //var RTE = require('rte');
-var msg = function (color, msg, code) {}
+var msg = require('../actions/alerts').add;
 var Mutant = require('react-mutant');
 
 var View401 = require('./401');

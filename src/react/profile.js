@@ -6,7 +6,7 @@ var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 var users = require('../sockets/users');
 var orgs = require('../sockets/orgs');
-var msg = function (color, msg, code) {}
+var msg = require('../actions/alerts').add;
 var Mutant = require('react-mutant');
 
 var Profile = React.createClass({

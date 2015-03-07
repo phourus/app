@@ -6,7 +6,7 @@ var RouteHandler = Router.RouteHandler;
 var account = require('../sockets/account');
 var token = require('../token');
 var View401 = require('./401');
-var msg = function (color, msg, code) {}
+var msg = require('../actions/alerts').add;
 var Mutant = require('react-mutant');
 
 var Account = React.createClass({

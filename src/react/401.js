@@ -3,13 +3,13 @@
 var React = require('react');
 var account = require('../sockets/account');
 var token = require('../token');
-var msg = function (color, msg, code) {}
+var msg = require('../actions/alerts').add;
 
 var View401 = React.createClass({
     getInitialState: function () {
         return {
             mode: "login"
-        }  
+        }
     },
     componentDidMount: function () {
 		var self = this;
@@ -22,17 +22,17 @@ var View401 = React.createClass({
                  return;
              }
              msg('red', 'Login unsuccessful', code);
-         }); 
+         });
 	 },
 	 componentWillUnmount: function () {
     	 account.off('register');
     	 account.off('login');
 	 },
 	 register: function () {
-    	this.setState({mode: "register"}); 
+    	this.setState({mode: "register"});
 	 },
      forgot: function () {
-    	this.setState({mode: "forgot"}); 
+    	this.setState({mode: "forgot"});
 	 },
     render: function () {
         var component;
@@ -67,7 +67,7 @@ var Login = React.createClass({
                 <input ref="password" className="password" type="password" />
                 <button onClick={this.login} className="green button">Login</button>
                 <a href="" className="forgotLink" onClick={this.props.forgot}>Forgot your login information? Click here</a>
-                <div className="registration">Not yet a member? 
+                <div className="registration">Not yet a member?
                     <a href="" className="registerLink" onClick={this.props.register}>Click here to register</a>
                 </div>
             </div>
@@ -94,22 +94,22 @@ var Register = React.createClass({
                 <button onClick={this.register} className="blue button submit">Sign Up Now</button>
             </div>
           );
-     }    
+     }
 });
 
 var Forgot = React.createClass({
     request: function () {
-        
+
     },
     render: function () {
         return (
             <div className="forgot">
                 <h1>Forgot your login information?</h1>
                 <input ref="handle" className="handle" />
-                <button onClick={this.request} className="blue button submit">Send me my login info</button>             
+                <button onClick={this.request} className="blue button submit">Send me my login info</button>
             </div>
         );
-    } 
+    }
 });
 
 module.exports = View401;
