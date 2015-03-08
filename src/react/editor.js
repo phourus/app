@@ -1,145 +1,59 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { RouteHandler } = Router;
+let { RouteHandler, Link } = Router;
 
-let posts = require('../sockets/posts');
-let tags = require('../sockets/tags');
-let links = require('../sockets/links');
+let Actions = require('../actions/editor');
+let Store = require('../stores/editor');
 let token = require('../token');
 let moment = require('moment');
 let tax = require('../taxonomy');
 //let RTE = require('rte');
 let msg = require('../actions/alerts').add;
-let Mutant = require('react-mutant');
 let View401 = require('./401');
 
 let Editor = React.createClass({
 	 mixins: [Router.State],
-	 getInitialState: function () {
-    	return new Mutant({
-            post: {},
-            posts: [],
-            link: {
-                url: "",
-                caption: ""
-            }
-        });
-	 },
-	 componentDidMount: function () {
-		let id;
-		let self = this;
-		let params;
-		this.state.mutant.on('update', function (mutant) {
-				self.setState(mutant);
-		});
-        posts.on('single', function (code, data) {
-            if (code != 200) {
-                msg('yellow', 'Post could not be loaded', code);
-                return;
-             }
-			 self.state.mutant.set({post: data});
-		 });
-		posts.on('add', function (code, data) {
-			 if (code != 201) {
-			    msg('red', 'Post could not be created', code);
-                return;
-             }
-             msg('green', 'Post created successfully', code);
-			 self.reset();
-		 });
-		 posts.on('save', function (code, data) {
-			 if (code != 204) {
-			    msg('red', 'Post could not be saved', code);
-                return;
-             }
-			 self.reset();
-		 });
-		 posts.on('account', function (code, data) {
-             if (code != 200) {
-                msg('yellow', 'Posts could not be loaded', code);
-                return;
-             }
-			 self.state.mutant.set({posts: data.rows, total: data.total});
-		 });
-
-     params = this.getParams()
-		 if (params.id) {
-			posts.single(id);
-		 }
-    	//posts.account();
-	 },
-	 componentWillUnmount: function () {
-    	 posts.off('single');
-    	 posts.off('add');
-    	 posts.off('save');
-    	 posts.off('account');
-	 },
-	 save: function () {
-		 let model = this.getValues();
-		 if (this.state.post.id === null) {
-			 posts.add(model);
-		 } else {
-			 posts.save(this.state.post.id, model);
-		 }
-	 },
-	 list: function () {
-    	this.navigate('/editor');
-	 },
-	 reset: function () {
-    	 this.state.mutant.set({post: {}, link: {url: "", caption: ""}});
-	 },
-	 change: function (id, e) {
-		let post = this.state.post;
-		post[id] = e.currentTarget.value;
-		this.state.mutant.set({post: post});
-	 },
-	 add: function () {
-		 //this.setState({mode: 'form'});
-		 this.state.mutant.set({post: {}, link: {url: "", caption: ""}});
-		 this.navigate('/editor/add');
-	 },
-	 getValues: function () {
-		let model = {};
-		// title, content, privacy, type
-		let form = this.refs.form.refs;
-		model.title = form.title.getDOMNode().value;
-		model.content = form.rte.refs.content.getDOMNode().value;
-		model.privacy = form.privacy.getDOMNode().value;
-		model.type = form.details.refs.type.getDOMNode().value;
-		//
-		return model;
-	 },
 	 render: function () {
+		let id = this.getParams().id || null;
 		if (token.get() === false) {
             return (<View401 />);
 		}
-        //<Fields ref="form" {...this.props} change={this.change} list={this.list} save={this.save} />
-        //<List ref="list" posts={this.props.posts} add={this.add} />
-        return (
-            <div className="editor">
-            	<h1>Content Factory</h1>
-            	<RouteHandler {...this.state} change={this.change} />
-            </div>
-        );
+    return (
+      <div className="editor">
+      	<h1>Content Factory</h1>
+      	<RouteHandler postID={id} />
+      </div>
+    );
 	 }
 });
 
 Editor.List = React.createClass({
+	getInitialState: function () {
+		return {
+			posts: []
+		}
+	},
 	add: function () {
-        this.navigate("/editor/add");
+    //this.navigate("/editor/add");
 	},
 	edit: function (e) {
 		let id = e.currentTarget.id;
-		this.navigate("/editor/" + id);
+		//this.navigate("/editor/" + id);
+	},
+	componentDidMount: function () {
+		let self = this;
+		Store.listen(function (data) {
+			self.setState(data);
+		});
+		Actions.account();
 	},
 	render: function () {
-		let rows;
 		let self = this;
-		rows = this.props.posts.map(function (item) {
+		let rows = this.state.posts.map(function (item) {
 		   return <tr key={item.id}>
     		    <td>{moment(item.createdAt).fromNow()}</td>
-    		    <td><Link href={`post/${item.id}`}>{item.title}</Link></td>
+    		    <td><Link to="post" params={{id: item.id}}>{item.title}</Link></td>
     		    <td>{item.type}</td>
     		    <td><button id={item.id} className="edit button blue" onClick={self.edit}>Edit</button></td>
 		    </tr>;
@@ -187,35 +101,78 @@ Editor.List = React.createClass({
 </div>
 */
 Editor.Fields = React.createClass({
+	getInitialState: function () {
+		return {
+			postID: null,
+			post: {}
+		}
+	},
+	change: function () {
+
+	},
+	save: function () {
+		let model = this.getValues();
+		if (this.props.post.id === null) {
+			Actions.add(model);
+		} else {
+			Actions.save(this.state.post.id, model);
+		}
+	},
+	list: function () {
+
+	},
+	reset: function () {
+		Actions.reset();
+	},
+	getValues: function () {
+		let model = {};
+		// title, content, privacy, type
+		let form = this.refs.form.refs;
+		model.title = form.title.getDOMNode().value;
+		model.content = form.rte.refs.content.getDOMNode().value;
+		model.privacy = form.privacy.getDOMNode().value;
+		model.type = form.details.refs.type.getDOMNode().value;
+		//
+		return model;
+	},
+	componentDidMount: function () {
+		let self = this;
+		Store.listen(function (data) {
+			self.setState({post: data});
+		});
+		if (this.props.postID) {
+			Actions.single(this.props.postID);
+		}
+	},
 	render: function () {
-        let remove, privacy;
-        if (this.props.post.id) {
-            remove = <button ref="remove" className="button red">Delete Post</button>
-        }
-        privacy = this.props.post.privacy || 'private';
+    let remove, privacy;
+    if (this.props.postID) {
+        remove = <button ref="remove" className="button red">Delete Post</button>
+    }
+    privacy = this.state.post.privacy || 'private';
 		return (
 			<div className="form">
 			    <label>Title:</label>
-				<input ref="title" type="text" placeholder="title" value={this.props.post.title} onChange={this.props.change.bind(null, 'title')}/>
+				<input ref="title" type="text" placeholder="title" value={this.state.post.title} onChange={this.change.bind(null, 'title')}/>
 				<br />
 				<label>Privacy:</label>
-				<select ref="privacy" value={privacy} onChange={this.props.change.bind(null, 'privacy')}>
+				<select ref="privacy" value={privacy} onChange={this.change.bind(null, 'privacy')}>
 					<option value="private">Private</option>
 					<option value="phourus">Members only</option>
 					<option value="public">Public</option>
 				</select>
-				<Tags ref="tags" {...this.props}></Tags>
-				<TextEditor ref="rte" post={this.props.post} change={this.props.change}></TextEditor>
+				<Tags ref="tags"></Tags>
+				<TextEditor ref="rte" post={this.state.post} change={this.change}></TextEditor>
 				<h3>Post Details</h3>
-				<Details ref="details" post={this.props.post} change={this.props.change}></Details>
-				<Links ref="links" {...this.props}></Links>
+				<Details ref="details" post={this.state.post} change={this.change}></Details>
+				<Links ref="links"></Links>
 				<div ref="actions" className="actions">
-                    <button ref="save" className="button green" onClick={this.props.save}>
-                        {this.props.post.id ? "Update Post" : "Create New Post"}
-                    </button>
-                    {remove}
-                    <button ref="back" className="button blue" onClick={this.props.list}>Back to List</button>
-    			</div>
+          <button ref="save" className="button green" onClick={this.save}>
+              {this.state.post.id ? "Update Post" : "Create New Post"}
+          </button>
+          {remove}
+          <button ref="back" className="button blue" onClick={this.list}>Back to List</button>
+    		</div>
 			</div>
 		);
 	}
@@ -239,9 +196,9 @@ let TextEditor = React.createClass({
 let Details = React.createClass({
 	select: function (e) {
 	    let value = e.currentTarget.value;
-	    let post = this.props.post;
-    	post.type = value;
-    	this.props.mutant.set({post: post});
+	    //let post = this.props.post;
+    	//post.type = value;
+    	//this.props.mutant.set({post: post});
 	},
 	render: function () {
 	  let type = this.props.post.type;
@@ -274,61 +231,38 @@ let Details = React.createClass({
 });
 
 let Tags = React.createClass({
-   add: function () {
-        let model = {};
-        model.tag = this.refs.tag.getDOMNode().value;
+   getInitialState: function () {
+			return {
+				postID: null,
+				tags: []
+			}
+	 },
+	 add: function () {
+      let model = {};
+      model.tag = this.refs.tag.getDOMNode().value;
 
-        if (model.tag !== null && this.props.post.id) {
-            model.post_id = this.props.post.id;
-            tags.add(model);
-            return;
-        }
-        console.error('post must have an id first');
+      if (model.tag !== null && this.state.post.id) {
+          model.post_id = this.state.post.id;
+          Actions.tags.add(model);
+          return;
+      }
+      console.error('post must have an id first');
    },
    remove: function (e) {
        let id = e.currentTarget.id;
-       tags.remove(id);
+       Actions.tags.remove(id);
    },
-   componentDidMount: function () {
-        let self = this;
-        tags.on('collection', function (code, data) {
-            if (code != 200) {
-                msg('yellow', 'Tags could not be loaded', code);
-                return;
-            }
-            let post = self.props.post;
-            post.tags = data;
-            self.props.mutant.set({post: post});
-        });
-        tags.on('add', function (code, data) {
-            if (code != 201) {
-                msg('yellow', 'Tag could not be created', code);
-                return;
-            }
-            let post = self.props.post;
-            post.tags.push(data);
-            self.props.mutant.set({post: post});
-        });
-        tags.on('remove', function (code, data) {
-            if (code != 204) {
-                msg('yellow', 'Tag could not be removed', code);
-                return;
-            }
-            tags.collection({post_id: self.props.post.id});
-        });
-        tags.collection({post_id: this.props.post.id});
-   },
-   componentWillUnmount: function () {
-       tags.off('collection');
-       tags.off('add');
-       tags.off('remove');
-   },
+	componentDidMount: function () {
+		let self = this;
+		Store.listen(function (data) {
+			self.setState(data);
+		});
+		Actions.Tags.collection({post_id: this.props.postID});
+	},
    render: function () {
-        let tags, list, self;
-        self = this;
-        tags = this.props.post.tags || [];
-
-	   list = tags.map(function (item) {
+    let self = this;
+    let tags = this.state.tags;
+	   let list = tags.map(function (item) {
     	   return <li key={item.id}>{item.tag} <button id={item.id} className="button red tiny" onClick={self.remove}>X</button></li>
 	   });
 	   return (
@@ -344,79 +278,61 @@ let Tags = React.createClass({
 });
 
 let Links = React.createClass({
-   add: function () {
-        if (this.props.post.id) {
-            let model = {};
-            model.url = this.props.link.url;
-            model.caption = this.props.link.caption;
-            model.post_id = this.props.post.id;
-            links.add(model);
-            return;
-        }
-        console.error('post must have an id first');
+  getInitialState: function () {
+		return {
+			postID: null,
+			links: [],
+			link: {
+					url: "",
+					caption: ""
+			}
+		};
+	},
+	add: function () {
+      if (this.state.post.id) {
+          let model = {};
+          model.url = this.state.link.url;
+          model.caption = this.state.link.caption;
+          model.post_id = this.state.post.id;
+          Actions.links.add(model);
+          return;
+      }
+      console.error('post must have an id first');
    },
    remove: function (e) {
        let id = e.currentTarget.id;
-       links.remove(id);
+       Actions.links.remove(id);
    },
-   edit: function (model) {;
-        this.props.mutant.set({link: model});
+   edit: function (id) {
+				Actions.links.edit(id)
    },
    save: function () {
        let link = {};
-       link.url = this.props.link.url;
-       link.caption = this.props.link.caption;
-       links.save(this.props.link.id,  link);
+       link.url = this.state.link.url;
+       link.caption = this.state.link.caption;
+       Actions.links.save(this.state.link.id,  link);
    },
    change: function (e) {
        let url = this.refs.url.getDOMNode().value;
        let caption = this.refs.caption.getDOMNode().value;
 
-       let link = this.props.link;
+       let link = this.state.link;
        link.url = url;
        link.caption = caption;
-       this.props.mutant.set({link: link});
+       this.setState({link: link});
    },
    componentDidMount: function () {
-        let self = this;
-        links.on('collection', function (code, data) {
-            if (code != 200) {
-                msg('yellow', 'Links could not be loaded', code);
-                return;
-            }
-            let post = self.props.post;
-            post.links = data;
-            self.props.mutant.set({post: post});
-        });
-        links.on('add', function (code, data) {
-            if (code != 201) {
-                msg('yellow', 'Link could not be created', code);
-                return;
-            }
-            let post = self.props.post;
-            post.links.push(data);
-            self.props.mutant.set({post: post});
-        });
-        links.on('remove', function (code, data) {
-            if (code != 204) {
-                msg('red', 'Link could not be removed', code);
-                return;
-            }
-            links.collection({post_id: self.props.post.id});
-        });
-        links.collection({post_id: this.props.post.id});
-   },
-   componentWillUnmount: function () {
-       links.off('collection');
-       links.off('add');
-       links.off('remove');
+      let self = this;
+			Actions.Links.collection({post_id: this.props.postID});
+			Store.listen(function (data) {
+				self.setState(data);
+			});
    },
    render: function () {
-        let links, list, self;
-        self = this;
-        links = this.props.post.links || [];
+      let self = this;
+      let links = this.state.links;
 
-	   list = links.map(function (item) {
+	   let list = links.map(function (item) {
     	   return (
     	        <li key={item.id}>
     	            <button id={item.id} className="button red tiny remove" onClick={self.remove}>X</button>

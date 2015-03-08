@@ -4,12 +4,12 @@ let Router = require('react-router');
 let { Link } = Router;
 let posts = require('../sockets/posts');
 let moment = require('moment');
-let msg = require('../actions/alerts').add;
-let Mutant = require('react-mutant');
+let Store = require('../stores/search');
+let Actions = require('../actions/search');
 
 let Search = React.createClass({
 	 getInitialState: function () {
-    	 return new Mutant({
+    	 return {
             posts: [],
             exclude: [],
             search: '',
@@ -17,14 +17,12 @@ let Search = React.createClass({
             direction: 'DESC',
             page: 1,
             limit: 10,
-            total: 0,
-            datesVisible: false,
-            typesVisible: false
-        });
+            total: 0
+        }
      },
 	 search: function () {
 	     let val = this.refs.term.getDOMNode().value;
-       this.state.mutant.set({search: val});
+       Actions.search(val);
 	 },
 	 toggleFilter: function (e) {
     	let id = e.currentTarget.id;
@@ -32,24 +30,17 @@ let Search = React.createClass({
     	let obj = {};
     	let visibility = this.state[prop] == true ? false : true;
     	obj[prop] = visibility;
-    	this.state.mutant.set(obj);
+    	Actions.type(obj);
 	 },
      componentDidMount: function () {
-         let self = this;
-				this.state.mutant.on('update', function (mutant) {
-						self.setState(mutant);
+        let self = this;
+				Store.listen(function (data) {
+						self.setState(data);
 				});
-         posts.on('collection', function (code, data) {
-             if (code != 200) {
-                msg('red', 'Posts could not be loaded', code);
-                return;
-            }
-             self.state.mutant.set({posts: data.rows, total: data.count});
-         });
-         posts.collection({});
+        Actions.collection({});
 	 },
 	 componentWillUnmount: function () {
-    	 posts.off('collection');
+    	 // Store.stoplistening?
 	 },
 	 render: function () {
 		  let visible = "fa fa-minus-square-o";
@@ -84,10 +75,10 @@ let Groups = React.createClass({
 
 let Filter = React.createClass({
 	sort: function (e) {
-    	this.props.mutant.set({sort: e.target.value});
+    	Actions.sortBy(e.target.value);
 	},
 	direction: function (e) {
-        this.props.mutant.set({direction: e.target.value});
+      Actions.direction(e.target.value);
 	},
 	render: function () {
 		return (
@@ -159,7 +150,7 @@ let Types = React.createClass({
 	    } else {
     	    exclude.push(type);
 	    }
-	    this.props.mutant.set({exclude: exclude});
+	    Actions.types(exclude);
 	},
 	off: function (type) {
     	let exclude = this.props.exclude;
@@ -189,12 +180,12 @@ let Types = React.createClass({
 let Pagination = React.createClass({
 	next: function () {
 	    if ( Math.ceil(this.props.page * this.props.limit) < this.props.total ) {
-    	    this.props.mutant.set({page: this.props.page + 1});
+					Actions.page(this.props.page++)
 	    }
 	},
 	previous: function () {
         if (this.props.page > 1) {
-    	    this.props.mutant.set({page: this.props.page - 1});
+    	    Actions.page(this.props.page--);
 	    }
 	},
 	render: function () {

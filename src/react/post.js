@@ -2,12 +2,9 @@
 let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
-let posts = require('../sockets/posts');
-let comments = require('../sockets/comments');
-let thumbs = require('../sockets/thumbs');
 let moment = require('moment');
-let msg = require('../actions/alerts').add;
-let Mutant = require('react-mutant');
+let Actions = require('../actions/post');
+let Store = require('../stores/post');
 
 /** POST **/
 let fa = {
@@ -27,7 +24,7 @@ let fa = {
 let Post = React.createClass({
      mixins: [Router.State],
      getInitialState: function () {
-       return new Mutant({
+       return {
             post: {
                 id: null,
                 title: "",
@@ -46,36 +43,21 @@ let Post = React.createClass({
                 rows: [],
                 total: 0
             }
-        });
+        }
      },
      componentDidMount: function () {
          let self = this;
          let params = this.getParams();
-         this.state.mutant.on('update', function (mutant) {
-             self.setState(mutant);
+         Store.listen(function (data) {
+             self.setState(data);
          });
-         posts.on('single', function (code, data) {
-            if (code != 200) {
-                msg('red', 'Post could not be loaded', code);
-                return;
-            }
-             self.state.mutant.set({post: data, user: data.user});
-         });
-         comments.on('collection', function (code, data) {
-            if (code != 200) {
-                msg('yellow', 'Comments could not be loaded', code);
-                return;
-            }
-            self.state.mutant.set({comments: data});
-         });
-         posts.single(params.id);
-         comments.collection({postId: params.id});
-     },
-     componentWillUnmount: function () {
-         posts.off('single');
-         comments.off('collection');
+         Actions.single(params.id);
+         Actions.Comments.collection({postId: params.id});
      },
      render: function () {
+      //  <Link to="user" path={`/user/${this.state.user.id}`} params={{id: this.state.user.id}}>
+      //                          {this.state.user.first} {this.state.user.last}
+      //                        </Link>
           let params = this.getParams();
           return (
             <div>
@@ -83,7 +65,10 @@ let Post = React.createClass({
                     <Meta post={this.state.post} />
                     <h1>{this.state.post.title}</h1>
                     <div className="basic">
-                      <span>By <Link to="user" path={`/user/${this.state.user.id}`} params={{id: this.state.user.id}}>{this.state.user.first} {this.state.user.last}</Link> </span>
+                      <span>
+                      By
+
+                      </span>
                       <Tags tags={this.state.post.tags} />
                       <br />
                       <span>Originally by {this.state.post.author}</span>
@@ -179,17 +164,7 @@ let Author = React.createClass({
 
 let Thumbs = React.createClass({
    componentDidMount: function () {
-     let self = this;
-     thumbs.on('single', function (code, data) {
-         if (code != 200) {
-            msg('yellow', 'Thumbs could not be loaded', code);
-            return;
-         }
-     });
-     thumbs.single(this.props.post.id);
-   },
-   componentWillUnmount: function () {
-       thumbs.off('single');
+     Actions.Thumbs.single(this.props.post.id);
    },
    like: function () {
        let model = {};
@@ -240,18 +215,6 @@ let Thumbs = React.createClass({
 });
 
 let Comments = React.createClass({
-    componentDidMount: function () {
-         let self = this;
-         comments.on('add', function (code, data) {
-            if (code != 201) {
-                msg('red', 'Comment could not be created', code);
-                return;
-            }
-         });
-    },
-    componentWillUnmount: function () {
-        comments.off('add');
-    },
     render: function () {
           let create = <h3>You must be logged-in to comment</h3>
           let token = null;
@@ -284,7 +247,7 @@ let Create = React.createClass({
         let model = {};
         model.content = this.refs.comment.getDOMNode().value;
         model.post_id = this.props.postID;
-        comments.add(model);
+        Actions.Comments.add(model);
     },
    render: function () {
        return (

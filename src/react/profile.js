@@ -2,53 +2,27 @@
 let React = require('react');
 let Router = require('react-router');
 let { Link, RouteHandler } = Router;
-let users = require('../sockets/users');
-let orgs = require('../sockets/orgs');
 let msg = require('../actions/alerts').add;
-let Mutant = require('react-mutant');
+let Actions = require('../actions/profile');
+let { User, Org } = Actions;
 
 let Profile = React.createClass({
      mixins: [Router.State],
      getInitialState: function () {
-        return new Mutant({
+        return {
             id: "",
             type: "",
             profile: {}
-        });
+        }
      },
      componentDidMount: function () {
-		let type, id, view;
-        let self = this;
         let params = this.getParams();
-        type = 'user';
-        //type = this.params.view;
-        //id = this.params.id;
-        //view = (['posts', 'rank', 'members', 'events', 'reviews'].indexOf(this.props._[2]) !== -1) ? this.props._[2] : "about";
-
-		if (type === 'org') {
-            orgs.on('single', function (code, data) {
-                if (code != 200) {
-                    msg('red', 'Organization could not be loaded', code);
-                    return;
-                }
-                self.props.mutant.set({id: id, type: type, profile: data, view: view});
-            });
-    		orgs.single(id);
-		} else {
-            users.on('single', function (code, data) {
-                if (code != 200) {
-                    msg('yellow', 'User could not be loaded', code);
-                    return;
-                }
-                //self.props.mutant.set({id: id, type: type, profile: data, view: view});
-            });
-    		users.single(id);
-		}
-	 },
-	 componentWillUnmount: function () {
-    	 orgs.off('single');
-    	 users.off('single');
-	 },
+    		if (params.type === 'org') {
+        		Org.single(params.id);
+    		} else {
+        		User.single(params.id);
+    		}
+  	 },
      render: function () {
           return (
             <div className="profile">

@@ -2,15 +2,14 @@
 let React = require('react');
 let Router = require('react-router');
 let { RouteHandler } = Router;
-let account = require('../sockets/account');
+let Store = require('../stores/account');
+let Actions = require('../actions/account');
 let token = require('../token');
 let View401 = require('./401');
-let msg = require('../actions/alerts').add;
-let Mutant = require('react-mutant');
 
 let Account = React.createClass({
      getInitialState: function () {
-         return new Mutant({
+         return {
             user: {
                 id: null,
                 pic: "",
@@ -33,73 +32,26 @@ let Account = React.createClass({
             },
             notifications: [],
             history: []
-        });
+        }
      },
      save: function () {
-        account.edit(this.props.user);
+        Actions.edit(this.state.user);
      },
      componentDidMount: function () {
          let self = this;
-         this.state.mutant.on('update', function (mutant) {
-             self.setState(mutant);
+         Store.listen(function (data) {
+             self.setState(data);
          });
-         account.on('get', function (code, data) {
-             if (code != 200) {
-                 msg('yellow', 'Account could not be loaded', code);
-                 return;
-             }
-             self.state.mutant.set({user: data});
-         });
-         account.on('edit', function (code, data) {
-            if (code == 204) {
-                msg('green', 'Account updated', code);
-                return;
-            }
-            msg('red', 'Account could not be updated', code);
-         });
-         account.on('password', function (code, data) {
-            if (code == 204) {
-                msg('green', 'Password updated', code);
-                return;
-            }
-            msg('red', 'Password could not be updated', code);
-         });
-         account.on('deactivate', function (code, data) {
-            if (code == 202) {
-                msg('green', 'Account deactivated', code);
-                return;
-            }
-            msg('red', 'Account could not be deactivated', code);
-         });
-         account.get();
-	 },
-	 componentWillUnmount: function () {
-    	account.off('get');
-    	account.off('edit');
-    	account.off('password');
-    	account.off('deactivate');
-	 },
-     deactivate: function () {
-       account.deactivate();
-     },
-	 history: function () {
-    	 this.navigate('/account/history');
-	 },
-	 notifications: function () {
-    	 this.navigate('/account');
+         Actions.get();
 	 },
      render: function () {
-        let button, view, password;
-        button = <button className="button blue" onClick={this.history}>View History</button>;
         if (token.get() !== false) {
             return (
                 <div className="account">
                     <h1>My Account</h1>
                     <div className="heading">
-                        <PicUploader {...this.state.user} mutant={this.state.mutant} />
+                        <PicUploader {...this.state.user} />
                     </div>
-                    {password}
-                    {button}
                     <RouteHandler {...this.state} />
                 </div>
             );
@@ -139,9 +91,9 @@ Account.Edit = React.createClass({
     render: function () {
         return (
             <div>
-                <Info {...this.props.user} mutant={this.props.mutant} />
-                <Details {...this.props.user} mutant={this.props.mutant} />
-                <Address {...this.props.user} mutant={this.props.mutant} />
+                <Info {...this.props.user} />
+                <Details {...this.props.user} />
+                <Address {...this.props.user} />
                 <Social />
             </div>
         );
@@ -150,9 +102,9 @@ Account.Edit = React.createClass({
 
 let Info = React.createClass({
     change: function (e) {
-        let user = this.props.mutant.get().user;
+        let user = this.state.user;
         user[e.target.className] = e.target.value;
-        this.props.mutant.set({user: user});
+        this.setState({user: user});
     },
     render: function () {
         return (
@@ -181,9 +133,9 @@ let Info = React.createClass({
 
 let Details = React.createClass({
     change: function (e) {
-      let user = this.props.mutant.get().user;
+      let user = this.props.user;
         user[e.target.className] = e.target.value;
-        this.props.mutant.set({user: user});
+        this.setState({user: user});
     },
     render: function () {
         return (
@@ -275,18 +227,7 @@ Account.Password = React.createClass({
 
 Account.Notifications = React.createClass({
     componentDidMount: function () {
-        let self = this;
-        account.on('notifications', function (code, data) {
-             if (code != 200) {
-                msg('yellow', 'Notifications could not be loaded', code);
-                return;
-             }
-             self.props.mutant.set({notifications: data});
-         });
-         account.notifications({});
-    },
-    componentWillUnmount: function () {
-        account.off('notifications');
+      Actions.notifications();
     },
     render: function () {
         let views = this.props.notifications[0] || [];
@@ -312,18 +253,7 @@ Account.Notifications = React.createClass({
 
 Account.History = React.createClass({
     componentDidMount: function () {
-        let self = this;
-        account.on('history', function (code, data) {
-             if (code != 200) {
-                msg('yellow', 'History could not be loaded', code);
-                return;
-             }
-             self.props.mutant.set({history: data});
-         });
-         account.history({});
-    },
-    componentWillUnmount: function () {
-        account.off('history');
+      Actions.history();
     },
     render: function () {
         let views = this.props.history[0] || [];
