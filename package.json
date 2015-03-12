@@ -22,6 +22,7 @@
     "socket.io-client": "^1.2.1"
   },
   "devDependencies": {
+    "babel-jest": "^4.0.0",
     "babelify": "^5.0.4",
     "gulp": "^3.8.11",
     "gulp-livereload": "^3.4.0",
@@ -42,7 +43,7 @@
   },
   "jest": {
     "testDirectoryName": "tests",
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "collectCoverage": true,
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react"
