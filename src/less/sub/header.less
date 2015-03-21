@@ -1,63 +1,63 @@
 header {
   .Row(100%);
-  height: 60px;
+  height: 40px;
   position: fixed;
-  
+
   border-bottom: solid 1px #bbb;
-  background-color: #3C4251;
-      
+  background-color: @theme;
+
   .brand {
-	.Cols(6);  
-    
+	.Cols(4);
+
     a img {
-        margin-top: 13px;
-        height: 50%;
-    } 
+        margin-top: 12px;
+        height: 35%;
+    }
   }
 
     nav {
-      .Cols(6);
+      .Cols(8);
       text-align: right;
-        
+
       .fa {
-        width: 60px;
-        font-size: 1.8em;
-        height: 45px; 
-        border-right: solid 1px #1E2E3F;
-        padding-top: 15px;
+        width: 40px;
+        font-size: 1.5em;
+        height: 30px;
+        border-right: solid 1px @theme-dark;
+        padding-top: 10px;
       }
-      
+
       a {
-        color: #e5e7eb;   
+        color: @grey-light;
         text-align: center;
       }
       a:hover {
         color: #444;
       }
-      
+
       a.fa-trophy:hover {
-          color: @red-light;
+          color: @red;
           border-bottom: solid 4px @red-light;
       }
-      
+
       a.fa-search:hover {
           color: @blue-dark;
           border-bottom: solid 4px @blue-light;
       }
-      
+
       a.fa-pencil:hover {
           color: @green-dark;
           border-bottom: solid 4px @green-light;
       }
-      
+
       a.fa-user:hover {
-          color: @gold-light; 
-          border-bottom: solid 4px @gold-light; 
+          color: @gold;
+          border-bottom: solid 4px @gold-light;
       }
-      
+
       .notifications {
-          background-color: #f00;
-          color: #fff;
+          background-color: @red;
+          color: white;
           font-weight: bold;
           font-size: 0.4em;
       }

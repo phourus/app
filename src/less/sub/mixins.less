@@ -11,7 +11,7 @@
   border-right: groove 2px @color; 
 }
 
-.insetlight(@color: #eee) {
+.insetlight(@color: @grey-light) {
   border-top: groove 2px @color;
   border-bottom: ridge 2px @color;
   border-left: groove 2px @color;
@@ -31,7 +31,7 @@
     More info at: http://lesselements.com
   ---------------------------------------------------*/
 
-.gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
+.gradient(@color: #F5F5F5, @start: @grey-light, @stop: white) {
   background: @color;
   background: -webkit-gradient(linear,
                                left bottom,
@@ -65,7 +65,7 @@
                                  rgb(@start,@start,@start));
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",rgb(@stop,@stop,@stop),rgb(@start,@start,@start)));
 }
-.bordered(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE) {
+.bordered(@top-color: @grey-light, @right-color: @grey-light, @bottom-color: @grey-light, @left-color: @grey-light) {
   border-top: solid 1px @top-color;
   border-left: solid 1px @left-color;
   border-right: solid 1px @right-color;
@@ -152,7 +152,7 @@
   -ms-user-select: @argument;
   user-select: @argument;
 }
-.columns(@colwidth: 250px, @colcount: 0, @colgap: 50px, @columnRuleColor: #EEE, @columnRuleStyle: solid, @columnRuleWidth: 1px) {
+.columns(@colwidth: 250px, @colcount: 0, @colgap: 50px, @columnRuleColor: @grey-light, @columnRuleStyle: solid, @columnRuleWidth: 1px) {
   -moz-column-width: @colwidth;
   -moz-column-count: @colcount;
   -moz-column-gap: @colgap;

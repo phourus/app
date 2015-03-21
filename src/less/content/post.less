@@ -2,42 +2,42 @@
 .heading {
   font-size: 0.9em;
   color: #777;
-  border-bottom: solid 1px #eee;
+  border-bottom: solid 1px @grey-light;
   margin-bottom: 20px;
-  
+
   .meta {
       .Row(100%);
 
       div {
           .Cols(4);
       }
-      
+
       ul {
           .Cols(8);
       }
       .type {
         display: inline;
-        padding: 4px 10px;  
+        padding: 4px 10px;
         color: white;
         .rounded(10px);
       }
-      
+
       .type.blog, .type.event {
-          background-color: @green-dark;
+          background-color: @green;
       }
-      
+
       .type.debate, .type.bill {
-          background-color: @red-dark;
+          background-color: @red;
       }
-      
+
       .type.subject, .type.question {
-          background-color: @blue-dark;
+          background-color: @blue;
       }
-      
+
       .type.quote, .type.belief {
-          background-color: @gold-dark;
+          background-color: @gold;
       }
-      
+
       ul.breadcrumb li {
             .Cols(4);
             font-size: 1em;
@@ -47,9 +47,9 @@
 
   .basic {
     .tags {
-        
+
         .tag {
-          border: solid 1px #ddd;
+          border: solid 1px @grey;
           padding: 2px 6px;
           .rounded(16px);
           font-size: 0.9em;
@@ -69,60 +69,60 @@
 
 .thumb {
     margin-bottom: 40px;
-    background-color: #F6F7FB;
-    border-top: solid 1px #E4E5E6;
-    border-bottom: solid 1px #E4E5E6;
+    background-color: @form-background;
+    border-top: solid 1px @form-border;
+    border-bottom: solid 1px @form-border;
 }
 
 .comments {
-    
+
     .comment {
         .Row(100%);
         font-size: 0.9em;
-        border-bottom: solid 1px #E3E4E6;
+        border-bottom: solid 1px @form-border;
         margin-bottom: 20px;
-        
+
         .pic {
             .Cols(2);
-            
+
             a {
                 img {
                     width: 80%;
                 }
             }
         }
-        
+
         .content {
             .Cols(10);
-            
+
             .username {
-                
+
             }
-            
+
             p {
-                
+
             }
-            
+
             .date {
                 color: #aaa;
                 font-size: 1em;
                 font-style: italic;
             }
-           
+
         }
     }
 }
 
 
 .create {
-background-color: #3C4251;
+background-color: @theme;
 .Row(96%);
 padding: 2%;
-color: #eee;
+color: @grey-light;
 
   .pic {
       .Cols(2);
-      
+
       img {
           margin: 0;
           padding: 0;
@@ -132,11 +132,10 @@ color: #eee;
   textarea {
     .Cols(8);
     border: none;
-    background-color: #F6F7F9;
     .rounded(4px);
     height: 200px;
   }
-  
+
   button.button {
     .Cols(2);
     margin: 0;
@@ -153,12 +152,12 @@ color: #eee;
 
 /*
 .post, .org {
-  
+
   div.basic {
     float: left;
     width: 75%;
     line-height: 20px;
-    
+
     .title {
       font-size: 90%;
       font-weight: normal;
@@ -167,7 +166,7 @@ color: #eee;
       margin: 0px;
       padding: 0px;
     }
-    
+
     span.created {
       font-size: 80%;
       font-weight: normal;
@@ -176,57 +175,57 @@ color: #eee;
       padding: 0px;
     }
   }
-  
+
   div.stats {
     float: right;
     width: 25%;
-    
+
     ul.detail {
       text-align: right;
       font-size: 65%;
-      
+
       li {
         list-style: none;
         margin: 0px;
         line-height: 14px;
       }
     }
-    
+
     .influence {
-      float: right; 
-      text-align: center; 
-      font-size: 5em; 
+      float: right;
+      text-align: center;
+      font-size: 5em;
       width: 60px;
       height: 80px;
       padding: 20px 20px 0px 5px;
     }
   }
-  
 
-  
+
+
   .title {
     font-size: 2.8em;
     font-weight: normal;
     padding-top: 20px;
-    text-align: left; 
-    text-transform: none; 
+    text-align: left;
+    text-transform: none;
     line-height: 1em;
   }
-  
+
   .body {
     margin: 20px;
     line-height: 28px;
     text-align: left;
     padding: 10px 5px 10px 5px;
-    margin: 0px; 
-    border-top: solid 1px #eee;
-    border-bottom: solid 1px #eee;
-    font-family: @palatino; 
+    margin: 0px;
+    border-top: solid 1px @grey-light;
+    border-bottom: solid 1px @grey-light;
+    font-family: @palatino;
   }
-  
+
   .interact {
     img {
-      
+
       margin: 0px 4px 0px 4px;
       padding: 0px;
       border: none;
@@ -235,7 +234,7 @@ color: #eee;
       width: 20%;
       float: left;
       margin-top: 10px;
-      
+
       img {
         float: left;
       }
@@ -251,25 +250,25 @@ color: #eee;
       width: 80%;
       float: right;
       text-align: right;
-      
+
       div {
         float: right;
         font-family: @century;
         font-size: 90%;
-        color: #333;
+        color: @grey-dark;
         margin-top: 3px;
         line-height: 14px;
-        
+
         strong {
           font-size: 120%;
         }
-        
+
         em {
           font-size: 90%;
           font-style: italic;
         }
       }
-      
+
       .positive { color: @green-dark; }
       .negative {color: @red-dark; }
       img {

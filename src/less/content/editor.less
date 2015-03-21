@@ -1,38 +1,127 @@
 .editor {
-    
+
     div.format {
         background-color: #ccc;
         .Row(100%);
-        
+
         select {
             .Row(100%);
         }
-        
+
         button {
             .Cols(1, 10);
         }
     }
-    
+
+    .types {
+      .Row(100%);
+      text-align: center;
+
+      div {
+        .Cols(5);
+        text-align: center;
+        border: solid 1px @grey;
+        .rounded(2px);
+        cursor: pointer;
+        padding: 1%;
+        margin: 1%;
+        height: 10em;
+
+        strong {
+          font-size: 1.5em;
+          line-height: 1.5em;
+          font-weight: normal;
+        }
+
+        p {
+          margin: 0px;
+          padding: 0px;
+          font-size: 0.9em;
+        }
+
+        &.blog, &.event {
+          border-top: solid 4px @green-dark;
+
+          &:hover {
+            background-color: fade(@green, 10%);
+          }
+
+          &.selected {
+            background-color: fade(@green, 20%);
+            border: solid 2px @green-dark;
+          }
+        }
+
+        &.subject, &.question {
+          border-top: solid 4px @blue-dark;
+
+          &:hover {
+            background-color: fade(@blue, 10%);
+          }
+
+          &.selected {
+            background-color: fade(@blue, 20%);
+            border: solid 2px @blue-dark;
+          }
+        }
+
+        &.debate, &.poll {
+          border-top: solid 4px @red-dark;
+
+          &:hover {
+            background-color: fade(@red, 10%);
+          }
+
+          &.selected {
+            background-color: fade(@red, 20%);
+            border: solid 2px @red-dark;
+          }
+        }
+
+        &.quote, &.belief {
+          border-top: solid 4px @gold-dark;
+
+          &:hover {
+            background-color: fade(@gold, 10%);
+          }
+
+          &.selected {
+            background-color: fade(@gold, 20%);
+            border: solid 2px @gold-dark;
+          }
+        }
+      }
+    }
+
+
     input[type=radio] {
         width: 20px;
         border: none;
-        background-color: #ddd;
+        background-color: @grey;
     }
     textarea {
         width: 100%;
         margin: 0px;
         padding: 0px;
     }
-    
+
     div.actions {
         .Row(100%);
-        background-color: #ccc;
-        
+        text-align: center;
+        font-size: 1.2em;
+
         button {
             .Cols(3);
+            height: 6em;
+
+            i {
+              margin-top: 10px;
+              display: block;
+              font-size: 2em;
+            }
         }
     }
-    
+
     label {
         width: 20%;
         display: inline-block;
@@ -40,8 +129,21 @@
         height: 1em;
         margin: 0 10px 10px 0;
     }
-    
+
     table {
         width: 100%;
+    }
+}
+
+@media (min-width: 1000px) {
+    .editor {
+
+        .types {
+
+            div {
+                .Cols(2);
+
+            }
+        }
     }
 }

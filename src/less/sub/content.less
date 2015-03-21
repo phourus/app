@@ -11,12 +11,20 @@
 }
 
 #content {
-    margin: 20px 2% 0 2%;
-    width: 90%; 
-    background: #fff;
-    border: solid 1px #D9D9D9;
-    padding: 3%;
+
+    > div {
+      margin: 20px 2% 0 2%;
+      width: 90%;
+      background-color: white;
+      border: solid 1px @grey;
+      padding: 3%;
+    }
+
+    > div.search {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: transparent;
+      border: none;
+    }
 }
-
-
-

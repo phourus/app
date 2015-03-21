@@ -3,7 +3,7 @@ fieldset {
   ul {
     margin: 0px;
     padding: 0px;
-    
+
     li {
       list-style: none;
     }
@@ -12,81 +12,50 @@ fieldset {
 ul {
   margin: 0px;
   padding: 0px;
-  
+
   li {
     margin: 0px;
     padding: 0px;
     list-style: none;
   }
-  
-}
-ul.tabs 
 
-  li { 
-    float: left; 
-    list-style: none;
-    background-color: #f0f0f0;
-    padding: 2px;
-    margin-right: 2px;
-    
-    a { 
-      display: block; 
-      text-align: center; 
-      font-weight: bold; 
-      padding: 4px 0;  
-      width: 100px; 
-      font-size: 0.7em;
-      text-transform: uppercase; 
-    }
-    a:hover, a.selected:hover { 
-      color: #f90; 
-    }
-    a.selected { 
-      border-bottom: solid 6px #f90; 
-      color: #333;    
-    }
-    a.disabled { 
-      background-color: #fff; 
-      color: #ccc; 
-      cursor: default;
-    }
 }
 
 /** NOTIFICATIONS **/
 .notifications ul {
   width: 100%;
-  
+
   li {
     list-style: none;
     background-repeat: no-repeat;
     height: 40px;
-    border-bottom: solid 1px #eee;
+    border-bottom: solid 1px @grey-light;
     padding: 4px 0px 0px 40px;
     font-size: 1.2em;
     font-family: @palatino;
   }
-  
+
   a {
     font-weight: bold;
-    color: @blue-light;
+    color: @blue;
   }
-  
+
   a:hover {
-    color: #f90;
+    color: @gold;
   }
-  
+
   li.comment { background-image: url('/assets/icons/notifications/comment.png'); }
   li.thumb { background-image: url('/assets/icons/notifications/thumb.png'); }
   li.post { background-image: url('/assets/icons/notifications/post.png'); }
   li.favorite { background-image: url('/assets/icons/notifications/favorite.png'); }
   li.member { background-image: url('/assets/icons/notifications/member.png'); }
-  
+
   div.date {
     width: 200px;
     float: right;
     display: block;
   }
-  
+
 }
 
 /** DEFINITION LISTS **/
@@ -94,12 +63,12 @@ dl {
 	display: block;
 	width: 250px;
 	/*float: left;*/
-	
+
 	dt {
 		float: left;
-		width: 100px;	
+		width: 100px;
 		font-weight: bold;
-		color: #333;
+		color: @grey-dark;
     font-size: 0.9em;
     overflow: hidden;
 	}
@@ -107,4 +76,4 @@ dl {
 		overflow: hidden;
 		word-wrap: break-word;
 	}
-}	
+}

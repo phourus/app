@@ -1,116 +1,313 @@
 .search {
-    
-    .keywords {
+
+    .heading {
+      background-color: white;
+      height: 90px;
+      top: 40px;
+      position: fixed;
+      width: 90%;
+      padding: 2% 5%;
+
+      .keywords {
+          .Row(100%);
+          height: 40px;
+
+          input {
+              .Cols(10);
+              max-width: none;
+              margin: 0px;
+              padding: 0px;
+              height: 100%;
+              font-size: 1.5em;
+          }
+
+          button {
+              .Cols(2);
+              margin: 0px;
+              padding: 0px;
+              height: 100%;
+              .rounded(0px);
+          }
+
+      }
+
+
+      .refine {
         .Row(100%);
-        height: 60px;
-        
-        input {
-            .Cols(10);
-            max-width: none;
-            margin: 0px;
-            padding: 0px;
-            height: 100%;
-            font-size: 2em;
+        margin-top: 10px;
+
+        .context {
+          .Cols(6);
         }
-        
+
+        .toggles {
+          .Cols(6);
+          text-align: right;
+
+          button {
+            width: 40px;
+            height: 40px;
+            background-color: @off-white;
+            border: solid 1px #bbb;
+            cursor: pointer;
+            color: #bbb;
+            margin-left: 10px;
+            .rounded(2px);
+
+            &:hover {
+              background-color: @off-white;
+              color: @blue;
+            }
+          }
+        }
+      }
+
+      .filter, .sortby {
+        clear: right;
+        background-color: @grey-light;
+        margin-top: 10px;
+
+        .box-shadow(0px, 0px, 12px, @grey-dark);
+        float: right;
+
+        @triangleSize: 12px;
+        .triangle {
+          margin-top: -12px;
+          width: 0;
+          height: 0;
+          float: right;
+          border-left: @triangleSize solid transparent;
+          border-right: @triangleSize solid transparent;
+          border-bottom: @triangleSize solid @grey-light;
+        }
+
+        h3 {
+          font-size: 0.8em;
+          color: #aaa;
+          text-transform: uppercase;
+          padding: 1em;
+          margin: 0;
+        }
+      }
+      .filter {
+        width: 300px;
+        padding-bottom: 1em;
+
         button {
-            .Cols(2);
-            margin: 0px;
-            padding: 0px;
-            height: 100%;
+          border: none;
         }
-        
-    }
-    #map {
-        width: 100%;
-        min-height: 450px;
-        max-height: 600px;
-    }
-    
-    .show {
-        display: block;
-    }
-    
-    .hide {
-        display: none;
-    }
-    .groups {
-        
-    }
-    
-    .filter {
-       .Row(100%);
-       
-       .label {
-           .Cols(4);
-           text-align: right;
-       }
-       .sort {
-            .Cols(8);         
-       }
-       .direction {
-           .Cols(4)
-       }
-    }
-    
-    .dates {
-           div {
-           .Row(100%);
-           }
-           select {
-                .Cols(5);
-           } 
-           
-           select.date {
-               .Cols(2);
-           }       
-       }
-    
-    .types {
-        .Row(100%);
-    
+
+        .triangle {
+          margin-right: 58px;
+        }
+        .types {
+          button {
+            display: inline-block;
+            width: 100px;
+          }
+        }
+        .dates {
+          .Row(100%);
+          margin-left: 10px;
+
+          div {
+            .Cols(6);
+          }
+          label {
+            font-size: 0.8em;
+            font-style: normal;
+            display: block;
+            margin: 0;
+            padding: 0;
+          }
+
+          button {
+            display: inline-block;
+            height: 36px;
+            width: 30px;
+            color: white;
+
+          }
+          input {
+            width: 100px;
+          }
+        }
+
+        .clear, .apply {
+          width: 120px;
+          height: 40px;
+          .rounded(4px);
+          color: white;
+          cursor: pointer;
+          margin-left: 10px;
+
+          &:hover {
+            background-color: @theme-light;
+          }
+        }
+
+        .clear {
+          background-color: @theme;
+        }
+
+        .apply {
+          background-color: @theme-dark;
+        }
+      }
+      .sortby {
+        width: 200px;
+
+        .triangle {
+          margin-right: 8px;
+        }
+        ul {
+          border-top: solid 1px #ccc;
+          li {
+            width: 96%;
+            border-bottom: solid 1px #ccc;
+            padding: 0.5em 2%;
+            cursor: pointer;
+
+            .fa {
+              color: @grey;
+            }
+
+            &.selected {
+              color: @blue;
+              background-color: white;
+
+              .fa {
+                color: @blue;
+              }
+            }
+
+            &:hover {
+              background-color: white;
+              color: @green;
+
+              .fa {
+                color: @green;
+              }
+            }
+          }
+        }
         button {
-            .Cols(1, 3);
+          background-color: white;
+          border: none;
+          width: 50%;
+          text-align: center;
+          height: 40px;
+          cursor: pointer;
+
+          &.selected {
+            color: @blue;
+          }
         }
+
+      }
     }
-    
-    .pagination {
-        .Row(100%);
-        
-        button {
-            .Cols(2);
-        }
-        
-        div {
-            .Cols(7);
-            text-align: center;
-        }
+
+    .foot {
+      background-color: @theme;
+      height: 60px;
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+
+      .pagination {
+          .Row(100%);
+          color: white;
+          font-size: 0.8em;
+          text-align: center;
+
+          button {
+              background-color: @theme-dark;
+              width: 60px;
+              display: inline-block;
+
+              &:hover {
+                background-color: @theme-light;
+              }
+          }
+      }
     }
-    
+
+    // .filter {
+    //    .Row(100%);
+    //
+    //    .label {
+    //        .Cols(4);
+    //        text-align: right;
+    //    }
+    //    .sort {
+    //         .Cols(8);
+    //    }
+    //    .direction {
+    //        .Cols(4)
+    //    }
+    // }
+
+    // .dates {
+    //        div {
+    //        .Row(100%);
+    //        }
+    //        select {
+    //             .Cols(5);
+    //        }
+    //
+    //        select.date {
+    //            .Cols(2);
+    //        }
+    //    }
+    //
+    // .types {
+    //     .Row(100%);
+    //
+    //     button {
+    //         .Cols(1, 3);
+    //     }
+    // }
+    //
+
+
     .posts {
-        
+      margin-top: 160px;
     }
-    
+
     .postItem {
         .Row(100%);
-        border-top: solid 1px #eee;
+
         margin-top: 2em;
-        padding-top: 1em;
-        
-        .type {
-            .Row(100%);
-            font-size: 0.8em;
-            text-transform: uppercase;
-            font-weight: bold;
+        padding: 1em 5%;
+        width: 80%;
+        background-color: white;
+
+        h2 {
+          margin-bottom: 1em;
+          line-height: 1.3em;
         }
-        .pic, .basic, .detail, .stats {
-            .Cols(6);
-        }
-        .pic {
-            
-            img {
-                width: 90%;
+
+        .details {
+          .pic {
+            .Cols(2);
+              img {
+                  width: 70%;
+              }
+          }
+
+          .basic {
+            .Cols(10);
+            font-size: 0.9em;
+            line-height: 1.1em;
+
+            .created {
+              font-size: 0.8em;
+              color: #bbb;
             }
+          }
+          .meta {
+            display: none;
+          }
         }
 
         .content {
@@ -118,21 +315,64 @@
             height: 6em;
             overflow: hidden;
         }
+
+        .footing {
+          margin-top: 1em;
+          padding-top: 1em;
+          border-top: solid 1px @grey-light;
+
+          .stats {
+            color: #aaa;
+            font-size: 0.8em;
+
+            div {
+              display: inline-block;
+
+              i {
+                padding: 0px 6px;
+              }
+            }
+            .popularity {
+                img {
+                  width: 60px;
+                }
+            }
+
+            li {
+              display: inline;
+            }
+          }
+
+          .type {
+              font-size: 0.8em;
+              text-transform: capitalize;
+              .rounded(6px);
+              color: white;
+              padding: 2px;
+              text-align: center;
+              font-weight: bold;
+          }
+
+          .type.blog, .type.event { background-color: @green; color: darken(@green-dark, 10%); }
+          .type.subject, .type.question { background-color: @blue; color: darken(@blue-dark, 10%); }
+          .type.debate, .type.poll { background-color: @red; color: darken(@red-dark, 10%); }
+          .type.quote, .type.belief { background-color: @gold; color: darken(@gold-dark, 10%); }
+        }
     }
 }
 
 @media (min-width: 800px) {
     .search {
-        
+
         .postItem {
                 .pic, .basic, .detail, .stats {
                     .Cols(3);
                 }
         }
-        
+
         .types {
             .Row(100%);
-            
+
             button {
                 .Cols(1, 9);
             }
