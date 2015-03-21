@@ -1,15 +1,14 @@
-@import 'sub/alerts.less';
-@import 'sub/auth.less';
-@import 'sub/buttons.less';
-@import 'sub/calendar.less';
-@import 'sub/content.less';
-@import 'sub/footer.less';
+@import 'sub/grid.less';
+@import 'sub/mixins.less';
 @import 'sub/fonts.less';
 @import 'sub/forms.less';
-@import 'sub/grid.less';
+@import 'sub/buttons.less';
+
+@import 'sub/alerts.less';
+@import 'sub/auth.less';
+@import 'sub/content.less';
+@import 'sub/footer.less';
 @import 'sub/header.less';
-@import 'sub/lists.less';
-@import 'sub/mixins.less';
 
 /** COLORS **/
 @background: #EDEDED;
@@ -38,6 +37,10 @@
 @red-dark: darken(@red, 10%);
 @grey-dark: #444;
 
+@font-serif: 'rokkitt', @palatino;
+@font-sans: 'open sans', @arial;
+@font-mono: @mono;
+
 // Other greys: 444, 777, AAA, BBB, DDD
 
 
@@ -65,11 +68,10 @@ body {
   margin: 0px;
   padding: 0px;
   color: @theme;
-  font-family: @arial;
+  font-family: @font-sans;
   font-size: 100%;
   line-height: 25px;
   letter-spacing: 0px;
-  font-family: 'Open Sans';
 }
 
 div.spacer {
@@ -78,86 +80,71 @@ div.spacer {
 
 /** HEADINGS **/
 h1 {
-  margin: 0px 0px 4px 0px;
-  padding: 0px 0px 10px 0px;
-  letter-spacing: 1px;
-  font-size: 2em;
+  font-family: @font-serif;
+  font-size: 3em;
   font-weight: normal;
-  font-family: 'Bree Serif';
-  color: #444;
-  line-height: 1.4em;
-
-  a {
-    text-shadow: 1px 1px white;
-  }
+  line-height: 1em;
+  color: @theme;
 }
 
 h2 {
-  margin: 5px 0px 5px 0px;
-  padding: 4px 0px 4px 0px;
-  color: #444;
+  font-family: @font-serif;
+  font-size: 2em;
+  font-weight: bold;
+  color: @theme-dark;
+}
 
-  a {
-    color: #444;
-
-    &:hover {
-      color: @blue;
-    }
-  }
+h3 {
+  font-family: @font-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: @theme-light;
 }
 
 h4 {
-text-align: center !important;
-font-size: 1.2em;
-font-style: italic;
+  font-size: 1em;
+  font-weight: bold;
+  color: @grey-dark;
 }
 
 /* LINKS */
 a {
-text-decoration: none;
-color: @blue-dark;
+  text-decoration: none;
+  color: @blue;
+
   img {
     border: none;
   }
-}
 
-a:hover {
-color: @gold;
-}
-
-a.title {
-font-size: 1.5em;
-font-weight: normal;
-text-align: center;
-width: 100%;
-display: block;
-cursor: pointer;
+  &:hover {
+    color: @gold;
+  }
 }
 
 /** IMG **/
 img {
-margin: 4px;
-border: none;
-padding: 2px;
+  margin: 4px;
+  border: none;
+  padding: 2px;
 }
 
 .icon {
-border: none;
+  border: none;
 }
 
 /** CLEAR **/
 div.clear {
-clear:both;
-margin: 0px;
-padding: 0px;
-width: 0px;
-height: 0px;
+  clear:both;
+  margin: 0px;
+  padding: 0px;
+  width: 0px;
+  height: 0px;
 }
 
 i.fa-plus {
-    color: @green;
+  color: @green;
 }
 
 i.fa-minus {
-    color: @red;
+  color: @red;
 }

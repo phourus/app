@@ -81,7 +81,7 @@
           border-bottom: @triangleSize solid @grey-light;
         }
 
-        h3 {
+        .label {
           font-size: 0.8em;
           color: #aaa;
           text-transform: uppercase;
@@ -162,11 +162,16 @@
         }
         ul {
           border-top: solid 1px #ccc;
+          margin: 0px;
+          padding: 0px;
+          
           li {
             width: 96%;
             border-bottom: solid 1px #ccc;
             padding: 0.5em 2%;
             cursor: pointer;
+
+            list-style: none;
 
             .fa {
               color: @grey;
@@ -282,9 +287,15 @@
         width: 80%;
         background-color: white;
 
-        h2 {
-          margin-bottom: 1em;
-          line-height: 1.3em;
+        .title {
+
+          a {
+            color: @theme-dark;
+
+            &:hover {
+              color: @gold;
+            }
+          }
         }
 
         .details {
