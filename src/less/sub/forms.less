@@ -1,74 +1,50 @@
-/** ELEMENTS **/
-fieldset {
-border: none;
-}
-
-input {
-padding: 4px;
-height: 36px;
-max-width: 350px;
-width: 90%;
+label {
+  font-size: 1.3em;
+  color: @theme-light;
+  margin: 0px 40px 20px 0px;
 }
 
 input, textarea, select {
-background-color: @off-white;
-font-size: 1.1em;
-color: @grey-dark;
-margin-bottom: 10px;
-border: solid 1px @grey;
-.rounded(2px);
+  font-family: @font-serif;
+  background-color: @off-white;
+  font-size: 1.2em;
+  color: @theme;
+  margin-bottom: 10px;
+  border: solid 1px @grey;
+  .rounded(2px);
 }
 
-input[type=text], textarea {
+input {
+  padding: 4px;
+  height: 36px;
+  max-width: 350px;
+  width: 90%;
 
-}
+  &[type=file] {
+    background-color: transparent;
+    border: none;
+    font-size: 0.8em;
+  }
 
-input[type=file] {
-background-color: transparent;
-border: none;
-width: 100%;
-font-size: 0.7em;
-}
-
-input[type=checkbox] {
-border: none;
-background: transparent;
-.box-shadow(0px 0px 0px white);
-}
-
-label {
-font-size: 1.2em;
-color: #bbb;
-font-style: italic;
-margin: 0px 40px 20px 0px;
-}
-
-select {
-height: 36px;
-padding: 4px;
-max-width: 350px;
-width: 90%;
-font-size: 1.1em;
-color: @grey-dark;
+  &[type=checkbox] {
+    border: none;
+    background: transparent;
+  }
 }
 
 textarea {
-padding: 4px;
-height: 360px;
-background-color: @form-background;
-border: solid 1px @form-border;
-font-size: 0.9em;
-color: @grey-dark;
+  padding: 4px;
+  height: 360px;
+  background-color: @form-background;
+  border: solid 1px @form-border;
+  color: @theme-dark;
 }
 
-.checkbox {
-width: 55px;
-height: 20px;
-/*background-image: url('/assets/icons/general/checkbox/small/off.png'); */
-background-repeat: no-repeat;
-cursor: pointer;
-}
-
-.checkbox.on {
-/*background-image: url('/assets/icons/general/checkbox/small/on.png'); */
+select {
+  height: 36px;
+  padding: 4px;
+  max-width: 350px;
+  width: 90%;
+  font-size: 1.1em;
+  color: @grey-dark;
 }

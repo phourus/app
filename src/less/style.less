@@ -5,7 +5,6 @@
 @import 'sub/buttons.less';
 
 @import 'sub/alerts.less';
-@import 'sub/auth.less';
 @import 'sub/content.less';
 @import 'sub/footer.less';
 @import 'sub/header.less';
@@ -42,24 +41,6 @@
 @font-mono: @mono;
 
 // Other greys: 444, 777, AAA, BBB, DDD
-
-
-// @gold-light: #e6b657;
-// @blue-light: #3598DB;
-// @green-light: #a7c266;
-// @red-light: #d65e35;
-
-// @gold-dark: #df9d1a;
-// @blue-dark: #2279B0;
-// @red-dark: #cc3300;
-// @green-dark: #98b849;
-
-/**
-
-SourceSans, FontAwesome, OpenSans, Lato
-BreeSerif
-
-**/
 
 /** BODY **/
 body {
@@ -132,13 +113,17 @@ img {
   border: none;
 }
 
-/** CLEAR **/
+/** MISC **/
 div.clear {
   clear:both;
   margin: 0px;
   padding: 0px;
   width: 0px;
   height: 0px;
+}
+
+.inline {
+	display: inline;
 }
 
 i.fa-plus {
