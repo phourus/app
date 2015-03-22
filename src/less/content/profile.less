@@ -1,43 +1,48 @@
 .profile {
 
-    .heading {
-        .Row(100%);
+  .heading {
+    .Row(100%);
 
-        .pic {
-            .Cols(2);
-        }
-        .basic {
-          .Cols(5);
-        }
-        .stats  {
-            .Cols(4);
-            text-align: right;
-        }
+    .pic {
+      .Cols(2);
     }
-
-    .tabs {
-        .Row(100%);
-
-        > div {
-          .Cols(2);
-
-          &:hover {
-            background-color: @grey-light;
-            cursor: pointer;
-          }
-
-          .number {
-            text-align: center;
-            font-size: 4em;
-            color: @gold;
-          }
-
-          .label {
-            display: block;
-            color: #444;
-            font-size: 1em;
-          }
-        }
-
+    .basic {
+      .Cols(5);
     }
+    .stats  {
+      .Cols(4);
+      text-align: right;
+    }
+  }
+
+  .tabs {
+    .Row(100%);
+
+    > div {
+      .Cols(2);
+
+      &:hover {
+        background-color: @grey-light;
+        cursor: pointer;
+      }
+
+      .number {
+        text-align: center;
+        font-size: 4em;
+        color: @gold;
+      }
+
+      .label {
+        display: block;
+        color: #444;
+        font-size: 1em;
+      }
+    }
+  }
+
+  .viewInfo {}
+  .viewRank {}
+  .viewMembership {}
+  .viewReviews {}
+  .viewEvents {}
 }

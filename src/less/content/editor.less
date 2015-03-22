@@ -1,16 +1,29 @@
 .editor {
 
-    div.format {
-        background-color: #ccc;
-        .Row(100%);
+  .list {
 
-        select {
-            .Row(100%);
-        }
+    table {
+        width: 100%;
+    }
+  }
 
-        button {
-            .Cols(1, 10);
-        }
+  .form {
+    input[type=radio] {
+      width: 20px;
+      border: none;
+      background-color: @grey;
+    }
+    textarea {
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+    label {
+      width: 20%;
+      display: inline-block;
+      font-size: 1em;
+      height: 1em;
+      margin: 0 10px 10px 0;
     }
 
     .types {
@@ -93,57 +106,33 @@
       }
     }
 
-
-    input[type=radio] {
-        width: 20px;
-        border: none;
-        background-color: @grey;
-    }
-    textarea {
-        width: 100%;
-        margin: 0px;
-        padding: 0px;
-    }
-
     div.actions {
-        .Row(100%);
-        text-align: center;
-        font-size: 1.2em;
+      .Row(100%);
+      text-align: center;
+      font-size: 1.2em;
 
-        button {
-            .Cols(3);
-            height: 6em;
+      button {
+        .Cols(3);
+        height: 6em;
 
-            i {
-              margin-top: 10px;
-              display: block;
-              font-size: 2em;
-            }
+        i {
+          margin-top: 10px;
+          display: block;
+          font-size: 2em;
         }
+      }
     }
-
-    label {
-        width: 20%;
-        display: inline-block;
-        font-size: 1em;
-        height: 1em;
-        margin: 0 10px 10px 0;
-    }
-
-    table {
-        width: 100%;
-    }
+  }
 }
 
 @media (min-width: 1000px) {
-    .editor {
+  .editor {
 
-        .types {
+    .types {
 
-            div {
-                .Cols(2);
-
-            }
-        }
+      div {
+        .Cols(2);
+      }
     }
+  }
 }
