@@ -60,7 +60,7 @@ let Post = React.createClass({
       //                        </Link>
           let params = this.getParams();
           return (
-            <div>
+            <div className="post">
                 <div className="heading">
                     <Meta post={this.state.post} />
                     <h1>{this.state.post.title}</h1>

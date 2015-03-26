@@ -2,15 +2,16 @@
 let React = require('react');
 let Router = require('react-router');
 let { RouteHandler, Link } = Router;
+let moment = require('moment');
+
+let View401 = require('./401');
 
 let Actions = require('../actions/editor');
 let Store = require('../stores/editor');
+
 let token = require('../token');
-let moment = require('moment');
 let tax = require('../taxonomy');
 //let RTE = require('rte');
-let msg = require('../actions/alerts').add;
-let View401 = require('./401');
 
 let Editor = React.createClass({
 	 mixins: [Router.State],
@@ -29,17 +30,18 @@ let Editor = React.createClass({
 });
 
 Editor.List = React.createClass({
+	mixins: [Router.Navigation],
 	getInitialState: function () {
 		return {
 			posts: []
 		}
 	},
 	add: function () {
-    //this.navigate("/editor/add");
+		this.transitionTo("add");
 	},
 	edit: function (e) {
 		let id = e.currentTarget.id;
-		//this.navigate("/editor/" + id);
+		this.transitionTo("edit", {id: id});
 	},
 	componentDidMount: function () {
 		let self = this;
@@ -77,29 +79,6 @@ Editor.List = React.createClass({
 	}
 });
 
-/*
-<div className="format">
-	<select>
-		<option>Paragraph</option>
-		<option>Heading 1</option>
-		<option>Heading 2</option>
-		<option>Heading 3</option>
-		<option>Heading 4</option>
-		<option>Heading 5</option>
-		<option>Heading 6</option>
-		<option>Code</option>
-	</select>
-	<button className="fa fa-bold"></button>
-	<button className="fa fa-italic"></button>
-	<button className="fa fa-underline"></button>
-	<button className="fa fa-align-left"></button>
-	<button className="fa fa-align-center"></button>
-	<button className="fa fa-align-justify"></button>
-	<button className="fa fa-align-right"></button>
-	<button className="fa fa-list-ul"></button>
-	<button className="fa fa-list-ol"></button>
-</div>
-*/
 Editor.Fields = React.createClass({
 	getInitialState: function () {
 		return {
@@ -147,7 +126,7 @@ Editor.Fields = React.createClass({
 	render: function () {
     let remove, privacy;
     if (this.props.postID) {
-        remove = <button ref="remove" className="button red">Delete Post</button>
+        remove = <button ref="remove" className="button red">Delete Post <i className="fa fa-trash" /></button>
     }
     privacy = this.state.post.privacy || 'private';
 		return (
@@ -163,15 +142,18 @@ Editor.Fields = React.createClass({
 				</select>
 				<Tags ref="tags"></Tags>
 				<TextEditor ref="rte" post={this.state.post} change={this.change}></TextEditor>
-				<h3>Post Details</h3>
 				<Details ref="details" post={this.state.post} change={this.change}></Details>
 				<Links ref="links"></Links>
 				<div ref="actions" className="actions">
           <button ref="save" className="button green" onClick={this.save}>
               {this.state.post.id ? "Update Post" : "Create New Post"}
+							<i className="fa fa-pencil" />
           </button>
           {remove}
-          <button ref="back" className="button blue" onClick={this.list}>Back to List</button>
+          <button ref="back" className="button blue" onClick={this.list}>
+						Back to List
+						<i className="fa fa-list" />
+					</button>
     		</div>
 			</div>
 		);
@@ -206,26 +188,44 @@ let Details = React.createClass({
     	  //type = 'blog';
 	  }
 	  return (
-		<div>
-			<div>Please select a type before saving</div>
-			<form ref="type">
-    			<input type="radio" name="type" value="blog" onChange={this.select} checked={(type == 'blog') ? true : false} />
-    			<strong>Blog:</strong> General Post type, start here if you dont know what to choose<br />
-    			<input type="radio" name="type" value="event" onChange={this.select} checked={(type == 'event') ? true : false} />
-    			<strong>Event:</strong> Virtual or real-world event<br />
-    			<input type="radio" name="type" value="subject" onChange={this.select} checked={(type == 'subject') ? true : false} />
-    			<strong>Subject:</strong> Share your knowledge or expertise with the community on a letiety of Subjects<br />
-    			<input type="radio" name="type" value="question" onChange={this.select} checked={(type == 'question') ? true : false} />
-    			<strong>Question:</strong> Need help or clarification on a topic? Ask it with a Question<br />
-    			<input type="radio" name="type" value="debate" onChange={this.select} checked={(type == 'debate') ? true : false} />
-    			<strong>Debate:</strong> Get the discussion started with a local, county, state or national-level Debate<br />
-    			<input type="radio" name="type" value="quote" onChange={this.select} checked={(type == 'quote') ? true : false} />
-    			<strong>Quote:</strong> Has someone else already described how you feel? Post their Quote here<br />
-    			<input type="radio" name="type" value="belief" onChange={this.select} checked={(type == 'belief') ? true : false} />
-    			<strong>Belief:</strong> Tell us more about your Belief on something dear to you<br />
-			</form>
-			<Meta ref="meta" post={this.props.post} change={this.props.change} />
-		</div>
+			<div className="details">
+				<div className="types">
+						<h3>Please select a type before saving</h3>
+	    			<div className="blog ">
+		    			<strong>Blog</strong>
+							<p>General Post type, start here if you dont know what to choose</p>
+						</div>
+	    			<div className="event">
+		    			<strong>Event</strong>
+							<p>Virtual or real-world event</p>
+						</div>
+	    			<div className="subject">
+		    			<strong>Subject</strong>
+							<p>Share your knowledge or expertise with the community on a letiety of Subjects</p>
+						</div>
+	    			<div className="question">
+		    			<strong>Question</strong>
+							<p>Need help or clarification on a topic? Ask it with a Question</p>
+						</div>
+	    			<div className="debate">
+		    			<strong>Debate</strong>
+							<p>Get the discussion started with a local, county, state or national-level Debate</p>
+						</div>
+						<div className="poll">
+							<strong>Poll</strong>
+							<p>Get the discussion started with a local, county, state or national-level Debate</p>
+						</div>
+	    			<div className="quote">
+		    			<strong>Quote</strong>
+							<p>Has someone else already described how you feel? Post their Quote here</p>
+						</div>
+	    			<div className="belief selected">
+		    			<strong>Belief</strong>
+							<p>Tell us more about your Belief on something dear to you</p>
+						</div>
+				</div>
+				<Meta ref="meta" post={this.props.post} change={this.props.change} />
+			</div>
 	  );
 	 }
 });
@@ -513,6 +513,5 @@ let Meta = React.createClass({
     	}
 	}
 });
-
 
 module.exports = Editor;

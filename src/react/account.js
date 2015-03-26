@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { RouteHandler } = Router;
+let { RouteHandler, Link } = Router;
 let Store = require('../stores/account');
 let Actions = require('../actions/account');
 let token = require('../token');
@@ -10,28 +10,24 @@ let View401 = require('./401');
 let Account = React.createClass({
      getInitialState: function () {
          return {
-            user: {
-                id: null,
-                pic: "",
-                username: "",
-                first: "",
-                last: "",
-                email: "",
-                phone: "",
-                company: "",
-                occupation: "",
-                website: "",
-                dob: "",
-                gender: "",
-                address: {
-                    street: "",
-                    city: "",
-                    state: "",
-                    zip: ""
-                }
-            },
-            notifications: [],
-            history: []
+          id: 4,
+          img: "2",
+          username: "jessedrelick",
+          first: "Jesse",
+          last: "Drelick",
+          email: "info@jessedrelick.com",
+          phone: "(603)783-1358",
+          company: "Tyco Int.",
+          occupation: "Front-End Engineer",
+          website: "www.jessedrelick.com",
+          dob: "July 9, 1987",
+          gender: "M",
+          address: {
+              street: "100 White Cap Lane",
+              city: "Newport Coast",
+              state: "CA",
+              zip: "92657"
+          }
         }
      },
      save: function () {
@@ -50,7 +46,9 @@ let Account = React.createClass({
                 <div className="account">
                     <h1>My Account</h1>
                     <div className="heading">
-                        <PicUploader {...this.state.user} />
+                        <Pic {...this.state} />
+                        <Profile {...this.state} />
+                        <Posts {...this.state} />
                     </div>
                     <RouteHandler {...this.state} />
                 </div>
@@ -63,37 +61,87 @@ let Account = React.createClass({
      }
 });
 
-let PicUploader = React.createClass({
-    logout: function () {
-	    token.remove()
-	    this.forceUpdate();
-	 },
+let Pic = React.createClass({
     render: function () {
     //<Link href="/account/password">Change my password</Link>
         return (
-            <div className="uploader">
-                <div className="pic">
-                    <img src={"/assets/avatars/" + this.props.img + ".jpg"} height="200" />
-                </div>
-                <form action={`/rest/pic/${this.props.id}`} method="post" encType="multipart/form-data" target="upload">
-                  <input type="file" ref="pic" id="pic" />
-                  <input type="hidden" ref="type" value="user" />
-                </form>
+            <div className="pic">
+                <img src={`/assets/avatars/${this.props.img}.jpg`} />
                 <br />
-                <a onClick={this.logout}>Logout</a>
+                <Link to="update">Edit Account</Link>
                 <br />
+                <a onClick={this._logout}>Logout</a>
+                <br />
+            </div>
+        );
+    },
+    _logout: function () {
+      token.remove()
+      this.forceUpdate();
+   }
+});
+
+let Profile = React.createClass({
+    render: function () {
+    //<Link href="/account/password">Change my password</Link>
+        return (
+            <div className="profile">
+              <h2><Link to="user" params={{id: this.props.id}}>{this.props.username}</Link></h2>
+              <div>{`Full Name: ${this.props.first} ${this.props.last}`}</div>
+              <div>{this.props.address.city}, {this.props.address.state}</div>
+              <div>{this.props.company}</div>
+              <div>{this.props.dob}</div>
+              <div>{this.props.gender}</div>
+            </div>
+        );
+    },
+    _logout: function () {
+      token.remove()
+      this.forceUpdate();
+   }
+});
+
+let Posts = React.createClass({
+    render: function () {
+        return (
+            <div className="posts">
+              <button className="button blue">My Posts (45)</button>
+              <br />
+              <button className="button gold">98</button>
             </div>
         );
     }
 });
 
 Account.Edit = React.createClass({
+    getInitialState: function () {
+        return {
+         id: null,
+         pic: "",
+         username: "",
+         first: "",
+         last: "",
+         email: "",
+         phone: "",
+         company: "",
+         occupation: "",
+         website: "",
+         dob: "",
+         gender: "",
+         address: {
+             street: "",
+             city: "",
+             state: "",
+             zip: ""
+         }
+       }
+    },
     render: function () {
         return (
-            <div>
-                <Info {...this.props.user} />
-                <Details {...this.props.user} />
-                <Address {...this.props.user} />
+            <div className="update">
+                <Info {...this.state} />
+                <Details {...this.state} />
+                <Address {...this.state} />
                 <Social />
             </div>
         );
@@ -109,6 +157,12 @@ let Info = React.createClass({
     render: function () {
         return (
           <div className="info">
+          <img src={`/assets/avatars/${this.props.img}.jpg`} height="200" />
+          <form action={`/rest/pic/${this.props.id}`} method="post" encType="multipart/form-data" target="upload">
+            <input type="file" ref="pic" id="pic" />
+            <input type="hidden" ref="type" value="user" />
+          </form>
+          <br />
             <div id="user_basic">
                 <label>Username</label>
                 <input ref="username" className="username" type="text" value={this.props.username} disabled="true" />
@@ -226,13 +280,21 @@ Account.Password = React.createClass({
 });
 
 Account.Notifications = React.createClass({
+    getInitialState: function () {
+      return {
+        notifications: []
+      }
+    },
     componentDidMount: function () {
+      Store.listen( (data) => {
+          this.setState(data);
+      });
       Actions.notifications();
     },
     render: function () {
-        let views = this.props.notifications[0] || [];
-        let comments = this.props.notifications[1] || [];
-        let thumbs = this.props.notifications[2] || [];
+        let views = this.state.notifications[0] || [];
+        let comments = this.state.notifications[1] || [];
+        let thumbs = this.state.notifications[2] || [];
 
         views = views.map(function (item) {
            return <li key={item.id}><img src={`/assets/avatars/${item.viewer.img}.jpg`} /><a href={`/user/${item.viewer.id}`}>{item.viewer.username}</a> viewed your profile</li>;
@@ -252,13 +314,21 @@ Account.Notifications = React.createClass({
 });
 
 Account.History = React.createClass({
+    getInitialState: function () {
+      return {
+        history: []
+      }
+    },
     componentDidMount: function () {
+      Store.listen( (data) => {
+          this.setState(data);
+      });
       Actions.history();
     },
     render: function () {
-        let views = this.props.history[0] || [];
-        let comments = this.props.history[1] || [];
-        let thumbs = this.props.history[2] || [];
+        let views = this.state.history[0] || [];
+        let comments = this.state.history[1] || [];
+        let thumbs = this.state.history[2] || [];
 
         views = views.map(function (item) {
            return <li key={item.id}><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed <img src={"/assets/avatars/1.jpg"} /><a href={"/user/"}></a></li>;

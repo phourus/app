@@ -9,10 +9,25 @@ let { User, Org } = Actions;
 let Profile = React.createClass({
      mixins: [Router.State],
      getInitialState: function () {
-        return {
-            id: "",
-            type: "",
-            profile: {}
+         return {
+          id: 4,
+          img: "2",
+          username: "jessedrelick",
+          first: "Jesse",
+          last: "Drelick",
+          email: "info@jessedrelick.com",
+          phone: "(603)783-1358",
+          company: "Tyco Int.",
+          occupation: "Front-End Engineer",
+          website: "www.jessedrelick.com",
+          dob: "July 9, 1987",
+          gender: "M",
+          address: {
+              street: "100 White Cap Lane",
+              city: "Newport Coast",
+              state: "CA",
+              zip: "92657"
+          }
         }
      },
      componentDidMount: function () {
@@ -27,6 +42,7 @@ let Profile = React.createClass({
           return (
             <div className="profile">
                 <Heading {...this.state} />
+                <Tabs />
                 <RouteHandler {...this.state} />
             </div>
           );
@@ -37,7 +53,7 @@ let Heading = React.createClass({
     render: function () {
         return (
             <div className="heading">
-                <h1>{this.props.profile.username || this.props.profile.shortname}</h1>
+                <Pic className="basic" {...this.props} />
                 <Basic className="basic" {...this.props} />
                 <Details className="details" {...this.props} />
                 <Stats className="stats" {...this.props} />
@@ -46,14 +62,37 @@ let Heading = React.createClass({
     }
 });
 
+let Pic = React.createClass({
+    render: function () {
+    //<Link href="/account/password">Change my password</Link>
+        return (
+            <div className="pic">
+                <img src={`/assets/avatars/${this.props.img}.jpg`} />
+            </div>
+        );
+    },
+    _logout: function () {
+      token.remove()
+      this.forceUpdate();
+   }
+});
+
 let Basic = React.createClass({
     render: function () {
         return (
-          <div className="basic">Basic</div>
+          <div className="basic">
+            <h2><Link to="user" params={{id: this.props.id}}>{this.props.username || this.props.shortname}</Link></h2>
+            <div>{`Full Name: ${this.props.first} ${this.props.last}`}</div>
+            <div>{this.props.address.city}, {this.props.address.state}</div>
+            <div>{this.props.company}</div>
+            <div>{this.props.dob}</div>
+            <div>{this.props.gender}</div>
+          </div>
         );
     }
 });
 
+/** MOVE DETAILS TO ABOUT **/
 let Details = React.createClass({
     render: function () {
 /*
@@ -118,6 +157,49 @@ let Stats = React.createClass({
 
           </div>
         );
+    }
+});
+
+let Tabs = React.createClass({
+    mixins: [Router.Navigation],
+    getInitialState: function () {
+      return {
+        id: 3,
+        influence: 66,
+        posts: 23,
+        orgs: 2,
+        events: 6,
+        reviews: 45
+      }
+    },
+    render: function () {
+      return (
+        <div className="tabs">
+          <div onClick={this._select.bind(this, 'rank')}>
+            <div className="number">{this.state.influence}</div>
+            <div className="label">Influence</div>
+          </div>
+          <div onClick={this._select.bind(this, 'posts')}>
+            <div className="number">{this.state.posts}</div>
+            <div className="label">Posts</div>
+          </div>
+          <div onClick={this._select.bind(this, 'organizations')}>
+            <div className="number">{this.state.orgs}</div>
+            <div className="label">Organizations</div>
+          </div>
+          <div onClick={this._select.bind(this, 'events')}>
+            <div className="number">{this.state.events}</div>
+            <div className="label">Events</div>
+          </div>
+          <div onClick={this._select.bind(this, 'reviews')}>
+            <div className="number">{this.state.reviews}</div>
+            <div className="label">Reviews</div>
+          </div>
+        </div>
+      )
+    },
+    _select: function (id) {
+      this.transitionTo(id, {id: this.state.id});
     }
 });
 

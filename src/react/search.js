@@ -7,62 +7,103 @@ let moment = require('moment');
 let Store = require('../stores/search');
 let Actions = require('../actions/search');
 
+let Popularity = require('../popularity');
+
 let Search = React.createClass({
 	 getInitialState: function () {
-    	 return {
-            posts: [],
-            exclude: [],
-            search: '',
-            sort: 'influence',
-            direction: 'DESC',
-            page: 1,
-            limit: 10,
-            total: 0
-        }
-     },
-	 search: function () {
-	     let val = this.refs.term.getDOMNode().value;
-       Actions.search(val);
-	 },
-	 toggleFilter: function (e) {
-    	let id = e.currentTarget.id;
-    	let prop = id + "Visible";
-    	let obj = {};
-    	let visibility = this.state[prop] == true ? false : true;
-    	obj[prop] = visibility;
-    	Actions.type(obj);
-	 },
-     componentDidMount: function () {
-        let self = this;
-				Store.listen(function (data) {
-						self.setState(data);
-				});
-        Actions.collection({});
+			 return {
+						posts: [],
+						exclude: [],
+						search: '',
+						sort: 'influence',
+						direction: 'DESC',
+						page: 1,
+						limit: 10,
+						total: 0
+				}
+		 },
+	 componentDidMount: function () {
+			let self = this;
+			Store.listen(function (data) {
+					self.setState(data);
+			});
+			Actions.collection({});
 	 },
 	 componentWillUnmount: function () {
-    	 // Store.stoplistening?
+			 // Store.stoplistening?
 	 },
 	 render: function () {
-		  let visible = "fa fa-minus-square-o";
-		  let hidden = "fa fa-plus-square-o";
-		  return (
+			let visible = "fa fa-minus-square-o";
+			let hidden = "fa fa-plus-square-o";
+			return (
 			<div className="search">
-				<div className="keywords">
-    				<input ref="term" className="term" type="text" placeholder="search for" />
-    				<button className="button green" ref="search" onClick={this.search}><i className="fa fa-search" /></button>
-				</div>
-                <h3 id="dates" onClick={this.toggleFilter}><i className={this.state.datesVisible ? visible : hidden} /> Date Range:</h3>
-				<Dates datesVisible={this.state.datesVisible} />
-				<hr />
-				<h3 id="types" onClick={this.toggleFilter}><i className={this.state.typesVisible ? visible : hidden} /> Toggle Content:</h3>
-				<Types typesVisible={this.state.typesVisible} exclude={this.state.exclude} />
-				<hr />
-				<Filter sortVisible={this.props.sortVisible} />
-				<Pagination ref="pagination" page={this.state.page} total={this.state.total} limit={this.state.limit} />
+				<Head {...this.state} />
 				<Posts posts={this.state.posts} />
+				<Foot {...this.state} />
 			</div>
-		  )
+			)
 	 }
+});
+
+let Head = React.createClass({
+	getInitialState: function () {
+		return { mode: 0 };
+	},
+	render: function () {
+		let popup = '';
+		if (this.state.mode === 1) {
+			popup = <Filter {...this.props} />
+		}
+		if (this.state.mode === 2) {
+			popup = <Sort {...this.props} />
+		}
+		return (
+			<div className="heading">
+				<div className="keywords">
+						<input ref="term" className="term" type="text" placeholder="Search for" />
+						<button className="button blue" ref="search" onClick={this._search}><i className="fa fa-search" /> Search</button>
+				</div>
+				<div className="refine">
+					<Context />
+					<div className="toggles">
+						<button className="fa fa-filter" onClick={this._filter}></button>
+						<button className="fa fa-sort" onClick={this._sort}></button>
+					</div>
+				</div>
+				{popup}
+			</div>
+		);
+	},
+	_search: function () {
+			let val = this.refs.term.getDOMNode().value;
+			Actions.search(val);
+	},
+	_filter: function () {
+		this.setState({mode: 1});
+	},
+	_sort: function () {
+		this.setState({mode: 2});
+	}
+});
+
+let Foot = React.createClass({
+	render: function () {
+		return (
+			<div className="foot">
+				<Pagination ref="pagination" page={this.props.page} total={this.props.total} limit={this.props.limit} />
+			</div>
+		);
+	}
+});
+
+let Context = React.createClass({
+	render: function () {
+		return (
+			<div className="context">
+				Viewing posts by:
+			</div>
+		);
+	}
 });
 
 let Groups = React.createClass({
@@ -74,104 +115,121 @@ let Groups = React.createClass({
 });
 
 let Filter = React.createClass({
+	render: function () {
+		return (
+			<div className="filter">
+				<div className="triangle"></div>
+				<div className="label">Filter By</div>
+				<Types />
+				<div className="label">Date Range</div>
+				<Dates />
+				<button className="clear">
+					Clear All <i className="fa fa-close" />
+				</button>
+				<button className="apply">
+					Apply <i className="fa fa-check" />
+				</button>
+			</div>
+		);
+	},
+	toggleFilter: function (e) {
+		let id = e.currentTarget.id;
+		let prop = id + "Visible";
+		let obj = {};
+		let visibility = this.state[prop] == true ? false : true;
+		obj[prop] = visibility;
+		Actions.type(obj);
+	}
+});
+
+let Sort = React.createClass({
 	sort: function (e) {
-    	Actions.sortBy(e.target.value);
+			Actions.sortBy(e.target.value);
 	},
 	direction: function (e) {
-      Actions.direction(e.target.value);
+			Actions.direction(e.target.value);
 	},
 	render: function () {
 		return (
-			<div>
-			  <div className="filter">
-			      <div className="label">Sort by</div>
-				  <select className="sort" onChange={this.sort} ref="sort">
-					  <option value="influence">Influence</option>
-					  <option value="views">Views</option>
-					  <option value="popularity">Popularity</option>
-					  <option value="thumbs">Thumbs</option>
-					  <option value="comments">Comments</option>
-					  <option value="location">Location</option>
-					  <option value="createdAt">Date</option>
-				  </select>
-				  <select className="direction" onChange={this.direction} ref="direction">
-					  <option value="DESC">High to Low</option>
-					  <option value="ASC">Low to High</option>
-				  </select>
-			  </div>
-           </div>
+			<div className="sortby">
+				<div className="triangle"></div>
+				<div className="label">Sort by</div>
+				<ul className="sort" onClick={this.sort} ref="sort">
+					<li className="influence selected"><i className="fa fa-check" /> Influence</li>
+					<li className="views"><i className="fa fa-check" /> Views</li>
+					<li className="popularity"><i className="fa fa-check" /> Popularity</li>
+					<li className="thumbs"><i className="fa fa-check" /> Thumbs</li>
+					<li className="comments"><i className="fa fa-check" /> Comments</li>
+					<li className="location"><i className="fa fa-check" /> Location</li>
+					<li className="createdAt"><i className="fa fa-check" /> Date</li>
+				</ul>
+				<div className="direction"  ref="direction">
+					<button className="DESC selected" onChange={this.direction}>
+							<i className="fa fa-arrow-down" /> High to Low
+					</button>
+					<button className="ASC" onChange={this.direction}>
+						<i className="fa fa-arrow-up" /> Low to High
+					</button>
+				</div>
+			</div>
 		);
 	}
 });
 
 let Dates = React.createClass({
-    dates: function () {
-
-    },
 	render: function () {
 		return (
-		  <div className={this.props.datesVisible ? 'show' : 'hide'}>
-			<div>
-			<label>Start:</label>
-			<select>
-			  <option>January</option>
-			</select>
-			<select className="date">
-				<option>1</option>
-			</select>
-			<select>
-				<option>2014</option>
-			</select>
+			<div className="dates">
+				<div>
+					<label>From:</label>
+					<button><i className="fa fa-calendar" /></button>
+					<input />
+				</div>
+				<div>
+					<label>To:</label>
+					<button><i className="fa fa-calendar" /></button>
+					<input />
+				</div>
 			</div>
-			<div>
-			<label>End:</label>
-			<select>
-				<option>January</option>
-			</select>
-			<select className="date">
-				<option>1</option>
-			</select>
-			<select>
-				<option>2015</option>
-			</select>
-			</div>
-		  </div>
 		);
 	}
 });
 
 let Types = React.createClass({
+	getInitialState: function () {
+		return {
+			exclude: []
+		}
+	},
 	toggle: function (e) {
-	    let type = e.currentTarget.id;
-	    let exclude = this.props.exclude;
-	    let index = exclude.indexOf(type);
-	    if (index > -1) {
-    	    exclude.splice(index, 1);
-	    } else {
-    	    exclude.push(type);
-	    }
-	    Actions.types(exclude);
+			let type = e.currentTarget.id;
+			let exclude = this.props.exclude;
+			let index = exclude.indexOf(type);
+			if (index > -1) {
+					exclude.splice(index, 1);
+			} else {
+					exclude.push(type);
+			}
+			Actions.types(exclude);
 	},
 	off: function (type) {
-    	let exclude = this.props.exclude;
-    	if (exclude.length && exclude.indexOf(type) > -1) {
-    	    return 'off ';
-        }
-        return '';
+			let exclude = this.state.exclude;
+			if (exclude.length && exclude.indexOf(type) > -1) {
+					return 'off ';
+				}
+				return '';
 	},
 	render: function () {
 		return (
-			<div className={this.props.typesVisible ? 'show' : 'hide'}>
-			  <div className="types">
-				  <button id="blogs" value="blog" className={(this.off('blogs')) + "button green"} onClick={this.toggle}><i className="fa fa-laptop" /> Blogs</button>
-				  <button id="events" value="event" className={(this.off('events')) + " button green"} onClick={this.toggle}><i className="fa fa-calendar" /> Events</button>
-				  <button id="subjects" value="subject" className={(this.off('subjects')) + " button blue"} onClick={this.toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
-				  <button id="questions" value="question" className={(this.off('questions')) + " button blue"} onClick={this.toggle}><i className="fa fa-question" /> Questions</button>
-				  <button id="debates" value="debate" className={(this.off('debates')) + " button red"} onClick={this.toggle}><i className="fa fa-bullhorn" /> Debates</button>
-				  <button id="bills" value="bill" className={(this.off('bills')) + " button red"} onClick={this.toggle}><i className="fa fa-line-chart" /> Bills</button>
-				  <button id="beliefs" value="belief" className={(this.off('beliefs')) + " button orange"} onClick={this.toggle}><i className="fa fa-road" /> Paths</button>
-				  <button id="quotes" value="quote" className={(this.off('quotes')) + " button orange"} onClick={this.toggle}><i className="fa fa-quote-right" /> Quotes</button>
-			  </div>
+			<div className="types">
+				<button id="blogs" value="blog" className={(this.off('blogs')) + "button green"} onClick={this.toggle}><i className="fa fa-laptop" /> Blogs</button>
+				<button id="events" value="event" className={(this.off('events')) + " button green"} onClick={this.toggle}><i className="fa fa-calendar" /> Events</button>
+				<button id="subjects" value="subject" className={(this.off('subjects')) + " button blue"} onClick={this.toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
+				<button id="questions" value="question" className={(this.off('questions')) + " button blue"} onClick={this.toggle}><i className="fa fa-question" /> Questions</button>
+				<button id="debates" value="debate" className={(this.off('debates')) + " button red"} onClick={this.toggle}><i className="fa fa-bullhorn" /> Debates</button>
+				<button id="bills" value="bill" className={(this.off('bills')) + " button red"} onClick={this.toggle}><i className="fa fa-line-chart" /> Bills</button>
+				<button id="beliefs" value="belief" className={(this.off('beliefs')) + " button gold"} onClick={this.toggle}><i className="fa fa-road" /> Paths</button>
+				<button id="quotes" value="quote" className={(this.off('quotes')) + " button gold"} onClick={this.toggle}><i className="fa fa-quote-right" /> Quotes</button>
 			</div>
 		);
 	}
@@ -179,25 +237,21 @@ let Types = React.createClass({
 
 let Pagination = React.createClass({
 	next: function () {
-	    if ( Math.ceil(this.props.page * this.props.limit) < this.props.total ) {
+			if ( Math.ceil(this.props.page * this.props.limit) < this.props.total ) {
 					Actions.page(this.props.page++)
-	    }
+			}
 	},
 	previous: function () {
-        if (this.props.page > 1) {
-    	    Actions.page(this.props.page--);
-	    }
+				if (this.props.page > 1) {
+					Actions.page(this.props.page--);
+			}
 	},
 	render: function () {
 		let pages = Math.ceil(this.props.total / this.props.limit);
 		return (
 			<div className="pagination">
+				<div>Displaying page {this.props.page} of {pages} out of {this.props.total} posts</div>
 				<button href="javascript:void(0)" ref="prev" className="button blue" onClick={this.previous}>Previous</button>
-				<div>
-    				<div>Page {this.props.page} of {pages}</div>
-    				<br />
-    				<div>Total Posts: {this.props.total}</div>
-				</div>
 				<button href="javascript:void(0)" ref="next" className="button blue" onClick={this.next}>Next</button>
 			</div>
 		);
@@ -211,11 +265,11 @@ let Posts = React.createClass({
 		let list = [];
 
 		list = data.map(function (item, i) {
-		   let location = {};
-		   if (item.user.locations && item.user.locations.length > 0) {
-    		   location = item.user.locations[0];
-		   }
-		   return <PostItem key={item.id} post={item} user={item.user} location={location} />;
+			 let location = {};
+			 if (item.user.locations && item.user.locations.length > 0) {
+					 location = item.user.locations[0];
+			 }
+			 return <PostItem key={item.id} post={item} user={item.user} location={location} />;
 		});
 
 		return (
@@ -235,6 +289,10 @@ let Posts = React.createClass({
 */
 
 let PostItem = React.createClass({
+	componentDidMount: function () {
+		let element = document.getElementById(`popularity${this.props.post.id}`);
+		let popularity = new Popularity(element, 0, this.props.post.popularity/100);
+	},
 	render: function () {
 		let meta = [];
 		let post = this.props.post;
@@ -248,30 +306,38 @@ let PostItem = React.createClass({
 		}
 		return (
 			<div className="postItem">
-				<h2><Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link></h2>
-				<div className="type"><i className="fa fa-bell" /> {this.props.post.type}</div>
-				<div className="pic">
-					<Link to="user" params={{id: this.props.user.id}}>
-					    <img src={`/assets/avatars/${this.props.user.img}.jpg`} />
-                    </Link>
-				</div>
-				<div className="basic">
-				  <h3>By <Link to="user" params={{id: this.props.user.id}}>{this.props.post.user.first} {this.props.post.user.last}</Link></h3>
-				  <div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
-				  <div className="location">{this.props.location.city} {this.props.location.state}</div>
-				</div>
-				<div className="detail">
-				  <ul>
-					{meta}
-				  </ul>
-				</div>
-				<div className="stats">
-				  <div className="influence">{this.props.post.influence}</div>
-				  <li>Views: {this.props.post.views}</li>
-				  <li>Comments: {this.props.post.totalComments}</li>
-				  <li>Popularity: {this.props.post.thumbs}</li>
+				<h2 className="title"><Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link></h2>
+				<div className="details">
+					<div className="pic">
+						<Link to="user" params={{id: this.props.user.id}}>
+								<img src={`/assets/avatars/${this.props.user.img}.jpg`} />
+						</Link>
+						<div className="influence">{this.props.post.influence}</div>
+					</div>
+					<div className="basic">
+						<span>By <Link to="user" params={{id: this.props.user.id}}>{this.props.post.user.first} {this.props.post.user.last} </Link></span>
+						&bull;
+						<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
+						<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
+					</div>
+					<div className="meta">
+						<ul>
+						{meta}
+						</ul>
+					</div>
 				</div>
 				<div className="content">{this.props.post.content}</div>
+				<div className="footing">
+					<div className="stats">
+						<div className="likes">
+							<canvas id={`popularity${this.props.post.id}`} width="100" height="100"></canvas>
+							Popularity
+						</div>
+						<div><i className="fa fa-eye" /><strong>10,324</strong> Views </div>
+						<div><i className="fa fa-comments" /><strong>1,323</strong> Comments</div>
+					</div>
+					<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
+				</div>
 			</div>
 		);
 	}
