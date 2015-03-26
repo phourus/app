@@ -18,12 +18,22 @@ let View404 = require('./react/404');
 module.exports = (
   <Route handler={App} path="/">
     <DefaultRoute handler={Landing} />
-    <Route name="leaders" handler={Leaders}  />
-    <Route name="search" handler={Search} />
+    <Route name="leaders" handler={Leaders}>
+      <DefaultRoute handler={Leaders.Posts} />
+      <Route name="topPosts" path="posts" handler={Leaders.Posts} />
+      <Route name="topUsers" path="users" handler={Leaders.Users} />
+      <Route name="topOrgs" path="orgs" handler={Leaders.Orgs} />
+      <Route name="topPhourus" path="phourus" handler={Leaders.Phourus} />
+    </Route>
     <Route name="post" path="/post/:id" handler={Post} />
     <Route name="general" handler={General} />
+    <Route name="search" path="search" handler={Search}>
+      <Route name="myPosts" path="me" handler={Search} />
+      <Route name="userPosts" path="user/:id" handler={Search} />
+      <Route name="orgPosts" path="org/:id" handler={Search} />
+    </Route>
     <Route name="account" path="account" handler={Account}>
-      <DefaultRoute handler={Account.Password} />
+      <DefaultRoute handler={Account.Notifications} />
       <Route name="notifications" path="notifications" handler={Account.Notifications} />
       <Route name="history" path="history" handler={Account.History} />
       <Route name="update" path="update" handler={Account.Edit} />
@@ -40,6 +50,8 @@ module.exports = (
         <Route name="about" path="about" handler={Profile.About} />
         <Route name="posts" path="posts" handler={Profile.Posts} />
         <Route name="rank" path="rank" handler={Profile.Rank} />
+        <Route name="members" path="members" handler={Profile.Membership} />
+        <Route name="organizations" path="organizations" handler={Profile.Membership} />
         <Route name="events" path="events" handler={Profile.Events} />
         <Route name="reviews" path="reviews" handler={Profile.Reviews} />
     </Route>

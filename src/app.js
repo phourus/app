@@ -12,9 +12,7 @@ let App = React.createClass({
             <div>
                 <header className="header">
                     <div className="brand">
-                    	<a href="./">
-                    		<img src="/assets/logos/logo-new.png" />
-                    	</a>
+                    	<a href="./"></a>
                     </div>
                     <nav className="nav">
                       <Link to="leaders" className="game fa fa-trophy"></Link>
@@ -34,7 +32,8 @@ let App = React.createClass({
                         <br />
                         <Link to="leaders">Home</Link> |
         				<Link to="general">About</Link> |
-        				<Link to="general">Terms</Link>
+        				<Link to="general">Terms</Link> |
+                  <Link to="general">Privacy</Link>
         				<br clear="all" />
                     </footer>
                 </div>

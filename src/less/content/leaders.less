@@ -1,0 +1,177 @@
+.leaders {
+
+  .profile {
+    border-top: solid 1px @grey-light;
+    border-bottom: solid 1px @grey-light;
+    margin-top: 20px;
+
+    .pic {
+      .Cols(3);
+    }
+
+    .info {
+      .Cols(4);
+    }
+
+    .compare {
+      .Cols(5);
+      text-align: right;
+
+      img {
+        width: 40%;
+      }
+    }
+  }
+
+  ul.tabs {
+    .Row(100%);
+    margin: 0;
+    padding: 0;
+    background-color: @gold;
+    border-top: solid 1px @gold-dark;
+    border-bottom: solid 1px @gold-dark;
+    border-left: solid 1px @gold-dark;
+    color: white;
+    text-align: center;
+    font-size: 0.8em;
+
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      .Cols(3);
+      box-sizing: border-box;
+      border-right: solid 1px @gold-dark;
+      border-left: solid 1px lighten(@gold, 10%);
+
+      a {
+        padding: 20px 0;
+        color: white;
+        display: block;
+
+        &:hover {
+            background-color: lighten(@gold, 10%);
+        }
+
+        i {
+          width: 100%;
+          font-size: 2em;
+        }
+      }
+    }
+  }
+
+  .tab {
+    background-color: fade(gold, 20%);
+    .Row(100%);
+    padding-bottom: 10px;
+
+    label {
+      .Cols(6);
+      padding: 20px 0 0 0;
+      margin: 0;
+
+      input, select {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .filter {
+    background-color: @theme-light;
+    .metric {
+
+    }
+
+    .elements {
+
+      .button {
+        font-size: 1.1em !important;
+        height: 60px;
+        color: white;
+
+        div {
+          color: black;
+          font-size: 0.7em;
+        }
+      }
+    }
+
+  }
+
+  .list {
+    .Row(100%);
+
+    > div {
+      .Cols(3);
+      margin: 0 2% 0 2%;
+      border: solid 1px @grey-light;
+      vertical-align: middle;
+
+      .heading {
+        background-color: @blue;
+        color: @grey-light;
+        font-size: 1em;
+        text-align: center;
+
+        i {
+          margin: 0 4px;
+        }
+      }
+
+      .center {
+
+        .centerText {
+          text-align: center;
+        }
+
+        img {
+          display: block;
+          margin: 10px auto;
+          width: 80%;
+        }
+      }
+
+      .footing {
+        background-color: @grey-light;
+        text-align: center;
+      }
+
+    }
+
+    > div:nth-child(2) {
+      .Cols(4);
+      vertical-align: middle;
+    }
+  }
+
+}
+
+@media (min-width: 600px) {
+  .leaders {
+
+    .tab {
+
+      label {
+        .Cols(3);
+      }
+    }
+
+    .filter {
+      .Row(100%);
+
+      .metric {
+        .Cols(3);
+      }
+
+      .elements {
+        .Cols(9);
+
+        .button {
+          display: inline;
+        }
+      }
+
+    }
+  }
+}

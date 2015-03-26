@@ -1,0 +1,51 @@
+#chart {
+  margin: 20px 0% 20px -5%;
+  width: 105%;
+
+  .c3-axis {
+    font-family: @font-serif;
+    font-size: 1em;
+    color: @theme-dark;
+  }
+  .c3-axis-y {
+    font-family: @font-serif;
+    font-size: 1em;
+    color: @theme-dark;
+  }
+  .domain {
+    fill: @theme-dark !important;
+    size: 1px;
+  }
+
+  .c3-legend-item {
+    display: none;
+  }
+
+  .c3-bar-0 { stroke: @red !important; fill: @red !important; }
+  .c3-bar-1 { stroke: @red !important; fill: @red !important; }
+  .c3-bar-2 { stroke: @gold !important; fill: @gold !important; }
+  .c3-bar-3 { stroke: @gold !important; fill: @gold !important; }
+  .c3-bar-4 { stroke: @green !important; fill: @green !important; }
+  .c3-bar-5 { stroke: @green !important; fill: @green !important; }
+  .c3-bar-6 { stroke: @green !important; fill: @green !important; }
+  .c3-bar-7 { stroke: @blue !important; fill: @blue !important; }
+  .c3-bar-8 { stroke: @blue !important; fill: @blue !important; }
+  .c3-bar-9 { stroke: @blue !important; fill: @blue !important; }
+}
+
+
+@media (min-width: 500px) {
+
+  #chart {
+    margin-left: 2%;
+    margin-right: 8%;
+    width: 90%;
+
+    .c3-axis {
+      font-size: 2em;
+    }
+    .c3-axis-y {
+      font-size: 1.5em;
+    }
+  }
+}

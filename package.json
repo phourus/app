@@ -11,7 +11,7 @@
   "dependencies": {
     "express": "4.0.x",
     "gulp-cssmin": "^0.1.6",
-    "gulp-less": "^2.0.1",
+    "gulp-less": "^3.0.1",
     "localStorage": "^1.0.3",
     "moment": "^2.9.0",
     "node-jsx": "^0.12.0",
