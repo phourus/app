@@ -1,4 +1,5 @@
 "use strict";
+var config = require("./config").get('app');
 var babel = require('babel/register');
 var fs = require('fs');
 var express = require('express');
@@ -21,6 +22,6 @@ phourus.get('*', function(req, res){
     });
 });
 
-phourus.listen(4567, function(){
+phourus.listen(config.port, function(){
     console.log('server started');
 });

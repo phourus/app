@@ -1,6 +1,7 @@
+let config = require('../../config').get("socket");
 let token = require('../token');
 let io = require('socket.io-client');
-let socket = io('http://localhost:3000/account', {query: 'token=' + token.get()});
+let socket = io(`${config.url}:${config.port}/account`, {query: 'token=' + token.get()});
 
 socket.register = function (email, password) {
     socket.emit('postRegister', email, password);

@@ -1,6 +1,7 @@
+let config = require('../../config').get("socket");
 let token = require('../token');
 let io = require('socket.io-client');
-let socket = io('http://localhost:3000/posts', {query: 'token=' + token.get()});
+let socket = io(`${config.url}:${config.port}/posts`, {query: 'token=' + token.get()});
 
 socket.single = function (id) {
     socket.emit('getSingle', id);
