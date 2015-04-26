@@ -38,5 +38,4 @@ var conf = convict({
 });
 
 conf.validate();
-console.log(conf.toString());
 module.exports = conf;
