@@ -277,7 +277,21 @@
         }
       }
       .meta {
-        display: none;
+        .Cols(12);
+
+        ul {
+          margin: 0;
+          padding: 0;
+
+          li {
+            list-style: none;
+            font-size: 0.8em;
+            color: @theme-light;
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+          }
+        }
       }
     }
 
@@ -336,8 +350,26 @@
   .search {
 
     .postItem {
-      .pic, .basic, .detail, .stats {
-        .Cols(3);
+
+      .details {
+        .pic {
+          .Cols(3);
+        }
+        .basic {
+          .Cols(6);
+        }
+        .meta {
+          .Cols(3);
+          text-align: right;
+
+          .influence {
+            float: right;
+          }
+
+          ul {
+            clear: right;
+          }
+        }
       }
     }
 

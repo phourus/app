@@ -2,7 +2,6 @@
 
 var browserify = require('browserify');
 var babelify = require('babelify');
-//var reactify = require('reactify');
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
@@ -41,7 +40,7 @@ gulp.task('javascript', function() {
 gulp.task('css', function () {
   gulp.src('./src/less/style.less')
     .pipe(less())
-    .pipe(cssmin())
+    //.pipe(cssmin())
     .pipe(gulp.dest('./build/'))
 });
 

@@ -50,8 +50,7 @@ module.exports = (
         <Route name="about" path="about" handler={Profile.About} />
         <Route name="posts" path="posts" handler={Profile.Posts} />
         <Route name="rank" path="rank" handler={Profile.Rank} />
-        <Route name="members" path="members" handler={Profile.Membership} />
-        <Route name="organizations" path="organizations" handler={Profile.Membership} />
+        <Route name="membership" path="membership" handler={Profile.Membership} />
         <Route name="events" path="events" handler={Profile.Events} />
         <Route name="reviews" path="reviews" handler={Profile.Reviews} />
     </Route>

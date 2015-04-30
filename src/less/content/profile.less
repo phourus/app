@@ -1,16 +1,25 @@
 .profile {
 
+  .name {
+    margin: 0;
+  }
+
   .heading {
     .Row(100%);
 
     .pic {
-      .Cols(2);
+      .Cols(4);
+
+      img {
+        margin: 5%;
+        width: 90%;
+      }
     }
     .basic {
-      .Cols(5);
+      .Cols(8);
     }
-    .stats  {
-      .Cols(4);
+    .details  {
+      display: none;
       text-align: right;
     }
   }
@@ -19,30 +28,169 @@
     .Row(100%);
 
     > div {
-      .Cols(2);
+      .Cols(2, 10);
+      text-align: center;
+      border-bottom: solid 1px @grey-light;
+      font-family: @font-serif;
+      font-size: 1em;
 
       &:hover {
         background-color: @grey-light;
         cursor: pointer;
       }
 
+      &.selected {
+        border-bottom: solid 4px @gold;
+      }
+
       .number {
         text-align: center;
-        font-size: 4em;
+        font-size: 3em;
         color: @gold;
+        line-height: 1em;
+        border-right: solid 1px @grey-light;
+      }
+
+      &:nth-child(5) .number {
+        border-right: none;
       }
 
       .label {
         display: block;
         color: #444;
-        font-size: 1em;
+        font-size: 0.9em;
       }
     }
   }
 
-  .viewInfo {}
+  .viewInfo {
+
+    .contact {
+      .Row(100%);
+
+      > div {
+        .Cols(12);
+        margin-top: 20px;
+
+        i {
+          .Cols(1);
+          font-size: 2em;
+        }
+
+        > div {
+          .Cols (11);
+
+          .email, .phone, .fax {
+            font-size: 0.9em;
+            color: @grey-dark;
+          }
+        }
+      }
+    }
+  }
   .viewRank {}
   .viewMembership {}
-  .viewReviews {}
+  .viewReviews {
+
+    > div {
+      .Row(100%);
+
+      .title {
+        margin-bottom: 0;
+      }
+
+      .pic {
+        .Cols(4);
+
+        img {
+          width: 80%;
+        }
+      }
+      .details {
+        .Cols(8);
+
+        .rating {
+          margin: 10px 0;
+
+          .stars {
+
+            &.stars1 { color: @red; }
+            &.stars2, &.stars3 { color: @gold; }
+            &.stars4 { color: @green; }
+            &.stars5 { color: @blue; }
+          }
+        }
+
+        .date {
+          font-size: 0.9em;
+          color: @grey-dark;
+          display: block;
+        }
+      }
+    }
+
+    button {
+      margin: auto;
+    }
+  }
   .viewEvents {}
+}
+
+@media (min-width: 600px) {
+  .profile {
+
+    .heading {
+
+      .pic {
+        .Cols(4);
+
+        img {
+          margin: 5%;
+          width: 90%;
+        }
+      }
+      .basic {
+        .Cols(6);
+      }
+      .details  {
+        .Cols(2);
+        display: inline-block;
+        text-align: right;
+      }
+    }
+
+    .tabs {
+
+      > div {
+        font-size: 1.2em;
+      }
+    }
+
+    .viewInfo {
+
+      .contact {
+
+        > div {
+          .Cols(6);
+        }
+      }
+    }
+
+    .viewReviews {
+
+      > div {
+
+        .pic {
+          .Cols(1);
+        }
+        .details {
+          .Cols(11);
+
+          .date {
+            display: inline;
+          }
+        }
+      }
+    }
+  }
 }

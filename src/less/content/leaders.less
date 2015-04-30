@@ -77,13 +77,36 @@
     }
   }
 
-  .filter {
-    background-color: @theme-light;
+  .visualization {
     .metric {
-
+      .Cols(3);
     }
+    .visual {
+      .Cols(3);
+    }
+    .date {
+      .Cols(6);
+
+      button {
+        float: right;
+
+        span {
+          font-size: 1.2em;
+        }
+
+        i {
+          font-size: 1.5em;
+        }
+      }
+    }
+  }
+
+  .filter {
+    .Row(100%);
+    background-color: @theme-light;
 
     .elements {
+      .Cols(3);
 
       .button {
         font-size: 1.1em !important;
