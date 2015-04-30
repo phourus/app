@@ -32,12 +32,12 @@ let Leaders = React.createClass({
         return (
           <div className="leaders">
             <h1>Leaders</h1>
-            <Tabs {...this.state} />
-            <RouteHandler {...this.state} />
-            <Filter {...this.state} />
             <Visualization {...this.state} />
             <List {...this.state} />
             <Profile {...this.state} />
+            <Tabs {...this.state} />
+            <RouteHandler {...this.state} />
+            <Filter {...this.state} />
           </div>
         );
      }
@@ -167,6 +167,13 @@ let Filter = React.createClass({
 });
 
 let Visualization = React.createClass({
+    getInitialState: function () {
+      return {
+          type: "donut",
+          metric: "likes",
+          data: [1345, 1280, 1156, 1002, 922, 897, 773, 625, 572, 412]
+      };
+    },
     render: function () {
       return (
         <div className="visualization">
@@ -180,20 +187,24 @@ let Visualization = React.createClass({
             </select>
           </div>
           <div className="visual">
-            <select>
+            <select onChange={this._visual}>
                 <option>Map</option>
                 <option>Heatmap</option>
-                <option>Bar chart</option>
-                <option>Pie chart</option>
+                <option value="bar">Bar chart</option>
+                <option value="donut">Pie chart</option>
                 <option>Area Chart</option>
             </select>
           </div>
           <div className="date">
-            <input />
+            <button className="button blue">3/15/2015 <i className="fa fa-calendar" /></button>
           </div>
-          <Chart />
+          <Chart {...this.state} />
         </div>
       );
+    },
+    _visual: function (e) {
+      let id = e.currentTarget.value;
+      this.setState({type: id});
     }
 });
 
@@ -209,40 +220,47 @@ let Map = React.createClass({
 });
 
 let Chart = React.createClass({
-  getInitialState: function () {
-    return {
-        type: "bar",
-        metric: "likes",
-        data: [1345, 1280, 1156, 1002, 922, 897, 773, 625, 572, 412]
-    };
-  },
-  componentDidMount: function () {
-    var columns = this.state.data;
-    columns.unshift(this.state.metric);
-    c3.generate({
-        data: {
-            columns: [columns],
-            type: this.state.type
-        },
-        bar: {
-            width: {
-                ratio: 0.8 // this makes bar width 50% of length between ticks
-            }
-        },
-        axis: {
-          x: {
-            tick: {
-              format: function (x) { return `#${x + 1}`; },
-              culling: false
-            }
-          }
-        }
-    });
-  },
   render: function () {
+    this._draw();
     return (
       <div id="chart"></div>
     );
+  },
+  _draw: function () {
+    let options = {};
+    let columns = this.props.data;
+
+    switch (this.props.type) {
+      case 'bar':
+        columns.unshift(this.props.metric);
+        options.data = {columns: [columns], type: this.props.type};
+        options.bar = {
+              width: {
+                  ratio: 0.8 // this makes bar width 50% of length between ticks
+              }
+          };
+        options.axis = {
+            x: {
+              tick: {
+                format: function (x) { return `#${x + 1}`; },
+                culling: false
+              }
+            }
+          };
+        break;
+      case 'donut':
+        options.data = {columns: [], type: this.props.type}
+        for (let i in columns) {
+          options.data.columns.push([`#${i}`, columns[i]]);
+        }
+
+        options.donut = {
+          title: "likes"
+        };
+        break;
+    }
+
+    c3.generate(options);
   }
 })
 

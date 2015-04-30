@@ -7,6 +7,7 @@ let moment = require('moment');
 let Store = require('../stores/search');
 let Actions = require('../actions/search');
 
+let Influence = require('../influence');
 let Popularity = require('../popularity');
 
 let Search = React.createClass({
@@ -312,7 +313,6 @@ let PostItem = React.createClass({
 						<Link to="user" params={{id: this.props.user.id}}>
 								<img src={`/assets/avatars/${this.props.user.img}.jpg`} />
 						</Link>
-						<div className="influence">{this.props.post.influence}</div>
 					</div>
 					<div className="basic">
 						<span>By <Link to="user" params={{id: this.props.user.id}}>{this.props.post.user.first} {this.props.post.user.last} </Link></span>
@@ -321,6 +321,7 @@ let PostItem = React.createClass({
 						<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
 					</div>
 					<div className="meta">
+						<Influence influence={this.props.post.influence}/>
 						<ul>
 						{meta}
 						</ul>
