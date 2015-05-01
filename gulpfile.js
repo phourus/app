@@ -11,7 +11,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var less = require('gulp-less');
 var cssmin = require('gulp-cssmin');
 
-//process.env.NODE_ENV = 'production';
+// save ~40kb from React
+process.env.NODE_ENV = 'production';
 
 gulp.task('javascript', function() {
 
@@ -20,8 +21,12 @@ gulp.task('javascript', function() {
     debug: true
   })
   .transform(babelify)
-  //.exclude('react')
-  //.exclude('socket.io-client');
+  // .exclude('react') // 120kb
+  // .exclude('socket.io-client') // 70kb
+  // .exclude('moment') // 60kb
+  // .exclude('convict') // 50kb
+  // .exclude('react-router') // 30kb
+  // .exclude('reflux') // 20kb
 
   var bundle = function() {
     return bundler
@@ -29,7 +34,7 @@ gulp.task('javascript', function() {
       .pipe(source('app.js'))
       .pipe(buffer())
       //.pipe(sourcemaps.init({loadMaps: true}))
-        //.pipe(uglify())
+      .pipe(uglify())
       //.pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('./build/'))
   };
