@@ -1,49 +1,27 @@
+"use strict";
+var config = require("./config").get('app');
+var babel = require('babel/register');
 var fs = require('fs');
 var express = require('express');
 var React = require('react');
-var jsx = require('node-jsx').install();
+var Router = require('react-router');
+
+var routes = require('./src/routes');
 
 var phourus = express();
-phourus.get('', function(req, res){
-    var template = fs.readFile('build/index.html', 'utf8', function(err, out){
-        //var component = renderComponent('landing');
-        //out = out.replace('$CONTENT', component);
-        res.send(out, 200);
-    });   
-});
-
-var respond = function(req, res){
-    var id, out;
-    id = req.route.path;
-    parts = id.split('/');
-    out = compile(parts[1]);
-    res.send(out, 200);
-}
-
-phourus.get('/search', respond);
-phourus.get('/post/:id', respond);
-phourus.get('/editor', respond);
-phourus.get('/profile/:id', respond);
-phourus.get('/account', respond);
-phourus.get('/game', respond);
-phourus.get('/general', respond);
-
-var compile = function(id){
-    var out;
-    var file = fs.readFileSync('build/template.html', 'utf8');
-    var component = renderComponent(id);
-    file = file.replace('$CONTENT', component);
-    //file = file.replace('$SCRIPT', '<script type="text/javascript" src="/react/' + id + '.js"></script>');
-    return file;   
-}
 
 phourus.use(express.static(__dirname + '/build'));
 
-function renderComponent(id){
-    var component = require('./src/react/' + id);
-    return React.renderToString(component());    
-}
+phourus.get('*', function(req, res){
+    var file, app, out;
+    file = fs.readFileSync('build/index.html', 'utf8');
+    Router.run(routes, req.url, function (Handler) {
+        var app = React.renderToString(React.createElement(Handler, null));
+        out = file.replace('$APP', app);
+        res.send(out, 200);
+    });
+});
 
-phourus.listen(4567, function(){
+phourus.listen(config.port, function(){
     console.log('server started');
 });

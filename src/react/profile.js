@@ -1,75 +1,104 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
+let React = require('react');
+let Router = require('react-router');
+let { Link, RouteHandler } = Router;
+let moment = require('moment');
+let msg = require('../actions/alerts').add;
+let Actions = require('../actions/profile');
+let { User, Org } = Actions;
 
-var Profile = React.createClass({
-     getDefaultProps: function () {
-       return {
-           profile: {
-               username: "jessedrelick",
-               type: "individual"       
-           },
-           stats: {
-               people: 1434,
-               members: 143,
-               pending: 22,
-               influence: 55
-           },
-           view: 'info',
-           widget: 'about'
-       }  
+let Profile = React.createClass({
+     mixins: [Router.State],
+     getInitialState: function () {
+         return {
+          id: 4,
+          img: "2",
+          username: "jessedrelick",
+          first: "Jesse",
+          last: "Drelick",
+          email: "info@jessedrelick.com",
+          phone: "(603)783-1358",
+          company: "Tyco Int.",
+          occupation: "Front-End Engineer",
+          website: "www.jessedrelick.com",
+          dob: "July 9, 1987",
+          gender: "M",
+          address: {
+              street: "100 White Cap Lane",
+              city: "Newport Coast",
+              state: "CA",
+              zip: "92657"
+          }
+        }
      },
      componentDidMount: function () {
-		var update = this.props.update;
-		$.ajax({
-			url: "/rest/account",
-			dataType: "json",
-			success: function (data) {
-				update({posts: data});
-			},
-			error: function (err) {
-				console.log(err);
-			}
-		});		
-	 },
-     update: function (obj) {
-		 this.setProps(obj);
-	 },
+        let params = this.getParams();
+    		if (params.type === 'org') {
+        		Org.single(params.id);
+    		} else {
+        		User.single(params.id);
+    		}
+  	 },
      render: function () {
           return (
             <div className="profile">
-                <Heading profile={this.props.profile} stats={this.props.stats} />
+                <h1 className="name"><Link to="user" params={{id: this.state.id}}>{this.state.username || this.state.shortname}</Link></h1>
+                <Heading {...this.state} />
                 <Tabs />
-                <Views widget={this.props.widget} profile={this.props.profile} stats={this.props.stats} />
+                <RouteHandler {...this.state} />
             </div>
           );
      }
 });
 
-var Heading = React.createClass({
+let Heading = React.createClass({
     render: function () {
         return (
             <div className="heading">
-                <h1>{this.props.profile.username}</h1>
-                <Basic className="basic" />
-                <Details className="details" stats={this.props.stats} profile={this.props.profile} />
-                <Stats className="stats" />
+                <Pic {...this.props} />
+                <Basic {...this.props} />
+                <Details {...this.props} />
             </div>
         );
-    }    
+    }
 });
 
-var Basic = React.createClass({
+let Pic = React.createClass({
+    render: function () {
+    //<Link href="/account/password">Change my password</Link>
+        return (
+            <div className="pic">
+              <Link to="user" params={{id: this.props.id}}>
+                <img src={`/assets/avatars/${this.props.img}.jpg`} />
+              </Link>
+            </div>
+        );
+    },
+    _logout: function () {
+      token.remove()
+      this.forceUpdate();
+   }
+});
+
+let Basic = React.createClass({
     render: function () {
         return (
-          <div className="basic">Basic</div>      
+          <div className="basic">
+            <div>{this.props.first} {this.props.last}</div>
+            <div>{this.props.address.city}, {this.props.address.state}</div>
+            <div>{this.props.company}</div>
+            <div>{this.props.dob}</div>
+            <div>{this.props.gender}</div>
+          </div>
         );
-    } 
+    }
 });
 
-var Details = React.createClass({
+/** MOVE DETAILS TO ABOUT **/
+let Details = React.createClass({
     render: function () {
-        var details;
+/*
+        let details;
         switch(this.props.profile.type){
             case 'individual':
                 details = <li></li>;
@@ -94,96 +123,324 @@ var Details = React.createClass({
                     {details}
             		<li><strong>Members:</strong> {this.props.stats.members}</li>
             		<li><strong>Pending:</strong> {this.props.stats.pending}</li>
-            	</ul>	 
+            	</ul>
             </div>
         );
-    } 
-});
+*/
+/*
+                <li><Link to={type + id + "/posts"}>1032 Posts</Link></li>
+                <li><Link href={type + id + "/members"}>244 Members</Link></li>
+                <li><Link href={type + id + "/events"}>15 Events</Link></li>
+                <li><Link href={type + id + "/reviews"}>22 Reviews</Link></li>
+*/
 
-var Stats = React.createClass({
-    render: function () {
+        let type, id;
+        //type = "/" + this.props._[0] + "/";
+        //id = this.props._[1];
         return (
-          <div className="stats">Stats</div>      
-        );
-    } 
-});
-
-var Tabs = React.createClass({
-    render: function () {
-        return (
-          <div className="tabs">
-              <ul>
-                <li><a href="/profile/1/about" className="selected">Info</a></li>
-                <li><a href="/profile/1/posts">Posts</a></li>
-                <li><a href="/profile/1/rank">Rank</a></li>
-                <li><a href="/profile/1/users">Members</a></li>
-                <li><a href="/profile/1/extras">Extras</a></li>
-              </ul>
+          <div className="details">
+            <Stats />
           </div>
         );
-    } 
+    }
 });
 
-var Views = React.createClass({
+let Stats = React.createClass({
+    mixins: [Router.State],
+    //<Link href={type + id + "/rank"}>View Rank</Link>
     render: function () {
+        let type, id;
+        let params = this.getParams();
+        //type = "/" + params.view + "/";
+        //id = params.view;
+
         return (
-            <div className="views">
-                <ViewInfo path="/profile/1/info" widget={this.props.widget} />
-                <ViewPosts path="/profile/1/posts" />
-                <ViewMembership path="/profile/1/membership" />
-                <ViewRank path="/profile/1/rank" />
-                <ViewExtras widget={this.props.widget} profile={this.props.profile} />
-            </div>
+          <div className="stats">
+            <div className="influence">67</div>
+
+          </div>
         );
-    } 
+    }
 });
 
+let Tabs = React.createClass({
+    mixins: [Router.Navigation, Router.State],
+    getInitialState: function () {
+      return {
+        id: 3,
+        influence: 66,
+        posts: 23,
+        orgs: 2,
+        events: 6,
+        reviews: 45
+      }
+    },
+    render: function () {
+      let view = this.context.getCurrentRoutes()[2].name;
+      return (
+        <div className="tabs">
+          <div onClick={this._select.bind(this, 'rank')} className={'rank' === view ? 'selected' : ''}>
+            <div className="number">{this.state.influence}</div>
+            <div className="label">Influence</div>
+          </div>
+          <div onClick={this._select.bind(this, 'posts')} className={'posts' === view ? 'selected' : ''}>
+            <div className="number">{this.state.posts}</div>
+            <div className="label">Posts</div>
+          </div>
+          <div onClick={this._select.bind(this, 'membership')} className={'membership' === view ? 'selected' : ''}>
+            <div className="number">{this.state.orgs}</div>
+            <div className="label">Orgs</div>
+          </div>
+          <div onClick={this._select.bind(this, 'events')} className={'events' === view ? 'selected' : ''}>
+            <div className="number">{this.state.events}</div>
+            <div className="label">Events</div>
+          </div>
+          <div onClick={this._select.bind(this, 'reviews')} className={'reviews' === view ? 'selected' : ''}>
+            <div className="number">{this.state.reviews}</div>
+            <div className="label">Reviews</div>
+          </div>
+        </div>
+      )
+    },
+    _select: function (id) {
+      this.transitionTo(id, {id: this.state.id});
+    }
+});
 
-var ViewInfo = React.createClass({
+Profile.About = React.createClass({
+    getInitialState: function () {
+      return {
+        about: "about",
+        locations: [
+          {
+            name: "California Office",
+            street: "100 White Cap Lane",
+            city: "Newport Coast",
+            state: "CA",
+            zip: "92657",
+            email: "info@jessedrelick.com",
+            phone: "(603)783-1368",
+            fax: "(603)its-2015"
+          },
+          {
+            name: "New Hampshire Office",
+            street: "100 White Cap Lane",
+            city: "Newport Coast",
+            state: "CA",
+            zip: "92657",
+            email: "info@jessedrelick.com",
+            phone: "(603)783-1368",
+            fax: "(603)its-2015"
+          },
+          {
+            name: "Colorado Office",
+            street: "100 White Cap Lane",
+            city: "Newport Coast",
+            state: "CA",
+            zip: "92657",
+            email: "info@jessedrelick.com",
+            phone: "(603)783-1368",
+            fax: "(603)its-2015"
+          },
+          {
+            name: "North Carolina Office",
+            street: "100 White Cap Lane",
+            city: "Newport Coast",
+            state: "CA",
+            zip: "92657",
+            email: "info@jessedrelick.com",
+            phone: "(603)783-1368",
+            fax: "(603)its-2015"
+          },
+          {
+            name: "Massachusetts Office",
+            street: "100 White Cap Lane",
+            city: "Newport Coast",
+            state: "CA",
+            zip: "92657",
+            email: "info@jessedrelick.com",
+            phone: "(603)783-1368",
+            fax: "(603)its-2015"
+          }
+        ]
+      }
+    },
     render: function () {
         return (
           <div className="viewInfo">
-              <ul>
-                <li><a href="/profile/1/about">About</a></li>
-                <li><a href="/profile/1/social">Social</a></li>
-                <li><a href="/profile/1/reviews">Reviews</a></li>
-                <li><a href="/profile/1/clout">Clout</a></li>
-                <li><a href="/profile/1/events">Events</a></li>
-                <li><a href="/profile/1/contact">Contact</a></li>
-              </ul>
-              <Widget widget={this.props.widget} />
+              <h3>About</h3>
+              <p>Zionjo alo id lauh min wuleut tel wefer ciru det pik mof hipugwij leb opduh. Pa laava viege hosibo merliwe me ravwabo gehoav apelabube wijpoz kejjoh vammem giz. Neg niguwbe nu we vu ki geowucu wuta femdu hebculot pijeppi eb. Bazlo medhizkoh kuv noze kavpokin wos unani borafi siv lufep ukeuzzat weboc mazmios vanijiz tamvet biemuoja feco fozew.</p>
+              <p>Gusajagak koltit te me zudzun sogiepi kizuj batoziwil kugwet co buskuamu ov. Fe mirbe umo wubo eca ne ge wurja zuhfod esihjaf akisubec gutnirot etewicog defba sebavla edoji tetgihaf. Zuubikir suruvzi ug iminuw eve nu lulfaohu hagi gidapohod seudo pac esuvsuh pitjoca pucporola jofzemda erijatpo bi zac.</p>
+              <Contact locations={this.state.locations}/>
           </div>
         );
     }
 });
 
-var ViewPosts = React.createClass({
+let Contact = React.createClass({
+  render: function () {
+    return (
+      <div className="contact">
+        {this.props.locations.map(function (item) {
+          return (
+            <div key={item.name}>
+              <i className="fa fa-map-marker" />
+              <div className="info">
+                <h3 className='name'>{item.name}</h3>
+                <div className="address">
+                  {item.street}<br />
+                {item.city}, {item.state} {item.zip}<br /><br />
+                </div>
+                <div className="email"><strong>Email: </strong><a href={item.email}>{item.email}</a></div>
+                <div className="phone"><strong>Phone: </strong>{item.phone}</div>
+                <div className="fax"><strong>Fax: </strong>{item.fax}</div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    );
+  }
+});
+
+Profile.Posts = React.createClass({
     render: function () {
         return (
-            <div className="viewPosts">Posts</div>
+            <div className="viewPosts">
+              <h2>Posts</h2>
+            </div>
         );
     }
 });
 
-var ViewRank = React.createClass({
+Profile.Rank = React.createClass({
     render: function () {
         return (
-            <div className="viewRank">Rank</div>
+            <div className="viewRank">
+              <h2>Influence</h2>
+            </div>
         );
-    }    
+    }
 });
 
-var ViewMembership = React.createClass({
+Profile.Membership = React.createClass({
     render: function () {
         return (
-            <div className="viewMembership">Membership</div>
+            <div className="viewMembership">
+              <h2>Membership</h2>
+            </div>
         );
-    }    
+    }
 });
 
-var ViewExtras = React.createClass({
+Profile.Reviews = React.createClass({
+  getInitialState: function () {
+    return {
+      reviews: [
+        {
+          title: "Great Company",
+          content: "Pa laava viege hosibo merliwe me ravwabo gehoav apelabube wijpoz kejjoh vammem giz. Neg niguwbe nu we vu ki geowucu wuta femdu hebculot pijeppi eb. Bazlo medhizkoh kuv noze kavpokin wos unani borafi siv lufep ukeuzzat weboc mazmios vanijiz tamvet biemuoja feco fozew.",
+          rating: 5,
+          username: "jdrelick",
+          date: new Date(),
+          pic: 1
+        },
+        {
+          title: "Terrible Service",
+          content: "Fe mirbe umo wubo eca ne ge wurja zuhfod esihjaf akisubec gutnirot etewicog defba sebavla edoji tetgihaf.",
+          rating: 1,
+          username: "hsmith4234",
+          date: new Date(),
+          pic: 2
+        },
+        {
+          title: "Overall good experience",
+          content: "Bo tedke oplut reafa iti la kur filawu ut ol ac sevmep ab vovni. Isiliw ip cut rim pa hehtejo no godigu sidfi ivfizoj suc aj.",
+          rating: 4,
+          username: "moo1234",
+          date: new Date(),
+          pic: 3
+        },
+        {
+          title: "Nothing special",
+          content: "Awaub necagtew wul volziji osodahfu kuteb momer duras kotoguza kowage jojwi ce.",
+          rating: 3,
+          username: "kevans32",
+          date: new Date(),
+          pic: 4
+        },
+        {
+          title: "Almost perfect!",
+          content: "Jilwas efi le ugi somirvu izgo vaic mo ab izil wih hehamo bahima. Tomajaz sonnil jogovujoc zipijjub ipa tel uluzin ma ege tigdet puzijaka lifufzeh ja. Kitop fegigbug tu impooh wekumzig suziw lutmutobe uv gikzevos ropgoga wojig mocenge. Larmazsi urpudsu faw duto mip reziv no ec zikugu he bag uveocji ruvfueha betcoc rubkowef vizizi.",
+          rating: 4,
+          username: "rogerdodger213",
+          date: new Date(),
+          pic: 5
+        }
+      ]
+    }
+  },
+  render: function () {
+    return (
+      <div className="viewReviews">
+        <h4>16 Reviews</h4>
+        {this.state.reviews.map(function (item) {
+          return (
+            <div key={item.title}>
+              <h2 className="title">{item.title}</h2>
+              <div className="content">{item.content}</div>
+              <div className="pic">
+                <Link to="user" params={{id: 2}}>
+                  <img src={`/assets/avatars/${item.pic}.jpg`} />
+                </Link>
+              </div>
+              <div className="details">
+                <div className="rating">
+                  <Stars rating={item.rating} />
+                </div>
+                <div className="user">
+                  <Link to="user" params={{id: 2}}>
+                    {item.username}
+                  </Link>
+                  <span className="date"> Reviewed {moment(item.date).fromNow()}</span>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+        <button className="button blue">Load More</button>
+      </div>
+    );
+  }
+});
+
+let Stars = React.createClass({
     render: function () {
-        var specific;
+      let stars = [];
+      for (let i = 0; i < this.props.rating; i++) {
+        stars.push(<i className="fa fa-star" key={i} />);
+      }
+      return (
+        <div className={`stars stars${this.props.rating}`}>
+          {stars}
+        </div>
+      );
+    }
+});
+
+Profile.Events = React.createClass({
+    render: function () {
+        return (
+            <div className="viewEvents">
+              <h2>Events</h2>
+            </div>
+        );
+    }
+});
+
+let Premium = React.createClass({
+    render: function () {
+        let specific;
         switch(this.props.profile.type){
             case 'individual':
                 specific = <li></li>;
@@ -212,11 +469,11 @@ var ViewExtras = React.createClass({
                 specific = <li><a href="/profile/1/extras">Donate</a></li>;
             break;
         }
-        
+
         return (
           <div className="viewExtras">
-              <ul class="extras">  
-                {specific} 
+              <ul className="extras">
+                {specific}
                 <li><h3>COMMON</h3></li>
                 <li><a href="/profile/1/extras">Jobs</a></li>
                 <li><a href="/profile/1/extras">Org Chart</a></li>
@@ -226,13 +483,13 @@ var ViewExtras = React.createClass({
               <Widget widget={this.props.widget} />
           </div>
         );
-    } 
+    }
 });
 
-var Widget = React.createClass({
+let Widget = React.createClass({
     render: function () {
         return (
-            <div className="widget"></div>
+            <div className="widget">Widget</div>
         );
     }
 });

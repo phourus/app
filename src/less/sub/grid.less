@@ -1,11 +1,11 @@
 @base_px: 16;
-@toRems: (1 / @base_px) + 0rem; 
+@toRems: (1 / @base_px) + 0rem;
 @toEms: (1 / @base_px) + 0em;
- 
+
 @default-width: 1200 * @toRems;
 @default-colspan: 1;
 @default-total_cols: 12;
- 
+
 .Row(@width : @default-width){
     max-width: @width;
     width: 100%;
@@ -20,7 +20,7 @@
         clear:both;
     }
 }
- 
+
 .Cols(@colspan : @default-colspan; @total_cols : @default-total_cols){
     width: (@colspan * (100 / @total_cols)) + 0%;
     display: inline-block;

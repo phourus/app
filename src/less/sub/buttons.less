@@ -1,85 +1,64 @@
-/** BUTTONS **/
-button.button, a.button, input.button, input.searchsubmit {
-  display: block;
-  font-family: @century;
-  font-size: 0.9em !important;
-  color: #eee !important;
-  width: 160px;
-  height: 40px;
-  text-align: center;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border: none;
-  margin: 4px;
-  .insetlight()
+button.button, a.button, input.button {
+	display: block;
+	font-size: 0.9em !important;
+	color: @grey-light !important;
+	width: 160px;
+	height: 40px;
+	text-align: center;
+	.rounded(4px);
+	border: none;
+	margin: 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.small {
+  	width: 40px;
+  	height: 40px;
+  	display: inline;
+  }
+
+  &.tiny {
+  	width: 20px;
+  	height: 20px;
+  	display: inline;
+  }
+
+  &.green {
+  	background-color: @green;
+
+    &:hover {
+    	background-color: @green-light;
+    }
+  }
+
+  &.blue {
+    background-color: @blue;
+
+    &:hover {
+      background-color: @blue-light;
+    }
+  }
+
+  &.red {
+    background-color: @red;
+
+    &:hover {
+      background-color: @red-light;
+    }
+  }
+
+  &.gold {
+    background-color: @gold;
+
+    &:hover {
+      background-color: @gold-light;
+    }
+  }
 }
 
-.button.dark {
-  .inset(#555);
-}
-
-.sidebar .button, .footer .button, .footing .button {
-  .inset(#555);
-}
-  
 a.button {
-  padding-top: 8px;
-  height: 32px;
+	padding-top: 8px;
+	height: 32px;
 }
-
-button.button:hover, a.button:hover, input.button:hover, input.searchsubmit:hover {
-cursor: pointer;
-text-shadow: 0px -1px 0px rgba(000,000,000,0), 0px 0px 0px rgba(000,000,000,0);
-font-weight: normal !important;
-}
-
-/** GREEN **/
-button.green.button, a.green.button, input.green.button, input.searchsubmit.green {
-.button-gradient(#0b0, #090);
-}
-
-button.green.button:hover, a.green.button:hover, input.green.button:hover, input.searchsubmit.green:hover {
-.button-gradient(#090, #0b0);
-}
-
-/** BLUE **/
-button.blue.button, a.blue.button, input.blue.button, input.searchsubmit.blue {
-.button-gradient(#08f, #05c);
-}
-
-button.blue.button:hover, a.blue.button:hover, input.blue.button:hover, input.searchsubmit.blue:hover {
-.button-gradient(#05c, #08f);
-}
-
-/** RED **/
-button.red.button, a.red.button, input.red.button, input#searchsubmit.red {
-.button-gradient(#d00, #a00);
-}
-
-button.red.button:hover, a.red.button:hover, input.red.button:hover, input.searchsubmit.red:hover {
-.button-gradient(#a00, #d00);
-}
-
-/** ORANGE **/
-button.orange.button, a.orange.button, input.orange.button, input.searchsubmit.orange {
-.button-gradient(#f60, #f90);
-}
-
-button.orange.button:hover, a.orange.button:hover, input.orange.button:hover, input#searchsubmit.orange:hover {
-.button-gradient(#f90, #f60);
-}
-
-/** HOME **/
-a.button-home {
-display: block;
-width: 200px;
-height: 200px;  
-cursor: pointer;
-float: left;
-}
-
-a.button-home.earth { background-image: url('/assets/elements/color/earth.png'); }
-a.button-home.mind { background-image: url('/assets/elements/color/mind.png'); }
-a.button-home.voice { background-image: url('/assets/elements/color/voice.png'); }
-a.button-home.self { background-image: url('/assets/elements/color/self.png'); }

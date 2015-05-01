@@ -1,0 +1,51 @@
+#chart {
+  margin: 20px 0% 20px -5%;
+  width: 105%;
+
+  .c3-axis {
+    font-family: @font-serif;
+    font-size: 1em;
+    color: @theme-dark;
+  }
+  .c3-axis-y {
+    font-family: @font-serif;
+    font-size: 1em;
+    color: @theme-dark;
+  }
+  .domain {
+    fill: @theme-dark !important;
+    size: 1px;
+  }
+
+  .c3-legend-item {
+    display: none;
+  }
+
+  .c3-bar-0, .c3-arc--0 { stroke: @red !important; fill: @red !important; }
+  .c3-bar-1, .c3-arc--1 { stroke: @red !important; fill: fade(@red, 50%) !important; }
+  .c3-bar-2, .c3-arc--2 { stroke: @gold !important; fill: @gold !important; }
+  .c3-bar-3, .c3-arc--3 { stroke: @gold !important; fill: fade(@gold, 50%) !important; }
+  .c3-bar-4, .c3-arc--4 { stroke: @green !important; fill: @green !important; }
+  .c3-bar-5, .c3-arc--5 { stroke: @green !important; fill: fade(@green, 50%) !important; }
+  .c3-bar-6, .c3-arc--6 { stroke: @green !important; fill: fade(@green, 20%) !important; }
+  .c3-bar-7, .c3-arc--7 { stroke: @blue !important; fill: @blue !important; }
+  .c3-bar-8, .c3-arc--8 { stroke: @blue !important; fill: fade(@blue, 50%) !important; }
+  .c3-bar-9, .c3-arc--9 { stroke: @blue !important; fill: fade(@blue, 20%) !important; }
+}
+
+
+@media (min-width: 500px) {
+
+  #chart {
+    margin-left: 2%;
+    margin-right: 8%;
+    width: 90%;
+
+    .c3-axis {
+      font-size: 2em;
+    }
+    .c3-axis-y {
+      font-size: 1.5em;
+    }
+  }
+}

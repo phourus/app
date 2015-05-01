@@ -1,7 +1,7 @@
 div.alerts {
-  margin: auto;   
+  margin: auto;
   width: 100%;
-  text-align: center; 
+  text-align: center;
   font-size: 1em;
 
 	.alert {
@@ -9,23 +9,37 @@ div.alerts {
 		padding: 10px;
 		margin: 5px;
 		border: solid 1px;
+
+		.msg {
+    		color: @grey-dark;
+    		line-height: 0.5em;
+		}
+
+		.code {
+    		color: #444;
+    		font-size: 0.7em;
+		}
 	}
 	.close {
   	font-weight: bold;
 	}
 	.close:hover {
-  	color: #fff;
+  	color: white;
 	}
-	.complete {
-  	border-color: #093; 
+	.green {
+  	border-color: #093;
     background-color: #CFC;
 	}
-	.message {
-    border-color: #FF3; 
+	.yellow {
+    border-color: #FF3;
     background-color: #FFC;
 	}
-	.error {
-  	border-color:  #F00;    
-  	background-color: #Faa; 
+	.red {
+  	border-color:  #F00;
+  	background-color: #Faa;
+	}
+
+	button {
+    	float: right;
 	}
 }

@@ -1,7 +1,7 @@
 @import '../content/account.less';
 @import '../content/editor.less';
-@import '../content/game.less';
 @import '../content/landing.less';
+@import '../content/leaders.less';
 @import '../content/post.less';
 @import '../content/profile.less';
 @import '../content/search.less';
@@ -11,11 +11,21 @@
 }
 
 #content {
-    .Cols(12);
-}
 
-@media (min-width: 800px) {
-    #content {
-        .Cols(9);
+    > div {
+      margin: 20px auto 0 auto;
+      width: 90%;
+      max-width: 1200px;
+      background-color: white;
+      border: solid 1px @grey;
+      padding: 3%;
+    }
+
+    > div.search {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: transparent;
+      border: none;
     }
 }

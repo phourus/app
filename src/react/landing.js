@@ -1,8 +1,7 @@
-/** @jsx React.DOM */
 "use strict";
-var React = require('react');
+let React = require('react');
 
-var Landing = React.createClass({
+let Landing = React.createClass({
      render: function () {
           return React.DOM.h1(null, 'Landing Page');
      }

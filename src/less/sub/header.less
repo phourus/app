@@ -1,37 +1,112 @@
 header {
-  .Row(100%);
-  height: 40px;
-  position: fixed;
-  
-  border-bottom: solid 1px #bbb;
-  background-color: #fff;
-      
-  .brand {
-	.Cols(10);  
-    
-    a img {
-        height: 80%;
-    } 
-  }
+	.Row(100%);
+	height: 40px;
+	position: fixed;
+	border-bottom: solid 1px #bbb;
+	background-color: @theme;
+	z-index: 9999;
+
+	.brand {
+	   .Cols(4);
+
+  		a {
+				display: block;
+				margin: 6px 0px 0px 0px;
+				padding: 0px;
+				width: 120px;
+				height: 40px;
+				background-repeat: no-repeat;
+				background-size: 100%;
+				background-image: url('/assets/logos/logo-new.png');
+
+				&:hover {
+					background-image: url('/assets/logos/logo-hover.png');
+				}
+  		}
+	}
+
+	nav {
+		.Cols(8);
+		text-align: right;
+
+		.fa {
+			width: 40px;
+			font-size: 1.5em;
+			height: 30px;
+			border-right: solid 1px @theme-dark;
+			padding-top: 10px;
+		}
+
+		a {
+			color: @theme-dark;
+			text-align: center;
+		}
+		a:hover {
+			color: #444;
+		}
+
+		a.fa-trophy:hover {
+			color: @red;
+			border-bottom: solid 4px @red-light;
+		}
+
+		a.fa-search:hover {
+			color: @blue-dark;
+			border-bottom: solid 4px @blue-light;
+		}
+
+		a.fa-pencil:hover {
+			color: @green-dark;
+			border-bottom: solid 4px @green-light;
+		}
+
+		a.fa-user:hover {
+			color: @gold;
+			border-bottom: solid 4px @gold-light;
+		}
+
+		.notifications {
+			background-color: @red;
+			color: white;
+			font-weight: bold;
+			font-size: 0.4em;
+		}
+	}
+}
+
+@media (min-width: 500px) {
+
+	header {
+		height: 60px;
+
+    .brand {
+
+    		a {
+					width: 180px;
+					height: 60px;
+    		}
+  	}
 
     nav {
-      .Cols(1);
       text-align: right;
-        
-      a {
-        color: #555;   
-        text-align: center;
-      }
-      a:hover {
-        color: #444;
-      }
-      
-      a.fa-search:hover {
-          color: @blue-dark;
-      }
-      
-      a.fa-plus:hover {
-          color: @green-dark;
+
+      .fa {
+        width: 60px;
+        font-size: 2em;
+        height: 45px;
+        border-right: solid 1px @theme-dark;
+        padding-top: 15px;
       }
     }
+	}
+
+  div.spacer {
+    height: 60px !important;
+  }
+
+  .search {
+    .heading {
+      top: 60px;
+    }
+  }
 }

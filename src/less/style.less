@@ -1,145 +1,162 @@
-@import 'sub/alerts.less';
-@import 'sub/auth.less';
-@import 'sub/buttons.less';
-@import 'sub/calendar.less';
-@import 'sub/content.less';
-@import 'sub/footer.less';
+@import 'sub/grid.less';
+@import 'sub/mixins.less';
 @import 'sub/fonts.less';
 @import 'sub/forms.less';
-@import 'sub/grid.less';
+@import 'sub/buttons.less';
+@import 'sub/charts.less';
+
+@import 'sub/alerts.less';
+@import 'sub/content.less';
+@import 'sub/footer.less';
 @import 'sub/header.less';
-@import 'sub/lists.less';
-@import 'sub/mixins.less';
-@import 'sub/sidebar.less';
-/*
-@import 'sub/reset.css';
-*/
 
 /** COLORS **/
-@orange: #E47911;
-@blue: #004b91;
-@purple: #003399;
+@background: #EDEDED;
+@theme: #34495E;
+@theme-dark: #1E2F40;
+@theme-light: #425D77;
+@off-white: #fafafa;
+@form-border: #E4E5E6;
+@form-background: #F6F7F9;
 
-@blue-light: #72afc3;
-@blue-dark: #4f9db6;
-@red-light: #d65e35;
-@red-dark: #cc3300;
-@green-light: #a7c266;
-@green-dark: #98b849;
-@gold-light: #df9d1a;
-@gold-dark: #e6b657;
+@gold: #ECB010;
+@blue: #3498DB;
+@green: #8ABF00;
+@red: #ED0303;
+@grey: #DDD;
+
+@gold-light: lighten(@gold, 10%);
+@blue-light: lighten(@blue, 10%);
+@green-light: lighten(@green, 5%);
+@red-light: lighten(@red, 10%);
+@grey-light: #eee;
+
+@gold-dark: darken(@gold, 10%);
+@blue-dark: darken(@blue, 10%);
+@green-dark: darken(@green, 10%);
+@red-dark: darken(@red, 10%);
+@grey-dark: #444;
+
+@font-serif: 'rokkitt', @palatino;
+@font-sans: 'open sans', @arial;
+@font-mono: @mono;
+
+// Other greys: 444, 777, AAA, BBB, DDD
 
 /** BODY **/
 body {
-  background-color: #eee;
+  background-color: @background;
+  background-image: url('/assets/bg.jpg');
   margin: 0px;
   padding: 0px;
-  color: #333;
-  font-family: @arial;  
+  color: @theme;
+  font-family: @font-sans;
   font-size: 100%;
   line-height: 25px;
   letter-spacing: 0px;
 }
 
 div.spacer {
-  height: 40px;   
+  height: 40px;
 }
 
 /** HEADINGS **/
 h1 {
-  margin: 0px 0px 4px 0px;
-  padding: 0px 0px 10px 0px;   
-  letter-spacing: 1px;
-  font-size: 1.8em;
+  font-family: @font-serif;
+  font-size: 3em;
   font-weight: normal;
-  font-family: @arial;
-  color: #444;
-  text-transform: uppercase;
-  
-  a {
-    text-shadow: 1px 1px #fff;
-  }
+  line-height: 1em;
+  color: @theme;
 }
 
 h2 {
-  margin: 5px 0px 5px 0px;
-  padding: 4px 0px 4px 0px;
-  text-shadow: 1px 1px #fff;
-  color: #444;
-      
+  font-family: @font-serif;
+  font-size: 2em;
+  font-weight: bold;
+  color: @theme-dark;
+}
+
+h3 {
+  font-family: @font-serif;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: @theme-light;
 }
 
 h4 {
-text-align: center !important;
-font-size: 1.2em;
-font-style: italic;
-
-    a {
-      color: #72afc3;
-    }
+  font-size: 1em;
+  font-weight: bold;
+  color: @grey-dark;
 }
 
 /* LINKS */
 a {
-text-decoration: none;
-color: @blue-dark;   
+  text-decoration: none;
+  color: @blue;
+
   img {
     border: none;
-  } 
-}
+  }
 
-a:hover {
-color: #1488c1; 
-}
-
-a.title {
-font-size: 1.5em;
-font-weight: normal;
-text-align: center;
-width: 100%;
-display: block; 
-cursor: pointer;
-color: #18b;
-}
-
-a.title:hover {
-color: #f90;    
-}
-
-a.edit {    
-font-size: 1em;
-color: #18b;
-}
-
-a.edit:hover {  
-font-size: 1em;
-color: #f90;
+  &:hover {
+    color: @gold;
+  }
 }
 
 /** IMG **/
 img {
-margin: 4px;
-border: none;
-padding: 2px;
+  margin: 4px;
+  border: none;
+  padding: 2px;
 }
 
 .icon {
-border: none;
+  border: none;
 }
 
-/** CLEAR **/
+/** MISC **/
 div.clear {
-clear:both;
-margin: 0px;
-padding: 0px;
-width: 0px;
-height: 0px;    
+  clear:both;
+  margin: 0px;
+  padding: 0px;
+  width: 0px;
+  height: 0px;
+}
+
+.inline {
+	display: inline;
 }
 
 i.fa-plus {
-    color: @green-light;
+  color: @green;
 }
 
 i.fa-minus {
-    color: @red-light;
+  color: @red;
+}
+
+/** INFLUENCE **/
+.influence {
+  width: 80px;
+  padding-top: 2px;
+  height: 28px;
+  color: white;
+  text-align: center;
+  font-size: 1.4em;
+  .rounded(4px);
+
+  i {
+    margin-right: 4px;
+  }
+
+  &.influence1 { background-color: @blue; }
+  &.influence2 { background-color: @blue; }
+  &.influence3 { background-color: @blue; }
+  &.influence4 { background-color: @blue; }
+  &.influence5 { background-color: @green; }
+  &.influence6 { background-color: @green; }
+  &.influence7 { background-color: @green; }
+  &.influence8 { background-color: @gold; }
+  &.influence9 { background-color: @gold; }
+  &.influence10 { background-color: @red; }
 }

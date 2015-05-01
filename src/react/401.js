@@ -1,0 +1,113 @@
+"use strict";
+let React = require('react');
+let account = require('../sockets/account');
+let token = require('../token');
+let msg = require('../actions/alerts').add;
+
+let View401 = React.createClass({
+    getInitialState: function () {
+        return {
+            mode: "login"
+        }
+    },
+    componentDidMount: function () {
+        let self = this;
+        account.on('register', function (code, data) {
+             msg('green', 'Registration complete', code);
+         });
+         account.on('login', function (code, data) {
+             if (code === 200) {
+                 token.save(data);
+                 return;
+             }
+             msg('red', 'Login unsuccessful', code);
+         });
+	 },
+	 componentWillUnmount: function () {
+    	 account.off('register');
+    	 account.off('login');
+	 },
+	 register: function () {
+    	this.setState({mode: "register"});
+	 },
+     forgot: function () {
+    	this.setState({mode: "forgot"});
+	 },
+    render: function () {
+        let component;
+        if (this.state.mode == "forgot") {
+            component = <Forgot />;
+        } else if (this.state.mode == "register") {
+            component = <Register />;
+        } else {
+            component = <Login register={this.register} forgot={this.forgot} />;
+        }
+        return (
+            <div className="view401">
+                {component}
+            </div>
+        );
+    }
+});
+
+let Login = React.createClass({
+	 login: function () {
+	   let self = this;
+     let username = this.refs.username.getDOMNode().value;
+     let password = this.refs.password.getDOMNode().value;
+	   account.login(username, password);
+	 },
+     render: function () {
+          return (
+            <div className="login">
+                <h1>Login</h1>
+                <input ref="username" className="username" />
+                <input ref="password" className="password" type="password" />
+                <button onClick={this.login} className="green button">Login</button>
+                <a href="" className="forgotLink" onClick={this.props.forgot}>Forgot your login information? Click here</a>
+                <div className="registration">Not yet a member?
+                    <a href="" className="registerLink" onClick={this.props.register}>Click here to register</a>
+                </div>
+            </div>
+          );
+     }
+});
+
+let Register = React.createClass({
+     register: function () {
+         let email = this.refs.email.getDOMNode().value;
+         let password = this.refs.password.getDOMNode().value;
+         let confirm = this.refs.confirm.getDOMNode().value;
+         if (password === confirm) {
+             account.register(email, password);
+         }
+     },
+     render: function () {
+          return (
+            <div className="register">
+                <h1>Register</h1>
+                <input ref="email" className="email" />
+                <input ref="password" className="password" type="password" />
+                <input ref="confirm" className="confirm" type="password" />
+                <button onClick={this.register} className="blue button submit">Sign Up Now</button>
+            </div>
+          );
+     }
+});
+
+let Forgot = React.createClass({
+    request: function () {
+
+    },
+    render: function () {
+        return (
+            <div className="forgot">
+                <h1>Forgot your login information?</h1>
+                <input ref="handle" className="handle" />
+                <button onClick={this.request} className="blue button submit">Send me my login info</button>
+            </div>
+        );
+    }
+});
+
+module.exports = View401;

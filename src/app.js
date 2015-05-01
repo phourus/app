@@ -1,68 +1,45 @@
 "use strict";
-//require('node-jsx').install();
-var Search = require('./react/search');
-var Post = require('./react/post');
-var Editor = require('./react/editor');
-var Account = require('./react/account');
-var Profile = require('./react/profile');
-var Game = require('./react/game');
-var General = require('./react/general');
-var Landing = require('./react/general');
-var Map = require('./map');
-var React = require('react');
+let React = require('react');
 
-var container = document.getElementById('content');   
+let Router = require('react-router');
+let { Link, RouteHandler} = Router;
 
-//page('', landing);
-page.base('/');
-page('search', search);
-page('post/:id', post);
-page('account', account);
-page('editor', editor);
-page('editor/:id', editor);
-page('profile/*', profile);
-//page('game', game);
-//page('*', general);
-page();
-    
-  
-function landing (route) {
-    var params = {};
-    //React.render(new Landing(params), container); 
-}
+let Alerts = require('./react/alerts');
 
-function search (route) {
-    var params = {};   
-    React.render(<Search />, container); 
-    Map.render(); 
-}
+let App = React.createClass({
+    render: function () {
+        return  (
+            <div>
+                <header className="header">
+                    <div className="brand">
+                    	<a href="./"></a>
+                    </div>
+                    <nav className="nav">
+                      <Link to="leaders" className="game fa fa-trophy"></Link>
+                    	<Link to="search" className="search fa fa-search"></Link>
+                    	<Link to="editor" className="editor fa fa-pencil"></Link>
+                    	<Link to="account" className="account fa fa-user"><span className="notifications">13</span></Link>
+                    </nav>
+                </header>
+                <div className="spacer"></div>
+                <Alerts {...this.props.alerts} />
+                <div className="main">
+                    <div id="content">
+                        <RouteHandler />
+                    </div>
+                    <footer className="footer">
+                        © 2013 Phourus LLC. All Rights Reserved.
+                        <br />
+                        <Link to="leaders">Home</Link> |
+        				<Link to="general">About</Link> |
+        				<Link to="general">Terms</Link> |
+                  <Link to="general">Privacy</Link>
+        				<br clear="all" />
+                    </footer>
+                </div>
+            </div>
+        );
+    }
+});
 
-function post (route) {
-    var params = {};  
-    React.render(<Post />, container); 
-}
-
-function account (route) {
-    var params = {};  
-    //React.render(<Account />, container);    
-}
-
-function editor (route) {
-    var params = {};  
-    React.render(<Editor />, container);   
-}
-
-function profile (route) {
-    var params = {};  
-    React.render(<Profile />, container); 
-}
-
-function game (route) {
-    var params = {};  
-    React.render(<Game />, container); 
-}
-
-function general (route) {
-    var params = {};  
-    React.render(<General />, container); 
-}
+module.exports = App;

@@ -1,0 +1,25 @@
+let config = require('../../config').get("socket");
+let token = require('../token');
+let io = require('socket.io-client');
+let socket = io(`${config.url}:${config.port}/posts`, {query: 'token=' + token.get()});
+
+socket.single = function (id) {
+    socket.emit('getSingle', id);
+};
+socket.collection = function (params) {
+    socket.emit('getCollection', params);
+};
+socket.add = function (model) {
+    socket.emit('postAdd', model);
+};
+socket.save = function (id, model) {
+    socket.emit('putSave', id, model);
+};
+socket.remove = function (id) {
+    socket.emit('delRemove', id);
+};
+socket.account = function () {
+    socket.emit('getAccount');
+};
+
+module.exports = socket;
