@@ -1608,8 +1608,8 @@ header nav .notifications {
 /** COLORS **/
 /** BODY **/
 body {
-  background-color: #000;
-  background-image: url('/assets/b/g.jpg');
+  background-color: #ededed;
+  background-image: url('/assets/bg.jpg');
   margin: 0px;
   padding: 0px;
   color: #34495e;
