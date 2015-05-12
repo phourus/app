@@ -1,6 +1,6 @@
 "use strict";
 let React = require('react');
-let account = require('../sockets/account');
+let account = require('../api/account');
 let token = require('../token');
 let msg = require('../actions/alerts').add;
 

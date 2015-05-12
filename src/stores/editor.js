@@ -4,9 +4,7 @@ let Actions = require('../actions/editor');
 let { account, single, add, save, remove, reset, Tags, Links } = Actions;
 let msg = require("../actions/alerts").add;
 
-let posts = require('../sockets/posts');
-let tags = require('../sockets/tags');
-let links = require('../sockets/links');
+let posts = require('../api/posts');
 
 let Editor = Reflux.createStore({
   init: function () {
@@ -17,49 +15,53 @@ let Editor = Reflux.createStore({
     this.listenTo(save, this._save);
     this.listenTo(remove, this._remove);
     this.listenTo(reset, this._reset);
-
-    posts.on('account', function (code, data) {
-       if (code != 200) {
-          msg('yellow', 'Posts could not be loaded', code);
-          return;
-       }
-       self.trigger({posts: data.rows, total: data.total});
-     });
-    posts.on('single', function (code, data) {
-     if (code != 200) {
-         msg('yellow', 'Post could not be loaded', code);
-         return;
-      }
-      self.trigger(data);
-    });
-    posts.on('add', function (code, data) {
-       if (code != 201) {
-          msg('red', 'Post could not be created', code);
-          return;
-       }
-       msg('green', 'Post created successfully', code);
-       self._reset();
-   });
-   posts.on('save', function (code, data) {
-     if (code != 204) {
-       msg('red', 'Post could not be saved', code);
-       return;
-     }
-     self._reset();
-   });
-
   },
   _account: function () {
-    posts.account();
+    posts.account()
+    .then(data => {
+      this.trigger({posts: data.rows, total: data.total});
+    })
+    .catch(code => {
+      if (code != 200) {
+         msg('yellow', 'Posts could not be loaded', code);
+      }
+    });
   },
   _single: function (id) {
-    posts.single(id);
+    posts.single(id)
+    .then(data => {
+      this.trigger(data);
+    })
+    .catch(code => {
+      if (code != 200) {
+          msg('yellow', 'Post could not be loaded', code);
+       }
+    });
   },
   _add: function (model) {
-    posts.add(model);
+    posts.add(model)
+    .then(data => {
+      msg('green', 'Post created successfully', code);
+      this._reset();
+    })
+    .catch(code => {
+      if (code != 201) {
+         msg('red', 'Post could not be created', code);
+         return;
+      }
+    });
   },
   _save: function (id, model) {
-    posts.save(id, model);
+    posts.save(id, model)
+    .then(data => {
+      this._reset();
+    })
+    .catch(code => {
+      if (code != 204) {
+        msg('red', 'Post could not be saved', code);
+        return;
+      }
+    });
   },
   _reset: function () {
     this.trigger({post: {}});

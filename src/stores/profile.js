@@ -3,8 +3,8 @@ let Reflux = require('reflux');
 let msg = require("../actions/alerts").add;
 
 let { User, Org } = require('../actions/profile');
-let users = require('../sockets/users');
-let orgs = require('../sockets/orgs');
+let users = require('../api/users');
+let orgs = require('../api/orgs');
 
 let Profile = {};
 Profile.User = Reflux.createStore({

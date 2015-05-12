@@ -2,7 +2,7 @@
 let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
-let posts = require('../sockets/posts');
+let posts = require('../api/posts');
 let moment = require('moment');
 let Store = require('../stores/search');
 let Actions = require('../actions/search');

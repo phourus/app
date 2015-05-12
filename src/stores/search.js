@@ -1,6 +1,6 @@
 "use strict";
 let Reflux = require('reflux');
-let posts = require('../sockets/posts');
+let posts = require('../api/posts');
 let { collection, search, page, limit, sortBy, direction, types } = require('../actions/search');
 let msg = require("../actions/alerts").add;
 
@@ -16,8 +16,6 @@ module.exports = Reflux.createStore({
     limit: 10
   },
   init: function () {
-    let self = this;
-
     this.listenTo(collection, this._collection);
     this.listenTo(search, this._search);
     this.listenTo(page, this._page);
@@ -25,17 +23,17 @@ module.exports = Reflux.createStore({
     this.listenTo(sortBy, this._sortBy);
     this.listenTo(direction, this._direction);
     this.listenTo(types, this._types);
-
-    posts.on('collection', function (code, data) {
-        if (code != 200) {
-           msg('red', 'Posts could not be loaded', code);
-           return;
-       }
-       self.trigger({posts: data.rows, total: data.count});
-    });
   },
   _collection: function (params) {
-    posts.collection(this.params);
+    posts.collection(this.params)
+    .then(data => {
+      this.trigger({posts: data.rows, total: data.count});
+    })
+    .catch(code => {
+      if (code != 200) {
+         msg('red', 'Posts could not be loaded', code);
+      }
+    });
   },
   _search: function (search) {
     this.params.search = search;
