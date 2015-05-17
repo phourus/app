@@ -1,6 +1,6 @@
 var type = 'sockets';
-var thumbs = require('../ws/thumbs');
+var thumbs = require('../rest/thumbs');
 
 module.exports = {
-
+  single: thumbs.single
 };

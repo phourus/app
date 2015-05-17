@@ -1,5 +1,5 @@
 var type = 'sockets';
-var comments = require('../ws/comments');
+var comments = require('../rest/comments');
 
 module.exports = {
 

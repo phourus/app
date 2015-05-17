@@ -1,5 +1,5 @@
 var type = 'sockets';
-var account = require('../ws/account');
+var account = require('../rest/account');
 
 module.exports = {
   get: account.get,

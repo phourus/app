@@ -1,5 +1,5 @@
 var type = 'sockets';
-var tags = require('../ws/tags');
+var tags = require('../rest/tags');
 
 module.exports = {
 

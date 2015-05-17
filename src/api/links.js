@@ -1,5 +1,5 @@
 var type = 'sockets';
-var links = require('../ws/links');
+var links = require('../rest/links');
 
 module.exports = {
 
