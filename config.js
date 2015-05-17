@@ -34,6 +34,20 @@ var conf = convict({
       "default": 3000,
       "env": "PHOURUS_SOCKET_PORT"
     }
+  },
+  "rest": {
+    "url": {
+      "doc": "REST Server URL",
+      "format": "url",
+      "default": "http://localhost",
+      "env": "PHOURUS_REST_URL"
+    },
+    "port": {
+      "doc": "REST Server Port",
+      "format": "port",
+      "default": 4000,
+      "env": "PHOURUS_REST_PORT"
+    }
   }
 });
 
