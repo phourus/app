@@ -1,29 +1,30 @@
 "use strict";
 let Reflux = require('reflux');
 let account = require('../api/account');
-let { get, edit, password, deactivate, history, notifications } = require('../actions/account');
+let { get, edit, password, deactivate, history, notifications, login, register } = require('../actions/account');
 let msg = require("../actions/alerts").add;
+let token = require('../token');
 
 module.exports = Reflux.createStore({
   user: {
-      id: null,
-      pic: "",
-      username: "",
-      first: "",
-      last: "",
-      email: "",
-      phone: "",
-      company: "",
-      occupation: "",
-      website: "",
-      dob: "",
-      gender: "",
-      address: {
-          street: "",
-          city: "",
-          state: "",
-          zip: ""
-      }
+    id: null,
+    pic: "",
+    username: "",
+    first: "",
+    last: "",
+    email: "",
+    phone: "",
+    company: "",
+    occupation: "",
+    website: "",
+    dob: "",
+    gender: "",
+    address: {
+        street: "",
+        city: "",
+        state: "",
+        zip: ""
+    }
   },
   notifications: [],
   history: [],
@@ -34,6 +35,8 @@ module.exports = Reflux.createStore({
     this.listenTo(deactivate, this._page);
     this.listenTo(history, this._history);
     this.listenTo(notifications, this._notifications);
+    this.listenTo(login, this._login);
+    this.listenTo(register, this._register);
   },
   _get: function () {
     account.get()
@@ -99,6 +102,24 @@ module.exports = Reflux.createStore({
       if (code != 200) {
         msg('yellow', 'History could not be loaded', code);
       }
+    });
+  },
+  _login: function (email, password) {
+    account.login(email, password)
+    .then((data) => {
+      token.save(data);
+    })
+    .catch((code) => {
+      msg('red', 'Login unsuccessful', code);
+    });
+  },
+  _register: function () {
+    account.register({})
+    .then((data) => {
+      msg('green', 'Registration complete', code);
+    })
+    .catch((err) => {
+
     });
   }
 });

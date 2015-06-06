@@ -26,5 +26,12 @@ module.exports = {
   },
   history: function () {
     return http.get(base + 'history', settings);
+  },
+  login: function (email, password) {
+    settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
+    return http.post(base + 'login', {}, settings);
+  },
+  register: function () {
+    return http.post(base + 'register', {}, settings);
   }
 };

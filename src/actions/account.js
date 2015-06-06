@@ -7,5 +7,7 @@ module.exports = {
   password: Reflux.createAction(),
   deactivate: Reflux.createAction(),
   history: Reflux.createAction(),
-  notifications: Reflux.createAction()
+  notifications: Reflux.createAction(),
+  login: Reflux.createAction(),
+  register: Reflux.createAction()
 }

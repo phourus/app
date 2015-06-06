@@ -7,5 +7,7 @@ module.exports = {
   password: account.password,
   deactivate: account.deactivate,
   notifications: account.notifications,
-  history: account.history
+  history: account.history,
+  login: account.login,
+  register: account.register
 };
