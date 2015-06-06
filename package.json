@@ -16,6 +16,7 @@
     "gulp-less": "^3.0.1",
     "localStorage": "^1.0.3",
     "moment": "^2.9.0",
+    "please-ajax": "^1.0.8",
     "react": "0.12.x",
     "react-mutant": "^0.1.0",
     "react-router": "^0.12.4",
