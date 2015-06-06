@@ -28,7 +28,7 @@ let Search = React.createClass({
 			Store.listen(function (data) {
 					self.setState(data);
 			});
-			Actions.collection({});
+			Actions.collection();
 	 },
 	 componentWillUnmount: function () {
 			 // Store.stoplistening?

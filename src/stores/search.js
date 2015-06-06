@@ -24,7 +24,7 @@ module.exports = Reflux.createStore({
     this.listenTo(direction, this._direction);
     this.listenTo(types, this._types);
   },
-  _collection: function (params) {
+  _collection: function () {
     posts.collection(this.params)
     .then(data => {
       this.trigger({posts: data.rows, total: data.count});
