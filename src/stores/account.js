@@ -41,11 +41,12 @@ module.exports = Reflux.createStore({
   _get: function () {
     account.get()
     .then(data => {
+      console.log(data);
       this.trigger({user: data});
     })
     .catch(code => {
       if (code != 200) {
-          msg('yellow', 'Account could not be loaded', code);
+        msg('yellow', 'Account could not be loaded', code);
       }
     });
   },

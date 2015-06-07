@@ -33,7 +33,7 @@ module.exports = (
       <Route name="orgPosts" path="org/:id" handler={Search} />
     </Route>
     <Route name="account" path="account" handler={Account}>
-      <DefaultRoute handler={Account.Notifications} />
+      <DefaultRoute handler={Account.Edit} />
       <Route name="notifications" path="notifications" handler={Account.Notifications} />
       <Route name="history" path="history" handler={Account.History} />
       <Route name="update" path="update" handler={Account.Edit} />

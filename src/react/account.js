@@ -10,7 +10,7 @@ let View401 = require('./401');
 let Account = React.createClass({
   getInitialState: function () {
     return {
-      id: null,
+      id: 0,
       img: "",
       username: "",
       first: "",
@@ -32,7 +32,7 @@ let Account = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
-      this.setState(data);
+      this.setState(data.user);
     });
     Actions.get();
   },
@@ -116,34 +116,12 @@ let Posts = React.createClass({
 });
 
 Account.Edit = React.createClass({
-  getInitialState: function () {
-    return {
-      id: null,
-      pic: "",
-      username: "",
-      first: "",
-      last: "",
-      email: "",
-      phone: "",
-      company: "",
-      occupation: "",
-      website: "",
-      dob: "",
-      gender: "",
-      address: {
-        street: "",
-        city: "",
-        state: "",
-        zip: ""
-      }
-    }
-  },
   render: function () {
     return (
       <div className="update">
-        <Info {...this.state} />
-        <Details {...this.state} />
-        <Address {...this.state} />
+        <Info {...this.props} />
+        <Details {...this.props} />
+        <Address {...this.props} />
         <Social />
       </div>
     );
