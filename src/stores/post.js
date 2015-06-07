@@ -25,22 +25,35 @@ let Post = Reflux.createStore({
 
 Post.Comments = Reflux.createStore({
   init: function () {
-
+    this.listenTo(Comments.collection, this._collection);
+  },
+  _collection: function (id) {
+    comments.collection({post_id: id})
+    .then(data => {
+      this.trigger(data);
+    })
+    .catch(code => {
+      msg('red', 'Comments could not be loaded', code);
+    });
   }
 });
 
 Post.Thumbs = Reflux.createStore({
   init: function () {
     this.listenTo(Thumbs.single, this._single);
+    this.listenTo(Thumbs.collection, this._collection);
   },
-  _single: function () {
-    thumbs.single()
-    .then(data => {
+  _single: function (id) {
 
+  },
+  _collection: function (id) {
+    thumbs.collection({post_id: id})
+    .then(data => {
+      this.trigger(data);
     })
     .catch(code => {
       msg('red', 'Thumbs could not be loaded', code);
-    })
+    });
   }
 });
 

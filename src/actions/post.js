@@ -8,6 +8,7 @@ module.exports = {
     add: Reflux.createAction()
   },
   Thumbs: {
-    single: Reflux.createAction()
+    single: Reflux.createAction(),
+    collection: Reflux.createAction()
   }
 }

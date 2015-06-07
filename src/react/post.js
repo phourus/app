@@ -32,24 +32,21 @@ let Post = React.createClass({
         influence: null,
         element: '',
         scope: '',
-        type: ''
+        type: '',
+        tags: [],
+        links: []
       },
       user: {
         id: null,
         first: "",
         last: ""
-      },
-      comments: {
-        rows: [],
-        total: 0
       }
     }
   },
   componentDidMount: function () {
-    let self = this;
     let params = this.getParams();
-    this.unsubscribe = Store.listen(function (data) {
-      self.setState(data);
+    this.unsubscribe = Store.listen((data) => {
+      this.setState(data);
     });
     Actions.single(params.id);
     Actions.Comments.collection({postId: params.id});
@@ -81,10 +78,10 @@ let Post = React.createClass({
           </div>
         </div>
         <div className="content">{this.state.post.content}</div>
-        <Links />
+        <Links links={this.state.post.links} />
         <Author />
         <Thumbs post={this.state.post} thumb={this.state.thumb} />
-        <Comments post={this.state.post} comments={this.state.comments} />
+        <Comments post={this.state.post} />
       </div>
     );
   }
@@ -123,14 +120,14 @@ let Meta = React.createClass({
 
 let Tags = React.createClass({
   render: function () {
-    let tags = [];
-    for (let i in this.props.tags) {
-      tags.push(<span className="tag" key={i}>{this.props.tags[i].tag}</span>);
-    }
     return (
       <span className="tags">
         <i className="fa fa-tag" />
-        {tags}
+        {this.props.tags.map((item, index) => {
+          return (
+            <span className="tag" key={index}>{item.tag}</span>
+          );
+        })}
       </span>
     );
   }
@@ -138,13 +135,18 @@ let Tags = React.createClass({
 
 let Links = React.createClass({
   render: function () {
-    let links;
-    if (!this.props.post || !this.props.post.tags) {
-      return <div></div>
-    }
-    links = this.props.post.links;
     return (
-      <div className="links">{links}</div>
+      <div className="links">
+        {this.props.links.map((item, index) => {
+          return (
+            <div className="link" key={index}>
+              <a href={item.url}>
+                {item.caption}
+              </a>
+            </div>
+          );
+        })}
+      </div>
     );
   }
 });
@@ -158,8 +160,16 @@ let Author = React.createClass({
 });
 
 let Thumbs = React.createClass({
+   mixins: [Router.State],
    componentDidMount: function () {
-     Actions.Thumbs.single(this.props.post.id);
+     let params = this.getParams();
+     this.unsubscribe = Store.Thumbs.listen((data) => {
+       this.setState(data);
+     });
+     Actions.Thumbs.collection(params.id);
+   },
+   componentWillUnmount: function () {
+     this.unsubscribe();
    },
    like: function () {
      let model = {};
@@ -207,16 +217,33 @@ let Thumbs = React.createClass({
 });
 
 let Comments = React.createClass({
+  mixins: [Router.State],
+  getInitialState: function () {
+    return {
+      count: 0,
+      rows: []
+    }
+  },
+  componentDidMount: function () {
+    let params = this.getParams();
+    this.unsubscribe = Store.Comments.listen((data) => {
+      this.setState(data);
+    });
+    Actions.Comments.collection(params.id);
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
     let create = <h3>You must be logged-in to comment</h3>
     let token = null;
     if (token === null) {
       //pic = <a href="#user/{this.props.id}"><img src="{this.props.pic}" width="100"></a>
     }
-    let data = this.props.comments.rows;
+    let data = this.state.rows;
     let comments = [];
     if (data) {
-      comments= data.map(function (item, i) {
+      comments = data.map(function (item, i) {
         let user = {id: 1, first: "JESSE", last: "drelick", influence: 66, username: "jdrelick", img: 1};
         return <Comment key={item.id} comment={item} user={user} />;
       });
