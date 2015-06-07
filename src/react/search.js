@@ -11,39 +11,38 @@ let Influence = require('../influence');
 let Popularity = require('../popularity');
 
 let Search = React.createClass({
-	 getInitialState: function () {
-			 return {
-						posts: [],
-						exclude: [],
-						search: '',
-						sort: 'influence',
-						direction: 'DESC',
-						page: 1,
-						limit: 10,
-						total: 0
-				}
-		 },
-	 componentDidMount: function () {
-			let self = this;
-			Store.listen(function (data) {
-					self.setState(data);
-			});
-			Actions.collection();
-	 },
-	 componentWillUnmount: function () {
-			 // Store.stoplistening?
-	 },
-	 render: function () {
-			let visible = "fa fa-minus-square-o";
-			let hidden = "fa fa-plus-square-o";
-			return (
+	getInitialState: function () {
+		return {
+			posts: [],
+			exclude: [],
+			search: '',
+			sort: 'influence',
+			direction: 'DESC',
+			page: 1,
+			limit: 10,
+			total: 0
+		}
+	},
+	componentDidMount: function () {
+		this.unsubscribe = Store.listen((data) => {
+			this.setState(data);
+		});
+		Actions.collection();
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
+	},
+	render: function () {
+		let visible = 'fa fa-minus-square-o';
+		let hidden = 'fa fa-plus-square-o';
+		return (
 			<div className="search">
 				<Head {...this.state} />
 				<Posts posts={this.state.posts} />
 				<Foot {...this.state} />
 			</div>
-			)
-	 }
+		);
+	}
 });
 
 let Head = React.createClass({

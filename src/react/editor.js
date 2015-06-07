@@ -44,11 +44,13 @@ Editor.List = React.createClass({
 		this.transitionTo("edit", {id: id});
 	},
 	componentDidMount: function () {
-		let self = this;
-		Store.listen(function (data) {
-			self.setState(data);
+		this.unsubscribe = Store.listen((data) => {
+			this.setState(data);
 		});
 		Actions.account();
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
 	},
 	render: function () {
 		let self = this;
