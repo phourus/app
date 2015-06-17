@@ -6,6 +6,7 @@ let Store = require('../stores/account');
 let Actions = require('../actions/account');
 let token = require('../token');
 let View401 = require('./401');
+let moment = require('moment');
 
 let Account = React.createClass({
   getInitialState: function () {
@@ -49,7 +50,7 @@ let Account = React.createClass({
             <Profile {...this.state} />
             <Posts {...this.state} />
           </div>
-          <RouteHandler {...this.state} />
+          <RouteHandler {...this.state} save={this._save} change={this._change} />
         </div>
       );
     } else {
@@ -59,7 +60,12 @@ let Account = React.createClass({
     }
   },
   _save: function () {
-    Actions.edit(this.state.user);
+    Actions.edit(this.state);
+  },
+  _change: function (e) {
+    let user = this.state;
+    user[e.target.className] = e.target.value;
+    this.setState(user);
   },
 });
 
@@ -89,10 +95,10 @@ let Profile = React.createClass({
     return (
       <div className="profile">
         <h2><Link to="user" params={{id: this.props.id}}>{this.props.username}</Link></h2>
-        <div>{`Full Name: ${this.props.first} ${this.props.last}`}</div>
+        <div><strong>Full Name:</strong> {this.props.first} {this.props.last}</div>
         <div>{this.props.address.city}, {this.props.address.state}</div>
-        <div>{this.props.company}</div>
-        <div>{this.props.dob}</div>
+        <div><strong>Company:</strong> {this.props.company}</div>
+        <div><strong>Born:</strong> {moment(this.props.dob).format('MMMM Do YYYY')}</div>
         <div>{this.props.gender}</div>
       </div>
     );
@@ -122,7 +128,21 @@ Account.Edit = React.createClass({
         <Info {...this.props} />
         <Details {...this.props} />
         <Address {...this.props} />
-        <Social />
+      </div>
+    );
+  }
+});
+
+let Uploader = React.createClass({
+  render: function () {
+    return (
+      <div className="uploader">
+        <h3>Profile Picture</h3>
+        <img src={`/assets/avatars/${this.props.img}.jpg`} height="200" />
+        <form action={`/rest/pic/${this.props.id}`} method="post" encType="multipart/form-data" target="upload">
+          <input type="file" ref="pic" id="pic" />
+          <input type="hidden" ref="type" value="user" />
+        </form>
       </div>
     );
   }
@@ -132,70 +152,57 @@ let Info = React.createClass({
   render: function () {
     return (
       <div className="info">
-        <img src={`/assets/avatars/${this.props.img}.jpg`} height="200" />
-        <form action={`/rest/pic/${this.props.id}`} method="post" encType="multipart/form-data" target="upload">
-          <input type="file" ref="pic" id="pic" />
-          <input type="hidden" ref="type" value="user" />
-        </form>
-        <br />
+        <h3>Basic Information</h3>
         <div id="user_basic">
-          <label>Username</label>
-          <input ref="username" className="username" type="text" value={this.props.username} disabled="true" />
-          <br />
-          <label>First</label>
-          <input ref="first" className="first" type="text" value={this.props.first} onChange={this._change} />
-          <br />
-          <label>Last</label>
+          <label>Username
+            <input ref="username" className="username" type="text" value={this.props.username} disabled="true" />
+          </label>
+          <label>First
+            <input ref="first" className="first" type="text" value={this.props.first} onChange={this._change} />
+          </label>
+          <label>Last
           <input ref="last" className="last" type="text" value={this.props.last} onChange={this._change} />
-          <br />
-          <label>Email</label>
-          <input ref="email" className="email" type="text" value={this.props.email} onChange={this._change} />
-          <br />
-          <label>Phone</label>
-          <input ref="phone" className="phone" type="text" value={this.props.phone} onChange={this._change} />
-          <br />
+          </label>
+          <label>Email
+            <input ref="email" className="email" type="text" value={this.props.email} onChange={this._change} />
+          </label>
+          <label>Phone
+            <input ref="phone" className="phone" type="text" value={this.props.phone} onChange={this._change} />
+          </label>
         </div>
+        <button className="button green" onClick={this.props.save}>Save Changes</button>
       </div>
     );
-  },
-  _change: function (e) {
-    let user = this.state.user;
-    user[e.target.className] = e.target.value;
-    this.setState({user: user});
   }
 });
 
 let Details = React.createClass({
-  change: function (e) {
-    let user = this.props.user;
-    user[e.target.className] = e.target.value;
-    this.setState({user: user});
-  },
   render: function () {
     return (
       <div className="details">
+        <h3>Details</h3>
         <div id="user_detail">
-          <label>Company</label>
-          <input ref="company" className="company" type="text" value={this.props.company} onChange={this.change} />
-          <br />
-          <label>Occupation</label>
-          <input ref="occupation" className="occupation" type="text" value={this.props.occupation} onChange={this.change} />
-          <br />
-          <label>Website</label>
-          <input ref="website" className="website" type="text" value={this.props.website} onChange={this.change} />
-          <br />
-          <label>Date of Birth</label>
-          <input ref="dob" className="dob" type="datetime" value={this.props.dob} onChange={this.change} />
-          <br />
-          <label>Gender</label>
-          <select ref="gender" className="gender" value={this.props.gender} onChange={this.change}>
-            <option value="">Private</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Other</option>
-          </select>
-          <br />
+          <label>Company
+            <input ref="company" className="company" type="text" value={this.props.company} onChange={this.props.change} />
+          </label>
+          <label>Occupation
+            <input ref="occupation" className="occupation" type="text" value={this.props.occupation} onChange={this.props.change} />
+          </label>
+          <label>Website
+            <input ref="website" className="website" type="text" value={this.props.website} onChange={this.props.change} />
+          </label>
+          <label>Date of Birth
+            <input ref="dob" className="dob" type="datetime" value={this.props.dob} onChange={this.props.change} />
+          </label>
+          <label>Gender
+            <select ref="gender" className="gender" value={this.props.gender} onChange={this.props.change}>
+              <option value="">Private</option>
+              <option value="F">Female</option>
+              <option value="M">Male</option>
+            </select>
+          </label>
         </div>
+        <button className="button green" onClick={this.props.save}>Save Changes</button>
       </div>
     );
   }
@@ -207,15 +214,20 @@ let Address = React.createClass({
       <div>
         <h3>My Address</h3>
         <div id="user_address">
-          <label>Street</label>
-          <input ref="street" className="street" type="text" value={this.props.address.street} onChange={this.props.change} />
-          <label>Zip</label>
-          <input ref="zip" className="zip" type="text" value={this.props.address.zip} onChange={this.props.change} />
-          <label>City</label>
-          <input ref="city" className="city" type="text" value={this.props.address.city} onChange={this.props.change} />
-          <label>State</label>
-          <input ref="state" className="state" type="text" value={this.props.address.state} onChange={this.props.change} />
+          <label>Street
+            <input ref="street" className="street" type="text" value={this.props.address.street} onChange={this.props.change} />
+          </label>
+          <label>Zip
+            <input ref="zip" className="zip" type="text" value={this.props.address.zip} onChange={this.props.change} />
+          </label>
+          <label>City
+            <input ref="city" className="city" type="text" value={this.props.address.city} onChange={this.props.change} />
+          </label>
+          <label>State
+            <input ref="state" className="state" type="text" value={this.props.address.state} onChange={this.props.change} />
+          </label>
         </div>
+        <button className="button green">Save Address</button>
       </div>
     );
   }

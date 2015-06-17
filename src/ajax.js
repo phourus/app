@@ -43,6 +43,13 @@
                 isJSON = false;
             }
         }
+        /** CUSTOM: CONVERT OBJECTS TO JSON **/
+        if (typeof data === 'object') {
+          data = JSON.stringify(data);
+          isJSON = true;
+        }
+        /** END CUSTOM **/
+
         // IE9 Form Upload
         if (options.fileForm && isString) {
             var iframe  = document.createElement('iframe');
@@ -82,10 +89,10 @@
             request = new XHR('MSXML2.XMLHTTP.3.0');
             request.open(type, url, true);
             request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            if (isString) {
+            //if (isString) {
                 if (isJSON) request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
                 else request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
-            }
+            //}
             if (!!request.upload) {
                 request.upload.addEventListener('loadstart', options.loadstart, false);
                 request.upload.addEventListener('progress', options.progress, false);

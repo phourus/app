@@ -66,7 +66,7 @@ a.button,
 input.button {
   display: block;
   font-size: 0.9em !important;
-  color: #eeeeee !important;
+  color: #eeeeee;
   width: 160px;
   height: 40px;
   text-align: center;
@@ -105,6 +105,12 @@ a.button.green:hover,
 input.button.green:hover {
   background-color: #9cd900;
 }
+button.button.green.off,
+a.button.green.off,
+input.button.green.off {
+  background-color: #fafafa;
+  color: #9cd900;
+}
 button.button.blue,
 a.button.blue,
 input.button.blue {
@@ -114,6 +120,12 @@ button.button.blue:hover,
 a.button.blue:hover,
 input.button.blue:hover {
   background-color: #5faee3;
+}
+button.button.blue.off,
+a.button.blue.off,
+input.button.blue.off {
+  background-color: #fafafa;
+  color: #5faee3;
 }
 button.button.red,
 a.button.red,
@@ -125,6 +137,12 @@ a.button.red:hover,
 input.button.red:hover {
   background-color: #fc2727;
 }
+button.button.red.off,
+a.button.red.off,
+input.button.red.off {
+  background-color: #fafafa;
+  color: #fc2727;
+}
 button.button.gold,
 a.button.gold,
 input.button.gold {
@@ -134,6 +152,12 @@ button.button.gold:hover,
 a.button.gold:hover,
 input.button.gold:hover {
   background-color: #f2c13d;
+}
+button.button.gold.off,
+a.button.gold.off,
+input.button.gold.off {
+  background-color: #fafafa;
+  color: #f2c13d;
 }
 a.button {
   padding-top: 8px;
@@ -278,20 +302,131 @@ div.alerts button {
   clear: both;
 }
 .account .heading .pic {
-  width: 16.66666667%;
+  width: 50%;
   display: inline-block;
   vertical-align: top;
 }
 .account .heading .profile {
-  width: 41.66666667%;
+  width: 50%;
   display: inline-block;
   vertical-align: top;
 }
 .account .heading .posts {
-  width: 41.66666667%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
   text-align: right;
+}
+.account .update {
+  max-width: 75rem;
+  width: 100%;
+  margin: 0 auto;
+}
+.account .update:before,
+.account .update:after {
+  content: "";
+  display: table;
+}
+.account .update:after {
+  clear: both;
+}
+.account .update > div {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+.account label {
+  display: block;
+  font-size: 0.8em;
+}
+.account label input,
+.account label select {
+  display: block;
+}
+@media (min-width: 600px) {
+  .account .heading .pic {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .account .heading .profile {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .account .heading .posts {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+  }
+  .account .update {
+    max-width: 75rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .account .update:before,
+  .account .update:after {
+    content: "";
+    display: table;
+  }
+  .account .update:after {
+    clear: both;
+  }
+  .account .update > div {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+@media (min-width: 800px) {
+  .account .heading {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .account .heading:before,
+  .account .heading:after {
+    content: "";
+    display: table;
+  }
+  .account .heading:after {
+    clear: both;
+  }
+  .account .heading .pic {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .account .heading .profile {
+    width: 66.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .account .heading .posts {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+  }
+  .account .update {
+    max-width: 75rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .account .update:before,
+  .account .update:after {
+    content: "";
+    display: table;
+  }
+  .account .update:after {
+    clear: both;
+  }
+  .account .update > div {
+    width: 33.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
 .editor .list table {
   width: 100%;
@@ -1031,6 +1166,9 @@ div.alerts button {
     display: inline;
   }
 }
+#content div.search {
+  max-width: 100%;
+}
 .search .heading {
   background-color: white;
   height: 90px;
@@ -1038,6 +1176,7 @@ div.alerts button {
   position: fixed;
   width: 90%;
   padding: 2% 5%;
+  z-index: 1;
 }
 .search .heading .keywords {
   max-width: 100%;
@@ -1237,6 +1376,7 @@ div.alerts button {
 .search .heading .sortby ul li.selected {
   color: #3498db;
   background-color: white;
+  font-size: 1.5em;
 }
 .search .heading .sortby ul li.selected .fa {
   color: #3498db;
@@ -1262,7 +1402,6 @@ div.alerts button {
 .search .foot {
   background-color: #34495e;
   height: 60px;
-  position: fixed;
   bottom: 0px;
   width: 100%;
 }
@@ -1270,6 +1409,7 @@ div.alerts button {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
+  max-width: 1400px;
   color: white;
   font-size: 0.8em;
   text-align: center;
@@ -1291,7 +1431,9 @@ div.alerts button {
   background-color: #425d77;
 }
 .search .posts {
-  margin-top: 160px;
+  padding-top: 100px;
+  max-width: 1400px;
+  margin: auto;
 }
 .search .postItem {
   max-width: 100%;
@@ -1420,6 +1562,9 @@ div.alerts button {
   color: #8c690a;
 }
 @media (min-width: 800px) {
+  .search .posts {
+    padding-top: 160px;
+  }
   .search .postItem .details .pic {
     width: 25%;
     display: inline-block;

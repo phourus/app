@@ -12,8 +12,8 @@ module.exports = {
   get: function () {
     return http.get(base, settings);
   },
-  edit: function () {
-    return http.put(base, settings);
+  edit: function (model) {
+    return http.put(base, model, settings);
   },
   password: function (model) {
     return http.put(base + 'password', model, settings);
