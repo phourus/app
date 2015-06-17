@@ -27,13 +27,13 @@ let App = React.createClass({
                         <RouteHandler />
                     </div>
                     <footer className="footer">
-                        © 2013 Phourus LLC. All Rights Reserved.
+                        © 2015 Phourus Inc. All Rights Reserved.
                         <br />
                         <Link to="leaders">Home</Link> |
-        				<Link to="general">About</Link> |
-        				<Link to="general">Terms</Link> |
-                  <Link to="general">Privacy</Link>
-        				<br clear="all" />
+                				<Link to="general">About</Link> |
+                				<Link to="general">Terms</Link> |
+                        <Link to="general">Privacy</Link>
+        				        <br clear="all" />
                     </footer>
                 </div>
             </div>
