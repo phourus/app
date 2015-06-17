@@ -1,3 +1,7 @@
+#content div.search {
+  max-width: 100%;
+}
+
 .search {
 
   .heading {
@@ -7,6 +11,7 @@
     position: fixed;
     width: 90%;
     padding: 2% 5%;
+    z-index: 1;
 
     .keywords {
       .Row(100%);
@@ -180,6 +185,7 @@
           &.selected {
             color: @blue;
             background-color: white;
+            font-size: 1.5em;
 
             .fa {
               color: @blue;
@@ -214,12 +220,12 @@
   .foot {
     background-color: @theme;
     height: 60px;
-    position: fixed;
     bottom: 0px;
     width: 100%;
 
     .pagination {
       .Row(100%);
+      max-width: 1400px;
       color: white;
       font-size: 0.8em;
       text-align: center;
@@ -237,7 +243,9 @@
   }
 
   .posts {
-    margin-top: 160px;
+    padding-top: 100px;
+    max-width: 1400px;
+    margin: auto;
   }
 
   .postItem {
@@ -348,6 +356,10 @@
 
 @media (min-width: 800px) {
   .search {
+
+    .posts {
+      padding-top: 160px;
+    }
 
     .postItem {
 

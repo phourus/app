@@ -1,7 +1,7 @@
 button.button, a.button, input.button {
 	display: block;
 	font-size: 0.9em !important;
-	color: @grey-light !important;
+	color: @grey-light;
 	width: 160px;
 	height: 40px;
 	text-align: center;
@@ -31,6 +31,11 @@ button.button, a.button, input.button {
     &:hover {
     	background-color: @green-light;
     }
+
+		&.off {
+			background-color: #fafafa;
+			color: @green-light;
+		}
   }
 
   &.blue {
@@ -39,6 +44,11 @@ button.button, a.button, input.button {
     &:hover {
       background-color: @blue-light;
     }
+
+		&.off {
+			background-color: #fafafa;
+			color: @blue-light;
+		}
   }
 
   &.red {
@@ -47,6 +57,11 @@ button.button, a.button, input.button {
     &:hover {
       background-color: @red-light;
     }
+
+		&.off {
+			background-color: #fafafa;
+			color: @red-light;
+		}
   }
 
   &.gold {
@@ -55,6 +70,11 @@ button.button, a.button, input.button {
     &:hover {
       background-color: @gold-light;
     }
+
+		&.off {
+			background-color: #fafafa;
+			color: @gold-light;
+		}
   }
 }
 

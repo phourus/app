@@ -14,13 +14,16 @@ let Search = React.createClass({
 	getInitialState: function () {
 		return {
 			posts: [],
-			exclude: [],
-			search: '',
-			sort: 'influence',
-			direction: 'DESC',
-			page: 1,
-			limit: 10,
-			total: 0
+			total: 0,
+			params: {
+				exclude: [],
+				search: '',
+				sortBy: 'influence',
+				direction: 'DESC',
+				page: 1,
+				limit: 10,
+				total: 0
+			}
 		}
 	},
 	componentDidMount: function () {
@@ -37,9 +40,9 @@ let Search = React.createClass({
 		let hidden = 'fa fa-plus-square-o';
 		return (
 			<div className="search">
-				<Head {...this.state} />
+				<Head {...this.state.params} />
 				<Posts posts={this.state.posts} />
-				<Foot {...this.state} />
+				<Foot {...this.state.params} />
 			</div>
 		);
 	}
@@ -79,10 +82,18 @@ let Head = React.createClass({
 			Actions.search(val);
 	},
 	_filter: function () {
-		this.setState({mode: 1});
+		if (this.state.mode === 1) {
+			this.setState({mode: 0});
+		} else {
+			this.setState({mode: 1});
+		}
 	},
 	_sort: function () {
-		this.setState({mode: 2});
+		if (this.state.mode === 2) {
+			this.setState({mode: 0});
+		} else {
+			this.setState({mode: 2})
+		}
 	}
 });
 
@@ -120,7 +131,7 @@ let Filter = React.createClass({
 			<div className="filter">
 				<div className="triangle"></div>
 				<div className="label">Filter By</div>
-				<Types />
+				<Types {...this.props} />
 				<div className="label">Date Range</div>
 				<Dates />
 				<button className="clear">
@@ -143,37 +154,40 @@ let Filter = React.createClass({
 });
 
 let Sort = React.createClass({
-	sort: function (e) {
-			Actions.sortBy(e.target.value);
-	},
-	direction: function (e) {
-			Actions.direction(e.target.value);
-	},
 	render: function () {
 		return (
 			<div className="sortby">
 				<div className="triangle"></div>
 				<div className="label">Sort by</div>
-				<ul className="sort" onClick={this.sort} ref="sort">
-					<li className="influence selected"><i className="fa fa-check" /> Influence</li>
-					<li className="views"><i className="fa fa-check" /> Views</li>
-					<li className="popularity"><i className="fa fa-check" /> Popularity</li>
-					<li className="thumbs"><i className="fa fa-check" /> Thumbs</li>
-					<li className="comments"><i className="fa fa-check" /> Comments</li>
-					<li className="location"><i className="fa fa-check" /> Location</li>
-					<li className="createdAt"><i className="fa fa-check" /> Date</li>
+				<ul className="sort" ref="sort">
+					<li className={(this.props.sortBy === 'influence') ? "selected" : ""} onClick={this._influence}><i className="fa fa-check" /> Influence</li>
+					<li className={(this.props.sortBy === 'views') ? "selected" : ""} onClick={this._views}><i className="fa fa-check" /> Views</li>
+					<li className={(this.props.sortBy === 'popularity') ? "selected" : ""} onClick={this._popularity}><i className="fa fa-check" /> Popularity</li>
+					<li className={(this.props.sortBy === 'thumbs') ? "selected" : ""} onClick={this._thumbs}><i className="fa fa-check" /> Thumbs</li>
+					<li className={(this.props.sortBy === 'comments') ? "selected" : ""} onClick={this._comments}><i className="fa fa-check" /> Comments</li>
+					<li className={(this.props.sortBy === 'location') ? "selected" : ""} onClick={this._location}><i className="fa fa-check" /> Location</li>
+					<li className={(this.props.sortBy === 'date') ? "selected" : ""} onClick={this._date}><i className="fa fa-check" /> Date</li>
 				</ul>
 				<div className="direction"  ref="direction">
-					<button className="DESC selected" onChange={this.direction}>
+					<button className={(this.props.direction === 'DESC') ? 'selected' : ''} onClick={this._desc}>
 							<i className="fa fa-arrow-down" /> High to Low
 					</button>
-					<button className="ASC" onChange={this.direction}>
+					<button className={(this.props.direction === 'ASC') ? 'selected' : ''} onClick={this._asc}>
 						<i className="fa fa-arrow-up" /> Low to High
 					</button>
 				</div>
 			</div>
 		);
-	}
+	},
+	_influence: function (e) { Actions.sortBy('influence'); },
+	_views: function (e) { Actions.sortBy('views'); },
+	_popularity: function (e) { Actions.sortBy('popularity'); },
+	_thumbs: function (e) { Actions.sortBy('thumbs'); },
+	_comments: function (e) { Actions.sortBy('comments'); },
+	_location: function (e) { Actions.sortBy('location'); },
+	_date: function (e) { Actions.sortBy('date'); },
+	_asc: function (e) { Actions.direction('ASC'); },
+	_desc: function (e) { Actions.direction('DESC'); },
 });
 
 let Dates = React.createClass({
@@ -196,42 +210,44 @@ let Dates = React.createClass({
 });
 
 let Types = React.createClass({
-	getInitialState: function () {
-		return {
-			exclude: []
-		}
-	},
-	toggle: function (e) {
-			let type = e.currentTarget.id;
-			let exclude = this.props.exclude;
-			let index = exclude.indexOf(type);
-			if (index > -1) {
-					exclude.splice(index, 1);
-			} else {
-					exclude.push(type);
-			}
-			Actions.types(exclude);
-	},
-	off: function (type) {
-			let exclude = this.state.exclude;
-			if (exclude.length && exclude.indexOf(type) > -1) {
-					return 'off ';
-				}
-				return '';
-	},
 	render: function () {
+		var classes = {
+			blogs: "button green",
+			events: "button green",
+			subjects: "button blue",
+			questions: "button blue",
+			debates: "button red",
+			bills: "button red",
+			beliefs: "button gold",
+			quotes: "button gold"
+		}
+		for (var i = 0; i < this.props.exclude.length; i++) {
+			var key = this.props.exclude[i];
+			classes[key] += " off";
+		}
 		return (
 			<div className="types">
-				<button id="blogs" value="blog" className={(this.off('blogs')) + "button green"} onClick={this.toggle}><i className="fa fa-laptop" /> Blogs</button>
-				<button id="events" value="event" className={(this.off('events')) + " button green"} onClick={this.toggle}><i className="fa fa-calendar" /> Events</button>
-				<button id="subjects" value="subject" className={(this.off('subjects')) + " button blue"} onClick={this.toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
-				<button id="questions" value="question" className={(this.off('questions')) + " button blue"} onClick={this.toggle}><i className="fa fa-question" /> Questions</button>
-				<button id="debates" value="debate" className={(this.off('debates')) + " button red"} onClick={this.toggle}><i className="fa fa-bullhorn" /> Debates</button>
-				<button id="bills" value="bill" className={(this.off('bills')) + " button red"} onClick={this.toggle}><i className="fa fa-line-chart" /> Bills</button>
-				<button id="beliefs" value="belief" className={(this.off('beliefs')) + " button gold"} onClick={this.toggle}><i className="fa fa-road" /> Paths</button>
-				<button id="quotes" value="quote" className={(this.off('quotes')) + " button gold"} onClick={this.toggle}><i className="fa fa-quote-right" /> Quotes</button>
+				<button id="blogs" value="blog" className={classes.blogs} onClick={this._toggle}><i className="fa fa-laptop" /> Blogs</button>
+				<button id="events" value="event" className={classes.events} onClick={this._toggle}><i className="fa fa-calendar" /> Events</button>
+				<button id="subjects" value="subject" className={classes.subjects} onClick={this._toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
+				<button id="questions" value="question" className={classes.questions} onClick={this._toggle}><i className="fa fa-question" /> Questions</button>
+				<button id="debates" value="debate" className={classes.debates} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</button>
+				<button id="bills" value="bill" className={classes.bills} onClick={this._toggle}><i className="fa fa-line-chart" /> Bills</button>
+				<button id="beliefs" value="belief" className={classes.beliefs} onClick={this._toggle}><i className="fa fa-road" /> Paths</button>
+				<button id="quotes" value="quote" className={classes.quotes} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</button>
 			</div>
 		);
+	},
+	_toggle: function (e) {
+		let type = e.currentTarget.id;
+		let exclude = this.props.exclude;
+		let index = exclude.indexOf(type);
+		if (index > -1) {
+				exclude.splice(index, 1);
+		} else {
+				exclude.push(type);
+		}
+		Actions.types(exclude);
 	}
 });
 

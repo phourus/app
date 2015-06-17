@@ -27,7 +27,7 @@ module.exports = Reflux.createStore({
   _collection: function () {
     posts.collection(this.params)
     .then(data => {
-      this.trigger({posts: data.rows, total: data.count});
+      this.trigger({posts: data.rows, total: data.count, params: this.params});
     })
     .catch(code => {
       if (code != 200) {
@@ -37,20 +37,26 @@ module.exports = Reflux.createStore({
   },
   _search: function (search) {
     this.params.search = search;
+    this._collection();
   },
   _page: function (page) {
     this.params.page = page;
+    this._collection();
   },
   _limit: function (limit) {
     this.params.limit = limit;
+    this._collection();
   },
   _sortBy: function (sortBy) {
     this.params.sortBy = sortBy;
+    this._collection();
   },
   _direction: function (direction) {
     this.params.direction = direction;
+    this._collection();
   },
   _types: function (types) {
     this.params.types = types;
+    this._collection();
   }
 });
