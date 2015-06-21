@@ -4,6 +4,7 @@ var babel = require('babel/register');
 var fs = require('fs');
 var express = require('express');
 var React = require('react');
+//var server = require('./api/rest');
 //var Router = require('react-router');
 
 //var routes = require('./src/routes');
