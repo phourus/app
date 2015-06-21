@@ -1,4 +1,4 @@
-var config = require("./config").get('db');
+var config = require("../config").get('db');
 var Sequelize = require('sequelize');
 var db = config.name;
 var username = config.user;

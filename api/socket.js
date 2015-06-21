@@ -1,4 +1,4 @@
-var config = require("./config");
+var config = require("../config");
 var IO = require('socket.io');
 var jwt = require('jsonwebtoken');
 

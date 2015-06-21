@@ -1,5 +1,5 @@
 require("babel/register");
-var config = require("./config");
+var config = require("../config");
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var body = require('body-parser');

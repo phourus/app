@@ -1,6 +1,6 @@
 var http = require('../ajax')(window);
-var config = require('../../config').get('rest');
-var base = config.url + ':' + config.port + '/account/';
+var config = require('../../config');
+var base = config.get('url') + ':' + config.get('port') + '/rest/account/';
 var settings = {
   headers: {
     "Authorization": require('../token').get()

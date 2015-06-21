@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var config = require('../config');
+var config = require('../../config');
 var db = require('../db');
 var users = require('../models/users');
 var passwords = require('../models/passwords');

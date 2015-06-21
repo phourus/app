@@ -7,46 +7,54 @@ var conf = convict({
     "default": "development",
     "env": "PHOURUS_ENV"
   },
-  "app": {
-    "url": {
-      "doc": "App URL",
-      "format": "url",
-      "default": "http://localhost",
-      "env": "PHOURUS_APP_URL"
-    },
-    "port": {
-      "doc": "App Port",
-      "format": "port",
-      "default": 8000,
-      "env": "PHOURUS_APP_PORT"
-    }
+  "url": {
+    "doc": "App URL",
+    "format": "url",
+    "default": "http://localhost",
+    "env": "PHOURUS_APP_URL"
   },
-  "socket": {
-    "url": {
-      "doc": "Socket Server URL",
-      "format": "url",
-      "default": "http://localhost",
-      "env": "PHOURUS_SOCKET_URL"
-    },
-    "port": {
-      "doc": "Socket Server Port",
-      "format": "port",
-      "default": 3000,
-      "env": "PHOURUS_SOCKET_PORT"
-    }
+  "port": {
+    "doc": "Server Port",
+    "format": "port",
+    "default": 3000,
+    "env": "PHOURUS_SOCKET_PORT"
   },
-  "rest": {
-    "url": {
-      "doc": "REST Server URL",
-      "format": "url",
-      "default": "http://localhost",
-      "env": "PHOURUS_REST_URL"
+  "salt": {
+    "doc": "JWT Salt",
+    "format": "*",
+    "default": "123abc",
+    "env": "PHOURUS_JWT_SALT"
+  },
+  "db": {
+    "host": {
+      "doc": "Database Hostname",
+      "format": "*",
+      "default": "localhost",
+      "env": "PHOURUS_DB_HOST"
     },
     "port": {
-      "doc": "REST Server Port",
+      "doc": "Database Port",
       "format": "port",
-      "default": 4000,
-      "env": "PHOURUS_REST_PORT"
+      "default": 3306,
+      "env": "PHOURUS_DB_PORT"
+    },
+    "name": {
+      "doc": "Database Name",
+      "format": "*",
+      "default": "phourus-dev",
+      "env": "PHOURUS_DB_NAME"
+    },
+    "user": {
+      "doc": "Database Username",
+      "format": "*",
+      "default": "root",
+      "env": "PHOURUS_DB_USER"
+    },
+    "pass": {
+      "doc": "Database Password",
+      "format": "*",
+      "default": "",
+      "env": "PHOURUS_DB_PASS"
     }
   }
 });
