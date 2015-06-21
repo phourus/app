@@ -1,5 +1,4 @@
 var router = require('express').Router();
-var rest = require('../rest').use('/account', router);
 var config = require('../config');
 var db = require('../db');
 var users = require('../models/users');
@@ -207,3 +206,5 @@ router.get('/history', (req, res) => {
       res.send(503);
   });
 });
+
+module.exports = router;

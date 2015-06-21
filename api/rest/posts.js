@@ -1,5 +1,4 @@
 var router = require('express').Router();
-var rest = require('../rest').use('/posts', router);
 
 var posts = require('../models/posts');
 
@@ -71,3 +70,5 @@ router.get('/account', (req, res) => {
     res.send(503);
   });
 });
+
+module.exports = router;

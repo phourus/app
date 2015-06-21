@@ -1,5 +1,4 @@
 var router = require('express').Router();
-var rest = require('../rest').use('/links', router);
 
 var links = require('../models/links');
 
@@ -58,3 +57,5 @@ router.delete('/:id', (req, res) => {
       res.send(503);
   });
 });
+
+module.exports = router;

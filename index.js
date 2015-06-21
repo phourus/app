@@ -4,7 +4,7 @@ var babel = require('babel/register');
 var fs = require('fs');
 var express = require('express');
 var React = require('react');
-//var server = require('./api/rest');
+var api = require('./api/rest');
 //var Router = require('react-router');
 
 //var routes = require('./src/routes');
@@ -12,6 +12,7 @@ var React = require('react');
 var phourus = express();
 
 phourus.use(express.static(__dirname + '/build'));
+phourus.use('/rest', api);
 
 phourus.get('*', function(req, res){
     var file, app, out;

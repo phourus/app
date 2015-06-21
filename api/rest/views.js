@@ -1,5 +1,4 @@
 var router = require('express').Router();
-var rest = require('../rest').use('/views', router);
 
 var views = require('../models/views');
 
@@ -27,3 +26,5 @@ router.post('', (req, res) => {
     res.send(503);
   });
 });
+
+module.exports = router;

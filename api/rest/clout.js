@@ -1,8 +1,6 @@
 var router = require('express').Router();
-var rest = require('../rest').use('/clout', router);
 
 var clout = require('../models/clout');
-
 
 router.get('/:id', (req, res) => {
     var id;
@@ -59,3 +57,5 @@ router.delete('/:id', (req, res) => {
       res.send(503);
   });
 });
+
+module.exports = router;

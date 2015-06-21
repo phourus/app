@@ -1,5 +1,4 @@
 var router = require('express').Router();
-var rest = require('../rest').use('/orgs', router);
 
 var orgs = require('../models/orgs');
 
@@ -58,3 +57,5 @@ router.delete('/:id', (req, res) => {
     res.send(503);
   });
 });
+
+module.exports = router;
