@@ -10,7 +10,9 @@ let Factory = require('./react/editor');
 let Account = require('./react/account');
 let Profile = require('./react/profile');
 let Leaders = require('./react/leaders');
-let General = require('./react/general');
+let FAQ = require('./react/about');
+let Terms = require('./react/terms');
+let Privacy = require('./react/privacy');
 let Landing = require('./react/landing');
 let Map = require('./map');
 let View404 = require('./react/404');
@@ -26,7 +28,9 @@ module.exports = (
       <Route name="topPhourus" path="phourus" handler={Leaders.Phourus} />
     </Route>
     <Route name="post" path="/post/:id" handler={Post} />
-    <Route name="general" handler={General} />
+    <Route name="faq" handler={FAQ} />
+    <Route name="terms" handler={Terms} />
+    <Route name="privacy" handler={Privacy} />
     <Route name="search" path="search" handler={Search}>
       <Route name="myPosts" path="me" handler={Search} />
       <Route name="userPosts" path="user/:id" handler={Search} />
