@@ -8,6 +8,7 @@ let Search = require('./react/search');
 let Post = require('./react/post');
 let Factory = require('./react/editor');
 let Account = require('./react/account');
+let Admin = require('./react/admin');
 let Profile = require('./react/profile');
 let Leaders = require('./react/leaders');
 let FAQ = require('./react/about');
@@ -42,6 +43,13 @@ module.exports = (
       <Route name="history" path="history" handler={Account.History} />
       <Route name="update" path="update" handler={Account.Edit} />
       <Route name="password" path="password" handler={Account.Password} />
+      <Route name="orgs" path="orgs" handler={Account.Orgs} />
+    </Route>
+    <Route name="admin" path="admin/:id" handler={Admin}>
+      <Route name="details" path="details" handler={Admin.Details} />
+      <Route name="users" path="users" handler={Admin.Users} />
+      <Route name="categories" path="categories" handler={Admin.Categories} />
+      <Route name="apps" path="apps" handler={Admin.Apps} />
     </Route>
     <Route name="editor" path="editor" handler={Factory}>
       <DefaultRoute handler={Factory.List} />

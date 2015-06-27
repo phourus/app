@@ -78,6 +78,10 @@ let Pic = React.createClass({
         <br />
         <Link to="update">Edit Account</Link>
         <br />
+        <Link to="notifications">My Notifications</Link>
+        <br />
+        <Link to="history">My History</Link>
+        <br />
         <a onClick={this._logout}>Logout</a>
         <br />
       </div>
@@ -97,7 +101,7 @@ let Profile = React.createClass({
         <h2><Link to="user" params={{id: this.props.id}}>{this.props.username}</Link></h2>
         <div><strong>Full Name:</strong> {this.props.first} {this.props.last}</div>
         <div>{this.props.address.city}, {this.props.address.state}</div>
-        <div><strong>Company:</strong> {this.props.company}</div>
+        <div><Link to="orgs">4 Organizations</Link></div>
         <div><strong>Born:</strong> {moment(this.props.dob).format('MMMM Do YYYY')}</div>
         <div>{this.props.gender}</div>
       </div>
@@ -354,6 +358,46 @@ Account.History = React.createClass({
       );
     });
     return (<div><h3>History</h3><ul>{views}</ul><ul>{comments}</ul><ul>{thumbs}</ul></div>);
+  }
+});
+
+Account.Orgs = React.createClass({
+  mixins: [Router.Navigation],
+  getInitialState: function () {
+    return {
+      orgs: [
+        {id: 1, name: "UCLA", admin: false},
+        {id: 2, name: "ABC Company", admin: true},
+        {id: 3, name: "City of Santa Monica, CA", admin: false},
+        {id: 4, name: "First Church of Phourus", admin: true}
+      ]
+    }
+  },
+  render: function () {
+    return (
+      <div>
+        <h1>My Organizations</h1>
+        {this.state.orgs.map((item) => {
+          var admin = false;
+          if (item.admin === true) {
+            admin = <button id={item.id} className="button blue" onClick={this._edit}>Edit Organization</button>
+          }
+          return (
+            <div>
+              {item.name} <button id={item.id} className="button red" onClick={this._remove}>Remove Me</button> {admin}
+            </div>
+          );
+        })}
+      </div>
+    );
+  },
+  _edit: function (e) {
+    var id = e.currentTarget.id;
+    this.context.transitionTo('details', {id: id});
+  },
+  _remove: function (e) {
+    var id = e.currentTarget.id;
+    console.warn('remove org' + id);
   }
 });
 

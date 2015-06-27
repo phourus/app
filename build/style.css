@@ -990,50 +990,6 @@ div.alerts button {
   display: none;
   text-align: right;
 }
-.profile .tabs {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-}
-.profile .tabs:before,
-.profile .tabs:after {
-  content: "";
-  display: table;
-}
-.profile .tabs:after {
-  clear: both;
-}
-.profile .tabs > div {
-  width: 20%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-  border-bottom: solid 1px #eeeeee;
-  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
-  font-size: 1em;
-}
-.profile .tabs > div:hover {
-  background-color: #eeeeee;
-  cursor: pointer;
-}
-.profile .tabs > div.selected {
-  border-bottom: solid 4px #ecb010;
-}
-.profile .tabs > div .number {
-  text-align: center;
-  font-size: 3em;
-  color: #ecb010;
-  line-height: 1em;
-  border-right: solid 1px #eeeeee;
-}
-.profile .tabs > div:nth-child(5) .number {
-  border-right: none;
-}
-.profile .tabs > div .label {
-  display: block;
-  color: #444;
-  font-size: 0.9em;
-}
 .profile .viewInfo .contact {
   max-width: 100%;
   width: 100%;
@@ -1872,4 +1828,59 @@ i.fa-minus {
 }
 .influence.influence10 {
   background-color: #ed0303;
+}
+/** TABS **/
+.tabs {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+.tabs:before,
+.tabs:after {
+  content: "";
+  display: table;
+}
+.tabs:after {
+  clear: both;
+}
+.tabs > div {
+  width: 20%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  border-bottom: solid 1px #eeeeee;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  font-size: 1em;
+}
+.tabs > div:hover {
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+.tabs > div.selected {
+  border-bottom: solid 4px #ecb010;
+}
+.tabs > div .number {
+  text-align: center;
+  font-size: 3em;
+  color: #ecb010;
+  line-height: 1em;
+  border-right: solid 1px #eeeeee;
+}
+.tabs > div .number .pending {
+  background-color: #fc2727;
+  color: #fff;
+  font-size: initial;
+  vertical-align: top;
+  display: inline-block;
+  padding: 4px 4px 0 4px;
+  height: 20px;
+  line-height: initial;
+}
+.tabs > div:nth-child(5) .number {
+  border-right: none;
+}
+.tabs > div .label {
+  display: block;
+  color: #444;
+  font-size: 0.9em;
 }

@@ -24,45 +24,6 @@
     }
   }
 
-  .tabs {
-    .Row(100%);
-
-    > div {
-      .Cols(2, 10);
-      text-align: center;
-      border-bottom: solid 1px @grey-light;
-      font-family: @font-serif;
-      font-size: 1em;
-
-      &:hover {
-        background-color: @grey-light;
-        cursor: pointer;
-      }
-
-      &.selected {
-        border-bottom: solid 4px @gold;
-      }
-
-      .number {
-        text-align: center;
-        font-size: 3em;
-        color: @gold;
-        line-height: 1em;
-        border-right: solid 1px @grey-light;
-      }
-
-      &:nth-child(5) .number {
-        border-right: none;
-      }
-
-      .label {
-        display: block;
-        color: #444;
-        font-size: 0.9em;
-      }
-    }
-  }
-
   .viewInfo {
 
     .contact {
