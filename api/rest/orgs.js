@@ -3,7 +3,7 @@ var router = require('express').Router();
 var orgs = require('../models/orgs');
 
 router.get('/:id', (req, res) => {
-  var id;
+  var id = req.params.id;
   orgs.single(id)
   .then(function (data) {
       res.send(200, data);

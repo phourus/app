@@ -11,6 +11,7 @@ let Influence = require('../influence');
 let Popularity = require('../popularity');
 
 let Search = React.createClass({
+	mixins: [Router.State],
 	getInitialState: function () {
 		return {
 			posts: [],
@@ -23,10 +24,21 @@ let Search = React.createClass({
 				page: 1,
 				limit: 10,
 				total: 0
+			},
+			context: {
+				type: null,
+				id: null
 			}
 		}
 	},
 	componentDidMount: function () {
+		let type = null;
+		let route = this.context.getCurrentRoutes();
+		let params = this.context.getCurrentParams();
+		if (route[2]) {
+			type = route[2].name;
+		}
+		Actions.context(type, params.id);
 		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
 		});
@@ -40,7 +52,7 @@ let Search = React.createClass({
 		let hidden = 'fa fa-plus-square-o';
 		return (
 			<div className="search">
-				<Head {...this.state.params} />
+				<Head {...this.state.params} context={this.state.context} />
 				<Posts posts={this.state.posts} />
 				<Foot {...this.state.params} />
 			</div>
@@ -67,7 +79,7 @@ let Head = React.createClass({
 						<button className="button blue" ref="search" onClick={this._search}><i className="fa fa-search" /> Search</button>
 				</div>
 				<div className="refine">
-					<Context />
+					<Context {...this.props.context} />
 					<div className="toggles">
 						<button className="fa fa-filter" onClick={this._filter}></button>
 						<button className="fa fa-sort" onClick={this._sort}></button>
@@ -109,11 +121,20 @@ let Foot = React.createClass({
 
 let Context = React.createClass({
 	render: function () {
+		let name = this.props.username;
+		if (!this.props.type) {
+			return <div className="context"></div>;
+		}
 		return (
 			<div className="context">
-				Viewing posts by:
+				<img src={'/assets/avatars/' + this.props.id + '.jpg'} />
+				Viewing posts by: <br />
+			<Link to="user" params={{id: this.props.id}}>{name}</Link> | Clear filters <a href="javascript:void(0)" className="close" onClick={this._clear}>x</a>
 			</div>
 		);
+	},
+	_clear: function () {
+		Actions.context(null, null);
 	}
 });
 

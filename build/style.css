@@ -1210,6 +1210,17 @@ div.alerts button {
   background-color: #fafafa;
   color: #3498db;
 }
+.search .heading .context {
+  font-size: 0.9em;
+}
+.search .heading .context img {
+  float: left;
+  height: 40px;
+}
+.search .heading .context a.close {
+  font-size: 0.9em;
+  color: #111;
+}
 .search .heading .filter,
 .search .heading .sortby {
   clear: right;

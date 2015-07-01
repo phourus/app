@@ -3,7 +3,7 @@ var router = require('express').Router();
 var users = require('../models/users');
 
 router.get('/:id', (req, res) => {
-  let id;
+  let id = req.params.id;
   users.single(id)
   .then(function (data) {
     res.send(200, data);

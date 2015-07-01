@@ -8,5 +8,6 @@ module.exports = {
   limit: Reflux.createAction(),
   sortBy: Reflux.createAction(),
   direction: Reflux.createAction(),
-  types: Reflux.createAction()
+  types: Reflux.createAction(),
+  context: Reflux.createAction()
 }
