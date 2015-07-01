@@ -859,17 +859,6 @@ div.alerts button {
   font-size: 1em;
   text-transform: uppercase;
 }
-.post .heading .basic .tags .tag {
-  border: solid 1px #dddddd;
-  padding: 2px 6px;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  font-size: 0.9em;
-  color: #aaa;
-  margin-left: 4px;
-  display: inline-block;
-}
 .post .content {
   margin-bottom: 40px;
 }
@@ -1839,6 +1828,36 @@ i.fa-minus {
 }
 .influence.influence10 {
   background-color: #ed0303;
+}
+/** TAGS **/
+.tag {
+  border: solid 1px #dddddd;
+  padding: 2px 6px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  font-size: 0.9em;
+  color: #aaa;
+  margin-left: 4px;
+  display: inline-block;
+}
+.tag span:hover {
+  border-color: #5faee3;
+  color: #5faee3;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.tag button.remove {
+  border: none;
+  background: transparent;
+  display: inline;
+  font-size: 1em;
+  color: inherit;
+}
+.tag button.remove:hover {
+  color: #fc2727;
+  text-decoration: none;
+  cursor: pointer;
 }
 /** TABS **/
 .tabs {

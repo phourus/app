@@ -161,6 +161,38 @@ i.fa-minus {
   &.influence10 { background-color: @red; }
 }
 
+/** TAGS **/
+.tag {
+  border: solid 1px @grey;
+  padding: 2px 6px;
+  .rounded(16px);
+  font-size: 0.9em;
+  color: #aaa;
+  margin-left: 4px;
+  display: inline-block;
+
+  span:hover {
+    border-color: @blue-light;
+    color: @blue-light;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  button.remove {
+    border: none;
+    background: transparent;
+    display: inline;
+    font-size: 1em;
+    color: inherit;
+
+    &:hover {
+      color: @red-light;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
 /** TABS **/
 .tabs {
   .Row(100%);

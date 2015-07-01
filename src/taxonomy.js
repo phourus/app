@@ -248,5 +248,7 @@ module.exports = {
     debates: debates,
     polls: polls,
     beliefs: beliefs,
+    quotes: '',
+    questions: '',
     filters: filters
 }

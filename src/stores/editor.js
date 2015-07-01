@@ -1,7 +1,7 @@
 "use strict";
 let Reflux = require('reflux');
 let Actions = require('../actions/editor');
-let { account, single, add, save, remove, reset, Tags, Links } = Actions;
+let { account, single, add, save, remove, reset, change, Tags, Links } = Actions;
 let msg = require("../actions/alerts").add;
 
 let posts = require('../api/posts');
@@ -9,12 +9,15 @@ let posts = require('../api/posts');
 let Editor = Reflux.createStore({
   init: function () {
     let self = this;
+    this.post = {};
+    this.postID = null;
     this.listenTo(account, this._account);
     this.listenTo(single, this._single);
     this.listenTo(add, this._add);
     this.listenTo(save, this._save);
     this.listenTo(remove, this._remove);
     this.listenTo(reset, this._reset);
+    this.listenTo(change, this._change);
   },
   _account: function () {
     posts.account()
@@ -28,9 +31,11 @@ let Editor = Reflux.createStore({
     });
   },
   _single: function (id) {
+    this.postID = id;
     posts.single(id)
     .then(data => {
-      this.trigger(data);
+      this.post = data;
+      this.trigger({post: data, postID: id});
     })
     .catch(code => {
       if (code != 200) {
@@ -65,6 +70,10 @@ let Editor = Reflux.createStore({
   },
   _reset: function () {
     this.trigger({post: {}});
+  },
+  _change: function (key, value) {
+    this.post[key] = value;
+    this.trigger({post: this.post});
   }
   /*,
   Tags: Reflux.createStore({

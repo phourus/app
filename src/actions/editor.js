@@ -8,6 +8,7 @@ module.exports = {
   save: Reflux.createAction(),
   remove: Reflux.createAction(),
   reset: Reflux.createAction(),
+  change: Reflux.createAction(),
   Tags: {
     collection: Reflux.createAction(),
     add: Reflux.createAction(),

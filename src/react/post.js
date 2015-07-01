@@ -78,7 +78,6 @@ let Post = React.createClass({
           </div>
         </div>
         <div className="content">{this.state.post.content}</div>
-        <Links links={this.state.post.links} />
         <Author />
         <Thumbs post={this.state.post} thumb={this.state.thumb} />
         <Comments post={this.state.post} />
