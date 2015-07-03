@@ -1,7 +1,8 @@
-var types = require('sequelize');
+var sql = require('sequelize');
 var db = require('../db');
 
 var users = require('./users');
+var orgs = require('./orgs');
 var tags = require('./tags');
 var links = require('./links');
 var locations = require('./locations');
@@ -11,33 +12,34 @@ var comments = require('./comments');
 
 var posts = db.define('posts', {
   // Common
-  id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
-  created: {type: types.DATE, defaultValue: types.NOW},
-  modified: types.DATE,
-  privacy: {type: types.ENUM('public', 'phourus', 'private'), defaultValue: 'private'},
-  type: types.ENUM('blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'),
-  title: types.STRING,
-  content: types.TEXT,
-  element: types.ENUM('world', 'mind', 'voice', 'self'),
-  category: types.STRING(20),
-  lat: types.FLOAT,
-  lng: types.FLOAT,
+  id: {type: sql.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
+  created: {type: sql.DATE, defaultValue: sql.NOW},
+  modified: sql.DATE,
+  privacy: {type: sql.ENUM('public', 'phourus', 'private'), defaultValue: 'private'},
+  type: sql.ENUM('blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'),
+  title: sql.STRING,
+  content: sql.TEXT,
+  element: sql.ENUM('world', 'mind', 'voice', 'self'),
+  category: sql.STRING(20),
+  lat: sql.FLOAT,
+  lng: sql.FLOAT,
 
   // Stats
-  totalComments: {type: types.INTEGER, defaultValue: 0},
-  totalViews: {type: types.INTEGER, defaultValue: 0},
-  totalThumbs: {type: types.INTEGER, defaultValue: 0},
-  popularity: {type: types.INTEGER, defaultValue: 0},
-  influence: {type: types.INTEGER, defaultValue: 0},
+  totalComments: {type: sql.INTEGER, defaultValue: 0},
+  totalViews: {type: sql.INTEGER, defaultValue: 0},
+  totalThumbs: {type: sql.INTEGER, defaultValue: 0},
+  popularity: {type: sql.INTEGER, defaultValue: 0},
+  influence: {type: sql.INTEGER, defaultValue: 0},
 
   // Meta
-  parent_id: types.INTEGER,
-  difficulty: {type: types.ENUM('easy', 'medium', 'hard'), allowNull: true},
-  positive: types.BOOLEAN,
-  scope: {type: types.ENUM('local', 'county', 'state', 'national', 'international'), allowNull: true},
-  zip: types.STRING(5),
-  author: types.STRING,
-  vote: types.BOOLEAN
+  parent_id: sql.INTEGER,
+  difficulty: {type: sql.ENUM('easy', 'medium', 'hard'), allowNull: true},
+  positive: sql.BOOLEAN,
+  scope: {type: sql.ENUM('local', 'county', 'state', 'national', 'international'), allowNull: true},
+  zip: sql.STRING(5),
+  author: sql.STRING,
+  vote: sql.BOOLEAN,
+  orgId: {type: sql.INTEGER, defaultValue: null}
 }, {
   classMethods: {
     single: function (id) {
@@ -100,7 +102,7 @@ var posts = db.define('posts', {
       defaults.limit = 10;
 
       /** STANDARD **/
-      query.order = (params.sort || defaults.sort) + ' ' + (params.direction || defaults.direction);
+      query.order = [[(params.sortBy || defaults.sortBy), (params.direction || defaults.direction)]];
       query.offset = ((params.page || defaults.page) - 1) * (defaults.limit || params.limit);
       query.limit = params.limit || defaults.limit;
       query.where = {};
@@ -122,7 +124,7 @@ var posts = db.define('posts', {
       // specific search: question, author
       if (params.search && params.search !== '') {
           var term = { like:  '%' + params.search + '%' };
-          query.where = types.or(
+          query.where = sql.or(
               { title: term },
               { content: term }
           );
@@ -148,7 +150,7 @@ var posts = db.define('posts', {
       query.include = [
           {model: users, as: 'user', include: [locations]},
           {model: tags, as: 'tags'},
-          {model: links, as: 'links'},
+          {model: links, as: 'links'}
       ];
       return query;
     }

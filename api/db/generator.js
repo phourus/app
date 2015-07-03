@@ -29,10 +29,10 @@ var ORG_TOTAL = 20;
 /** TYPES **/
 var User = function User () {
   return {
-        username: chance.word(), 
+        username: chance.word(),
         first: chance.first(),
         last: chance.last(),
-        email: chance.email(), 
+        email: chance.email(),
         phone: chance.phone(),
         gender: chance.character({pool: "MFP"}),
         occupation: chance.word(),
@@ -41,12 +41,13 @@ var User = function User () {
         dob: chance.birthday(),
         influence: chance.integer({min: 0, max: 100}),
         img: chance.integer({min: 1, max: 10})
-    }  
+    }
 }
 
 var Post = function Post () {
   return {
     userId: chance.integer({min: 1, max: USER_TOTAL}),
+    orgId: chance.integer({min: null, max: ORG_TOTAL}),
     privacy: ['public', 'phourus', 'private'][chance.integer({min: 0, max: 2})],
     type: ['blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'][chance.integer({min: 0, max: 7})],
     title: chance.sentence(),
@@ -55,16 +56,16 @@ var Post = function Post () {
     category: chance.word(),
     lat: chance.latitude(),
     lng: chance.longitude(),
-    comments: chance.integer({min: 0, max: 1000}),
-    views: chance.integer({min: 0, max: 100000}),
-    thumbs: chance.integer({min: 0, max: 10000}),
+    totalComments: chance.integer({min: 0, max: 1000}),
+    totalViews: chance.integer({min: 0, max: 100000}),
+    totalThumbs: chance.integer({min: 0, max: 10000}),
     popularity: chance.integer({min: 0, max: 100}),
     influence: chance.integer({min: 0, max: 100}),
     positive: chance.bool(),
     zip: chance.zip(),
     author: chance.name(),
     vote: chance.bool()
-    }  
+    }
 }
 
 var View = function View () {
@@ -85,7 +86,7 @@ var Thumb = function Thumb () {
     return {
         postId: chance.integer({min: 1, max: POST_TOTAL}),
         userId: chance.integer({min: 1, max: USER_TOTAL}),
-        positive: chance.bool()       
+        positive: chance.bool()
     }
 }
 
@@ -93,7 +94,7 @@ var Comment = function Comment () {
     return {
         userId: chance.integer({min: 1, max: USER_TOTAL}),
         postId: chance.integer({min: 1, max: POST_TOTAL}),
-        content: chance.paragraph()        
+        content: chance.paragraph()
     }
 }
 
@@ -117,7 +118,7 @@ var Link = function Link () {
     return {
         postId: chance.integer({min: 1, max: POST_TOTAL}),
         url: chance.url(),
-        caption: chance.sentence()      
+        caption: chance.sentence()
     }
 }
 
@@ -140,7 +141,7 @@ var Org = function Org () {
         website: chance.domain(),
         influence: chance.integer({min: 0, max: 100}),
         img: '',
-        people: chance.integer({min: 1, max: 10000}),    
+        people: chance.integer({min: 1, max: 10000}),
         about: chance.paragraph(),
         video: chance.url(),
         channel: chance.url(),
@@ -180,9 +181,9 @@ var Member = function Member () {
 
 var Password = function Password () {
     return {
-        userId: chance.integer({min: 1, max: USER_TOTAL}), 
-        hash: Passwords.hash('phourus')     
-    }    
+        userId: chance.integer({min: 1, max: USER_TOTAL}),
+        hash: Passwords.hash('phourus')
+    }
 }
 
 /** GENERATE **/
@@ -194,7 +195,7 @@ function generate (Model, count, db) {
             console.log(err);
         });
         i++;
-    }   
+    }
 }
 
 function passwords (Model, count, db) {
@@ -205,12 +206,12 @@ function passwords (Model, count, db) {
             console.log(err);
         });
         i++;
-    }       
+    }
 }
 /** EXECUTE **/
 generate(User, USER_TOTAL, Users);
 generate(Post, POST_TOTAL, Posts);
-//generate(Org, ORG_TOTAL, Orgs);
+generate(Org, ORG_TOTAL, Orgs);
 
 passwords(Password, USER_TOTAL, Passwords);
 generate(Tag, 400, Tags);
