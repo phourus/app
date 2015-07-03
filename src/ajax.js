@@ -22,11 +22,25 @@
         return {data:result, request:req};
     };
 
+    var query = function (params) {
+      var out = '?';
+      if (params.length < 1 || typeof params !== 'object') {
+        return '';
+      }
+      Object.keys(params).forEach(function (item) {
+        var value = params[item];
+        out += item + '=' + encodeURIComponent(params[item]) + '&';
+      });
+      out.slice(0, -1);
+      return out;
+    };
+
     var xhr = function (type, url, data, opts) {
         var options = {
             fileForm: opts.fileForm || false,
             promise: opts.promise || false,
             headers: opts.headers || {},
+            query: opts.query || {},
             success: opts.success || function () {},
             error: opts.error || function () {},
             loadstart: opts.loadstart || function () {},
@@ -36,6 +50,8 @@
         request,
         isString = typeof data === 'string',
         isJSON = false;
+        url += query(opts.query);
+
         if (isString) {
             try {
                 isJSON = !!JSON.parse(data);

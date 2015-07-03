@@ -13,6 +13,7 @@ module.exports = {
     return http.get(base + id, settings);
   },
   collection: function (params) {
+    settings.query = params;
     return http.get(base, settings);
   },
   add: function (model) {

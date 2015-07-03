@@ -107,11 +107,8 @@ var posts = db.define('posts', {
 
       /** WHERE **/
       // EXCLUDE
-      // .isArray does not seem to work here, used instanceof instead
-      // do not support strings, arrays only
-      if (params.exclude && params.exclude instanceof Array && params.exclude.length) {
-          console.log(params.exclude);
-          query.where.type = { not: params.exclude }
+      if (params.exclude && params.exclude.length) {
+          query.where.type = { not: params.exclude.split(',') }
       }
 
       // USER_ID

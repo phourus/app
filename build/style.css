@@ -428,6 +428,10 @@ div.alerts button {
     vertical-align: top;
   }
 }
+.editor a.edit {
+  font-size: 0.4em;
+  text-decoration: underline;
+}
 .editor .list table {
   width: 100%;
 }

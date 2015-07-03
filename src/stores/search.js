@@ -3,7 +3,7 @@ let Reflux = require('reflux');
 let posts = require('../api/posts');
 let users = require('../api/users');
 let orgs = require('../api/orgs');
-let { collection, search, page, limit, sortBy, direction, types, context } = require('../actions/search');
+let Actions = require('../actions/search');
 let msg = require("../actions/alerts").add;
 
 module.exports = Reflux.createStore({
@@ -22,14 +22,14 @@ module.exports = Reflux.createStore({
     }
   },
   init: function () {
-    this.listenTo(collection, this._collection);
-    this.listenTo(search, this._search);
-    this.listenTo(page, this._page);
-    this.listenTo(limit, this._limit);
-    this.listenTo(sortBy, this._sortBy);
-    this.listenTo(direction, this._direction);
-    this.listenTo(types, this._types);
-    this.listenTo(context, this._context);
+    this.listenTo(Actions.collection, this._collection);
+    this.listenTo(Actions.search, this._search);
+    this.listenTo(Actions.page, this._page);
+    this.listenTo(Actions.limit, this._limit);
+    this.listenTo(Actions.sortBy, this._sortBy);
+    this.listenTo(Actions.direction, this._direction);
+    this.listenTo(Actions.exclude, this._exclude);
+    this.listenTo(Actions.context, this._context);
   },
   _collection: function () {
     posts.collection(this.params)
@@ -62,8 +62,15 @@ module.exports = Reflux.createStore({
     this.params.direction = direction;
     this._collection();
   },
-  _types: function (types) {
-    this.params.types = types;
+  _exclude: function (type) {
+    let exclude = this.params.exclude;
+    let index = exclude.indexOf(type);
+    if (index > -1) {
+      exclude.splice(index, 1);
+    } else {
+      exclude.push(type);
+    }
+    this.params.exclude = exclude;
     this._collection();
   },
   _context: function (type, id) {

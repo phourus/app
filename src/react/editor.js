@@ -43,7 +43,7 @@ let Editor = React.createClass({
 
 		return (
 			<div className="editor">
-				<h1>Content Factory</h1>
+				<h1>Content Factory <Link to="myPosts" className="edit">Edit my posts</Link></h1>
 				<div className="form">
 				  <label>Title:</label>
 					<input ref="title" type="text" placeholder="title" value={this.state.post.title} onChange={this._title} />

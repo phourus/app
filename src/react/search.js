@@ -233,14 +233,14 @@ let Dates = React.createClass({
 let Types = React.createClass({
 	render: function () {
 		var classes = {
-			blogs: "button green",
-			events: "button green",
-			subjects: "button blue",
-			questions: "button blue",
-			debates: "button red",
-			bills: "button red",
-			beliefs: "button gold",
-			quotes: "button gold"
+			blog: "button green",
+			event: "button green",
+			subject: "button blue",
+			question: "button blue",
+			debate: "button red",
+			poll: "button red",
+			belief: "button gold",
+			quote: "button gold"
 		}
 		for (var i = 0; i < this.props.exclude.length; i++) {
 			var key = this.props.exclude[i];
@@ -248,27 +248,20 @@ let Types = React.createClass({
 		}
 		return (
 			<div className="types">
-				<button id="blogs" value="blog" className={classes.blogs} onClick={this._toggle}><i className="fa fa-laptop" /> Blogs</button>
-				<button id="events" value="event" className={classes.events} onClick={this._toggle}><i className="fa fa-calendar" /> Events</button>
-				<button id="subjects" value="subject" className={classes.subjects} onClick={this._toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
-				<button id="questions" value="question" className={classes.questions} onClick={this._toggle}><i className="fa fa-question" /> Questions</button>
-				<button id="debates" value="debate" className={classes.debates} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</button>
-				<button id="bills" value="bill" className={classes.bills} onClick={this._toggle}><i className="fa fa-line-chart" /> Bills</button>
-				<button id="beliefs" value="belief" className={classes.beliefs} onClick={this._toggle}><i className="fa fa-road" /> Paths</button>
-				<button id="quotes" value="quote" className={classes.quotes} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</button>
+				<button id="blog" className={classes.blog} onClick={this._toggle}><i className="fa fa-laptop" /> Blogs</button>
+				<button id="event" className={classes.event} onClick={this._toggle}><i className="fa fa-calendar" /> Events</button>
+				<button id="subject" className={classes.subject} onClick={this._toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
+				<button id="question" className={classes.question} onClick={this._toggle}><i className="fa fa-question" /> Questions</button>
+				<button id="debate" className={classes.debate} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</button>
+				<button id="poll" className={classes.poll} onClick={this._toggle}><i className="fa fa-line-chart" /> Polls</button>
+				<button id="belief" className={classes.belief} onClick={this._toggle}><i className="fa fa-road" /> Beliefs</button>
+				<button id="quote" className={classes.quote} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</button>
 			</div>
 		);
 	},
 	_toggle: function (e) {
 		let type = e.currentTarget.id;
-		let exclude = this.props.exclude;
-		let index = exclude.indexOf(type);
-		if (index > -1) {
-				exclude.splice(index, 1);
-		} else {
-				exclude.push(type);
-		}
-		Actions.types(exclude);
+		Actions.exclude(type);
 	}
 });
 

@@ -183,7 +183,7 @@ let Tabs = React.createClass({
             <div className="number">{this.state.influence}</div>
             <div className="label">Influence</div>
           </div>
-          <div onClick={this._select.bind(this, 'posts')} className={'posts' === view ? 'selected' : ''}>
+          <div onClick={this._select.bind(this, 'userPosts')} className={'posts' === view ? 'selected' : ''}>
             <div className="number">{this.state.posts}</div>
             <div className="label">Posts</div>
           </div>
