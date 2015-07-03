@@ -269,6 +269,25 @@
     width: 80%;
     background-color: white;
 
+    .type {
+      font-size: 0.8em;
+      text-transform: capitalize;
+      .rounded(6px);
+      color: white;
+      padding: 2px;
+      text-align: center;
+      width: 100px;
+    }
+
+    .type.blog, .type.event { background-color: @green; color: #fff; }
+    .type.subject, .type.question { background-color: @blue; color: #fff; }
+    .type.debate, .type.poll { background-color: @red; color: #fff; }
+    .type.quote, .type.belief { background-color: @gold; color: #fff; }
+
+    canvas {
+      width: 150px;
+    }
+
     .title {
 
       a {
@@ -298,72 +317,60 @@
           color: #bbb;
         }
       }
-      .meta {
-        .Cols(12);
-
-        ul {
-          margin: 0;
-          padding: 0;
-
-          li {
-            list-style: none;
-            font-size: 0.8em;
-            color: @theme-light;
-            margin: 0;
-            padding: 0;
-            line-height: 1.4;
-          }
-        }
-      }
     }
 
+    ul {
+      margin: 20px 0 0 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        font-size: 0.8em;
+        color: @theme-light;
+        margin: 0;
+        padding: 0;
+        line-height: 1.4;
+      }
+    }
     .content {
       .Row(100%);
       height: 6em;
       overflow: hidden;
     }
 
+    .stats {
+      color: #999;
+      font-size: 0.8em;
+      text-align: left;
+      clear: right;
+
+      div {
+        width: 150px;
+
+        span {
+          width: 80px;
+          font-size: 0.9em;
+          display: inline-block;
+        }
+
+       strong {
+         color: #777;
+         font-size: 1.1em;
+       }
+        i {
+          padding: 0px 6px;
+        }
+      }
+
+      li {
+        display: inline;
+      }
+    }
+
     .footing {
       margin-top: 1em;
       padding-top: 1em;
       border-top: solid 1px @grey-light;
-
-      .stats {
-        color: #aaa;
-        font-size: 0.8em;
-
-        div {
-          display: inline-block;
-
-          i {
-            padding: 0px 6px;
-          }
-        }
-        .popularity {
-          img {
-            width: 60px;
-          }
-        }
-
-        li {
-          display: inline;
-        }
-      }
-
-      .type {
-        font-size: 0.8em;
-        text-transform: capitalize;
-        .rounded(6px);
-        color: white;
-        padding: 2px;
-        text-align: center;
-        font-weight: bold;
-      }
-
-      .type.blog, .type.event { background-color: @green; color: darken(@green-dark, 10%); }
-      .type.subject, .type.question { background-color: @blue; color: darken(@blue-dark, 10%); }
-      .type.debate, .type.poll { background-color: @red; color: darken(@red-dark, 10%); }
-      .type.quote, .type.belief { background-color: @gold; color: darken(@gold-dark, 10%); }
     }
   }
 }

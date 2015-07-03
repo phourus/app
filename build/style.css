@@ -1412,6 +1412,40 @@ div.alerts button {
 .search .postItem:after {
   clear: both;
 }
+.search .postItem .type {
+  font-size: 0.8em;
+  text-transform: capitalize;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  color: white;
+  padding: 2px;
+  text-align: center;
+  width: 100px;
+}
+.search .postItem .type.blog,
+.search .postItem .type.event {
+  background-color: #8abf00;
+  color: #fff;
+}
+.search .postItem .type.subject,
+.search .postItem .type.question {
+  background-color: #3498db;
+  color: #fff;
+}
+.search .postItem .type.debate,
+.search .postItem .type.poll {
+  background-color: #ed0303;
+  color: #fff;
+}
+.search .postItem .type.quote,
+.search .postItem .type.belief {
+  background-color: #ecb010;
+  color: #fff;
+}
+.search .postItem canvas {
+  width: 150px;
+}
 .search .postItem .title a {
   color: #1e2f40;
 }
@@ -1437,16 +1471,11 @@ div.alerts button {
   font-size: 0.8em;
   color: #bbb;
 }
-.search .postItem .details .meta {
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
-}
-.search .postItem .details .meta ul {
-  margin: 0;
+.search .postItem ul {
+  margin: 20px 0 0 0;
   padding: 0;
 }
-.search .postItem .details .meta ul li {
+.search .postItem ul li {
   list-style: none;
   font-size: 0.8em;
   color: #425d77;
@@ -1469,57 +1498,34 @@ div.alerts button {
 .search .postItem .content:after {
   clear: both;
 }
+.search .postItem .stats {
+  color: #999;
+  font-size: 0.8em;
+  text-align: left;
+  clear: right;
+}
+.search .postItem .stats div {
+  width: 150px;
+}
+.search .postItem .stats div span {
+  width: 80px;
+  font-size: 0.9em;
+  display: inline-block;
+}
+.search .postItem .stats div strong {
+  color: #777;
+  font-size: 1.1em;
+}
+.search .postItem .stats div i {
+  padding: 0px 6px;
+}
+.search .postItem .stats li {
+  display: inline;
+}
 .search .postItem .footing {
   margin-top: 1em;
   padding-top: 1em;
   border-top: solid 1px #eeeeee;
-}
-.search .postItem .footing .stats {
-  color: #aaa;
-  font-size: 0.8em;
-}
-.search .postItem .footing .stats div {
-  display: inline-block;
-}
-.search .postItem .footing .stats div i {
-  padding: 0px 6px;
-}
-.search .postItem .footing .stats .popularity img {
-  width: 60px;
-}
-.search .postItem .footing .stats li {
-  display: inline;
-}
-.search .postItem .footing .type {
-  font-size: 0.8em;
-  text-transform: capitalize;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  color: white;
-  padding: 2px;
-  text-align: center;
-  font-weight: bold;
-}
-.search .postItem .footing .type.blog,
-.search .postItem .footing .type.event {
-  background-color: #8abf00;
-  color: #405900;
-}
-.search .postItem .footing .type.subject,
-.search .postItem .footing .type.question {
-  background-color: #3498db;
-  color: #196090;
-}
-.search .postItem .footing .type.debate,
-.search .postItem .footing .type.poll {
-  background-color: #ed0303;
-  color: #880202;
-}
-.search .postItem .footing .type.quote,
-.search .postItem .footing .type.belief {
-  background-color: #ecb010;
-  color: #8c690a;
 }
 @media (min-width: 800px) {
   .search .posts {

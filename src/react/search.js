@@ -54,7 +54,7 @@ let Search = React.createClass({
 			<div className="search">
 				<Head {...this.state.params} context={this.state.context} />
 				<Posts posts={this.state.posts} />
-				<Foot {...this.state.params} />
+				<Foot {...this.state} />
 			</div>
 		);
 	}
@@ -109,16 +109,6 @@ let Head = React.createClass({
 	}
 });
 
-let Foot = React.createClass({
-	render: function () {
-		return (
-			<div className="foot">
-				<Pagination ref="pagination" page={this.props.page} total={this.props.total} limit={this.props.limit} />
-			</div>
-		);
-	}
-});
-
 let Context = React.createClass({
 	render: function () {
 		let name = this.props.username;
@@ -138,10 +128,12 @@ let Context = React.createClass({
 	}
 });
 
-let Groups = React.createClass({
+let Foot = React.createClass({
 	render: function () {
 		return (
-			<div className="groups">Groups</div>
+			<div className="foot">
+				<Pagination ref="pagination" page={this.props.params.page} total={this.props.total} limit={this.props.params.limit} />
+			</div>
 		);
 	}
 });
@@ -182,10 +174,10 @@ let Sort = React.createClass({
 				<div className="label">Sort by</div>
 				<ul className="sort" ref="sort">
 					<li className={(this.props.sortBy === 'influence') ? "selected" : ""} onClick={this._influence}><i className="fa fa-check" /> Influence</li>
-					<li className={(this.props.sortBy === 'views') ? "selected" : ""} onClick={this._views}><i className="fa fa-check" /> Views</li>
+					<li className={(this.props.sortBy === 'totalViews') ? "selected" : ""} onClick={this._views}><i className="fa fa-check" /> Views</li>
 					<li className={(this.props.sortBy === 'popularity') ? "selected" : ""} onClick={this._popularity}><i className="fa fa-check" /> Popularity</li>
-					<li className={(this.props.sortBy === 'thumbs') ? "selected" : ""} onClick={this._thumbs}><i className="fa fa-check" /> Thumbs</li>
-					<li className={(this.props.sortBy === 'comments') ? "selected" : ""} onClick={this._comments}><i className="fa fa-check" /> Comments</li>
+					<li className={(this.props.sortBy === 'totalThumbs') ? "selected" : ""} onClick={this._thumbs}><i className="fa fa-check" /> Thumbs</li>
+					<li className={(this.props.sortBy === 'totalComments') ? "selected" : ""} onClick={this._comments}><i className="fa fa-check" /> Comments</li>
 					<li className={(this.props.sortBy === 'location') ? "selected" : ""} onClick={this._location}><i className="fa fa-check" /> Location</li>
 					<li className={(this.props.sortBy === 'date') ? "selected" : ""} onClick={this._date}><i className="fa fa-check" /> Date</li>
 				</ul>
@@ -201,10 +193,10 @@ let Sort = React.createClass({
 		);
 	},
 	_influence: function (e) { Actions.sortBy('influence'); },
-	_views: function (e) { Actions.sortBy('views'); },
+	_views: function (e) { Actions.sortBy('totalViews'); },
 	_popularity: function (e) { Actions.sortBy('popularity'); },
-	_thumbs: function (e) { Actions.sortBy('thumbs'); },
-	_comments: function (e) { Actions.sortBy('comments'); },
+	_thumbs: function (e) { Actions.sortBy('totalThumbs'); },
+	_comments: function (e) { Actions.sortBy('totalComments'); },
 	_location: function (e) { Actions.sortBy('location'); },
 	_date: function (e) { Actions.sortBy('date'); },
 	_asc: function (e) { Actions.direction('ASC'); },
@@ -266,25 +258,21 @@ let Types = React.createClass({
 });
 
 let Pagination = React.createClass({
-	next: function () {
-			if ( Math.ceil(this.props.page * this.props.limit) < this.props.total ) {
-					Actions.page(this.props.page++)
-			}
-	},
-	previous: function () {
-				if (this.props.page > 1) {
-					Actions.page(this.props.page--);
-			}
-	},
 	render: function () {
 		let pages = Math.ceil(this.props.total / this.props.limit);
 		return (
 			<div className="pagination">
 				<div>Displaying page {this.props.page} of {pages} out of {this.props.total} posts</div>
-				<button href="javascript:void(0)" ref="prev" className="button blue" onClick={this.previous}>Previous</button>
-				<button href="javascript:void(0)" ref="next" className="button blue" onClick={this.next}>Next</button>
+				<button href="javascript:void(0)" ref="prev" className="button blue" onClick={this._previous}>Previous</button>
+				<button href="javascript:void(0)" ref="next" className="button blue" onClick={this._next}>Next</button>
 			</div>
 		);
+	},
+	_next: function () {
+		Actions.nextPage();
+	},
+	_previous: function () {
+		Actions.previousPage();
 	}
 });
 
@@ -321,7 +309,7 @@ let Posts = React.createClass({
 let PostItem = React.createClass({
 	componentDidMount: function () {
 		let element = document.getElementById(`popularity${this.props.post.id}`);
-		let popularity = new Popularity(element, 0, this.props.post.popularity/100);
+		let popularity = new Popularity(element, this.props.post.popularity);
 	},
 	render: function () {
 		let meta = [];
@@ -330,12 +318,12 @@ let PostItem = React.createClass({
 			let key = keys[i];
 			let value = post[keys[i]];
 			if (['element', 'category', 'subcategory', 'difficulty', 'scope', 'zip', 'author', 'vote'].indexOf(key) !== -1 && value !== null) {
-				meta.push(<li key={key} >{key}: {value}</li>);
+				meta.push(<li key={key} ><strong>{key.toUpperCase()}</strong>: {value}</li>);
 			}
-
 		}
 		return (
 			<div className="postItem">
+				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
 				<h2 className="title"><Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link></h2>
 				<div className="details">
 					<div className="pic">
@@ -348,25 +336,25 @@ let PostItem = React.createClass({
 						&bull;
 						<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 						<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
+							<ul>
+							{meta}
+							</ul>
 					</div>
 					<div className="meta">
 						<Influence influence={this.props.post.influence}/>
-						<ul>
-						{meta}
-						</ul>
+						<div className="stats">
+							<div><i className="fa fa-eye" /> Views <strong>{this.props.post.totalViews}</strong> </div>
+							<div><i className="fa fa-comments" /> Comments <strong>{this.props.post.totalComments}</strong></div>
+							<div><i className="fa fa-thumbs-up" /> Thumbs <strong>{this.props.post.totalThumbs}</strong></div>
+						</div>
+						<div className="popularity">
+							<canvas id={`popularity${this.props.post.id}`}></canvas>
+						</div>
 					</div>
 				</div>
-				<div className="content">{this.props.post.content}</div>
 				<div className="footing">
-					<div className="stats">
-						<div className="likes">
-							<canvas id={`popularity${this.props.post.id}`} width="100" height="100"></canvas>
-							Popularity
-						</div>
-						<div><i className="fa fa-eye" /><strong>10,324</strong> Views </div>
-						<div><i className="fa fa-comments" /><strong>1,323</strong> Comments</div>
-					</div>
-					<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
+					<div className="content">{this.props.post.content}</div>
+
 				</div>
 			</div>
 		);
