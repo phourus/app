@@ -5,7 +5,7 @@ module.exports = db.define('members', {
   id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
   org_id: types.INTEGER,
   user_id: types.INTEGER,
-  type: types.STRING(20),
+  admin: types.BOOLEAN,
   approved: types.BOOLEAN
 }, {
   classMethods: {

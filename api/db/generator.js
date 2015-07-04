@@ -13,11 +13,12 @@ var Comments = require('../models/comments');
 
 var Locations = require('../models/locations');
 
-/*
 var Orgs = require('../models/orgs');
+var Members = require('../models/members');
+
+/*
 var Clouts = require('../models/clout');
 var Reviews = require('../models/reviews');
-var Members = require('../models/members');
 */
 
 var chance = new Chance();
@@ -140,7 +141,7 @@ var Org = function Org () {
         fax: chance.phone(),
         website: chance.domain(),
         influence: chance.integer({min: 0, max: 100}),
-        img: '',
+        img: chance.integer({min: 1, max: 10}),
         people: chance.integer({min: 1, max: 10000}),
         about: chance.paragraph(),
         video: chance.url(),
@@ -174,7 +175,7 @@ var Member = function Member () {
     return {
         org_id: chance.integer({min: 1, max: ORG_TOTAL}),
         user_id: chance.integer({min: 1, max: USER_TOTAL}),
-        type: ['member', 'admin'][chance.integer({min: 0, max: 1})],
+        admin: chance.bool(),
         approved: chance.bool()
     }
 }
@@ -209,20 +210,20 @@ function passwords (Model, count, db) {
     }
 }
 /** EXECUTE **/
-generate(User, USER_TOTAL, Users);
-generate(Post, POST_TOTAL, Posts);
-generate(Org, ORG_TOTAL, Orgs);
+// generate(User, USER_TOTAL, Users);
+// generate(Post, POST_TOTAL, Posts);
+// generate(Org, ORG_TOTAL, Orgs);
+// generate(Member, 50, Members);
 
-passwords(Password, USER_TOTAL, Passwords);
-generate(Tag, 400, Tags);
-generate(Link, 200, Links);
-generate(View, 200, Views);
-generate(Thumb, 200, Thumbs);
-generate(Comment, 100, Comments);
-generate(Location, 100, Locations);
+// passwords(Password, USER_TOTAL, Passwords);
+// generate(Tag, 400, Tags);
+// generate(Link, 200, Links);
+// generate(View, 200, Views);
+// generate(Thumb, 200, Thumbs);
+// generate(Comment, 100, Comments);
+// generate(Location, 100, Locations);
 
 /*
-generate(Member, 200, Members);
 generate(Clout, 200, Clouts);
 generate(Review, 200, Reviews);
 */
