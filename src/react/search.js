@@ -52,7 +52,7 @@ let Search = React.createClass({
 		let hidden = 'fa fa-plus-square-o';
 		return (
 			<div className="search">
-				<Head {...this.state.params} context={this.state.context} />
+				<Head {...this.state.params} />
 				<Posts posts={this.state.posts} />
 				<Foot {...this.state} />
 			</div>
@@ -110,16 +110,50 @@ let Head = React.createClass({
 });
 
 let Context = React.createClass({
+	getDefaultProps: function () {
+		return {
+			id: null,
+			type: null,
+			profile: null
+		}
+	},
 	render: function () {
-		let name = this.props.username;
-		if (!this.props.type) {
-			return <div className="context"></div>;
+		let label = 'Viewing all public Phourus posts';
+		let img = '/assets/logos/logo-emblem.png';
+		let clear = false;
+		let clearLink = <span> | Clear filters <a href="javascript:void(0)" className="close" onClick={this._clear}>x</a></span>;
+		let link = false;
+		let name = '';
+		if (this.props.profile) {
+			name = this.props.profile.username || this.props.profile.shortname || '';
+		}
+		if (true === 'user is logged in') {
+			link = <Link to="myPosts">Click here to view your posts</Link>
+		} else {
+			link = <Link to="account">Click here to create posts</Link>
+		}
+		if (this.props.type === 'myPosts') {
+			label = 'Viewing all my posts:';
+			clear = clearLink;
+			link = <Link to="account">View my account</Link>
+		}
+		if (this.props.type === 'userPosts') {
+			label = 'Viewing posts by:';
+			img = '/assets/avatars/' + this.props.id + '.jpg';
+			clear = clearLink;
+			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
+		}
+		if (this.props.type === 'orgPosts') {
+			label = 'Viewing posts by:';
+			img = '/assets/orgs/' + this.props.id + '.jpg';
+			clear = clearLink;
+			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
 		}
 		return (
 			<div className="context">
-				<img src={'/assets/avatars/' + this.props.id + '.jpg'} />
-				Viewing posts by: <br />
-			<Link to="user" params={{id: this.props.id}}>{name}</Link> | Clear filters <a href="javascript:void(0)" className="close" onClick={this._clear}>x</a>
+				<img src={img} />
+				{label}<br />
+			  {link} {clear}
 			</div>
 		);
 	},
@@ -354,7 +388,6 @@ let PostItem = React.createClass({
 				</div>
 				<div className="footing">
 					<div className="content">{this.props.post.content}</div>
-
 				</div>
 			</div>
 		);

@@ -1,6 +1,7 @@
 "use strict";
 let Reflux = require('reflux');
 let posts = require('../api/posts');
+let account = require('../api/account');
 let users = require('../api/users');
 let orgs = require('../api/orgs');
 let Actions = require('../actions/search');
@@ -85,25 +86,44 @@ module.exports = Reflux.createStore({
     this._collection();
   },
   _context: function (type, id) {
+    this.params.context = {
+      type: type,
+      id: id,
+      profile: null
+    }
+    // no context
+    if (type === null) {
+      this.params.context = {
+        type: null,
+        id: null,
+        profile: null
+      }
+      this._collection();
+      return;
+    }
+    // me
+    if (type === 'myPosts') {
+      account.get()
+        .then(data => {
+          this.params.context.profile = data;
+          this._collection();
+        })
+        .catch(code => {
+          if (code != 200) {
+             msg('red', 'Could not load posts for this profile', code);
+          }
+        });
+      return;
+    }
+    // users/orgs
     let profile = users;
     if (type === 'orgPosts') {
       profile = orgs;
     }
-    if (type === null) {
-      this.params.context = {
-        type: null,
-        id: null
-      }
-      this.trigger({context: this.params.context});
-      return;
-    }
     profile.single(id)
       .then(data => {
-        let context = data;
-        context.type = type;
-        context.id = id;
-        this.params.context = context;
-        this.trigger({context: context});
+        this.params.context.profile = data;
+        this._collection();
       })
       .catch(code => {
         if (code != 200) {

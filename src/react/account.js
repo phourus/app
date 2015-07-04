@@ -114,14 +114,18 @@ let Profile = React.createClass({
 });
 
 let Posts = React.createClass({
+  mixins: [Router.Navigation],
   render: function () {
     return (
       <div className="posts">
-        <button className="button blue">My Posts (45)</button>
+        <button className="button blue" onClick={this._posts}>My Posts (45)</button>
         <br />
         <button className="button gold">98</button>
       </div>
     );
+  },
+  _posts: function () {
+    this.context.transitionTo('myPosts');
   }
 });
 

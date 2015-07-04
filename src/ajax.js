@@ -24,6 +24,9 @@
 
     var query = function (params) {
       var out = '?';
+      if (!params) {
+        return '';
+      }
       if (params.length < 1 || typeof params !== 'object') {
         return '';
       }
