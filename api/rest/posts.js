@@ -17,6 +17,7 @@ router.get('/:id', (req, res) => {
 });
 router.get('', (req, res) => {
   var params = req.query;
+  posts.SESSION_USER = req.user_id;
   posts.collection(params)
   .then(function (data) {
     res.send(200, data);

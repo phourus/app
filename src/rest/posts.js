@@ -13,6 +13,8 @@ module.exports = {
     return http.get(base + id, settings);
   },
   collection: function (params) {
+    params.contextId = params.context.id;
+    params.contextType = params.context.type;
     settings.query = params;
     return http.get(base, settings);
   },

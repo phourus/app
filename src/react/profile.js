@@ -5,40 +5,47 @@ let { Link, RouteHandler } = Router;
 let moment = require('moment');
 let msg = require('../actions/alerts').add;
 let Actions = require('../actions/profile');
+let Store = require('../stores/profile');
 let { User, Org } = Actions;
 
 let Profile = React.createClass({
      mixins: [Router.State],
      getInitialState: function () {
          return {
-          id: 4,
-          img: "2",
-          username: "jessedrelick",
-          first: "Jesse",
-          last: "Drelick",
-          email: "info@jessedrelick.com",
-          phone: "(603)783-1358",
-          company: "Tyco Int.",
-          occupation: "Front-End Engineer",
-          website: "www.jessedrelick.com",
-          dob: "July 9, 1987",
-          gender: "M",
+          id: 0,
+          img: "",
+          username: "",
+          first: "",
+          last: "",
+          email: "",
+          phone: "",
+          company: "",
+          occupation: "",
+          website: "",
+          dob: "",
+          gender: "",
           address: {
-              street: "100 White Cap Lane",
-              city: "Newport Coast",
-              state: "CA",
-              zip: "92657"
+              street: "",
+              city: "",
+              state: "",
+              zip: ""
           }
         }
      },
      componentDidMount: function () {
         let params = this.getParams();
     		if (params.type === 'org') {
-        		Org.single(params.id);
+        	Org.single(params.id);
     		} else {
-        		User.single(params.id);
+        	User.single(params.id);
     		}
+        this.unsubscribe = Store.listen((data) => {
+          this.setState(data);
+        });
   	 },
+     componentWillUnmount: function () {
+       this.unsubscribe();
+     },
      render: function () {
           return (
             <div className="profile">

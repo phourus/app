@@ -143,6 +143,19 @@ var posts = db.define('posts', {
           query.where.createdAt = {};
           query.where.createdAt.lt = params.endDate;
       }
+
+      // CONTEXT
+      if (params.contextType === 'userPosts') {
+        query.where.userId = params.contextId;
+      }
+
+      if (params.contextType === 'orgPosts') {
+        query.where.orgId = params.contextId;
+      }
+
+      if (params.contextType === 'myPosts') {
+        query.where.userId = this.SESSION_USER;
+      }
       /** ADVANCED **/
       // groups, location, org_id
 
