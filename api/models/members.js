@@ -1,10 +1,8 @@
 var types = require('sequelize');
 var db = require('../db');
 
-module.exports = db.define('members', {
+var members = db.define('members', {
   id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
-  org_id: types.INTEGER,
-  user_id: types.INTEGER,
   admin: types.BOOLEAN,
   approved: types.BOOLEAN
 }, {
@@ -29,3 +27,5 @@ module.exports = db.define('members', {
     }
   }
 });
+
+module.exports = members;

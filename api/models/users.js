@@ -6,7 +6,8 @@ var locations = require('./locations');
 var views = require('./views');
 var thumbs = require('./thumbs');
 var comments = require('./comments');
-
+var members = require('./members');
+var orgs = require('./orgs');
 
 var users = db.define('users', {
   id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
@@ -43,6 +44,16 @@ var users = db.define('users', {
     queryize: function (params) {
       return {};
     },
+    orgs: function (id) {
+      return members.findAll({
+        where: {
+          userId: id
+        },
+        include: [
+          {model: orgs, as: 'org'}
+        ]
+      });
+    },
     getID: function (username) {
       return this.findOne({where: types.or({username: username}, {email: username}) });
     }
@@ -69,5 +80,11 @@ thumbs.belongsTo(users);
 // comments
 users.hasMany(comments);
 comments.belongsTo(users);
+
+// members
+orgs.hasMany(members);
+members.belongsTo(orgs);
+users.hasMany(members);
+members.belongsTo(users);
 
 module.exports = users
