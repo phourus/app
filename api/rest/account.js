@@ -207,4 +207,18 @@ router.get('/history', (req, res) => {
   });
 });
 
+router.get('/orgs', (req, res) => {
+  if (!req.user_id) {
+    return res.send(401);
+  }
+  users.orgs(req.user_id)
+  .then(function (data) {
+    res.send(200, data);
+  })
+  .catch(function (err) {
+    console.log(err);
+    res.send(500);
+  });
+});
+
 module.exports = router;

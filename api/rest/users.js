@@ -13,6 +13,17 @@ router.get('/:id', (req, res) => {
     res.send(503);
   });
 });
+router.get('/:id/orgs', (req, res) => {
+  let id = req.params.id;
+  users.orgs(id)
+  .then(function (data) {
+    res.send(200, data);
+  })
+  .catch(function (err) {
+    console.log(err);
+    res.send(500);
+  });
+});
 router.get('', (req, res) => {
   let params;
   users.collection(params)
