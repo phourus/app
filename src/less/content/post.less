@@ -5,50 +5,52 @@
     border-bottom: solid 1px @grey-light;
     margin-bottom: 20px;
 
-    .meta {
+    .top {
       .Row(100%);
 
-      div {
-        .Cols(4);
+      > div.type {
+        .Cols(2);
+
+        .type {
+          display: inline;
+          padding: 4px 10px;
+          color: white;
+          .rounded(10px);
+        }
+
+        .type.blog, .type.event {
+          background-color: @green;
+        }
+
+        .type.debate, .type.bill {
+          background-color: @red;
+        }
+
+        .type.subject, .type.question {
+          background-color: @blue;
+        }
+
+        .type.quote, .type.belief {
+          background-color: @gold;
+        }
       }
 
-      ul {
+      ul.breadcrumb {
         .Cols(8);
-      }
-      .type {
-        display: inline;
-        padding: 4px 10px;
-        color: white;
-        .rounded(10px);
-      }
+        margin: 0;
+        padding: 0;
 
-      .type.blog, .type.event {
-        background-color: @green;
-      }
-
-      .type.debate, .type.bill {
-        background-color: @red;
+        li {
+          display: inline-block;
+          list-style: none;
+          margin-right: 10px;
+          font-size: 1em;
+          text-transform: uppercase;
+        }
       }
 
-      .type.subject, .type.question {
-        background-color: @blue;
-      }
-
-      .type.quote, .type.belief {
-        background-color: @gold;
-      }
-
-      ul.breadcrumb li {
-        .Cols(4);
-        font-size: 1em;
-        text-transform: uppercase;
-      }
-    }
-
-    .basic {
-
-      .tags {
-
+      > div.meta {
+        .Cols(2);
       }
     }
   }
@@ -66,10 +68,41 @@
   }
 
   .thumb {
-    margin-bottom: 40px;
-    background-color: @form-background;
-    border-top: solid 1px @form-border;
-    border-bottom: solid 1px @form-border;
+    float: right;
+    
+    .popularity {
+      width: 150px;
+      display: inline-block;
+
+      canvas {
+        width: 150px;
+      }
+    }
+
+    .counts {
+      margin: 20px 20px 0 0;
+      font-size: 1.5em;
+      display: inline-block;
+      vertical-align: top;
+
+      .green {
+        color: @green-dark;
+      }
+
+      .red {
+        color: @red-dark;
+      }
+    }
+
+    .buttons {
+      margin-top: 10px;
+      display: inline-block;
+      vertical-align: top;
+
+      button {
+        display: inline-block;
+      }
+    }
   }
 
   .comments {

@@ -5,6 +5,7 @@ let { Link } = Router;
 let moment = require('moment');
 let Actions = require('../actions/post');
 let Store = require('../stores/post');
+let Popularity = require('../popularity');
 
 /** POST **/
 let fa = {
@@ -26,7 +27,7 @@ let Post = React.createClass({
   getInitialState: function () {
     return {
       post: {
-        id: null,
+        id: 0,
         title: "",
         created: "",
         influence: null,
@@ -37,7 +38,7 @@ let Post = React.createClass({
         links: []
       },
       user: {
-        id: null,
+        id: 0,
         first: "",
         last: ""
       }
@@ -55,31 +56,35 @@ let Post = React.createClass({
     this.unsubscribe();
   },
   render: function () {
-    //  <Link to="user" path={`/user/${this.state.user.id}`} params={{id: this.state.user.id}}>
-    //                          {this.state.user.first} {this.state.user.last}
-    //                        </Link>
     let params = this.getParams();
+    let author = false;
+    if (this.state.post.author) {
+      author = <div style={{fontSize: '80%', fontStyle: 'italic'}}>Originally by: {this.state.post.author}</div>
+    }
     return (
       <div className="post">
         <div className="heading">
           <Meta post={this.state.post} />
           <h1>{this.state.post.title}</h1>
+          <Thumbs {...this.state} />
           <div className="basic">
-            <span>By</span>
-            <Tags tags={this.state.post.tags} />
-            <br />
-            <span>Originally by {this.state.post.author}</span>
-            <br />
-            <span className="created">{moment(this.state.post.createdAt).fromNow()} </span>
-            <span className="views">
+            <div>
+              <span>Created by </span>
+              <Link to="user" params={{id: this.state.user.id}}>
+                {this.state.user.first} {this.state.user.last}
+              </Link>
+              <span className="created"> {moment(this.state.post.createdAt).fromNow()}</span>
+            </div>
+            {author}
+            <div className="views">
               <i className="fa fa-eye" />
-              <span> {this.state.post.views} views</span>
-            </span>
+              <span> {this.state.post.totalViews} views</span>
+            </div>
           </div>
         </div>
+        <Tags tags={this.state.post.tags} /><br /><br />
         <div className="content">{this.state.post.content}</div>
-        <Author />
-        <Thumbs post={this.state.post} thumb={this.state.thumb} />
+        <h2>Comments</h2>
         <Comments post={this.state.post} />
       </div>
     );
@@ -96,22 +101,22 @@ let Meta = React.createClass({
     }
     for (let i in this.props.post) {
       if (['difficulty', 'scope', 'zip'].indexOf(i) !== -1 && this.props.post[i] !== null) {
-        meta.push(<div key={i}><strong>{i}:</strong> {this.props.post[i]}</div>);
+        meta.push(<div key={i}><strong>{i.toUpperCase()}:</strong> {this.props.post[i]}</div>);
       }
     }
     return (
-      <div className="meta">
-        <div>
+      <div className="top">
+        <div className="type">
           <span className={t + " type"}>
             <i className={"fa fa-" + fa[t]} /> {capitalized}
           </span>
-          <div>{meta}</div>
         </div>
         <ul className="breadcrumb">
-          <li>{this.props.post.element}</li>
-          <li>{this.props.post.category}</li>
-          <li>{this.props.post.category}</li>
+          <li><a href="">Mind</a> >></li>
+          <li><a href="">History</a> >></li>
+          <li><a href="">American History</a></li>
         </ul>
+        <div className="meta">{meta}</div>
       </div>
     );
   }
@@ -120,14 +125,14 @@ let Meta = React.createClass({
 let Tags = React.createClass({
   render: function () {
     return (
-      <span className="tags">
+      <div className="tags">
         <i className="fa fa-tag" />
         {this.props.tags.map((item, index) => {
           return (
-            <span className="tag" key={index}>{item.tag}</span>
+            <span className="tag" key={index}><a href="">{item.tag}</a></span>
           );
         })}
-      </span>
+      </div>
     );
   }
 });
@@ -146,14 +151,6 @@ let Links = React.createClass({
           );
         })}
       </div>
-    );
-  }
-});
-
-let Author = React.createClass({
-  render: function () {
-    return (
-      <div className="author"></div>
     );
   }
 });
@@ -185,14 +182,8 @@ let Thumbs = React.createClass({
    render: function () {
      let c = '';
      let current = '';
-     let icon = '';
-     let popularity = (this.props.post.likes / this.props.post.dislikes);
-     if(popularity > 50){
-       c = 'positive';
-       <i className="fa fa-plus fa-2x" />
-     } else if (popularity < 50) {
-       c = 'negative';
-       <i className="fa fa-minus fa-2x" />
+     if (this.props.post.popularity) {
+       new Popularity(document.getElementById('popularity'), this.props.post.popularity);
      }
      if (this.props.thumb === 1) {
        current = 'like';
@@ -202,13 +193,16 @@ let Thumbs = React.createClass({
      // <p>You have decided you {current} this post. Click the button below to change your mind.</p>
      return (
         <div className="thumb">
-          {icon}
-          <div>
-            <em className="{c}">({this.props.popularity}% popularity)</em>
-            <span><i className="fa fa-arrow-up" />{this.props.post.positive}</span>
-            <span><i className="fa fa-arrow-down" />{this.props.post.thumbs}</span>
-            <button className="button green medium inline" onClick={this.like}><i className="fa fa-2x fa-arrow-circle-o-up" /> Like</button>
-            <button className="button red medium inline" onClick={this.dislike}><i className="fa fa-2x fa-arrow-circle-o-down" /> Dislike</button>
+          <div className="popularity">
+            <canvas id='popularity'></canvas>
+          </div>
+          <div className="counts">
+            <span className="green"><i className="fa fa-arrow-up" />1,434  </span>
+            <span className="red"><i className="fa fa-arrow-down" />142</span>
+          </div>
+          <div className="buttons">
+            <button className="button green medium" onClick={this.like}><i className="fa fa-2x fa-arrow-circle-o-up" /> Like</button>
+            <button className="button red medium" onClick={this.dislike}><i className="fa fa-2x fa-arrow-circle-o-down" /> Dislike</button>
           </div>
         </div>
      );

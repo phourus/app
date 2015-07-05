@@ -809,30 +809,25 @@ div.alerts button {
   border-bottom: solid 1px #eeeeee;
   margin-bottom: 20px;
 }
-.post .heading .meta {
+.post .heading .top {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
 }
-.post .heading .meta:before,
-.post .heading .meta:after {
+.post .heading .top:before,
+.post .heading .top:after {
   content: "";
   display: table;
 }
-.post .heading .meta:after {
+.post .heading .top:after {
   clear: both;
 }
-.post .heading .meta div {
-  width: 33.33333333%;
+.post .heading .top > div.type {
+  width: 16.66666667%;
   display: inline-block;
   vertical-align: top;
 }
-.post .heading .meta ul {
-  width: 66.66666667%;
-  display: inline-block;
-  vertical-align: top;
-}
-.post .heading .meta .type {
+.post .heading .top > div.type .type {
   display: inline;
   padding: 4px 10px;
   color: white;
@@ -840,37 +835,73 @@ div.alerts button {
   -moz-border-radius: 10px;
   border-radius: 10px;
 }
-.post .heading .meta .type.blog,
-.post .heading .meta .type.event {
+.post .heading .top > div.type .type.blog,
+.post .heading .top > div.type .type.event {
   background-color: #8abf00;
 }
-.post .heading .meta .type.debate,
-.post .heading .meta .type.bill {
+.post .heading .top > div.type .type.debate,
+.post .heading .top > div.type .type.bill {
   background-color: #ed0303;
 }
-.post .heading .meta .type.subject,
-.post .heading .meta .type.question {
+.post .heading .top > div.type .type.subject,
+.post .heading .top > div.type .type.question {
   background-color: #3498db;
 }
-.post .heading .meta .type.quote,
-.post .heading .meta .type.belief {
+.post .heading .top > div.type .type.quote,
+.post .heading .top > div.type .type.belief {
   background-color: #ecb010;
 }
-.post .heading .meta ul.breadcrumb li {
-  width: 33.33333333%;
+.post .heading .top ul.breadcrumb {
+  width: 66.66666667%;
   display: inline-block;
   vertical-align: top;
+  margin: 0;
+  padding: 0;
+}
+.post .heading .top ul.breadcrumb li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 10px;
   font-size: 1em;
   text-transform: uppercase;
+}
+.post .heading .top > div.meta {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
 }
 .post .content {
   margin-bottom: 40px;
 }
 .post .thumb {
-  margin-bottom: 40px;
-  background-color: #f6f7f9;
-  border-top: solid 1px #e4e5e6;
-  border-bottom: solid 1px #e4e5e6;
+  float: right;
+}
+.post .thumb .popularity {
+  width: 150px;
+  display: inline-block;
+}
+.post .thumb .popularity canvas {
+  width: 150px;
+}
+.post .thumb .counts {
+  margin: 20px 20px 0 0;
+  font-size: 1.5em;
+  display: inline-block;
+  vertical-align: top;
+}
+.post .thumb .counts .green {
+  color: #658c00;
+}
+.post .thumb .counts .red {
+  color: #bb0202;
+}
+.post .thumb .buttons {
+  margin-top: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+.post .thumb .buttons button {
+  display: inline-block;
 }
 .post .comments .comment {
   max-width: 100%;
