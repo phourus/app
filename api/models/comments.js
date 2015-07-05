@@ -19,8 +19,9 @@ var comments = db.define('comments', {
       return this.destroy({where: {id: id}});
     },
     queryize: function (params) {
-      //, include: [{model: users, as: 'user'}]
-      return {where: {postId: params.post_id}};
+      // to avoid cyclical dependency, require as needed
+      var users = require('./users');
+      return {where: {postId: params.post_id}, include: [{model: users, as: 'user'}]};
     }
   }
 });

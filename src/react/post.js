@@ -237,8 +237,7 @@ let Comments = React.createClass({
     let comments = [];
     if (data) {
       comments = data.map(function (item, i) {
-        let user = {id: 1, first: "JESSE", last: "drelick", influence: 66, username: "jdrelick", img: 1};
-        return <Comment key={item.id} comment={item} user={user} />;
+        return <Comment key={item.id} comment={item} user={item.user} />;
       });
     }
     if (1) {
