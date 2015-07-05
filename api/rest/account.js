@@ -4,6 +4,7 @@ var db = require('../db');
 var users = require('../models/users');
 var passwords = require('../models/passwords');
 var posts = require('../models/posts');
+var members = require('../models/members');
 var views = require('../models/views');
 var comments = require('../models/comments');
 var thumbs = require('../models/thumbs');
@@ -211,7 +212,7 @@ router.get('/orgs', (req, res) => {
   if (!req.user_id) {
     return res.send(401);
   }
-  users.orgs(req.user_id)
+  members.getOrgs(req.user_id)
   .then(function (data) {
     res.send(200, data);
   })

@@ -1,9 +1,6 @@
 var types = require('sequelize');
 var db = require('../db');
 
-var members = require('./members');
-var users = require('./users');
-
 var orgs = db.define('orgs', {
   id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
   type: types.ENUM('company', 'school', 'government', 'group'),
@@ -36,17 +33,6 @@ var orgs = db.define('orgs', {
     },
     remove: function (id) {
       return this.destroy({where: {id: id}});
-    },
-    members: function (id) {
-      return members.findAll({
-        where: {
-          orgId: id
-        },
-        // users empty object here, cyclical reference?
-        // include: [
-        //   {model: users, as: 'users'}
-        // ]
-      });
     },
     queryize: function (params) {
       return {};

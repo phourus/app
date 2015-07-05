@@ -1,34 +1,62 @@
-var PATH = '../models/';
 require('../db');
-var Clout = require(PATH + 'clout');
-var Comments = require(PATH + 'comments');
-var Links = require(PATH + 'links');
-var Locations = require(PATH + 'locations');
-var Members = require(PATH + 'members');
-var Orgs = require(PATH + 'orgs');
-var Passwords = require(PATH + 'passwords');
-var Posts = require(PATH + 'posts');
-var Reviews = require(PATH + 'reviews');
-var Tags = require(PATH + 'tags');
-var Thumbs = require(PATH + 'thumbs');
-var Users = require(PATH + 'users');
-var Views = require(PATH + 'views');
+var clout = require('../models/clout');
+var comments = require('../models/comments');
+var links = require('../models/links');
+var locations = require('../models/locations');
+var members = require('../models/members');
+var orgs = require('../models/orgs');
+var passwords = require('../models/passwords');
+var posts = require('../models/posts');
+var reviews = require('../models/reviews');
+var tags = require('../models/tags');
+var thumbs = require('../models/thumbs');
+var users = require('../models/users');
+var views = require('../models/views');
 
-Users.sync();
-Passwords.sync();
+// passwords
+users.hasOne(passwords);
+passwords.belongsTo(users);
 
-Posts.sync();
-Links.sync();
-Tags.sync();
-Locations.sync();
+// locations
+users.hasMany(locations);
+locations.belongsTo(users);
 
-Views.sync(); 
-Thumbs.sync();  
-Comments.sync();
+// views
+users.hasMany(views);
+//views.belongsTo(users, {as: "user"});
+users.hasMany(views, {foreignKey: {name: 'viewerId'}});
+views.belongsTo(users, {as: "viewer"});
+
+// thumbs
+users.hasMany(thumbs);
+thumbs.belongsTo(users);
+
+// comments
+users.hasMany(comments);
+comments.belongsTo(users);
+
+// membership
+orgs.hasMany(members);
+members.belongsTo(orgs);
+users.hasMany(members);
+members.belongsTo(users);
+
+users.sync();
+passwords.sync();
+
+posts.sync();
+links.sync();
+tags.sync();
+locations.sync();
+
+views.sync();
+thumbs.sync();
+comments.sync();
+
+orgs.sync();
+members.sync();
 
 /*
-Orgs.sync();
-Members.sync();
 Clout.sync();
 Reviews.sync();
 */

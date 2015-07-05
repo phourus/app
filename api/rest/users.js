@@ -1,6 +1,7 @@
 var router = require('express').Router();
 
 var users = require('../models/users');
+var members = require('../models/members');
 
 router.get('/:id', (req, res) => {
   let id = req.params.id;
@@ -15,7 +16,7 @@ router.get('/:id', (req, res) => {
 });
 router.get('/:id/orgs', (req, res) => {
   let id = req.params.id;
-  users.orgs(id)
+  members.getOrgs(id)
   .then(function (data) {
     res.send(200, data);
   })
