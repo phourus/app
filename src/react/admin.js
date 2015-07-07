@@ -16,7 +16,7 @@ let Admin = React.createClass({
   },
   render: function () {
     return (
-      <div>
+      <div className="admin">
         <Heading {...this.state} />
         <Tabs />
         <RouteHandler />

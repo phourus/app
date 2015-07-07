@@ -4,11 +4,13 @@ let posts = require('../api/posts');
 let account = require('../api/account');
 let users = require('../api/users');
 let orgs = require('../api/orgs');
+let comments = require('../api/comments');
+let thumbs = require('../api/thumbs');
 let Actions = require('../actions/search');
 let msg = require("../actions/alerts").add;
 
-module.exports = Reflux.createStore({
-  posts: [],
+let Stream = Reflux.createStore({
+  posts: null,
   total: 0,
   params: {
     exclude: [],
@@ -27,6 +29,7 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.search, this._search);
     this.listenTo(Actions.nextPage, this._nextPage);
     this.listenTo(Actions.previousPage, this._previousPage);
+    this.listenTo(Actions.more, this._more);
     this.listenTo(Actions.limit, this._limit);
     this.listenTo(Actions.sortBy, this._sortBy);
     this.listenTo(Actions.direction, this._direction);
@@ -37,11 +40,16 @@ module.exports = Reflux.createStore({
     posts.collection(this.params)
     .then(data => {
       this.total = data.count;
-      this.posts = data.rows;
-      this.trigger({posts: data.rows, total: data.count, params: this.params});
+      if (this.posts) {
+        this.posts = data.rows.concat(this.posts);
+      } else {
+        this.posts = data.rows;
+      }
+      this.trigger({posts: this.posts, total: data.count, params: this.params});
     })
     .catch(code => {
       if (code != 200) {
+         console.error(code);
          msg('red', 'Posts could not be loaded', code);
       }
     });
@@ -61,6 +69,10 @@ module.exports = Reflux.createStore({
       this.params.page--;
       this._collection();
     }
+  },
+  _more: function () {
+    this.params.page++;
+    this._collection();
   },
   _limit: function (limit) {
     this.params.limit = limit;
@@ -132,3 +144,39 @@ module.exports = Reflux.createStore({
       });
   }
 });
+
+Stream.Comments = Reflux.createStore({
+  init: function () {
+    this.listenTo(Actions.comments, this._comments);
+  },
+  _comments: function (id) {
+    comments.collection({post_id: id})
+    .then(data => {
+      this.trigger(data);
+    })
+    .catch(code => {
+      msg('red', 'Comments could not be loaded', code);
+    });
+  }
+});
+
+Stream.Thumbs = Reflux.createStore({
+  init: function () {
+    this.listenTo(Actions.thumb, this._single);
+    this.listenTo(Actions.thumbs, this._collection);
+  },
+  _single: function (id) {
+
+  },
+  _collection: function (id) {
+    thumbs.collection({post_id: id})
+    .then(data => {
+      this.trigger(data);
+    })
+    .catch(code => {
+      msg('red', 'Thumbs could not be loaded', code);
+    });
+  }
+});
+
+module.exports = Stream;

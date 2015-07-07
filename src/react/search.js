@@ -9,6 +9,7 @@ let Actions = require('../actions/search');
 
 let Influence = require('../influence');
 let Popularity = require('../popularity');
+let Scroll = require('react-infinite-scroll')(React);
 
 let Search = React.createClass({
 	mixins: [Router.State],
@@ -53,10 +54,14 @@ let Search = React.createClass({
 		return (
 			<div className="search">
 				<Head {...this.state.params} />
-				<Posts posts={this.state.posts} />
-				<Foot {...this.state} />
+				<Scroll pageStart={0} loadMore={this._more} hasMore={true} loader={<div className="loader">Loading ...</div>}>
+						<Posts posts={this.state.posts} />
+				</Scroll>
 			</div>
 		);
+	},
+	_more: function () {
+		Actions.more();
 	}
 });
 
@@ -81,8 +86,8 @@ let Head = React.createClass({
 				<div className="refine">
 					<Context {...this.props.context} />
 					<div className="toggles">
-						<button className="fa fa-filter" onClick={this._filter}></button>
-						<button className="fa fa-sort" onClick={this._sort}></button>
+						<button className="fa fa-filter" onClick={this._filter}> Filter</button>
+						<button className="fa fa-sort" onClick={this._sort}> Sort</button>
 					</div>
 				</div>
 				{popup}
@@ -342,13 +347,23 @@ let Posts = React.createClass({
 */
 
 let PostItem = React.createClass({
+	getInitialState: function () {
+		return {
+			selected: false
+		}
+	},
 	componentDidMount: function () {
 		let element = document.getElementById(`popularity${this.props.post.id}`);
 		let popularity = new Popularity(element, this.props.post.popularity);
 	},
 	render: function () {
+		let className = "postItem";
 		let meta = [];
 		let post = this.props.post;
+		let comments = false;
+		let tags = false;
+		let links = false;
+		let thumbs = false;
 		for (let i = 0, keys = Object.keys(post); i < keys.length; i++) {
 			let key = keys[i];
 			let value = post[keys[i]];
@@ -356,10 +371,22 @@ let PostItem = React.createClass({
 				meta.push(<li key={key} ><strong>{key.toUpperCase()}</strong>: {value}</li>);
 			}
 		}
+		if (this.state.hidden === true) {
+			return false;
+		}
+		if (this.state.selected === true) {
+			tags = <Tags tags={this.props.post.tags} />;
+			//links = <Links links={this.props.post.links} />;
+			thumbs = <Thumbs post={this.props.post} />;
+			comments = <Comments post={this.props.post} />;
+			className += " selected";
+		}
+		//<Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link>
 		return (
-			<div className="postItem">
+			<div className={className}>
 				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
-				<h2 className="title"><Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link></h2>
+				<button className="close" onClick={this._hide}>X</button>
+				<h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.props.post.title}</a></h2>
 				<div className="details">
 					<div className="pic">
 						<Link to="user" params={{id: this.props.user.id}}>
@@ -388,11 +415,221 @@ let PostItem = React.createClass({
 					</div>
 				</div>
 				<div className="footing">
+					{tags}
 					<div className="content">{this.props.post.content}</div>
 				</div>
+				{links}
+				{thumbs}
+				{comments}
 			</div>
 		);
+	},
+	_toggle: function () {
+		let current = !this.state.selected;
+		this.setState({selected: current});
+	},
+	_hide: function () {
+		this.setState({hidden: true});
 	}
+});
+
+let Tags = React.createClass({
+  render: function () {
+    return (
+      <div className="tags">
+        <i className="fa fa-tag" />
+        {this.props.tags.map((item, index) => {
+          return (
+            <span className="tag" key={index}><a href="">{item.tag}</a></span>
+          );
+        })}
+      </div>
+    );
+  }
+});
+
+let Links = React.createClass({
+  render: function () {
+    return (
+      <div className="links">
+        {this.props.links.map((item, index) => {
+          return (
+            <div className="link" key={index}>
+              <a href={item.url}>
+                {item.caption}
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+});
+
+let Thumbs = React.createClass({
+   mixins: [Router.State],
+   componentDidMount: function () {
+     let params = this.getParams();
+     this.unsubscribe = Store.Thumbs.listen((data) => {
+       this.setState(data);
+     });
+     Actions.thumbs(params.id);
+   },
+   componentWillUnmount: function () {
+     this.unsubscribe();
+   },
+   like: function () {
+     let model = {};
+     model.post_id = this.props.post.id;
+     model.positive = 1;
+     thumbs.add(model);
+   },
+   dislike: function () {
+     let model = {};
+     model.post_id = this.props.post.id;
+     model.positive = 0;
+     thumbs.add(model);
+   },
+   render: function () {
+     let c = '';
+     let current = '';
+     if (this.props.post.popularity) {
+       //new Popularity(document.getElementById('popularity'), this.props.post.popularity);
+     }
+     if (this.props.thumb === 1) {
+       current = 'like';
+     } else if (this.props.thumb === 0) {
+       current = 'dislike';
+     }
+     // <p>You have decided you {current} this post. Click the button below to change your mind.</p>
+     return (
+        <div className="thumb">
+          <div className="popularity">
+            <canvas id='popularity'></canvas>
+          </div>
+          <div className="counts">
+            <span className="green"><i className="fa fa-arrow-up" />1,434  </span>
+            <span className="red"><i className="fa fa-arrow-down" />142</span>
+          </div>
+          <div className="buttons">
+            <button className="button green medium" onClick={this.like}><i className="fa fa-2x fa-arrow-circle-o-up" /> Like</button>
+            <button className="button red medium" onClick={this.dislike}><i className="fa fa-2x fa-arrow-circle-o-down" /> Dislike</button>
+          </div>
+        </div>
+     );
+   }
+});
+
+let Comments = React.createClass({
+  mixins: [Router.State],
+  getInitialState: function () {
+    return {
+      count: 0,
+      rows: []
+    }
+  },
+  componentDidMount: function () {
+    //let params = this.getParams();
+		console.log(Store);
+    this.unsubscribe = Store.Comments.listen((data) => {
+      console.log(data);
+			this.setState(data);
+    });
+    Actions.comments(this.props.post.id);
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
+  render: function () {
+    let create = <h3>You must be logged-in to comment</h3>
+    let token = null;
+    if (token === null) {
+      //pic = <a href="#user/{this.props.id}"><img src="{this.props.pic}" width="100"></a>
+    }
+    let data = this.state.rows;
+    let comments = [];
+    if (data) {
+      comments = data.map(function (item, i) {
+        return <Comment key={item.id} comment={item} user={item.user} />;
+      });
+    }
+    if (1) {
+      create = <Create />
+    }
+    return (
+      <div>
+        <div className="comments">{comments}</div>
+        {create}
+      </div>
+    );
+  }
+});
+
+let Create = React.createClass({
+  add: function () {
+    let model = {};
+    model.content = this.refs.comment.getDOMNode().value;
+    model.post_id = this.props.postID;
+    Actions.Comments.add(model);
+  },
+  render: function () {
+    return (
+      <div className="create">
+        <div className="pic">
+          <a href="/account">
+            <img src={"/assets/avatars/1.jpg"} />
+          </a>
+        </div>
+        <textarea ref="comment" placeholder="Comment goes here"></textarea>
+        <button className="button green add" onClick={this.add}>
+          <i className="fa fa-comment" /> Post Comment
+        </button>
+      </div>
+    );
+  }
+});
+
+let Comment = React.createClass({
+  render: function () {
+    let textarea = '';
+    /*
+    if (owner === true) {
+    textarea =   <textarea>{this.props.id}</textarea>
+    actions =
+    <% if(owner === true){ %>
+    <div class="actions-admin">
+    <button class="button blue edit">Edit Comment</button>
+    <button class="button red delete">Delete Comment</button>
+    </div>
+    <div class="actions-edit">
+    <button class="button green save">Save Changes</button>
+    <button class="button red cancel">Cancel</button>
+    </div>
+    <div class="actions-delete">
+    <button class="button green confirm">Confirm Delete</button>
+    <button class="button red cancel">Cancel</button>
+    </div>
+
+    }
+    */
+    return (
+      <div className="comment" ref={this.props.id}>
+        <div className="pic">
+          <a href={"/user/" + this.props.user.id}>
+            <img src={`/assets/avatars/${this.props.user.img}.jpg`} width="100" />
+          </a>
+        </div>
+        <div className="content">
+          <a className="username" href={"/user/" + this.props.user.id} >
+            {this.props.user.username} ({this.props.user.influence})
+          </a>
+          <p>{this.props.comment.content}</p>
+          <span className="date">{moment(this.props.comment.createdAt).fromNow()}</span>
+        </div>
+        <div className="actions"></div>
+      </div>
+    );
+  }
 });
 
 module.exports = Search;

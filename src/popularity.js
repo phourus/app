@@ -9,16 +9,16 @@ module.exports = function (element, popularity) {
 
   ctx.font = "30px 'open sans'";
   ctx.textAlign = 'center';
-  ctx.fillText(popularity + '%', posX, posY + 10);
+  ctx.fillText(100 - popularity + '%', posX, posY + 10);
   ctx.beginPath();
-  ctx.strokeStyle = '#AA0000';
+  ctx.strokeStyle = '#99CC33';
   ctx.lineCap = 'square';
   ctx.lineWidth = 10;
   ctx.arc(posX, posY, radius, 0, circ, false);
   ctx.stroke();
 
   ctx.beginPath();
-  ctx.strokeStyle = '#99CC33';
+  ctx.strokeStyle = '#AA0000';
   ctx.lineCap = 'square';
   ctx.lineWidth = 20;
   ctx.arc(posX, posY, radius, -(quart), ((circ) * end) - quart, false);

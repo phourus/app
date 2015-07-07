@@ -5,10 +5,8 @@
 .search {
 
   .heading {
-    background-color: white;
     height: 90px;
     top: 40px;
-    position: fixed;
     width: 90%;
     padding: 2% 5%;
     z-index: 1;
@@ -40,20 +38,20 @@
       margin-top: 10px;
 
       .context {
-        .Cols(6);
+
       }
 
       .toggles {
-        .Cols(6);
-        text-align: right;
+        text-align: left;
 
         button {
-          width: 40px;
+          width: 80px;
           height: 40px;
           background-color: @off-white;
           border: solid 1px #bbb;
           cursor: pointer;
           color: #bbb;
+          font-size: 0.8em;
           margin-left: 10px;
           .rounded(2px);
 
@@ -257,17 +255,19 @@
   }
 
   .posts {
-    padding-top: 100px;
     max-width: 1400px;
     margin: auto;
   }
 
   .postItem {
-    .Row(100%);
-    margin-top: 2em;
-    padding: 1em 5%;
-    width: 80%;
+    .Cols(12);
+    padding: 1%;
+    margin: 1%;
     background-color: white;
+
+    &.selected {
+      .Cols(12);
+    }
 
     .type {
       font-size: 0.8em;
@@ -373,17 +373,100 @@
       border-top: solid 1px @grey-light;
     }
   }
+
+  .comments {
+
+    .comment {
+      .Row(100%);
+      font-size: 0.9em;
+      border-bottom: solid 1px @form-border;
+      margin-bottom: 20px;
+
+      .pic {
+        .Cols(2);
+
+        a {
+          img {
+            width: 80%;
+          }
+        }
+      }
+
+      .content {
+        .Cols(10);
+
+        .username {
+
+        }
+
+        p {
+
+        }
+
+        .date {
+          color: #aaa;
+          font-size: 1em;
+          font-style: italic;
+        }
+      }
+    }
+  }
+  .create {
+    background-color: @theme;
+    .Row(96%);
+    padding: 2%;
+    color: @grey-light;
+
+    .pic {
+      width: 10%;
+      display: inline-block;
+      vertical-align: top;
+
+      img {
+        margin: 0;
+        padding: 0;
+        width: 80%;
+      }
+    }
+    textarea {
+      display: inline-block;
+      border: none;
+      height: 160px;
+      width: 90%;
+    }
+
+    button.button {
+      float: right;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+}
+
+@media (min-width: 500px) {
+  .search {
+    .postItem {
+      .Cols(5);
+    }
+    .refine {
+
+      .context {
+        .Cols(6);
+      }
+
+      .toggles {
+        .Cols(6);
+      }
+    }
+
+  }
 }
 
 @media (min-width: 800px) {
   .search {
-
-    .posts {
-      padding-top: 160px;
-    }
-
     .postItem {
-
+      .Cols(2);
       .details {
         .pic {
           .Cols(3);

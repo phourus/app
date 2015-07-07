@@ -24,6 +24,7 @@
     "mysql": "^2.5.5",
     "please-ajax": "^1.0.8",
     "react": "0.12.x",
+    "react-infinite-scroll": "^0.1.5",
     "react-mutant": "^0.1.0",
     "react-router": "^0.12.4",
     "reflux": "^0.2.6",

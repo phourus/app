@@ -48,7 +48,6 @@ let Account = React.createClass({
           <div className="heading">
             <Pic {...this.state} />
             <Profile {...this.state} />
-            <Posts {...this.state} />
           </div>
           <RouteHandler {...this.state} save={this._save} change={this._change} />
         </div>
@@ -98,12 +97,11 @@ let Profile = React.createClass({
     //<Link href="/account/password">Change my password</Link>
     return (
       <div className="profile">
-        <h2><Link to="user" params={{id: this.props.id}}>{this.props.username}</Link></h2>
+        <Link to="user" params={{id: this.props.id}}>{this.props.username}</Link>
         <div><strong>Full Name:</strong> {this.props.first} {this.props.last}</div>
-        <div>{this.props.address.city}, {this.props.address.state}</div>
+        <div>{(this.props.address.city) ? this.props.address.city + ', ' : ''} {this.props.address.state || ''}</div>
         <div><Link to="orgs">4 Organizations</Link></div>
         <div><strong>Born:</strong> {moment(this.props.dob).format('MMMM Do YYYY')}</div>
-        <div>{this.props.gender}</div>
       </div>
     );
   },
@@ -343,7 +341,7 @@ Account.History = React.createClass({
     let thumbs = this.state.history[2] || [];
 
     views = views.map(function (item) {
-      return <li key={item.id}><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed <img src={"/assets/avatars/1.jpg"} /><a href={"/user/"}></a></li>;
+      return <li key={item.id}><img src={"/assets/avatars/1.jpg"} /><i className="fa fa-eye" />You viewed<a href={"/user/"}></a></li>;
     });
     comments = comments.map(function (item) {
       return (

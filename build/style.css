@@ -288,6 +288,11 @@ div.alerts .red {
 div.alerts button {
   float: right;
 }
+.account ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 .account .heading {
   max-width: 100%;
   width: 100%;
@@ -305,6 +310,16 @@ div.alerts button {
   width: 50%;
   display: inline-block;
   vertical-align: top;
+  font-size: 90%;
+  line-height: 120%;
+}
+.account .heading .pic a {
+  text-decoration: underline;
+}
+.account .heading .pic img {
+  width: 95%;
+  margin: 0;
+  padding: 0;
 }
 .account .heading .profile {
   width: 50%;
@@ -426,6 +441,28 @@ div.alerts button {
     width: 33.33333333%;
     display: inline-block;
     vertical-align: top;
+  }
+}
+.admin .heading .pic {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+}
+.admin .heading .pic img {
+  width: 90%;
+}
+.admin .heading .basic {
+  width: 75%;
+  display: inline-block;
+  vertical-align: top;
+}
+.admin .tabs > div {
+  width: 25%;
+  font-size: 0.5em;
+}
+@media (min-width: 800px) {
+  .admin .tabs > div {
+    font-size: 1em;
   }
 }
 .editor a.edit {
@@ -903,77 +940,6 @@ div.alerts button {
 .post .thumb .buttons button {
   display: inline-block;
 }
-.post .comments .comment {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  font-size: 0.9em;
-  border-bottom: solid 1px #e4e5e6;
-  margin-bottom: 20px;
-}
-.post .comments .comment:before,
-.post .comments .comment:after {
-  content: "";
-  display: table;
-}
-.post .comments .comment:after {
-  clear: both;
-}
-.post .comments .comment .pic {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
-}
-.post .comments .comment .pic a img {
-  width: 80%;
-}
-.post .comments .comment .content {
-  width: 83.33333333%;
-  display: inline-block;
-  vertical-align: top;
-}
-.post .comments .comment .content .date {
-  color: #aaa;
-  font-size: 1em;
-  font-style: italic;
-}
-.post .create {
-  background-color: #34495e;
-  max-width: 96%;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2%;
-  color: #eeeeee;
-}
-.post .create:before,
-.post .create:after {
-  content: "";
-  display: table;
-}
-.post .create:after {
-  clear: both;
-}
-.post .create .pic {
-  width: 10%;
-  display: inline-block;
-  vertical-align: top;
-}
-.post .create .pic img {
-  margin: 0;
-  padding: 0;
-  width: 80%;
-}
-.post .create textarea {
-  display: inline-block;
-  border: none;
-  height: 160px;
-  width: 90%;
-}
-.post .create button.button {
-  float: right;
-  margin: 0;
-  padding: 0;
-}
 .profile .name {
   margin: 0;
 }
@@ -1144,10 +1110,8 @@ div.alerts button {
   max-width: 100%;
 }
 .search .heading {
-  background-color: white;
   height: 90px;
   top: 40px;
-  position: fixed;
   width: 90%;
   padding: 2% 5%;
   z-index: 1;
@@ -1201,24 +1165,17 @@ div.alerts button {
 .search .heading .refine:after {
   clear: both;
 }
-.search .heading .refine .context {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-}
 .search .heading .refine .toggles {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: right;
+  text-align: left;
 }
 .search .heading .refine .toggles button {
-  width: 40px;
+  width: 80px;
   height: 40px;
   background-color: #fafafa;
   border: solid 1px #bbb;
   cursor: pointer;
   color: #bbb;
+  font-size: 0.8em;
   margin-left: 10px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -1416,26 +1373,21 @@ div.alerts button {
   background-color: #425d77;
 }
 .search .posts {
-  padding-top: 100px;
   max-width: 1400px;
   margin: auto;
 }
 .search .postItem {
-  max-width: 100%;
   width: 100%;
-  margin: 0 auto;
-  margin-top: 2em;
-  padding: 1em 5%;
-  width: 80%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 1%;
+  margin: 1%;
   background-color: white;
 }
-.search .postItem:before,
-.search .postItem:after {
-  content: "";
-  display: table;
-}
-.search .postItem:after {
-  clear: both;
+.search .postItem.selected {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
 }
 .search .postItem .type {
   font-size: 0.8em;
@@ -1552,9 +1504,99 @@ div.alerts button {
   padding-top: 1em;
   border-top: solid 1px #eeeeee;
 }
+.search .comments .comment {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 0.9em;
+  border-bottom: solid 1px #e4e5e6;
+  margin-bottom: 20px;
+}
+.search .comments .comment:before,
+.search .comments .comment:after {
+  content: "";
+  display: table;
+}
+.search .comments .comment:after {
+  clear: both;
+}
+.search .comments .comment .pic {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+}
+.search .comments .comment .pic a img {
+  width: 80%;
+}
+.search .comments .comment .content {
+  width: 83.33333333%;
+  display: inline-block;
+  vertical-align: top;
+}
+.search .comments .comment .content .date {
+  color: #aaa;
+  font-size: 1em;
+  font-style: italic;
+}
+.search .create {
+  background-color: #34495e;
+  max-width: 96%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2%;
+  color: #eeeeee;
+}
+.search .create:before,
+.search .create:after {
+  content: "";
+  display: table;
+}
+.search .create:after {
+  clear: both;
+}
+.search .create .pic {
+  width: 10%;
+  display: inline-block;
+  vertical-align: top;
+}
+.search .create .pic img {
+  margin: 0;
+  padding: 0;
+  width: 80%;
+}
+.search .create textarea {
+  display: inline-block;
+  border: none;
+  height: 160px;
+  width: 90%;
+}
+.search .create button.button {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 500px) {
+  .search .postItem {
+    width: 41.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .search .refine .context {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .search .refine .toggles {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
 @media (min-width: 800px) {
-  .search .posts {
-    padding-top: 160px;
+  .search .postItem {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
   }
   .search .postItem .details .pic {
     width: 25%;
