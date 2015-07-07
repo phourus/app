@@ -465,45 +465,123 @@ div.alerts button {
     font-size: 1em;
   }
 }
-.editor a.edit {
+#content .editor {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+}
+#content .editor .heading {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  background: #eee;
+}
+#content .editor .heading:before,
+#content .editor .heading:after {
+  content: "";
+  display: table;
+}
+#content .editor .heading:after {
+  clear: both;
+}
+#content .editor .heading > div {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  vertical-align: middle;
+}
+#content .editor .heading label {
+  width: 60px;
+  display: inline-block;
+}
+#content .editor .heading button {
+  font-size: 4em;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  width: 25%;
+  padding: 0;
+  margin: 0;
+  color: #aaa;
+}
+#content .editor .heading button:hover {
+  color: #1e2f40;
+}
+#content .editor .heading button span {
+  font-size: 10px;
+  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;
+}
+#content .editor a.edit {
   font-size: 0.4em;
   text-decoration: underline;
 }
-.editor .list table {
+#content .editor .list table {
   width: 100%;
 }
-.editor .form input[type=radio] {
+#content .editor textarea {
+  background-color: #fff;
+  border: none;
+  width: 100%;
+}
+#content .editor .form input[type=radio] {
   width: 20px;
   border: none;
   background-color: #dddddd;
 }
-.editor .form textarea {
+#content .editor .form textarea {
   width: 100%;
   margin: 0px;
   padding: 0px;
 }
-.editor .form label {
+#content .editor .form label {
   width: 20%;
   display: inline-block;
   font-size: 1em;
   height: 1em;
   margin: 0 10px 10px 0;
 }
-.editor .form .types {
+#content .editor .form div.actions {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.2em;
+}
+#content .editor .form div.actions:before,
+#content .editor .form div.actions:after {
+  content: "";
+  display: table;
+}
+#content .editor .form div.actions:after {
+  clear: both;
+}
+#content .editor .form div.actions button {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  height: 6em;
+}
+#content .editor .form div.actions button i {
+  margin-top: 10px;
+  display: block;
+  font-size: 2em;
+}
+#content .editor .types {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
   text-align: center;
 }
-.editor .form .types:before,
-.editor .form .types:after {
+#content .editor .types:before,
+#content .editor .types:after {
   content: "";
   display: table;
 }
-.editor .form .types:after {
+#content .editor .types:after {
   clear: both;
 }
-.editor .form .types div {
+#content .editor .types div {
   width: 41.66666667%;
   display: inline-block;
   vertical-align: top;
@@ -517,93 +595,67 @@ div.alerts button {
   margin: 1%;
   height: 10em;
 }
-.editor .form .types div strong {
+#content .editor .types div strong {
   font-size: 1.5em;
   line-height: 1.5em;
   font-weight: normal;
 }
-.editor .form .types div p {
+#content .editor .types div p {
   margin: 0px;
   padding: 0px;
   font-size: 0.9em;
 }
-.editor .form .types div.blog,
-.editor .form .types div.event {
+#content .editor .types div.blog,
+#content .editor .types div.event {
   border-top: solid 4px #658c00;
 }
-.editor .form .types div.blog:hover,
-.editor .form .types div.event:hover {
+#content .editor .types div.blog:hover,
+#content .editor .types div.event:hover {
   background-color: rgba(138, 191, 0, 0.1);
 }
-.editor .form .types div.blog.selected,
-.editor .form .types div.event.selected {
+#content .editor .types div.blog.selected,
+#content .editor .types div.event.selected {
   background-color: rgba(138, 191, 0, 0.2);
   border: solid 2px #658c00;
 }
-.editor .form .types div.subject,
-.editor .form .types div.question {
+#content .editor .types div.subject,
+#content .editor .types div.question {
   border-top: solid 4px #217dbb;
 }
-.editor .form .types div.subject:hover,
-.editor .form .types div.question:hover {
+#content .editor .types div.subject:hover,
+#content .editor .types div.question:hover {
   background-color: rgba(52, 152, 219, 0.1);
 }
-.editor .form .types div.subject.selected,
-.editor .form .types div.question.selected {
+#content .editor .types div.subject.selected,
+#content .editor .types div.question.selected {
   background-color: rgba(52, 152, 219, 0.2);
   border: solid 2px #217dbb;
 }
-.editor .form .types div.debate,
-.editor .form .types div.poll {
+#content .editor .types div.debate,
+#content .editor .types div.poll {
   border-top: solid 4px #bb0202;
 }
-.editor .form .types div.debate:hover,
-.editor .form .types div.poll:hover {
+#content .editor .types div.debate:hover,
+#content .editor .types div.poll:hover {
   background-color: rgba(237, 3, 3, 0.1);
 }
-.editor .form .types div.debate.selected,
-.editor .form .types div.poll.selected {
+#content .editor .types div.debate.selected,
+#content .editor .types div.poll.selected {
   background-color: rgba(237, 3, 3, 0.2);
   border: solid 2px #bb0202;
 }
-.editor .form .types div.quote,
-.editor .form .types div.belief {
+#content .editor .types div.quote,
+#content .editor .types div.belief {
   border-top: solid 4px #bc8c0d;
 }
-.editor .form .types div.quote:hover,
-.editor .form .types div.belief:hover {
+#content .editor .types div.quote:hover,
+#content .editor .types div.belief:hover {
   background-color: rgba(236, 176, 16, 0.1);
 }
-.editor .form .types div.quote.selected,
-.editor .form .types div.belief.selected {
+#content .editor .types div.quote.selected,
+#content .editor .types div.belief.selected {
   background-color: rgba(236, 176, 16, 0.2);
   border: solid 2px #bc8c0d;
-}
-.editor .form div.actions {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 1.2em;
-}
-.editor .form div.actions:before,
-.editor .form div.actions:after {
-  content: "";
-  display: table;
-}
-.editor .form div.actions:after {
-  clear: both;
-}
-.editor .form div.actions button {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-  height: 6em;
-}
-.editor .form div.actions button i {
-  margin-top: 10px;
-  display: block;
-  font-size: 2em;
 }
 @media (min-width: 1000px) {
   .editor .types div {

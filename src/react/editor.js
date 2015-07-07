@@ -32,6 +32,7 @@ let Editor = React.createClass({
 		this.unsubscribe();
 	},
 	render: function () {
+		let view = <TextEditor ref="rte" post={this.state.post}></TextEditor>
 		if (token.get() === false) {
 			return (<View401 />);
 		}
@@ -41,36 +42,72 @@ let Editor = React.createClass({
     }
     let privacy = this.state.post.privacy || 'private';
 
+		if (this.state.mode === 'tags') {
+			view = (<div>
+				<Tags ref="tags" {...this.state}></Tags>
+				<Details ref="details" post={this.state.post}></Details>
+			</div>);
+		}
+
+		if (this.state.mode === 'links') {
+			view = <Links />
+		}
+
+		if (this.state.mode === 'share') {
+			view = <div>Share</div>
+		}
+		//
+		//
+		//
+		// <div ref="actions" className="actions">
+		// 	<button ref="save" className="button green" onClick={this._save}>
+		// 		{this.state.post.id ? "Update Post" : "Create New Post"}
+		// 		<i className="fa fa-pencil" />
+		// 	</button>
+		// 	{remove}
+		// 	<button ref="back" className="button blue" onClick={this._list}>
+		// 		Back to List
+		// 		<i className="fa fa-list" />
+		// 	</button>
+		// </div>
 		return (
 			<div className="editor">
-				<h1>Content Factory <Link to="myPosts" className="edit">Edit my posts</Link></h1>
-				<div className="form">
-				  <label>Title:</label>
-					<input ref="title" type="text" placeholder="title" value={this.state.post.title} onChange={this._title} />
-					<br />
-					<label>Privacy:</label>
-					<select ref="privacy" value={privacy} onChange={this._privacy}>
-						<option value="private">Private</option>
-						<option value="phourus">Members only</option>
-						<option value="public">Public</option>
-					</select>
-					<TextEditor ref="rte" post={this.state.post}></TextEditor>
-					<Details ref="details" post={this.state.post}></Details>
-					<Tags ref="tags" {...this.state}></Tags>
-					<div ref="actions" className="actions">
-	          <button ref="save" className="button green" onClick={this._save}>
-	            {this.state.post.id ? "Update Post" : "Create New Post"}
-							<i className="fa fa-pencil" />
-	          </button>
-	          {remove}
-	          <button ref="back" className="button blue" onClick={this._list}>
-							Back to List
-							<i className="fa fa-list" />
-						</button>
-	    		</div>
+
+				<div className="heading">
+				  <div>
+						<Link to="myPosts" className="edit">Edit my posts</Link><br />
+						<label>Title:</label>
+						<input ref="title" type="text" placeholder="title" value={this.state.post.title} onChange={this._title} />
+						<br />
+						<label>Privacy:</label>
+						<select ref="privacy" value={privacy} onChange={this._privacy}>
+							<option value="private">Private</option>
+							<option value="phourus">Members only</option>
+							<option value="public">Public</option>
+						</select>
+					</div>
+					<div>
+						<button className="fa fa-quote-right" onClick={this._content}><br />Content</button>
+						<button className="fa fa-tags" onClick={this._tags}><br />Tags</button>
+						<button className="fa fa-photo" onClick={this._links}><br />Links</button>
+						<button className="fa fa-cloud" onClick={this._share}><br />Share</button>
+					</div>
 				</div>
+				{view}
 			</div>
 		);
+	},
+	_content: function () {
+		this.setState({mode: 'content'});
+	},
+	_tags: function () {
+		this.setState({mode: 'tags'});
+	},
+	_links: function () {
+		this.setState({mode: 'links'});
+	},
+	_share: function () {
+		this.setState({mode: 'share'});
 	},
 	_save: function () {
 		if (this.props.post.id === null) {
@@ -94,8 +131,8 @@ let Editor = React.createClass({
 
 let TextEditor = React.createClass({
 	componentDidMount: function () {
-		//let rte = new RTE();
-		//rte.render();
+		let rte = new RTE();
+		rte.render();
 	},
 	render: function () {
 		let content = this.props.post.content || "";
