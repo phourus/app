@@ -412,20 +412,21 @@ let PostItem = React.createClass({
 						{details}
 					</div>
 				</div>
-				<div className="meta">
-					<Influence influence={this.props.post.influence}/>
-					<div className="stats">
-						<div><i className="fa fa-eye" /> Views <strong>{this.props.post.totalViews}</strong> </div>
-						<div><i className="fa fa-comments" /> Comments <strong>{this.props.post.totalComments}</strong></div>
-						<div><i className="fa fa-thumbs-up" /> Thumbs <strong>{this.props.post.totalThumbs}</strong></div>
-					</div>
-					<div className="popularity">
-						<canvas id={`popularity${this.props.post.id}`}></canvas>
-					</div>
-				</div>
 				<div className="footing">
 					{tags}
 					<div className="content">{this.props.post.content}</div>
+				</div>
+				<div className="meta">
+					<Influence influence={this.props.post.influence}/>
+					<div className="popularity">
+						<canvas id={`popularity${this.props.post.id}`}></canvas>
+						<div>Popularity</div>
+					</div>
+					<div className="stats">
+						<div><i className="fa fa-eye" /> Views <br /><strong>{this.props.post.totalViews}</strong> </div>
+						<div><i className="fa fa-comments" /> Comments <br /><strong>{this.props.post.totalComments}</strong></div>
+						<div><i className="fa fa-thumbs-up" /> Thumbs <br /><strong>{this.props.post.totalThumbs}</strong></div>
+					</div>
 				</div>
 				{links}
 				{thumbs}

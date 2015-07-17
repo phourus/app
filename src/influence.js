@@ -6,7 +6,8 @@ let Influence = React.createClass({
       let range = Math.ceil(this.props.influence / 10);
       return (
         <div className={`influence influence${range}`}>
-          <i className="fa fa-certificate" /> {this.props.influence}
+          <div className="score">{this.props.influence}</div>
+          <div>Influence</div>
         </div>
       );
     }

@@ -3,7 +3,7 @@ module.exports = function (element, popularity) {
   var circ = Math.PI * 2;
   var quart = Math.PI / 2;
   var radius = 50;
-  var posX = element.width / 2;
+  var posX = 90;
   var posY = element.height / 2;
   var end = popularity / 100;
 

@@ -965,13 +965,6 @@ div.alerts button {
 .post .thumb {
   float: right;
 }
-.post .thumb .popularity {
-  width: 150px;
-  display: inline-block;
-}
-.post .thumb .popularity canvas {
-  width: 150px;
-}
 .post .thumb .counts {
   margin: 20px 20px 0 0;
   font-size: 1.5em;
@@ -1486,9 +1479,6 @@ div.alerts button {
   background-color: #ecb010;
   color: #fff;
 }
-.search .postItem canvas {
-  width: 150px;
-}
 .search .postItem .title a {
   color: #1e2f40;
 }
@@ -1558,19 +1548,14 @@ div.alerts button {
   clear: right;
 }
 .search .postItem .stats div {
-  width: 150px;
-}
-.search .postItem .stats div span {
-  width: 80px;
-  font-size: 0.9em;
+  width: 33.33333333%;
   display: inline-block;
+  vertical-align: top;
+  text-align: center;
 }
 .search .postItem .stats div strong {
   color: #777;
   font-size: 1.1em;
-}
-.search .postItem .stats div i {
-  padding: 0px 6px;
 }
 .search .postItem .stats li {
   display: inline;
@@ -1709,7 +1694,7 @@ div.alerts button {
     clear: both;
   }
   .search .postItem .meta .influence {
-    float: right;
+    float: left;
   }
   .search .postItem .meta ul {
     clear: right;
@@ -2003,48 +1988,60 @@ i.fa-minus {
 }
 /** INFLUENCE **/
 .influence {
-  width: 80px;
-  padding-top: 2px;
-  height: 28px;
-  color: white;
+  width: 60px;
+  height: 75px;
   text-align: center;
-  font-size: 1.4em;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
 }
-.influence i {
-  margin-right: 4px;
+.influence .score {
+  padding-top: 10px;
+  height: 40px;
+  font-size: 2.5em;
 }
-.influence.influence1 {
-  background-color: #3498db;
+.influence > div {
+  font-size: 10px;
+  color: #333;
 }
-.influence.influence2 {
-  background-color: #3498db;
+.influence.influence1 .score {
+  color: #3498db;
 }
-.influence.influence3 {
-  background-color: #3498db;
+.influence.influence2 .score {
+  color: #3498db;
 }
-.influence.influence4 {
-  background-color: #3498db;
+.influence.influence3 .score {
+  color: #3498db;
 }
-.influence.influence5 {
-  background-color: #8abf00;
+.influence.influence4 .score {
+  color: #3498db;
 }
-.influence.influence6 {
-  background-color: #8abf00;
+.influence.influence5 .score {
+  color: #8abf00;
 }
-.influence.influence7 {
-  background-color: #8abf00;
+.influence.influence6 .score {
+  color: #8abf00;
 }
-.influence.influence8 {
-  background-color: #ecb010;
+.influence.influence7 .score {
+  color: #8abf00;
 }
-.influence.influence9 {
-  background-color: #ecb010;
+.influence.influence8 .score {
+  color: #ecb010;
 }
-.influence.influence10 {
-  background-color: #ed0303;
+.influence.influence9 .score {
+  color: #ecb010;
+}
+.influence.influence10 .score {
+  color: #ed0303;
+}
+/** POPULARITY **/
+.popularity {
+  width: 60px;
+  display: inline-block;
+}
+.popularity canvas {
+  width: 100px;
+}
+.popularity > div {
+  font-size: 10px;
+  text-align: center;
 }
 /** TAGS **/
 .tag {

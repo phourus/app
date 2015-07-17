@@ -303,10 +303,6 @@
     .type.debate, .type.poll { background-color: @red; color: #fff; }
     .type.quote, .type.belief { background-color: @gold; color: #fff; }
 
-    canvas {
-      width: 150px;
-    }
-
     .title {
 
       a {
@@ -367,20 +363,15 @@
       clear: right;
 
       div {
-        width: 150px;
-
-        span {
-          width: 80px;
-          font-size: 0.9em;
-          display: inline-block;
-        }
+        .Cols(4);
+        text-align: center;
 
        strong {
          color: #777;
          font-size: 1.1em;
        }
         i {
-          padding: 0px 6px;
+
         }
       }
 
@@ -506,7 +497,7 @@
         text-align: right;
 
         .influence {
-          float: right;
+          float: left;
         }
 
         ul {
