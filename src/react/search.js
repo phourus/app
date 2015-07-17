@@ -17,6 +17,7 @@ let Search = React.createClass({
 		return {
 			posts: [],
 			total: 0,
+			selected: 0,
 			params: {
 				exclude: [],
 				search: '',
@@ -55,7 +56,7 @@ let Search = React.createClass({
 			<div className="search">
 				<Head {...this.state.params} />
 				<Scroll pageStart={0} loadMore={this._more} hasMore={true} loader={<div className="loader">Loading ...</div>}>
-						<Posts posts={this.state.posts} />
+						<Posts posts={this.state.posts} selected={this.state.selected} scroll={this.state.scroll} />
 				</Scroll>
 			</div>
 		);
@@ -341,12 +342,13 @@ let Posts = React.createClass({
 		let data = this.props.posts;
 		let list = [];
 
-		list = data.map(function (item, i) {
+		list = data.map((item, i) => {
 			 let location = {};
+			 let selected = (item.id === this.props.selected);
 			 if (item.user.locations && item.user.locations.length > 0) {
 					 location = item.user.locations[0];
 			 }
-			 return <PostItem key={item.id} post={item} user={item.user} location={location} />;
+			 return <PostItem key={item.id} post={item} user={item.user} location={location} selected={selected} scroll={this.props.scroll} />;
 		});
 
 		return (
@@ -364,6 +366,14 @@ let PostItem = React.createClass({
 	componentDidMount: function () {
 		let element = document.getElementById(`popularity${this.props.post.id}`);
 		let popularity = new Popularity(element, this.props.post.popularity);
+	},
+	componentDidUpdate: function () {
+		console.log(this.props.scroll);
+		if (this.props.selected === true && this.props.scroll === false) {
+			let element = this.getDOMNode();
+			let y = element.offsetTop - element.scrollTop + element.clientTop - 80;
+			window.scrollTo(0, y);
+		}
 	},
 	render: function () {
 		let className = "postItem";
@@ -384,7 +394,7 @@ let PostItem = React.createClass({
 		if (this.state.hidden === true) {
 			return false;
 		}
-		if (this.state.selected === true) {
+		if (this.props.selected === true) {
 			tags = <Tags tags={this.props.post.tags} />;
 			//links = <Links links={this.props.post.links} />;
 			thumbs = <Thumbs post={this.props.post} />;
@@ -435,8 +445,11 @@ let PostItem = React.createClass({
 		);
 	},
 	_toggle: function () {
-		let current = !this.state.selected;
-		this.setState({selected: current});
+		let id = 0;
+		if (this.props.selected !== true) {
+			id = this.props.post.id;
+		}
+		Actions.select(id);
 	},
 	_hide: function () {
 		this.setState({hidden: true});

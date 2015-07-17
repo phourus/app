@@ -12,6 +12,8 @@ let msg = require("../actions/alerts").add;
 let Stream = Reflux.createStore({
   posts: null,
   total: 0,
+  selected: 0,
+  scroll: false,
   params: {
     exclude: [],
     search: '',
@@ -26,6 +28,7 @@ let Stream = Reflux.createStore({
   },
   init: function () {
     this.listenTo(Actions.collection, this._collection);
+    this.listenTo(Actions.select, this._select);
     this.listenTo(Actions.search, this._search);
     this.listenTo(Actions.nextPage, this._nextPage);
     this.listenTo(Actions.previousPage, this._previousPage);
@@ -45,7 +48,7 @@ let Stream = Reflux.createStore({
       } else {
         this.posts = data.rows;
       }
-      this.trigger({posts: this.posts, total: data.count, params: this.params});
+      this.trigger({posts: this.posts, total: data.count, params: this.params, scroll: this.scroll});
     })
     .catch(code => {
       if (code != 200) {
@@ -53,6 +56,11 @@ let Stream = Reflux.createStore({
          msg('red', 'Posts could not be loaded', code);
       }
     });
+  },
+  _select: function (id) {
+    this.selected = id;
+    this.scroll = false;
+    this.trigger({selected: this.selected, scroll: this.scroll});
   },
   _search: function (search) {
     this.params.search = search;
@@ -72,6 +80,7 @@ let Stream = Reflux.createStore({
   },
   _more: function () {
     this.params.page++;
+    this.scroll = true;
     this._collection();
   },
   _limit: function (limit) {
