@@ -423,9 +423,9 @@ let PostItem = React.createClass({
 						<div>Popularity</div>
 					</div>
 					<div className="stats">
-						<div><i className="fa fa-eye" /> Views <br /><strong>{this.props.post.totalViews}</strong> </div>
-						<div><i className="fa fa-comments" /> Comments <br /><strong>{this.props.post.totalComments}</strong></div>
-						<div><i className="fa fa-thumbs-up" /> Thumbs <br /><strong>{this.props.post.totalThumbs}</strong></div>
+						<div><strong>{this.props.post.totalViews}</strong><br /><i className="fa fa-eye" /> Views</div>
+						<div><strong>{this.props.post.totalComments}</strong><br /><i className="fa fa-comments" /> Comments</div>
+						<div><strong>{this.props.post.totalThumbs}</strong><br /><i className="fa fa-thumbs-up" /> Thumbs</div>
 					</div>
 				</div>
 				{links}

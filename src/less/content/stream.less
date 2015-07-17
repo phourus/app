@@ -335,7 +335,10 @@
       }
     }
     .meta {
-      .Cols(4);
+      > div {
+        display: inline-block;
+        vertical-align: bottom;
+      }
     }
     ul {
       margin: 20px 0 0 0;
@@ -365,18 +368,14 @@
       div {
         .Cols(4);
         text-align: center;
+        font-size: 10px;
+        color: #333;
+        width: 80px;
 
        strong {
-         color: #777;
-         font-size: 1.1em;
+         color: #555;
+         font-size: 1.4em;
        }
-        i {
-
-        }
-      }
-
-      li {
-        display: inline;
       }
     }
 

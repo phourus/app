@@ -1509,10 +1509,9 @@ div.alerts button {
   font-size: 0.8em;
   color: #bbb;
 }
-.search .postItem .meta {
-  width: 33.33333333%;
+.search .postItem .meta > div {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: bottom;
 }
 .search .postItem ul {
   margin: 20px 0 0 0;
@@ -1552,13 +1551,13 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
   text-align: center;
+  font-size: 10px;
+  color: #333;
+  width: 80px;
 }
 .search .postItem .stats div strong {
-  color: #777;
-  font-size: 1.1em;
-}
-.search .postItem .stats li {
-  display: inline;
+  color: #555;
+  font-size: 1.4em;
 }
 .search .postItem .footing {
   margin-top: 1em;
