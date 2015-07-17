@@ -1429,17 +1429,31 @@ div.alerts button {
   margin: auto;
 }
 .search .postItem {
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
-  padding: 1%;
+  width: 98%;
   margin: 1%;
+  padding: 1%;
+  opacity: 0.5;
   background-color: white;
+  box-sizing: border-box;
+}
+.search .postItem:hover {
+  opacity: 1;
 }
 .search .postItem.selected {
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
+  width: 98%;
+  margin: 1%;
+  opacity: 1;
+  padding: 1%;
+}
+.search .postItem button.close {
+  background: transparent;
+  border: none;
+  float: right;
+  font-size: 1em;
+}
+.search .postItem button.close:hover {
+  color: #ed0303;
+  cursor: pointer;
 }
 .search .postItem .type {
   font-size: 0.8em;
@@ -1481,6 +1495,11 @@ div.alerts button {
 .search .postItem .title a:hover {
   color: #ecb010;
 }
+.search .postItem .details {
+  width: 66.66666667%;
+  display: inline-block;
+  vertical-align: top;
+}
 .search .postItem .details .pic {
   width: 16.66666667%;
   display: inline-block;
@@ -1499,6 +1518,11 @@ div.alerts button {
 .search .postItem .details .basic .created {
   font-size: 0.8em;
   color: #bbb;
+}
+.search .postItem .meta {
+  width: 33.33333333%;
+  display: inline-block;
+  vertical-align: top;
 }
 .search .postItem ul {
   margin: 20px 0 0 0;
@@ -1628,27 +1652,91 @@ div.alerts button {
   padding: 0;
 }
 @media (min-width: 500px) {
+  .search .heading .refine .context {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .search .heading .refine .toggles {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+  }
+}
+@media (min-width: 1000px) {
   .search .postItem {
-    width: 41.66666667%;
+    width: 24%;
+    margin: 1% 1% 1% 0;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  .search .postItem .details {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .search .postItem .details:before,
+  .search .postItem .details:after {
+    content: "";
+    display: table;
+  }
+  .search .postItem .details:after {
+    clear: both;
+  }
+  .search .postItem .details .pic {
+    width: 25%;
     display: inline-block;
     vertical-align: top;
   }
-  .search .refine .context {
+  .search .postItem .details .basic {
     width: 50%;
     display: inline-block;
     vertical-align: top;
   }
-  .search .refine .toggles {
-    width: 50%;
+  .search .postItem .meta {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    text-align: right;
+  }
+  .search .postItem .meta:before,
+  .search .postItem .meta:after {
+    content: "";
+    display: table;
+  }
+  .search .postItem .meta:after {
+    clear: both;
+  }
+  .search .postItem .meta .influence {
+    float: right;
+  }
+  .search .postItem .meta ul {
+    clear: right;
+  }
+  .search .types {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .search .types:before,
+  .search .types:after {
+    content: "";
+    display: table;
+  }
+  .search .types:after {
+    clear: both;
+  }
+  .search .types button {
+    width: 11.11111111%;
     display: inline-block;
     vertical-align: top;
   }
 }
-@media (min-width: 800px) {
+@media (min-width: 1400px) {
   .search .postItem {
-    width: 16.66666667%;
-    display: inline-block;
-    vertical-align: top;
+    width: 19%;
+    margin-right: 1%;
   }
   .search .postItem .details .pic {
     width: 25%;

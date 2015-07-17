@@ -67,14 +67,17 @@ let Search = React.createClass({
 
 let Head = React.createClass({
 	getInitialState: function () {
-		return { mode: 0 };
+		return { mode: false };
 	},
 	render: function () {
 		let popup = '';
-		if (this.state.mode === 1) {
+		if (this.state.mode === 'categories') {
+			popup = <Categories {...this.props} />
+		}
+		if (this.state.mode === 'filter') {
 			popup = <Filter {...this.props} />
 		}
-		if (this.state.mode === 2) {
+		if (this.state.mode === 'sort') {
 			popup = <Sort {...this.props} />
 		}
 		return (
@@ -86,6 +89,7 @@ let Head = React.createClass({
 				<div className="refine">
 					<Context {...this.props.context} />
 					<div className="toggles">
+						<button className="fa fa-tag" onClick={this._tags}> Tags</button>
 						<button className="fa fa-filter" onClick={this._filter}> Filter</button>
 						<button className="fa fa-sort" onClick={this._sort}> Sort</button>
 					</div>
@@ -98,18 +102,25 @@ let Head = React.createClass({
 			let val = this.refs.term.getDOMNode().value;
 			Actions.search(val);
 	},
-	_filter: function () {
-		if (this.state.mode === 1) {
-			this.setState({mode: 0});
+	_tags: function () {
+		if (this.state.mode === 'categories') {
+			this.setState({mode: false});
 		} else {
-			this.setState({mode: 1});
+			this.setState({mode: 'categories'});
+		}
+	},
+	_filter: function () {
+		if (this.state.mode === 'filter') {
+			this.setState({mode: false});
+		} else {
+			this.setState({mode: 'filter'});
 		}
 	},
 	_sort: function () {
-		if (this.state.mode === 2) {
-			this.setState({mode: 0});
+		if (this.state.mode === 'sort') {
+			this.setState({mode: false});
 		} else {
-			this.setState({mode: 2})
+			this.setState({mode: 'sort'})
 		}
 	}
 });
@@ -174,6 +185,14 @@ let Foot = React.createClass({
 			<div className="foot">
 				<Pagination ref="pagination" page={this.props.params.page} total={this.props.total} limit={this.props.params.limit} />
 			</div>
+		);
+	}
+});
+
+let Categories = React.createClass({
+	render: function () {
+		return (
+			<div className="categories"></div>
 		);
 	}
 });
@@ -336,16 +355,6 @@ let Posts = React.createClass({
 	}
 });
 
-/*
-<li><strong>Positive:</strong> {this.props.meta.positive}</li>
-<li><strong>Category:</strong> {this.props.meta.category}</li>
-<li><strong>Element:</strong> {this.props.meta.element}</li>
-<li><strong>Date/Time:</strong> {this.props.post.date}</li>
-<li><strong>Address:</strong> {this.props.address.city}</li>
-<li><strong>Difficulty:</strong> {this.props.meta.difficulty}</li>
-<li><strong>Scope:</strong> {this.props.meta.scope}</li>
-*/
-
 let PostItem = React.createClass({
 	getInitialState: function () {
 		return {
@@ -360,6 +369,7 @@ let PostItem = React.createClass({
 		let className = "postItem";
 		let meta = [];
 		let post = this.props.post;
+		let details = false;
 		let comments = false;
 		let tags = false;
 		let links = false;
@@ -380,12 +390,13 @@ let PostItem = React.createClass({
 			thumbs = <Thumbs post={this.props.post} />;
 			comments = <Comments post={this.props.post} />;
 			className += " selected";
+			details = <ul>{meta}</ul>;
 		}
 		//<Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link>
 		return (
 			<div className={className}>
-				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
 				<button className="close" onClick={this._hide}>X</button>
+				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
 				<h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.props.post.title}</a></h2>
 				<div className="details">
 					<div className="pic">
@@ -398,20 +409,18 @@ let PostItem = React.createClass({
 						&bull;
 						<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 						<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
-							<ul>
-							{meta}
-							</ul>
+						{details}
 					</div>
-					<div className="meta">
-						<Influence influence={this.props.post.influence}/>
-						<div className="stats">
-							<div><i className="fa fa-eye" /> Views <strong>{this.props.post.totalViews}</strong> </div>
-							<div><i className="fa fa-comments" /> Comments <strong>{this.props.post.totalComments}</strong></div>
-							<div><i className="fa fa-thumbs-up" /> Thumbs <strong>{this.props.post.totalThumbs}</strong></div>
-						</div>
-						<div className="popularity">
-							<canvas id={`popularity${this.props.post.id}`}></canvas>
-						</div>
+				</div>
+				<div className="meta">
+					<Influence influence={this.props.post.influence}/>
+					<div className="stats">
+						<div><i className="fa fa-eye" /> Views <strong>{this.props.post.totalViews}</strong> </div>
+						<div><i className="fa fa-comments" /> Comments <strong>{this.props.post.totalComments}</strong></div>
+						<div><i className="fa fa-thumbs-up" /> Thumbs <strong>{this.props.post.totalThumbs}</strong></div>
+					</div>
+					<div className="popularity">
+						<canvas id={`popularity${this.props.post.id}`}></canvas>
 					</div>
 				</div>
 				<div className="footing">
@@ -631,5 +640,15 @@ let Comment = React.createClass({
     );
   }
 });
+
+/*
+<li><strong>Positive:</strong> {this.props.meta.positive}</li>
+<li><strong>Category:</strong> {this.props.meta.category}</li>
+<li><strong>Element:</strong> {this.props.meta.element}</li>
+<li><strong>Date/Time:</strong> {this.props.post.date}</li>
+<li><strong>Address:</strong> {this.props.address.city}</li>
+<li><strong>Difficulty:</strong> {this.props.meta.difficulty}</li>
+<li><strong>Scope:</strong> {this.props.meta.scope}</li>
+*/
 
 module.exports = Search;
