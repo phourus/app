@@ -48,6 +48,7 @@ let Account = React.createClass({
           <div className="heading">
             <Pic {...this.state} />
             <Profile {...this.state} />
+            <Orgs />
           </div>
           <RouteHandler {...this.state} save={this._save} change={this._change} />
         </div>
@@ -100,8 +101,7 @@ let Profile = React.createClass({
         <Link to="user" params={{id: this.props.id}}>{this.props.username}</Link>
         <div><strong>Full Name:</strong> {this.props.first} {this.props.last}</div>
         <div>{(this.props.address.city) ? this.props.address.city + ', ' : ''} {this.props.address.state || ''}</div>
-        <div><Link to="orgs">4 Organizations</Link></div>
-        <div><strong>Born:</strong> {moment(this.props.dob).format('MMMM Do YYYY')}</div>
+        <div><Link to="myPosts">View my Posts (65)</Link></div>
       </div>
     );
   },
@@ -111,19 +111,43 @@ let Profile = React.createClass({
   }
 });
 
-let Posts = React.createClass({
+let Orgs = React.createClass({
   mixins: [Router.Navigation],
+  getInitialState: function () {
+    return {
+      orgs: [
+        {id: 1, name: "UCLA", admin: false},
+        {id: 2, name: "ABC Company", admin: true},
+        {id: 3, name: "City of Santa Monica, CA", admin: false},
+        {id: 4, name: "First Church of Phourus", admin: true}
+      ]
+    }
+  },
   render: function () {
     return (
-      <div className="posts">
-        <button className="button blue" onClick={this._posts}>My Posts (45)</button>
-        <br />
-        <button className="button gold">98</button>
+      <div className="orgs">
+        <h4>My Organizations</h4>
+        {this.state.orgs.map((item) => {
+          var admin = false;
+          if (item.admin === true) {
+            admin = <button id={item.id} className="button blue" onClick={this._edit}>Admin</button>
+          }
+          return (
+            <div className="org">
+              <Link to="orgPosts" params={{id: item.id}}>{item.name}</Link> <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>Remove Me</a> {admin}
+            </div>
+          );
+        })}
       </div>
     );
   },
-  _posts: function () {
-    this.context.transitionTo('myPosts');
+  _edit: function (e) {
+    var id = e.currentTarget.id;
+    this.context.transitionTo('details', {id: id});
+  },
+  _remove: function (e) {
+    var id = e.currentTarget.id;
+    console.warn('remove org' + id);
   }
 });
 
@@ -360,46 +384,6 @@ Account.History = React.createClass({
       );
     });
     return (<div><h3>History</h3><ul>{views}</ul><ul>{comments}</ul><ul>{thumbs}</ul></div>);
-  }
-});
-
-Account.Orgs = React.createClass({
-  mixins: [Router.Navigation],
-  getInitialState: function () {
-    return {
-      orgs: [
-        {id: 1, name: "UCLA", admin: false},
-        {id: 2, name: "ABC Company", admin: true},
-        {id: 3, name: "City of Santa Monica, CA", admin: false},
-        {id: 4, name: "First Church of Phourus", admin: true}
-      ]
-    }
-  },
-  render: function () {
-    return (
-      <div>
-        <h1>My Organizations</h1>
-        {this.state.orgs.map((item) => {
-          var admin = false;
-          if (item.admin === true) {
-            admin = <button id={item.id} className="button blue" onClick={this._edit}>Edit Organization</button>
-          }
-          return (
-            <div>
-              {item.name} <button id={item.id} className="button red" onClick={this._remove}>Remove Me</button> {admin}
-            </div>
-          );
-        })}
-      </div>
-    );
-  },
-  _edit: function (e) {
-    var id = e.currentTarget.id;
-    this.context.transitionTo('details', {id: id});
-  },
-  _remove: function (e) {
-    var id = e.currentTarget.id;
-    console.warn('remove org' + id);
   }
 });
 

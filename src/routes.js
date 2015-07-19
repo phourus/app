@@ -38,12 +38,11 @@ module.exports = (
       <Route name="orgPosts" path="org/:id" handler={Search} />
     </Route>
     <Route name="account" path="account" handler={Account}>
-      <DefaultRoute handler={Account.Edit} />
+      <DefaultRoute handler={Account.Notifications} />
       <Route name="notifications" path="notifications" handler={Account.Notifications} />
       <Route name="history" path="history" handler={Account.History} />
       <Route name="update" path="update" handler={Account.Edit} />
       <Route name="password" path="password" handler={Account.Password} />
-      <Route name="orgs" path="orgs" handler={Account.Orgs} />
     </Route>
     <Route name="admin" path="admin/:id" handler={Admin}>
       <Route name="details" path="details" handler={Admin.Details} />
@@ -58,13 +57,13 @@ module.exports = (
       <Route name="edit" path=":id" handler={Factory.Fields} />
     </Route>
     <Route name="user" path="user/:id" handler={Profile}>
-        <DefaultRoute handler={Profile.About} />
-        <Route name="about" path="about" handler={Profile.About} />
-        <Route name="posts" path="posts" handler={Profile.Posts} />
-        <Route name="rank" path="rank" handler={Profile.Rank} />
-        <Route name="membership" path="membership" handler={Profile.Membership} />
-        <Route name="events" path="events" handler={Profile.Events} />
-        <Route name="reviews" path="reviews" handler={Profile.Reviews} />
+      <DefaultRoute handler={Profile.About} />
+      <Route name="about" path="about" handler={Profile.About} />
+      <Route name="posts" path="posts" handler={Profile.Posts} />
+      <Route name="rank" path="rank" handler={Profile.Rank} />
+      <Route name="membership" path="membership" handler={Profile.Membership} />
+      <Route name="events" path="events" handler={Profile.Events} />
+      <Route name="reviews" path="reviews" handler={Profile.Reviews} />
     </Route>
     <NotFoundRoute handler={View404}/>
   </Route>

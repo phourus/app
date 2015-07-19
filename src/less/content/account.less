@@ -27,9 +27,31 @@
       .Cols(6);
     }
 
-    .posts {
+    .orgs {
       .Cols(12);
-      text-align: right;
+
+      .org {
+        height: 30px;
+
+        a {
+          color: #333;
+        }
+
+        a:hover {
+          text-decoration: underline;
+          color: @gold-light;
+        }
+        a.remove {
+          font-size: 80%;
+          color: @blue-light;
+        }
+        button {
+          float: right;
+          height: 30px;
+          width: 60px;
+          font-size: 70%;
+        }
+      }
     }
   }
 
@@ -105,12 +127,11 @@
       }
 
       .profile {
-        .Cols(8);
+        .Cols(4);
       }
 
-      .posts {
-        .Cols(2);
-        text-align: right;
+      .orgs {
+        .Cols(6);
       }
     }
 

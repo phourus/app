@@ -326,11 +326,30 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
 }
-.account .heading .posts {
+.account .heading .orgs {
   width: 100%;
   display: inline-block;
   vertical-align: top;
-  text-align: right;
+}
+.account .heading .orgs .org {
+  height: 30px;
+}
+.account .heading .orgs .org a {
+  color: #333;
+}
+.account .heading .orgs .org a:hover {
+  text-decoration: underline;
+  color: #f2c13d;
+}
+.account .heading .orgs .org a.remove {
+  font-size: 80%;
+  color: #5faee3;
+}
+.account .heading .orgs .org button {
+  float: right;
+  height: 30px;
+  width: 60px;
+  font-size: 70%;
 }
 .account .update {
   max-width: 75rem;
@@ -414,15 +433,14 @@ div.alerts button {
     vertical-align: top;
   }
   .account .heading .profile {
-    width: 66.66666667%;
+    width: 33.33333333%;
     display: inline-block;
     vertical-align: top;
   }
-  .account .heading .posts {
-    width: 16.66666667%;
+  .account .heading .orgs {
+    width: 50%;
     display: inline-block;
     vertical-align: top;
-    text-align: right;
   }
   .account .update {
     max-width: 75rem;
