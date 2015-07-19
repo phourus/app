@@ -12,7 +12,7 @@ router.get('/:id', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 router.get('', (req, res) => {
@@ -24,7 +24,7 @@ router.get('', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 router.post('', (req, res) => {
@@ -35,7 +35,7 @@ router.post('', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 router.put('/:id', (req, res) => {
@@ -47,7 +47,7 @@ router.put('/:id', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 router.delete('/:id', (req, res) => {
@@ -58,7 +58,7 @@ router.delete('/:id', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 router.get('/account', (req, res) => {
@@ -68,7 +68,7 @@ router.get('/account', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 

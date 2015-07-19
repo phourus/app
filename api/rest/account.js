@@ -64,7 +64,7 @@ router.post('/login', (req, res) => {
       })
       .catch(function (err) {
         console.error(err);
-        res.send(503);
+        res.send(500);
       });
 });
 
@@ -78,7 +78,7 @@ router.get('', (req, res) => {
   })
   .catch(function (err) {
     console.log(err);
-    res.send(503);
+    res.send(500);
   });
 });
 
@@ -96,7 +96,7 @@ router.put('', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 
@@ -107,7 +107,7 @@ router.delete('', function () {
   })
   .catch(function (err) {
       console.error(err);
-      res.send(503);
+      res.send(500);
   });
 });
 
@@ -119,7 +119,7 @@ router.put('/password', function (current, changed) {
   })
   .catch(function (err) {
       console.error(err);
-      res.send(503);
+      res.send(500);
   });
 });
 
@@ -164,7 +164,7 @@ router.get('/notifications', (req, res) => {
   })
   .catch(function (err) {
       console.error(err);
-      res.send(503);
+      res.send(500);
   });
 });
 
@@ -204,7 +204,7 @@ router.get('/history', (req, res) => {
   })
   .catch(function (err) {
       console.log(err);
-      res.send(503);
+      res.send(500);
   });
 });
 

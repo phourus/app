@@ -12,7 +12,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('single', 503);
+            socket.emit('single', 500);
         });
   });
   socket.on('getCollection', function (params) {
@@ -22,7 +22,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('collection', 503);
+            socket.emit('collection', 500);
         });
   });
   socket.on('postCreate', function (model) {
@@ -32,7 +32,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('create', 503);
+            socket.emit('create', 500);
         });
   });
   socket.on('putSave', function (id, model) {
@@ -42,7 +42,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('save', 503);
+            socket.emit('save', 500);
         });
   });
   socket.on('delRemove', function (id) {
@@ -52,7 +52,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('remove', 503);
+            socket.emit('remove', 500);
         });
   });
 });

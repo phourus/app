@@ -10,7 +10,7 @@ router.get('', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 router.post('', (req, res) => {
@@ -23,7 +23,7 @@ router.post('', (req, res) => {
   })
   .catch(function (err) {
     console.error(err);
-    res.send(503);
+    res.send(500);
   });
 });
 

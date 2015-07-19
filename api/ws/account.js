@@ -42,7 +42,7 @@ ws.on('connection', function (socket) {
         .then(function (data) {
             if (data === null) {
                 console.error('username not found');
-                socket.emit('login', 503);
+                socket.emit('login', 500);
                 //done();
             }
             return data.id;
@@ -52,7 +52,7 @@ ws.on('connection', function (socket) {
                 .then(function (data) {
                     if (data.count !== 1) {
                         console.error('user_id + hash not found');
-                        socket.emit('login', 503);
+                        socket.emit('login', 500);
                     }
                     return user_id;
                 });
@@ -65,7 +65,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('login', 503);
+            socket.emit('login', 500);
         });  
   });
   socket.on('getGet', function (id, model) {
@@ -75,7 +75,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.log(err);
-            socket.emit('get', 503);
+            socket.emit('get', 500);
         });
   });
   socket.on('putEdit', function (model) {
@@ -86,7 +86,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('edit', 503);
+            socket.emit('edit', 500);
         });
   });
   socket.on('delDeactivate', function () {
@@ -96,7 +96,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('deactivate', 503);
+            socket.emit('deactivate', 500);
         });
   });
   socket.on('putPassword', function (current, changed) {
@@ -107,7 +107,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('password', 503);
+            socket.emit('password', 500);
         });
   });
   socket.on('getNotifications', function (params) {
@@ -148,7 +148,7 @@ ws.on('connection', function (socket) {
         })
         .catch(function (err) {
             console.error(err);
-            socket.emit('notifications', 503);
+            socket.emit('notifications', 500);
         });
   });
   socket.on('getHistory', function (params) {
@@ -184,7 +184,7 @@ ws.on('connection', function (socket) {
             })  
             .catch(function (err) {
                 console.log(err);
-                socket.emit('history', 503);
+                socket.emit('history', 500);
             });
   });
 });
