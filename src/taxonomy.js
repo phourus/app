@@ -108,14 +108,14 @@ blogs.voice = [
 ];
 
 blogs.self = [
-{label: "Christians", value:"christians"},
-{label: "Muslims", value:"muslims"},
-{label: "Jews", value:"jews"},
+{label: "Christianity", value:"christians"},
+{label: "Islam", value:"muslims"},
+{label: "Judaism", value:"jews"},
 {label: "New Age/Spiritual", value:"spiritual"},
-{label: "Buddhists", value:"buddhists"},
-{label: "Atheists", value:"atheists"},
-{label: "Agnostics", value:"agnostics"},
-{label: "Humanist", value:"humanist"},
+{label: "Buddhism", value:"buddhists"},
+{label: "Atheism", value:"atheists"},
+{label: "Agnosticism", value:"agnostics"},
+{label: "Humanism", value:"humanist"},
 {label: "Other", value:"other"},
 {label: "Not Religious", value:"non"}
 ];

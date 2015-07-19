@@ -7,6 +7,7 @@ let moment = require('moment');
 let Store = require('../stores/search');
 let Actions = require('../actions/search');
 
+let Tax = require('../taxonomy');
 let Influence = require('../influence');
 let Popularity = require('../popularity');
 let Scroll = require('react-infinite-scroll')(React);
@@ -191,10 +192,65 @@ let Foot = React.createClass({
 });
 
 let Categories = React.createClass({
+	getInitialState: function () {
+		return {
+			element: 'blogs',
+			category: '',
+			subcategory: ''
+		}
+	},
 	render: function () {
+		let categories = [];
+		let subcategories = [];
+		categories = Tax[this.state.element];
+
+		if (this.state.element === 'blogs') {
+			categories = Tax.blogs.world;
+		}
+		if (this.state.element === 'subjects') {
+			categories = Tax.subjects.category;
+			subcategories = Tax.subjects[this.state.category || Tax.subjects.category[0].value];
+		}
+		if (this.state.element === 'debates') {
+			categories = Tax.debates.category;
+			subcategories = [];
+		}
+		if (this.state.element === 'beliefs') {
+			categories = Tax.beliefs.category;
+			subcategories = [];
+		}
 		return (
-			<div className="categories"></div>
+			<div className="categories">
+				<div className="toggles">
+					<button className="button blue">Select All</button>
+					<button className="button red">Select None</button>
+				</div>
+				<ul>
+					<li><a id="blogs" href="javascript:void(0)" onClick={this._changeElement}>Blogs & Events</a></li>
+					<li><a id="subjects" href="javascript:void(0)" onClick={this._changeElement}>Subjects & Questions</a></li>
+					<li><a id="debates" href="javascript:void(0)" onClick={this._changeElement}>Debates & Polls</a></li>
+					<li><a id="beliefs" href="javascript:void(0)" onClick={this._changeElement}>Beliefs & Quotes</a></li>
+				</ul>
+				<ul>
+					{categories.map((item) => {
+						return <li><a id={item.value} href="javascript:void(0)" onClick={this._changeCategory}>{item.label}</a></li>
+					})}
+				</ul>
+				<ul>
+					{subcategories.map((item) => {
+						return <li><a id={item.value} href="javascript:void(0)" onClick={this._changeCategory}>{item.label}</a></li>
+					})}
+				</ul>
+			</div>
 		);
+	},
+	_changeElement: function (e) {
+		let id = e.currentTarget.id;
+		this.setState({element: id});
+	},
+	_changeCategory: function (e) {
+		let id = e.currentTarget.id;
+		this.setState({category: id});
 	}
 });
 

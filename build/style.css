@@ -1173,7 +1173,6 @@ div.alerts button {
   max-width: 100%;
 }
 .search .heading {
-  height: 90px;
   top: 40px;
   width: 90%;
   padding: 2% 5%;
@@ -1213,6 +1212,43 @@ div.alerts button {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
+}
+.search .heading .categories {
+  background-color: #fff;
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+.search .heading .categories:before,
+.search .heading .categories:after {
+  content: "";
+  display: table;
+}
+.search .heading .categories:after {
+  clear: both;
+}
+.search .heading .categories .toggles {
+  float: right;
+}
+.search .heading .categories ul {
+  display: inline-block;
+  list-style: none;
+  vertical-align: top;
+}
+.search .heading .categories ul li {
+  border-bottom: solid 1px #eee;
+}
+.search .heading .categories ul li a#blogs {
+  border-left: solid 4px #9cd900;
+}
+.search .heading .categories ul li a#subjects {
+  border-left: solid 4px #5faee3;
+}
+.search .heading .categories ul li a#debates {
+  border-left: solid 4px #fc2727;
+}
+.search .heading .categories ul li a#beliefs {
+  border-left: solid 4px #f2c13d;
 }
 .search .heading .refine {
   max-width: 100%;

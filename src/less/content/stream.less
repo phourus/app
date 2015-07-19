@@ -5,7 +5,6 @@
 .search {
 
   .heading {
-    height: 90px;
     top: 40px;
     width: 90%;
     padding: 2% 5%;
@@ -30,6 +29,41 @@
         padding: 0px;
         height: 100%;
         .rounded(0px);
+      }
+    }
+
+    .categories {
+      background-color: #fff;
+      .Row(100%);
+
+      .toggles {
+        float: right;
+      }
+      ul {
+        display: inline-block;
+        list-style: none;
+        vertical-align: top;
+
+        li {
+          border-bottom: solid 1px #eee;
+        }
+      }
+
+      ul {
+        li {
+          a#blogs {
+            border-left: solid 4px @green-light;
+          }
+          a#subjects {
+            border-left: solid 4px @blue-light;
+          }
+          a#debates {
+            border-left: solid 4px @red-light;
+          }
+          a#beliefs {
+            border-left: solid 4px @gold-light;
+          }
+        }
       }
     }
 
