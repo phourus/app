@@ -7,7 +7,7 @@ let Actions = require('../actions/editor');
 let Store = require('../stores/editor');
 let token = require('../token');
 let tax = require('../taxonomy');
-let RTE = require('rte');
+let RTE = require('react-quill');
 
 let Editor = React.createClass({
 	mixins: [Router.State],
@@ -56,6 +56,10 @@ let Editor = React.createClass({
 		if (this.state.mode === 'share') {
 			view = <div>Share</div>
 		}
+
+		if (this.state.mode === 'import') {
+			view = <div>Import Content</div>
+		}
 		//
 		//
 		//
@@ -75,7 +79,7 @@ let Editor = React.createClass({
 
 				<div className="heading">
 				  <div>
-						<Link to="myPosts" className="edit">Edit my posts</Link><br />
+						<Link to="myPosts" className="small">Edit my posts</Link> <span style={{fontSize: '0.5em'}}>|</span> <a href="javascript:void(0)" className="small" onClick={this._import}>Import content</a><br />
 						<label>Title:</label>
 						<input ref="title" type="text" placeholder="title" value={this.state.post.title} onChange={this._title} />
 						<br />
@@ -109,6 +113,9 @@ let Editor = React.createClass({
 	_share: function () {
 		this.setState({mode: 'share'});
 	},
+	_import: function () {
+		this.setState({mode: 'import'});
+	},
 	_save: function () {
 		if (this.props.post.id === null) {
 			Actions.add(this.state.post);
@@ -130,15 +137,11 @@ let Editor = React.createClass({
 });
 
 let TextEditor = React.createClass({
-	componentDidMount: function () {
-		let rte = new RTE();
-		rte.render();
-	},
 	render: function () {
 		let content = this.props.post.content || "";
 		return (
 			<div>
-				<textarea ref="content" placeholder="insert content here" value={content} onChange={this._content}></textarea>
+				<RTE ref="content" placeholder="insert content here" value={content} onChange={this._content} theme="snow" />
 			</div>
 		);
 	},

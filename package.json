@@ -26,6 +26,7 @@
     "react": "0.12.x",
     "react-infinite-scroll": "^0.1.5",
     "react-mutant": "^0.1.0",
+    "react-quill": "^0.1.1",
     "react-router": "^0.12.4",
     "reflux": "^0.2.6",
     "sequelize": "2.0.3",
@@ -37,7 +38,6 @@
     "babel-jest": "^4.0.0",
     "babelify": "^5.0.4",
     "browserify": "^10.0.0",
-    "browserify-shim": "^3.8.6",
     "chance": "^0.7.3",
     "gulp": "^3.8.11",
     "gulp-livereload": "^3.4.0",
@@ -46,14 +46,6 @@
     "reactify": "^0.15.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "browserify-shim": {
-    "rte": "global:Editor"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
   },
   "scripts": {
     "start": "node index.js",

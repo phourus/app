@@ -530,8 +530,8 @@ div.alerts button {
   font-size: 10px;
   font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;
 }
-#content .editor a.edit {
-  font-size: 0.4em;
+#content .editor a.small {
+  font-size: 0.5em;
   text-decoration: underline;
 }
 #content .editor .list table {
