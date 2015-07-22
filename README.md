@@ -37,7 +37,6 @@ BUILD
 EXPRESS
 - **express-jwt** for JSON Web Token support
 - **body-parser** for handling POST/PUT data in JSON format
--
 
 CLIENT
 - **react-router** for React routing

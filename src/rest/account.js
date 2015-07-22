@@ -1,12 +1,13 @@
 var http = require('../ajax')(window);
 var config = require('../../config');
+var token = require('../token');
 var base = config.get('url') + ':' + config.get('port') + '/rest/account/';
 var settings = {
   headers: {
-    "Authorization": require('../token').get()
+    "Authorization": token.get()
   },
   promise: true
-}
+};
 
 module.exports = {
   get: function () {
@@ -33,5 +34,8 @@ module.exports = {
   },
   register: function () {
     return http.post(base + 'register', {}, settings);
+  },
+  refresh: function () {
+    settings.headers.Authorization = token.get();
   }
 };

@@ -17,6 +17,12 @@ label {
   font-size: 1.3em;
   color: #425d77;
   margin: 0px 40px 20px 0px;
+  display: block;
+}
+label span {
+  display: inline-block;
+  width: 100px;
+  font-size: 0.7em;
 }
 input,
 textarea,
@@ -287,6 +293,29 @@ div.alerts .red {
 }
 div.alerts button {
   float: right;
+}
+.view401 {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+.view401:before,
+.view401:after {
+  content: "";
+  display: table;
+}
+.view401:after {
+  clear: both;
+}
+.view401 .login {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+.view401 .register {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
 }
 .account ul {
   list-style: none;

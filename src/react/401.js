@@ -15,20 +15,12 @@ let View401 = React.createClass({
     });
   },
   render: function () {
-    let component;
-    if (this.state.mode == "forgot") {
-      component = <Forgot />;
-    } else if (this.state.mode == "register") {
-      component = <Register />;
-    } else {
-      component = <Login register={this._register} forgot={this._forgot} />;
-    }
     return (
-      <div className="view401">{component}</div>
+      <div className="view401">
+        <Register />
+        <Login forgot={this._forgot} />
+      </div>
     );
-  },
-  _register: function () {
-    this.setState({mode: "register"});
   },
   _forgot: function () {
     this.setState({mode: "forgot"});
@@ -40,13 +32,16 @@ let Login = React.createClass({
     return (
       <div className="login">
         <h1>Login</h1>
-        <input ref="username" className="username" />
-        <input ref="password" className="password" type="password" />
+        <label>
+          Email:
+          <input ref="username" className="username" placeholder="your email address"/>
+        </label>
+        <label>
+          Password:
+          <input ref="password" className="password" type="password" placeholder="your password" />
+        </label>
         <button onClick={this._login} className="green button">Login</button>
-        <a href="" className="forgotLink" onClick={this.props.forgot}>Forgot your login information? Click here</a>
-        <div className="registration">Not yet a member?
-          <a href="" className="registerLink" onClick={this.props.register}>Click here to register</a>
-        </div>
+        <a href="javascript:void(0)" className="forgotLink" onClick={this.props.forgot}>Forgot your login information? Click here</a>
       </div>
     );
   },
@@ -62,9 +57,18 @@ let Register = React.createClass({
     return (
       <div className="register">
         <h1>Register</h1>
-        <input ref="email" className="email" />
-        <input ref="password" className="password" type="password" />
-        <input ref="confirm" className="confirm" type="password" />
+        <label>
+          Email:
+          <input ref="email" className="email" placeholder="enter your email address" />
+        </label>
+        <label>
+          Password:
+          <input ref="password" className="password" type="password" placeholder="enter a password" />
+        </label>
+        <label>
+          Confirm Password:
+          <input ref="confirm" className="confirm" type="password" placeholder="confirm your password" />
+        </label>
         <button onClick={this._register} className="blue button submit">Sign Up Now</button>
       </div>
     );
@@ -84,14 +88,17 @@ let Forgot = React.createClass({
     return (
     <div className="forgot">
       <h1>Forgot your login information?</h1>
-      <input ref="handle" className="handle" />
+      <label>
+        Email:
+        <input ref="handle" className="handle" />
+      </label>
       <button onClick={this._request} className="blue button submit">Send me my login info</button>
     </div>
     );
   },
   _request: function () {
 
-  },
+  }
 });
 
 module.exports = View401;

@@ -1,7 +1,7 @@
 "use strict";
 let Reflux = require('reflux');
 let account = require('../api/account');
-let { get, edit, password, deactivate, history, notifications, login, register } = require('../actions/account');
+let { get, edit, password, deactivate, history, notifications, login, register, logout } = require('../actions/account');
 let msg = require("../actions/alerts").add;
 let token = require('../token');
 
@@ -37,6 +37,7 @@ module.exports = Reflux.createStore({
     this.listenTo(notifications, this._notifications);
     this.listenTo(login, this._login);
     this.listenTo(register, this._register);
+    this.listenTo(logout, this._logout);
   },
   _get: function () {
     account.get()
@@ -109,6 +110,8 @@ module.exports = Reflux.createStore({
     account.login(email, password)
     .then((data) => {
       token.save(data);
+      account.refresh();
+      this._get();
     })
     .catch((code) => {
       msg('red', 'Login unsuccessful', code);
@@ -122,5 +125,10 @@ module.exports = Reflux.createStore({
     .catch((err) => {
 
     });
+  },
+  _logout: function () {
+    token.remove();
+    account.refresh();
+    this._get();
   }
 });

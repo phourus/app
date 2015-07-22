@@ -55,7 +55,7 @@ let Account = React.createClass({
       );
     } else {
       return (
-        <View401 force={this.force} />
+        <View401 />
       );
     }
   },
@@ -82,14 +82,13 @@ let Pic = React.createClass({
         <br />
         <Link to="history">My History</Link>
         <br />
-        <a onClick={this._logout}>Logout</a>
+        <a href="javascript:void(0)" onClick={this._logout}>Logout</a>
         <br />
       </div>
     );
   },
   _logout: function () {
-    token.remove()
-    this.forceUpdate();
+    Actions.logout();
   }
 });
 
@@ -104,10 +103,6 @@ let Profile = React.createClass({
         <div><Link to="myPosts">View my Posts (65)</Link></div>
       </div>
     );
-  },
-  _logout: function () {
-    token.remove()
-    this.forceUpdate();
   }
 });
 

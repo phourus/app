@@ -9,5 +9,6 @@ module.exports = {
   history: Reflux.createAction(),
   notifications: Reflux.createAction(),
   login: Reflux.createAction(),
-  register: Reflux.createAction()
+  register: Reflux.createAction(),
+  logout: Reflux.createAction()
 }

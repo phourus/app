@@ -9,5 +9,6 @@ module.exports = {
   notifications: account.notifications,
   history: account.history,
   login: account.login,
-  register: account.register
+  register: account.register,
+  refresh: account.refresh
 };
