@@ -117,13 +117,13 @@ module.exports = Reflux.createStore({
       msg('red', 'Login unsuccessful', code);
     });
   },
-  _register: function () {
-    account.register({})
+  _register: function (email, password) {
+    account.register(email, password)
     .then((data) => {
       msg('green', 'Registration complete', code);
     })
-    .catch((err) => {
-
+    .catch((code) => {
+      msg('red', 'Registration unsuccessful', code);
     });
   },
   _logout: function () {

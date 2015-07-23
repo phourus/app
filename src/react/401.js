@@ -53,32 +53,48 @@ let Login = React.createClass({
 });
 
 let Register = React.createClass({
+  getInitialState: function () {
+    return {
+      email: "",
+      password: "",
+      confirm: ""
+    };
+  },
   render: function () {
     return (
       <div className="register">
         <h1>Register</h1>
         <label>
           Email:
-          <input ref="email" className="email" placeholder="enter your email address" />
+          <input ref="email" className="email" placeholder="enter your email address" value={this.state.email} onChange={this._email} />
         </label>
         <label>
           Password:
-          <input ref="password" className="password" type="password" placeholder="enter a password" />
+          <input ref="password" className="password" type="password" placeholder="enter a password" value={this.state.password} onChange={this._password} />
         </label>
         <label>
           Confirm Password:
-          <input ref="confirm" className="confirm" type="password" placeholder="confirm your password" />
+          <input ref="confirm" className="confirm" type="password" placeholder="confirm your password" value={this.state.confirm} onChange={this._confirm} />
         </label>
         <button onClick={this._register} className="blue button submit">Sign Up Now</button>
       </div>
     );
   },
+  _email: function (e) {
+    var value = e.currentTarget.value;
+    this.setState({email: value});
+  },
+  _password: function (e) {
+    var value = e.currentTarget.value;
+    this.setState({password: value});
+  },
+  _confirm: function (e) {
+    var value = e.currentTarget.value;
+    this.setState({confirm: value});
+  },
   _register: function () {
-    let email = this.refs.email.getDOMNode().value;
-    let password = this.refs.password.getDOMNode().value;
-    let confirm = this.refs.confirm.getDOMNode().value;
-    if (password === confirm) {
-      Actions.register(email, password);
+    if (this.state.password === this.state.confirm) {
+      Actions.register(this.state.email, this.state.password);
     }
   },
 });

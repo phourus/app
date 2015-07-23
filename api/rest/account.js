@@ -11,36 +11,43 @@ var thumbs = require('../models/thumbs');
 //var favs = require('../models/favs');
 var jwt = require('jsonwebtoken');
 
+var authDecode = function (auth) {
+  let token = auth.split(' ')[1];
+  let decoded = new Buffer(token, 'base64').toString().split(':');
+  return {
+    email: decoded[0],
+    password: decoded[1]
+  };
+};
+
 router.post('/register', (req, res) => {
-  var email, password;
+  let auth = req.headers.authorization;
+  let { email, password } = authDecode(auth);
   return db.transaction(function (t) {
     return users.create({email: email}, {transaction: t})
       .then(function (user) {
           var hash = passwords.hash(password);
-          return passwords.create({user_id: user.id, hash: hash}, {transaction: t});
+          return passwords.create({userId: user.id, hash: hash}, {transaction: t});
       });
   })
   .then(function (result) {
-      console.log(result);
-      res.send(202);
+    console.log(result);
+    res.send(202);
   })
   .catch(function (err) {
-      console.error(err);
-      // duplicate email
-      res.send(409);
+    console.error(err);
+    // duplicate email
+    res.send(409);
   });
 });
 
 router.post('/login', (req, res) => {
     let auth = req.headers.authorization;
-    let token = auth.split(' ')[1];
-    let decoded = new Buffer(token, 'base64').toString().split(':');
-    let username = decoded[0];
-    let password = decoded[1];
-    return users.getID (username)
+    let { email, password } = authDecode(auth);
+    return users.getID (email)
       .then(function (data) {
           if (data === null) {
-            console.error('username not found');
+            console.error('email not found');
             res.send(404);
             //done();
           }

@@ -32,7 +32,8 @@ module.exports = {
     settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
     return http.post(base + 'login', {}, settings);
   },
-  register: function () {
+  register: function (email, password) {
+    settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
     return http.post(base + 'register', {}, settings);
   },
   refresh: function () {

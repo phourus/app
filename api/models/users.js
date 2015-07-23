@@ -42,8 +42,8 @@ var users = db.define('users', {
     queryize: function (params) {
       return {};
     },
-    getID: function (username) {
-      return this.findOne({where: types.or({username: username}, {email: username}) });
+    getID: function (email) {
+      return this.findOne({where: types.or({username: email}, {email: email}) });
     }
   }
 });
