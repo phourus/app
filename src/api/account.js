@@ -8,6 +8,7 @@ module.exports = {
   deactivate: account.deactivate,
   notifications: account.notifications,
   history: account.history,
+  orgs: account.orgs,
   login: account.login,
   register: account.register,
   refresh: account.refresh

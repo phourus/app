@@ -8,6 +8,7 @@ module.exports = {
   deactivate: Reflux.createAction(),
   history: Reflux.createAction(),
   notifications: Reflux.createAction(),
+  orgs: Reflux.createAction(),
   login: Reflux.createAction(),
   register: Reflux.createAction(),
   logout: Reflux.createAction()

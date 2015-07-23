@@ -33,7 +33,9 @@ let Account = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
-      this.setState(data.user);
+      if (data.user) {
+        this.setState(data.user);
+      }
     });
     Actions.get();
   },
@@ -74,7 +76,7 @@ let Pic = React.createClass({
     //<Link href="/account/password">Change my password</Link>
     return (
       <div className="pic">
-        <img src={`/assets/avatars/${this.props.img}.jpg`} />
+        <img src={`/assets/avatars/${this.props.img || 'default'}.jpg`} />
         <br />
         <Link to="update">Edit Account</Link>
         <br />
@@ -100,7 +102,7 @@ let Profile = React.createClass({
         <Link to="user" params={{id: this.props.id}}>{this.props.username}</Link>
         <div><strong>Full Name:</strong> {this.props.first} {this.props.last}</div>
         <div>{(this.props.address.city) ? this.props.address.city + ', ' : ''} {this.props.address.state || ''}</div>
-        <div><Link to="myPosts">View my Posts (65)</Link></div>
+        <div><Link to="myPosts">View my Posts</Link></div>
       </div>
     );
   }
@@ -110,13 +112,19 @@ let Orgs = React.createClass({
   mixins: [Router.Navigation],
   getInitialState: function () {
     return {
-      orgs: [
-        {id: 1, name: "UCLA", admin: false},
-        {id: 2, name: "ABC Company", admin: true},
-        {id: 3, name: "City of Santa Monica, CA", admin: false},
-        {id: 4, name: "First Church of Phourus", admin: true}
-      ]
+      orgs: []
     }
+  },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen((data) => {
+      if (data.orgs) {
+        this.setState({orgs: data.orgs});
+      }
+    });
+    Actions.orgs();
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
   },
   render: function () {
     return (
@@ -125,11 +133,11 @@ let Orgs = React.createClass({
         {this.state.orgs.map((item) => {
           var admin = false;
           if (item.admin === true) {
-            admin = <button id={item.id} className="button blue" onClick={this._edit}>Admin</button>
+            admin = <button id={item.org.id} className="button blue" onClick={this._edit}>Admin</button>
           }
           return (
             <div className="org">
-              <Link to="orgPosts" params={{id: item.id}}>{item.name}</Link> <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>Remove Me</a> {admin}
+              <Link to="orgPosts" params={{id: item.org.id}}>{item.org.name}</Link> <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>Remove Me</a> {admin}
             </div>
           );
         })}

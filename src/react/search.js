@@ -153,18 +153,18 @@ let Context = React.createClass({
 		if (this.props.type === 'myPosts') {
 			label = 'Viewing all my posts:';
 			clear = clearLink;
-			img = '/assets/avatars/' + this.props.profile.img + '.jpg';
+			img = '/assets/avatars/' + (this.props.profile.img || 'default') + '.jpg';
 			link = <Link to="account">View my account</Link>
 		}
 		if (this.props.type === 'userPosts') {
 			label = 'Viewing posts by:';
-			img = '/assets/avatars/' + this.props.profile.img + '.jpg';
+			img = '/assets/avatars/' + (this.props.profile.img || 'default') + '.jpg';
 			clear = clearLink;
 			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
 		}
 		if (this.props.type === 'orgPosts') {
 			label = 'Viewing posts by:';
-			img = '/assets/orgs/' + this.props.profile.img + '.jpg';
+			img = '/assets/orgs/' + (this.props.profile.img || 'default') + '.jpg';
 			clear = clearLink;
 			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
 		}

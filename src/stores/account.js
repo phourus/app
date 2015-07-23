@@ -1,7 +1,7 @@
 "use strict";
 let Reflux = require('reflux');
 let account = require('../api/account');
-let { get, edit, password, deactivate, history, notifications, login, register, logout } = require('../actions/account');
+let { get, edit, password, deactivate, history, notifications, orgs, login, register, logout } = require('../actions/account');
 let msg = require("../actions/alerts").add;
 let token = require('../token');
 
@@ -35,6 +35,7 @@ module.exports = Reflux.createStore({
     this.listenTo(deactivate, this._page);
     this.listenTo(history, this._history);
     this.listenTo(notifications, this._notifications);
+    this.listenTo(orgs, this._orgs);
     this.listenTo(login, this._login);
     this.listenTo(register, this._register);
     this.listenTo(logout, this._logout);
@@ -103,6 +104,17 @@ module.exports = Reflux.createStore({
     .catch(code => {
       if (code != 200) {
         msg('yellow', 'History could not be loaded', code);
+      }
+    });
+  },
+  _orgs: function () {
+    account.orgs()
+    .then(data => {
+      this.trigger({orgs: data});
+    })
+    .catch(code => {
+      if (code != 200) {
+        msg('yellow', 'Organizations could not be loaded', code);
       }
     });
   },
