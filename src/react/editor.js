@@ -10,18 +10,19 @@ let tax = require('../taxonomy');
 let RTE = require('react-quill');
 
 let Editor = React.createClass({
-	mixins: [Router.State],
+	mixins: [Router.State, Router.Navigation],
 	getInitialState: function () {
 		return {
-			postID: null,
 			post: {}
 		}
 	},
 	componentDidMount: function () {
 		let self = this;
-		this.unsubscribe = Store.listen(function (data) {
-			console.log(data);
-			self.setState(data);
+		this.unsubscribe = Store.listen((data) => {
+			if (data.add === true) {
+				this.transitionTo("edit", {id: data.post.id});
+			}
+			self.setState({post: data.post});
 		});
 		let id = this.getParams().id || null;
 		if (id) {
@@ -37,7 +38,7 @@ let Editor = React.createClass({
 			return (<View401 />);
 		}
 		let remove = false;
-		if (this.props.postID) {
+		if (this.state.post.id) {
        remove = <button ref="remove" className="button red">Delete Post <i className="fa fa-trash" /></button>
     }
     let privacy = this.state.post.privacy || 'private';
@@ -91,6 +92,9 @@ let Editor = React.createClass({
 						</select>
 					</div>
 					<div>
+						<button onClick={this._save} className="button green">Save</button>
+					</div>
+					<div>
 						<button className="fa fa-quote-right" onClick={this._content}><br />Content</button>
 						<button className="fa fa-tags" onClick={this._tags}><br />Tags</button>
 						<button className="fa fa-photo" onClick={this._links}><br />Links</button>
@@ -117,10 +121,10 @@ let Editor = React.createClass({
 		this.setState({mode: 'import'});
 	},
 	_save: function () {
-		if (this.props.post.id === null) {
-			Actions.add(this.state.post);
-		} else {
+		if (this.state.post.id) {
 			Actions.save(this.state.post.id, this.state.post);
+		} else {
+			Actions.add(this.state.post);
 		}
 	},
 	_reset: function () {

@@ -140,7 +140,7 @@
                         resolve(parse(request).data);
                     }
                     else {
-                        reject(Error(request.statusText));
+                        reject(request.status);
                     }
                 };
 

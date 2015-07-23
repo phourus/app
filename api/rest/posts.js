@@ -28,7 +28,7 @@ router.get('', (req, res) => {
   });
 });
 router.post('', (req, res) => {
-  var model = {};
+  var model = req.body;
   posts.add(model)
   .then(function (data) {
     res.send(201, data);

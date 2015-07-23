@@ -46,14 +46,12 @@ let Editor = Reflux.createStore({
   _add: function (model) {
     posts.add(model)
     .then(data => {
-      msg('green', 'Post created successfully', code);
-      this._reset();
+      //msg('green', 'Post created successfully');
+      this.trigger({post: data, add: true});
     })
     .catch(code => {
-      if (code != 201) {
-         msg('red', 'Post could not be created', code);
-         return;
-      }
+       msg('red', 'Post could not be created', code);
+       return;
     });
   },
   _save: function (id, model) {
