@@ -45,21 +45,26 @@ let Editor = React.createClass({
 
 		if (this.state.mode === 'tags') {
 			view = (<div>
+				<h1>Types & Tags</h1>
 				<Tags ref="tags" {...this.state}></Tags>
 				<Details ref="details" post={this.state.post}></Details>
 			</div>);
 		}
 
 		if (this.state.mode === 'links') {
-			view = <Links />
+			view = <Links postID={this.state.post.id} />
 		}
 
 		if (this.state.mode === 'share') {
-			view = <div>Share</div>
+			view = (<div>
+				<h1>Share Post</h1>
+			</div>);
 		}
 
 		if (this.state.mode === 'import') {
-			view = <div>Import Content</div>
+			view = (<div>
+				<h1>Import Content</h1>
+			</div>);
 		}
 		//
 		//
@@ -149,8 +154,7 @@ let TextEditor = React.createClass({
 			</div>
 		);
 	},
-	_content: function (e) {
-		let value = e.currentTarget.value;
+	_content: function (value) {
 		Actions.change('content', value);
 	}
 });
@@ -166,44 +170,148 @@ let Details = React.createClass({
 				classes[key] += ' selected';
 			}
 		}
+		let element =
+		<select ref="element" value={this.props.post.element} onChange={this._element}>
+			<option value="world">World</option>
+			<option value="mind">Mind</option>
+			<option value="voice">Voice</option>
+			<option value="self">Self</option>
+		</select>
 	  return (
 			<div className="details">
 				<div className="types">
-						<h3>Please select a type before saving</h3>
 	    			<div className={classes.blog} onClick={this._blog}>
-		    			<strong>Blog</strong>
+		    			<strong><i className="fa fa-laptop" /> Blog</strong>
 							<p>General Post type, start here if you dont know what to choose</p>
+								<div className={(type === 'blog') ? "selected" : ""}>
+									<label>Element:</label>
+								{element}
+								<br />
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.blogs[this.props.post.element]}>
+								</Select>
+								<label>Subcategory:</label>
+								<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.blogs.subcategory}>
+								</Select>
+								<br />
+								<label>Positive?</label>
+								<input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this._positive} />
+								<br />
+								</div>
 						</div>
 	    			<div className={classes.event} onClick={this._events}>
-		    			<strong>Event</strong>
+		    			<strong><i className="fa fa-calendar" /> Event</strong>
 							<p>Virtual or real-world event</p>
+							<div className={(type === 'event') ? "selected" : ""}>
+								<label>Element:</label>
+								{element}
+								<br />
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.events[this.props.post.element]} />
+								<br />
+								<label>Date</label>
+								<input ref="date" value={this.props.post.date} onChange={this._date} />
+								<br />
+								<label>Address</label>
+								<input ref="address" value={this.props.post.address} onChange={this._address} />
+								<br />
+							</div>
 						</div>
 	    			<div className={classes.subject} onClick={this._subjects}>
-		    			<strong>Subject</strong>
+		    			<strong><i className="fa fa-puzzle-piece" /> Subject</strong>
 							<p>Share your knowledge or expertise with the community on a letiety of Subjects</p>
+							<div className={(type === 'subject') ? "selected" : ""}>
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.subjects.category} />
+								<br />
+								<label>Subcategory:</label>
+								<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.subjects[this.props.post.category]} />
+								<br />
+								<label>Difficulty:</label>
+								<select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
+									<option>Easy</option>
+									<option>Medium</option>
+									<option>Hard</option>
+								</select>
+								<br />
+							</div>
 						</div>
 	    			<div className={classes.question} onClick={this._questions}>
-		    			<strong>Question</strong>
+		    			<strong><i className="fa fa-question" /> Question</strong>
 							<p>Need help or clarification on a topic? Ask it with a Question</p>
+							<div className={(type === 'question') ? "selected" : ""}>
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.subcategory} onChange={this._category} data={tax.subjects.category} />
+								<br />
+								<label>Subcategory:</label>
+								<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.subjects[this.props.post.category]} />
+								<br />
+								<label>Difficulty:</label>
+								<select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
+									<option>Easy</option>
+									<option>Medium</option>
+									<option>Hard</option>
+								</select>
+								<br />
+							</div>
 						</div>
 	    			<div className={classes.debate} onClick={this._debates}>
-		    			<strong>Debate</strong>
+		    			<strong><i className="fa fa-bullhorn" /> Debate</strong>
 							<p>Get the discussion started with a local, county, state or national-level Debate</p>
+							<div className={(type === 'debate') ? "selected" : ""}>
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.debates.category} />
+								<br />
+								<label>Scope:</label>
+								<select ref="scope" value={this.props.post.scope} onChange={this._scope}>
+									<option>Local</option>
+									<option>County</option>
+									<option>State</option>
+								</select>
+								<br />
+								<label>Zip</label>
+								<input ref="zip" value={this.props.post.zip} onChange={this._zip} />
+								<br />
+							 </div>
 						</div>
 						<div className={classes.poll} onClick={this._polls}>
-							<strong>Poll</strong>
+							<strong><i className="fa fa-line-chart" /> Poll</strong>
 							<p>Get the discussion started with a local, county, state or national-level Debate</p>
+								<div className={(type === 'poll') ? "selected" : ""}>
+									<label>Category:</label>
+									<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.debates.category} />
+									<br />
+									<label>Scope:</label>
+									<select ref="scope" value={this.props.post.scope} onChange={this._scope}>
+										<option>Local</option>
+										<option>County</option>
+										<option>State</option>
+									</select>
+									<br />
+									<label>Zip</label>
+									<input ref="zip" value={this.props.post.zip} onChange={this._zip} />
+									<br />
+								 </div>
 						</div>
 	    			<div className={classes.quote} onClick={this._quotes}>
-		    			<strong>Quote</strong>
+		    			<strong><i className="fa fa-road" /> Quote</strong>
 							<p>Has someone else already described how you feel? Post their Quote here</p>
+							<div className={(type === 'quote') ? "selected" : ""}>
+								<label>Source/Author</label>
+								<input ref="author" value={this.props.post.author} onChange={this._author} />
+								<br />
+							</div>
 						</div>
 	    			<div className={classes.belief} onClick={this._beliefs}>
-		    			<strong>Belief</strong>
+		    			<strong><i className="fa fa-quote-right" /> Belief</strong>
 							<p>Tell us more about your Belief on something dear to you</p>
+							<div className={(type === 'belief') ? "selected" : ""}>
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.beliefs.category} />
+								<br />
+							</div>
 						</div>
 				</div>
-				<Meta ref="meta" post={this.props.post} change={this.props.change} />
 			</div>
 	  );
 	},
@@ -215,7 +323,47 @@ let Details = React.createClass({
 	_debates: function () { Actions.change('type', 'debate'); },
 	_polls: function () { Actions.change('type', 'poll'); },
 	_beliefs: function () { Actions.change('type', 'belief'); },
-	_quotes: function () { Actions.change('type', 'quote'); }
+	_quotes: function () { Actions.change('type', 'quote'); },
+	_element: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('element', value);
+	},
+	_category: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('category', value);
+	},
+	_subcategory: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('subcategory', value);
+	},
+	_positive: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('positive', value);
+	},
+	_date: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('date', value);
+	},
+	_address: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('address', value);
+	},
+	_difficulty: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('difficulty', value);
+	},
+	_scope: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('scope', value);
+	},
+	_zip: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('zip', value);
+	},
+	_author: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('author', value);
+	}
 });
 
 let Tags = React.createClass({
@@ -233,8 +381,6 @@ let Tags = React.createClass({
 		}
 		return (
 			<div>
-				<h3>Tags</h3>
-				<label>Tag: </label>
 				<input ref="tag" type="text" />
 				<button ref="add" onClick={this._add} className="button green small">Add Tag</button>
 				<div ref="list">
@@ -265,7 +411,6 @@ let Tags = React.createClass({
 let Links = React.createClass({
 	getInitialState: function () {
 		return {
-			postID: null,
 			links: [],
 			link: {
 				url: "",
@@ -294,7 +439,7 @@ let Links = React.createClass({
 		});
 		return (
 			<div>
-				<h3>Links</h3>
+				<h1>Links</h1>
 				<label>Link address:</label>
 				<input ref="url" type="text" onChange={this.change} />
 				<br />
@@ -354,187 +499,6 @@ let Select = React.createClass({
       </select>
     );
   }
-});
-
-let Meta = React.createClass({
-	render: function () {
-      let element, type;
-    	if (!this.props.post.type) {
-    		return <div>Please select a type</div>;
-    	}
-    	type = this.props.post.type.toLowerCase();
-    	/** SHARED FIELDS **/
-    	element =
-    	<select ref="element" value={this.props.post.element} onChange={this._element}>
-    		<option value="world">World</option>
-    		<option value="mind">Mind</option>
-    		<option value="voice">Voice</option>
-    		<option value="self">Self</option>
-    	</select>
-
-
-    	switch (type) {
-    		case "blog":
-    		  return (
-        		  <div>
-        		    <label>Element:</label>
-        			{element}
-        			<br />
-        			<label>Category:</label>
-        			<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.blogs[this.props.post.element]}>
-        			</Select>
-        			<label>Subcategory:</label>
-        			<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.blogs.subcategory}>
-        			</Select>
-        			<br />
-        			<label>Positive?</label>
-        			<input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this._positive} />
-        			<br />
-        		  </div>
-    		  );
-    		  break;
-    		case "event":
-    		   return (
-        		   <div>
-        		    <label>Element:</label>
-        			{element}
-        			<br />
-        			<label>Category:</label>
-        			<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.events[this.props.post.element]}>
-        			</Select>
-        			<br />
-        			<label>Date</label>
-        			<input ref="date" value={this.props.post.date} onChange={this._date} />
-        			<br />
-        			<label>Address</label>
-        			<input ref="address" value={this.props.post.address} onChange={this._address} />
-        			<br />
-        		  </div>
-    		  )
-    		  break;
-    		case "subject":
-    		   return (
-        		   <div>
-        		    <label>Category:</label>
-        			<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.subjects.category}>
-        			</Select>
-        			<br />
-        			<label>Subcategory:</label>
-        			<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.subjects[this.props.post.category]}>
-        			</Select>
-        			<br />
-        			<label>Difficulty:</label>
-        			<select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
-        				<option>Easy</option>
-        				<option>Medium</option>
-        				<option>Hard</option>
-        			</select>
-        			<br />
-        		  </div>
-    		  )
-    		  break;
-    		case "question":
-    		    return (
-        		    <div>
-        		    <label>Category:</label>
-        			<Select ref="category" value={this.props.post.subcategory} onChange={this._category} data={tax.subjects.category}>
-        			</Select>
-        			<br />
-        			<label>Subcategory:</label>
-        			<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.subjects[this.props.post.category]}>
-        			</Select>
-        			<br />
-        			<label>Difficulty:</label>
-        			<select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
-        				<option>Easy</option>
-        				<option>Medium</option>
-        				<option>Hard</option>
-        			</select>
-        			<br />
-        		  </div>
-    		  );
-    		  break;
-    		case "debate":
-    		   return (
-        		   <div>
-        		    <label>Category:</label>
-        			<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.debates.category}>
-        			</Select>
-        			<br />
-        			<label>Scope:</label>
-        			<select ref="scope" value={this.props.post.scope} onChange={this._scope}>
-        				<option>Local</option>
-        				<option>County</option>
-        				<option>State</option>
-        			</select>
-        			<br />
-        			<label>Zip</label>
-        			<input ref="zip" value={this.props.post.zip} onChange={this._zip} />
-        			<br />
-        		  </div>
-    		  );
-    		  break;
-    		case "belief":
-    		  return (
-        		  <div>
-        		    <label>Category:</label>
-        			<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.beliefs.category}>
-        			</Select>
-        			<br />
-        		  </div>
-    		  );
-    		  break;
-    		case "quote":
-    		  return (
-        		  <div>
-            		  <label>Source/Author</label>
-            		  <input ref="author" value={this.props.post.author} onChange={this._author} />
-            		  <br />
-        		  </div>
-    		  );
-    		  break;
-    	}
-	},
-	_element: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('element', value);
-	},
-	_category: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('category', value);
-	},
-	_subcategory: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('subcategory', value);
-	},
-	_positive: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('positive', value);
-	},
-	_date: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('date', value);
-	},
-	_address: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('address', value);
-	},
-	_difficulty: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('difficulty', value);
-	},
-	_scope: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('scope', value);
-	},
-  _zip: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('zip', value);
-	},
-	_author: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('author', value);
-	}
 });
 
 module.exports = Editor;

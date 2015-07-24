@@ -640,7 +640,7 @@ div.alerts button {
   cursor: pointer;
   padding: 1%;
   margin: 1%;
-  height: 10em;
+  min-height: 4em;
 }
 #content .editor .types div strong {
   font-size: 1.5em;
@@ -651,6 +651,12 @@ div.alerts button {
   margin: 0px;
   padding: 0px;
   font-size: 0.9em;
+}
+#content .editor .types div > div {
+  display: none;
+}
+#content .editor .types div > div.selected {
+  display: block;
 }
 #content .editor .types div.blog,
 #content .editor .types div.event {

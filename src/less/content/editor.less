@@ -102,7 +102,7 @@
       cursor: pointer;
       padding: 1%;
       margin: 1%;
-      height: 10em;
+      min-height: 4em;
 
       strong {
         font-size: 1.5em;
@@ -114,6 +114,14 @@
         margin: 0px;
         padding: 0px;
         font-size: 0.9em;
+      }
+
+      > div {
+        display: none;
+
+        &.selected {
+          display: block;
+        }
       }
 
       &.blog, &.event {

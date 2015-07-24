@@ -10,7 +10,6 @@ let Editor = Reflux.createStore({
   init: function () {
     let self = this;
     this.post = {};
-    this.postID = null;
     this.listenTo(account, this._account);
     this.listenTo(single, this._single);
     this.listenTo(add, this._add);
@@ -31,11 +30,10 @@ let Editor = Reflux.createStore({
     });
   },
   _single: function (id) {
-    this.postID = id;
     posts.single(id)
     .then(data => {
       this.post = data;
-      this.trigger({post: data, postID: id});
+      this.trigger({post: data});
     })
     .catch(code => {
       if (code != 200) {
@@ -57,7 +55,7 @@ let Editor = Reflux.createStore({
   _save: function (id, model) {
     posts.save(id, model)
     .then(data => {
-      this._reset();
+      this._single(id);
     })
     .catch(code => {
       if (code != 204) {
@@ -65,9 +63,6 @@ let Editor = Reflux.createStore({
         return;
       }
     });
-  },
-  _reset: function () {
-    this.trigger({post: {}});
   },
   _change: function (key, value) {
     this.post[key] = value;

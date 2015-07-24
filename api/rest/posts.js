@@ -40,7 +40,7 @@ router.post('', (req, res) => {
 });
 router.put('/:id', (req, res) => {
   var id = req.params.id;
-  var model = {};
+  var model = req.body;
   posts.save(id, model)
   .then(function (data) {
     res.send(204, data);
