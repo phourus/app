@@ -5,6 +5,8 @@ let { account, single, add, save, remove, reset, change, Tags, Links } = Actions
 let msg = require("../actions/alerts").add;
 
 let posts = require('../api/posts');
+let tags = require('../api/tags');
+let links = require('../api/links');
 
 let Editor = Reflux.createStore({
   init: function () {
@@ -41,6 +43,9 @@ let Editor = Reflux.createStore({
        }
     });
   },
+  _refresh: function () {
+    this._single(this.post.id);
+  },
   _add: function (model) {
     posts.add(model)
     .then(data => {
@@ -67,8 +72,7 @@ let Editor = Reflux.createStore({
   _change: function (key, value) {
     this.post[key] = value;
     this.trigger({post: this.post});
-  }
-  /*,
+  },
   Tags: Reflux.createStore({
     tags: [],
     init: function () {
@@ -76,94 +80,81 @@ let Editor = Reflux.createStore({
       this.listenTo(Tags.collection, this._collection)
       this.listenTo(Tags.add, this._add);
       this.listenTo(Tags.remove, this._remove);
-
-      tags.on('collection', function (code, data) {
-          if (code != 200) {
-              msg('yellow', 'Tags could not be loaded', code);
-              return;
-          }
-          this.tags = data;
-          self.trigger({tags: this.tags});
-      });
-      tags.on('add', function (code, data) {
-          if (code != 201) {
-              msg('yellow', 'Tag could not be created', code);
-              return;
-          }
-          this.tags.push(data);
-          self.trigger({tags: this.tags});
-      });
-      tags.on('remove', function (code, data) {
-          if (code != 204) {
-              msg('yellow', 'Tag could not be removed', code);
-              return;
-          }
-      });
     },
     _collection: function (params) {
-      tags.collection(params);
+      tags.collection(params)
+      .then(data => {
+
+      })
+      .catch(code => {
+        msg('yellow', 'Tags could not be loaded', code);
+      });
     },
     _add: function (model) {
-      tags.add(model);
+      tags.add(model)
+      .then(data => {
+        Editor._refresh();
+      })
+      .catch(code => {
+        msg('red', 'Tag could not be created', code);
+      });
     },
     _remove: function (id) {
-      tags.remove(id);
+      tags.remove(id)
+      .then(data => {
+        Editor._refresh();
+      })
+      .catch(code => {
+        msg('red', 'Tag could not be removed', code);
+      });
     }
   }),
   Links: Reflux.createStore({
     links: [],
     init: function () {
-      let self = this;
-      this.listenTo(Links.collection, this._collection)
+      this.listenTo(Links.collection, this._collection);
       this.listenTo(Links.add, this._add);
       this.listenTo(Links.save, this._save);
       this.listenTo(Links.remove, this._remove);
-
-      links.on('collection', function (code, data) {
-          if (code != 200) {
-              msg('yellow', 'Links could not be loaded', code);
-              return;
-          }
-          this.links = data;
-          self.trigger({links: this.links});
-      });
-      links.on('add', function (code, data) {
-          if (code != 201) {
-              msg('yellow', 'Link could not be created', code);
-              return;
-          }
-          this.links.push(data);
-          self.trigger({links: this.links});
-      });
-      links.on('save', function (code, data) {
-          if (code != 201) {
-              msg('yellow', 'Link could not be saved', code);
-              return;
-          }
-          this.links.push(data);
-          self.trigger({links: this.links});
-          msg('green', 'Link saved successfully', code);
-      });
-      links.on('remove', function (code, data) {
-          if (code != 204) {
-              msg('red', 'Link could not be removed', code);
-              return;
-          }
-      });
     },
     _collection: function (params) {
-      tags.collection(params);
+      links.collection(params)
+      .then(data => {
+
+      })
+      .catch(code => {
+        msg('yellow', 'Links could not be loaded', code);
+      });
     },
     _add: function (model) {
-      tags.add(model);
+      links.add(model)
+      .then(data => {
+        Editor._single(model.postId);
+      })
+      .catch(code => {
+        msg('red', 'Link could not be created', code);
+      });
     },
     _save: function (id, model) {
-      tags.save(id, model);
+      links.save(id, model)
+      .then(data => {
+        this.trigger({id: null, url: '', caption: '', mode: 'add'});
+        Editor._refresh();
+      })
+      .catch(code => {
+        msg('red', 'Link could not be saved', code);
+      });
     },
     _remove: function (id) {
-      tags.remove(id);
+      links.remove(id)
+      .then(data => {
+        Editor._refresh();
+      })
+      .catch(code => {
+        msg('red', 'Link could not be removed', code);
+      });
     }
-  })*/
+  })
 });
 
 module.exports = Editor;

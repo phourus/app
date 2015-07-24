@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
     });
 });
 router.get('', (req, res) => {
-    var params;
+    var params = req.query;
     links.collection(params)
     .then(function (data) {
         res.send(200, data);
@@ -25,7 +25,7 @@ router.get('', (req, res) => {
     });
 });
 router.post('', (req, res) => {
-  var model;
+  var model = req.body;
   links.add(model)
   .then(function (data) {
       res.send(200, data);
@@ -36,7 +36,8 @@ router.post('', (req, res) => {
   });
 });
 router.put('/:id', (req, res) => {
-  var id, model;
+  var id = req.params.id;
+  var model = req.body;
   links.save(id, model)
   .then(function (data) {
       res.send(200, data);
@@ -47,14 +48,14 @@ router.put('/:id', (req, res) => {
   });
 });
 router.delete('/:id', (req, res) => {
-  var id;
+  var id = req.params.id;
   links.remove(id)
   .then(function (data) {
-      res.send(data);
+    res.send(202);
   })
   .catch(function (err) {
-      console.error(err);
-      res.send(500);
+    console.error(err);
+    res.send(500);
   });
 });
 

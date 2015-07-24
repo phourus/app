@@ -3,7 +3,7 @@ var router = require('express').Router();
 var tags = require('../models/tags');
 
 router.get('/:id', (req, res) => {
-  let id;
+  let id = req.params.id;
   tags.single(id)
   .then(function (data) {
     res.send(200, data);
@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
   });
 });
 router.get('', (req, res) => {
-  let params;
+  let params = req.query;
   tags.collection(params)
   .then(function (data) {
     res.send(200, data);
@@ -25,7 +25,7 @@ router.get('', (req, res) => {
   });
 });
 router.post('', (req, res) => {
-  let model;
+  let model = req.body;
   tags.add(model)
   .then(function (data) {
     res.send(201, data);
@@ -36,7 +36,8 @@ router.post('', (req, res) => {
   });
 });
 router.put('/:id', (req, res) => {
-  let id, model;
+  let id = req.params.id;
+  let model = req.body;
   tags.save(id, model)
   .then(function (data) {
     res.send(204, data);
@@ -47,10 +48,10 @@ router.put('/:id', (req, res) => {
   });
 });
 router.delete('/:id', (req, res) => {
-  let id;
+  let id = req.params.id;
   tags.remove(id)
   .then(function (data) {
-    res.send(202, data);
+    res.send(202);
   })
   .catch(function (err) {
     console.error(err);

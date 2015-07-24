@@ -52,7 +52,7 @@ let Editor = React.createClass({
 		}
 
 		if (this.state.mode === 'links') {
-			view = <Links postID={this.state.post.id} />
+			view = <Links post={this.state.post} />
 		}
 
 		if (this.state.mode === 'share') {
@@ -370,6 +370,7 @@ let Tags = React.createClass({
 	getDefaultProps: function () {
 		return {
 			post: {
+				id: null,
 				tags: []
 			}
 		}
@@ -395,93 +396,99 @@ let Tags = React.createClass({
 		let model = {};
 		model.tag = this.refs.tag.getDOMNode().value;
 
-		if (model.tag !== null && this.state.post.id) {
-			model.post_id = this.state.post.id;
-			Actions.tags.add(model);
+		if (model.tag !== null && this.props.post.id) {
+			model.postId = this.props.post.id;
+			Actions.Tags.add(model);
 			return;
 		}
 		console.error('post must have an id first');
 	},
 	_remove: function (e) {
 		let id = e.currentTarget.id;
-		Actions.tags.remove(id);
+		Actions.Tags.remove(id);
 	},
 });
 
 let Links = React.createClass({
 	getInitialState: function () {
 		return {
-			links: [],
-			link: {
-				url: "",
-				caption: ""
-			}
+			mode: 'add',
+			id: null,
+			url: "",
+			caption: ""
 		};
 	},
 	componentDidMount: function () {
-		let self = this;
-		Actions.Links.collection({post_id: this.props.postID});
-		Store.listen(function (data) {
-			self.setState(data);
+		this.unsubscribe = Store.Links.listen((data) => {
+			this.setState(data);
 		});
 	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
+	},
 	render: function () {
-		let self = this;
-		let links = this.state.links;
-		let list = links.map(function (item) {
+		let links = this.props.post.links;
+		let button = <button onClick={this._add} className="button green small add">Add Link</button>;
+		let list = links.map((item, index) => {
 			return (
 				<li key={item.id}>
-				<button id={item.id} className="button red tiny remove" onClick={self._remove}>X</button>
-				{item.url}
-				<button className="button blue small edit" onClick={self.edit.bind(null, item)}>Edit</button>
+					<button id={item.id} className="button red tiny remove" onClick={this._remove}>X</button>
+					{item.url}
+					<button id={index} className="button blue small edit" onClick={this._edit}>Edit</button>
 				</li>
 			);
 		});
+		if (this.state.mode === 'edit') {
+			button = <button onClick={this._save} className="button green small edit">Save Changes</button>;
+		}
 		return (
 			<div>
 				<h1>Links</h1>
 				<label>Link address:</label>
-				<input ref="url" type="text" onChange={this.change} />
+				<input type="text" onChange={this._changeURL} value={this.state.url} />
 				<br />
 				<label>Caption:</label>
-				<input ref="caption" type="text" onChange={this.change} />
-				<button ref="add" onClick={this._add} className="button green small add">Add Link</button>
+				<input type="text" onChange={this._changeCaption} value={this.state.caption} />
+				{button}
 				<ul ref="list">{list}</ul>
 			</div>
 		);
 	},
-	add: function () {
-		if (this.state.post.id) {
+	_add: function () {
+		if (this.props.post.id) {
 			let model = {};
-			model.url = this.state.link.url;
-			model.caption = this.state.link.caption;
-			model.post_id = this.state.post.id;
-			Actions.links.add(model);
+			model.url = this.state.url;
+			model.caption = this.state.caption;
+			model.postId = this.props.post.id;
+			Actions.Links.add(model);
 			return;
 		}
 		console.error('post must have an id first');
 	},
-	remove: function (e) {
+	_remove: function (e) {
 		let id = e.currentTarget.id;
-		Actions.links.remove(id);
+		Actions.Links.remove(id);
 	},
-	edit: function (id) {
-		Actions.links.edit(id)
+	_edit: function (e) {
+		var id = e.currentTarget.id;
+		var state = this.props.post.links[id];
+		state.mode = 'edit';
+		this.setState(state);
 	},
-	save: function () {
+	_save: function () {
 		let link = {};
-		link.url = this.state.link.url;
-		link.caption = this.state.link.caption;
-		Actions.links.save(this.state.link.id,  link);
+		link.url = this.state.url;
+		link.caption = this.state.caption;
+		Actions.Links.save(this.state.id,  link);
 	},
-	change: function (e) {
-		let url = this.refs.url.getDOMNode().value;
-		let caption = this.refs.caption.getDOMNode().value;
-		let link = this.state.link;
-		link.url = url;
-		link.caption = caption;
-		this.setState({link: link});
+	_changeURL: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({url: value});
 	},
+	_changeCaption: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({caption: value});
+	}
 });
 
 let Select = React.createClass({
