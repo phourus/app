@@ -460,7 +460,8 @@ let Links = React.createClass({
 			mode: 'add',
 			id: null,
 			url: "",
-			caption: ""
+			caption: "",
+			title: ""
 		};
 	},
 	componentDidMount: function () {
@@ -475,33 +476,51 @@ let Links = React.createClass({
 		let links = this.props.post.links || [];
 		let button = <button onClick={this._add} className="button green small add">Add Link</button>;
 		let list = links.map((item, index) => {
+			let image = item.img || '/assets/logos/logo-emblem.png';
 			return (
-				<li key={item.id}>
-					<button id={item.id} className="button red tiny remove" onClick={this._remove}>X</button>
-					{item.url}
-					<button id={index} className="button blue small edit" onClick={this._edit}>Edit</button>
-				</li>
+				<div key={item.id}>
+					<div className="image">
+						<img src={image} />
+					</div>
+					<div>
+						<button id={item.id} className="remove" onClick={this._remove}>X</button>
+						<a href={item.url} target="_blank">{item.title}</a>
+						<p>{item.caption}</p>
+						<button id={index} className="button blue edit" onClick={this._edit}>Edit</button>
+					</div>
+					<div style={{clear: 'both'}}></div>
+				</div>
 			);
 		});
 		if (this.state.mode === 'edit') {
 			button = <button onClick={this._save} className="button green small edit">Save Changes</button>;
 		}
 		return (
-			<div>
+			<div className="links">
 				<h1>Links</h1>
-				<label>Link address:</label>
-				<input type="text" onChange={this._changeURL} value={this.state.url} />
-				<br />
-				<label>Caption:</label>
-				<input type="text" onChange={this._changeCaption} value={this.state.caption} />
-				{button}
-				<ul ref="list">{list}</ul>
+				<div className="fields">
+					<label>Link Title:<br />
+						<input type="text" onChange={this._changeTitle} value={this.state.title} placeholder="enter title" />
+					</label>
+					<label>Link URL/Upload:
+						<input type="text" onChange={this._changeURL} value={this.state.url} placeholder="enter URL or upload"/>
+						<button className="button blue">Upload</button>
+					</label>
+					<label>Caption:
+						<textarea type="text" onChange={this._changeCaption} placeholder="enter short description">{this.state.caption}</textarea>
+					</label>
+					{button}
+				</div>
+				<div className="list">
+					{list}
+				</div>
 			</div>
 		);
 	},
 	_add: function () {
 		if (this.props.post.id) {
 			let model = {};
+			model.title = this.state.title;
 			model.url = this.state.url;
 			model.caption = this.state.caption;
 			model.postId = this.props.post.id;
@@ -522,9 +541,14 @@ let Links = React.createClass({
 	},
 	_save: function () {
 		let link = {};
+		link.title = this.state.title;
 		link.url = this.state.url;
 		link.caption = this.state.caption;
 		Actions.Links.save(this.state.id,  link);
+	},
+	_changeTitle: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({title: value});
 	},
 	_changeURL: function (e) {
 		let value = e.currentTarget.value;
