@@ -541,6 +541,7 @@ div.alerts button {
 #content .editor .heading label {
   width: 60px;
   display: inline-block;
+  font-size: 0.8em;
 }
 #content .editor .heading button {
   font-size: 4em;

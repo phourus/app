@@ -33,6 +33,7 @@ let Editor = React.createClass({
 		this.unsubscribe();
 	},
 	render: function () {
+		let orgs = false;
 		let view = <TextEditor ref="rte" post={this.state.post}></TextEditor>
 		if (token.get() === false) {
 			return (<View401 />);
@@ -66,6 +67,20 @@ let Editor = React.createClass({
 				<h1>Import Content</h1>
 			</div>);
 		}
+
+		if (this.state.post.privacy === 'org') {
+			let organizations = [{id: 1, name: "Phourus Inc."}, {id: 2, name: "Tyco Intl."}, {id: 3, name: "Intuit Inc."}, {id: 4, name: "Enco Industries Inc."}];
+			orgs = (
+				<span>
+					<label>Organization:</label>
+					<select value={this.state.post.orgId} onChange={this._orgId}>
+						{organizations.map((item) => {
+							return (<option value={item.id}>{item.name}</option>);
+						})}
+					</select>
+				</span>
+			);
+		}
 		//
 		//
 		//
@@ -92,9 +107,12 @@ let Editor = React.createClass({
 						<label>Privacy:</label>
 						<select ref="privacy" value={privacy} onChange={this._privacy}>
 							<option value="private">Private</option>
-							<option value="phourus">Members only</option>
-							<option value="public">Public</option>
+							<option value="org">Organization Members only</option>
+							<option value="phourus">Phourus Users only</option>
+							<option value="public">Everyone</option>
 						</select>
+						<br />
+						{orgs}
 					</div>
 					<div>
 						<button onClick={this._save} className="button green">Save</button>
@@ -138,6 +156,10 @@ let Editor = React.createClass({
 	_privacy: function (e) {
 		let value = e.currentTarget.value;
 		Actions.change('privacy', value);
+	},
+	_orgId: function (e) {
+		let value = e.currentTarget.value;
+		Actions.change('orgId', value);
 	},
 	_title: function (e) {
 		let value = e.currentTarget.value;
