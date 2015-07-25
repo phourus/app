@@ -17,12 +17,20 @@ let Editor = React.createClass({
 		}
 	},
 	componentDidMount: function () {
-		let self = this;
 		this.unsubscribe = Store.listen((data) => {
 			if (data.add === true) {
 				this.transitionTo("edit", {id: data.post.id});
 			}
-			self.setState({post: data.post});
+			if (data.post) {
+				this.setState({post: data.post});
+			}
+			if (data.changes) {
+				let current = this.state.post;
+				Object.keys(data.changes).forEach((key) => {
+					current[key] = data.changes[key];
+				});
+				this.setState({post: current});
+			}
 		});
 		let id = this.getParams().id || null;
 		if (id) {
@@ -145,9 +153,9 @@ let Editor = React.createClass({
 	},
 	_save: function () {
 		if (this.state.post.id) {
-			Actions.save(this.state.post.id, this.state.post);
+			Actions.save();
 		} else {
-			Actions.add(this.state.post);
+			Actions.add();
 		}
 	},
 	_reset: function () {

@@ -15,7 +15,7 @@ var posts = db.define('posts', {
   id: {type: sql.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
   created: {type: sql.DATE, defaultValue: sql.NOW},
   modified: sql.DATE,
-  privacy: {type: sql.ENUM('public', 'phourus', 'private'), defaultValue: 'private'},
+  privacy: {type: sql.ENUM('public', 'phourus', 'org', 'private'), defaultValue: 'private'},
   type: sql.ENUM('blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'),
   title: sql.STRING,
   content: sql.TEXT,
@@ -55,9 +55,11 @@ var posts = db.define('posts', {
       return this.findAndCountAll(this.queryize(params));
     },
     add: function (model) {
+      model.userId = this.SESSION_USER;
       return this.create(model);
     },
     save: function (id, model) {
+      model.userId = this.SESSION_USER;
       return this.update(model, {where: {id: id, userId: model.userId}});
     },
     remove: function (id) {
