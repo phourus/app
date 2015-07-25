@@ -1,13 +1,29 @@
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 label {
-  font-size: 1.3em;
   color: @theme-light;
   margin: 0px 40px 20px 0px;
   display: block;
 
+  &.error {
+    border-left: solid 4px @red-dark;
+    padding-left: 6px;
+  }
+
   span {
     display: inline-block;
-    width: 100px;
-    font-size: 0.7em;
+    font-size: 0.8em;
+
+    &.error {
+      color: @red-dark;
+      font-weight: bold;
+      font-size: 0.8em;
+    }
   }
 }
 
@@ -16,6 +32,7 @@ input, textarea, select {
   background-color: @off-white;
   font-size: 1.2em;
   color: @theme;
+  min-width: 120px;
   margin-bottom: 10px;
   border: solid 1px @grey;
   .rounded(2px);

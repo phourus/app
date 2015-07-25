@@ -103,6 +103,13 @@ let Editor = React.createClass({
 		// 		<i className="fa fa-list" />
 		// 	</button>
 		// </div>
+		let classes = {
+			content: "fa fa-quote-right",
+			tags: "fa fa-tags",
+			links: "fa fa-photo",
+			share: "fa fa-cloud"
+		}
+		classes[this.state.mode] += ' selected';
 		return (
 			<div className="editor">
 
@@ -123,16 +130,16 @@ let Editor = React.createClass({
 						{orgs}
 					</div>
 					<div>
-						<button onClick={this._save} className="button green">Save</button>
+						<button onClick={this._save} style={{height: "80px"}} className="button green">Save</button>
 					</div>
-					<div>
-						<button className="fa fa-quote-right" onClick={this._content}><br />Content</button>
-						<button className="fa fa-tags" onClick={this._tags}><br />Tags</button>
-						<button className="fa fa-photo" onClick={this._links}><br />Links</button>
-						<button className="fa fa-cloud" onClick={this._share}><br />Share</button>
+					<div className="modes">
+						<button className={classes.content} onClick={this._content}><br />Content</button>
+						<button className={classes.tags} onClick={this._tags}><br />Tags</button>
+						<button className={classes.links} onClick={this._links}><br />Links</button>
+						<button className={classes.share} onClick={this._share}><br />Share</button>
 					</div>
 				</div>
-				{view}
+				<div className="subview">{view}</div>
 			</div>
 		);
 	},
@@ -214,19 +221,16 @@ let Details = React.createClass({
 		    			<strong><i className="fa fa-laptop" /> Blog</strong>
 							<p>General Post type, start here if you dont know what to choose</p>
 								<div className={(type === 'blog') ? "selected" : ""}>
-									<label>Element:</label>
-								{element}
-								<br />
-								<label>Category:</label>
-								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.blogs[this.props.post.element]}>
-								</Select>
-								<label>Subcategory:</label>
-								<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.blogs.subcategory}>
-								</Select>
-								<br />
-								<label>Positive?</label>
-								<input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this._positive} />
-								<br />
+								<label>Element: {element}</label>
+								<label>Category:
+									<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.blogs[this.props.post.element]} />
+								</label>
+								<label>Subcategory:
+									<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.blogs.subcategory} />
+								</label>
+								<label>Positive?
+									<input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this._positive} />
+								</label>
 								</div>
 						</div>
 	    			<div className={classes.event} onClick={this._events}>
@@ -405,30 +409,41 @@ let Tags = React.createClass({
 			}
 		}
 	},
+	getInitialState: function () {
+		return {
+			tag: ""
+		}
+	},
 	render: function () {
-		let tags = [];
+		let currentTags = [];
 		if (this.props.post && this.props.post.tags) {
-			tags = this.props.post.tags;
+			currentTags = this.props.post.tags.map((item) => {
+				return <div key={item.id} className="tag">{item.tag} <button id={item.id} className="remove" onClick={this._remove}>x</button></div>
+			});
 		}
 		return (
 			<div>
-				<input ref="tag" type="text" />
-				<button ref="add" onClick={this._add} className="button green small">Add Tag</button>
-				<div ref="list">
-					{tags.map((item) => {
-						return <span key={item.id} className="tag">{item.tag} <button id={item.id} className="remove" onClick={this._remove}>x</button></span>
-					})}
-				</div>
+				<label>Tag your post:<br />
+					<div className="tagField">
+						{currentTags}
+						<input placeholder="add tags here" onChange={this._change} type="text" value={this.state.tag} />
+						<button ref="add" onClick={this._add} className="button green small">Add Tag</button>
+					</div>
+				</label>
 			</div>
 		);
 	},
+	_change: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({tag: value});
+	},
 	_add: function () {
 		let model = {};
-		model.tag = this.refs.tag.getDOMNode().value;
-
-		if (model.tag !== null && this.props.post.id) {
+		if (this.state.tag.length > 1 && this.props.post.id) {
+			model.tag = this.state.tag;
 			model.postId = this.props.post.id;
 			Actions.Tags.add(model);
+			this.setState({tag: ""});
 			return;
 		}
 		console.error('post must have an id first');
@@ -457,7 +472,7 @@ let Links = React.createClass({
 		this.unsubscribe();
 	},
 	render: function () {
-		let links = this.props.post.links;
+		let links = this.props.post.links || [];
 		let button = <button onClick={this._add} className="button green small add">Add Link</button>;
 		let list = links.map((item, index) => {
 			return (

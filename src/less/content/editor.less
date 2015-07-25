@@ -18,22 +18,28 @@
       display: inline-block;
       font-size: 0.8em;
     }
-    button {
-      font-size: 4em;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      width: 25%;
-      padding: 0;
-      margin: 0;
-      color: #aaa;
+    .modes {
+      button {
+        font-size: 4em;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        width: 25%;
+        padding: 0;
+        margin: 0;
+        color: #aaa;
 
-      &:hover {
-        color: @theme-dark;
-      }
-      span {
-        font-size: 10px;
-        font-family: @font-sans;
+        &.selected {
+          color: @theme-light;
+        }
+
+        &:hover {
+          color: @theme-dark;
+        }
+        span {
+          font-size: 10px;
+          font-family: @font-sans;
+        }
       }
     }
   }
@@ -49,6 +55,33 @@
     }
   }
 
+  .subview {
+    box-sizing: border-box;
+    padding: 20px;
+  }
+
+  .tagField {
+    font-family: @font-serif;
+    background-color: @off-white;
+    font-size: 1em;
+    color: @theme;
+    min-width: 200px;
+    margin-bottom: 10px;
+    border: solid 1px @grey;
+    display: inline-block;
+    .rounded(2px);
+
+    input {
+      border: none;
+      height: initial;
+      width: initial;
+    }
+
+    button.button {
+      min-width: 100px;
+      height: 40px;
+    }
+  }
   textarea {
     background-color: #fff;
     border: none;
@@ -93,16 +126,16 @@
 
   .types {
     .Row(100%);
-    text-align: center;
 
-    div {
-      .Cols(5);
+    > div {
+      width: 49%;
+      margin: 10px 1% 10px 0;
       text-align: center;
       border: solid 1px @grey;
+      box-sizing: border-box;
       .rounded(2px);
       cursor: pointer;
       padding: 1%;
-      margin: 1%;
       min-height: 4em;
 
       strong {
@@ -126,7 +159,7 @@
       }
 
       &.blog, &.event {
-        border-top: solid 4px @green-dark;
+        border-left: solid 4px @green-dark;
 
         &:hover {
           background-color: fade(@green, 10%);
@@ -134,12 +167,11 @@
 
         &.selected {
           background-color: fade(@green, 20%);
-          border: solid 2px @green-dark;
         }
       }
 
       &.subject, &.question {
-        border-top: solid 4px @blue-dark;
+        border-left: solid 4px @blue-dark;
 
         &:hover {
           background-color: fade(@blue, 10%);
@@ -147,12 +179,11 @@
 
         &.selected {
           background-color: fade(@blue, 20%);
-          border: solid 2px @blue-dark;
         }
       }
 
       &.debate, &.poll {
-        border-top: solid 4px @red-dark;
+        border-left: solid 4px @red-dark;
 
         &:hover {
           background-color: fade(@red, 10%);
@@ -160,12 +191,11 @@
 
         &.selected {
           background-color: fade(@red, 20%);
-          border: solid 2px @red-dark;
         }
       }
 
       &.quote, &.belief {
-        border-top: solid 4px @gold-dark;
+        border-left: solid 4px @gold-dark;
 
         &:hover {
           background-color: fade(@gold, 10%);
@@ -173,7 +203,6 @@
 
         &.selected {
           background-color: fade(@gold, 20%);
-          border: solid 2px @gold-dark;
         }
       }
     }
