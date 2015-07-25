@@ -79,14 +79,13 @@ let Editor = React.createClass({
 		if (this.state.post.privacy === 'org') {
 			let organizations = [{id: 1, name: "Phourus Inc."}, {id: 2, name: "Tyco Intl."}, {id: 3, name: "Intuit Inc."}, {id: 4, name: "Enco Industries Inc."}];
 			orgs = (
-				<span>
-					<label>Organization:</label>
+				<label>Organization:
 					<select value={this.state.post.orgId} onChange={this._orgId}>
 						{organizations.map((item) => {
 							return (<option value={item.id}>{item.name}</option>);
 						})}
 					</select>
-				</span>
+				</label>
 			);
 		}
 		//
@@ -116,17 +115,17 @@ let Editor = React.createClass({
 				<div className="heading">
 				  <div>
 						<Link to="myPosts" className="small">Edit my posts</Link> <span style={{fontSize: '0.5em'}}>|</span> <a href="javascript:void(0)" className="small" onClick={this._import}>Import content</a><br />
-						<label>Title:</label>
-						<input ref="title" type="text" placeholder="title" value={this.state.post.title} onChange={this._title} />
-						<br />
-						<label>Privacy:</label>
-						<select ref="privacy" value={privacy} onChange={this._privacy}>
-							<option value="private">Private</option>
-							<option value="org">Organization Members only</option>
-							<option value="phourus">Phourus Users only</option>
-							<option value="public">Everyone</option>
-						</select>
-						<br />
+						<label>Title:
+							<input ref="title" type="text" placeholder="title" value={this.state.post.title} onChange={this._title} />
+						</label>
+						<label>Privacy:
+							<select ref="privacy" value={privacy} onChange={this._privacy}>
+								<option value="private">Private</option>
+								<option value="org">Organization Members only</option>
+								<option value="phourus">Phourus Users only</option>
+								<option value="public">Everyone</option>
+							</select>
+						</label>
 						{orgs}
 					</div>
 					<div>

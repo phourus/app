@@ -50,6 +50,7 @@ select {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
+  display: block;
 }
 input {
   padding: 4px;
@@ -552,10 +553,13 @@ div.alerts button {
   vertical-align: top;
   vertical-align: middle;
 }
-#content .editor .heading label {
-  width: 60px;
+#content .editor .heading label span {
   display: inline-block;
-  font-size: 0.8em;
+  width: 60px;
+}
+#content .editor .heading label input,
+#content .editor .heading label select {
+  display: inline-block;
 }
 #content .editor .heading .modes button {
   font-size: 4em;
@@ -605,6 +609,7 @@ div.alerts button {
   border: none;
   height: initial;
   width: initial;
+  display: inline-block;
 }
 #content .editor .tagField button.button {
   min-width: 100px;
