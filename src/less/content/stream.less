@@ -364,14 +364,17 @@
     .details {
       .Cols(8);
       .pic {
-        .Cols(2);
+        .Cols(3);
           img {
-            width: 70%;
+            width: 100%;
+            margin: 0%;
+            padding-right: 4%;
+            box-sizing: border-box;
           }
       }
 
       .basic {
-        .Cols(10);
+        .Cols(9);
         font-size: 0.9em;
         line-height: 1.1em;
 
@@ -419,8 +422,9 @@
         width: 80px;
 
        strong {
-         color: #555;
-         font-size: 1.4em;
+         color: @theme-dark;
+         font-family: @font-serif;
+         font-size: 2.4em;
        }
       }
     }
@@ -594,10 +598,10 @@
 
       .details {
         .pic {
-          .Cols(3);
+          .Cols(2);
         }
         .basic {
-          .Cols(6);
+          .Cols(7);
         }
         .meta {
           .Cols(3);

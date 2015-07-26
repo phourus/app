@@ -453,7 +453,7 @@ let PostItem = React.createClass({
 		}
 		if (this.props.selected === true) {
 			tags = <Tags tags={this.props.post.tags} />;
-			//links = <Links links={this.props.post.links} />;
+			links = <Links links={this.props.post.links} />;
 			thumbs = <Thumbs post={this.props.post} />;
 			content = <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
 			comments = <Comments post={this.props.post} />;
@@ -493,9 +493,9 @@ let PostItem = React.createClass({
 						<div>Popularity</div>
 					</div>
 					<div className="stats">
-						<div><strong>{this.props.post.totalViews}</strong><br /><i className="fa fa-eye" /> Views</div>
-						<div><strong>{this.props.post.totalComments}</strong><br /><i className="fa fa-comments" /> Comments</div>
-						<div><strong>{this.props.post.totalThumbs}</strong><br /><i className="fa fa-thumbs-up" /> Thumbs</div>
+						<div><strong>{numeral(this.props.post.totalViews).format(thousands)}</strong><br /><i className="fa fa-eye" /> Views</div>
+						<div><strong>{numeral(this.props.post.totalComments).format(thousands)}</strong><br /><i className="fa fa-comments" /> Comments</div>
+						<div><strong>{numeral(this.props.post.totalThumbs).format(thousands)}</strong><br /><i className="fa fa-thumbs-up" /> Thumbs</div>
 					</div>
 				</div>
 				{links}
@@ -532,17 +532,25 @@ let Tags = React.createClass({
 
 let Links = React.createClass({
   render: function () {
-    return (
+		return (
       <div className="links">
-        {this.props.links.map((item, index) => {
-          return (
-            <div className="link" key={index}>
-              <a href={item.url}>
-                {item.caption}
-              </a>
-            </div>
-          );
-        })}
+				<div className="list">
+					{this.props.links.map((item, index) => {
+						let image = item.img || '/assets/logos/logo-emblem.png';
+						return (
+							<div key={item.id}>
+								<div className="image">
+									<img src={image} />
+								</div>
+								<div>
+									<a href={item.url} target="_blank">{item.title}</a>
+									<p>{item.caption}</p>
+								</div>
+								<div style={{clear: 'both'}}></div>
+							</div>
+						);
+					})}
+				</div>
       </div>
     );
   }

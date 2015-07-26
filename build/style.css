@@ -620,81 +620,6 @@ div.alerts button {
   border: none;
   width: 100%;
 }
-#content .editor .links {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-}
-#content .editor .links:before,
-#content .editor .links:after {
-  content: "";
-  display: table;
-}
-#content .editor .links:after {
-  clear: both;
-}
-#content .editor .links .fields {
-  width: 33.33333333%;
-  display: inline-block;
-  vertical-align: top;
-}
-#content .editor .links .fields textarea {
-  border: solid 1px #dddddd;
-  height: 160px;
-}
-#content .editor .links .fields button {
-  width: 200px;
-  font-size: 2em;
-}
-#content .editor .links .list {
-  width: 66.66666667%;
-  display: inline-block;
-  vertical-align: top;
-}
-#content .editor .links .list > div {
-  padding: 2%;
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 100px;
-  background-color: rgba(95, 174, 227, 0.02);
-  border: solid 1px rgba(95, 174, 227, 0.3);
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  margin-bottom: 10px;
-}
-#content .editor .links .list > div > div {
-  width: 83.33333333%;
-  display: inline-block;
-  vertical-align: top;
-}
-#content .editor .links .list > div > div.image {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
-}
-#content .editor .links .list > div > div.image img {
-  max-width: 90%;
-}
-#content .editor .links .list > div a {
-  font-size: 2em;
-}
-#content .editor .links .list > div p {
-  font-size: 0.9em;
-}
-#content .editor .links .list > div button.remove {
-  float: right;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-#content .editor .links .list > div button.remove:hover {
-  color: #fc2727;
-}
-#content .editor .links .list > div button.edit {
-  float: right;
-  width: 100px;
-}
 #content .editor .form input[type=radio] {
   width: 20px;
   border: none;
@@ -1709,15 +1634,18 @@ div.alerts button {
   vertical-align: top;
 }
 .search .postItem .details .pic {
-  width: 16.66666667%;
+  width: 25%;
   display: inline-block;
   vertical-align: top;
 }
 .search .postItem .details .pic img {
-  width: 70%;
+  width: 100%;
+  margin: 0%;
+  padding-right: 4%;
+  box-sizing: border-box;
 }
 .search .postItem .details .basic {
-  width: 83.33333333%;
+  width: 75%;
   display: inline-block;
   vertical-align: top;
   font-size: 0.9em;
@@ -1773,8 +1701,9 @@ div.alerts button {
   width: 80px;
 }
 .search .postItem .stats div strong {
-  color: #555;
-  font-size: 1.4em;
+  color: #1e2f40;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  font-size: 2.4em;
 }
 .search .postItem .footing {
   margin-top: 1em;
@@ -1963,12 +1892,12 @@ div.alerts button {
     margin-right: 1%;
   }
   .search .postItem .details .pic {
-    width: 25%;
+    width: 16.66666667%;
     display: inline-block;
     vertical-align: top;
   }
   .search .postItem .details .basic {
-    width: 50%;
+    width: 58.33333333%;
     display: inline-block;
     vertical-align: top;
   }
@@ -2366,4 +2295,80 @@ i.fa-minus {
   display: block;
   color: #444;
   font-size: 0.9em;
+}
+/** LINKS **/
+.links {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+.links:before,
+.links:after {
+  content: "";
+  display: table;
+}
+.links:after {
+  clear: both;
+}
+.links .fields {
+  width: 33.33333333%;
+  display: inline-block;
+  vertical-align: top;
+}
+.links .fields textarea {
+  border: solid 1px #dddddd;
+  height: 160px;
+}
+.links .fields button {
+  width: 200px;
+  font-size: 2em;
+}
+.links .list {
+  width: 66.66666667%;
+  display: inline-block;
+  vertical-align: top;
+}
+.links .list > div {
+  padding: 2%;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100px;
+  background-color: rgba(95, 174, 227, 0.02);
+  border: solid 1px rgba(95, 174, 227, 0.3);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.links .list > div > div {
+  width: 83.33333333%;
+  display: inline-block;
+  vertical-align: top;
+}
+.links .list > div > div.image {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+}
+.links .list > div > div.image img {
+  max-width: 90%;
+}
+.links .list > div a {
+  font-size: 2em;
+}
+.links .list > div p {
+  font-size: 0.9em;
+}
+.links .list > div button.remove {
+  float: right;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.links .list > div button.remove:hover {
+  color: #fc2727;
+}
+.links .list > div button.edit {
+  float: right;
+  width: 100px;
 }
