@@ -1593,6 +1593,9 @@ div.alerts button {
 .search .heading .sortby button.selected {
   color: #3498db;
 }
+.search .tags {
+  margin-bottom: 30px;
+}
 .search .foot {
   background-color: #34495e;
   height: 60px;
@@ -1624,9 +1627,17 @@ div.alerts button {
 .search .foot .pagination button:hover {
   background-color: #425d77;
 }
-.search .posts {
+.search .posts,
+.search .post {
   max-width: 1400px;
   margin: auto;
+  min-height: 600px;
+}
+.search .post .postItem {
+  display: none;
+}
+.search .post .postItem.selected {
+  display: block;
 }
 .search .postItem {
   width: 98%;
@@ -1736,7 +1747,6 @@ div.alerts button {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  height: 6em;
   overflow: hidden;
 }
 .search .postItem .content:before,
@@ -1889,7 +1899,7 @@ div.alerts button {
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
-    text-align: right;
+    text-align: left;
   }
   .search .postItem .meta:before,
   .search .postItem .meta:after {
@@ -1900,10 +1910,33 @@ div.alerts button {
     clear: both;
   }
   .search .postItem .meta .influence {
+    display: inline-block;
+  }
+  .search .postItem .thumb {
+    float: right;
+  }
+  .search .postItem .thumb button {
+    font-size: 0.7em;
+    height: 60px;
+    width: 160px;
+    display: inline-block;
+  }
+  .search .postItem .thumb button i {
+    font-size: 3em;
+    color: #FFF;
+    opacity: 0.5;
     float: left;
   }
-  .search .postItem .meta ul {
-    clear: right;
+  .search .postItem .thumb button .total {
+    font-size: 2em;
+    color: #FFF;
+    opacity: 0.9;
+    font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+    display: block;
+    width: 100px;
+    float: right;
+    margin: 8px 2px 0 0;
+    text-align: right;
   }
   .search .types {
     max-width: 100%;

@@ -4,6 +4,8 @@ let Router = require('react-router');
 let { Link } = Router;
 let posts = require('../api/posts');
 let moment = require('moment');
+let numeral = require('numeral');
+let thousands = "0,0";
 let Store = require('../stores/search');
 let Actions = require('../actions/search');
 
@@ -56,7 +58,7 @@ let Search = React.createClass({
 		return (
 			<div className="search">
 				<Head {...this.state.params} />
-				<Scroll pageStart={0} loadMore={this._more} hasMore={true} loader={<div className="loader">Loading ...</div>}>
+				<Scroll pageStart={0} loadMore={this._more} hasMore={(this.state.posts.length < this.state.total)} loader={<div className="loader">Loading more...</div>}>
 						<Posts posts={this.state.posts} selected={this.state.selected} scroll={this.state.scroll} />
 				</Scroll>
 			</div>
@@ -406,9 +408,8 @@ let Posts = React.createClass({
 			 }
 			 return <PostItem key={item.id} post={item} user={item.user} location={location} selected={selected} scroll={this.props.scroll} />;
 		});
-
 		return (
-			<div className="posts">{list}</div>
+			<div className={this.props.selected > 0 ? "post" : "posts"}>{list}</div>
 		);
 	}
 });
@@ -424,7 +425,6 @@ let PostItem = React.createClass({
 		let popularity = new Popularity(element, this.props.post.popularity);
 	},
 	componentDidUpdate: function () {
-		console.log(this.props.scroll);
 		if (this.props.selected === true && this.props.scroll === false) {
 			let element = this.getDOMNode();
 			let y = element.offsetTop - element.scrollTop + element.clientTop - 80;
@@ -438,6 +438,7 @@ let PostItem = React.createClass({
 		let details = false;
 		let comments = false;
 		let tags = false;
+		let content = false;
 		let links = false;
 		let thumbs = false;
 		for (let i = 0, keys = Object.keys(post); i < keys.length; i++) {
@@ -454,6 +455,7 @@ let PostItem = React.createClass({
 			tags = <Tags tags={this.props.post.tags} />;
 			//links = <Links links={this.props.post.links} />;
 			thumbs = <Thumbs post={this.props.post} />;
+			content = <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
 			comments = <Comments post={this.props.post} />;
 			className += " selected";
 			details = <ul>{meta}</ul>;
@@ -463,11 +465,12 @@ let PostItem = React.createClass({
 			<div className={className}>
 				<button className="close" onClick={this._hide}>X</button>
 				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
+				<Link to="edit" params={{id: this.props.post.id}}>Edit</Link>
 				<h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.props.post.title}</a></h2>
 				<div className="details">
 					<div className="pic">
 						<Link to="user" params={{id: this.props.user.id}}>
-								<img src={`/assets/avatars/${this.props.user.img}.jpg`} />
+								<img src={`/assets/avatars/${this.props.user.img || 'default'}.jpg`} />
 						</Link>
 					</div>
 					<div className="basic">
@@ -480,8 +483,9 @@ let PostItem = React.createClass({
 				</div>
 				<div className="footing">
 					{tags}
-					<div className="content">{this.props.post.content}</div>
+					{content}
 				</div>
+				{thumbs}
 				<div className="meta">
 					<Influence influence={this.props.post.influence}/>
 					<div className="popularity">
@@ -495,7 +499,6 @@ let PostItem = React.createClass({
 					</div>
 				</div>
 				{links}
-				{thumbs}
 				{comments}
 			</div>
 		);
@@ -583,16 +586,9 @@ let Thumbs = React.createClass({
      // <p>You have decided you {current} this post. Click the button below to change your mind.</p>
      return (
         <div className="thumb">
-          <div className="popularity">
-            <canvas id='popularity'></canvas>
-          </div>
-          <div className="counts">
-            <span className="green"><i className="fa fa-arrow-up" />1,434  </span>
-            <span className="red"><i className="fa fa-arrow-down" />142</span>
-          </div>
           <div className="buttons">
-            <button className="button green medium" onClick={this.like}><i className="fa fa-2x fa-arrow-circle-o-up" /> Like</button>
-            <button className="button red medium" onClick={this.dislike}><i className="fa fa-2x fa-arrow-circle-o-down" /> Dislike</button>
+            <button className="button green medium" onClick={this.like}><i className="fa fa-arrow-circle-o-up" /> <span className="total"> {numeral(1434).format(thousands)}</span></button>
+            <button className="button red medium" onClick={this.dislike}><i className="fa fa-arrow-circle-o-down" /> <span className="total"> {numeral(137).format(thousands)}</span></button>
           </div>
         </div>
      );

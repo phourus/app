@@ -112,6 +112,7 @@ let Stream = Reflux.createStore({
       id: id,
       profile: null
     }
+    this.posts = [];
     // no context
     if (type === null) {
       this.params.context = {
