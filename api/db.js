@@ -1,4 +1,5 @@
 var config = require("../config").get('db');
+console.log(config);
 var Sequelize = require('sequelize');
 var db = config.name;
 var username = config.user;
