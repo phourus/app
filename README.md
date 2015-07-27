@@ -71,3 +71,26 @@ Commit only to the `dev` branch. Tests not required.
 
 # API
 [Click here for REST API details](/docs/api.md)
+
+# Deploy
+Ensure EB environment exists
+Ensure RDS Instance grants access
+- Check assigned Security Group allows from EC2 IP
+`eb deploy` on master branch
+PHOURUS_PORT = 8081
+PHOURUS_DB_HOST = prod/staging host
+PHOURUS_DB_PORT = 3306
+PHOURUS_DB_NAME = prod/staging database name
+PHOURUS_DB_USER = prod/staging database name
+PHOURUS_DB_PASS = prod/staging database name
+
+# DB Dump & Deploy
+```bash
+mysqldump -u root -p phourus-dev > phourus-dev.sql
+
+# Deploy
+mysql -u root -p -h hostname phourus < phourus.sql
+
+mysql -u phourus -p -h staging.c27rpgejeaxu.us-west-2.rds.amazonaws.com staging < phourus-dev.sql
+mysql -u phourus -p -h phourus.c27rpgejeaxu.us-west-2.rds.amazonaws.com phourus < phourus-dev.sql
+```

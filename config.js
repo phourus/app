@@ -17,7 +17,7 @@ var conf = convict({
     "doc": "Server Port",
     "format": "port",
     "default": 3000,
-    "env": "PHOURUS_SOCKET_PORT"
+    "env": "PHOURUS_PORT"
   },
   "salt": {
     "doc": "JWT Salt",

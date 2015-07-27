@@ -1,8 +1,8 @@
 branch-defaults:
-  dev:
-    environment: staging
   master:
-    environment: production
+    environment: phourus-staging
+  production:
+    environment: phourus
 global:
   application_name: phourus
   default_ec2_keyname: aws-eb
