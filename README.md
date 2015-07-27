@@ -76,13 +76,10 @@ Commit only to the `dev` branch. Tests not required.
 Ensure EB environment exists
 Ensure RDS Instance grants access
 - Check assigned Security Group allows from EC2 IP
-`eb deploy` on master branch
-PHOURUS_PORT = 8081
-PHOURUS_DB_HOST = prod/staging host
-PHOURUS_DB_PORT = 3306
-PHOURUS_DB_NAME = prod/staging database name
-PHOURUS_DB_USER = prod/staging database name
-PHOURUS_DB_PASS = prod/staging database name
+aws deploy push --application-name phourus-staging --s3-location s3://phourus-staging/deployments
+PHOURUS_PORT=8081 PHOURUS_DB_HOST=staging.c27rpgejeaxu.us-west-2.rds.amazonaws.com PHOURUS_DB_PORT=3306 PHOURUS_DB_NAME=staging PHOURUS_DB_USER=phourus PHOURUS_APP_URL=http://phourus-staging-p9upkev2uc.elasticbeanstalk.com/ PHOURUS_DB_PASS=
+
+PHOURUS_PORT=8081 PHOURUS_DB_HOST=phourus.c27rpgejeaxu.us-west-2.rds.amazonaws.com PHOURUS_DB_PORT=3306 PHOURUS_DB_NAME=phourus PHOURUS_DB_USER=phourus PHOURUS_APP_URL=http://phourus.elasticbeanstalk.com/ PHOURUS_DB_PASS=
 
 # DB Dump & Deploy
 ```bash

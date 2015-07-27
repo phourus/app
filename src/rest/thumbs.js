@@ -1,6 +1,6 @@
 var http = require('../ajax')(window);
 var config = require('../../config');
-var base = config.get('url') + ':' + config.get('port') + '/rest/thumbs/';
+var base = '/rest/thumbs/';
 var settings = {
   headers: {
     "Authorization": require('../token').get()
