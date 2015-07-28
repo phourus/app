@@ -73,15 +73,28 @@ Commit only to the `dev` branch. Tests not required.
 [Click here for REST API details](/docs/api.md)
 
 # Deploy
-Ensure EB environment exists
-Ensure RDS Instance grants access
-- Check assigned Security Group allows from EC2 IP
-eb create app-name -c cname
-eb deploy
-aws deploy push --application-name phourus-staging --s3-location s3://phourus-staging/deployments
-PHOURUS_PORT=8081 PHOURUS_DB_HOST=staging.c27rpgejeaxu.us-west-2.rds.amazonaws.com PHOURUS_DB_PORT=3306 PHOURUS_DB_NAME=staging PHOURUS_DB_USER=phourus PHOURUS_APP_URL=http://phourus-staging-p9upkev2uc.elasticbeanstalk.com/ PHOURUS_DB_PASS=
+Repositories = Applications
+Branches = Environments
+Ensure Security Group's inbound allows from EC2
 
-PHOURUS_PORT=8081 PHOURUS_DB_HOST=phourus.c27rpgejeaxu.us-west-2.rds.amazonaws.com PHOURUS_DB_PORT=3306 PHOURUS_DB_NAME=phourus PHOURUS_DB_USER=phourus PHOURUS_APP_URL=http://phourus.elasticbeanstalk.com/ PHOURUS_DB_PASS=
+Elastic Beanstalk
+```bash
+eb terminate staging
+eb create staging -c phourus-staging
+eb setenv PHOURUS_PORT=8081 PHOURUS_DB_HOST=staging.c27rpgejeaxu.us-west-2.rds.amazonaws.com PHOURUS_DB_PORT=3306 PHOURUS_DB_NAME=staging PHOURUS_DB_USER=phourus PHOURUS_APP_URL=http://phourus-staging.elasticbeanstalk.com/
+#PHOURUS_PORT=8081 PHOURUS_DB_HOST=phourus.c27rpgejeaxu.us-west-2.rds.amazonaws.com PHOURUS_DB_PORT=3306 PHOURUS_DB_NAME=phourus
+#PHOURUS_DB_USER=phourus PHOURUS_APP_URL=http://phourus.elasticbeanstalk.com/
+
+eb setenv PHOURUS_DB_PASS=
+
+# Updates
+eb deploy
+
+```
+aws
+```bash
+aws deploy push --application-name phourus --s3-location s3://phourus-staging/deployments
+```
 
 # DB Dump & Deploy
 ```bash
