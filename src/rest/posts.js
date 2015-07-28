@@ -1,5 +1,4 @@
 var http = require('../ajax')(window);
-var config = require('../../config');
 var base = '/rest/posts/';
 var settings = {
   headers: {

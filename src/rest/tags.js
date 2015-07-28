@@ -1,5 +1,4 @@
 var http = require('../ajax')(window);
-var config = require('../../config');
 var base = '/rest/tags/';
 var settings = {
   headers: {

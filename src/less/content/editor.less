@@ -9,7 +9,7 @@
     background: #eee;
 
     > div {
-      .Cols(4);
+      .Cols(6);
       vertical-align: middle;
     }
 
@@ -211,6 +211,36 @@
         &.selected {
           background-color: fade(@gold, 20%);
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .editor {
+
+    .types {
+
+      div {
+        .Cols(2);
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  #content .editor {
+
+    .heading {
+
+      > div {
+        .Cols(4);
+      }
+    }
+    .types {
+
+      div {
+        .Cols(2);
       }
     }
   }

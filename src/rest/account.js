@@ -1,5 +1,4 @@
 var http = require('../ajax')(window);
-var config = require('../../config');
 var token = require('../token');
 var base = '/rest/account/';
 var settings = {

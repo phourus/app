@@ -548,7 +548,7 @@ div.alerts button {
   clear: both;
 }
 #content .editor .heading > div {
-  width: 33.33333333%;
+  width: 50%;
   display: inline-block;
   vertical-align: top;
   vertical-align: middle;
@@ -752,6 +752,25 @@ div.alerts button {
 #content .editor .types > div.quote.selected,
 #content .editor .types > div.belief.selected {
   background-color: rgba(236, 176, 16, 0.2);
+}
+@media (min-width: 500px) {
+  .editor .types div {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+@media (min-width: 800px) {
+  #content .editor .heading > div {
+    width: 33.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  #content .editor .types div {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
 @media (min-width: 1000px) {
   .editor .types div {

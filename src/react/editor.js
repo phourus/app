@@ -352,7 +352,6 @@ let Details = React.createClass({
 	_events: function () { Actions.change('type', 'event'); },
 	_subjects: function () { Actions.change('type', 'subject'); },
 	_questions: function () { Actions.change('type', 'question'); },
-	_subjects: function () { Actions.change('type', 'subject'); },
 	_debates: function () { Actions.change('type', 'debate'); },
 	_polls: function () { Actions.change('type', 'poll'); },
 	_beliefs: function () { Actions.change('type', 'belief'); },
