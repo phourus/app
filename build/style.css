@@ -548,7 +548,7 @@ div.alerts button {
   clear: both;
 }
 #content .editor .heading > div {
-  width: 50%;
+  width: 33.33333333%;
   display: inline-block;
   vertical-align: top;
   vertical-align: middle;
@@ -677,7 +677,7 @@ div.alerts button {
   clear: both;
 }
 #content .editor .types > div {
-  width: 49%;
+  width: 98%;
   margin: 10px 1% 10px 0;
   text-align: center;
   border: solid 1px #dddddd;
@@ -754,6 +754,11 @@ div.alerts button {
   background-color: rgba(236, 176, 16, 0.2);
 }
 @media (min-width: 500px) {
+  .editor .heading > div {
+    width: 33.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
   .editor .types div {
     width: 16.66666667%;
     display: inline-block;
@@ -765,18 +770,10 @@ div.alerts button {
     width: 33.33333333%;
     display: inline-block;
     vertical-align: top;
+    vertical-align: middle;
   }
   #content .editor .types div {
-    width: 16.66666667%;
-    display: inline-block;
-    vertical-align: top;
-  }
-}
-@media (min-width: 1000px) {
-  .editor .types div {
-    width: 16.66666667%;
-    display: inline-block;
-    vertical-align: top;
+    width: 20%;
   }
 }
 .leaders .profile {

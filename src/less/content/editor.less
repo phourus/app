@@ -9,7 +9,7 @@
     background: #eee;
 
     > div {
-      .Cols(6);
+      .Cols(4);
       vertical-align: middle;
     }
 
@@ -135,7 +135,7 @@
     .Row(100%);
 
     > div {
-      width: 49%;
+      width: 98%;
       margin: 10px 1% 10px 0;
       text-align: center;
       border: solid 1px @grey;
@@ -219,6 +219,13 @@
 @media (min-width: 500px) {
   .editor {
 
+    .heading {
+
+      > div {
+        .Cols(4);
+      }
+    }
+
     .types {
 
       div {
@@ -235,12 +242,13 @@
 
       > div {
         .Cols(4);
+        vertical-align: middle;
       }
     }
     .types {
 
       div {
-        .Cols(2);
+        width: 20%;
       }
     }
   }
@@ -251,8 +259,8 @@
 
     .types {
 
-      div {
-        .Cols(2);
+      > div {
+
       }
     }
   }
