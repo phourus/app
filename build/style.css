@@ -2388,3 +2388,13 @@ i.fa-minus {
   float: right;
   width: 100px;
 }
+/** LEGALESE **/
+.general ol li {
+  font-weight: bold;
+}
+.general ol li p {
+  font-weight: normal;
+}
+.general ol li ol li {
+  font-weight: normal;
+}
