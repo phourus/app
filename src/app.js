@@ -30,7 +30,7 @@ let App = React.createClass({
             © 2015 Phourus Inc. All Rights Reserved.
             <br />
             <Link to="leaders">Home</Link> |
-            <Link to="faq">About</Link> |
+            <Link to="about">About</Link> |
             <Link to="terms">Terms</Link> |
             <Link to="privacy">Privacy</Link>
             <br clear="all" />

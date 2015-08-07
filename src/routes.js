@@ -11,7 +11,7 @@ let Account = require('./react/account');
 let Admin = require('./react/admin');
 let Profile = require('./react/profile');
 let Leaders = require('./react/leaders');
-let FAQ = require('./react/about');
+let About = require('./react/about');
 let Terms = require('./react/terms');
 let Privacy = require('./react/privacy');
 let Landing = require('./react/landing');
@@ -29,7 +29,7 @@ module.exports = (
       <Route name="topPhourus" path="phourus" handler={Leaders.Phourus} />
     </Route>
     <Route name="post" path="/post/:id" handler={Post} />
-    <Route name="faq" handler={FAQ} />
+    <Route name="about" handler={About} />
     <Route name="terms" handler={Terms} />
     <Route name="privacy" handler={Privacy} />
     <Route name="search" path="search" handler={Search}>
@@ -58,7 +58,6 @@ module.exports = (
     </Route>
     <Route name="user" path="user/:id" handler={Profile}>
       <DefaultRoute handler={Profile.About} />
-      <Route name="about" path="about" handler={Profile.About} />
       <Route name="posts" path="posts" handler={Profile.Posts} />
       <Route name="rank" path="rank" handler={Profile.Rank} />
       <Route name="membership" path="membership" handler={Profile.Membership} />

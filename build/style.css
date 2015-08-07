@@ -332,6 +332,85 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
 }
+#content .about {
+  padding: 0;
+}
+#content .about .banner {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#content .about .description {
+  width: 75%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .about .help {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .about .basics {
+  background-color: #1e2f40;
+  color: #fff;
+}
+#content .about .basics button {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  height: 100px;
+}
+#content .about .basics button:hover {
+  background-color: #658c00;
+}
+#content .about .basics button.selected {
+  background-color: #9cd900;
+}
+#content .about .basics button i {
+  font-size: 4em;
+  color: #425d77;
+}
+#content .about .basics .details {
+  background-color: #9cd900;
+  text-align: center;
+}
+#content .about .basics .details .title {
+  margin: 0;
+  padding: 0;
+}
+#content .about .basics .details > div {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .about .integrations {
+  text-align: center;
+}
+#content .about .integrations i {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 2em;
+  color: #1e2f40;
+}
+#content .about .contact {
+  background-color: #1e2f40;
+  color: #fff;
+}
+#content .about .contact > div {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .about .contact > div i {
+  color: #425d77;
+  font-size: 4em;
+  text-align: center;
+}
 .account ul {
   list-style: none;
   margin: 0;

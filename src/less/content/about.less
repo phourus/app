@@ -1,0 +1,83 @@
+#content .about {
+  padding: 0;
+
+  .banner {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .description {
+    .Cols(9);
+  }
+
+  .help {
+    .Cols(3);
+  }
+
+  .basics {
+    background-color: @theme-dark;
+    color: #fff;
+
+    button {
+      .Cols(3);
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      height: 100px;
+
+      &:hover {
+        background-color: @green-dark;
+      }
+
+      &.selected {
+        background-color: @green-light;
+      }
+
+      i {
+        font-size: 4em;
+        color: @theme-light;
+      }
+    }
+
+    .details {
+      background-color: @green-light;
+      text-align: center;
+
+      .title {
+        margin: 0;
+        padding: 0;
+      }
+
+      > div {
+        .Cols(6);
+      }
+    }
+  }
+
+  .integrations {
+    text-align: center;
+
+    i {
+      .Cols(2);
+      font-size: 2em;
+      color: @theme-dark;
+    }
+  }
+
+  .contact {
+    background-color: @theme-dark;
+    color: #fff;
+
+    > div {
+      .Cols(3);
+
+      i {
+        color: @theme-light;
+        font-size: 4em;
+        text-align: center;
+      }
+    }
+  }
+}
