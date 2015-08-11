@@ -761,10 +761,12 @@ div.alerts button {
   width: 120px;
   display: inline-block;
 }
-#content .editor div.import .services {
+#content .editor div.import .services,
+#content .editor div.share .services {
   background-color: #eee;
 }
-#content .editor div.import .services > button {
+#content .editor div.import .services > button,
+#content .editor div.share .services > button {
   width: 20%;
   margin: 2%;
   border: solid 1px #999;
@@ -774,11 +776,13 @@ div.alerts button {
   font-size: 1em;
   display: inline-block;
 }
-#content .editor div.import .services > button i {
+#content .editor div.import .services > button i,
+#content .editor div.share .services > button i {
   font-size: 2em;
   margin-right: 10px;
 }
-#content .editor div.import .services > button:hover {
+#content .editor div.import .services > button:hover,
+#content .editor div.share .services > button:hover {
   background-color: #f2c13d;
   cursor: pointer;
   border: solid 1px #bc8c0d;

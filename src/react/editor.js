@@ -65,9 +65,7 @@ let Editor = React.createClass({
 		}
 
 		if (this.state.mode === 'share') {
-			view = (<div>
-				<h1>Share Post</h1>
-			</div>);
+			view = <Share />
 		}
 
 		if (this.state.mode === 'import') {
@@ -576,18 +574,52 @@ let Import = React.createClass({
 						Import Google Docs
 					</button>
 					<button>
-						<i className="fa fa-rss" />
-						Import Blog Posts
-					</button>
-					<button>
 						<i className="fa fa-linkedin" />
 						Import LinkedIn Posts
+					</button>
+					<button>
+						<i className="fa fa-rss" />
+						Import Blog Posts
 					</button>
 				</div>
 				<div className="manager">
 					<h2 style={{textAlign: "center", paddingTop: '60px', paddingBottom: '40px'}}>Please select a service to import content from</h2>
 					<div style={{width: '70%', margin: 'auto'}}>
 						<p style={{textAlign: "center"}}>Don't want to rewrite all of your existing content or spend time copying and pasting? No problem!<br /> Just connect with one of your existing accounts by clicking the buttons above and you can import your content to Phourus.</p>
+					</div>
+				</div>
+			</div>
+		);
+	}
+});
+
+let Share = React.createClass({
+	render: function () {
+		return (
+			<div className="share">
+				<h1>Share Content</h1>
+				<div className="services">
+					<button>
+						<i className="fa fa-facebook" />
+						Share with Facebook
+					</button>
+					<button>
+						<i className="fa fa-twitter" />
+						Share with Twitter
+					</button>
+					<button>
+						<i className="fa fa-linkedin" />
+						Share with LinkedIn
+					</button>
+					<button>
+						<i className="fa fa-download" />
+						Download My Posts
+					</button>
+				</div>
+				<div className="manager">
+					<h2 style={{textAlign: "center", paddingTop: '60px', paddingBottom: '40px'}}>Please select a service to share content with</h2>
+					<div style={{width: '70%', margin: 'auto'}}>
+						<p style={{textAlign: "center"}}>Increase visibility for your post by sharing it with your social media accounts.<br /> You can also download a copy of your post as a PDF file for easy sharing and backup.</p>
 					</div>
 				</div>
 			</div>
