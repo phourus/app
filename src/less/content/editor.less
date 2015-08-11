@@ -7,10 +7,22 @@
   .heading {
     .Row(100%);
     background: #eee;
+    padding-top: 10px;
 
     > div {
       .Cols(4);
       vertical-align: middle;
+    }
+
+    > div.actions {
+
+      > div {
+        .Cols(6);
+
+        a:hover {
+          color: #fff;
+        }
+      }
     }
 
     label {
@@ -126,6 +138,44 @@
           margin-top: 10px;
           display: block;
           font-size: 2em;
+        }
+      }
+    }
+  }
+
+  label.upload {
+
+    button {
+      font-size: 2em;
+      width: 120px;
+      display: inline-block;
+    }
+  }
+
+  div.import {
+
+    .services {
+      background-color: #eee;
+
+      > button {
+        width: 20%;
+        margin: 2%;
+        border: solid 1px #999;
+        background: none;
+        box-sizing: border-box;
+        height: 60px;
+        font-size: 1em;
+        display: inline-block;
+
+        i {
+          font-size: 2em;
+          margin-right: 10px;
+        }
+
+        &:hover {
+          background-color: @gold-light;
+          cursor: pointer;
+          border: solid 1px @gold-dark;
         }
       }
     }

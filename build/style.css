@@ -97,6 +97,11 @@ input.button {
   border: none;
   margin: 4px;
 }
+button.button i,
+a.button i,
+input.button i {
+  margin-right: 4px;
+}
 button.button:hover,
 a.button:hover,
 input.button:hover {
@@ -617,6 +622,7 @@ div.alerts button {
   width: 100%;
   margin: 0 auto;
   background: #eee;
+  padding-top: 10px;
 }
 #content .editor .heading:before,
 #content .editor .heading:after {
@@ -631,6 +637,14 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
   vertical-align: middle;
+}
+#content .editor .heading > div.actions > div {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .editor .heading > div.actions > div a:hover {
+  color: #fff;
 }
 #content .editor .heading label span {
   display: inline-block;
@@ -741,6 +755,33 @@ div.alerts button {
   margin-top: 10px;
   display: block;
   font-size: 2em;
+}
+#content .editor label.upload button {
+  font-size: 2em;
+  width: 120px;
+  display: inline-block;
+}
+#content .editor div.import .services {
+  background-color: #eee;
+}
+#content .editor div.import .services > button {
+  width: 20%;
+  margin: 2%;
+  border: solid 1px #999;
+  background: none;
+  box-sizing: border-box;
+  height: 60px;
+  font-size: 1em;
+  display: inline-block;
+}
+#content .editor div.import .services > button i {
+  font-size: 2em;
+  margin-right: 10px;
+}
+#content .editor div.import .services > button:hover {
+  background-color: #f2c13d;
+  cursor: pointer;
+  border: solid 1px #bc8c0d;
 }
 #content .editor .types {
   max-width: 100%;

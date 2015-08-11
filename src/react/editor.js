@@ -71,9 +71,7 @@ let Editor = React.createClass({
 		}
 
 		if (this.state.mode === 'import') {
-			view = (<div>
-				<h1>Import Content</h1>
-			</div>);
+			view = <Import />
 		}
 
 		if (this.state.post.privacy === 'org') {
@@ -111,10 +109,8 @@ let Editor = React.createClass({
 		classes[this.state.mode] += ' selected';
 		return (
 			<div className="editor">
-
 				<div className="heading">
 				  <div>
-						<Link to="myPosts" className="small">Edit my posts</Link> <span style={{fontSize: '0.5em'}}>|</span> <a href="javascript:void(0)" className="small" onClick={this._import}>Import content</a><br />
 						<label>Title:
 							<input ref="title" type="text" placeholder="title" value={this.state.post.title} onChange={this._title} />
 						</label>
@@ -128,8 +124,14 @@ let Editor = React.createClass({
 						</label>
 						{orgs}
 					</div>
-					<div>
-						<button onClick={this._save} style={{height: "80px"}} className="button green">Save</button>
+					<div className="actions">
+						<div>
+							<button onClick={this._save} style={{height: "80px"}} className="button green save">Save</button>
+						</div>
+						<div>
+							<Link to="myPosts" className="button blue">Edit my posts</Link>
+							<a href="javascript:void(0)" className="button blue" onClick={this._import}>Import content</a><br />
+						</div>
 					</div>
 					<div className="modes">
 						<button className={classes.content} onClick={this._content}><br />Content</button>
@@ -500,9 +502,10 @@ let Links = React.createClass({
 					<label>Link Title:<br />
 						<input type="text" onChange={this._changeTitle} value={this.state.title} placeholder="enter title" />
 					</label>
-					<label>Link URL/Upload:
+					<label className="upload">Link URL/Upload:
 						<input type="text" onChange={this._changeURL} value={this.state.url} placeholder="enter URL or upload"/>
-						<button className="button blue">Upload</button>
+						<button className="button blue"><i className="fa fa-upload" /> Upload</button>
+						<button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
 					</label>
 					<label>Caption:
 						<textarea type="text" onChange={this._changeCaption} placeholder="enter short description">{this.state.caption}</textarea>
@@ -555,6 +558,40 @@ let Links = React.createClass({
 	_changeCaption: function (e) {
 		let value = e.currentTarget.value;
 		this.setState({caption: value});
+	}
+});
+
+let Import = React.createClass({
+	render: function () {
+		return (
+			<div className="import">
+				<h1>Import Content</h1>
+				<div className="services">
+					<button>
+						<i className="fa fa-facebook" />
+						Import Facebook Posts
+					</button>
+					<button>
+						<i className="fa fa-google" />
+						Import Google Docs
+					</button>
+					<button>
+						<i className="fa fa-rss" />
+						Import Blog Posts
+					</button>
+					<button>
+						<i className="fa fa-linkedin" />
+						Import LinkedIn Posts
+					</button>
+				</div>
+				<div className="manager">
+					<h2 style={{textAlign: "center", paddingTop: '60px', paddingBottom: '40px'}}>Please select a service to import content from</h2>
+					<div style={{width: '70%', margin: 'auto'}}>
+						<p style={{textAlign: "center"}}>Don't want to rewrite all of your existing content or spend time copying and pasting? No problem!<br /> Just connect with one of your existing accounts by clicking the buttons above and you can import your content to Phourus.</p>
+					</div>
+				</div>
+			</div>
+		);
 	}
 });
 
