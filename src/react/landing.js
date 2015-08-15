@@ -1,52 +1,126 @@
 "use strict";
 let React = require('react');
+let Store = require('../stores/search');
+let Actions = require('../actions/search');
+let Post = require('./post');
 
 let Landing = React.createClass({
   render: function () {
     return (
-      <div>
-        <Truth />
-        <Elements />
+      <div className="landing">
+        <Slider />
+        <Convert />
+        <Explore />
+        <Create />
         <Compete />
-        <Start />
+        <Integrate />
       </div>
     );
   }
 });
 
-let Truth = React.createClass({
+let Slider = React.createClass({
   render: function () {
     return (
-      <div className="truth">
-        <h2 className="heading">Truth is scarce</h2>
-        <p>Whether it be personal truth </p>
-        <blockquote>"Who am I?"</blockquote>
-        <p>Or in a business</p>
-        <blockquote>"Online or traditional advertising?"</blockquote>
-        <p>Politics (of course)</p>
-        <blockquote>"Is gun control the answer"</blockquote>
-        <p>Religion as well</p>
-        <blockquote>"Was Jesus a man or divine?"</blockquote>
-        <p>And even in education</p>
-        <blockquote>"Is the world flat?"</blockquote>
-        <p>Truth can be hard to come by in a world run by money...</p>
+      <div className="slider">
+        <img src="/assets/banner.jpg" className="banner" />
       </div>
     );
   }
 });
 
-let Elements = React.createClass({
+let Convert = React.createClass({
   render: function () {
     return (
-      <div className="elements">
-        <h2 className="heading">Phourus helps you find truth, across the "4 Elements of Society"TM</h2>
-        <p>Just like the world is made up of 4 basic elements</p>
+      <div className="convert">
 
-        <p>...and a person is made up of</p>
+      </div>
+    );
+  }
+});
 
-        <p>there are "4 Elements of Society"TM</p>
+let Explore = React.createClass({
+  render: function () {
+    return (
+      <div className="explore">
+        <h2>Explore</h2>
+        <p>view our stream of top-rated content</p>
+        <Explorer />
+      </div>
+    );
+  }
+});
 
-        <p>made up of</p>
+let Explorer = React.createClass({
+  getInitialState: function () {
+    return {
+      posts: []
+    }
+  },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen((data) => {
+      this.setState(data);
+    });
+    Actions.collection();
+  },
+  render: function () {
+    let data = this.state.posts.slice(0, 5);
+    let posts = [];
+
+    posts = data.map((item, i) => {
+       let location = {};
+       //let selected = (item.id === this.props.selected);
+       if (item.user.locations && item.user.locations.length > 0) {
+           location = item.user.locations[0];
+       }
+       return <Post key={item.id} post={item} user={item.user} location={location} scroll={this.props.scroll} />;
+    });
+    return (
+      <div className="explorer">
+        <div className="posts">{posts}</div>
+        <button className="button blue" style={{margin: 'auto'}}>See More</button>
+      </div>
+    );
+  }
+});
+
+let Create = React.createClass({
+  render: function () {
+    return (
+      <div className="create">
+        <h2>Create</h2>
+        <div>
+          <i className="fa fa-laptop" /><br />
+          Blogs
+        </div>
+        <div>
+          <i className="fa fa-calendar" /><br />
+          Events
+        </div>
+        <div>
+          <i className="fa fa-puzzle-piece" /><br />
+          Subjects
+        </div>
+        <div>
+          <i className="fa fa-question" /><br />
+          Questions
+        </div>
+        <div>
+          <i className="fa fa-bullhorn" /><br />
+          Debates
+        </div>
+        <div>
+          <i className="fa fa-line-chart" /><br />
+          Polls
+        </div>
+        <div>
+          <i className="fa fa-road" /><br />
+          Beliefs
+        </div>
+        <div>
+          <i className="fa fa-quote-right" /><br />
+          Quotes
+        </div>
       </div>
     );
   }
@@ -56,20 +130,39 @@ let Compete = React.createClass({
   render: function () {
     return (
       <div className="compete">
-        <h2 className="heading">Through a competitive, social content, the Phourus platform + your brains can get us all one step closer to the truth</h2>
-        <p>With a scoring algorithm called "Influence", a competitive, points-driven "Leaders" section, and other tools for content curation, Phourus is your tool for sharing and finding truth.</p>
+        <h2>Compete</h2>
+        <div>
+          <i className="fa fa-users" /><br />
+          Engage users
+        </div>
+        <div>
+          <i className="fa fa-bolt" /><br />
+          Earn Influence points
+        </div>
+        <div>
+          <i className="fa fa-line-chart" /><br />
+          Rise in rankings
+        </div>
+        <div>
+          <i className="fa fa-trophy" /><br />
+          Become a Leader
+        </div>
       </div>
     );
   }
 });
 
-let Start = React.createClass({
+let Integrate = React.createClass({
   render: function () {
     return (
-      <div className="start">
-        <h2 className="heading">Whether you are an individual or an organization, Phourus can help bring you out of the dark and into the light.</h2>
-        <button>Get Started Now</button>
-        <button>Learn More</button>
+      <div className="integrate">
+        <h2>Integrate</h2>
+        <i className="fa fa-facebook" />
+        <i className="fa fa-dropbox" />
+        <i className="fa fa-linkedin" />
+        <i className="fa fa-slack" />
+        <i className="fa fa-google" />
+        <i className="fa fa-rss" />
       </div>
     );
   }

@@ -338,7 +338,10 @@ div.alerts button {
   vertical-align: top;
 }
 #content .about {
+  margin: 0;
   padding: 0;
+  width: 100%;
+  max-width: 100%;
 }
 #content .about .banner {
   max-width: 100%;
@@ -914,6 +917,89 @@ div.alerts button {
     width: 20%;
   }
 }
+#content .landing {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  background: transparent;
+  text-align: center;
+}
+#content .landing .slider {
+  background-color: #fff;
+}
+#content .landing .convert {
+  background-color: #1e2f40;
+}
+#content .landing .explore {
+  padding-bottom: 40px;
+}
+#content .landing .create {
+  background-color: #fff;
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .landing .create:before,
+#content .landing .create:after {
+  content: "";
+  display: table;
+}
+#content .landing .create:after {
+  clear: both;
+}
+#content .landing .create > div {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 40px;
+}
+#content .landing .create > div i {
+  font-size: 3em;
+}
+#content .landing .compete {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  height: 300px;
+}
+#content .landing .compete:before,
+#content .landing .compete:after {
+  content: "";
+  display: table;
+}
+#content .landing .compete:after {
+  clear: both;
+}
+#content .landing .compete > div {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .landing .compete > div i {
+  font-size: 3em;
+}
+#content .landing .integrate {
+  background-color: #fff;
+  padding-bottom: 60px;
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .landing .integrate:before,
+#content .landing .integrate:after {
+  content: "";
+  display: table;
+}
+#content .landing .integrate:after {
+  clear: both;
+}
+#content .landing .integrate i {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 3em;
+}
 .leaders .profile {
   border-top: solid 1px #eeeeee;
   border-bottom: solid 1px #eeeeee;
@@ -1142,98 +1228,360 @@ div.alerts button {
     display: inline;
   }
 }
-.post .heading {
-  font-size: 0.9em;
-  color: #777;
-  border-bottom: solid 1px #eeeeee;
-  margin-bottom: 20px;
+.postItem {
+  width: 98%;
+  margin: 1%;
+  padding: 1%;
+  opacity: 0.5;
+  background-color: white;
+  box-sizing: border-box;
 }
-.post .heading .top {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
+.postItem:hover {
+  opacity: 1;
 }
-.post .heading .top:before,
-.post .heading .top:after {
-  content: "";
-  display: table;
+.postItem.selected {
+  width: 98%;
+  margin: 1%;
+  opacity: 1;
+  padding: 1%;
 }
-.post .heading .top:after {
-  clear: both;
+.postItem button.close {
+  background: transparent;
+  border: none;
+  float: right;
+  font-size: 1em;
 }
-.post .heading .top > div.type {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
+.postItem button.close:hover {
+  color: #ed0303;
+  cursor: pointer;
 }
-.post .heading .top > div.type .type {
-  display: inline;
-  padding: 4px 10px;
+.postItem .type {
+  font-size: 0.8em;
+  text-transform: capitalize;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
   color: white;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+  padding: 2px;
+  text-align: center;
+  width: 100px;
 }
-.post .heading .top > div.type .type.blog,
-.post .heading .top > div.type .type.event {
+.postItem .type.blog,
+.postItem .type.event {
   background-color: #8abf00;
+  color: #fff;
 }
-.post .heading .top > div.type .type.debate,
-.post .heading .top > div.type .type.bill {
-  background-color: #ed0303;
-}
-.post .heading .top > div.type .type.subject,
-.post .heading .top > div.type .type.question {
+.postItem .type.subject,
+.postItem .type.question {
   background-color: #3498db;
+  color: #fff;
 }
-.post .heading .top > div.type .type.quote,
-.post .heading .top > div.type .type.belief {
+.postItem .type.debate,
+.postItem .type.poll {
+  background-color: #ed0303;
+  color: #fff;
+}
+.postItem .type.quote,
+.postItem .type.belief {
   background-color: #ecb010;
+  color: #fff;
 }
-.post .heading .top ul.breadcrumb {
+.postItem .title a {
+  color: #1e2f40;
+}
+.postItem .title a:hover {
+  color: #ecb010;
+}
+.postItem .details {
   width: 66.66666667%;
   display: inline-block;
   vertical-align: top;
-  margin: 0;
+}
+.postItem .details .pic {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+}
+.postItem .details .pic img {
+  width: 100%;
+  margin: 0%;
+  padding-right: 4%;
+  box-sizing: border-box;
+}
+.postItem .details .basic {
+  width: 75%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 0.9em;
+  line-height: 1.1em;
+}
+.postItem .details .basic .created {
+  font-size: 0.8em;
+  color: #bbb;
+}
+.postItem .meta > div {
+  display: inline-block;
+  vertical-align: bottom;
+}
+.postItem ul {
+  margin: 20px 0 0 0;
   padding: 0;
 }
-.post .heading .top ul.breadcrumb li {
-  display: inline-block;
+.postItem ul li {
   list-style: none;
-  margin-right: 10px;
-  font-size: 1em;
-  text-transform: uppercase;
+  font-size: 0.8em;
+  color: #425d77;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
 }
-.post .heading .top > div.meta {
+.postItem .content {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.postItem .content:before,
+.postItem .content:after {
+  content: "";
+  display: table;
+}
+.postItem .content:after {
+  clear: both;
+}
+.postItem .stats {
+  color: #999;
+  font-size: 0.8em;
+  text-align: left;
+  clear: right;
+}
+.postItem .stats div {
+  width: 33.33333333%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  font-size: 10px;
+  color: #333;
+  width: 80px;
+}
+.postItem .stats div strong {
+  color: #1e2f40;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  font-size: 2.4em;
+}
+.postItem .footing {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: solid 1px #eeeeee;
+}
+.postItem .comments .comment {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 0.9em;
+  border-bottom: solid 1px #e4e5e6;
+  margin-bottom: 20px;
+}
+.postItem .comments .comment:before,
+.postItem .comments .comment:after {
+  content: "";
+  display: table;
+}
+.postItem .comments .comment:after {
+  clear: both;
+}
+.postItem .comments .comment .pic {
   width: 16.66666667%;
   display: inline-block;
   vertical-align: top;
 }
-.post .content {
-  margin-bottom: 40px;
+.postItem .comments .comment .pic a img {
+  width: 80%;
 }
-.post .thumb {
+.postItem .comments .comment .content {
+  width: 83.33333333%;
+  display: inline-block;
+  vertical-align: top;
+}
+.postItem .comments .comment .content .date {
+  color: #aaa;
+  font-size: 1em;
+  font-style: italic;
+}
+.postItem .create {
+  background-color: #34495e;
+  max-width: 96%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2%;
+  color: #eeeeee;
+}
+.postItem .create:before,
+.postItem .create:after {
+  content: "";
+  display: table;
+}
+.postItem .create:after {
+  clear: both;
+}
+.postItem .create .pic {
+  width: 10%;
+  display: inline-block;
+  vertical-align: top;
+}
+.postItem .create .pic img {
+  margin: 0;
+  padding: 0;
+  width: 80%;
+}
+.postItem .create textarea {
+  display: inline-block;
+  border: none;
+  height: 160px;
+  width: 90%;
+}
+.postItem .create button.button {
   float: right;
+  margin: 0;
+  padding: 0;
 }
-.post .thumb .counts {
-  margin: 20px 20px 0 0;
-  font-size: 1.5em;
-  display: inline-block;
-  vertical-align: top;
+@media (min-width: 1000px) {
+  .postItem {
+    width: 24%;
+    margin: 1% 1% 1% 0;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  .postItem .details {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .postItem .details:before,
+  .postItem .details:after {
+    content: "";
+    display: table;
+  }
+  .postItem .details:after {
+    clear: both;
+  }
+  .postItem .details .pic {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .postItem .details .basic {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .postItem .meta {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .postItem .meta:before,
+  .postItem .meta:after {
+    content: "";
+    display: table;
+  }
+  .postItem .meta:after {
+    clear: both;
+  }
+  .postItem .meta .influence {
+    display: inline-block;
+  }
+  .postItem .thumb {
+    float: right;
+  }
+  .postItem .thumb button {
+    font-size: 0.7em;
+    height: 60px;
+    width: 160px;
+    display: inline-block;
+  }
+  .postItem .thumb button i {
+    font-size: 3em;
+    color: #FFF;
+    opacity: 0.5;
+    float: left;
+  }
+  .postItem .thumb button .total {
+    font-size: 2em;
+    color: #FFF;
+    opacity: 0.9;
+    font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+    display: block;
+    width: 100px;
+    float: right;
+    margin: 8px 2px 0 0;
+    text-align: right;
+  }
+  .types {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .types:before,
+  .types:after {
+    content: "";
+    display: table;
+  }
+  .types:after {
+    clear: both;
+  }
+  .types button {
+    width: 11.11111111%;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
-.post .thumb .counts .green {
-  color: #658c00;
-}
-.post .thumb .counts .red {
-  color: #bb0202;
-}
-.post .thumb .buttons {
-  margin-top: 10px;
-  display: inline-block;
-  vertical-align: top;
-}
-.post .thumb .buttons button {
-  display: inline-block;
+@media (min-width: 1400px) {
+  .postItem {
+    width: 19%;
+    margin-right: 1%;
+  }
+  .postItem .details .pic {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .postItem .details .basic {
+    width: 58.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .postItem .details .meta {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+  }
+  .postItem .details .meta .influence {
+    float: right;
+  }
+  .postItem .details .meta ul {
+    clear: right;
+  }
+  .types {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .types:before,
+  .types:after {
+    content: "";
+    display: table;
+  }
+  .types:after {
+    clear: both;
+  }
+  .types button {
+    width: 11.11111111%;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
 .profile .name {
   margin: 0;
@@ -1718,223 +2066,6 @@ div.alerts button {
 .search .post .postItem.selected {
   display: block;
 }
-.search .postItem {
-  width: 98%;
-  margin: 1%;
-  padding: 1%;
-  opacity: 0.5;
-  background-color: white;
-  box-sizing: border-box;
-}
-.search .postItem:hover {
-  opacity: 1;
-}
-.search .postItem.selected {
-  width: 98%;
-  margin: 1%;
-  opacity: 1;
-  padding: 1%;
-}
-.search .postItem button.close {
-  background: transparent;
-  border: none;
-  float: right;
-  font-size: 1em;
-}
-.search .postItem button.close:hover {
-  color: #ed0303;
-  cursor: pointer;
-}
-.search .postItem .type {
-  font-size: 0.8em;
-  text-transform: capitalize;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  color: white;
-  padding: 2px;
-  text-align: center;
-  width: 100px;
-}
-.search .postItem .type.blog,
-.search .postItem .type.event {
-  background-color: #8abf00;
-  color: #fff;
-}
-.search .postItem .type.subject,
-.search .postItem .type.question {
-  background-color: #3498db;
-  color: #fff;
-}
-.search .postItem .type.debate,
-.search .postItem .type.poll {
-  background-color: #ed0303;
-  color: #fff;
-}
-.search .postItem .type.quote,
-.search .postItem .type.belief {
-  background-color: #ecb010;
-  color: #fff;
-}
-.search .postItem .title a {
-  color: #1e2f40;
-}
-.search .postItem .title a:hover {
-  color: #ecb010;
-}
-.search .postItem .details {
-  width: 66.66666667%;
-  display: inline-block;
-  vertical-align: top;
-}
-.search .postItem .details .pic {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-}
-.search .postItem .details .pic img {
-  width: 100%;
-  margin: 0%;
-  padding-right: 4%;
-  box-sizing: border-box;
-}
-.search .postItem .details .basic {
-  width: 75%;
-  display: inline-block;
-  vertical-align: top;
-  font-size: 0.9em;
-  line-height: 1.1em;
-}
-.search .postItem .details .basic .created {
-  font-size: 0.8em;
-  color: #bbb;
-}
-.search .postItem .meta > div {
-  display: inline-block;
-  vertical-align: bottom;
-}
-.search .postItem ul {
-  margin: 20px 0 0 0;
-  padding: 0;
-}
-.search .postItem ul li {
-  list-style: none;
-  font-size: 0.8em;
-  color: #425d77;
-  margin: 0;
-  padding: 0;
-  line-height: 1.4;
-}
-.search .postItem .content {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-}
-.search .postItem .content:before,
-.search .postItem .content:after {
-  content: "";
-  display: table;
-}
-.search .postItem .content:after {
-  clear: both;
-}
-.search .postItem .stats {
-  color: #999;
-  font-size: 0.8em;
-  text-align: left;
-  clear: right;
-}
-.search .postItem .stats div {
-  width: 33.33333333%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-  font-size: 10px;
-  color: #333;
-  width: 80px;
-}
-.search .postItem .stats div strong {
-  color: #1e2f40;
-  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
-  font-size: 2.4em;
-}
-.search .postItem .footing {
-  margin-top: 1em;
-  padding-top: 1em;
-  border-top: solid 1px #eeeeee;
-}
-.search .comments .comment {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  font-size: 0.9em;
-  border-bottom: solid 1px #e4e5e6;
-  margin-bottom: 20px;
-}
-.search .comments .comment:before,
-.search .comments .comment:after {
-  content: "";
-  display: table;
-}
-.search .comments .comment:after {
-  clear: both;
-}
-.search .comments .comment .pic {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
-}
-.search .comments .comment .pic a img {
-  width: 80%;
-}
-.search .comments .comment .content {
-  width: 83.33333333%;
-  display: inline-block;
-  vertical-align: top;
-}
-.search .comments .comment .content .date {
-  color: #aaa;
-  font-size: 1em;
-  font-style: italic;
-}
-.search .create {
-  background-color: #34495e;
-  max-width: 96%;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2%;
-  color: #eeeeee;
-}
-.search .create:before,
-.search .create:after {
-  content: "";
-  display: table;
-}
-.search .create:after {
-  clear: both;
-}
-.search .create .pic {
-  width: 10%;
-  display: inline-block;
-  vertical-align: top;
-}
-.search .create .pic img {
-  margin: 0;
-  padding: 0;
-  width: 80%;
-}
-.search .create textarea {
-  display: inline-block;
-  border: none;
-  height: 160px;
-  width: 90%;
-}
-.search .create button.button {
-  float: right;
-  margin: 0;
-  padding: 0;
-}
 @media (min-width: 500px) {
   .search .heading .refine .context {
     width: 50%;
@@ -1946,144 +2077,6 @@ div.alerts button {
     display: inline-block;
     vertical-align: top;
     text-align: right;
-  }
-}
-@media (min-width: 1000px) {
-  .search .postItem {
-    width: 24%;
-    margin: 1% 1% 1% 0;
-    display: inline-block;
-    box-sizing: border-box;
-  }
-  .search .postItem .details {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .search .postItem .details:before,
-  .search .postItem .details:after {
-    content: "";
-    display: table;
-  }
-  .search .postItem .details:after {
-    clear: both;
-  }
-  .search .postItem .details .pic {
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .search .postItem .details .basic {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .search .postItem .meta {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    text-align: left;
-  }
-  .search .postItem .meta:before,
-  .search .postItem .meta:after {
-    content: "";
-    display: table;
-  }
-  .search .postItem .meta:after {
-    clear: both;
-  }
-  .search .postItem .meta .influence {
-    display: inline-block;
-  }
-  .search .postItem .thumb {
-    float: right;
-  }
-  .search .postItem .thumb button {
-    font-size: 0.7em;
-    height: 60px;
-    width: 160px;
-    display: inline-block;
-  }
-  .search .postItem .thumb button i {
-    font-size: 3em;
-    color: #FFF;
-    opacity: 0.5;
-    float: left;
-  }
-  .search .postItem .thumb button .total {
-    font-size: 2em;
-    color: #FFF;
-    opacity: 0.9;
-    font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
-    display: block;
-    width: 100px;
-    float: right;
-    margin: 8px 2px 0 0;
-    text-align: right;
-  }
-  .search .types {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .search .types:before,
-  .search .types:after {
-    content: "";
-    display: table;
-  }
-  .search .types:after {
-    clear: both;
-  }
-  .search .types button {
-    width: 11.11111111%;
-    display: inline-block;
-    vertical-align: top;
-  }
-}
-@media (min-width: 1400px) {
-  .search .postItem {
-    width: 19%;
-    margin-right: 1%;
-  }
-  .search .postItem .details .pic {
-    width: 16.66666667%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .search .postItem .details .basic {
-    width: 58.33333333%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .search .postItem .details .meta {
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
-    text-align: right;
-  }
-  .search .postItem .details .meta .influence {
-    float: right;
-  }
-  .search .postItem .details .meta ul {
-    clear: right;
-  }
-  .search .types {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .search .types:before,
-  .search .types:after {
-    content: "";
-    display: table;
-  }
-  .search .types:after {
-    clear: both;
-  }
-  .search .types button {
-    width: 11.11111111%;
-    display: inline-block;
-    vertical-align: top;
   }
 }
 .main {
