@@ -713,6 +713,20 @@ div.alerts button {
   border: none;
   width: 100%;
 }
+#content .editor .filepicker {
+  width: 90%;
+  box-sizing: border-box;
+  max-width: 350px;
+  height: 200px;
+  background-color: #eee;
+  border: dashed 2px #aaa;
+}
+#content .editor .filepicker > span {
+  text-align: center;
+  font-size: 1em;
+  display: block;
+  margin-top: 80px;
+}
 #content .editor .form input[type=radio] {
   width: 20px;
   border: none;

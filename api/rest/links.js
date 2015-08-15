@@ -35,6 +35,11 @@ router.post('', (req, res) => {
       res.send(500);
   });
 });
+router.post('/attachment', (req, res) => {
+  console.log(req.files);
+  res.send(200);
+});
+
 router.put('/:id', (req, res) => {
   var id = req.params.id;
   var model = req.body;

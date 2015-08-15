@@ -8,6 +8,11 @@ let Store = require('../stores/editor');
 let token = require('../token');
 let tax = require('../taxonomy');
 let RTE = require('react-quill');
+let File = require('react-dropzone-component');
+let AWS = require('aws-sdk');
+AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});
+let S3 = AWS.S3;
+let s3 = new S3();
 
 let Editor = React.createClass({
 	mixins: [Router.State, Router.Navigation],
@@ -502,7 +507,7 @@ let Links = React.createClass({
 					</label>
 					<label className="upload">Link URL/Upload:
 						<input type="text" onChange={this._changeURL} value={this.state.url} placeholder="enter URL or upload"/>
-						<button className="button blue"><i className="fa fa-upload" /> Upload</button>
+						<Upload />
 						<button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
 					</label>
 					<label>Caption:
@@ -557,6 +562,65 @@ let Links = React.createClass({
 		let value = e.currentTarget.value;
 		this.setState({caption: value});
 	}
+});
+
+let Upload = React.createClass({
+	render: function () {
+		return (
+			<File className="button blue" config={this.config} eventHandlers={this.handlers}>
+				Click or drag files here
+			</File>
+		);
+	},
+	config: {
+		allowedFiletypes: ['.jpg', '.png', '.gif', '.pdf', '.doc', '.docx', '.xls', '.xlsx'],
+    showFiletypeIcon: true,
+    postUrl: '/rest/links/attachment'
+	},
+	handlers: {
+		// This one receives the dropzone object as the first parameter
+    // and can be used to additional work with the dropzone.js
+    // object
+    init: null,
+    // All of these receive the event as first parameter:
+    drop: function (e) {
+			console.log(e);
+		},
+    dragstart: null,
+    dragend: null,
+    dragenter: null,
+    dragover: null,
+    dragleave: null,
+    // All of these receive the file as first parameter:
+    addedfile: function (e) {
+			s3.upload({Bucket: 'phourus-users', Key: 'some-user', Body: e}, {}, (err, data) => {
+				console.log(err, data);
+			});
+		},
+    removedfile: null,
+    thumbnail: null,
+    error: null,
+    processing: null,
+    uploadprogress: null,
+    sending: null,
+    success: null,
+    complete: null,
+    canceled: null,
+    maxfilesreached: null,
+    maxfilesexceeded: null,
+    // All of these receive a list of files as first parameter
+    // and are only called if the uploadMultiple option
+    // in djsConfig is true:
+    processingmultiple: null,
+    sendingmultiple: null,
+    successmultiple: null,
+    completemultiple: null,
+    canceledmultiple: null,
+    // Special Events
+    totaluploadprogress: null,
+    reset: null,
+    queuecompleted: null
+	},
 });
 
 let Import = React.createClass({
