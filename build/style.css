@@ -395,6 +395,13 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
 }
+#content .about .screenshots > div {
+  border-bottom: solid 1px #eee;
+}
+#content .about .screenshots img {
+  float: right;
+  max-width: 60%;
+}
 #content .about .integrations {
   text-align: center;
 }
@@ -413,6 +420,9 @@ div.alerts button {
   width: 25%;
   display: inline-block;
   vertical-align: top;
+  text-align: center;
+  color: #eee;
+  padding-bottom: 40px;
 }
 #content .about .contact > div i {
   color: #425d77;

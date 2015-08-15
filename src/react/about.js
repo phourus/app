@@ -51,6 +51,32 @@ let About = React.createClass({
           </button>
           <div className="details">{views[this.state.mode]}</div>
         </div>
+        <div className="screenshots">
+          <div>
+            <img src="/assets/screenshots/stream.png" />
+            <h3>Discover Content</h3>
+            <p>...using the Phourus Stream with advanced searching and filtering capability</p>
+            <div style={{clear: "right"}}></div>
+          </div>
+          <div>
+            <img src="/assets/screenshots/editor.png" />
+            <h3>Create Posts</h3>
+            <p>...on a variety of topics with rich text, file attachments and detailed metadata</p>
+            <div style={{clear: "right"}}></div>
+          </div>
+          <div>
+            <img src="/assets/screenshots/comments.png" />
+            <h3>Interact</h3>
+            <p>...with the Phourus community by viewing posts and commenting, voting and sharing</p>
+            <div style={{clear: "right"}}></div>
+          </div>
+          <div>
+            <img src="/assets/screenshots/editor.png" />
+            <h3>Compete</h3>
+            <p>...to become a respected Leader by contributing to the Phourus platform</p>
+            <div style={{clear: "right"}}></div>
+          </div>
+        </div>
         <div className="platforms"></div>
         <div className="integrations">
           <h2>Integrations</h2>
@@ -66,14 +92,14 @@ let About = React.createClass({
           <div></div>
           <div>
             <i className="fa fa-map-marker" /><br />
-            Phourus Inc.
-            1411 7th St #305
+            Phourus Inc.<br />
+            1411 7th St #305<br />
             Santa Monica, CA 90401
           </div>
           <div>
             <i className="fa fa-phone" /><br />
-            1-800-PHOURUS
-            1-800-746-8787
+            1-800-PHOURUS<br />
+            1-800-746-8787<br />
             <a href="mailto:info@phourus.com">info@phourus.com</a>
           </div>
           <div></div>
@@ -106,7 +132,7 @@ let Signup = React.createClass({
 let Create = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className="create">
         <br />
         <h2 className="title">What kind of posts can I create on Phourus?</h2>
         <p>Each element of Phourus has two post types to choose from:</p>
