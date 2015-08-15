@@ -27,11 +27,15 @@ let About = React.createClass({
       <div className="about">
         <img src="/assets/banner.jpg" className="banner" />
         <div className="description">
+          <h3>What is Phourus?</h3>
           <p>For individuals, a free tool to express themselves professionally, educationally, politically and religiously; a place where expression and representation meet.</p>
           <p>For organizations, such as businesses, government agencies, religious/charitable organizations and educational institutions, Phourus is a tool to create valuable content both internally and externally, with a competitive, social spin with the purpose of giving higher visibility to great content.</p>
         </div>
         <div className="help">
-
+          <h3>Have questions or need help?</h3>
+          <button className="button blue">Contact Support</button>
+          <p>1-800-PHOURUS</p>
+          <a href='mailto:info@phourus.com'>info@phourus.com</a>
         </div>
         <div className="basics">
           <h2>How does it work?</h2>

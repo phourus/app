@@ -344,6 +344,7 @@ div.alerts button {
   max-width: 100%;
 }
 #content .about .banner {
+  width: 100%;
   max-width: 100%;
   margin: 0;
   padding: 0;
@@ -352,11 +353,23 @@ div.alerts button {
   width: 75%;
   display: inline-block;
   vertical-align: top;
+  box-sizing: border-box;
+  padding: 20px 40px 0 40px;
+  color: #444;
+  vertical-align: middle;
 }
 #content .about .help {
   width: 25%;
   display: inline-block;
   vertical-align: top;
+  box-sizing: border-box;
+  border-left: solid 1px #eee;
+  padding-left: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+#content .about .help button.button {
+  margin: auto;
 }
 #content .about .basics {
   background-color: #1e2f40;
