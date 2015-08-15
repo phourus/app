@@ -1003,16 +1003,33 @@ div.alerts button {
   text-align: center;
 }
 #content .landing .slider {
-  background-color: #fff;
+  width: 100%;
+  max-width: 100%;
+}
+#content .landing .slider img.banner {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 #content .landing .convert {
   background-color: #1e2f40;
+}
+#content .landing .convert div {
+  margin: auto;
+  color: #ccc;
+}
+#content .landing .convert div input,
+#content .landing .convert div button {
+  display: inline-block;
 }
 #content .landing .explore {
   padding-bottom: 40px;
 }
 #content .landing .create {
-  background-color: #fff;
+  background-color: #9cd900;
+  color: #fff;
+  padding-bottom: 60px;
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
@@ -1039,6 +1056,7 @@ div.alerts button {
   width: 100%;
   margin: 0 auto;
   height: 300px;
+  background-color: #fff;
 }
 #content .landing .compete:before,
 #content .landing .compete:after {
@@ -1057,7 +1075,8 @@ div.alerts button {
   font-size: 3em;
 }
 #content .landing .integrate {
-  background-color: #fff;
+  background-color: #425d77;
+  color: #fff;
   padding-bottom: 60px;
   max-width: 100%;
   width: 100%;

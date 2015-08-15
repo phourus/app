@@ -33,7 +33,11 @@ let Convert = React.createClass({
   render: function () {
     return (
       <div className="convert">
-
+        <div>
+          <input placeholder="email" />
+          <button className="button green">Sign Up Now</button>
+          Already registered? <a href="">Login here</a>.
+        </div>
       </div>
     );
   }
