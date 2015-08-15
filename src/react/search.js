@@ -38,8 +38,8 @@ let Search = React.createClass({
 	},
 	componentDidMount: function () {
 		let type = null;
-		let route = this.context.getCurrentRoutes();
-		let params = this.context.getCurrentParams();
+		let route = this.context.router.getCurrentRoutes();
+		let params = this.context.router.getCurrentParams();
 		if (route[2]) {
 			type = route[2].name;
 		}

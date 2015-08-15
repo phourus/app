@@ -183,7 +183,7 @@ let Tabs = React.createClass({
       }
     },
     render: function () {
-      let view = this.context.getCurrentRoutes()[2].name;
+      let view = this.context.router.getCurrentRoutes()[2].name;
       return (
         <div className="tabs">
           <div onClick={this._select.bind(this, 'rank')} className={'rank' === view ? 'selected' : ''}>

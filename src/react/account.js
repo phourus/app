@@ -146,7 +146,7 @@ let Orgs = React.createClass({
   },
   _edit: function (e) {
     var id = e.currentTarget.id;
-    this.context.transitionTo('details', {id: id});
+    this.context.router.transitionTo('details', {id: id});
   },
   _remove: function (e) {
     var id = e.currentTarget.id;
