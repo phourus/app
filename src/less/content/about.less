@@ -22,7 +22,7 @@
     background-color: @theme-dark;
     color: #fff;
 
-    button {
+     > button {
       .Cols(3);
       background: transparent;
       border: none;
@@ -53,8 +53,18 @@
         padding: 0;
       }
 
-      > div {
-        .Cols(6);
+      div.signup, div.create, div.interact, div.rank {
+       .Row(80%);
+
+       > div {
+         .Cols(6);
+         text-align: left;
+
+         i {
+           font-size: 3em;
+           float: left;
+         }
+       }
       }
     }
   }
@@ -62,19 +72,28 @@
   .screenshots {
     > div {
       border-bottom: solid 1px #eee;
+      width: 80%;
+      margin: 60px auto;
+      padding-bottom: 60px;
     }
     img {
       float: right;
       max-width: 60%;
+
+      &.left {
+        float: left;
+      }
     }
   }
 
   .integrations {
     text-align: center;
+    padding-bottom: 40px;
+    .Row(80%);
 
     i {
       .Cols(2);
-      font-size: 2em;
+      font-size: 3em;
       color: @theme-dark;
     }
   }

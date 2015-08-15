@@ -362,7 +362,7 @@ div.alerts button {
   background-color: #1e2f40;
   color: #fff;
 }
-#content .about .basics button {
+#content .about .basics > button {
   width: 25%;
   display: inline-block;
   vertical-align: top;
@@ -372,13 +372,13 @@ div.alerts button {
   cursor: pointer;
   height: 100px;
 }
-#content .about .basics button:hover {
+#content .about .basics > button:hover {
   background-color: #658c00;
 }
-#content .about .basics button.selected {
+#content .about .basics > button.selected {
   background-color: #9cd900;
 }
-#content .about .basics button i {
+#content .about .basics > button i {
   font-size: 4em;
   color: #425d77;
 }
@@ -390,26 +390,80 @@ div.alerts button {
   margin: 0;
   padding: 0;
 }
-#content .about .basics .details > div {
+#content .about .basics .details div.signup,
+#content .about .basics .details div.create,
+#content .about .basics .details div.interact,
+#content .about .basics .details div.rank {
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .about .basics .details div.signup:before,
+#content .about .basics .details div.create:before,
+#content .about .basics .details div.interact:before,
+#content .about .basics .details div.rank:before,
+#content .about .basics .details div.signup:after,
+#content .about .basics .details div.create:after,
+#content .about .basics .details div.interact:after,
+#content .about .basics .details div.rank:after {
+  content: "";
+  display: table;
+}
+#content .about .basics .details div.signup:after,
+#content .about .basics .details div.create:after,
+#content .about .basics .details div.interact:after,
+#content .about .basics .details div.rank:after {
+  clear: both;
+}
+#content .about .basics .details div.signup > div,
+#content .about .basics .details div.create > div,
+#content .about .basics .details div.interact > div,
+#content .about .basics .details div.rank > div {
   width: 50%;
   display: inline-block;
   vertical-align: top;
+  text-align: left;
+}
+#content .about .basics .details div.signup > div i,
+#content .about .basics .details div.create > div i,
+#content .about .basics .details div.interact > div i,
+#content .about .basics .details div.rank > div i {
+  font-size: 3em;
+  float: left;
 }
 #content .about .screenshots > div {
   border-bottom: solid 1px #eee;
+  width: 80%;
+  margin: 60px auto;
+  padding-bottom: 60px;
 }
 #content .about .screenshots img {
   float: right;
   max-width: 60%;
 }
+#content .about .screenshots img.left {
+  float: left;
+}
 #content .about .integrations {
   text-align: center;
+  padding-bottom: 40px;
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .about .integrations:before,
+#content .about .integrations:after {
+  content: "";
+  display: table;
+}
+#content .about .integrations:after {
+  clear: both;
 }
 #content .about .integrations i {
   width: 16.66666667%;
   display: inline-block;
   vertical-align: top;
-  font-size: 2em;
+  font-size: 3em;
   color: #1e2f40;
 }
 #content .about .contact {

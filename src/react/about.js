@@ -1,5 +1,7 @@
 "use strict";
 let React = require('react');
+let Router = require('react-router');
+let Link = Router.Link;
 
 let About = React.createClass({
   getInitialState: function () {
@@ -56,30 +58,32 @@ let About = React.createClass({
             <img src="/assets/screenshots/stream.png" />
             <h3>Discover Content</h3>
             <p>...using the Phourus Stream with advanced searching and filtering capability</p>
-            <div style={{clear: "right"}}></div>
+            <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/editor.png" />
+            <img src="/assets/screenshots/editor.png" className="left" />
             <h3>Create Posts</h3>
             <p>...on a variety of topics with rich text, file attachments and detailed metadata</p>
-            <div style={{clear: "right"}}></div>
+            <div style={{clear: "both"}}></div>
           </div>
           <div>
             <img src="/assets/screenshots/comments.png" />
             <h3>Interact</h3>
             <p>...with the Phourus community by viewing posts and commenting, voting and sharing</p>
-            <div style={{clear: "right"}}></div>
+            <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/editor.png" />
+            <img src="/assets/screenshots/editor.png" className="left" />
             <h3>Compete</h3>
             <p>...to become a respected Leader by contributing to the Phourus platform</p>
-            <div style={{clear: "right"}}></div>
+            <div style={{clear: "both"}}></div>
           </div>
         </div>
         <div className="platforms"></div>
         <div className="integrations">
+          <br />
           <h2>Integrations</h2>
+          <br />
           <i className="fa fa-facebook" />
           <i className="fa fa-dropbox" />
           <i className="fa fa-linkedin" />
@@ -124,7 +128,22 @@ let About = React.createClass({
 let Signup = React.createClass({
   render: function () {
     return (
-      <div>Signup</div>
+      <div className="signup">
+        <br />
+        <h2 className="title">How do I get started?</h2>
+        <p>It's as simple as signing up! Simply register with your email, fill out your profile and start using Phourus today.</p>
+        <div>
+          <i className="fa fa-user" />
+          <h3>Sign up as an Individual</h3>
+          <button className="button blue">Sign Up Now</button>
+        </div>
+        <div>
+          <i className="fa fa-users" />
+          <h3>Sign up as an Organization</h3>
+          <button className="button blue">Sign Up Now</button>
+        </div>
+        <p>Already have an account with Phourus? <Link to="account">Click here to login.</Link></p>
+      </div>
     )
   }
 });
@@ -137,22 +156,22 @@ let Create = React.createClass({
         <h2 className="title">What kind of posts can I create on Phourus?</h2>
         <p>Each element of Phourus has two post types to choose from:</p>
         <div>
-          <i className="" />
+          <i className="fa fa-laptop" />
           <h3>Blogs & Events</h3>
           <p>General posts and real-life events</p>
         </div>
         <div>
-          <i className="" />
+          <i className="fa fa-question" />
           <h3>Subjects & Questions</h3>
           <p>Educational posts and Q&A</p>
         </div>
         <div>
-          <i className="" />
+          <i className="fa fa-bullhorn" />
           <h3>Debates & Polls</h3>
           <p>Polarized discussions and survey-style polling</p>
         </div>
         <div>
-          <i className="" />
+          <i className="fa fa-quote-right" />
           <h3>Beliefs & Quotes</h3>
           <p>Deep-seated thoughts and meaningful quotes</p>
         </div>
@@ -164,7 +183,31 @@ let Create = React.createClass({
 let Interact = React.createClass({
   render: function () {
     return (
-      <div>Interact</div>
+      <div className="interact">
+        <br />
+        <h2 className="title">How do I participate?</h2>
+        <p>It's easy to participate on Phourus with common social features like commenting, voting and sharing.</p>
+        <div>
+          <i className="fa fa-eye" />
+          <h3>View</h3>
+          <p>View a post if it piques your interest or is respected by the community</p>
+        </div>
+        <div>
+          <i className="fa fa-comment" />
+          <h3>Comment</h3>
+          <p>Join the discussion to provide feedback, good or bad, to the post's author</p>
+        </div>
+        <div>
+          <i className="fa fa-thumbs-up" />
+          <h3>Vote</h3>
+          <p>Upvote or downvote to alter the Influence and visibility of a post</p>
+        </div>
+        <div>
+          <i className="fa fa-share" />
+          <h3>Share</h3>
+          <p>Help increase a post's visibility and points the most by sharing</p>
+        </div>
+      </div>
     )
   }
 });
@@ -172,7 +215,21 @@ let Interact = React.createClass({
 let Rank = React.createClass({
   render: function () {
     return (
-      <div>Rank</div>
+      <div className="rank">
+        <br />
+        <h2 className="title">How do I compete?</h2>
+        <p>Earn points on Phourus to increase your visibility and credibility</p>
+        <div>
+          <i className="fa fa-star" />
+          <h3>Influence</h3>
+          <p>Users, posts and organizations earn Influence points based on positive community feedback</p>
+        </div>
+        <div>
+          <i className="fa fa-trophy" />
+          <h3>Leaders</h3>
+          <p>Top-rated users, posts and organizations are featured on the Leaders page</p>
+        </div>
+      </div>
     )
   }
 });
