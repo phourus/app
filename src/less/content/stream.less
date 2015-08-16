@@ -112,9 +112,11 @@
     }
 
     .filter, .sortby {
-      clear: right;
       background-color: @grey-light;
       margin-top: 10px;
+      position: absolute;
+      right: 5%;
+      z-index: 999;
 
       .box-shadow(0px, 0px, 12px, @grey-dark);
       float: right;
@@ -148,7 +150,7 @@
       }
 
       .triangle {
-        margin-right: 58px;
+        margin-right: 118px;
       }
       .types {
         button {
@@ -209,7 +211,7 @@
       width: 200px;
 
       .triangle {
-        margin-right: 8px;
+        margin-right: 26px;
       }
       ul {
         border-top: solid 1px #ccc;

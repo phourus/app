@@ -1973,9 +1973,11 @@ div.alerts button {
 }
 .search .heading .filter,
 .search .heading .sortby {
-  clear: right;
   background-color: #eeeeee;
   margin-top: 10px;
+  position: absolute;
+  right: 5%;
+  z-index: 999;
   box-shadow: 0px 0px 12px #444444;
   -moz-box-shadow: 0px 0px 12px #444444;
   -webkit-box-shadow: 0px 0px 12px #444444;
@@ -2007,7 +2009,7 @@ div.alerts button {
   border: none;
 }
 .search .heading .filter .triangle {
-  margin-right: 58px;
+  margin-right: 118px;
 }
 .search .heading .filter .types button {
   display: inline-block;
@@ -2073,7 +2075,7 @@ div.alerts button {
   width: 200px;
 }
 .search .heading .sortby .triangle {
-  margin-right: 8px;
+  margin-right: 26px;
 }
 .search .heading .sortby ul {
   border-top: solid 1px #ccc;
