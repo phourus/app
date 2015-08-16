@@ -35,7 +35,7 @@ let About = React.createClass({
           <h3>Have questions or need help?</h3>
           <button className="button blue">Contact Support</button>
           <p>1-800-PHOURUS</p>
-          <a href='mailto:info@phourus.com'>info@phourus.com</a>
+          <a href='mailto:info@phourus.com?Subject=Support'>info@phourus.com</a>
         </div>
         <div className="basics">
           <h2>How does it work?</h2>
@@ -108,7 +108,7 @@ let About = React.createClass({
             <i className="fa fa-phone" /><br />
             1-800-PHOURUS<br />
             1-800-746-8787<br />
-            <a href="mailto:info@phourus.com">info@phourus.com</a>
+          <a href="mailto:info@phourus.com?Subject=Support">info@phourus.com</a>
           </div>
           <div></div>
         </div>

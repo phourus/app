@@ -66,12 +66,12 @@ let Post = React.createClass({
 				<h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.props.post.title}</a></h2>
 				<div className="details">
 					<div className="pic">
-						<Link to="user" params={{id: this.props.user.id}}>
+						<Link to="userPosts" params={{id: this.props.user.id}}>
 								<img src={`/assets/avatars/${this.props.user.img || 'default'}.jpg`} />
 						</Link>
 					</div>
 					<div className="basic">
-						<span>By <Link to="user" params={{id: this.props.user.id}}>{this.props.post.user.first} {this.props.post.user.last} </Link></span>
+						<span>By <Link to="userPosts" params={{id: this.props.user.id}}>{this.props.post.user.first} {this.props.post.user.last} </Link></span>
 						&bull;
 						<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 						<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
@@ -256,9 +256,9 @@ let Create = React.createClass({
     return (
       <div className="create">
         <div className="pic">
-          <a href="/account">
+          <Link to="account">
             <img src={"/assets/avatars/1.jpg"} />
-          </a>
+          </Link>
         </div>
         <textarea ref="comment" placeholder="Comment goes here"></textarea>
         <button className="button green add" onClick={this.add}>
@@ -295,14 +295,14 @@ let Comment = React.createClass({
     return (
       <div className="comment" ref={this.props.id}>
         <div className="pic">
-          <a href={"/user/" + this.props.user.id}>
+          <Link to="userPosts" params={{id: this.props.user.id}}>
             <img src={`/assets/avatars/${this.props.user.img}.jpg`} width="100" />
-          </a>
+          </Link>
         </div>
         <div className="content">
-          <a className="username" href={"/user/" + this.props.user.id} >
+          <Link to="userPosts" params={{id: this.props.user.id}} className="username">
             {this.props.user.username} ({this.props.user.influence})
-          </a>
+          </Link>
           <p>{this.props.comment.content}</p>
           <span className="date">{moment(this.props.comment.createdAt).fromNow()}</span>
         </div>

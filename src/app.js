@@ -12,7 +12,7 @@ let App = React.createClass({
       <div>
         <header className="header">
           <div className="brand">
-            <a href="./"></a>
+            <Link to="home"></Link>
           </div>
           <nav className="nav">
             <Link to="search" className="search fa fa-search"></Link>

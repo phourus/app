@@ -133,7 +133,7 @@ let Editor = React.createClass({
 						</div>
 						<div>
 							<Link to="myPosts" className="button blue">Edit my posts</Link>
-							<a href="javascript:void(0)" className="button blue" onClick={this._import}>Import content</a><br />
+							<button className="button blue" onClick={this._import}>Import content</button><br />
 						</div>
 					</div>
 					<div className="modes">

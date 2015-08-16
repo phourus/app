@@ -20,7 +20,7 @@ let View404 = require('./react/404');
 
 module.exports = (
   <Route handler={App} path="/">
-    <DefaultRoute handler={Landing} />
+    <DefaultRoute name="home" handler={Landing} />
     <Route name="leaders" handler={Leaders}>
       <DefaultRoute handler={Leaders.Posts} />
       <Route name="topPosts" path="posts" handler={Leaders.Posts} />

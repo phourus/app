@@ -1,5 +1,7 @@
 "use strict";
 let React = require('react');
+let Router = require('react-router');
+let Link = Router.Link;
 let Store = require('../stores/search');
 let Actions = require('../actions/search');
 let Post = require('./post');
@@ -36,7 +38,7 @@ let Convert = React.createClass({
         <div>
           <input placeholder="email" />
           <button className="button green">Sign Up Now</button>
-          Already registered? <a href="">Login here</a>.
+          Already registered? <Link to="account">Login here</Link>.
         </div>
       </div>
     );
@@ -56,6 +58,7 @@ let Explore = React.createClass({
 });
 
 let Explorer = React.createClass({
+  mixins: [Router.State],
   getInitialState: function () {
     return {
       posts: []
@@ -82,9 +85,12 @@ let Explorer = React.createClass({
     return (
       <div className="explorer">
         <div className="posts">{posts}</div>
-        <button className="button blue" style={{margin: 'auto'}}>See More</button>
+        <button className="button blue" style={{margin: 'auto'}} onClick={this._more}>See More</button>
       </div>
     );
+  },
+  _more: function () {
+    this.context.router.transitionTo('search');
   }
 });
 

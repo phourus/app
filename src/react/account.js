@@ -99,7 +99,7 @@ let Profile = React.createClass({
     //<Link href="/account/password">Change my password</Link>
     return (
       <div className="profile">
-        <Link to="user" params={{id: this.props.id}}>{this.props.username}</Link>
+        <Link to="userPosts" params={{id: this.props.id}}>{this.props.username}</Link>
         <div><strong>Full Name:</strong> {this.props.first} {this.props.last}</div>
         <div>{(this.props.address.city) ? this.props.address.city + ', ' : ''} {this.props.address.state || ''}</div>
         <div><Link to="myPosts">View my Posts</Link></div>
