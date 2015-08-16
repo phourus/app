@@ -11,9 +11,10 @@ module.exports = Reflux.createStore({
   },
   _add: function (color, msg, code) {
     let id = this._id;
+    console.warn('PHOURUS ERROR (' + color + ') ' + code, msg);
     this._alerts.push({id: id, color: color, msg: msg, code: code});
     this._id++;
-    this.trigger(this._alerts);
+    //this.trigger(this._alerts);
   },
   _remove: function (i) {
     delete this._alerts[i];
