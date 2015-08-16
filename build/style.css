@@ -2461,8 +2461,8 @@ i.fa-minus {
   -webkit-border-radius: 16px;
   -moz-border-radius: 16px;
   border-radius: 16px;
-  font-size: 0.9em;
-  color: #aaa;
+  font-size: 1.2em;
+  color: #999;
   margin-left: 4px;
   display: inline-block;
 }
@@ -2472,14 +2472,15 @@ i.fa-minus {
   text-decoration: underline;
   cursor: pointer;
 }
-.tag button.remove {
+.tag a.remove {
   border: none;
   background: transparent;
-  display: inline;
+  display: inline-block;
   font-size: 1em;
   color: inherit;
+  margin-left: 10px;
 }
-.tag button.remove:hover {
+.tag a.remove:hover {
   color: #fc2727;
   text-decoration: none;
   cursor: pointer;

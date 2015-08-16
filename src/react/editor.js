@@ -421,7 +421,7 @@ let Tags = React.createClass({
 		let currentTags = [];
 		if (this.props.post && this.props.post.tags) {
 			currentTags = this.props.post.tags.map((item) => {
-				return <div key={item.id} className="tag">{item.tag} <button id={item.id} className="remove" onClick={this._remove}>x</button></div>
+				return <div key={item.id} className="tag">{item.tag}<a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>x</a></div>
 			});
 		}
 		return (
