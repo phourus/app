@@ -25,10 +25,12 @@ router.post('/register', (req, res) => {
   let { email, password } = authDecode(auth);
   return db.transaction(function (t) {
     return users.create({email: email}, {transaction: t})
-      .then(function (user) {
-          var hash = passwords.hash(password);
+    .then(function (user) {
+        return passwords.hash(password)
+        .then(function (hash) {
           return passwords.create({userId: user.id, hash: hash}, {transaction: t});
-      });
+        });
+    });
   })
   .then(function (result) {
     console.log(result);
@@ -56,7 +58,7 @@ router.post('/login', (req, res) => {
       .then(function (user_id) {
         return passwords.authorize(user_id, password)
           .then(function (data) {
-            if (data.count !== 1) {
+            if (data !== true) {
               console.error('user_id + hash not found');
               res.send(404);
             }
