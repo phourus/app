@@ -13,6 +13,7 @@ let Account = React.createClass({
     if (token.get() !== false) {
       return (
         <div className="activity">
+          <Link to="account" className="button gold toggle"><i className="fa fa-gear" /> My Account</Link>
           <h1>My Activity</h1>
           <Notifications />
           <History />

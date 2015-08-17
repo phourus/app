@@ -669,6 +669,11 @@ div.alerts button {
     vertical-align: top;
   }
 }
+.activity ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 .admin .heading .pic {
   width: 25%;
   display: inline-block;
@@ -2617,6 +2622,16 @@ i.fa-minus {
 .links .list > div button.edit {
   float: right;
   width: 100px;
+}
+/** TOGGLE **/
+.account a.toggle.button,
+.activity a.toggle.button {
+  float: right;
+  margin-top: 30px;
+}
+.account a.toggle.button:hover,
+.activity a.toggle.button:hover {
+  color: #fff;
 }
 /** LEGALESE **/
 .general ol li {
