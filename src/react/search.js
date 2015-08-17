@@ -38,13 +38,7 @@ let Search = React.createClass({
 		}
 	},
 	componentDidMount: function () {
-		let type = null;
-		let route = this.context.router.getCurrentRoutes();
-		let params = this.context.router.getCurrentParams();
-		if (route[2]) {
-			type = route[2].name;
-		}
-		Actions.context(type, params.id);
+		this._context();
 		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
 		});
@@ -53,17 +47,30 @@ let Search = React.createClass({
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
+	componentWillReceiveProps: function () {
+		this._context();
+	},
 	render: function () {
 		let visible = 'fa fa-minus-square-o';
 		let hidden = 'fa fa-plus-square-o';
+		let hasMore = (this.state.posts.length < this.state.total);
 		return (
 			<div className="search">
 				<Head {...this.state.params} />
-				<Scroll pageStart={0} loadMore={this._more} hasMore={(this.state.posts.length < this.state.total)} loader={<div className="loader">Loading more...</div>}>
-						<Posts posts={this.state.posts} selected={this.state.selected} scroll={this.state.scroll} />
+				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader">Loading more...</div>}>
+					<Posts posts={this.state.posts} selected={this.state.selected} scroll={this.state.scroll} />
 				</Scroll>
 			</div>
 		);
+	},
+	_context: function () {
+		let type = null;
+		let route = this.context.router.getCurrentRoutes();
+		let params = this.context.router.getCurrentParams();
+		if (route[2]) {
+			type = route[2].name;
+		}
+		Actions.context(type, params.id);
 	},
 	_more: function () {
 		Actions.more();
@@ -142,7 +149,7 @@ let Context = React.createClass({
 		let label = 'Viewing all public Phourus posts';
 		let img = '/assets/logos/logo-emblem.png';
 		let clear = false;
-		let clearLink = <span> | Clear filters <a href="javascript:void(0)" className="close" onClick={this._clear}>x</a></span>;
+		let clearLink = <span> | Clear filters <Link to="search" className="close">x</Link></span>;
 		let link = false;
 		let name = '';
 		if (this.props.profile) {

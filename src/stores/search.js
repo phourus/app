@@ -107,6 +107,7 @@ let Stream = Reflux.createStore({
     this._collection();
   },
   _context: function (type, id) {
+    this.params.page = 1;
     this.params.context = {
       type: type,
       id: id,
