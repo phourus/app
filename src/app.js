@@ -15,9 +15,9 @@ let App = React.createClass({
             <Link to="home"></Link>
           </div>
           <nav className="nav">
-            <Link to="search" className="search fa fa-search"></Link>
-            <Link to="editor" className="editor fa fa-pencil"></Link>
-            <Link to="account" className="account fa fa-user"><span className="notifications">13</span></Link>
+            <Link to="search" className="fa fa-search"></Link>
+            <Link to="editor" className="fa fa-pencil"></Link>
+            <Link to="activity" className="fa fa-user"><span className="notifications"></span></Link>
           </nav>
         </header>
         <div className="spacer"></div>
