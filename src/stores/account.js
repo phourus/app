@@ -110,7 +110,6 @@ module.exports = Reflux.createStore({
     .then((data) => {
       this.authenticated = true;
       token.save(data);
-      account.refresh();
       this._get();
     })
     .catch((code) => {
@@ -131,7 +130,6 @@ module.exports = Reflux.createStore({
     token.remove();
     this.user = null;
     this.authenticated = false;
-    account.refresh();
     this.trigger({user: this.user});
   }
 });

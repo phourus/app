@@ -1,23 +1,18 @@
 var http = require('../ajax')(window);
 var base = '/rest/links/';
-var settings = {
-  headers: {
-    "Authorization": require('../token').get()
-  },
-  promise: true
-}
+var settings = require('../settings');
 
 module.exports = {
   collection: function (params) {
-    return http.get(base, settings);
+    return http.get(base, settings());
   },
   add: function (model) {
-    return http.post(base, model, settings);
+    return http.post(base, model, settings());
   },
   save: function (id, model) {
-    return http.put(base + id, model, settings);
+    return http.put(base + id, model, settings());
   },
   remove: function(id) {
-    return http.delete(base + id, settings);
+    return http.delete(base + id, settings());
   }
 };

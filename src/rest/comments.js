@@ -1,11 +1,6 @@
 var http = require('../ajax')(window);
 var base = '/rest/comments/';
-var settings = {
-  headers: {
-    "Authorization": require('../token').get()
-  },
-  promise: true
-}
+var settings = require('../settings');
 
 module.exports = {
   collection: function (params) {
@@ -16,6 +11,6 @@ module.exports = {
     if (params.user_id) {
       query += 'user_id=' + params.user_id;
     }
-    return http.get(base + '?' + query, settings);
+    return http.get(base + '?' + query, settings());
   }
 };

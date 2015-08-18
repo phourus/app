@@ -10,6 +10,5 @@ module.exports = {
   history: account.history,
   orgs: account.orgs,
   login: account.login,
-  register: account.register,
-  refresh: account.refresh
+  register: account.register
 };
