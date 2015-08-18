@@ -8,9 +8,18 @@ let token = require('../token');
 let View401 = require('./401');
 let moment = require('moment');
 
-let Account = React.createClass({
+let Activity = React.createClass({
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen((data) => {
+      this.setState({user: data.user, notifications: data.notifications, history: data.history});
+    });
+    Actions.get();
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
-    if (token.get() !== false) {
+    if (Store.authenticated === true) {
       return (
         <div className="activity">
           <Link to="account" className="button gold toggle"><i className="fa fa-gear" /> My Account</Link>
@@ -46,7 +55,6 @@ let Notifications = React.createClass({
     let views = this.state.notifications[0] || [];
     let comments = this.state.notifications[1] || [];
     let thumbs = this.state.notifications[2] || [];
-
     views = views.map(function (item) {
       return <li key={item.id}><img src={`/assets/avatars/${item.viewer.img}.jpg`} /><a href={`/user/${item.viewer.id}`}>{item.viewer.username}</a> viewed your profile</li>;
     });
@@ -113,4 +121,4 @@ let History = React.createClass({
   }
 });
 
-module.exports = Account;
+module.exports = Activity;

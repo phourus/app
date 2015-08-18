@@ -33,9 +33,7 @@ let Account = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
-      if (data.user) {
-        this.setState(data.user);
-      }
+      this.setState(data.user);
     });
     Actions.get();
   },
@@ -43,7 +41,7 @@ let Account = React.createClass({
     this.unsubscribe();
   },
   render: function () {
-    if (token.get() !== false) {
+    if (Store.authenticated === true) {
       return (
         <div className="account">
           <Link to="activity" className="button gold toggle"><i className="fa fa-bell" /> My Activity</Link>

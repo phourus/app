@@ -6,29 +6,14 @@ let msg = require("../actions/alerts").add;
 let token = require('../token');
 
 module.exports = Reflux.createStore({
-  user: {
-    id: null,
-    pic: "",
-    username: "",
-    first: "",
-    last: "",
-    email: "",
-    phone: "",
-    company: "",
-    occupation: "",
-    website: "",
-    dob: "",
-    gender: "",
-    address: {
-        street: "",
-        city: "",
-        state: "",
-        zip: ""
-    }
-  },
+  authenticated: false,
+  user: null,
   notifications: [],
   history: [],
   init: function () {
+    if (token.get()) {
+      this.authenticated = true;
+    }
     this.listenTo(get, this._get);
     this.listenTo(edit, this._edit);
     this.listenTo(password, this._search);
@@ -43,10 +28,12 @@ module.exports = Reflux.createStore({
   _get: function () {
     account.get()
     .then(data => {
-      console.log(data);
+      this.user = data;
       this.trigger({user: data});
     })
     .catch(code => {
+      this.authenticated = false;
+      this.user = null;
       if (code != 200) {
         msg('yellow', 'Account could not be loaded', code);
       }
@@ -121,6 +108,7 @@ module.exports = Reflux.createStore({
   _login: function (email, password) {
     account.login(email, password)
     .then((data) => {
+      this.authenticated = true;
       token.save(data);
       account.refresh();
       this._get();
@@ -132,6 +120,7 @@ module.exports = Reflux.createStore({
   _register: function (email, password) {
     account.register(email, password)
     .then((data) => {
+      this._login(email, password);
       msg('green', 'Registration complete', code);
     })
     .catch((code) => {
@@ -140,7 +129,9 @@ module.exports = Reflux.createStore({
   },
   _logout: function () {
     token.remove();
+    this.user = null;
+    this.authenticated = false;
     account.refresh();
-    this._get();
+    this.trigger({user: this.user});
   }
 });

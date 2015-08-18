@@ -10,10 +10,10 @@ var comments = require('./comments');
 var users = db.define('users', {
   id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
   status: types.ENUM('new', 'active', 'inactive', 'closed'),
-  username: types.STRING(20),
+  username: {type: types.STRING(20), unique: true},
   first: types.STRING(40),
   last: types.STRING(40),
-  email: types.STRING(60),
+  email: {type: types.STRING(60), unique: true},
   phone: types.STRING(20),
   gender: types.ENUM('M', 'F', 'O', 'P'),
   occupation: types.STRING(40),

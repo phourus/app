@@ -5,6 +5,7 @@ let moment = require('moment');
 let View401 = require('./401');
 let Actions = require('../actions/editor');
 let Store = require('../stores/editor');
+let Account = require('../stores/account');
 let token = require('../token');
 let tax = require('../taxonomy');
 let RTE = require('react-quill');
@@ -41,14 +42,18 @@ let Editor = React.createClass({
 		if (id) {
 			Actions.single(id);
 		}
+		this.unsubscribeAccount = Account.listen((data) => {
+			this.setState({account: data});
+		});
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
+		this.unsubscribeAccount();
 	},
 	render: function () {
 		let orgs = false;
 		let view = <TextEditor ref="rte" post={this.state.post}></TextEditor>
-		if (token.get() === false) {
+		if (Account.authenticated !== true) {
 			return (<View401 />);
 		}
 		let remove = false;
