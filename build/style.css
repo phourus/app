@@ -540,7 +540,13 @@ div.alerts button {
   vertical-align: top;
 }
 .account .heading .orgs .org {
-  height: 30px;
+  border-bottom: solid 1px #eee;
+  border-left: solid 4px #555;
+  padding-left: 10px;
+}
+.account .heading .orgs .org:hover {
+  border-left: solid 4px #5faee3;
+  background-color: #f7f7f7;
 }
 .account .heading .orgs .org a {
   color: #333;

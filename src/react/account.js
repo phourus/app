@@ -63,9 +63,6 @@ let Pic = React.createClass({
         <img src={`/assets/avatars/${this.props.img || 'default'}.jpg`} />
       </div>
     );
-  },
-  _logout: function () {
-    Actions.logout();
   }
 });
 
@@ -82,6 +79,9 @@ let Profile = React.createClass({
         <div><a href="javascript:void(0)" onClick={this._logout}>Logout</a></div>
       </div>
     );
+  },
+  _logout: function () {
+    Actions.logout();
   }
 });
 
@@ -106,7 +106,7 @@ let Orgs = React.createClass({
   render: function () {
     return (
       <div className="orgs">
-        <h4>My Organizations</h4>
+        <strong>My Organizations</strong>
         {this.state.orgs.map((item) => {
           var admin = false;
           if (item.admin === true) {
@@ -114,7 +114,9 @@ let Orgs = React.createClass({
           }
           return (
             <div className="org">
-              <Link to="orgPosts" params={{id: item.org.id}}>{item.org.name}</Link> <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>Remove Me</a> {admin}
+              {admin}
+              <Link to="orgPosts" params={{id: item.org.id}}>{item.org.name}</Link> <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>Remove Me</a>
+              <div style={{clear: 'right'}}></div>
             </div>
           );
         })}

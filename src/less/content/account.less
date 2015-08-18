@@ -31,7 +31,14 @@
       .Cols(12);
 
       .org {
-        height: 30px;
+        border-bottom: solid 1px #eee;
+        border-left: solid 4px #555;
+        padding-left: 10px;
+
+        &:hover {
+          border-left: solid 4px @blue-light;
+          background-color: #f7f7f7;
+        }
 
         a {
           color: #333;
