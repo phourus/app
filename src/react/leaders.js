@@ -32,12 +32,12 @@ let Leaders = React.createClass({
         return (
           <div className="leaders">
             <h1>Leaders</h1>
+            <Filter {...this.state} />
             <Visualization {...this.state} />
             <List {...this.state} />
             <Profile {...this.state} />
             <Tabs {...this.state} />
             <RouteHandler {...this.state} />
-            <Filter {...this.state} />
           </div>
         );
      }

@@ -1,12 +1,13 @@
 "use strict";
 let Reflux = require('reflux');
 let account = require('../api/account');
-let { get, edit, password, deactivate, history, notifications, orgs, login, register, logout } = require('../actions/account');
+let { change, get, edit, password, deactivate, history, notifications, orgs, login, register, logout } = require('../actions/account');
 let msg = require("../actions/alerts").add;
 let token = require('../token');
 
 module.exports = Reflux.createStore({
   authenticated: false,
+  changes: {},
   user: null,
   notifications: [],
   history: [],
@@ -14,6 +15,7 @@ module.exports = Reflux.createStore({
     if (token.get()) {
       this.authenticated = true;
     }
+    this.listenTo(change, this._change);
     this.listenTo(get, this._get);
     this.listenTo(edit, this._edit);
     this.listenTo(password, this._search);
@@ -24,6 +26,10 @@ module.exports = Reflux.createStore({
     this.listenTo(login, this._login);
     this.listenTo(register, this._register);
     this.listenTo(logout, this._logout);
+  },
+  _change: function (key, value) {
+    this.changes[key] = value;
+    this.trigger({changes: this.changes});
   },
   _get: function () {
     account.get()
@@ -39,8 +45,8 @@ module.exports = Reflux.createStore({
       }
     });
   },
-  _edit: function (update) {
-    account.edit(update)
+  _edit: function () {
+    account.edit(this.changes)
     .then(data => {
       if (code == 204) {
         msg('green', 'Account updated', code);

@@ -2,6 +2,7 @@
 let Reflux = require('reflux');
 
 module.exports = {
+  change: Reflux.createAction(),
   get: Reflux.createAction(),
   edit: Reflux.createAction(),
   password: Reflux.createAction(),

@@ -56,10 +56,12 @@
   }
 
   .update {
-    .Row();
 
     > div {
-      .Cols(12);
+      .Row(96%);
+      padding: 2%;
+      background-color: #f7f7f7;
+      margin-top: 40px;
     }
   }
 
@@ -70,6 +72,7 @@
   label {
     display: block;
     font-size: 0.8em;
+    .Cols(4);
 
     input, select {
       display: block;
@@ -98,10 +101,20 @@
     }
 
     .update {
-      .Row();
+      .Row(100%);
 
-      > div {
-        .Cols(6);
+
+      div.info {
+
+      }
+
+      div.address {
+
+        label {
+          .Cols(3);
+          margin: 0;
+          padding: 0;
+        }
       }
     }
   }
@@ -124,14 +137,6 @@
 
       .orgs {
         .Cols(6);
-      }
-    }
-
-    .update {
-      .Row();
-
-      > div {
-        .Cols(4);
       }
     }
   }

@@ -11,29 +11,14 @@ let moment = require('moment');
 let Account = React.createClass({
   getInitialState: function () {
     return {
-      id: 0,
-      img: "",
-      username: "",
-      first: "",
-      last: "",
-      email: "",
-      phone: "",
-      company: "",
-      occupation: "",
-      website: "",
-      dob: "",
-      gender: "",
-      address: {
-        street: "",
-        city: "",
-        state: "",
-        zip: ""
-      }
+      user: {},
+      changes: {},
+      address: {}
     }
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
-      this.setState(data.user);
+      this.setState(data);
     });
     Actions.get();
   },
@@ -76,15 +61,6 @@ let Pic = React.createClass({
     return (
       <div className="pic">
         <img src={`/assets/avatars/${this.props.img || 'default'}.jpg`} />
-        <br />
-        <Link to="update">Edit Account</Link>
-        <br />
-        <Link to="activity">My Notifications</Link>
-        <br />
-        <Link to="activity">My History</Link>
-        <br />
-        <a href="javascript:void(0)" onClick={this._logout}>Logout</a>
-        <br />
       </div>
     );
   },
@@ -98,10 +74,12 @@ let Profile = React.createClass({
     //<Link href="/account/password">Change my password</Link>
     return (
       <div className="profile">
-        <Link to="userPosts" params={{id: this.props.id}}>{this.props.username}</Link>
-        <div><strong>Full Name:</strong> {this.props.first} {this.props.last}</div>
-        <div>{(this.props.address.city) ? this.props.address.city + ', ' : ''} {this.props.address.state || ''}</div>
         <div><Link to="myPosts">View my Posts</Link></div>
+        <div><Link to="activity">View my Activity</Link></div>
+        <div><a href="javascript:void(0)">View my Profile</a></div>
+        <div><a href="javascript:void(0)">View my Stats</a></div>
+        <br />
+        <div><a href="javascript:void(0)" onClick={this._logout}>Logout</a></div>
       </div>
     );
   }
@@ -158,7 +136,6 @@ Account.Edit = React.createClass({
     return (
       <div className="update">
         <Info {...this.props} />
-        <Details {...this.props} />
         <Address {...this.props} />
       </div>
     );
@@ -182,68 +159,70 @@ let Uploader = React.createClass({
 
 let Info = React.createClass({
   render: function () {
+    let account = this.props.user;
+    Object.keys(this.props.changes).forEach((key) => {
+      account[key] = this.props.changes[key];
+    });
     return (
       <div className="info">
         <h3>Basic Information</h3>
         <div id="user_basic">
           <label>Username
-            <input ref="username" className="username" type="text" value={this.props.username} disabled="true" />
-          </label>
-          <label>First
-            <input ref="first" className="first" type="text" value={this.props.first} onChange={this._change} />
-          </label>
-          <label>Last
-          <input ref="last" className="last" type="text" value={this.props.last} onChange={this._change} />
+            <input ref="username" className="username" type="text" value={account.username} disabled="true" />
           </label>
           <label>Email
-            <input ref="email" className="email" type="text" value={this.props.email} onChange={this._change} />
+            <input ref="email" className="email" type="text" value={account.email} onChange={this._email} />
+          </label>
+          <label>First
+            <input ref="first" className="first" type="text" value={account.first} onChange={this._first} />
+          </label>
+          <label>Last
+          <input ref="last" className="last" type="text" value={account.last} onChange={this._last} />
           </label>
           <label>Phone
-            <input ref="phone" className="phone" type="text" value={this.props.phone} onChange={this._change} />
+            <input ref="phone" className="phone" type="text" value={account.phone} onChange={this._phone} />
           </label>
-        </div>
-        <button className="button green" onClick={this.props.save}>Save Changes</button>
-      </div>
-    );
-  }
-});
-
-let Details = React.createClass({
-  render: function () {
-    return (
-      <div className="details">
-        <h3>Details</h3>
-        <div id="user_detail">
           <label>Company
-            <input ref="company" className="company" type="text" value={this.props.company} onChange={this.props.change} />
+            <input ref="company" className="company" type="text" value={account.company} onChange={this._company} />
           </label>
           <label>Occupation
-            <input ref="occupation" className="occupation" type="text" value={this.props.occupation} onChange={this.props.change} />
+            <input ref="occupation" className="occupation" type="text" value={account.occupation} onChange={this._occupation} />
           </label>
           <label>Website
-            <input ref="website" className="website" type="text" value={this.props.website} onChange={this.props.change} />
+            <input ref="website" className="website" type="text" value={account.website} onChange={this._website} />
           </label>
           <label>Date of Birth
-            <input ref="dob" className="dob" type="datetime" value={this.props.dob} onChange={this.props.change} />
+            <input ref="dob" className="dob" type="datetime" value={account.dob} onChange={this._dob} />
           </label>
           <label>Gender
-            <select ref="gender" className="gender" value={this.props.gender} onChange={this.props.change}>
+            <select ref="gender" className="gender" value={account.gender} onChange={this._gender}>
               <option value="">Private</option>
               <option value="F">Female</option>
               <option value="M">Male</option>
             </select>
           </label>
         </div>
-        <button className="button green" onClick={this.props.save}>Save Changes</button>
+        <button className="button green" onClick={this._save}>Save Changes</button>
       </div>
     );
+  },
+  _first: function (e) { Actions.change('first', e.currentTarget.value); },
+  _last: function (e) { Actions.change('last', e.currentTarget.value); },
+  _phone: function (e) { Actions.change('phone', e.currentTarget.value); },
+  _company: function (e) { Actions.change('company', e.currentTarget.value); },
+  _occupation: function (e) { Actions.change('occupation', e.currentTarget.value); },
+  _website: function (e) { Actions.change('website', e.currentTarget.value); },
+  _dob: function (e) { Actions.change('dob', e.currentTarget.value); },
+  _gender: function (e) { Actions.change('gender', e.currentTarget.value); },
+  _save: function () {
+    Actions.edit();
   }
 });
 
 let Address = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className="address">
         <h3>My Address</h3>
         <div id="user_address">
           <label>Street
