@@ -5,6 +5,7 @@ let Link = Router.Link;
 let Store = require('../stores/search');
 let Actions = require('../actions/search');
 let Post = require('./post');
+let Emblem = require('./emblem');
 
 let Landing = React.createClass({
   render: function () {
@@ -31,7 +32,8 @@ let Slider = React.createClass({
     var classes = ['', '', '', '', ''];
     classes[this.state.slide] = 'selected';
     return (
-      <div className="slider" onClick={this._next}>
+      <div className="slider">
+        <Emblem slide={this.state.slide} green={this._green} blue={this._blue} red={this._red} gold={this._gold} />
         <div className={classes[0]}>
           <img src="/assets/landing/home.jpg" className="banner" />
           <div className="title">The Pursuit of Truth</div>
@@ -66,6 +68,34 @@ let Slider = React.createClass({
       return;
     }
     this.setState({slide: this.state.slide + 1});
+  },
+  _green: function () {
+    if (this.state.slide === 1) {
+      this.setState({slide: 0});
+      return;
+    }
+    this.setState({slide: 1});
+  },
+  _blue: function () {
+    if (this.state.slide === 2) {
+      this.setState({slide: 0});
+      return;
+    }
+    this.setState({slide: 2});
+  },
+  _red: function () {
+    if (this.state.slide === 3) {
+      this.setState({slide: 0});
+      return;
+    }
+    this.setState({slide: 3});
+  },
+  _gold: function () {
+    if (this.state.slide === 4) {
+      this.setState({slide: 0});
+      return;
+    }
+    this.setState({slide: 4});
   }
 });
 

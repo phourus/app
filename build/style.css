@@ -1001,10 +1001,15 @@ div.alerts button {
 #content .landing .slider {
   width: 100%;
   max-width: 100%;
+  position: relative;
+}
+#content .landing .slider > div.emblem {
+  position: absolute;
+  bottom: 0;
+  display: block;
 }
 #content .landing .slider > div {
   display: none;
-  position: relative;
 }
 #content .landing .slider > div.selected {
   display: block;
@@ -2661,6 +2666,12 @@ i.fa-minus {
 .account a.toggle.button:hover,
 .activity a.toggle.button:hover {
   color: #fff;
+}
+/** EMBLEM **/
+.emblem {
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
 }
 /** LEGALESE **/
 .general ol li {

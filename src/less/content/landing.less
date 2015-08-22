@@ -9,10 +9,16 @@
   .slider {
     width: 100%;
     max-width: 100%;
+    position: relative;
+
+    > div.emblem {
+      position: absolute;
+      bottom: 0;
+      display: block;
+    }
 
     > div {
       display: none;
-      position: relative;
 
       &.selected {
         display: block;
