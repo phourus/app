@@ -2221,7 +2221,8 @@ header {
   height: 40px;
   position: fixed;
   border-bottom: solid 1px #bbb;
-  background-color: #34495e;
+  background-color: #000;
+  opacity: 0.5;
   z-index: 9999;
 }
 header:before,
@@ -2264,7 +2265,7 @@ header nav .fa {
   padding-top: 10px;
 }
 header nav a {
-  color: #1e2f40;
+  color: #eee;
   text-align: center;
 }
 header nav a:hover {
