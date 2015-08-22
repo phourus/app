@@ -25,8 +25,15 @@ let Landing = React.createClass({
 let Slider = React.createClass({
   getInitialState: function () {
     return {
-      slide: 0
+      slide: 0,
+      interval: 5000
     }
+  },
+  componentDidMount: function () {
+    var self = this;
+    setInterval(function () {
+      self._next();
+    }, this.state.interval);
   },
   render: function () {
     var classes = ['', '', '', '', ''];
