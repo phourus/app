@@ -6,6 +6,28 @@
   background: transparent;
   text-align: center;
 
+  .heading {
+    font-size: 2em;
+    display: block;
+    margin: 0;
+    padding: 60px 0 20px 0;
+  }
+
+  div.squeeze {
+    .Row(100%);
+  }
+
+  .explore, .create, .integrate {
+
+    > p {
+      font-style: italic;
+      font-size: 0.8em;
+    }
+  }
+
+  .explore > p { color: #555; }
+  .create > p { color: #ccc; }
+
   .slider {
     height: 500px;
     width: 100%;
@@ -79,17 +101,34 @@
     padding-bottom: 60px;
     width: 100%;
 
-    .squeeze {
-      .Row(80%);
+    div {
+      .Cols(6);
+      margin-top: 40px;
+      color: #ccc;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 20px 0;
 
-      > div {
-        .Cols(3);
-        margin-top: 40px;
-        color: #ddd;
+      &.green {
+        border-top: solid 1px @green-light;
+      }
 
-        i {
-          font-size: 3em;
-        }
+      &.blue {
+        border-top: solid 1px @blue-light;
+      }
+
+      &.red {
+        border-top: solid 1px @red-light;
+      }
+
+      &.gold {
+        border-top: solid 1px @gold-light;
+      }
+      span {
+        color: #777;
+      }
+      i {
+        font-size: 3em;
       }
     }
   }
@@ -99,15 +138,15 @@
     height: 300px;
     background-color: #fff;
 
-    .squeeze {
-      .Row(60%);
+    .heading {
+      padding-bottom: 60px;
+    }
 
-      > div {
-        .Cols(3);
+    div > div {
+      .Cols(3);
 
-        i {
-          font-size: 3em;
-        }
+      i {
+        font-size: 3em;
       }
     }
   }
@@ -118,19 +157,42 @@
     padding-bottom: 60px;
     width: 100%;
 
-    .squeeze {
-      .Row(60%);
+    > p {
+      color: #ddd;
+      margin-bottom: 60px;
+    }
 
-      i {
-        .Cols(2);
-        font-size: 3em;
-      }
+    .heading {
+      color: #f7f7f7;
+    }
+
+    i {
+      .Cols(2);
+      font-size: 2em;
     }
   }
 }
 
 @media (min-width: 500px) {
   #content .landing {
+
+    .squeeze {
+      .Row(80%);
+    }
+
+    .heading {
+      font-size: 2.5em;
+      display: block;
+      margin: 0;
+      padding: 60px 0 20px 0;
+    }
+
+    .explore, .create, .integrate {
+
+      > p {
+        font-size: 1em;
+      }
+    }
 
     .slider {
 
@@ -149,6 +211,12 @@
         }
       }
     }
+
+    .integrate {
+      i {
+        font-size: 3em;
+      }
+    }
   }
 }
 
@@ -160,6 +228,24 @@
     max-width: 100%;
     background: transparent;
     text-align: center;
+
+    .squeeze {
+      .Row(60%);
+    }
+
+    .heading {
+      font-size: 3.5em;
+      display: block;
+      margin: 0;
+      padding: 60px 0 20px 0;
+    }
+
+    .explore, .create, .integrate {
+
+      > p {
+        font-size: 1.5em;
+      }
+    }
 
     .slider {
       height: 700px;
@@ -191,6 +277,12 @@
           margin: 0;
           padding: 0;
         }
+      }
+    }
+
+    .integrate {
+      i {
+        font-size: 4em;
       }
     }
   }

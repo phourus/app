@@ -124,7 +124,7 @@ let Explore = React.createClass({
   render: function () {
     return (
       <div className="explore">
-        <h2>Explore</h2>
+        <h2 className="heading">Explore</h2>
         <p>view our stream of top-rated content</p>
         <Explorer />
       </div>
@@ -173,37 +173,38 @@ let Create = React.createClass({
   render: function () {
     return (
       <div className="create">
-        <h2>Create</h2>
+        <h2 className="heading">Create</h2>
+        <p>create a variety of detailed post types</p>
         <div className="squeeze">
-          <div>
+          <div className="green">
             <i className="fa fa-laptop" /><br />
             Blogs
           </div>
-          <div>
+          <div className="green">
             <i className="fa fa-calendar" /><br />
             Events
           </div>
-          <div>
+          <div className="blue">
             <i className="fa fa-puzzle-piece" /><br />
             Subjects
           </div>
-          <div>
+          <div className="blue">
             <i className="fa fa-question" /><br />
             Questions
           </div>
-          <div>
+          <div className="red">
             <i className="fa fa-bullhorn" /><br />
             Debates
           </div>
-          <div>
+          <div className="red">
             <i className="fa fa-line-chart" /><br />
             Polls
           </div>
-          <div>
+          <div className="gold">
             <i className="fa fa-road" /><br />
             Beliefs
           </div>
-          <div>
+          <div className="gold">
             <i className="fa fa-quote-right" /><br />
             Quotes
           </div>
@@ -217,7 +218,7 @@ let Compete = React.createClass({
   render: function () {
     return (
       <div className="compete">
-        <h2>Compete</h2>
+        <h2 className="heading">Compete</h2>
         <div className="squeeze">
           <div>
             <i className="fa fa-users" /><br />
@@ -245,7 +246,8 @@ let Integrate = React.createClass({
   render: function () {
     return (
       <div className="integrate">
-        <h2>Integrate</h2>
+        <h2 className="heading">Integrate</h2>
+        <p>work with the tools you're already using</p>
         <div className="squeeze">
           <i className="fa fa-facebook" />
           <i className="fa fa-dropbox" />

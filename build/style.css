@@ -998,6 +998,37 @@ div.alerts button {
   background: transparent;
   text-align: center;
 }
+#content .landing .heading {
+  font-size: 2em;
+  display: block;
+  margin: 0;
+  padding: 60px 0 20px 0;
+}
+#content .landing div.squeeze {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .landing div.squeeze:before,
+#content .landing div.squeeze:after {
+  content: "";
+  display: table;
+}
+#content .landing div.squeeze:after {
+  clear: both;
+}
+#content .landing .explore > p,
+#content .landing .create > p,
+#content .landing .integrate > p {
+  font-style: italic;
+  font-size: 0.8em;
+}
+#content .landing .explore > p {
+  color: #555;
+}
+#content .landing .create > p {
+  color: #ccc;
+}
 #content .landing .slider {
   height: 500px;
   width: 100%;
@@ -1061,27 +1092,32 @@ div.alerts button {
   padding-bottom: 60px;
   width: 100%;
 }
-#content .landing .create .squeeze {
-  max-width: 80%;
-  width: 100%;
-  margin: 0 auto;
-}
-#content .landing .create .squeeze:before,
-#content .landing .create .squeeze:after {
-  content: "";
-  display: table;
-}
-#content .landing .create .squeeze:after {
-  clear: both;
-}
-#content .landing .create .squeeze > div {
-  width: 25%;
+#content .landing .create div {
+  width: 50%;
   display: inline-block;
   vertical-align: top;
   margin-top: 40px;
-  color: #ddd;
+  color: #ccc;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 20px 0;
 }
-#content .landing .create .squeeze > div i {
+#content .landing .create div.green {
+  border-top: solid 1px #9cd900;
+}
+#content .landing .create div.blue {
+  border-top: solid 1px #5faee3;
+}
+#content .landing .create div.red {
+  border-top: solid 1px #fc2727;
+}
+#content .landing .create div.gold {
+  border-top: solid 1px #f2c13d;
+}
+#content .landing .create div span {
+  color: #777;
+}
+#content .landing .create div i {
   font-size: 3em;
 }
 #content .landing .compete {
@@ -1089,25 +1125,15 @@ div.alerts button {
   height: 300px;
   background-color: #fff;
 }
-#content .landing .compete .squeeze {
-  max-width: 60%;
-  width: 100%;
-  margin: 0 auto;
+#content .landing .compete .heading {
+  padding-bottom: 60px;
 }
-#content .landing .compete .squeeze:before,
-#content .landing .compete .squeeze:after {
-  content: "";
-  display: table;
-}
-#content .landing .compete .squeeze:after {
-  clear: both;
-}
-#content .landing .compete .squeeze > div {
+#content .landing .compete div > div {
   width: 25%;
   display: inline-block;
   vertical-align: top;
 }
-#content .landing .compete .squeeze > div i {
+#content .landing .compete div > div i {
   font-size: 3em;
 }
 #content .landing .integrate {
@@ -1116,26 +1142,44 @@ div.alerts button {
   padding-bottom: 60px;
   width: 100%;
 }
-#content .landing .integrate .squeeze {
-  max-width: 60%;
-  width: 100%;
-  margin: 0 auto;
+#content .landing .integrate > p {
+  color: #ddd;
+  margin-bottom: 60px;
 }
-#content .landing .integrate .squeeze:before,
-#content .landing .integrate .squeeze:after {
-  content: "";
-  display: table;
+#content .landing .integrate .heading {
+  color: #f7f7f7;
 }
-#content .landing .integrate .squeeze:after {
-  clear: both;
-}
-#content .landing .integrate .squeeze i {
+#content .landing .integrate i {
   width: 16.66666667%;
   display: inline-block;
   vertical-align: top;
-  font-size: 3em;
+  font-size: 2em;
 }
 @media (min-width: 500px) {
+  #content .landing .squeeze {
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  #content .landing .squeeze:before,
+  #content .landing .squeeze:after {
+    content: "";
+    display: table;
+  }
+  #content .landing .squeeze:after {
+    clear: both;
+  }
+  #content .landing .heading {
+    font-size: 2.5em;
+    display: block;
+    margin: 0;
+    padding: 60px 0 20px 0;
+  }
+  #content .landing .explore > p,
+  #content .landing .create > p,
+  #content .landing .integrate > p {
+    font-size: 1em;
+  }
   #content .landing .slider > div.emblem {
     width: 60px;
   }
@@ -1144,6 +1188,9 @@ div.alerts button {
   }
   #content .landing .slider > div p {
     font-size: 1.5em;
+  }
+  #content .landing .integrate i {
+    font-size: 3em;
   }
 }
 @media (min-width: 800px) {
@@ -1154,6 +1201,30 @@ div.alerts button {
     max-width: 100%;
     background: transparent;
     text-align: center;
+  }
+  #content .landing .squeeze {
+    max-width: 60%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  #content .landing .squeeze:before,
+  #content .landing .squeeze:after {
+    content: "";
+    display: table;
+  }
+  #content .landing .squeeze:after {
+    clear: both;
+  }
+  #content .landing .heading {
+    font-size: 3.5em;
+    display: block;
+    margin: 0;
+    padding: 60px 0 20px 0;
+  }
+  #content .landing .explore > p,
+  #content .landing .create > p,
+  #content .landing .integrate > p {
+    font-size: 1.5em;
   }
   #content .landing .slider {
     height: 700px;
@@ -1181,6 +1252,9 @@ div.alerts button {
     height: 800px;
     margin: 0;
     padding: 0;
+  }
+  #content .landing .integrate i {
+    font-size: 4em;
   }
 }
 .leaders .profile {
