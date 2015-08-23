@@ -1,18 +1,31 @@
-let localStorage = require('localStorage');
+//let localStorage = require('localStorage');
 
 let token = {
     get: function () {
-      let token = localStorage.getItem('token'); 
-      if (!token) {
-          token = false;
+      try {
+        let token = localStorage.getItem('token');
+        if (!token) {
+            token = false;
+        }
+        return token;
+      } catch (e) {
+        console.error(e);
+        return false;
       }
-      return token;
     },
     save: function (token) {
-      localStorage.setItem('token', token);
+      try {
+        localStorage.setItem('token', token);
+      } catch (e) {
+        console.error(e);
+      }
     },
     remove: function () {
-      localStorage.removeItem('token');
+      try {
+        localStorage.removeItem('token');
+      } catch (e) {
+        console.error(e);
+      }
     }
 }
 module.exports = token;
