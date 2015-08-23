@@ -1,31 +1,33 @@
 //let localStorage = require('localStorage');
+let token = false;
 
-let token = {
+module.exports = {
     get: function () {
       try {
-        let token = localStorage.getItem('token');
+        token = localStorage.getItem('token');
         if (!token) {
             token = false;
         }
         return token;
       } catch (e) {
-        console.error(e);
-        return false;
+        console.warn('localStorage not supported');
+        return token;
       }
     },
-    save: function (token) {
+    save: function (jwt) {
       try {
         localStorage.setItem('token', token);
       } catch (e) {
-        console.error(e);
+        token = jwt;
+        console.warn('localStorage not supported');
       }
     },
     remove: function () {
       try {
         localStorage.removeItem('token');
       } catch (e) {
-        console.error(e);
+        token = false;
+        console.warn('localStorage not supported');
       }
     }
-}
-module.exports = token;
+};
