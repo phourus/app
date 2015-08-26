@@ -29,14 +29,14 @@ let Leaders = React.createClass({
        }
     },
      render: function () {
+        //<Filter {...this.state} />
         return (
           <div className="leaders">
             <h1>Leaders</h1>
-            <Filter {...this.state} />
+            <Profile {...this.state} />
+            <Tabs {...this.state} /><br />
             <Visualization {...this.state} />
             <List {...this.state} />
-            <Profile {...this.state} />
-            <Tabs {...this.state} />
             <RouteHandler {...this.state} />
           </div>
         );
@@ -48,6 +48,15 @@ let Profile = React.createClass({
         return (
             <div className="profile">
                 <h2>jessedrelick</h2>
+                <div className="metric">
+                  <select>
+                      <option>User Influence Points</option>
+                      <option>Popularity</option>
+                      <option>Comments</option>
+                      <option>Views</option>
+                      <option>Likes</option>
+                  </select>
+                </div>
                 <div className="pic">
                     <img src="/assets/default.png" />
                     <div className="rank">
@@ -175,30 +184,22 @@ let Visualization = React.createClass({
       };
     },
     render: function () {
+      // <div className="visual">
+      //   <select onChange={this._visual}>
+      //       <option>Map</option>
+      //       <option>Heatmap</option>
+      //       <option value="bar">Bar chart</option>
+      //       <option value="donut">Pie chart</option>
+      //       <option>Area Chart</option>
+      //   </select>
+      // </div>
       return (
         <div className="visualization">
-          <div className="metric">
-            <select>
-                <option>User Influence Points</option>
-                <option>Popularity</option>
-                <option>Comments</option>
-                <option>Views</option>
-                <option>Likes</option>
-            </select>
-          </div>
-          <div className="visual">
-            <select onChange={this._visual}>
-                <option>Map</option>
-                <option>Heatmap</option>
-                <option value="bar">Bar chart</option>
-                <option value="donut">Pie chart</option>
-                <option>Area Chart</option>
-            </select>
-          </div>
           <div className="date">
             <button className="button blue">3/15/2015 <i className="fa fa-calendar" /></button>
           </div>
-          <Chart {...this.state} />
+          <Chart {...this.state} type="bar" />
+          <Chart {...this.state} type="donut" />
         </div>
       );
     },
@@ -210,7 +211,7 @@ let Visualization = React.createClass({
 
 let Map = React.createClass({
     componentDidMount: function () {
-      //map.render();
+      map.render();
     },
     render: function () {
         return (
@@ -221,9 +222,12 @@ let Map = React.createClass({
 
 let Chart = React.createClass({
   render: function () {
-    this._draw();
+    let self = this;
+    setTimeout(function () {
+      self._draw();
+    }, 1);
     return (
-      <div id="chart"></div>
+      <div id={"chart-" + this.props.type}></div>
     );
   },
   _draw: function () {
@@ -233,6 +237,7 @@ let Chart = React.createClass({
     switch (this.props.type) {
       case 'bar':
         columns.unshift(this.props.metric);
+        options.bindto = '#chart-bar';
         options.data = {columns: [columns], type: this.props.type};
         options.bar = {
               width: {
@@ -249,6 +254,7 @@ let Chart = React.createClass({
           };
         break;
       case 'donut':
+        options.bindto = '#chart-donut';
         options.data = {columns: [], type: this.props.type}
         for (let i in columns) {
           options.data.columns.push([`#${i}`, columns[i]]);
@@ -270,7 +276,7 @@ let List = React.createClass({
         leaders: [
           {
             name: "Jesse Drelick",
-            title: "Lead Gangsta'",
+            title: "Developer'",
             company: "Phourus Inc.",
             location: "Santa Monica, CA"
           },
