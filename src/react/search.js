@@ -22,6 +22,7 @@ let Search = React.createClass({
 			posts: [],
 			total: 0,
 			selected: 0,
+			editing: 0,
 			params: {
 				exclude: [],
 				search: '',
@@ -58,7 +59,7 @@ let Search = React.createClass({
 			<div className="search">
 				<Head {...this.state.params} />
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader">Loading more...</div>}>
-					<Posts posts={this.state.posts} selected={this.state.selected} scroll={this.state.scroll} />
+					<Posts posts={this.state.posts} selected={this.state.selected} editing={this.state.editing} scroll={this.state.scroll} />
 				</Scroll>
 			</div>
 		);
@@ -69,7 +70,15 @@ let Search = React.createClass({
 		let params = this.context.router.getCurrentParams();
 		if (route[2]) {
 			type = route[2].name;
+
+			if (type === 'edit') {
+				this.setState({editing: params.id, selected: params.id});
+				Actions.context('myPosts', null);
+				Actions.single(params.id);
+				return;
+			}
 		}
+
 		Actions.context(type, params.id);
 	},
 	_more: function () {
@@ -410,11 +419,12 @@ let Posts = React.createClass({
 
 		list = data.map((item, i) => {
 			 let location = {};
-			 let selected = (item.id === this.props.selected);
+			 let selected = (item.id == this.props.selected);
+			 let editing = (item.id == this.props.editing);
 			 if (item.user.locations && item.user.locations.length > 0) {
 					 location = item.user.locations[0];
 			 }
-			 return <PostItem key={item.id} post={item} user={item.user} location={location} selected={selected} scroll={this.props.scroll} />;
+			 return <PostItem key={item.id} post={item} user={item.user} location={location} editing={editing} selected={selected} scroll={this.props.scroll} />;
 		});
 		return (
 			<div className={this.props.selected > 0 ? "post" : "posts"}>{list}</div>

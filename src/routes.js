@@ -29,7 +29,6 @@ module.exports = (
       <Route name="topOrgs" path="orgs" handler={Leaders.Orgs} />
       <Route name="topPhourus" path="phourus" handler={Leaders.Phourus} />
     </Route>
-    <Route name="post" path="/post/:id" handler={Post} />
     <Route name="about" handler={About} />
     <Route name="terms" handler={Terms} />
     <Route name="privacy" handler={Privacy} />
@@ -37,6 +36,8 @@ module.exports = (
       <Route name="myPosts" path="me" handler={Search} />
       <Route name="userPosts" path="user/:id" handler={Search} />
       <Route name="orgPosts" path="org/:id" handler={Search} />
+      <Route name="post" path=":id" handler={Search} />
+      <Route name="edit" path="edit/:id" handler={Search}></Route>
     </Route>
     <Route name="account" path="account" handler={Account}>
       <DefaultRoute handler={Account.Edit} />
@@ -54,7 +55,6 @@ module.exports = (
       <DefaultRoute handler={Factory.List} />
       <Route name="list" path="list" handler={Factory.List} />
       <Route name="add" path="add" handler={Factory.Fields} />
-      <Route name="edit" path=":id" handler={Factory.Fields} />
     </Route>
     <Route name="user" path="user/:id" handler={Profile}>
       <DefaultRoute handler={Profile.About} />

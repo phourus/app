@@ -30,6 +30,7 @@ let Stream = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);
     this.listenTo(Actions.select, this._select);
+    this.listenTo(Actions.single, this._single);
     this.listenTo(Actions.create, this._create);
     this.listenTo(Actions.search, this._search);
     this.listenTo(Actions.nextPage, this._nextPage);
@@ -54,6 +55,10 @@ let Stream = Reflux.createStore({
         this.posts.unshift(this.created);
         this.created = null;
       }
+      if (this.single) {
+        this.posts.unshift(this.single);
+        this.single = null;
+      }
       this.trigger({posts: this.posts, total: data.count, params: this.params, scroll: this.scroll});
     })
     .catch(code => {
@@ -67,6 +72,28 @@ let Stream = Reflux.createStore({
     this.selected = id;
     this.scroll = false;
     this.trigger({selected: this.selected, scroll: this.scroll});
+  },
+  _single: function (id) {
+    let local = this._local(id);
+    if (local) {
+      this.single = local;
+    }
+    posts.single(id)
+    .then(data => {
+      this.single = data;
+      this._collection();
+    })
+    .catch(code => {
+      if (code != 200) {
+         console.error(code);
+         msg('red', 'Post could not be loaded', code);
+      }
+    });
+  },
+  _local: function (id) {
+    // check local posts indexed by id for match
+    // closed post, read post status
+    return false;
   },
   _create: function () {
     this.selected = 0;
