@@ -5,6 +5,7 @@ let Router = require('react-router');
 let { Link, RouteHandler} = Router;
 
 let Alerts = require('./react/alerts');
+let Stream = require('./actions/search');
 
 let App = React.createClass({
   render: function () {
@@ -23,7 +24,7 @@ let App = React.createClass({
                 </Link>
               </li>
               <li className="create">
-                <Link to="editor">
+                <Link to="myPosts" onClick={this._create}>
                   <i className="fa fa-pencil" />
                   Create
                 </Link>
@@ -60,6 +61,9 @@ let App = React.createClass({
         </div>
       </div>
     );
+  },
+  _create: function () {
+    Stream.create();
   }
 });
 

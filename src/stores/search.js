@@ -14,6 +14,7 @@ let Stream = Reflux.createStore({
   total: 0,
   selected: 0,
   scroll: false,
+  created: null,
   params: {
     exclude: [],
     search: '',
@@ -29,6 +30,7 @@ let Stream = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);
     this.listenTo(Actions.select, this._select);
+    this.listenTo(Actions.create, this._create);
     this.listenTo(Actions.search, this._search);
     this.listenTo(Actions.nextPage, this._nextPage);
     this.listenTo(Actions.previousPage, this._previousPage);
@@ -48,6 +50,10 @@ let Stream = Reflux.createStore({
       } else {
         this.posts = data.rows;
       }
+      if (this.created) {
+        this.posts.unshift(this.created);
+        this.created = null;
+      }
       this.trigger({posts: this.posts, total: data.count, params: this.params, scroll: this.scroll});
     })
     .catch(code => {
@@ -61,6 +67,25 @@ let Stream = Reflux.createStore({
     this.selected = id;
     this.scroll = false;
     this.trigger({selected: this.selected, scroll: this.scroll});
+  },
+  _create: function () {
+    this.selected = 0;
+    this.context = {
+      type: 'myPosts',
+      id: null
+    };
+    posts.add()
+    .then(data => {
+      //msg('green', 'Post created successfully');
+      posts.single(data.id).then(post => {
+        this.created = post;
+        this._collection();
+      });
+    })
+    .catch(code => {
+       msg('red', 'Post could not be created', code);
+       return;
+    });
   },
   _search: function (search) {
     this.params.search = search;
