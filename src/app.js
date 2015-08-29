@@ -15,9 +15,33 @@ let App = React.createClass({
             <Link to="home"></Link>
           </div>
           <nav className="nav">
-            <Link to="search" className="fa fa-search"></Link>
-            <Link to="editor" className="fa fa-pencil"></Link>
-            <Link to="activity" className="fa fa-user"><span className="notifications"></span></Link>
+            <ul>
+              <li className="posts">
+                <Link to="search" >
+                  <i className="fa fa-search" />
+                  Posts
+                </Link>
+              </li>
+              <li className="create">
+                <Link to="editor">
+                  <i className="fa fa-pencil" />
+                  Create
+                </Link>
+              </li>
+              <li className="me">
+                <Link to="activity" className="me">
+                  <i className="fa fa-user" />
+                  <span className="notifications"></span>
+                  Me
+                </Link>
+                <ul>
+                  <li><Link to="myPosts">My Posts</Link></li>
+                  <li><Link to="activity">My Activity</Link></li>
+                  <li><Link to="account">My Account</Link></li>
+                  <li><Link to="myPosts">Logout</Link></li>
+                </ul>
+              </li>
+            </ul>
           </nav>
         </header>
         <div className="spacer"></div>
