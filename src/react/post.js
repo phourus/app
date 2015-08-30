@@ -54,10 +54,9 @@ let Post = React.createClass({
 			return false;
 		}
 		if (this.props.selected === true) {
-			stats = this.props.editing ? false : <Stats post={this.props.post} />;
+			stats = this.props.editing ? false : <Stats post={this.props.post} selected={this.props.selected} />;
 			tags = <Tags tags={this.props.post.tags} />;
 			links = <Links post={this.props.post} editing={this.props.editing} />;
-			thumbs = this.props.editing ? false : <Thumbs post={this.props.post} />;
 			content = this.props.editing ? <TextEditor post={this.props.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
 			comments = this.props.editing ? false : <Comments post={this.props.post} />;
 			className += " selected";
@@ -118,7 +117,6 @@ let Post = React.createClass({
 					{tags}
 					{content}
 				</div>
-				{thumbs}
 				{stats}
 				{links}
 				{comments}
@@ -163,6 +161,7 @@ let Stats = React.createClass({
 	render: function () {
 		return (
 			<div className="meta">
+				{this.props.selected ? <Thumbs post={this.props.post} /> : false}
 				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
 					<canvas id={`popularity${this.props.post.id}`}></canvas>
@@ -195,12 +194,11 @@ let Tags = React.createClass({
 
 let Links = React.createClass({
 	render: function () {
-		let edit = this.props.editing ? <Links.Edit post={this.props.post} /> : false;
 		return (
 			<div className="links">
-				<h1>Links</h1>
+				<h2>Links & Attachments</h2>
+				{this.props.editing ? <Links.Edit post={this.props.post} /> : false}
 				<Links.List post={this.props.post} />
-				{edit}
 			</div>
 		);
 	}
@@ -212,17 +210,22 @@ Links.List = React.createClass({
 		return (
 			<div className="list">
 				{links.map((item, index) => {
-					let image = item.img || '/assets/logos/logo-emblem.png';
+					let icon = 'fa fa-link';
+					if (item.upload) {
+						let ext = item.url.split(".").slice(-1)[0];
+						icon = 'fa fa-file' + this._icon(ext) + '-o';
+					}
+
 					return (
 						<div key={item.id}>
-							<div className="image">
-								<img src={image} />
+							<div className="icon">
+								<i className={icon} />
+								<a id={index} className="edit" onClick={this._edit}>Edit</a>
 							</div>
 							<div>
 								<button id={item.id} className="remove" onClick={this._remove}>X</button>
 								<a href={item.url} target="_blank">{item.title}</a>
 								<p>{item.caption}</p>
-								<button id={index} className="button blue edit" onClick={this._edit}>Edit</button>
 							</div>
 							<div style={{clear: 'both'}}></div>
 						</div>
@@ -230,6 +233,27 @@ Links.List = React.createClass({
 				})}
 			</div>
 		);
+	},
+	_icon: function (ext) {
+		let out = '';
+		let icons = {
+			image: ['png', 'jpg', 'gif', 'jpeg'],
+			pdf: ['pdf'],
+			video: ['mpeg', 'mp4'],
+			sound: ['mp3', 'wav'],
+			zip: ['zip'],
+			text: ['txt', 'rtf'],
+			word: ['doc', 'docx', 'pages'],
+			excel: ['xls', 'xlsx', 'numbers'],
+			powerpoint: ['ppt', 'pptx', 'keynote'],
+			code: ['js', 'html', 'css']
+		};
+		Object.keys(icons).forEach(function (key) {
+			if (icons[key].hasOwnProperty(ext)) {
+				out = '-' + key;
+			}
+		});
+		return out;
 	}
 });
 
@@ -257,21 +281,19 @@ Links.Edit = React.createClass({
 			button = <button onClick={this._save} className="button green small edit">Save Changes</button>;
 		}
 		return (
-			<div className="links">
-				<div className="fields">
-					<label>Link Title:<br />
-						<input type="text" onChange={this._changeTitle} value={this.state.title} placeholder="enter title" />
-					</label>
-					<label className="upload">Link URL/Upload:
-						<input type="text" onChange={this._changeURL} value={this.state.url} placeholder="enter URL or upload"/>
-						<Links.Upload />
-						<button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
-					</label>
-					<label>Caption:
-						<textarea type="text" onChange={this._changeCaption} placeholder="enter short description">{this.state.caption}</textarea>
-					</label>
-					{button}
-				</div>
+			<div className="fields">
+				<label>Link Title:<br />
+					<input type="text" onChange={this._changeTitle} value={this.state.title} placeholder="enter title" />
+				</label>
+				<label className="upload">Link URL/Upload:
+					<input type="text" onChange={this._changeURL} value={this.state.url} placeholder="enter URL or upload"/>
+					<Links.Upload />
+					<button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
+				</label>
+				<label>Caption:
+					<textarea type="text" onChange={this._changeCaption} placeholder="enter short description">{this.state.caption}</textarea>
+				</label>
+				{button}
 			</div>
 		);
 	},
@@ -462,6 +484,7 @@ let Comments = React.createClass({
     }
     return (
       <div>
+				<h2>Comments</h2>
         <div className="comments">{comments}</div>
         {create}
       </div>

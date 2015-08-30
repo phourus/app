@@ -95,11 +95,19 @@
     }
   }
   .meta {
+
     > div {
       display: inline-block;
       vertical-align: bottom;
     }
   }
+  &.selected .meta {
+    margin: 20px 0;
+    border-top: solid 1px #eee;
+    border-bottom: solid 1px #eee;
+    padding: 10px 0;
+  }
+
   ul {
     margin: 20px 0 0 0;
     padding: 0;
@@ -145,6 +153,73 @@
     border-top: solid 1px @grey-light;
   }
 
+  /** LINKS **/
+  .links {
+    .Row(100%);
+
+    .fields {
+      .Cols(4);
+      background-color: #f7f7f7;
+      box-sizing: border-box;
+      padding: 20px;
+
+      textarea {
+        border: solid 1px @grey;
+        height: 160px;
+      }
+
+      button {
+        width: 200px;
+        font-size: 2em;
+      }
+    }
+    .list {
+      .Cols(8);
+
+      > div {
+        padding: 2%;
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 100px;
+        border-bottom: solid 1px fade(@blue-light, 30%);
+        margin-bottom: 4px;
+
+        > div {
+          .Cols(11);
+
+          &.icon {
+            .Cols(1);
+
+            a.edit {
+              font-size: 1em;
+              display: block;
+            }
+
+            i {
+              font-size: 2em;
+            }
+          }
+        }
+
+        a {
+          font-size: 2em;
+        }
+        p {
+          font-size: 0.9em;
+        }
+        button.remove {
+          float: right;
+          border: none;
+          background: transparent;
+          cursor: pointer;
+
+          &:hover {
+            color: @red-light;
+          }
+        }
+      }
+    }
+  }
   .comments {
 
     .comment {
