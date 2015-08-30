@@ -69,7 +69,10 @@ let Post = React.createClass({
 				<button className="close" onClick={this._hide}>X</button>
 				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
 				<Link to="edit" params={{id: this.props.post.id}}>Edit</Link>
-				<h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.props.post.title}</a></h2>
+				{this.props.editing
+					? <div contentEditable={true} className="title editing">{this.props.post.title}</div>
+					: <h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.props.post.title}</a></h2>
+				}
 				<div className="details">
 					<div className="pic">
 						<Link to="userPosts" params={{id: this.props.user.id}}>

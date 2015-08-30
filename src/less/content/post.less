@@ -43,6 +43,20 @@
   .type.quote, .type.belief { background-color: @gold; color: #fff; }
 
   .title {
+    font-size: 2em;
+    line-height: 1em;
+    font-family: @font-serif;
+    font-weight: bold;
+    color: #1e2f40;
+    outline: none;
+    margin: 10px 0;
+    padding: 5px;
+
+    &.editing:hover, &.editing:focus {
+      border: solid 1px #ddd;
+      background-color: #fdfdfd;
+      padding: 3px;
+    }
 
     a {
       color: @theme-dark;
