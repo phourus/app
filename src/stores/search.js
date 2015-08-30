@@ -101,7 +101,7 @@ let Stream = Reflux.createStore({
       type: 'myPosts',
       id: null
     };
-    posts.add()
+    posts.add({title: 'New Post'})
     .then(data => {
       //msg('green', 'Post created successfully');
       posts.single(data.id).then(post => {

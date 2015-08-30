@@ -58,17 +58,41 @@ let Post = React.createClass({
 			tags = <Tags tags={this.props.post.tags} />;
 			links = <Links post={this.props.post} editing={this.props.editing} />;
 			thumbs = this.props.editing ? false : <Thumbs post={this.props.post} />;
-		content = this.props.editing ? <TextEditor post={this.props.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
+			content = this.props.editing ? <TextEditor post={this.props.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
 			comments = this.props.editing ? false : <Comments post={this.props.post} />;
 			className += " selected";
 			details = <ul>{meta}</ul>;
+		}
+		if (this.props.post.privacy === 'org') {
+			// let organizations = [{id: 1, name: "Phourus Inc."}, {id: 2, name: "Tyco Intl."}, {id: 3, name: "Intuit Inc."}, {id: 4, name: "Enco Industries Inc."}];
+			// orgs = (
+			// 	<label>Organization:
+			// 		<select value={this.state.post.orgId} onChange={this._orgId}>
+			// 			{organizations.map((item) => {
+			// 				return (<option value={item.id}>{item.name}</option>);
+			// 			})}
+			// 		</select>
+			// 	</label>
+			// );
 		}
 		//<Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link>
 		return (
 			<div className={className}>
 				<button className="close" onClick={this._hide}>X</button>
-				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type}</div>
-				<Link to="edit" params={{id: this.props.post.id}}>Edit</Link>
+				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type ? this.props.post.type : "Please select a type"}</div>
+				{this.props.editing
+					? <select ref="privacy" value={this.props.post.privacy} onChange={this._privacy}>
+						<option value="private">Private</option>
+						<option value="org">Organization Members only</option>
+						<option value="phourus">Phourus Users only</option>
+						<option value="public">Everyone</option>
+					</select>
+					: false
+				}
+				{this.props.editing
+					? false
+					: <Link to="edit" params={{id: this.props.post.id}}>Edit</Link>
+				}
 				{this.props.editing
 					? <div contentEditable={true} className="title editing">{this.props.post.title}</div>
 					: <h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.props.post.title}</a></h2>
@@ -106,6 +130,10 @@ let Post = React.createClass({
 		Stream.select(id);
 	},
 	_hide: function () {
+		if (this.props.selected === true) {
+			Stream.select(0);
+			return;
+		}
 		this.setState({hidden: true});
 	}
 });
