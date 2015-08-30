@@ -110,6 +110,9 @@ let Post = React.createClass({
 						<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
 						{details}
 					</div>
+					<div className="actions">
+						{this.props.editing ? <button className="button green">Save</button> : false}
+					</div>
 				</div>
 				<div className="footing">
 					{tags}

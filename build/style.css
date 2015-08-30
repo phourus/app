@@ -1752,6 +1752,11 @@ div.alerts button {
     display: inline-block;
     vertical-align: top;
   }
+  .postItem .details .actions {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
   .postItem .meta {
     max-width: 100%;
     width: 100%;
