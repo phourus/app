@@ -58,7 +58,7 @@ let Post = React.createClass({
 			tags = <Tags tags={this.props.post.tags} />;
 			links = <Links post={this.props.post} editing={this.props.editing} />;
 			thumbs = this.props.editing ? false : <Thumbs post={this.props.post} />;
-			content = <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
+		content = this.props.editing ? <TextEditor post={this.props.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
 			comments = this.props.editing ? false : <Comments post={this.props.post} />;
 			className += " selected";
 			details = <ul>{meta}</ul>;
@@ -107,6 +107,20 @@ let Post = React.createClass({
 	},
 	_hide: function () {
 		this.setState({hidden: true});
+	}
+});
+
+let TextEditor = React.createClass({
+	render: function () {
+		let content = this.props.post.content || "";
+		return (
+			<div>
+				<RTE ref="content" placeholder="insert content here" value={content} onChange={this._content} theme="snow" />
+			</div>
+		);
+	},
+	_content: function (value) {
+		Actions.change('content', value);
 	}
 });
 
