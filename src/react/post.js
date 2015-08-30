@@ -5,8 +5,16 @@ let { Link } = Router;
 let moment = require('moment');
 let numeral = require('numeral');
 let thousands = "0,0";
-let Store = require('../stores/search');
-let Actions = require('../actions/search');
+let Store = require('../stores/post');
+let Actions = require('../actions/post');
+let Stream = require('../actions/search');
+let tax = require('../taxonomy');
+let RTE = require('react-quill');
+let File = require('react-dropzone-component');
+let AWS = require('aws-sdk');
+AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});
+let S3 = AWS.S3;
+let s3 = new S3();
 
 let Influence = require('../influence');
 let Popularity = require('../popularity');
@@ -16,10 +24,6 @@ let Post = React.createClass({
 		return {
 			selected: false
 		}
-	},
-	componentDidMount: function () {
-		let element = document.getElementById(`popularity${this.props.post.id}`);
-		let popularity = new Popularity(element, this.props.post.popularity);
 	},
 	componentDidUpdate: function () {
 		if (this.props.selected === true && this.props.scroll === false) {
@@ -31,6 +35,7 @@ let Post = React.createClass({
 	render: function () {
 		let className = "postItem";
 		let meta = [];
+		let stats = <Stats post={this.props.post} />;
 		let post = this.props.post;
 		let details = false;
 		let comments = false;
@@ -49,11 +54,12 @@ let Post = React.createClass({
 			return false;
 		}
 		if (this.props.selected === true) {
+			stats = this.props.editing ? false : <Stats post={this.props.post} />;
 			tags = <Tags tags={this.props.post.tags} />;
-			links = <Links links={this.props.post.links} />;
-			thumbs = <Thumbs post={this.props.post} />;
+			links = <Links post={this.props.post} editing={this.props.editing} />;
+			thumbs = this.props.editing ? false : <Thumbs post={this.props.post} />;
 			content = <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
-			comments = <Comments post={this.props.post} />;
+			comments = this.props.editing ? false : <Comments post={this.props.post} />;
 			className += " selected";
 			details = <ul>{meta}</ul>;
 		}
@@ -83,18 +89,7 @@ let Post = React.createClass({
 					{content}
 				</div>
 				{thumbs}
-				<div className="meta">
-					<Influence influence={this.props.post.influence}/>
-					<div className="popularity">
-						<canvas id={`popularity${this.props.post.id}`}></canvas>
-						<div>Popularity</div>
-					</div>
-					<div className="stats">
-						<div><strong>{numeral(this.props.post.totalViews).format(thousands)}</strong><br /><i className="fa fa-eye" /> Views</div>
-						<div><strong>{numeral(this.props.post.totalComments).format(thousands)}</strong><br /><i className="fa fa-comments" /> Comments</div>
-						<div><strong>{numeral(this.props.post.totalThumbs).format(thousands)}</strong><br /><i className="fa fa-thumbs-up" /> Thumbs</div>
-					</div>
-				</div>
+				{stats}
 				{links}
 				{comments}
 			</div>
@@ -105,10 +100,33 @@ let Post = React.createClass({
 		if (this.props.selected !== true) {
 			id = this.props.post.id;
 		}
-		Actions.select(id);
+		Stream.select(id);
 	},
 	_hide: function () {
 		this.setState({hidden: true});
+	}
+});
+
+let Stats = React.createClass({
+	componentDidMount: function () {
+		let element = document.getElementById(`popularity${this.props.post.id}`);
+		let popularity = new Popularity(element, this.props.post.popularity);
+	},
+	render: function () {
+		return (
+			<div className="meta">
+				<Influence influence={this.props.post.influence}/>
+				<div className="popularity">
+					<canvas id={`popularity${this.props.post.id}`}></canvas>
+					<div>Popularity</div>
+				</div>
+				<div className="stats">
+					<div><strong>{numeral(this.props.post.totalViews).format(thousands)}</strong><br /><i className="fa fa-eye" /> Views</div>
+					<div><strong>{numeral(this.props.post.totalComments).format(thousands)}</strong><br /><i className="fa fa-comments" /> Comments</div>
+					<div><strong>{numeral(this.props.post.totalThumbs).format(thousands)}</strong><br /><i className="fa fa-thumbs-up" /> Thumbs</div>
+				</div>
+			</div>
+		);
 	}
 });
 
@@ -128,29 +146,187 @@ let Tags = React.createClass({
 });
 
 let Links = React.createClass({
-  render: function () {
+	render: function () {
+		let edit = this.props.editing ? <Links.Edit post={this.props.post} /> : false;
 		return (
-      <div className="links">
-				<div className="list">
-					{this.props.links.map((item, index) => {
-						let image = item.img || '/assets/logos/logo-emblem.png';
-						return (
-							<div key={item.id}>
-								<div className="image">
-									<img src={image} />
-								</div>
-								<div>
-									<a href={item.url} target="_blank">{item.title}</a>
-									<p>{item.caption}</p>
-								</div>
-								<div style={{clear: 'both'}}></div>
+			<div className="links">
+				<h1>Links</h1>
+				<Links.List post={this.props.post} />
+				{edit}
+			</div>
+		);
+	}
+});
+
+Links.List = React.createClass({
+	render: function () {
+		let links = this.props.post.links || [];
+		return (
+			<div className="list">
+				{links.map((item, index) => {
+					let image = item.img || '/assets/logos/logo-emblem.png';
+					return (
+						<div key={item.id}>
+							<div className="image">
+								<img src={image} />
 							</div>
-						);
-					})}
+							<div>
+								<button id={item.id} className="remove" onClick={this._remove}>X</button>
+								<a href={item.url} target="_blank">{item.title}</a>
+								<p>{item.caption}</p>
+								<button id={index} className="button blue edit" onClick={this._edit}>Edit</button>
+							</div>
+							<div style={{clear: 'both'}}></div>
+						</div>
+					);
+				})}
+			</div>
+		);
+	}
+});
+
+Links.Edit = React.createClass({
+	getInitialState: function () {
+		return {
+			mode: 'add',
+			id: null,
+			url: "",
+			caption: "",
+			title: ""
+		};
+	},
+	componentDidMount: function () {
+		this.unsubscribe = Store.Links.listen((data) => {
+			this.setState(data);
+		});
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
+	},
+	render: function () {
+		let button = <button onClick={this._add} className="button green small add">Add Link</button>;
+		if (this.state.mode === 'edit') {
+			button = <button onClick={this._save} className="button green small edit">Save Changes</button>;
+		}
+		return (
+			<div className="links">
+				<div className="fields">
+					<label>Link Title:<br />
+						<input type="text" onChange={this._changeTitle} value={this.state.title} placeholder="enter title" />
+					</label>
+					<label className="upload">Link URL/Upload:
+						<input type="text" onChange={this._changeURL} value={this.state.url} placeholder="enter URL or upload"/>
+						<Links.Upload />
+						<button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
+					</label>
+					<label>Caption:
+						<textarea type="text" onChange={this._changeCaption} placeholder="enter short description">{this.state.caption}</textarea>
+					</label>
+					{button}
 				</div>
-      </div>
-    );
-  }
+			</div>
+		);
+	},
+	_add: function () {
+		if (this.props.post.id) {
+			let model = {};
+			model.title = this.state.title;
+			model.url = this.state.url;
+			model.caption = this.state.caption;
+			model.postId = this.props.post.id;
+			Actions.Links.add(model);
+			return;
+		}
+		console.error('post must have an id first');
+	},
+	_remove: function (e) {
+		let id = e.currentTarget.id;
+		Actions.Links.remove(id);
+	},
+	_edit: function (e) {
+		var id = e.currentTarget.id;
+		var state = this.props.post.links[id];
+		state.mode = 'edit';
+		this.setState(state);
+	},
+	_save: function () {
+		let link = {};
+		link.title = this.state.title;
+		link.url = this.state.url;
+		link.caption = this.state.caption;
+		Actions.Links.save(this.state.id,  link);
+	},
+	_changeTitle: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({title: value});
+	},
+	_changeURL: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({url: value});
+	},
+	_changeCaption: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({caption: value});
+	}
+});
+
+Links.Upload = React.createClass({
+	render: function () {
+		return (
+			<File className="button blue" config={this.config} eventHandlers={this.handlers}>
+				Click or drag files here
+			</File>
+		);
+	},
+	config: {
+		allowedFiletypes: ['.jpg', '.png', '.gif', '.pdf', '.doc', '.docx', '.xls', '.xlsx'],
+    showFiletypeIcon: true,
+    postUrl: '/rest/links/attachment'
+	},
+	handlers: {
+		// This one receives the dropzone object as the first parameter
+    // and can be used to additional work with the dropzone.js
+    // object
+    init: null,
+    // All of these receive the event as first parameter:
+    drop: function (e) {
+			console.log(e);
+		},
+    dragstart: null,
+    dragend: null,
+    dragenter: null,
+    dragover: null,
+    dragleave: null,
+    // All of these receive the file as first parameter:
+    addedfile: function (e) {
+			s3.upload({Bucket: 'phourus-users', Key: 'some-user', Body: e}, {}, (err, data) => {
+				console.log(err, data);
+			});
+		},
+    removedfile: null,
+    thumbnail: null,
+    error: null,
+    processing: null,
+    uploadprogress: null,
+    sending: null,
+    success: null,
+    complete: null,
+    canceled: null,
+    maxfilesreached: null,
+    maxfilesexceeded: null,
+    // All of these receive a list of files as first parameter
+    // and are only called if the uploadMultiple option
+    // in djsConfig is true:
+    processingmultiple: null,
+    sendingmultiple: null,
+    successmultiple: null,
+    completemultiple: null,
+    canceledmultiple: null,
+    // Special Events
+    totaluploadprogress: null,
+    reset: null,
+    queuecompleted: null
+	},
 });
 
 let Thumbs = React.createClass({
@@ -160,7 +336,7 @@ let Thumbs = React.createClass({
      this.unsubscribe = Store.Thumbs.listen((data) => {
        this.setState(data);
      });
-     Actions.thumbs(params.id);
+     Actions.Thumbs.single(params.id);
    },
    componentWillUnmount: function () {
      this.unsubscribe();
@@ -215,7 +391,7 @@ let Comments = React.createClass({
       console.log(data);
 			this.setState(data);
     });
-    Actions.comments(this.props.post.id);
+    Actions.Comments.collection(this.props.post.id);
   },
   componentWillUnmount: function () {
     this.unsubscribe();
