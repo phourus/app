@@ -41,10 +41,115 @@
     cursor: pointer;
   }
 
+  .meta > .types {
+
+    > div {
+      display: none;
+      background-color: none;
+
+      &.selected {
+        display: block;
+
+        label {
+          display: inline-block;
+          width: 100px;
+
+        }
+        input, select {
+          display: inline-block;
+          max-width: 100px;
+        }
+      }
+    }
+  }
   .type.blog, .type.event { background-color: @green; color: #fff; }
   .type.subject, .type.question { background-color: @blue; color: #fff; }
   .type.debate, .type.poll { background-color: @red; color: #fff; }
   .type.quote, .type.belief { background-color: @gold; color: #fff; }
+
+  > .types {
+      .Row(100%);
+
+      > div {
+        width: 98%;
+        margin: 10px 1% 10px 0;
+        text-align: center;
+        border: solid 1px @grey;
+        box-sizing: border-box;
+        .rounded(2px);
+        cursor: pointer;
+        padding: 1%;
+        min-height: 4em;
+
+        strong {
+          font-size: 1.5em;
+          line-height: 1.5em;
+          font-weight: normal;
+        }
+
+        p {
+          margin: 0px;
+          padding: 0px;
+          font-size: 0.9em;
+        }
+
+        > div {
+          display: none;
+
+          &.selected {
+            display: block;
+          }
+        }
+
+        &.blog, &.event {
+          border-left: solid 4px @green-dark;
+
+          &:hover {
+            background-color: fade(@green, 10%);
+          }
+
+          &.selected {
+            background-color: fade(@green, 20%);
+          }
+        }
+
+        &.subject, &.question {
+          border-left: solid 4px @blue-dark;
+
+          &:hover {
+            background-color: fade(@blue, 10%);
+          }
+
+          &.selected {
+            background-color: fade(@blue, 20%);
+          }
+        }
+
+        &.debate, &.poll {
+          border-left: solid 4px @red-dark;
+
+          &:hover {
+            background-color: fade(@red, 10%);
+          }
+
+          &.selected {
+            background-color: fade(@red, 20%);
+          }
+        }
+
+        &.quote, &.belief {
+          border-left: solid 4px @gold-dark;
+
+          &:hover {
+            background-color: fade(@gold, 10%);
+          }
+
+          &.selected {
+            background-color: fade(@gold, 20%);
+          }
+        }
+      }
+    }
 
   .title {
     font-size: 2em;
@@ -94,14 +199,14 @@
       }
     }
   }
-  .meta {
+  .interact {
 
     > div {
       display: inline-block;
       vertical-align: bottom;
     }
   }
-  &.selected .meta {
+  &.selected .interact {
     margin: 20px 0;
     border-top: solid 1px #eee;
     border-bottom: solid 1px #eee;
@@ -296,6 +401,14 @@
     display: inline-block;
     box-sizing: border-box;
 
+    > .types {
+      > div {
+        .Cols(1, 5);
+        margin: 20px 1% 20px 0;
+        box-sizing: border-box;
+        height: 140px;
+      }
+    }
     .details {
       .Row(100%);
 
@@ -310,7 +423,7 @@
         .Cols(3);
       }
     }
-    .meta {
+    .interact {
       .Row(100%);
       text-align: left;
 
@@ -370,7 +483,7 @@
       .basic {
         .Cols(7);
       }
-      .meta {
+      .interact {
         .Cols(3);
         text-align: right;
 

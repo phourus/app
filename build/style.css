@@ -1225,6 +1225,22 @@ div.alerts button {
   margin: 4px 0;
   cursor: pointer;
 }
+.postItem .meta > .types > div {
+  display: none;
+  background-color: none;
+}
+.postItem .meta > .types > div.selected {
+  display: block;
+}
+.postItem .meta > .types > div.selected label {
+  display: inline-block;
+  width: 100px;
+}
+.postItem .meta > .types > div.selected input,
+.postItem .meta > .types > div.selected select {
+  display: inline-block;
+  max-width: 100px;
+}
 .postItem .type.blog,
 .postItem .type.event {
   background-color: #8abf00;
@@ -1244,6 +1260,96 @@ div.alerts button {
 .postItem .type.belief {
   background-color: #ecb010;
   color: #fff;
+}
+.postItem > .types {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+.postItem > .types:before,
+.postItem > .types:after {
+  content: "";
+  display: table;
+}
+.postItem > .types:after {
+  clear: both;
+}
+.postItem > .types > div {
+  width: 98%;
+  margin: 10px 1% 10px 0;
+  text-align: center;
+  border: solid 1px #dddddd;
+  box-sizing: border-box;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 1%;
+  min-height: 4em;
+}
+.postItem > .types > div strong {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  font-weight: normal;
+}
+.postItem > .types > div p {
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.9em;
+}
+.postItem > .types > div > div {
+  display: none;
+}
+.postItem > .types > div > div.selected {
+  display: block;
+}
+.postItem > .types > div.blog,
+.postItem > .types > div.event {
+  border-left: solid 4px #658c00;
+}
+.postItem > .types > div.blog:hover,
+.postItem > .types > div.event:hover {
+  background-color: rgba(138, 191, 0, 0.1);
+}
+.postItem > .types > div.blog.selected,
+.postItem > .types > div.event.selected {
+  background-color: rgba(138, 191, 0, 0.2);
+}
+.postItem > .types > div.subject,
+.postItem > .types > div.question {
+  border-left: solid 4px #217dbb;
+}
+.postItem > .types > div.subject:hover,
+.postItem > .types > div.question:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+.postItem > .types > div.subject.selected,
+.postItem > .types > div.question.selected {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+.postItem > .types > div.debate,
+.postItem > .types > div.poll {
+  border-left: solid 4px #bb0202;
+}
+.postItem > .types > div.debate:hover,
+.postItem > .types > div.poll:hover {
+  background-color: rgba(237, 3, 3, 0.1);
+}
+.postItem > .types > div.debate.selected,
+.postItem > .types > div.poll.selected {
+  background-color: rgba(237, 3, 3, 0.2);
+}
+.postItem > .types > div.quote,
+.postItem > .types > div.belief {
+  border-left: solid 4px #bc8c0d;
+}
+.postItem > .types > div.quote:hover,
+.postItem > .types > div.belief:hover {
+  background-color: rgba(236, 176, 16, 0.1);
+}
+.postItem > .types > div.quote.selected,
+.postItem > .types > div.belief.selected {
+  background-color: rgba(236, 176, 16, 0.2);
 }
 .postItem .title {
   font-size: 2em;
@@ -1294,11 +1400,11 @@ div.alerts button {
   font-size: 0.8em;
   color: #bbb;
 }
-.postItem .meta > div {
+.postItem .interact > div {
   display: inline-block;
   vertical-align: bottom;
 }
-.postItem.selected .meta {
+.postItem.selected .interact {
   margin: 20px 0;
   border-top: solid 1px #eee;
   border-bottom: solid 1px #eee;
@@ -1507,6 +1613,14 @@ div.alerts button {
     display: inline-block;
     box-sizing: border-box;
   }
+  .postItem > .types > div {
+    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px 1% 20px 0;
+    box-sizing: border-box;
+    height: 140px;
+  }
   .postItem .details {
     max-width: 100%;
     width: 100%;
@@ -1535,21 +1649,21 @@ div.alerts button {
     display: inline-block;
     vertical-align: top;
   }
-  .postItem .meta {
+  .postItem .interact {
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
     text-align: left;
   }
-  .postItem .meta:before,
-  .postItem .meta:after {
+  .postItem .interact:before,
+  .postItem .interact:after {
     content: "";
     display: table;
   }
-  .postItem .meta:after {
+  .postItem .interact:after {
     clear: both;
   }
-  .postItem .meta .influence {
+  .postItem .interact .influence {
     display: inline-block;
   }
   .postItem .thumb {
@@ -1612,16 +1726,16 @@ div.alerts button {
     display: inline-block;
     vertical-align: top;
   }
-  .postItem .details .meta {
+  .postItem .details .interact {
     width: 25%;
     display: inline-block;
     vertical-align: top;
     text-align: right;
   }
-  .postItem .details .meta .influence {
+  .postItem .details .interact .influence {
     float: right;
   }
-  .postItem .details .meta ul {
+  .postItem .details .interact ul {
     clear: right;
   }
   .types {
