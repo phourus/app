@@ -3,8 +3,8 @@ var base = '/rest/thumbs/';
 var settings = require('../settings');
 
 module.exports = {
-  single: function () {
-
+  post: function () {
+    return http.get(base, settings());
   },
   collection: function (params) {
     var query = "";

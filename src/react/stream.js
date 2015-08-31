@@ -6,8 +6,8 @@ let posts = require('../api/posts');
 let moment = require('moment');
 let numeral = require('numeral');
 let thousands = "0,0";
-let Store = require('../stores/search');
-let Actions = require('../actions/search');
+let Store = require('../stores/stream');
+let Actions = require('../actions/stream');
 
 let Tax = require('../taxonomy');
 let Influence = require('../influence');
@@ -15,7 +15,7 @@ let Popularity = require('../popularity');
 let Scroll = require('react-infinite-scroll')(React);
 let PostItem = require('./post');
 
-let Search = React.createClass({
+let Stream = React.createClass({
 	mixins: [Router.State],
 	getInitialState: function () {
 		return {
@@ -158,7 +158,7 @@ let Context = React.createClass({
 		let label = 'Viewing all public Phourus posts';
 		let img = '/assets/logos/logo-emblem.png';
 		let clear = false;
-		let clearLink = <span> | Clear filters <Link to="search" className="close">x</Link></span>;
+		let clearLink = <span> | Clear filters <Link to="stream" className="close">x</Link></span>;
 		let link = false;
 		let name = '';
 		if (this.props.profile) {
@@ -432,4 +432,4 @@ let Posts = React.createClass({
 	}
 });
 
-module.exports = Search;
+module.exports = Stream;

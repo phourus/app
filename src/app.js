@@ -5,7 +5,7 @@ let Router = require('react-router');
 let { Link, RouteHandler} = Router;
 
 let Alerts = require('./react/alerts');
-let Stream = require('./actions/search');
+let Stream = require('./actions/stream');
 
 let App = React.createClass({
   render: function () {
@@ -18,7 +18,7 @@ let App = React.createClass({
           <nav className="nav">
             <ul>
               <li className="posts">
-                <Link to="search" >
+                <Link to="stream" >
                   <i className="fa fa-search" />
                   Posts
                 </Link>

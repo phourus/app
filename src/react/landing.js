@@ -2,8 +2,8 @@
 let React = require('react');
 let Router = require('react-router');
 let Link = Router.Link;
-let Store = require('../stores/search');
-let Actions = require('../actions/search');
+let Store = require('../stores/stream');
+let Actions = require('../actions/stream');
 let Post = require('./post');
 let Emblem = require('./emblem');
 

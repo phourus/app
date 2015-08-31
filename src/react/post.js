@@ -1,28 +1,35 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link } = Router;
+let { Link, State } = Router;
 let moment = require('moment');
 let numeral = require('numeral');
-let thousands = "0,0";
-let Store = require('../stores/post');
-let Actions = require('../actions/post');
-let Stream = require('../actions/search');
-let tax = require('../taxonomy');
 let RTE = require('react-quill');
 let File = require('react-dropzone-component');
 let AWS = require('aws-sdk');
+
+let Actions = require('../actions/post');
+let Stream = require('../actions/stream');
+
+let Store = require('../stores/post');
+let Account = require('../stores/account');
+
+let Influence = require('../influence');
+let Popularity = require('../popularity');
+let tax = require('../taxonomy');
+let thousands = "0,0";
 AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});
 let S3 = AWS.S3;
 let s3 = new S3();
 
-let Influence = require('../influence');
-let Popularity = require('../popularity');
-
 let Post = React.createClass({
+	mixins: [State],
 	getInitialState: function () {
 		return {
-			selected: false
+			selected: false,
+			post: {
+				id: 0
+			}
 		}
 	},
 	componentDidUpdate: function () {
@@ -31,6 +38,34 @@ let Post = React.createClass({
 			let y = element.offsetTop - element.scrollTop + element.clientTop - 80;
 			window.scrollTo(0, y);
 		}
+	},
+	componentDidMount: function () {
+		this.unsubscribe = Store.listen((data) => {
+			if (data.add === true) {
+				this.transitionTo("edit", {id: data.post.id});
+			}
+			if (data.post) {
+				this.setState({post: data.post});
+			}
+			if (data.changes) {
+				let current = this.state.post;
+				Object.keys(data.changes).forEach((key) => {
+					current[key] = data.changes[key];
+				});
+				this.setState({post: current});
+			}
+		});
+		let id = this.getParams().id || null;
+		if (id) {
+			Actions.single(id);
+		}
+		this.unsubscribeAccount = Account.listen((data) => {
+			this.setState({account: data});
+		});
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
+		this.unsubscribeAccount();
 	},
 	render: function () {
 		let className = "postItem";
@@ -54,15 +89,15 @@ let Post = React.createClass({
 			return false;
 		}
 		if (this.props.selected === true) {
-			stats = this.props.editing ? false : <Stats post={this.props.post} selected={this.props.selected} />;
-			tags = <Tags tags={this.props.post.tags} />;
-			links = <Links post={this.props.post} editing={this.props.editing} />;
-			content = this.props.editing ? <TextEditor post={this.props.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
-			comments = this.props.editing ? false : <Comments post={this.props.post} />;
+			stats = this.props.editing ? false : <Stats post={this.state.post} selected={this.props.selected} />;
+			tags = <Tags tags={this.state.post.tags} />;
+			links = <Links post={this.state.post} editing={this.props.editing} />;
+			content = this.props.editing ? <TextEditor post={this.state.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.state.post.content}}></div>;
+			comments = this.props.editing ? false : <Comments post={this.state.post} />;
 			className += " selected";
 			details = <ul>{meta}</ul>;
 		}
-		if (this.props.post.privacy === 'org') {
+		if (this.state.post.privacy === 'org') {
 			// let organizations = [{id: 1, name: "Phourus Inc."}, {id: 2, name: "Tyco Intl."}, {id: 3, name: "Intuit Inc."}, {id: 4, name: "Enco Industries Inc."}];
 			// orgs = (
 			// 	<label>Organization:
@@ -78,9 +113,9 @@ let Post = React.createClass({
 		return (
 			<div className={className}>
 				<button className="close" onClick={this._hide}>X</button>
-				<div className={`type ${this.props.post.type}`}><i className="fa fa-bell" /> {this.props.post.type ? this.props.post.type : "Please select a type"}</div>
+				<div className={`type ${this.state.post.type}`}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				{this.props.editing
-					? <select ref="privacy" value={this.props.post.privacy} onChange={this._privacy}>
+					? <select ref="privacy" value={this.state.post.privacy} onChange={this._privacy}>
 						<option value="private">Private</option>
 						<option value="org">Organization Members only</option>
 						<option value="phourus">Phourus Users only</option>
@@ -90,11 +125,11 @@ let Post = React.createClass({
 				}
 				{this.props.editing
 					? false
-					: <Link to="edit" params={{id: this.props.post.id}}>Edit</Link>
+					: <Link to="edit" params={{id: this.state.post.id}}>Edit</Link>
 				}
 				{this.props.editing
-					? <div contentEditable={true} className="title editing">{this.props.post.title}</div>
-					: <h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.props.post.title}</a></h2>
+					? <div contentEditable={true} className="title editing" onInput={this._title}>{this.state.post.title}</div>
+				: <h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.state.post.title}</a></h2>
 				}
 				<div className="details">
 					<div className="pic">
@@ -106,11 +141,11 @@ let Post = React.createClass({
 						<span>By <Link to="userPosts" params={{id: this.props.user.id}}>{this.props.post.user.first} {this.props.post.user.last} </Link></span>
 						&bull;
 						<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
-						<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
+						<div className="created">{moment(this.state.post.createdAt).fromNow()}</div>
 						{details}
 					</div>
 					<div className="actions">
-						{this.props.editing ? <button className="button green">Save</button> : false}
+						{this.props.editing ? <button className="button green" onClick={this._update}>Save</button> : false}
 					</div>
 				</div>
 				<div className="footing">
@@ -136,6 +171,218 @@ let Post = React.createClass({
 			return;
 		}
 		this.setState({hidden: true});
+	},
+	_privacy: function (e) {
+		Actions.change('privacy', e.currentTarget.value);
+	},
+	_title: function (e) {
+		Actions.change('title', e.currentTarget.innerHTML);
+	},
+	_update: function () {
+		Actions.save();
+	}
+});
+
+let Types = React.createClass({
+	render: function () {
+	  let type = this.props.post.type;
+	  let classes = {};
+		for (var i in Object.keys(tax)) {
+			var key = Object.keys(tax)[i].slice(0, -1);
+			classes[key] = key;
+			if (type === key) {
+				classes[key] += ' selected';
+			}
+		}
+		let element =
+		<select ref="element" value={this.props.post.element} onChange={this._element}>
+			<option value="world">World</option>
+			<option value="mind">Mind</option>
+			<option value="voice">Voice</option>
+			<option value="self">Self</option>
+		</select>
+	  return (
+			<div className="details">
+				<div className="types">
+	    			<div className={classes.blog} onClick={this._blog}>
+		    			<strong><i className="fa fa-laptop" /> Blog</strong>
+							<p>General Post type, start here if you dont know what to choose</p>
+								<div className={(type === 'blog') ? "selected" : ""}>
+								<label>Element: {element}</label>
+								<label>Category:
+									<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.blogs[this.props.post.element]} />
+								</label>
+								<label>Subcategory:
+									<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.blogs.subcategory} />
+								</label>
+								<label>Positive?
+									<input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this._positive} />
+								</label>
+								</div>
+						</div>
+	    			<div className={classes.event} onClick={this._events}>
+		    			<strong><i className="fa fa-calendar" /> Event</strong>
+							<p>Virtual or real-world event</p>
+							<div className={(type === 'event') ? "selected" : ""}>
+								<label>Element:</label>
+								{element}
+								<br />
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.events[this.props.post.element]} />
+								<br />
+								<label>Date</label>
+								<input ref="date" value={this.props.post.date} onChange={this._date} />
+								<br />
+								<label>Address</label>
+								<input ref="address" value={this.props.post.address} onChange={this._address} />
+								<br />
+							</div>
+						</div>
+	    			<div className={classes.subject} onClick={this._subjects}>
+		    			<strong><i className="fa fa-puzzle-piece" /> Subject</strong>
+							<p>Share your knowledge or expertise with the community on a letiety of Subjects</p>
+							<div className={(type === 'subject') ? "selected" : ""}>
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.subjects.category} />
+								<br />
+								<label>Subcategory:</label>
+								<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.subjects[this.props.post.category]} />
+								<br />
+								<label>Difficulty:</label>
+								<select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
+									<option>Easy</option>
+									<option>Medium</option>
+									<option>Hard</option>
+								</select>
+								<br />
+							</div>
+						</div>
+	    			<div className={classes.question} onClick={this._questions}>
+		    			<strong><i className="fa fa-question" /> Question</strong>
+							<p>Need help or clarification on a topic? Ask it with a Question</p>
+							<div className={(type === 'question') ? "selected" : ""}>
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.subcategory} onChange={this._category} data={tax.subjects.category} />
+								<br />
+								<label>Subcategory:</label>
+								<Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.subjects[this.props.post.category]} />
+								<br />
+								<label>Difficulty:</label>
+								<select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
+									<option>Easy</option>
+									<option>Medium</option>
+									<option>Hard</option>
+								</select>
+								<br />
+							</div>
+						</div>
+	    			<div className={classes.debate} onClick={this._debates}>
+		    			<strong><i className="fa fa-bullhorn" /> Debate</strong>
+							<p>Get the discussion started with a local, county, state or national-level Debate</p>
+							<div className={(type === 'debate') ? "selected" : ""}>
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.debates.category} />
+								<br />
+								<label>Scope:</label>
+								<select ref="scope" value={this.props.post.scope} onChange={this._scope}>
+									<option>Local</option>
+									<option>County</option>
+									<option>State</option>
+								</select>
+								<br />
+								<label>Zip</label>
+								<input ref="zip" value={this.props.post.zip} onChange={this._zip} />
+								<br />
+							 </div>
+						</div>
+						<div className={classes.poll} onClick={this._polls}>
+							<strong><i className="fa fa-line-chart" /> Poll</strong>
+							<p>Get the discussion started with a local, county, state or national-level Debate</p>
+								<div className={(type === 'poll') ? "selected" : ""}>
+									<label>Category:</label>
+									<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.debates.category} />
+									<br />
+									<label>Scope:</label>
+									<select ref="scope" value={this.props.post.scope} onChange={this._scope}>
+										<option>Local</option>
+										<option>County</option>
+										<option>State</option>
+									</select>
+									<br />
+									<label>Zip</label>
+									<input ref="zip" value={this.props.post.zip} onChange={this._zip} />
+									<br />
+								 </div>
+						</div>
+	    			<div className={classes.quote} onClick={this._quotes}>
+		    			<strong><i className="fa fa-road" /> Quote</strong>
+							<p>Has someone else already described how you feel? Post their Quote here</p>
+							<div className={(type === 'quote') ? "selected" : ""}>
+								<label>Source/Author</label>
+								<input ref="author" value={this.props.post.author} onChange={this._author} />
+								<br />
+							</div>
+						</div>
+	    			<div className={classes.belief} onClick={this._beliefs}>
+		    			<strong><i className="fa fa-quote-right" /> Belief</strong>
+							<p>Tell us more about your Belief on something dear to you</p>
+							<div className={(type === 'belief') ? "selected" : ""}>
+								<label>Category:</label>
+								<Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.beliefs.category} />
+								<br />
+							</div>
+						</div>
+				</div>
+			</div>
+	  );
+	},
+	_blog: function () { Actions.change('type', 'blog'); },
+	_events: function () { Actions.change('type', 'event'); },
+	_subjects: function () { Actions.change('type', 'subject'); },
+	_questions: function () { Actions.change('type', 'question'); },
+	_debates: function () { Actions.change('type', 'debate'); },
+	_polls: function () { Actions.change('type', 'poll'); },
+	_beliefs: function () { Actions.change('type', 'belief'); },
+	_quotes: function () { Actions.change('type', 'quote'); },
+	_element: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('element', value);
+	},
+	_category: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('category', value);
+	},
+	_subcategory: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('subcategory', value);
+	},
+	_positive: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('positive', value);
+	},
+	_date: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('date', value);
+	},
+	_address: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('address', value);
+	},
+	_difficulty: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('difficulty', value);
+	},
+	_scope: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('scope', value);
+	},
+	_zip: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('zip', value);
+	},
+	_author: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('author', value);
 	}
 });
 
@@ -178,7 +425,12 @@ let Stats = React.createClass({
 });
 
 let Tags = React.createClass({
-  render: function () {
+  getDefaultProps: function () {
+		return {
+			tags: []
+		}
+	},
+	render: function () {
     return (
       <div className="tags">
         <i className="fa fa-tag" />
@@ -190,6 +442,60 @@ let Tags = React.createClass({
       </div>
     );
   }
+});
+
+Tags.Editor = React.createClass({
+	getDefaultProps: function () {
+		return {
+			post: {
+				id: null,
+				tags: []
+			}
+		}
+	},
+	getInitialState: function () {
+		return {
+			tag: ""
+		}
+	},
+	render: function () {
+		let currentTags = [];
+		if (this.props.post && this.props.post.tags) {
+			currentTags = this.props.post.tags.map((item) => {
+				return <div key={item.id} className="tag">{item.tag}<a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>x</a></div>
+			});
+		}
+		return (
+			<div>
+				<label>Tag your post:<br />
+					<div className="tagField">
+						{currentTags}
+						<input placeholder="add tags here" onChange={this._change} type="text" value={this.state.tag} />
+						<button ref="add" onClick={this._add} className="button green small">Add Tag</button>
+					</div>
+				</label>
+			</div>
+		);
+	},
+	_change: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({tag: value});
+	},
+	_add: function () {
+		let model = {};
+		if (this.state.tag.length > 1 && this.props.post.id) {
+			model.tag = this.state.tag;
+			model.postId = this.props.post.id;
+			Actions.Tags.add(model);
+			this.setState({tag: ""});
+			return;
+		}
+		console.error('post must have an id first');
+	},
+	_remove: function (e) {
+		let id = e.currentTarget.id;
+		Actions.Tags.remove(id);
+	},
 });
 
 let Links = React.createClass({
@@ -406,7 +712,7 @@ let Thumbs = React.createClass({
      this.unsubscribe = Store.Thumbs.listen((data) => {
        this.setState(data);
      });
-     Actions.Thumbs.single(params.id);
+     Actions.Thumbs.post(params.id);
    },
    componentWillUnmount: function () {
      this.unsubscribe();
@@ -456,9 +762,7 @@ let Comments = React.createClass({
   },
   componentDidMount: function () {
     //let params = this.getParams();
-		console.log(Store);
     this.unsubscribe = Store.Comments.listen((data) => {
-      console.log(data);
 			this.setState(data);
     });
     Actions.Comments.collection(this.props.post.id);
@@ -476,11 +780,11 @@ let Comments = React.createClass({
     let comments = [];
     if (data) {
       comments = data.map(function (item, i) {
-        return <Comment key={item.id} comment={item} user={item.user} />;
+        return <Comments.Comment key={item.id} comment={item} user={item.user} />;
       });
     }
     if (1) {
-      create = <Create />
+      create = <Comments.Create />
     }
     return (
       <div>
@@ -492,7 +796,7 @@ let Comments = React.createClass({
   }
 });
 
-let Create = React.createClass({
+Comments.Create = React.createClass({
   add: function () {
     let model = {};
     model.content = this.refs.comment.getDOMNode().value;
@@ -516,7 +820,7 @@ let Create = React.createClass({
   }
 });
 
-let Comment = React.createClass({
+Comments.Comment = React.createClass({
   render: function () {
     let textarea = '';
     /*
@@ -559,6 +863,22 @@ let Comment = React.createClass({
   }
 });
 
+let Select = React.createClass({
+  render: function () {
+    let list =[];
+    if (!this.props.data) {
+      return (<div>Missing option</div>);
+    }
+    list = this.props.data.map(function (item) {
+      return <option key={item.label} value={item.value}>{item.label}</option>;
+    });
+    return (
+      <select>
+      	{list}
+      </select>
+    );
+  }
+});
 /*
 <li><strong>Positive:</strong> {this.props.meta.positive}</li>
 <li><strong>Category:</strong> {this.props.meta.category}</li>

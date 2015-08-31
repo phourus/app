@@ -1,12 +1,13 @@
 "use strict";
 let Reflux = require('reflux');
+
+let Actions = require('../actions/stream');
+
 let posts = require('../api/posts');
 let account = require('../api/account');
 let users = require('../api/users');
 let orgs = require('../api/orgs');
-let comments = require('../api/comments');
-let thumbs = require('../api/thumbs');
-let Actions = require('../actions/search');
+
 let msg = require("../actions/alerts").add;
 
 let Stream = Reflux.createStore({
@@ -205,40 +206,6 @@ let Stream = Reflux.createStore({
            msg('red', 'Could not load posts for this profile', code);
         }
       });
-  }
-});
-
-Stream.Comments = Reflux.createStore({
-  init: function () {
-    this.listenTo(Actions.comments, this._comments);
-  },
-  _comments: function (id) {
-    comments.collection({post_id: id})
-    .then(data => {
-      this.trigger(data);
-    })
-    .catch(code => {
-      msg('red', 'Comments could not be loaded', code);
-    });
-  }
-});
-
-Stream.Thumbs = Reflux.createStore({
-  init: function () {
-    this.listenTo(Actions.thumb, this._single);
-    this.listenTo(Actions.thumbs, this._collection);
-  },
-  _single: function (id) {
-
-  },
-  _collection: function (id) {
-    thumbs.collection({post_id: id})
-    .then(data => {
-      this.trigger(data);
-    })
-    .catch(code => {
-      msg('red', 'Thumbs could not be loaded', code);
-    });
   }
 });
 
