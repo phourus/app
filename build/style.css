@@ -1200,15 +1200,38 @@ div.alerts button {
   opacity: 1;
   padding: 1%;
 }
+.postItem.selected button.close {
+  display: block;
+}
+.postItem.selected a.edit {
+  display: none;
+}
 .postItem button.close {
   background: transparent;
+  background-color: #555;
   border: none;
+  color: #fff;
   float: right;
+  padding-top: 3px;
   font-size: 1em;
+  display: none;
 }
 .postItem button.close:hover {
-  color: #ed0303;
+  color: #f2c13d;
   cursor: pointer;
+}
+.postItem a.edit {
+  display: block;
+  font-size: 0.6em;
+  float: right;
+  color: #ddd;
+  text-align: right;
+}
+.postItem a.edit:hover {
+  color: #5faee3;
+}
+.postItem a.edit i {
+  font-size: 1.5em;
 }
 .postItem .type {
   font-size: 0.8em;

@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, State } = Router;
+let { Link, State, Navigation } = Router;
 let moment = require('moment');
 let numeral = require('numeral');
 let RTE = require('react-quill');
@@ -23,7 +23,7 @@ let S3 = AWS.S3;
 let s3 = new S3();
 
 let Post = React.createClass({
-	mixins: [State],
+	mixins: [State, Navigation],
 	getInitialState: function () {
 		return {
 			selected: false,
@@ -123,7 +123,7 @@ let Post = React.createClass({
 		//<Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link>
 		return (
 			<div className={className}>
-				<button className="close" onClick={this._hide}>X</button>
+				<button className="close" onClick={this._back}>X</button>
 				<div className={`type ${this.state.post.type}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				{types}
 				{this.props.editing
@@ -137,11 +137,11 @@ let Post = React.createClass({
 				}
 				{this.props.editing
 					? false
-					: <Link to="edit" params={{id: this.state.post.id}}>Edit</Link>
+					: <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
 				}
 				{this.props.editing
 					? <div contentEditable={true} className="title editing" onInput={this._title}>{this.state.post.title}</div>
-				: <h2 className="title"><a href="javascript:void(0)" onClick={this._toggle}>{this.state.post.title}</a></h2>
+				: <h2 className="title"><Link to="post" params={{id: this.state.post.id}}>{this.state.post.title}</Link></h2>
 				}
 				<div className="details">
 					<div className="pic">
@@ -170,19 +170,8 @@ let Post = React.createClass({
 			</div>
 		);
 	},
-	_toggle: function () {
-		let id = 0;
-		if (this.state.selected !== true) {
-			id = this.state.post.id;
-		}
-		Stream.select(id);
-	},
-	_hide: function () {
-		if (this.state.selected === true) {
-			Stream.select(0);
-			return;
-		}
-		this.setState({hidden: true});
+	_back: function () {
+		this.context.router.transitionTo("stream");
 	},
 	_type: function () {
 		this.setState({types: !this.state.types});

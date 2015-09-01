@@ -14,17 +14,45 @@
     margin: 1%;
     opacity: 1;
     padding: 1%;
+
+    button.close {
+      display: block;
+    }
+
+    a.edit {
+      display: none;
+    }
   }
 
   button.close {
     background: transparent;
+    background-color: #555;
     border: none;
+    color: #fff;
     float: right;
+    padding-top: 3px;
     font-size: 1em;
+    display: none;
 
     &:hover {
-      color: @red;
+      color: @gold-light;
       cursor: pointer;
+    }
+  }
+
+  a.edit {
+    display: block;
+    font-size: 0.6em;
+    float: right;
+    color: #ddd;
+    text-align: right;
+
+    &:hover {
+      color: @blue-light;
+    }
+
+    i {
+      font-size: 1.5em;
     }
   }
   .type {

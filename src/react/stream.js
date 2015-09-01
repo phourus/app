@@ -65,21 +65,45 @@ let Stream = React.createClass({
 		);
 	},
 	_context: function () {
-		let type = null;
+		/** CONTEXT **/
+		// /stream
+		// /stream/user/:id
+		// /stream/org/:id
+		// /stream/edit/:id
+		// /stream/:id
+
 		let route = this.context.router.getCurrentRoutes();
 		let params = this.context.router.getCurrentParams();
+		let context_id = null;
+		let type = null;
+		let editing = 0;
+		let selected = 0;
+
 		if (route[2]) {
 			type = route[2].name;
+			// stream/user/:id
+			// stream/org/:id
+			if (type === 'userPosts' || type === 'orgPosts') {
+				context_id = params.id;
+			}
 
-			if (type === 'edit') {
-				this.setState({editing: params.id, selected: params.id});
-				Actions.context('myPosts', null);
+			// stream/edit/:id
+			if (type === 'edit' && params.id) {
+				editing = params.id;
+				selected = params.id;
+				type = 'myPosts';
 				Actions.single(params.id);
-				return;
+			}
+
+			// stream/:id
+			if (type === 'post' && params.id) {
+				selected = params.id;
+				Actions.single(params.id);
 			}
 		}
 
-		Actions.context(type, params.id);
+		this.setState({editing: editing, selected: selected});
+		Actions.context(type, context_id);
 	},
 	_more: function () {
 		Actions.more();
@@ -415,9 +439,19 @@ let Pagination = React.createClass({
 let Posts = React.createClass({
 	render: function () {
 		let data = this.props.posts;
+		let filtered = this.props.posts;
 		let list = [];
 
-		list = data.map((item, i) => {
+		if (this.props.selected > 0) {
+			filtered = data.filter(item => {
+				if (item.id == this.props.selected) {
+					return true;
+				}
+				return false;
+			});
+		}
+
+		list = filtered.map((item, i) => {
 			 let location = {};
 			 let selected = (item.id == this.props.selected);
 			 let editing = (item.id == this.props.editing);
