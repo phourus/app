@@ -1189,6 +1189,7 @@ div.alerts button {
   opacity: 0.5;
   background-color: white;
   box-sizing: border-box;
+  /** TAGS **/
   /** LINKS **/
 }
 .postItem:hover {
@@ -1483,6 +1484,75 @@ div.alerts button {
   margin-top: 1em;
   padding-top: 1em;
   border-top: solid 1px #eeeeee;
+}
+.postItem .tag {
+  border: solid 1px #dddddd;
+  padding: 0px 6px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  font-size: 1em;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  color: #999;
+  margin-left: 4px;
+  display: inline-block;
+}
+.postItem .tag a {
+  color: #ccc;
+}
+.postItem .tag a:hover {
+  border-color: #5faee3;
+  color: #5faee3;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.postItem .tag a.remove {
+  border: none;
+  background: transparent;
+  display: inline-block;
+  font-size: 1em;
+  color: inherit;
+  margin-left: 10px;
+}
+.postItem .tag a.remove:hover {
+  color: #fc2727;
+  text-decoration: none;
+  cursor: pointer;
+}
+.postItem .tagField {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+.postItem .tagField input {
+  border: solid 1px #dddddd;
+  padding: 0px 6px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  height: 40px;
+  font-size: 1.1em;
+  color: #333;
+  margin-left: 4px;
+  display: inline-block;
+}
+.postItem .tagField button {
+  width: 60px;
+  height: 38px;
+  position: absolute;
+  -webkit-border-radius: 0 15px 15px 0;
+  -moz-border-radius: 0 15px 15px 0;
+  border-radius: 0 15px 15px 0;
+  font-size: 0.5em;
+  border: none;
+  background-color: #217dbb;
+  cursor: pointer;
+  color: #eee;
+  top: 1px;
+  right: 15px;
+}
+.postItem .tagField button:hover {
+  background-color: #5faee3;
 }
 .postItem .links {
   max-width: 100%;
@@ -2604,37 +2674,6 @@ i.fa-minus {
 .popularity > div {
   font-size: 10px;
   text-align: center;
-}
-/** TAGS **/
-.tag {
-  border: solid 1px #dddddd;
-  padding: 2px 6px;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  border-radius: 16px;
-  font-size: 1.2em;
-  color: #999;
-  margin-left: 4px;
-  display: inline-block;
-}
-.tag span:hover {
-  border-color: #5faee3;
-  color: #5faee3;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.tag a.remove {
-  border: none;
-  background: transparent;
-  display: inline-block;
-  font-size: 1em;
-  color: inherit;
-  margin-left: 10px;
-}
-.tag a.remove:hover {
-  color: #fc2727;
-  text-decoration: none;
-  cursor: pointer;
 }
 /** TABS **/
 .tabs {

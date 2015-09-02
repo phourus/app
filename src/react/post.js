@@ -97,7 +97,7 @@ let Post = React.createClass({
 		if (this.props.selected === true) {
 			stats = this.state.editing ? false : <Stats post={this.state.post} selected={this.state.selected} />;
 		types = this.state.types ? <Types post={this.state.post} type={this._type} /> : false;
-			tags = <Tags tags={this.state.post.tags} />;
+			tags = <Tags post={this.state.post} editing={this.state.editing} owner={this.props.owner} />;
 			links = <Links post={this.state.post} editing={this.state.editing} owner={this.props.owner} />;
 			content = this.state.editing && this.props.owner ? <TextEditor post={this.state.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.state.post.content}}></div>;
 			comments = this.state.editing ? false : <Comments post={this.state.post} />;
@@ -562,26 +562,6 @@ let Stats = React.createClass({
 });
 
 let Tags = React.createClass({
-  getDefaultProps: function () {
-		return {
-			tags: []
-		}
-	},
-	render: function () {
-    return (
-      <div className="tags">
-        <i className="fa fa-tag" />
-        {this.props.tags.map((item, index) => {
-          return (
-            <span className="tag" key={index}><a href="">{item.tag}</a></span>
-          );
-        })}
-      </div>
-    );
-  }
-});
-
-Tags.Editor = React.createClass({
 	getDefaultProps: function () {
 		return {
 			post: {
@@ -596,24 +576,31 @@ Tags.Editor = React.createClass({
 		}
 	},
 	render: function () {
-		let currentTags = [];
-		if (this.props.post && this.props.post.tags) {
-			currentTags = this.props.post.tags.map((item) => {
-				return <div key={item.id} className="tag">{item.tag}<a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>x</a></div>
-			});
-		}
+    let tags = this.props.post.tags || [];
 		return (
-			<div>
-				<label>Tag your post:<br />
-					<div className="tagField">
-						{currentTags}
-						<input placeholder="add tags here" onChange={this._change} type="text" value={this.state.tag} />
-						<button ref="add" onClick={this._add} className="button green small">Add Tag</button>
-					</div>
-				</label>
-			</div>
-		);
-	},
+      <div className="tags">
+        <i className="fa fa-tag" />
+        {tags.map((item, index) => {
+          return (
+            <span className="tag" key={index}>
+							<a href="">{item.tag}</a>
+							{this.props.editing && this.props.owner
+								? <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>x</a>
+								: false
+							}
+						</span>
+          );
+        })}
+				{this.props.editing && this.props.owner
+					? <div className="tagField">
+					<input placeholder="add tags here" onChange={this._change} type="text" value={this.state.tag} />
+					<button ref="add" onClick={this._add}>Add Tag</button>
+				</div>
+					: false
+				}
+      </div>
+    );
+  },
 	_change: function (e) {
 		let value = e.currentTarget.value;
 		this.setState({tag: value});
@@ -625,14 +612,12 @@ Tags.Editor = React.createClass({
 			model.postId = this.props.post.id;
 			Actions.Tags.add(model);
 			this.setState({tag: ""});
-			return;
 		}
-		console.error('post must have an id first');
 	},
 	_remove: function (e) {
 		let id = e.currentTarget.id;
 		Actions.Tags.remove(id);
-	},
+	}
 });
 
 let Links = React.createClass({
