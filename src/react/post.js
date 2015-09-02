@@ -464,7 +464,6 @@ let Meta = React.createClass({
 	}
 });
 
-
 let TextEditor = React.createClass({
 	render: function () {
 		let content = this.props.post.content || "";
@@ -582,10 +581,16 @@ let Links = React.createClass({
 		return (
 			<div className="links">
 				<h2>Links & Attachments</h2>
-				{this.props.editing ? <Links.Edit post={this.props.post} /> : false}
-				<Links.List post={this.props.post} />
+				{this.props.editing ? <Links.Edit post={this.props.post} {...this.state} /> : false}
+				<Links.List post={this.props.post} edit={this._edit} />
 			</div>
 		);
+	},
+	_edit: function (e) {
+		var id = e.currentTarget.id;
+		var state = this.props.post.links[id];
+		state.mode = 'edit';
+		this.setState(state);
 	}
 });
 
@@ -602,10 +607,10 @@ Links.List = React.createClass({
 					}
 
 					return (
-						<div key={item.id}>
+						<div className="link" key={item.id}>
 							<div className="icon">
 								<i className={icon} />
-								<a id={index} className="edit" onClick={this._edit}>Edit</a>
+								<a id={index} href="javascript:void(0)" className="edit" onClick={this.props.edit}>Edit</a>
 							</div>
 							<div>
 								<button id={item.id} className="remove" onClick={this._remove}>X</button>
@@ -660,6 +665,11 @@ Links.Edit = React.createClass({
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
+	componentWillReceiveProps: function (data) {
+		if (data.id) {
+			this.setState(data);
+		}
+	},
 	render: function () {
 		let button = <button onClick={this._add} className="button green small add">Add Link</button>;
 		if (this.state.mode === 'edit') {
@@ -676,7 +686,7 @@ Links.Edit = React.createClass({
 					<button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
 				</label>
 				<label>Caption:
-					<textarea type="text" onChange={this._changeCaption} placeholder="enter short description">{this.state.caption}</textarea>
+					<textarea type="text" onChange={this._changeCaption} placeholder="enter short description" value={this.state.caption} />
 				</label>
 				{button}
 			</div>
@@ -698,12 +708,7 @@ Links.Edit = React.createClass({
 		let id = e.currentTarget.id;
 		Actions.Links.remove(id);
 	},
-	_edit: function (e) {
-		var id = e.currentTarget.id;
-		var state = this.props.post.links[id];
-		state.mode = 'edit';
-		this.setState(state);
-	},
+
 	_save: function () {
 		let link = {};
 		link.title = this.state.title;

@@ -15,11 +15,11 @@
     opacity: 1;
     padding: 1%;
 
-    button.close {
+    > button.close {
       display: block;
     }
 
-    a.edit {
+    > a.edit {
       display: none;
     }
   }
@@ -40,7 +40,7 @@
     }
   }
 
-  a.edit {
+  > a.edit {
     display: block;
     font-size: 0.6em;
     float: right;
@@ -323,13 +323,15 @@
           &.icon {
             .Cols(1);
 
-            a.edit {
-              font-size: 1em;
+            i {
+              font-size: 2em;
               display: block;
             }
 
-            i {
-              font-size: 2em;
+            a.edit {
+              font-size: 1em;
+              display: block;
+              text-align: left;
             }
           }
         }

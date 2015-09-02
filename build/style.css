@@ -1200,10 +1200,10 @@ div.alerts button {
   opacity: 1;
   padding: 1%;
 }
-.postItem.selected button.close {
+.postItem.selected > button.close {
   display: block;
 }
-.postItem.selected a.edit {
+.postItem.selected > a.edit {
   display: none;
 }
 .postItem button.close {
@@ -1220,17 +1220,17 @@ div.alerts button {
   color: #f2c13d;
   cursor: pointer;
 }
-.postItem a.edit {
+.postItem > a.edit {
   display: block;
   font-size: 0.6em;
   float: right;
   color: #ddd;
   text-align: right;
 }
-.postItem a.edit:hover {
+.postItem > a.edit:hover {
   color: #5faee3;
 }
-.postItem a.edit i {
+.postItem > a.edit i {
   font-size: 1.5em;
 }
 .postItem .type {
@@ -1536,12 +1536,14 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
 }
+.postItem .links .list > div > div.icon i {
+  font-size: 2em;
+  display: block;
+}
 .postItem .links .list > div > div.icon a.edit {
   font-size: 1em;
   display: block;
-}
-.postItem .links .list > div > div.icon i {
-  font-size: 2em;
+  text-align: left;
 }
 .postItem .links .list > div a {
   font-size: 2em;
