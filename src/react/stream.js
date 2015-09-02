@@ -24,8 +24,6 @@ let Stream = React.createClass({
 		return {
 			posts: [],
 			total: 0,
-			selected: 0,
-			editing: 0,
 			params: {
 				exclude: [],
 				search: '',
@@ -42,11 +40,10 @@ let Stream = React.createClass({
 		}
 	},
 	componentDidMount: function () {
-		this._context();
 		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
 		});
-		Actions.collection();
+		this._context();
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
@@ -60,9 +57,9 @@ let Stream = React.createClass({
 		let hasMore = (this.state.posts.length < this.state.total);
 		return (
 			<div className="search">
-				<Head {...this.state.params} />
-				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader">Loading more...</div>}>
-					<Posts posts={this.state.posts} selected={this.state.selected} editing={this.state.editing} scroll={this.state.scroll} />
+				<Head {...this.state} />
+				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader"></div>}>
+					<Posts {...this.state} />
 				</Scroll>
 			</div>
 		);
@@ -77,36 +74,16 @@ let Stream = React.createClass({
 
 		let route = this.context.router.getCurrentRoutes();
 		let params = this.context.router.getCurrentParams();
-		let context_id = null;
+		let id = null;
 		let type = null;
-		let editing = 0;
-		let selected = 0;
 
 		if (route[2]) {
 			type = route[2].name;
-			// stream/user/:id
-			// stream/org/:id
-			if (type === 'userPosts' || type === 'orgPosts') {
-				context_id = params.id;
-			}
-
-			// stream/edit/:id
-			if (type === 'edit' && params.id) {
-				editing = params.id;
-				selected = params.id;
-				type = 'myPosts';
-				Actions.single(params.id);
-			}
-
-			// stream/:id
-			if (type === 'post' && params.id) {
-				selected = params.id;
-				Actions.single(params.id);
-			}
 		}
-
-		this.setState({editing: editing, selected: selected});
-		Actions.context(type, context_id);
+		if (params.id) {
+			id = params.id;
+		}
+		Actions.context(type, id);
 	},
 	_more: function () {
 		Actions.more();
@@ -461,9 +438,9 @@ let Posts = React.createClass({
 		let filtered = this.props.posts;
 		let list = [];
 
-		if (this.props.selected > 0) {
+		if (this.props.context.type === 'post' || this.props.context.type === 'edit') {
 			filtered = data.filter(item => {
-				if (item.id == this.props.selected) {
+				if (item.id == this.props.context.id) {
 					return true;
 				}
 				return false;
@@ -472,20 +449,18 @@ let Posts = React.createClass({
 
 		list = filtered.map((item, i) => {
 			 let location = {};
-			 let selected = (item.id == this.props.selected);
-			 let editing = (item.id == this.props.editing);
 			 let owner = (item.user.id == this.state.user.id);
 			 if (item.user.locations && item.user.locations.length > 0) {
 					 location = item.user.locations[0];
 			 }
-			 return <PostItem key={item.id} post={item} user={item.user} owner={owner} location={location} editing={editing} selected={selected} scroll={this.props.scroll} />;
+			 return <PostItem key={item.id} post={item} user={item.user} context={this.props.context} owner={owner} location={location} scroll={this.props.scroll} />;
 		});
 
 		if (list.length < 1) {
 			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>
 		}
 		return (
-			<div className={this.props.selected > 0 ? "post" : "posts"}>{list}</div>
+			<div className={(this.props.context.type === 'post' || this.props.context.type === 'edit') ? "post" : "posts"}>{list}</div>
 		);
 	}
 });

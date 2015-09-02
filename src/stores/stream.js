@@ -164,24 +164,27 @@ let Stream = Reflux.createStore({
     this.params.context = {
       type: type,
       id: id,
-      profile: null
+      profile: {}
     }
+    this.trigger({context: this.params.context});
     this.posts = [];
     // no context
     if (type === null) {
-      this.params.context = {
-        type: null,
-        id: null,
-        profile: null
-      }
       this._collection();
       return;
     }
+    // post || edit
+    if (type === 'post' || type === 'edit') {
+      this._single(id);
+      return;
+    }
+
     // me
     if (type === 'myPosts') {
       account.get()
         .then(data => {
           this.params.context.profile = data;
+          this.trigger({context: this.params.context});
           this._collection();
         })
         .catch(code => {
@@ -199,6 +202,7 @@ let Stream = Reflux.createStore({
     profile.single(id)
       .then(data => {
         this.params.context.profile = data;
+        this.trigger({context: this.params.context});
         this._collection();
       })
       .catch(code => {
