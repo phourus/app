@@ -12,6 +12,7 @@ let Actions = require('../actions/post');
 let Stream = require('../actions/stream');
 
 let Store = require('../stores/post');
+let AccountStore = require('../stores/account');
 
 let Influence = require('../influence');
 let Popularity = require('../popularity');
@@ -64,6 +65,7 @@ let Post = React.createClass({
 		let id = this.getParams().id || null;
 		if (id) {
 			Actions.single(id);
+			Actions.Comments.collection({postId: id});
 		}
 	},
 	componentWillUnmount: function () {
@@ -895,11 +897,11 @@ let Comments = React.createClass({
     }
   },
   componentDidMount: function () {
-    //let params = this.getParams();
     this.unsubscribe = Store.Comments.listen((data) => {
 			this.setState(data);
     });
-    Actions.Comments.collection(this.props.post.id);
+		// Actions.Comments.collection moved to Post component because initial
+		// render postID = 0
   },
   componentWillUnmount: function () {
     this.unsubscribe();
@@ -914,11 +916,11 @@ let Comments = React.createClass({
     let comments = [];
     if (data) {
       comments = data.map(function (item, i) {
-        return <Comments.Comment key={item.id} comment={item} user={item.user} />;
+				return <Comments.Comment key={item.id} comment={item} user={item.user} />;
       });
     }
-    if (1) {
-      create = <Comments.Create />
+    if (AccountStore.authenticated) {
+      create = <Comments.Create post={this.props.post} />
     }
     return (
       <div>
@@ -931,13 +933,12 @@ let Comments = React.createClass({
 });
 
 Comments.Create = React.createClass({
-  add: function () {
-    let model = {};
-    model.content = this.refs.comment.getDOMNode().value;
-    model.post_id = this.props.postID;
-    Actions.Comments.add(model);
-  },
-  render: function () {
+  getInitialState: function () {
+		return {
+			content: ""
+		}
+	},
+	render: function () {
     return (
       <div className="create">
         <div className="pic">
@@ -945,17 +946,28 @@ Comments.Create = React.createClass({
             <img src={"/assets/avatars/1.jpg"} />
           </Link>
         </div>
-        <textarea ref="comment" placeholder="Comment goes here"></textarea>
-        <button className="button green add" onClick={this.add}>
+        <textarea ref="comment" placeholder="Comment goes here" value={this.state.content} onChange={this._content} />
+        <button className="button green add" onClick={this._add}>
           <i className="fa fa-comment" /> Post Comment
         </button>
       </div>
     );
-  }
+  },
+	_add: function () {
+		let model = {};
+		model.content = this.state.content;
+		model.postId = this.props.post.id;
+		Actions.Comments.add(model);
+	},
+	_content: function (e) {
+		let value = e.currentTarget.value;
+		this.setState({content: value});
+	}
 });
 
 Comments.Comment = React.createClass({
-  render: function () {
+  mixins: [Navigation],
+	render: function () {
     let textarea = '';
     /*
     if (owner === true) {
@@ -974,20 +986,21 @@ Comments.Comment = React.createClass({
     <button class="button green confirm">Confirm Delete</button>
     <button class="button red cancel">Cancel</button>
     </div>
+</Link>
 
     }
     */
     return (
-      <div className="comment" ref={this.props.id}>
+      <div className="comment" id={this.props.comment.id}>
         <div className="pic">
-          <Link to="userPosts" params={{id: this.props.user.id}}>
-            <img src={`/assets/avatars/${this.props.user.img}.jpg`} width="100" />
-          </Link>
+					<Link to="userPosts" params={{id: this.props.user.id}}>
+						<img src={`/assets/avatars/${this.props.user.img}.jpg`} width="100" />
+					</Link>
         </div>
         <div className="content">
-          <Link to="userPosts" params={{id: this.props.user.id}} className="username">
-            {this.props.user.username} ({this.props.user.influence})
-          </Link>
+					<Link to="userPosts" params={{id: this.props.user.id}} className="username">
+						{this.props.user.username} ({this.props.user.influence})
+					</Link>
           <p>{this.props.comment.content}</p>
           <span className="date">{moment(this.props.comment.createdAt).fromNow()}</span>
         </div>

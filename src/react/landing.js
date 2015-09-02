@@ -169,7 +169,7 @@ let Explorer = React.createClass({
     );
   },
   _more: function () {
-    this.context.router.transitionTo('search');
+    this.context.router.transitionTo('stream');
   }
 });
 
