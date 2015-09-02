@@ -12,9 +12,6 @@ module.exports = Reflux.createStore({
   notifications: [],
   history: [],
   init: function () {
-    if (token.get()) {
-      this.authenticated = true;
-    }
     this.listenTo(Actions.change, this._change);
     this.listenTo(Actions.get, this._get);
     this.listenTo(Actions.edit, this._edit);
@@ -34,6 +31,7 @@ module.exports = Reflux.createStore({
   _get: function () {
     account.get()
     .then(data => {
+      this.authenticated = true;
       this.user = data;
       this.trigger({user: data});
     })

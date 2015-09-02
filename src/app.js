@@ -5,7 +5,8 @@ let Router = require('react-router');
 let { Link, RouteHandler} = Router;
 
 let Alerts = require('./react/alerts');
-let Stream = require('./actions/stream');
+let StreamActions = require('./actions/stream');
+let AccountActions = require('./actions/account');
 
 let App = React.createClass({
   render: function () {
@@ -24,7 +25,7 @@ let App = React.createClass({
                 </Link>
               </li>
               <li className="create">
-                <Link to="myPosts" onClick={this._create}>
+                <Link to="myPosts" onClick={StreamActions.create}>
                   <i className="fa fa-pencil" />
                   Create
                 </Link>
@@ -39,7 +40,7 @@ let App = React.createClass({
                   <li><Link to="myPosts">My Posts</Link></li>
                   <li><Link to="activity">My Activity</Link></li>
                   <li><Link to="account">My Account</Link></li>
-                  <li><Link to="myPosts">Logout</Link></li>
+                  <li><a href="javascript:void(0)" onClick={AccountActions.logout}>Logout</a></li>
                 </ul>
               </li>
             </ul>
@@ -61,9 +62,6 @@ let App = React.createClass({
         </div>
       </div>
     );
-  },
-  _create: function () {
-    Stream.create();
   }
 });
 

@@ -16,7 +16,7 @@ module.exports = {
     },
     save: function (jwt) {
       try {
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', jwt);
       } catch (e) {
         token = jwt;
         console.warn('localStorage not supported');
