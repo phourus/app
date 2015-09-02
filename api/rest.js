@@ -6,7 +6,6 @@ var body = require('body-parser');
 var rest = express();
 
 var account = require('./rest/account');
-var clout = require('./rest/clout');
 var comments = require('./rest/comments');
 var links = require('./rest/links');
 var locations = require('./rest/locations');
@@ -14,7 +13,6 @@ var members = require('./rest/members');
 var orgs = require('./rest/orgs');
 var passwords = require('./rest/passwords');
 var posts = require('./rest/posts');
-var reviews = require('./rest/reviews');
 var tags = require('./rest/tags');
 var thumbs = require('./rest/thumbs');
 var users = require('./rest/users');
@@ -43,7 +41,6 @@ rest.use(function (req, res, next) {
 });
 
 rest.use('/account', account);
-rest.use('/clout', clout);
 rest.use('/comments', comments);
 rest.use('/links', links);
 rest.use('/locations', locations);
@@ -51,7 +48,6 @@ rest.use('/members', members);
 rest.use('/orgs', orgs);
 rest.use('/passwords', passwords);
 rest.use('/posts', posts);
-rest.use('/reviews', reviews);
 rest.use('/tags', tags);
 rest.use('/thumbs', thumbs);
 rest.use('/users', users);

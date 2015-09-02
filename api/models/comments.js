@@ -10,6 +10,7 @@ var comments = db.define('comments', {
       return this.findAndCountAll(this.queryize(params));
     },
     add: function (model) {
+      model.userId = this.SESSION_USER;
       return this.create(model);
     },
     save: function (id, model) {
@@ -21,7 +22,7 @@ var comments = db.define('comments', {
     queryize: function (params) {
       // to avoid cyclical dependency, require as needed
       var users = require('./users');
-      return {where: {postId: params.post_id}, include: [{model: users, as: 'user'}]};
+      return {where: {postId: params.postId}, include: [{model: users, as: 'user'}]};
     }
   }
 });

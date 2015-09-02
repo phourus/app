@@ -14,7 +14,12 @@ router.get('', (req, res) => {
   });
 });
 router.post('', (req, res) => {
-  var model;
+  var model = req.body;
+  if (req.user_id === false) {
+    res.send(401);
+    return;
+  }
+  comments.SESSION_USER = req.user_id;
   comments.add(model)
   .then(function (data) {
       res.send(201, data);
@@ -25,7 +30,13 @@ router.post('', (req, res) => {
   });
 });
 router.put('/:id', (req, res) => {
-  var id, model;
+  var id = req.params.id;
+  var model = req.body;
+  if (req.user_id === false) {
+    res.send(401);
+    return;
+  }
+  comments.SESSION_USER = req.user_id;
   comments.save(id, model)
   .then(function (data) {
       res.send(204, data);
@@ -36,7 +47,12 @@ router.put('/:id', (req, res) => {
   });
 });
 router.delete('/:id', (req, res) => {
-  var id;
+  var id = req.query.id;
+  if (req.user_id === false) {
+    res.send(401);
+    return;
+  }
+  comments.SESSION_USER = req.user_id;
   comments.remove(id)
   .then(function (data) {
       res.send(204, data);
