@@ -9,6 +9,9 @@ let thousands = "0,0";
 let Store = require('../stores/stream');
 let Actions = require('../actions/stream');
 
+let AccountStore = require('../stores/account');
+let AccountActions = require('../actions/account');
+
 let Tax = require('../taxonomy');
 let Influence = require('../influence');
 let Popularity = require('../popularity');
@@ -437,6 +440,22 @@ let Pagination = React.createClass({
 
 /** POSTS **/
 let Posts = React.createClass({
+	getInitialState: function () {
+		return {
+			user: {
+				id: null
+			}
+		}
+	},
+	componentDidMount: function () {
+		this.unsubscribe = AccountStore.listen((data) => {
+			this.setState(data);
+		});
+		AccountActions.get();
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
+	},
 	render: function () {
 		let data = this.props.posts;
 		let filtered = this.props.posts;
@@ -455,10 +474,11 @@ let Posts = React.createClass({
 			 let location = {};
 			 let selected = (item.id == this.props.selected);
 			 let editing = (item.id == this.props.editing);
+			 let owner = (item.user.id == this.state.user.id);
 			 if (item.user.locations && item.user.locations.length > 0) {
 					 location = item.user.locations[0];
 			 }
-			 return <PostItem key={item.id} post={item} user={item.user} location={location} editing={editing} selected={selected} scroll={this.props.scroll} />;
+			 return <PostItem key={item.id} post={item} user={item.user} owner={owner} location={location} editing={editing} selected={selected} scroll={this.props.scroll} />;
 		});
 		return (
 			<div className={this.props.selected > 0 ? "post" : "posts"}>{list}</div>

@@ -1,7 +1,7 @@
 "use strict";
 let Reflux = require('reflux');
 let account = require('../api/account');
-let { change, get, edit, password, deactivate, history, notifications, orgs, login, register, logout } = require('../actions/account');
+let Actions = require('../actions/account');
 let msg = require("../actions/alerts").add;
 let token = require('../token');
 
@@ -15,17 +15,17 @@ module.exports = Reflux.createStore({
     if (token.get()) {
       this.authenticated = true;
     }
-    this.listenTo(change, this._change);
-    this.listenTo(get, this._get);
-    this.listenTo(edit, this._edit);
-    this.listenTo(password, this._search);
-    this.listenTo(deactivate, this._page);
-    this.listenTo(history, this._history);
-    this.listenTo(notifications, this._notifications);
-    this.listenTo(orgs, this._orgs);
-    this.listenTo(login, this._login);
-    this.listenTo(register, this._register);
-    this.listenTo(logout, this._logout);
+    this.listenTo(Actions.change, this._change);
+    this.listenTo(Actions.get, this._get);
+    this.listenTo(Actions.edit, this._edit);
+    this.listenTo(Actions.password, this._search);
+    this.listenTo(Actions.deactivate, this._page);
+    this.listenTo(Actions.history, this._history);
+    this.listenTo(Actions.notifications, this._notifications);
+    this.listenTo(Actions.orgs, this._orgs);
+    this.listenTo(Actions.login, this._login);
+    this.listenTo(Actions.register, this._register);
+    this.listenTo(Actions.logout, this._logout);
   },
   _change: function (key, value) {
     this.changes[key] = value;
