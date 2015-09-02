@@ -4,7 +4,6 @@ var db = require('../db');
 
 module.exports = tags = db.define('tags', {
     id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
-    //post_id: types.INTEGER,
     tag: types.STRING(20)
 }, {
   classMethods: {

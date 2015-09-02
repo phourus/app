@@ -3,7 +3,6 @@ var db = require('../db');
 
 var links = db.define('links', {
   id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
-  //post_id: types.INTEGER,
   title: types.STRING,
   url: types.STRING,
   caption: types.STRING
