@@ -480,6 +480,10 @@ let Posts = React.createClass({
 			 }
 			 return <PostItem key={item.id} post={item} user={item.user} owner={owner} location={location} editing={editing} selected={selected} scroll={this.props.scroll} />;
 		});
+
+		if (list.length < 1) {
+			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>
+		}
 		return (
 			<div className={this.props.selected > 0 ? "post" : "posts"}>{list}</div>
 		);

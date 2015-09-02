@@ -5,47 +5,13 @@ let Router = require('react-router');
 let { Link, RouteHandler} = Router;
 
 let Alerts = require('./react/alerts');
-let StreamActions = require('./actions/stream');
-let AccountActions = require('./actions/account');
+let Header = require('./react/header');
 
 let App = React.createClass({
   render: function () {
     return  (
       <div>
-        <header className="header">
-          <div className="brand">
-            <Link to="home"></Link>
-          </div>
-          <nav className="nav">
-            <ul>
-              <li className="posts">
-                <Link to="stream" >
-                  <i className="fa fa-search" />
-                  Posts
-                </Link>
-              </li>
-              <li className="create">
-                <Link to="myPosts" onClick={StreamActions.create}>
-                  <i className="fa fa-pencil" />
-                  Create
-                </Link>
-              </li>
-              <li className="me">
-                <Link to="activity" className="me">
-                  <i className="fa fa-user" />
-                  <span className="notifications"></span>
-                  Me
-                </Link>
-                <ul>
-                  <li><Link to="myPosts">My Posts</Link></li>
-                  <li><Link to="activity">My Activity</Link></li>
-                  <li><Link to="account">My Account</Link></li>
-                  <li><a href="javascript:void(0)" onClick={AccountActions.logout}>Logout</a></li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </header>
+        <Header />
         <div className="spacer"></div>
         <Alerts {...this.props.alerts} />
         <div className="main">
