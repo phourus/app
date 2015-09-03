@@ -61,10 +61,11 @@ let Post = React.createClass({
 			}
 		});
 		let id = this.getParams().id || null;
-		if (id) {
+		if (this.props.context.type === 'edit' || this.props.context.type === 'post') {
 			Actions.single(id);
 			Actions.Comments.collection({postId: id});
 		}
+		this.setState(this.props);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
@@ -181,6 +182,7 @@ let Post = React.createClass({
 		Actions.change('title', e.currentTarget.innerHTML);
 	},
 	_update: function () {
+		Store.post.id = this.props.post.id;
 		Actions.save();
 	}
 });
