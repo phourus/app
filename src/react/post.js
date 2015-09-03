@@ -994,12 +994,12 @@ Comments.Comment = React.createClass({
       <div className="comment" id={this.props.comment.id}>
         <div className="pic">
 					<Link to="userPosts" params={{id: this.props.user.id}}>
-						<img src={`/assets/avatars/${this.props.user.img}.jpg`} width="100" />
+						<img src={`/assets/avatars/${this.props.user.img || "default"}.jpg`} />
 					</Link>
         </div>
         <div className="content">
 					<Link to="userPosts" params={{id: this.props.user.id}} className="username">
-						{this.props.user.username} ({this.props.user.influence})
+						{this.props.user.first} {this.props.user.last} ({this.props.user.influence})
 					</Link>
           <p>{this.props.comment.content}</p>
           <span className="date">{moment(this.props.comment.createdAt).fromNow()}</span>
