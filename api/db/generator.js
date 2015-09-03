@@ -16,11 +16,6 @@ var Locations = require('../models/locations');
 var Orgs = require('../models/orgs');
 var Members = require('../models/members');
 
-/*
-var Clouts = require('../models/clout');
-var Reviews = require('../models/reviews');
-*/
-
 var chance = new Chance();
 
 var POST_TOTAL = 100;

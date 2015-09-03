@@ -1,5 +1,4 @@
-require('../db');
-var clout = require('../models/clout');
+require('./connection');
 var comments = require('../models/comments');
 var links = require('../models/links');
 var locations = require('../models/locations');
@@ -7,7 +6,6 @@ var members = require('../models/members');
 var orgs = require('../models/orgs');
 var passwords = require('../models/passwords');
 var posts = require('../models/posts');
-var reviews = require('../models/reviews');
 var tags = require('../models/tags');
 var thumbs = require('../models/thumbs');
 var users = require('../models/users');
@@ -41,22 +39,24 @@ members.belongsTo(orgs);
 users.hasMany(members);
 members.belongsTo(users);
 
-users.sync();
-passwords.sync();
+users.sync()
+.then(function () {
+  passwords.sync();
 
-posts.sync();
-links.sync();
-tags.sync();
-locations.sync();
+  // posts
+  posts.sync()
+  .then(function () {
+    links.sync();
+    tags.sync();
+    locations.sync();
+    views.sync();
+    thumbs.sync();
+    comments.sync();
+  });
 
-views.sync();
-thumbs.sync();
-comments.sync();
-
-orgs.sync();
-members.sync();
-
-/*
-Clout.sync();
-Reviews.sync();
-*/
+  // orgs
+  orgs.sync()
+  .then(function () {
+    members.sync();
+  });
+});

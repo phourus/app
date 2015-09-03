@@ -15,7 +15,7 @@ var users = db.define('users', {
   last: types.STRING(40),
   email: {type: types.STRING(60), unique: true},
   phone: types.STRING(20),
-  gender: types.ENUM('M', 'F', 'O', 'P'),
+  gender: types.ENUM('M', 'F', 'P'),
   occupation: types.STRING(40),
   company: types.STRING(40),
   website: types.STRING(80),

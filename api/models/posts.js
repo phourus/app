@@ -13,14 +13,14 @@ var comments = require('./comments');
 var posts = db.define('posts', {
   // Common
   id: {type: sql.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
-  created: {type: sql.DATE, defaultValue: sql.NOW},
-  modified: sql.DATE,
   privacy: {type: sql.ENUM('public', 'phourus', 'org', 'private'), defaultValue: 'private'},
   type: sql.ENUM('blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'),
   title: sql.STRING,
+  slug: sql.STRING,
   content: sql.TEXT,
   element: sql.ENUM('world', 'mind', 'voice', 'self'),
-  category: sql.STRING(20),
+  category: sql.STRING(40),
+  subcategory: sql.STRING(40),
   lat: sql.FLOAT,
   lng: sql.FLOAT,
 

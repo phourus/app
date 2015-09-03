@@ -5,7 +5,7 @@ var orgs = db.define('orgs', {
   id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
   type: types.ENUM('company', 'school', 'government', 'group'),
   name: types.STRING(40),
-  shortname: types.STRING(20),
+  shortname: {type: types.STRING(20), unique: true},
   email: types.STRING(60),
   phone: types.STRING(20),
   fax: types.STRING(20),
