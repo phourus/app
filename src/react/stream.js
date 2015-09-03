@@ -96,14 +96,11 @@ let Head = React.createClass({
 	},
 	render: function () {
 		let popup = '';
-		if (this.state.mode === 'categories') {
-			popup = <Categories {...this.props} />
-		}
 		if (this.state.mode === 'filter') {
-			popup = <Filter {...this.props} />
+			popup = <Filter {...this.props.params} />
 		}
 		if (this.state.mode === 'sort') {
-			popup = <Sort {...this.props} />
+			popup = <Sort {...this.props.params} />
 		}
 		return (
 			<div className="heading">
@@ -114,7 +111,6 @@ let Head = React.createClass({
 				<div className="refine">
 					<Context {...this.props.context} />
 					<div className="toggles">
-						<button className="fa fa-tag" onClick={this._tags}> Tags</button>
 						<button className="fa fa-filter" onClick={this._filter}> Filter</button>
 						<button className="fa fa-sort" onClick={this._sort}> Sort</button>
 					</div>
@@ -126,13 +122,6 @@ let Head = React.createClass({
 	_search: function () {
 			let val = this.refs.term.getDOMNode().value;
 			Actions.search(val);
-	},
-	_tags: function () {
-		if (this.state.mode === 'categories') {
-			this.setState({mode: false});
-		} else {
-			this.setState({mode: 'categories'});
-		}
 	},
 	_filter: function () {
 		if (this.state.mode === 'filter') {
@@ -204,17 +193,90 @@ let Context = React.createClass({
 	}
 });
 
-let Foot = React.createClass({
+let Filter = React.createClass({
 	render: function () {
 		return (
-			<div className="foot">
-				<Pagination ref="pagination" page={this.props.params.page} total={this.props.total} limit={this.props.params.limit} />
+			<div className="filter">
+				<div className="triangle"></div>
+				<div className="label">Filter By</div>
+				<Filter.Types {...this.props} />
+				<div className="label">Date Range</div>
+				<Filter.Dates />
+				<Filter.Categories />
+				<button className="clear">
+					Clear All <i className="fa fa-close" />
+				</button>
+				<button className="apply">
+					Apply <i className="fa fa-check" />
+				</button>
+			</div>
+		);
+	},
+	toggleFilter: function (e) {
+		let id = e.currentTarget.id;
+		let prop = id + "Visible";
+		let obj = {};
+		let visibility = this.state[prop] == true ? false : true;
+		obj[prop] = visibility;
+		Actions.type(obj);
+	}
+});
+
+Filter.Dates = React.createClass({
+	render: function () {
+		return (
+			<div className="dates">
+				<div>
+					<label>From:</label>
+					<button><i className="fa fa-calendar" /></button>
+					<input />
+				</div>
+				<div>
+					<label>To:</label>
+					<button><i className="fa fa-calendar" /></button>
+					<input />
+				</div>
 			</div>
 		);
 	}
 });
 
-let Categories = React.createClass({
+Filter.Types = React.createClass({
+	render: function () {
+		var classes = {
+			blog: "button green",
+			event: "button green",
+			subject: "button blue",
+			question: "button blue",
+			debate: "button red",
+			poll: "button red",
+			belief: "button gold",
+			quote: "button gold"
+		}
+		for (var i = 0; i < this.props.exclude.length; i++) {
+			var key = this.props.exclude[i];
+			classes[key] += " off";
+		}
+		return (
+			<div className="types">
+				<button id="blog" className={classes.blog} onClick={this._toggle}><i className="fa fa-laptop" /> Blogs</button>
+				<button id="event" className={classes.event} onClick={this._toggle}><i className="fa fa-calendar" /> Events</button>
+				<button id="subject" className={classes.subject} onClick={this._toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
+				<button id="question" className={classes.question} onClick={this._toggle}><i className="fa fa-question" /> Questions</button>
+				<button id="debate" className={classes.debate} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</button>
+				<button id="poll" className={classes.poll} onClick={this._toggle}><i className="fa fa-line-chart" /> Polls</button>
+				<button id="belief" className={classes.belief} onClick={this._toggle}><i className="fa fa-road" /> Beliefs</button>
+				<button id="quote" className={classes.quote} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</button>
+			</div>
+		);
+	},
+	_toggle: function (e) {
+		let type = e.currentTarget.id;
+		Actions.exclude(type);
+	}
+});
+
+Filter.Categories = React.createClass({
 	getInitialState: function () {
 		return {
 			element: 'blogs',
@@ -277,34 +339,6 @@ let Categories = React.createClass({
 	}
 });
 
-let Filter = React.createClass({
-	render: function () {
-		return (
-			<div className="filter">
-				<div className="triangle"></div>
-				<div className="label">Filter By</div>
-				<Types {...this.props} />
-				<div className="label">Date Range</div>
-				<Dates />
-				<button className="clear">
-					Clear All <i className="fa fa-close" />
-				</button>
-				<button className="apply">
-					Apply <i className="fa fa-check" />
-				</button>
-			</div>
-		);
-	},
-	toggleFilter: function (e) {
-		let id = e.currentTarget.id;
-		let prop = id + "Visible";
-		let obj = {};
-		let visibility = this.state[prop] == true ? false : true;
-		obj[prop] = visibility;
-		Actions.type(obj);
-	}
-});
-
 let Sort = React.createClass({
 	render: function () {
 		return (
@@ -342,78 +376,34 @@ let Sort = React.createClass({
 	_desc: function (e) { Actions.direction('DESC'); },
 });
 
-let Dates = React.createClass({
-	render: function () {
-		return (
-			<div className="dates">
-				<div>
-					<label>From:</label>
-					<button><i className="fa fa-calendar" /></button>
-					<input />
-				</div>
-				<div>
-					<label>To:</label>
-					<button><i className="fa fa-calendar" /></button>
-					<input />
-				</div>
-			</div>
-		);
-	}
-});
-
-let Types = React.createClass({
-	render: function () {
-		var classes = {
-			blog: "button green",
-			event: "button green",
-			subject: "button blue",
-			question: "button blue",
-			debate: "button red",
-			poll: "button red",
-			belief: "button gold",
-			quote: "button gold"
-		}
-		for (var i = 0; i < this.props.exclude.length; i++) {
-			var key = this.props.exclude[i];
-			classes[key] += " off";
-		}
-		return (
-			<div className="types">
-				<button id="blog" className={classes.blog} onClick={this._toggle}><i className="fa fa-laptop" /> Blogs</button>
-				<button id="event" className={classes.event} onClick={this._toggle}><i className="fa fa-calendar" /> Events</button>
-				<button id="subject" className={classes.subject} onClick={this._toggle}><i className="fa fa-puzzle-piece" /> Subjects</button>
-				<button id="question" className={classes.question} onClick={this._toggle}><i className="fa fa-question" /> Questions</button>
-				<button id="debate" className={classes.debate} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</button>
-				<button id="poll" className={classes.poll} onClick={this._toggle}><i className="fa fa-line-chart" /> Polls</button>
-				<button id="belief" className={classes.belief} onClick={this._toggle}><i className="fa fa-road" /> Beliefs</button>
-				<button id="quote" className={classes.quote} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</button>
-			</div>
-		);
-	},
-	_toggle: function (e) {
-		let type = e.currentTarget.id;
-		Actions.exclude(type);
-	}
-});
-
-let Pagination = React.createClass({
-	render: function () {
-		let pages = Math.ceil(this.props.total / this.props.limit);
-		return (
-			<div className="pagination">
-				<div>Displaying page {this.props.page} of {pages} out of {this.props.total} posts</div>
-				<button href="javascript:void(0)" ref="prev" className="button blue" onClick={this._previous}>Previous</button>
-				<button href="javascript:void(0)" ref="next" className="button blue" onClick={this._next}>Next</button>
-			</div>
-		);
-	},
-	_next: function () {
-		Actions.nextPage();
-	},
-	_previous: function () {
-		Actions.previousPage();
-	}
-});
+// let Foot = React.createClass({
+// 	render: function () {
+// 		return (
+// 			<div className="foot">
+// 				<Pagination ref="pagination" page={this.props.params.page} total={this.props.total} limit={this.props.params.limit} />
+// 			</div>
+// 		);
+// 	}
+// });
+//
+// let Pagination = React.createClass({
+// 	render: function () {
+// 		let pages = Math.ceil(this.props.total / this.props.limit);
+// 		return (
+// 			<div className="pagination">
+// 				<div>Displaying page {this.props.page} of {pages} out of {this.props.total} posts</div>
+// 				<button href="javascript:void(0)" ref="prev" className="button blue" onClick={this._previous}>Previous</button>
+// 				<button href="javascript:void(0)" ref="next" className="button blue" onClick={this._next}>Next</button>
+// 			</div>
+// 		);
+// 	},
+// 	_next: function () {
+// 		Actions.nextPage();
+// 	},
+// 	_previous: function () {
+// 		Actions.previousPage();
+// 	}
+// });
 
 /** POSTS **/
 let Posts = React.createClass({

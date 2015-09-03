@@ -2062,41 +2062,41 @@ div.alerts button {
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
-.search .heading .categories {
+.search .heading .filter {
   background-color: #fff;
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
 }
-.search .heading .categories:before,
-.search .heading .categories:after {
+.search .heading .filter:before,
+.search .heading .filter:after {
   content: "";
   display: table;
 }
-.search .heading .categories:after {
+.search .heading .filter:after {
   clear: both;
 }
-.search .heading .categories .toggles {
+.search .heading .filter .toggles {
   float: right;
 }
-.search .heading .categories ul {
+.search .heading .filter ul {
   display: inline-block;
   list-style: none;
   vertical-align: top;
 }
-.search .heading .categories ul li {
+.search .heading .filter ul li {
   border-bottom: solid 1px #eee;
 }
-.search .heading .categories ul li a#blogs {
+.search .heading .filter ul li a#blogs {
   border-left: solid 4px #9cd900;
 }
-.search .heading .categories ul li a#subjects {
+.search .heading .filter ul li a#subjects {
   border-left: solid 4px #5faee3;
 }
-.search .heading .categories ul li a#debates {
+.search .heading .filter ul li a#debates {
   border-left: solid 4px #fc2727;
 }
-.search .heading .categories ul li a#beliefs {
+.search .heading .filter ul li a#beliefs {
   border-left: solid 4px #f2c13d;
 }
 .search .heading .refine {
@@ -2144,7 +2144,6 @@ div.alerts button {
   font-size: 0.9em;
   color: #111;
 }
-.search .heading .filter,
 .search .heading .sortby {
   background-color: #eeeeee;
   margin-top: 10px;
@@ -2156,7 +2155,6 @@ div.alerts button {
   -webkit-box-shadow: 0px 0px 12px #444444;
   float: right;
 }
-.search .heading .filter .triangle,
 .search .heading .sortby .triangle {
   margin-top: -12px;
   width: 0;
@@ -2166,83 +2164,12 @@ div.alerts button {
   border-right: 12px solid transparent;
   border-bottom: 12px solid #eeeeee;
 }
-.search .heading .filter .label,
 .search .heading .sortby .label {
   font-size: 0.8em;
   color: #aaa;
   text-transform: uppercase;
   padding: 1em;
   margin: 0;
-}
-.search .heading .filter {
-  width: 300px;
-  padding-bottom: 1em;
-}
-.search .heading .filter button {
-  border: none;
-}
-.search .heading .filter .triangle {
-  margin-right: 118px;
-}
-.search .heading .filter .types button {
-  display: inline-block;
-  width: 100px;
-}
-.search .heading .filter .dates {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  margin-left: 10px;
-}
-.search .heading .filter .dates:before,
-.search .heading .filter .dates:after {
-  content: "";
-  display: table;
-}
-.search .heading .filter .dates:after {
-  clear: both;
-}
-.search .heading .filter .dates div {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-}
-.search .heading .filter .dates label {
-  font-size: 0.8em;
-  font-style: normal;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-.search .heading .filter .dates button {
-  display: inline-block;
-  height: 36px;
-  width: 30px;
-  color: white;
-}
-.search .heading .filter .dates input {
-  width: 100px;
-}
-.search .heading .filter .clear,
-.search .heading .filter .apply {
-  width: 120px;
-  height: 40px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-  margin-left: 10px;
-}
-.search .heading .filter .clear:hover,
-.search .heading .filter .apply:hover {
-  background-color: #425d77;
-}
-.search .heading .filter .clear {
-  background-color: #34495e;
-}
-.search .heading .filter .apply {
-  background-color: #1e2f40;
 }
 .search .heading .sortby {
   width: 200px;
@@ -2290,40 +2217,6 @@ div.alerts button {
 }
 .search .heading .sortby button.selected {
   color: #3498db;
-}
-.search .tags {
-  margin-bottom: 30px;
-}
-.search .foot {
-  background-color: #34495e;
-  height: 60px;
-  bottom: 0px;
-  width: 100%;
-}
-.search .foot .pagination {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  max-width: 1400px;
-  color: white;
-  font-size: 0.8em;
-  text-align: center;
-}
-.search .foot .pagination:before,
-.search .foot .pagination:after {
-  content: "";
-  display: table;
-}
-.search .foot .pagination:after {
-  clear: both;
-}
-.search .foot .pagination button {
-  background-color: #1e2f40;
-  width: 60px;
-  display: inline-block;
-}
-.search .foot .pagination button:hover {
-  background-color: #425d77;
 }
 .search .posts,
 .search .post {

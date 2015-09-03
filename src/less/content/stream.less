@@ -32,7 +32,7 @@
       }
     }
 
-    .categories {
+    .filter {
       background-color: #fff;
       .Row(100%);
 
@@ -111,7 +111,7 @@
       }
     }
 
-    .filter, .sortby {
+    .sortby {
       background-color: @grey-light;
       margin-top: 10px;
       position: absolute;
@@ -141,71 +141,71 @@
       }
     }
 
-    .filter {
-      width: 300px;
-      padding-bottom: 1em;
-
-      button {
-        border: none;
-      }
-
-      .triangle {
-        margin-right: 118px;
-      }
-      .types {
-        button {
-          display: inline-block;
-          width: 100px;
-        }
-      }
-      .dates {
-        .Row(100%);
-        margin-left: 10px;
-
-        div {
-          .Cols(6);
-        }
-        label {
-          font-size: 0.8em;
-          font-style: normal;
-          display: block;
-          margin: 0;
-          padding: 0;
-        }
-
-        button {
-          display: inline-block;
-          height: 36px;
-          width: 30px;
-          color: white;
-
-        }
-        input {
-          width: 100px;
-        }
-      }
-
-      .clear, .apply {
-        width: 120px;
-        height: 40px;
-        .rounded(4px);
-        color: white;
-        cursor: pointer;
-        margin-left: 10px;
-
-        &:hover {
-          background-color: @theme-light;
-        }
-      }
-
-      .clear {
-        background-color: @theme;
-      }
-
-      .apply {
-        background-color: @theme-dark;
-      }
-    }
+    // .filter {
+    //   width: 300px;
+    //   padding-bottom: 1em;
+    //
+    //   button {
+    //     border: none;
+    //   }
+    //
+    //   .triangle {
+    //     margin-right: 118px;
+    //   }
+    //   .types {
+    //     button {
+    //       display: inline-block;
+    //       width: 100px;
+    //     }
+    //   }
+    //   .dates {
+    //     .Row(100%);
+    //     margin-left: 10px;
+    //
+    //     div {
+    //       .Cols(6);
+    //     }
+    //     label {
+    //       font-size: 0.8em;
+    //       font-style: normal;
+    //       display: block;
+    //       margin: 0;
+    //       padding: 0;
+    //     }
+    //
+    //     button {
+    //       display: inline-block;
+    //       height: 36px;
+    //       width: 30px;
+    //       color: white;
+    //
+    //     }
+    //     input {
+    //       width: 100px;
+    //     }
+    //   }
+    //
+    //   .clear, .apply {
+    //     width: 120px;
+    //     height: 40px;
+    //     .rounded(4px);
+    //     color: white;
+    //     cursor: pointer;
+    //     margin-left: 10px;
+    //
+    //     &:hover {
+    //       background-color: @theme-light;
+    //     }
+    //   }
+    //
+    //   .clear {
+    //     background-color: @theme;
+    //   }
+    //
+    //   .apply {
+    //     background-color: @theme-dark;
+    //   }
+    // }
 
     .sortby {
       width: 200px;
@@ -265,34 +265,30 @@
     }
   }
 
-  .tags {
-    margin-bottom: 30px;
-  }
-
-  .foot {
-    background-color: @theme;
-    height: 60px;
-    bottom: 0px;
-    width: 100%;
-
-    .pagination {
-      .Row(100%);
-      max-width: 1400px;
-      color: white;
-      font-size: 0.8em;
-      text-align: center;
-
-      button {
-        background-color: @theme-dark;
-        width: 60px;
-        display: inline-block;
-
-        &:hover {
-          background-color: @theme-light;
-        }
-      }
-    }
-  }
+  // .foot {
+  //   background-color: @theme;
+  //   height: 60px;
+  //   bottom: 0px;
+  //   width: 100%;
+  //
+  //   .pagination {
+  //     .Row(100%);
+  //     max-width: 1400px;
+  //     color: white;
+  //     font-size: 0.8em;
+  //     text-align: center;
+  //
+  //     button {
+  //       background-color: @theme-dark;
+  //       width: 60px;
+  //       display: inline-block;
+  //
+  //       &:hover {
+  //         background-color: @theme-light;
+  //       }
+  //     }
+  //   }
+  // }
 
   .posts, .post {
     max-width: 1400px;
