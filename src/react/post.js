@@ -137,7 +137,7 @@ let Post = React.createClass({
 					: <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
 				}
 				{this.props.context.type === 'edit' && this.props.owner
-					? <div contentEditable={true} className="title editing" onInput={this._title}>{this.state.post.title}</div>
+					? <input className="title editing" onChange={this._title} value={this.state.post.title} />
 				: <h2 className="title"><Link to="post" params={{id: this.state.post.id}}>{this.state.post.title}</Link></h2>
 				}
 				<div className="details">
@@ -179,7 +179,7 @@ let Post = React.createClass({
 		Actions.change('privacy', e.currentTarget.value);
 	},
 	_title: function (e) {
-		Actions.change('title', e.currentTarget.innerHTML);
+		Actions.change('title', e.currentTarget.value);
 	},
 	_update: function () {
 		Store.post.id = this.props.post.id;
