@@ -13,18 +13,5 @@ router.get('', (req, res) => {
     res.send(500);
   });
 });
-router.post('', (req, res) => {
-  let model;
-  //model.viewer_id = views.SESSION_USER;
-
-  views.add(model)
-  .then(function (data) {
-    res.send(201, data);
-  })
-  .catch(function (err) {
-    console.error(err);
-    res.send(500);
-  });
-});
 
 module.exports = router;

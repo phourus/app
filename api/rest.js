@@ -4,6 +4,8 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var body = require('body-parser');
 var rest = express();
+var auth = require('../middleware/auth');
+var stats = require('../middleware/stats');
 
 var account = require('./rest/account');
 var comments = require('./rest/comments');
@@ -39,6 +41,7 @@ rest.use(function (req, res, next) {
    }
    return next();
 });
+rest.use(auth);
 
 rest.use('/account', account);
 rest.use('/comments', comments);
@@ -52,5 +55,7 @@ rest.use('/tags', tags);
 rest.use('/thumbs', thumbs);
 rest.use('/users', users);
 rest.use('/views', views);
+
+rest.use(stats);
 
 module.exports = rest;
