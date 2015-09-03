@@ -159,7 +159,7 @@ let Explorer = React.createClass({
        if (item.user.locations && item.user.locations.length > 0) {
            location = item.user.locations[0];
        }
-       return <Post key={item.id} post={item} user={item.user} location={location} scroll={this.props.scroll} />;
+       return <Post key={item.id} post={item} user={item.user} location={location} context={{type: null, id: null}} scroll={this.props.scroll} />;
     });
     return (
       <div className="explorer">

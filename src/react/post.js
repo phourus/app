@@ -527,7 +527,10 @@ let Meta = React.createClass({
 
 let TextEditor = React.createClass({
 	render: function () {
-		let content = this.props.post.content || "";
+		if (!this.props.post.hasOwnProperty('content')) {
+			return false;
+		}
+		let content = this.props.post.content;
 		return (
 			<div>
 				<RTE ref="content" placeholder="insert content here" value={content} onChange={this._content} theme="snow" />
