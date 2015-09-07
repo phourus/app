@@ -112,12 +112,7 @@ var posts = db.define('posts', {
       /** WHERE **/
       // EXCLUDE
       if (params.exclude && params.exclude.length) {
-          query.where.type = { not: params.exclude.split(',') }
-      }
-
-      // USER_ID
-      if (params.user_id) {
-          query.where.userId = params.user_id;
+          query.where.type = { not: params.exclude.split(',') };
       }
 
       // SEARCH
@@ -146,18 +141,31 @@ var posts = db.define('posts', {
           query.where.createdAt.lt = params.endDate;
       }
 
+      // PRIVACY
+      let privacy = ['public'];
+      if (this.SESSION_USER !== false) {
+        privacy.push('phourus');
+      }
+
       // CONTEXT
+      if (params.contextType === 'myPosts' && this.SESSION_USER) {
+        query.where.userId = this.SESSION_USER;
+        privacy.push('org');
+        privacy.push('private');
+      }
+
       if (params.contextType === 'userPosts') {
         query.where.userId = params.contextId;
       }
 
       if (params.contextType === 'orgPosts') {
         query.where.orgId = params.contextId;
+        privacy = ['org'];
       }
 
-      if (params.contextType === 'myPosts') {
-        query.where.userId = this.SESSION_USER;
-      }
+      query.where.privacy = {
+        $in: privacy
+      };
       /** ADVANCED **/
       // groups, location, org_id
 
