@@ -29,7 +29,7 @@
     "react": "0.13.3",
     "react-dropzone-component": "^0.4.4",
     "react-infinite-scroll": "^0.1.5",
-    "react-quill": "^0.1.1",
+    "react-quill": "0.2.2",
     "react-router": "0.13.3",
     "reflux": "^0.2.6",
     "sequelize": "2.0.3",
