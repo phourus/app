@@ -693,6 +693,35 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
 }
+.admin ul {
+  margin: 0;
+  padding: 0;
+}
+.admin ul > li {
+  font-size: 1.2em;
+  list-style: none;
+  margin-bottom: 10px;
+}
+.admin ul > li ul {
+  margin-left: 20px;
+}
+.admin ul > li ul li {
+  list-style: disc;
+  font-size: 0.8em;
+  margin-bottom: 0px;
+}
+.admin ul.green {
+  border-left: solid 4px #9cd900;
+}
+.admin ul.blue {
+  border-left: solid 4px #5faee3;
+}
+.admin ul.red {
+  border-left: solid 4px #fc2727;
+}
+.admin ul.gold {
+  border-left: solid 4px #f2c13d;
+}
 .admin .tabs > div {
   width: 25%;
   font-size: 0.5em;

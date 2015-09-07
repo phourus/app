@@ -134,7 +134,7 @@ let Post = React.createClass({
 					</select>
 					: false
 				}
-				{this.state.post.privacy === 'org'
+				{this.state.post.privacy === 'org' && this.props.context.type === 'edit'
 					? {orgs}
 					: false
 				}

@@ -13,6 +13,39 @@
       .Cols(9);
     }
   }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    > li {
+      font-size: 1.2em;
+      list-style: none;
+      margin-bottom: 10px;
+
+      ul {
+        margin-left: 20px;
+
+        li {
+          list-style: disc;
+          font-size: 0.8em;
+          margin-bottom: 0px;
+        }
+      }
+    }
+    &.green {
+      border-left: solid 4px @green-light;
+    }
+    &.blue {
+      border-left: solid 4px @blue-light;
+    }
+    &.red {
+      border-left: solid 4px @red-light;
+    }
+    &.gold {
+      border-left: solid 4px @gold-light;
+    }
+  }
   .tabs > div {
     width: 25%;
     font-size: 0.5em;

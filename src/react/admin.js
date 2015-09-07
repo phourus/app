@@ -11,6 +11,32 @@ let Admin = React.createClass({
       address: {
         city: "Santa Monica",
         state: "CA"
+      },
+      categories: {
+        green: [
+          {category: "Sales", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
+          {category: "Marketing", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
+          {category: "Admin", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
+          {category: "Finance", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
+          {category: "HR", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
+          {category: "Product", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]}
+        ],
+        blue: [
+          {category: "Fire Safety", subcategories: ["Commercial", "Residential"]},
+          {category: "Security", subcategories: ["Intrusion", "Video Surveillance", "Access Control"]},
+          {category: "Retail", subcategories: ["RFID tags", "Loss Prevention", "Traffic Intelligence"]},
+          {category: "Personal Protection", subcategories: ["Respiratory", "Eye, Ear & Face", "Communication"]}
+        ],
+        red: [
+          {category: "Fire Safety", subcategories: ["Commercial", "Residential"]},
+          {category: "Security", subcategories: ["Intrusion", "Video Surveillance", "Access Control"]},
+          {category: "Retail", subcategories: ["RFID tags", "Loss Prevention", "Traffic Intelligence"]},
+          {category: "Personal Protection", subcategories: ["Respiratory", "Eye, Ear & Face", "Communication"]}
+        ],
+        gold: [
+          {category: "Vision & Mission"},
+          {category: "Inspiration & Motivation"}
+        ],
       }
     }
   },
@@ -18,8 +44,8 @@ let Admin = React.createClass({
     return (
       <div className="admin">
         <Heading {...this.state} />
-        <Tabs />
-        <RouteHandler />
+        <Tabs {...this.state} />
+        <RouteHandler {...this.state} />
       </div>
     );
   }
@@ -68,13 +94,36 @@ let Tabs = React.createClass({
         details: 70,
         users: 142,
         pending: 11,
-        categories: 11,
-        subcategories: 45,
         apps: 6
       }
     },
     render: function () {
       let view = this.context.router.getCurrentRoutes()[2].name;
+      let cats = this.props.categories;
+      let countCat = [cats.green.length, cats.blue.length, cats.red.length, cats.gold.length]
+      .reduce((prev, current, index, elements) => {
+        return current + prev;
+      });
+      let subs = Object.keys(cats).map(key => {
+        let category = cats[key];
+        if (!category.length) {
+          return false;
+        }
+        return category
+        .map(item => {
+          if (!item.subcategories) {
+            return 0;
+          }
+          return item.subcategories.length;
+        })
+        .reduce((prev, current, index, elements) => {
+          return prev + current;
+        });
+      });
+      let countSub = subs
+      .reduce((prev, current, index, elements) => {
+        return current + prev;
+      });
       return (
         <div className="tabs">
           <div onClick={this._select.bind(this, 'details')} className={'details' === view ? 'selected' : ''}>
@@ -86,7 +135,7 @@ let Tabs = React.createClass({
             <div className="label">Users</div>
           </div>
           <div onClick={this._select.bind(this, 'categories')} className={'categories' === view ? 'selected' : ''}>
-            <div className="number">{this.state.categories}/{this.state.subcategories}</div>
+            <div className="number">{countCat}/{countSub}</div>
             <div className="label">Categories</div>
           </div>
           <div onClick={this._select.bind(this, 'apps')} className={'apps' === view ? 'selected' : ''}>
@@ -120,7 +169,29 @@ Admin.Users = React.createClass({
 Admin.Categories = React.createClass({
   render: function () {
     return (
-      <div>Manage Categories</div>
+      <div>
+        <h2>Manage Categories</h2>
+        {Object.keys(this.props.categories).map(element => {
+          let categories = this.props.categories[element];
+          return (
+            <ul className={element}>
+              {categories.map(category => {
+                return (<li>{category.category}
+                    {category.subcategories
+                      ? <ul>
+                          {category.subcategories.map(subcategory => {
+                            return <li>{subcategory}</li>
+                          })}
+                        </ul>
+                      : false
+                    }
+                  </li>
+                );
+              })}
+            </ul>
+          );
+        })}
+      </div>
     );
   }
 });
