@@ -10,6 +10,7 @@ let AWS = require('aws-sdk');
 
 let Actions = require('../actions/post');
 let Stream = require('../actions/stream');
+let ActionsAccount = require('../actions/account');
 
 let Store = require('../stores/post');
 let AccountStore = require('../stores/account');
@@ -85,6 +86,7 @@ let Post = React.createClass({
 		let content = false;
 		let links = false;
 		let thumbs = false;
+		let orgs = <Orgs post={this.state.post} />;
 		for (let i = 0, keys = Object.keys(post); i < keys.length; i++) {
 			let key = keys[i];
 			let value = post[keys[i]];
@@ -130,6 +132,10 @@ let Post = React.createClass({
 						<option value="phourus">Phourus Users only</option>
 						<option value="public">Everyone</option>
 					</select>
+					: false
+				}
+				{this.state.post.privacy === 'org'
+					? {orgs}
 					: false
 				}
 				{!this.props.owner || this.props.context.type === 'edit'
@@ -185,6 +191,46 @@ let Post = React.createClass({
 		Store.post.id = this.props.post.id;
 		Actions.save();
 	}
+});
+
+let Orgs = React.createClass({
+  mixins: [Navigation],
+  getInitialState: function () {
+    return {
+      orgs: []
+    }
+  },
+  componentDidMount: function () {
+    this.unsubscribe = AccountStore.listen((data) => {
+      if (data.orgs) {
+        this.setState({orgs: data.orgs});
+      }
+    });
+    ActionsAccount.orgs();
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
+  render: function () {
+    return (
+      <div className="orgs">
+        {this.state.orgs.map((item) => {
+					if (item.approved !== true) {
+						return false;
+					}
+					return (
+            <div className="org">
+							{item.org.name}
+              <button id={item.org.id} onClick={this._select} className="button blue" disabled={this.props.post.orgId === item.org.id}>Select Organization</button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  },
+  _select: function (e) {
+		Actions.change('orgId', e.currentTarget.id);
+  }
 });
 
 let Types = React.createClass({
