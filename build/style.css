@@ -726,6 +726,33 @@ div.alerts button {
   width: 25%;
   font-size: 0.5em;
 }
+.admin .info > div {
+  max-width: 96%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2%;
+  background-color: #f7f7f7;
+  margin-top: 40px;
+}
+.admin .info > div:before,
+.admin .info > div:after {
+  content: "";
+  display: table;
+}
+.admin .info > div:after {
+  clear: both;
+}
+.admin label {
+  display: block;
+  font-size: 0.8em;
+  width: 33.33333333%;
+  display: inline-block;
+  vertical-align: top;
+}
+.admin label input,
+.admin label select {
+  display: block;
+}
 @media (min-width: 800px) {
   .admin .tabs > div {
     font-size: 1em;
