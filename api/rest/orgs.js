@@ -50,7 +50,8 @@ router.post('', (req, res) => {
   });
 });
 router.put('/:id', (req, res) => {
-  var id, model;
+  var id = req.params.id;
+  var model = req.body;
   orgs.save(id, model)
   .then(function (data) {
       res.send(204, data);

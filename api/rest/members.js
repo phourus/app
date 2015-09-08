@@ -3,7 +3,7 @@ var router = require('express').Router();
 var members = require('../models/members');
 
 router.get('/:id', (req, res) => {
-  var id;
+  var id = req.params.id;
   members.single(id)
   .then(function (data) {
       res.send(200, data);
@@ -14,10 +14,17 @@ router.get('/:id', (req, res) => {
   });
 });
 router.get('', (req, res) => {
-  var params;
-  members.collection(params)
+  var params = req.query;
+  var result;
+  if (params.orgId) {
+    result = members.getMembers(params.orgId);
+  }
+  if (params.userId) {
+    result = members.getOrgs(params.userId);
+  }
+  result
   .then(function (data) {
-      res.send(200, data);
+      res.send(200, data[0]);
   })
   .catch(function (err) {
       console.error(err);
@@ -25,7 +32,7 @@ router.get('', (req, res) => {
   });
 });
 router.post('', (req, res) => {
-  var model;
+  var model = req.body;
   members.create(model)
   .then(function (data) {
       res.send(200, data);
@@ -36,7 +43,8 @@ router.post('', (req, res) => {
   });
 });
 router.put('/:id', (req, res) => {
-  var id, model;
+  var id = req.params.id;
+  var model = req.body;
   members.save(id, model)
   .then(function (data) {
       res.send(200, data);
@@ -47,7 +55,7 @@ router.put('/:id', (req, res) => {
   });
 });
 router.delete('/:id', (req, res) => {
-  var id;
+  var id = req.params.id;
   members.remove(id)
   .then(function (data) {
       res.send(200, data);

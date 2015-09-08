@@ -17,33 +17,22 @@ var members = db.define('members', {
       }
       return this.create(model);
     },
-    approve: function (id) {
-      var model = {
-        approved: 1
-      }
+    save: function (id, model) {
       return this.update(model, {where: {id: id}});
     },
-    admin: function (id, model) {
-      var model = {
-        admin: 1
-      }
-      return this.update(model, {where: {id: id}});
-    },
-    deny: function (id) {
-      var model = {
-        approved: -1
-      }
-      return this.update({where: {id: id}});
+    remove: function (id) {
+      return this.destroy({where: {id: id}});
     },
     getMembers: function (orgId) {
-      return this.findAll({
-        where: {
-          orgId: orgId
-        },
-        include: [
-          //{model: users, as: 'users'}
-        ]
-      });
+      // return this.findAll({
+      //   where: {
+      //     orgId: orgId
+      //   },
+      //   // include: [
+      //   //   {model: users, as: 'users'}
+      //   // ]
+      // });
+      return db.query('SELECT *, members.id AS memberId FROM `members`, `users` WHERE members.orgId = ' + orgId +' AND members.userId = users.id;');
     },
     getOrgs: function (userId) {
       return this.findAll({
