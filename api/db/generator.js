@@ -18,9 +18,9 @@ var Members = require('../models/members');
 
 var chance = new Chance();
 
-var POST_TOTAL = 100;
-var USER_TOTAL = 50;
-var ORG_TOTAL = 20;
+var POST_TOTAL = 500;
+var USER_TOTAL = 200;
+var ORG_TOTAL = 50;
 
 /** TYPES **/
 var User = function User () {
@@ -44,12 +44,13 @@ var Post = function Post () {
   return {
     userId: chance.integer({min: 1, max: USER_TOTAL}),
     orgId: chance.integer({min: null, max: ORG_TOTAL}),
-    privacy: ['public', 'phourus', 'private'][chance.integer({min: 0, max: 2})],
+    privacy: ['public', 'phourus', 'private', 'org'][chance.integer({min: 0, max: 3})],
     type: ['blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'][chance.integer({min: 0, max: 7})],
     title: chance.sentence(),
     content: chance.paragraph(),
     element: ['world', 'mind', 'voice', 'self'][chance.integer({max: 4})],
     category: chance.word(),
+    subcategory: chance.word(),
     lat: chance.latitude(),
     lng: chance.longitude(),
     totalComments: chance.integer({min: 0, max: 1000}),
@@ -61,8 +62,8 @@ var Post = function Post () {
     zip: chance.zip(),
     author: chance.name(),
     vote: chance.bool()
-    }
-}
+  };
+};
 
 var View = function View () {
     var rndm = [{KEY: 'userId', MAX: USER_TOTAL}, {KEY: 'postId', MAX: POST_TOTAL}, {KEY: 'orgId', MAX: ORG_TOTAL}][chance.integer({min: 0, max: 1})];
@@ -73,26 +74,26 @@ var View = function View () {
         viewerId: chance.integer({min: 1, max: USER_TOTAL}),
         referer: chance.url(),
         exit: chance.url()
-    }
+    };
     out[rndm.KEY] = chance.integer({min: 1, max: rndm.MAX});
     return out;
-}
+};
 
 var Thumb = function Thumb () {
     return {
         postId: chance.integer({min: 1, max: POST_TOTAL}),
         userId: chance.integer({min: 1, max: USER_TOTAL}),
         positive: chance.bool()
-    }
-}
+    };
+};
 
 var Comment = function Comment () {
     return {
         userId: chance.integer({min: 1, max: USER_TOTAL}),
         postId: chance.integer({min: 1, max: POST_TOTAL}),
         content: chance.paragraph()
-    }
-}
+    };
+};
 
 var Location = function Location () {
     return {
@@ -107,24 +108,24 @@ var Location = function Location () {
         lat: chance.latitude(),
         lng: chance.longitude(),
         type: ['primary', 'business', 'residential', 'mailing'][chance.integer({min: 0, max: 3})]
-    }
-}
+    };
+};
 
 var Link = function Link () {
     return {
         postId: chance.integer({min: 1, max: POST_TOTAL}),
         url: chance.url(),
+        title: chance.sentence(),
         caption: chance.sentence()
-    }
-}
+    };
+};
 
 var Tag = function Tag () {
     return {
         postId: chance.integer({min: 1, max: POST_TOTAL}),
         tag: chance.word()
-    }
-
-}
+    };
+};
 
 var Org = function Org () {
     return {
@@ -142,59 +143,48 @@ var Org = function Org () {
         video: chance.url(),
         channel: chance.url(),
         contact: chance.paragraph()
-    }
-}
+    };
+};
 
-var Clout = function Clout () {
-    return {
-        org_id: chance.integer({min: 1, max: ORG_TOTAL}),
-        type: ['press', 'award'][chance.integer({min: 0, max: 1})],
-        title: chance.sentence(),
-        date: chance.date(),
-        content: chance.paragraph(),
-        img: ''
-    }
-}
-
-var Review = function Review () {
-    return {
-        org_id: chance.integer({min: 1, max: ORG_TOTAL}),
-        user_id: chance.integer({min: 1, max: USER_TOTAL}),
-        title: chance.sentence(),
-        content: chance.paragraph(),
-        rating: chance.integer({min: 1, max: 5})
-    }
-}
+// var Clout = function Clout () {
+//     return {
+//         org_id: chance.integer({min: 1, max: ORG_TOTAL}),
+//         type: ['press', 'award'][chance.integer({min: 0, max: 1})],
+//         title: chance.sentence(),
+//         date: chance.date(),
+//         content: chance.paragraph(),
+//         img: ''
+//     }
+// }
+//
+// var Review = function Review () {
+//     return {
+//         org_id: chance.integer({min: 1, max: ORG_TOTAL}),
+//         user_id: chance.integer({min: 1, max: USER_TOTAL}),
+//         title: chance.sentence(),
+//         content: chance.paragraph(),
+//         rating: chance.integer({min: 1, max: 5})
+//     }
+// }
 
 var Member = function Member () {
     return {
-        org_id: chance.integer({min: 1, max: ORG_TOTAL}),
-        user_id: chance.integer({min: 1, max: USER_TOTAL}),
+        orgId: chance.integer({min: 1, max: ORG_TOTAL}),
+        userId: chance.integer({min: 1, max: USER_TOTAL}),
         admin: chance.bool(),
         approved: chance.bool()
-    }
-}
+    };
+};
 
 var Password = function Password () {
     return {
         userId: chance.integer({min: 1, max: USER_TOTAL}),
-        hash: Passwords.hash('phourus')
-    }
-}
+        hash: '$2a$10$Pq96YXDhtlUMgDzq9Z0yiO3SpcHE82gqGU98vTPvQtyeOw8OyuwES'
+    };
+};
 
 /** GENERATE **/
 function generate (Model, count, db) {
-    var i = 0;
-    while (i < count) {
-        var model = new Model();
-        db.add(model).catch(function(err) {
-            console.log(err);
-        });
-        i++;
-    }
-}
-
-function passwords (Model, count, db) {
     var i = 0;
     while (i < count) {
         var model = new Model();
@@ -202,21 +192,24 @@ function passwords (Model, count, db) {
             console.log(err);
         });
         i++;
-    }
-}
-/** EXECUTE **/
-// generate(User, USER_TOTAL, Users);
-// generate(Post, POST_TOTAL, Posts);
-// generate(Org, ORG_TOTAL, Orgs);
-// generate(Member, 50, Members);
+    };
+};
 
-// passwords(Password, USER_TOTAL, Passwords);
-// generate(Tag, 400, Tags);
-// generate(Link, 200, Links);
-// generate(View, 200, Views);
-// generate(Thumb, 200, Thumbs);
-// generate(Comment, 100, Comments);
-// generate(Location, 100, Locations);
+/** EXECUTE **/
+// STEP 1
+generate(User, USER_TOTAL, Users);
+generate(Post, POST_TOTAL, Posts);
+generate(Org, ORG_TOTAL, Orgs);
+
+// STEP 2
+// generate(Member, 200, Members);
+// generate(Password, USER_TOTAL, Passwords);
+// generate(Tag, 1000, Tags);
+// generate(Link, 400, Links);
+// generate(View, 1000, Views);
+// generate(Thumb, 1000, Thumbs);
+// generate(Comment, 500, Comments);
+// generate(Location, 200, Locations);
 
 /*
 generate(Clout, 200, Clouts);

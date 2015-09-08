@@ -142,7 +142,7 @@ var posts = db.define('posts', {
       }
 
       // PRIVACY
-      let privacy = ['public'];
+      var privacy = ['public'];
       if (this.SESSION_USER !== false) {
         privacy.push('phourus');
       }
