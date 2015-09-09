@@ -20,6 +20,7 @@ phourus.get('*', function(req, res){
     //Router.run(routes, req.url, function (Handler) {
         //var app = React.renderToString(React.createElement(Handler, null));
         //out = file.replace('$APP', app);
+        out = file;
         res.send(out, 200);
     //});
 });
