@@ -30,6 +30,7 @@ let Post = React.createClass({
 			scroll: false,
 			owner: false,
 			location: {},
+			saving: false,
 			post: {
 				id: 0
 			},
@@ -49,6 +50,9 @@ let Post = React.createClass({
 		this.unsubscribe = Store.listen((data) => {
 			if (data.add === true) {
 				this.transitionTo("edit", {id: data.post.id});
+			}
+			if (data.hasOwnProperty('saving')) {
+				this.setState({saving: data.saving});
 			}
 			if (data.post) {
 				this.setState({post: data.post});
@@ -160,7 +164,7 @@ let Post = React.createClass({
 						{details}
 					</div>
 					<div className="actions">
-						{this.props.context.type === 'edit' && this.props.owner ? <button className="button green" onClick={this._update}>Save</button> : false}
+						{this.props.context.type === 'edit' && this.props.owner ? <button className="button green" onClick={this._update} disabled={this.state.saving}>{this.state.saving ? 'Saving' : 'Save'}</button> : false}
 					</div>
 				</div>
 				<div className="footing">
@@ -195,6 +199,7 @@ let Post = React.createClass({
 	},
 	_update: function () {
 		Store.post.id = this.props.post.id;
+		this.setState({saving: true});
 		Actions.save();
 	}
 });

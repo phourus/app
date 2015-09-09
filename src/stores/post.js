@@ -52,6 +52,7 @@ let Post = Reflux.createStore({
   _save: function () {
     posts.save(this.post.id, this.changes)
     .then(data => {
+      this.trigger({saving: false});
       this._single(this.post.id);
     })
     .catch(code => {
