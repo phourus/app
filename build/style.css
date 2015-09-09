@@ -1276,7 +1276,7 @@ div.alerts button {
   display: block;
 }
 .postItem.selected > a.edit {
-  display: none;
+  margin-right: 20px;
 }
 .postItem button.close {
   background: transparent;
@@ -1296,7 +1296,7 @@ div.alerts button {
   display: block;
   font-size: 0.6em;
   float: right;
-  color: #ddd;
+  color: #ccc;
   text-align: right;
 }
 .postItem > a.edit:hover {

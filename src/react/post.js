@@ -138,9 +138,9 @@ let Post = React.createClass({
 					? {orgs}
 					: false
 				}
-				{!this.props.owner || this.props.context.type === 'edit'
-					? false
-					: <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
+				{this.props.owner && this.props.context.type !== 'edit'
+					? <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
+					: false
 				}
 				{this.props.context.type === 'edit' && this.props.owner
 					? <input className="title editing" onChange={this._title} value={this.state.post.title} />
@@ -174,7 +174,13 @@ let Post = React.createClass({
 		);
 	},
 	_back: function () {
-		this.context.router.transitionTo("stream");
+		if (!this.goBack()) {
+			if (this.props.context.type === 'edit') {
+				this.context.router.transitionTo("myPosts");
+			} else {
+				this.context.router.transitionTo("stream");
+			}
+		}
 	},
 	_type: function () {
 		if (this.props.context.type === 'edit' && this.props.owner) {
