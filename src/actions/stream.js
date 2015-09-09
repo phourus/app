@@ -4,7 +4,6 @@ let Reflux = require('reflux');
 module.exports = {
   collection: Reflux.createAction(),
   single: Reflux.createAction(),
-  create: Reflux.createAction(),
   select: Reflux.createAction(),
   search: Reflux.createAction(),
   nextPage: Reflux.createAction(),

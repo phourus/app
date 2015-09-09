@@ -48,9 +48,6 @@ let Post = React.createClass({
 	},
 	componentDidMount: function () {
 		this.unsubscribe = Store.listen((data) => {
-			if (data.add === true) {
-				this.transitionTo("edit", {id: data.post.id});
-			}
 			if (data.hasOwnProperty('saving')) {
 				this.setState({saving: data.saving});
 			}

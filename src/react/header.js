@@ -4,19 +4,26 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, RouteHandler, Navigation } = Router;
 
-let StreamActions = require('../actions/stream');
+let PostActions = require('../actions/post');
+let PostStore = require('../stores/post');
 let AccountActions = require('../actions/account');
 let AccountStore = require('../stores/account');
 
 let Header = React.createClass({
   mixins: [Navigation],
   componentDidMount: function () {
-    this.unsubscribe = AccountStore.listen(data => {
+    this.unsubscribeAccount = AccountStore.listen(data => {
       this.setState(data);
+    });
+    this.unsubscribePost = PostStore.listen(data => {
+      if (data.add === true) {
+        this.transitionTo("edit", {id: data.post.id});
+      }
     });
   },
   componentWillUnmount: function () {
-    this.unsubscribe();
+    this.unsubscribeAccount();
+    this.unsubscribePost();
   },
   render: function () {
     return  (
@@ -33,10 +40,10 @@ let Header = React.createClass({
                 </Link>
               </li>
               <li className="create">
-                <Link to={AccountStore.authenticated ? "myPosts" : "account"} onClick={this._create}>
+                <a href="javascript: void(0)" onClick={this._create}>
                   <i className="fa fa-pencil" />
                   Create
-                </Link>
+                </a>
               </li>
               <li className="me">
                 <Link to="activity" className="me">
@@ -60,11 +67,10 @@ let Header = React.createClass({
     );
   },
   _create: function () {
-    if (AccountStore.authenticated) {
-      // wait until route renders?
-      setTimeout(function () {
-        StreamActions.create();
-      }, 500);
+    if (!AccountStore.authenticated) {
+      this.context.router.transitionTo("account");
+    } else {
+      PostActions.add();
     }
   }
 });

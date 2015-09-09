@@ -38,11 +38,10 @@ let Post = Reflux.createStore({
   _refresh: function () {
     this._single(this.post.id);
   },
-  _add: function (model) {
-    posts.add(this.changes)
+  _add: function () {
+    posts.add({title: 'New Post'})
     .then(data => {
-      //msg('green', 'Post created successfully');
-      this.trigger({post: data, add: true});
+      this.trigger({add: true, post: data});
     })
     .catch(code => {
        msg('red', 'Post could not be created', code);

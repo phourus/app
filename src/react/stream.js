@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link } = Router;
+let { Link, State } = Router;
 let posts = require('../api/posts');
 let moment = require('moment');
 let numeral = require('numeral');
@@ -19,7 +19,7 @@ let Scroll = require('react-infinite-scroll')(React);
 let PostItem = require('./post');
 
 let Stream = React.createClass({
-	mixins: [Router.State],
+	mixins: [State],
 	getInitialState: function () {
 		return {
 			posts: [],

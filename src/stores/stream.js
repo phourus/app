@@ -15,7 +15,6 @@ let Stream = Reflux.createStore({
   total: 0,
   selected: 0,
   scroll: false,
-  created: null,
   params: {
     exclude: [],
     search: '',
@@ -32,7 +31,6 @@ let Stream = Reflux.createStore({
     this.listenTo(Actions.collection, this._collection);
     this.listenTo(Actions.select, this._select);
     this.listenTo(Actions.single, this._single);
-    this.listenTo(Actions.create, this._create);
     this.listenTo(Actions.search, this._search);
     this.listenTo(Actions.nextPage, this._nextPage);
     this.listenTo(Actions.previousPage, this._previousPage);
@@ -51,10 +49,6 @@ let Stream = Reflux.createStore({
         this.posts = data.rows.concat(this.posts);
       } else {
         this.posts = data.rows;
-      }
-      if (this.created) {
-        this.posts.unshift(this.created);
-        this.created = null;
       }
       if (this.single) {
         this.posts.unshift(this.single);
@@ -95,25 +89,6 @@ let Stream = Reflux.createStore({
     // check local posts indexed by id for match
     // closed post, read post status
     return false;
-  },
-  _create: function () {
-    this.selected = 0;
-    this.context = {
-      type: 'myPosts',
-      id: null
-    };
-    posts.add({title: 'New Post'})
-    .then(data => {
-      //msg('green', 'Post created successfully');
-      posts.single(data.id).then(post => {
-        this.created = post;
-        this._collection();
-      });
-    })
-    .catch(code => {
-       msg('red', 'Post could not be created', code);
-       return;
-    });
   },
   _search: function (search) {
     this.params.search = search;
