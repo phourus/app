@@ -1,9 +1,12 @@
 "use strict";
 let React = require('react');
+let Router = require('react-router');
+let { State } = Router;
 let Actions = require('../actions/account');
 let Store = require('../stores/account');
 
 let View401 = React.createClass({
+  mixins: [State],
   getInitialState: function () {
     return {
       mode: "login"
@@ -13,14 +16,42 @@ let View401 = React.createClass({
     Store.listen((data) => {
       this.setState(data);
     });
+    this._routes();
+  },
+  componentWillReceiveProps: function () {
+    this._routes();
   },
   render: function () {
     return (
       <div className="view401">
-        <Register />
-        <Login forgot={this._forgot} />
+        {this.state.mode === 'login'
+          ? <Login forgot={this._forgot} />
+          : false
+        }
+        {this.state.mode === 'forgot'
+          ? <Forgot />
+          : false
+        }
+        {this.state.mode === 'reset'
+          ? <Reset />
+          : false
+        }
+        {this.state.mode === 'request'
+          ? <Request />
+          : false
+        }
+        {this.state.mode === 'register'
+          ? <Register />
+          : false
+        }
       </div>
     );
+  },
+  _routes: function () {
+    let route = this.context.router.getCurrentRoutes();
+    if (route[1].name === 'reset') {
+      this.setState({mode: "reset"});
+    }
   },
   _forgot: function () {
     this.setState({mode: "forgot"});
@@ -50,6 +81,58 @@ let Login = React.createClass({
     let password = this.refs.password.getDOMNode().value;
     Actions.login(username, password);
   },
+});
+
+let Forgot = React.createClass({
+  render: function () {
+    return (
+    <div className="forgot">
+      <h1>Forgot your login information?</h1>
+      <label>
+        Email:
+        <input onChange={this._email} />
+      </label>
+      <button onClick={this._forgot} className="blue button submit">Email me a reset link</button>
+    </div>
+    );
+  },
+  _email: function (e) { this.setState({email: e.currentTarget.value }); },
+  _forgot: function () {
+    Actions.forgot(this.state.email)
+  }
+});
+
+let Reset = React.createClass({
+  mixins: [State],
+  render: function () {
+    return (
+    <div className="forgot">
+      <h1>Reset Your Password</h1>
+      <label>
+        Email:
+        <input onChange={this._email} />
+      </label>
+      <label>
+        New Password:
+        <input onChange={this._password} />
+      </label>
+      <label>
+        Confirm Password:
+        <input onChange={this._confirm} />
+      </label>
+      <button onClick={this._reset} className="blue button submit">Reset my Password</button>
+    </div>
+    );
+  },
+  _email: function (e) { this.setState({email: e.currentTarget.value }); },
+  _password: function (e) { this.setState({password: e.currentTarget.value }); },
+  _confirm: function (e) { this.setState({confirm: e.currentTarget.value }); },
+  _reset: function () {
+    let query = this.context.router.getCurrentQuery();
+    if (this.state.password === this.state.confirm) {
+      Actions.reset(this.state.email, this.state.password, query.token, query.userId);
+    }
+  }
 });
 
 let Register = React.createClass({
@@ -97,24 +180,6 @@ let Register = React.createClass({
       Actions.register(this.state.email, this.state.password);
     }
   },
-});
-
-let Forgot = React.createClass({
-  render: function () {
-    return (
-    <div className="forgot">
-      <h1>Forgot your login information?</h1>
-      <label>
-        Email:
-        <input ref="handle" className="handle" />
-      </label>
-      <button onClick={this._request} className="blue button submit">Send me my login info</button>
-    </div>
-    );
-  },
-  _request: function () {
-
-  }
 });
 
 module.exports = View401;

@@ -34,5 +34,17 @@ module.exports = {
     var _settings = settings();
     _settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
     return http.post(base + 'register', {}, _settings);
+  },
+  forgot: function (email) {
+    return http.post('/rest/passwords/forgot', {email: email}, settings());
+  },
+  reset: function (email, password, token, userId) {
+    var _settings = settings();
+    _settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
+    var model = {
+      token: token,
+      userId: userId
+    };
+    return http.post('/rest/passwords/reset', model, _settings);
   }
 };

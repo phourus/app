@@ -12,5 +12,8 @@ module.exports = {
   orgs: Reflux.createAction(),
   login: Reflux.createAction(),
   register: Reflux.createAction(),
+  request: Reflux.createAction(),
+  forgot: Reflux.createAction(),
+  reset: Reflux.createAction(),
   logout: Reflux.createAction()
-}
+};

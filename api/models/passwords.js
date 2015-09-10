@@ -28,6 +28,12 @@ module.exports = db.define('passwords', {
         }
       });
     },
+    reset: function (userId, password) {
+      return this.hash(password)
+      .then((hash) => {
+          return this.update({hash: hash}, {where: {userId: userId}});
+      });
+    },
     remove: function (id) {
       return this.destroy({where: {id: id}});
     },

@@ -10,5 +10,8 @@ module.exports = {
   history: account.history,
   orgs: account.orgs,
   login: account.login,
-  register: account.register
+  register: account.register,
+  request: account.request,
+  forgot: account.forgot,
+  reset: account.reset
 };

@@ -16,6 +16,7 @@ let Terms = require('./react/terms');
 let Privacy = require('./react/privacy');
 let Landing = require('./react/landing');
 let Map = require('./map');
+let View401 = require('./react/401');
 let View404 = require('./react/404');
 
 module.exports = (
@@ -24,6 +25,7 @@ module.exports = (
     <Route name="about" handler={About} />
     <Route name="terms" handler={Terms} />
     <Route name="privacy" handler={Privacy} />
+    <Route name="reset" handler={View401} />
     <Route name="activity" path="activity" handler={Activity} />
     <Route name="leaders" handler={Leaders}>
       <DefaultRoute handler={Leaders.Posts} />

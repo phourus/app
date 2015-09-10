@@ -15,13 +15,17 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.change, this._change);
     this.listenTo(Actions.get, this._get);
     this.listenTo(Actions.edit, this._edit);
-    this.listenTo(Actions.password, this._search);
     this.listenTo(Actions.deactivate, this._page);
     this.listenTo(Actions.history, this._history);
     this.listenTo(Actions.notifications, this._notifications);
     this.listenTo(Actions.orgs, this._orgs);
+
     this.listenTo(Actions.login, this._login);
     this.listenTo(Actions.register, this._register);
+    this.listenTo(Actions.request, this._request);
+    this.listenTo(Actions.forgot, this._forgot);
+    this.listenTo(Actions.reset, this._reset);
+    this.listenTo(Actions.password, this._password);
     this.listenTo(Actions.logout, this._logout);
   },
   _change: function (key, value) {
@@ -52,17 +56,6 @@ module.exports = Reflux.createStore({
     })
     .catch(code => {
       msg('red', 'Account could not be updated', code);
-    });
-  },
-  _password: function (current, updated) {
-    account.password(current, updated)
-    .then(code => {
-      if (code == 204) {
-          msg('green', 'Password updated', code);
-      }
-    })
-    .catch(code => {
-      msg('red', 'Password could not be updated', code);
     });
   },
   _deactivate: function () {
@@ -128,6 +121,39 @@ module.exports = Reflux.createStore({
     })
     .catch((code) => {
       msg('red', 'Registration unsuccessful', code);
+    });
+  },
+  _request: function (email) {
+    let password = 'random';
+    this._register(email, password);
+  },
+  _forgot: function (email) {
+    account.forgot(email)
+    .then(data => {
+
+    })
+    .catch(code => {
+      msg('red', 'Password reset link could not be sent', code);
+    });
+  },
+  _reset: function (email, password, token, userId) {
+    account.reset(email, password, token, userId)
+    .then(data => {
+
+    })
+    .catch(code => {
+      msg('red', 'Password reset link could not be sent', code);
+    });
+  },
+  _password: function (current, updated) {
+    account.password(current, updated)
+    .then(code => {
+      if (code == 204) {
+          msg('green', 'Password updated', code);
+      }
+    })
+    .catch(code => {
+      msg('red', 'Password could not be updated', code);
     });
   },
   _logout: function () {
