@@ -114,11 +114,11 @@ let Reset = React.createClass({
       </label>
       <label>
         New Password:
-        <input onChange={this._password} />
+        <input onChange={this._password} type="password" />
       </label>
       <label>
         Confirm Password:
-        <input onChange={this._confirm} />
+        <input onChange={this._confirm} type="password" />
       </label>
       <button onClick={this._reset} className="blue button submit">Reset my Password</button>
     </div>
