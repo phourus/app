@@ -1,5 +1,5 @@
 var router = require('express').Router();
-
+var Email = require('../../email');
 var passwords = require('../models/passwords');
 
 /** DUPLICATED FROM ACCOUNT **/
@@ -32,7 +32,8 @@ router.post('/forgot', (req, res) => {
   let model = req.body;
   console.log('forgot ' + model.email);
   // generate temporary reset token
-  // send email with URL
+  // send email with token and userId
+  Email('reset', {token: 'abc123', userId: 3, email: model.email});
   res.send(200);
 });
 
