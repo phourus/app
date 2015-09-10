@@ -111,6 +111,7 @@ let Post = Reflux.createStore({
     }
   }),
   Thumbs: Reflux.createStore({
+    postId: null,
     init: function () {
       // Thumbs.collection not needed
       // Thumbs.post responsible for retrieving user + post value
@@ -120,6 +121,7 @@ let Post = Reflux.createStore({
       this.listenTo(Thumbs.remove, this._remove);
     },
     _post: function (id) {
+      this.postId = id;
       thumbs.post(id)
       .then(data => {
         this.trigger({thumbs: data});
@@ -131,7 +133,7 @@ let Post = Reflux.createStore({
     _add: function (model) {
       thumbs.add(model)
       .then(data => {
-        Post._refresh();
+        this._post(this.postId);
       })
       .catch(code => {
         msg('red', 'Thumb could not be added', code);
@@ -140,7 +142,7 @@ let Post = Reflux.createStore({
     _save: function (id, model) {
       thumbs.save(id, model)
       .then(data => {
-        Post._refresh();
+        this._post(this.postId);
       })
       .catch(code => {
         msg('red', 'Thumb could not be saved', code);
@@ -149,7 +151,7 @@ let Post = Reflux.createStore({
     _remove: function (id) {
       thumbs.remove(id)
       .then(data => {
-        Post._refresh();
+        this.trigger({thumbs: {id: null, positive: null}});
       })
       .catch(code => {
         msg('red', 'Thumb could not be removed', code);

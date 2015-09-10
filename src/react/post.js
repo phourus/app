@@ -900,49 +900,65 @@ Links.Upload = React.createClass({
 
 let Thumbs = React.createClass({
    mixins: [Router.State],
+	 getInitialState: function () {
+		 return {
+			 id: null,
+			 positive: null
+		 }
+	 },
    componentDidMount: function () {
      let params = this.getParams();
      this.unsubscribe = Store.Thumbs.listen((data) => {
-       this.setState(data);
+			 this.setState(data.thumbs);
      });
      Actions.Thumbs.post(params.id);
    },
    componentWillUnmount: function () {
      this.unsubscribe();
    },
-   like: function () {
-     let model = {};
-     model.post_id = this.props.post.id;
-     model.positive = 1;
-     thumbs.add(model);
-   },
-   dislike: function () {
-     let model = {};
-     model.post_id = this.props.post.id;
-     model.positive = 0;
-     thumbs.add(model);
-   },
    render: function () {
-     let c = '';
-     let current = '';
-     if (this.props.post.popularity) {
-       //new Popularity(document.getElementById('popularity'), this.props.post.popularity);
-     }
-     if (this.props.thumb === 1) {
-       current = 'like';
-     } else if (this.props.thumb === 0) {
-       current = 'dislike';
+		 let classLike = "button green medium";
+		 let classDislike = "button red medium";
+     if (this.state.positive === true) {
+       classLike += ' selected';
+     } else if (this.state.positive === false) {
+       classDislike += ' selected';
      }
      // <p>You have decided you {current} this post. Click the button below to change your mind.</p>
      return (
         <div className="thumb">
           <div className="buttons">
-            <button className="button green medium" onClick={this.like}><i className="fa fa-arrow-circle-o-up" /> <span className="total"> {numeral(1434).format(thousands)}</span></button>
-            <button className="button red medium" onClick={this.dislike}><i className="fa fa-arrow-circle-o-down" /> <span className="total"> {numeral(137).format(thousands)}</span></button>
+            <button className={classLike} onClick={this.state.positive === true ? this._remove : this._like}><i className="fa fa-arrow-circle-o-up" /> <span className="total"> Like</span></button>
+            <button className={classDislike} onClick={this.state.positive === false ? this._remove: this._dislike}><i className="fa fa-arrow-circle-o-down" /> <span className="total"> Dislike</span></button>
           </div>
         </div>
      );
-   }
+   },
+	 _like: function () {
+		 let model = {
+			 positive: 1
+		 };
+		 if (this.state.id) {
+			 Actions.Thumbs.save(this.state.id, model);
+		 } else {
+			 model.postId = this.props.post.id;
+			 Actions.Thumbs.add(model);
+		 }
+	 },
+	 _dislike: function () {
+		 let model = {
+			 positive: 0
+		 };
+			if (this.state.id) {
+				Actions.Thumbs.save(this.state.id, model);
+			} else {
+				model.postId = this.props.post.id;
+				Actions.Thumbs.add(model);
+			}
+	 },
+	 _remove: function () {
+		 Actions.Thumbs.remove(this.state.id);
+	 }
 });
 
 let Comments = React.createClass({

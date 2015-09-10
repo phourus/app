@@ -6,8 +6,8 @@ module.exports = db.define('thumbs', {
   positive: types.BOOLEAN
 }, {
   classMethods: {
-    single: function (post_id) {
-      return this.findOne({where: {post_id: post_id, user_id: this.SESSION_USER}});
+    single: function (params) {
+      return this.findOne({where: {postId: params.postId, userId: params.userId}});
     },
     collection: function (params) {
       return this.findAndCountAll(this.queryize(params));
@@ -16,10 +16,10 @@ module.exports = db.define('thumbs', {
       return this.create(model);
     },
     save: function (id, model) {
-      return this.update(model, {where: {id: id}});
+      return this.update(model, {where: {id: id, userId: model.userId}});
     },
-    remove: function (id) {
-      return this.destroy({where: {id: id}});
+    remove: function (id, userId) {
+      return this.destroy({where: {id: id, userId: userId}});
     },
     queryize: function (params) {
       // default to zero comments otherwise missing params will get all
@@ -28,9 +28,9 @@ module.exports = db.define('thumbs', {
           id: 0
         }
       };
-      if (params.post_id) {
+      if (params.postId) {
         query.where = {
-          postId: params.post_id
+          postId: params.postId
         }
       }
       return query;

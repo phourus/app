@@ -3,17 +3,19 @@ var base = '/rest/thumbs/';
 var settings = require('../settings');
 
 module.exports = {
-  post: function () {
-    return http.get(base, settings());
+  post: function (postId) {
+    return http.get(base + 'post/' + postId, settings());
   },
-  collection: function (params) {
-    var query = "";
-    if (params.post_id) {
-      query += 'post_id=' + params.post_id;
-    }
-    if (params.user_id) {
-      query += 'user_id=' + params.user_id;
-    }
-    return http.get(base + '?' + query, settings());
-  }
+  user: function () {
+    return http.get(base + 'user/', settings());
+  },
+  add: function (model) {
+    return http.post(base, model, settings());
+  },
+  save: function (id, model) {
+    return http.put(base + id, model, settings());
+  },
+  remove: function (id) {
+    return http.delete(base + id, settings());
+  },
 };
