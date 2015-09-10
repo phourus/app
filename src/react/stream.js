@@ -194,21 +194,18 @@ let Context = React.createClass({
 });
 
 let Filter = React.createClass({
+	// <button className="clear">
+	// 	Clear All <i className="fa fa-close" />
+	// </button>
+	// <button className="apply">
+	// 	Apply <i className="fa fa-check" />
+	// </button>
 	render: function () {
 		return (
 			<div className="filter">
 				<div className="triangle"></div>
 				<div className="label">Filter By</div>
 				<Filter.Types {...this.props} />
-				<div className="label">Date Range</div>
-				<Filter.Dates />
-				<Filter.Categories />
-				<button className="clear">
-					Clear All <i className="fa fa-close" />
-				</button>
-				<button className="apply">
-					Apply <i className="fa fa-check" />
-				</button>
 			</div>
 		);
 	},

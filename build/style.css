@@ -2140,11 +2140,26 @@ div.alerts button {
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
+.search .heading .filter,
+.search .heading .sortby {
+  background-color: #eeeeee;
+  box-shadow: 0px 0px 12px #444444;
+  -moz-box-shadow: 0px 0px 12px #444444;
+  -webkit-box-shadow: 0px 0px 12px #444444;
+}
+.search .heading .filter .label,
+.search .heading .sortby .label {
+  font-size: 0.8em;
+  color: #aaa;
+  text-transform: uppercase;
+  padding: 1em;
+  margin: 0;
+}
 .search .heading .filter {
-  background-color: #fff;
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
+  margin-top: 10px;
 }
 .search .heading .filter:before,
 .search .heading .filter:after {
@@ -2154,8 +2169,14 @@ div.alerts button {
 .search .heading .filter:after {
   clear: both;
 }
-.search .heading .filter .toggles {
-  float: right;
+.search .heading .filter .types {
+  background-color: #fff;
+  border-top: solid 1px #ccc;
+}
+.search .heading .filter .types button.button {
+  width: 42%;
+  margin: 10px 4% 10px 4%;
+  display: inline-block;
 }
 .search .heading .filter ul {
   display: inline-block;
@@ -2223,14 +2244,10 @@ div.alerts button {
   color: #111;
 }
 .search .heading .sortby {
-  background-color: #eeeeee;
   margin-top: 10px;
   position: absolute;
   right: 5%;
   z-index: 999;
-  box-shadow: 0px 0px 12px #444444;
-  -moz-box-shadow: 0px 0px 12px #444444;
-  -webkit-box-shadow: 0px 0px 12px #444444;
   float: right;
 }
 .search .heading .sortby .triangle {
@@ -2241,13 +2258,6 @@ div.alerts button {
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-bottom: 12px solid #eeeeee;
-}
-.search .heading .sortby .label {
-  font-size: 0.8em;
-  color: #aaa;
-  text-transform: uppercase;
-  padding: 1em;
-  margin: 0;
 }
 .search .heading .sortby {
   width: 200px;
@@ -2319,6 +2329,13 @@ div.alerts button {
     display: inline-block;
     vertical-align: top;
     text-align: right;
+  }
+}
+@media (min-width: 1000px) {
+  .search .heading .filter .types button.button {
+    width: 20%;
+    margin: 10px 3% 10px 2%;
+    display: inline-block;
   }
 }
 .main {
