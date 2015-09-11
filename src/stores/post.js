@@ -78,7 +78,7 @@ let Post = Reflux.createStore({
         this.trigger(data);
       })
       .catch(code => {
-        msg('yellow', 'Tags could not be loaded', code);
+        msg('yellow', 'Comments could not be loaded', code);
       });
     },
     _add: function (model) {
@@ -87,7 +87,7 @@ let Post = Reflux.createStore({
         Post._refresh();
       })
       .catch(code => {
-        msg('red', 'Tag could not be created', code);
+        msg('red', 'Comment could not be created', code);
       });
     },
     _save: function (id, model) {
@@ -97,7 +97,7 @@ let Post = Reflux.createStore({
         Post._refresh();
       })
       .catch(code => {
-        msg('red', 'Tag could not be removed', code);
+        msg('red', 'Comment could not be updated', code);
       });
     },
     _remove: function (id) {
@@ -106,7 +106,7 @@ let Post = Reflux.createStore({
         Post._refresh();
       })
       .catch(code => {
-        msg('red', 'Tag could not be removed', code);
+        msg('red', 'Comment could not be removed', code);
       });
     }
   }),
@@ -124,10 +124,12 @@ let Post = Reflux.createStore({
       this.postId = id;
       thumbs.post(id)
       .then(data => {
-        this.trigger({thumbs: data});
+        if (data) {
+          this.trigger(data);
+        }
       })
       .catch(code => {
-        msg('red', 'Tag could not be created', code);
+        msg('red', 'Thumbs could not be loaded', code);
       });
     },
     _add: function (model) {
@@ -151,7 +153,7 @@ let Post = Reflux.createStore({
     _remove: function (id) {
       thumbs.remove(id)
       .then(data => {
-        this.trigger({thumbs: {id: null, positive: null}});
+        this.trigger({id: null, positive: null});
       })
       .catch(code => {
         msg('red', 'Thumb could not be removed', code);

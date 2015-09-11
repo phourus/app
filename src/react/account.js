@@ -135,10 +135,10 @@ let Orgs = React.createClass({
 
 Account.Edit = React.createClass({
   render: function () {
+    //<Address {...this.props} />
     return (
       <div className="update">
         <Info {...this.props} />
-        <Address {...this.props} />
       </div>
     );
   }

@@ -909,7 +909,7 @@ let Thumbs = React.createClass({
    componentDidMount: function () {
      let params = this.getParams();
      this.unsubscribe = Store.Thumbs.listen((data) => {
-			 this.setState(data.thumbs);
+			 this.setState(data);
      });
      Actions.Thumbs.post(params.id);
    },
