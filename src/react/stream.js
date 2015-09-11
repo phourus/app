@@ -12,6 +12,7 @@ let Actions = require('../actions/stream');
 let AccountStore = require('../stores/account');
 let AccountActions = require('../actions/account');
 
+let Loader = require('./loader');
 let Tax = require('../taxonomy');
 let Influence = require('../influence');
 let Popularity = require('../popularity');
@@ -406,6 +407,7 @@ let Sort = React.createClass({
 let Posts = React.createClass({
 	getInitialState: function () {
 		return {
+			ready: false,
 			user: {
 				id: null
 			}
@@ -413,6 +415,9 @@ let Posts = React.createClass({
 	},
 	componentDidMount: function () {
 		this.unsubscribe = AccountStore.listen((data) => {
+			if (this.state.ready === false) {
+				data.ready = true;
+			}
 			this.setState(data);
 		});
 		AccountActions.get();
@@ -443,6 +448,9 @@ let Posts = React.createClass({
 			 return <PostItem key={item.id} post={item} user={item.user} context={this.props.context} owner={owner} location={location} scroll={this.props.scroll} />;
 		});
 
+		if (this.state.ready === false) {
+			return <Loader />
+		}
 		if (list.length < 1) {
 			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>
 		}

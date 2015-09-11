@@ -6,7 +6,7 @@ let moment = require('moment');
 let numeral = require('numeral');
 let RTE = require('react-quill');
 let File = require('react-dropzone-component');
-let AWS = require('aws-sdk');
+//let AWS = require('aws-sdk');
 
 let Actions = require('../actions/post');
 let Stream = require('../actions/stream');
@@ -15,13 +15,14 @@ let ActionsAccount = require('../actions/account');
 let Store = require('../stores/post');
 let AccountStore = require('../stores/account');
 
+let Loader = require('./loader');
 let Influence = require('../influence');
 let Popularity = require('../popularity');
 let tax = require('../taxonomy');
 let thousands = "0,0";
-AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});
-let S3 = AWS.S3;
-let s3 = new S3();
+// AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});
+// let S3 = AWS.S3;
+// let s3 = new S3();
 
 let Post = React.createClass({
 	mixins: [State, Navigation],
@@ -703,6 +704,13 @@ let Links = React.createClass({
 Links.List = React.createClass({
 	render: function () {
 		let links = this.props.post.links || [];
+		if (links.length < 1) {
+			return (
+				<div className="list">
+					<h3>This post does not have any links</h3>
+				</div>
+			);
+		}
 		return (
 			<div className="list">
 				{links.map((item, index) => {
@@ -968,12 +976,16 @@ let Comments = React.createClass({
   mixins: [Router.State],
   getInitialState: function () {
     return {
+			ready: false,
       count: 0,
       rows: []
     }
   },
   componentDidMount: function () {
     this.unsubscribe = Store.Comments.listen((data) => {
+			if (this.state.ready === false) {
+				data.ready = true;
+			}
 			this.setState(data);
     });
 		// Actions.Comments.collection moved to Post component because initial
@@ -990,11 +1002,17 @@ let Comments = React.createClass({
     }
     let data = this.state.rows;
     let comments = [];
-    if (data) {
-      comments = data.map(function (item, i) {
-				return <Comments.Comment key={item.id} comment={item} user={item.user} />;
-      });
-    }
+    if (data && this.state.ready === true) {
+			if (data.length > 0) {
+				comments = data.map(function (item, i) {
+					return <Comments.Comment key={item.id} comment={item} user={item.user} />;
+				});
+			} else {
+				comments = <h3>This post does not have any comments. Be the first!</h3>;
+			}
+    } else {
+			comments = <Loader />
+		}
     if (AccountStore.authenticated) {
       create = <Comments.Create post={this.props.post} />
     }

@@ -2109,6 +2109,10 @@ div.alerts button {
 #content div.search {
   max-width: 100%;
 }
+.search .loader {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
 .search .heading {
   top: 40px;
   width: 90%;
@@ -2743,6 +2747,12 @@ i.fa-minus {
   cursor: pointer;
   width: 100px;
   height: 100px;
+}
+/** LOADER **/
+.loader {
+  width: 100px;
+  height: 100px;
+  margin: auto;
 }
 /** LEGALESE **/
 .general ol li {
