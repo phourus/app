@@ -152,6 +152,20 @@ input.button.green.off {
   background-color: #fafafa;
   color: #9cd900;
 }
+button.button.green.inverted,
+a.button.green.inverted,
+input.button.green.inverted {
+  background-color: #fafafa;
+  border: solid 1px #9cd900;
+  color: #9cd900;
+}
+button.button.green.inverted:hover,
+a.button.green.inverted:hover,
+input.button.green.inverted:hover {
+  background-color: #658c00;
+  border: none;
+  color: #eeeeee;
+}
 button.button.blue,
 a.button.blue,
 input.button.blue {
@@ -167,6 +181,20 @@ a.button.blue.off,
 input.button.blue.off {
   background-color: #fafafa;
   color: #5faee3;
+}
+button.button.blue.inverted,
+a.button.blue.inverted,
+input.button.blue.inverted {
+  background-color: #fafafa;
+  border: solid 1px #5faee3;
+  color: #5faee3;
+}
+button.button.blue.inverted:hover,
+a.button.blue.inverted:hover,
+input.button.blue.inverted:hover {
+  background-color: #217dbb;
+  border: none;
+  color: #eeeeee;
 }
 button.button.red,
 a.button.red,
@@ -184,6 +212,20 @@ input.button.red.off {
   background-color: #fafafa;
   color: #fc2727;
 }
+button.button.red.inverted,
+a.button.red.inverted,
+input.button.red.inverted {
+  background-color: #fafafa;
+  border: solid 1px #fc2727;
+  color: #fc2727;
+}
+button.button.red.inverted:hover,
+a.button.red.inverted:hover,
+input.button.red.inverted:hover {
+  background-color: #bb0202;
+  border: none;
+  color: #eeeeee;
+}
 button.button.gold,
 a.button.gold,
 input.button.gold {
@@ -199,6 +241,20 @@ a.button.gold.off,
 input.button.gold.off {
   background-color: #fafafa;
   color: #f2c13d;
+}
+button.button.gold.inverted,
+a.button.gold.inverted,
+input.button.gold.inverted {
+  background-color: #fafafa;
+  border: solid 1px #f2c13d;
+  color: #f2c13d;
+}
+button.button.gold.inverted:hover,
+a.button.gold.inverted:hover,
+input.button.gold.inverted:hover {
+  background-color: #bc8c0d;
+  border: none;
+  color: #eeeeee;
 }
 a.button {
   padding-top: 8px;

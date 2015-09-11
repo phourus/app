@@ -449,7 +449,7 @@ let Posts = React.createClass({
 		});
 
 		if (this.state.ready === false) {
-			return <Loader />
+			//return <Loader />
 		}
 		if (list.length < 1) {
 			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>

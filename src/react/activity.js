@@ -30,7 +30,7 @@ let Activity = React.createClass({
       );
     } else {
       return (
-        <View401 />
+        <View401.Login />
       );
     }
   }

@@ -1011,7 +1011,7 @@ let Comments = React.createClass({
 				comments = <h3>This post does not have any comments. Be the first!</h3>;
 			}
     } else {
-			comments = <Loader />
+			//comments = <Loader />
 		}
     if (AccountStore.authenticated) {
       create = <Comments.Create post={this.props.post} />

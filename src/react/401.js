@@ -1,64 +1,13 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { State } = Router;
+let { RouteHandler, State, Navigation, Link } = Router;
 let Actions = require('../actions/account');
-let Store = require('../stores/account');
 
-let View401 = React.createClass({
-  mixins: [State],
-  getInitialState: function () {
-    return {
-      mode: "login"
-    }
-  },
-  componentDidMount: function () {
-    Store.listen((data) => {
-      this.setState(data);
-    });
-    this._routes();
-  },
-  componentWillReceiveProps: function () {
-    this._routes();
-  },
-  render: function () {
-    return (
-      <div className="view401">
-        {this.state.mode === 'login'
-          ? <Login forgot={this._forgot} />
-          : false
-        }
-        {this.state.mode === 'forgot'
-          ? <Forgot />
-          : false
-        }
-        {this.state.mode === 'reset'
-          ? <Reset />
-          : false
-        }
-        {this.state.mode === 'request'
-          ? <Request />
-          : false
-        }
-        {this.state.mode === 'register'
-          ? <Register />
-          : false
-        }
-      </div>
-    );
-  },
-  _routes: function () {
-    let route = this.context.router.getCurrentRoutes();
-    if (route[1].name === 'reset') {
-      this.setState({mode: "reset"});
-    }
-  },
-  _forgot: function () {
-    this.setState({mode: "forgot"});
-  },
-});
+let View401 = {};
 
-let Login = React.createClass({
+View401.Login = React.createClass({
+  mixins: [Navigation],
   render: function () {
     return (
       <div className="login">
@@ -72,7 +21,8 @@ let Login = React.createClass({
           <input ref="password" className="password" type="password" placeholder="your password" />
         </label>
         <button onClick={this._login} className="green button">Login</button>
-        <a href="javascript:void(0)" className="forgotLink" onClick={this.props.forgot}>Forgot your login information? Click here</a>
+        <button onClick={this._request} className="blue button inverted">Request Access</button>
+        <Link to="forgot" className="forgotLink">Forgot your login information? Click here</Link>
       </div>
     );
   },
@@ -81,9 +31,38 @@ let Login = React.createClass({
     let password = this.refs.password.getDOMNode().value;
     Actions.login(username, password);
   },
+  _request: function () {
+    this.context.router.transitionTo("request");
+  }
 });
 
-let Forgot = React.createClass({
+View401.Request = React.createClass({
+  getInitialState: function () {
+    return {
+      email: ""
+    }
+  },
+  render: function () {
+    return (
+      <div className="request">
+        <h1>Request Access</h1>
+        <p>Phourus is currently in Private Beta, so please provide your email with the form below if you'd like to join.</p>
+        <label>
+          Email:
+          <input className="username" placeholder="your email address" onChange={this._email} />
+        </label>
+        <button onClick={this._request} className="green button">Request Access</button>
+      </div>
+    );
+  },
+  _email: function (e) { this.setState({email: e.currentTarget.value }); },
+  _request: function () {
+    console.log('requested access', this.state.email);
+    //Actions.request(this.state.email);
+  },
+});
+
+View401.Forgot = React.createClass({
   render: function () {
     return (
     <div className="forgot">
@@ -102,11 +81,11 @@ let Forgot = React.createClass({
   }
 });
 
-let Reset = React.createClass({
+View401.Reset = React.createClass({
   mixins: [State],
   render: function () {
     return (
-    <div className="forgot">
+    <div className="reset">
       <h1>Reset Your Password</h1>
       <label>
         Email:
@@ -135,7 +114,7 @@ let Reset = React.createClass({
   }
 });
 
-let Register = React.createClass({
+View401.Register = React.createClass({
   getInitialState: function () {
     return {
       email: "",

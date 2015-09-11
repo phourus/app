@@ -25,7 +25,11 @@ module.exports = (
     <Route name="about" handler={About} />
     <Route name="terms" handler={Terms} />
     <Route name="privacy" handler={Privacy} />
-    <Route name="reset" handler={View401} />
+    <Route name="login" handler={View401.Login} />
+    <Route name="forgot" handler={View401.Forgot} />
+    <Route name="reset" handler={View401.Reset} />
+    <Route name="request" handler={View401.Request} />
+    <Route name="register" handler={View401.Register} />
     <Route name="activity" path="activity" handler={Activity} />
     <Route name="leaders" handler={Leaders}>
       <DefaultRoute handler={Leaders.Posts} />

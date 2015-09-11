@@ -14,13 +14,16 @@ var Loader = React.createClass({
     }
   },
   componentDidMount: function () {
-    setInterval(() => {
+    this.interval = setInterval(() => {
       if (this.state.slide === 3) {
         this.setState({slide: 0});
       } else {
         this.setState({slide: (this.state.slide + 1)});
       }
     }, this.props.speed);
+  },
+  componentWillUnmount: function () {
+    clearInterval(this.interval);
   },
   render: function () {
     let opacity = this.props.faded;
