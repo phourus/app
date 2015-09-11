@@ -73,6 +73,7 @@ let Post = Reflux.createStore({
       this.listenTo(Comments.remove, this._remove);
     },
     _collection: function (params) {
+      this.params = params;
       comments.collection(params)
       .then(data => {
         this.trigger(data);
@@ -84,7 +85,7 @@ let Post = Reflux.createStore({
     _add: function (model) {
       comments.add(model)
       .then(data => {
-        Post._refresh();
+        this._collection(this.params);
       })
       .catch(code => {
         msg('red', 'Comment could not be created', code);
@@ -93,7 +94,7 @@ let Post = Reflux.createStore({
     _save: function (id, model) {
       comments.save(id, model)
       .then(data => {
-        this.trigger({account: data});
+        this._collection(this.params);
         Post._refresh();
       })
       .catch(code => {
@@ -103,7 +104,7 @@ let Post = Reflux.createStore({
     _remove: function (id) {
       comments.remove(id)
       .then(data => {
-        Post._refresh();
+        this._collection(this.params);
       })
       .catch(code => {
         msg('red', 'Comment could not be removed', code);

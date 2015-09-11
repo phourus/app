@@ -1031,6 +1031,7 @@ Comments.Create = React.createClass({
 		model.content = this.state.content;
 		model.postId = this.props.post.id;
 		Actions.Comments.add(model);
+		this.setState({content: ""});
 	},
 	_content: function (e) {
 		let value = e.currentTarget.value;

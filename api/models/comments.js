@@ -22,7 +22,7 @@ var comments = db.define('comments', {
     queryize: function (params) {
       // to avoid cyclical dependency, require as needed
       var users = require('./users');
-      return {where: {postId: params.postId}, include: [{model: users, as: 'user'}]};
+      return {where: {postId: params.postId}, order: [['createdAt', 'DESC']], include: [{model: users, as: 'user'}]};
     }
   }
 });
