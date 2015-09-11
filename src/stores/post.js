@@ -24,6 +24,10 @@ let Post = Reflux.createStore({
     this.listenTo(Actions.remove, this._remove);
   },
   _single: function (id) {
+    if (!id) {
+      this.post = {};
+      return;
+    }
     posts.single(id)
     .then(data => {
       this.post = data;

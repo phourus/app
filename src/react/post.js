@@ -62,18 +62,13 @@ let Post = React.createClass({
 				this.setState({post: current});
 			}
 		});
-		let id = this.getParams().id || null;
-		if (this.props.context.type === 'edit' || this.props.context.type === 'post') {
-			Actions.single(id);
-			Actions.Comments.collection({postId: id});
-		}
-		this.setState(this.props);
+		this._context(this.props);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
 	componentWillReceiveProps: function (data) {
-		this.setState(data);
+		this._context(data);
 	},
 	render: function () {
 		let className = "postItem";
@@ -173,6 +168,14 @@ let Post = React.createClass({
 				{comments}
 			</div>
 		);
+	},
+	_context: function (data) {
+		let id = this.getParams().id || null;
+		if (this.props.context.type === 'edit' || this.props.context.type === 'post') {
+			Actions.single(id);
+			Actions.Comments.collection({postId: id});
+		}
+		this.setState(data);
 	},
 	_back: function () {
 		if (!this.goBack()) {
