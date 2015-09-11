@@ -54,7 +54,7 @@ let Stream = React.createClass({
 	render: function () {
 		let visible = 'fa fa-minus-square-o';
 		let hidden = 'fa fa-plus-square-o';
-		let hasMore = (this.state.posts.length < this.state.total);
+		let hasMore = (this.state.posts.length < this.state.total && this.state.context.type !== 'post' && this.state.context.type !== 'edit');
 		return (
 			<div className="search">
 				<Head {...this.state} />
