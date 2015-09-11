@@ -33,9 +33,9 @@ gulp.task('javascript', function() {
       .bundle()
       .pipe(source('app.js'))
       .pipe(buffer())
-      //.pipe(sourcemaps.init({loadMaps: true}))
-      //.pipe(uglify())
-      //.pipe(sourcemaps.write('./'))
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest('./build/'))
   };
 
