@@ -77,6 +77,16 @@ router.post('/login', (req, res) => {
       });
 });
 
+router.post('/pic', (req, res) => {
+  require("fs").writeFile("out.png", req.body, 'base64', function(err) {
+    if (err) {
+      console.error(err);
+      return res.send(500);
+    }
+    res.send(200);
+  });
+});
+
 router.get('', (req, res) => {
   if (!req.user_id) {
     return res.send(401);

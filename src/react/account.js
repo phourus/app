@@ -7,6 +7,7 @@ let Actions = require('../actions/account');
 let token = require('../token');
 let Login = require('./401').Login;
 let moment = require('moment');
+let ImageUploader = require('../pic');
 
 let Account = React.createClass({
   getInitialState: function () {
@@ -56,13 +57,39 @@ let Account = React.createClass({
 });
 
 let Pic = React.createClass({
+  componentDidMount: function () {
+    this.uploader = document.getElementById('uploader');
+    var uploader = new ImageUploader({
+      inputElement: this.uploader,
+      uploadUrl: '/rest/account/pic',
+      onProgress: function (event) {
+        console.log('Completed ' + event.done + ' files of ' + event.total + ' total.');
+        console.log((event.done / event.total * 100) + '%');
+      },
+      onFileComplete: function (event, file) {
+      	console.log('Finished file ' + file.fileName + ' with response from server ' + event.target.status);
+      },
+      onComplete: function (event) {
+         console.log('Completed all ' + event.done + ' files!');
+         console.log((event.done / event.total * 100) + '%');
+      },
+      maxWidth: 400,
+      quality: 1,
+      //timeout: 5000,
+      debug : true
+    });
+  },
   render: function () {
     //<Link href="/account/password">Change my password</Link>
     return (
       <div className="pic">
-        <img src={`/assets/avatars/${this.props.img || 'default'}.jpg`} />
+        <input id="uploader" type="file" name="uploader" className="uploader" />
+        <img src={`/assets/avatars/${this.props.img || 'default'}.jpg`} onClick={this._upload} />
       </div>
     );
+  },
+  _upload: function (e) {
+    this.uploader.click()
   }
 });
 

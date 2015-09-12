@@ -21,6 +21,7 @@ var users = require('./rest/users');
 var views = require('./rest/views');
 
 rest.use(body.json());
+rest.use(body.text({limit: '1mb'}));
 rest.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Authorization, Content-Type");

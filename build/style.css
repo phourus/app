@@ -595,10 +595,15 @@ div.alerts button {
 .account .heading .pic a {
   text-decoration: underline;
 }
+.account .heading .pic .uploader {
+  position: absolute;
+  left: -9999px;
+}
 .account .heading .pic img {
   width: 95%;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 .account .heading .profile {
   width: 50%;
