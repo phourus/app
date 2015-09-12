@@ -10,6 +10,7 @@ var comments = require('../models/comments');
 var thumbs = require('../models/thumbs');
 //var favs = require('../models/favs');
 var jwt = require('jsonwebtoken');
+var s3 = require('../s3');
 
 var authDecode = function (auth) {
   let token = auth.split(' ')[1];
@@ -78,12 +79,16 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/pic', (req, res) => {
-  require("fs").writeFile("out.png", req.body, 'base64', function(err) {
-    if (err) {
-      console.error(err);
-      return res.send(500);
-    }
+  if (!req.user_id) {
+    return res.send(401);
+  }
+  var body = new Buffer(req.body, 'base64');
+  s3('users', req.user_id, body)
+  .then(function (data) {
     res.send(200);
+  })
+  .catch(function (err) {
+    res.send(500);
   });
 });
 
