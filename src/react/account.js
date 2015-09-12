@@ -62,6 +62,9 @@ let Pic = React.createClass({
     var uploader = new ImageUploader({
       inputElement: this.uploader,
       uploadUrl: '/rest/account/pic',
+      headers: {
+        "Authorization": require('../token').get()
+      },
       onProgress: function (event) {
         console.log('Completed ' + event.done + ' files of ' + event.total + ' total.');
         console.log((event.done / event.total * 100) + '%');

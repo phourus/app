@@ -96,7 +96,11 @@ ImageUploader.prototype.performUpload = function(imageData, completionCallback) 
         This.progressUpdate(e.loaded, e.total);
     }, false);
     xhr.open('POST', this.config.uploadUrl, true);
-
+    /** CUSTOM **/
+    Object.keys(this.config.headers).forEach(function (key) {
+      xhr.setRequestHeader(key, This.config.headers[key]);
+    });
+    /** END CUSTOM **/
     xhr.send(imageData.split(',')[1]);
 
     if (this.config.timeout) {
