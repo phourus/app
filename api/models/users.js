@@ -34,10 +34,10 @@ var users = db.define('users', {
       return this.create(model);
     },
     save: function (id, model) {
-      return this.update(model, {where: {id: id, user_id: this.SESSION_USER}});
+      return this.update(model, {where: {id: id}});
     },
     remove: function (id) {
-      return this.destroy({where: {id: id, user_id: this.SESSION_USER}});
+      return this.destroy({where: {id: id}});
     },
     queryize: function (params) {
       return {};

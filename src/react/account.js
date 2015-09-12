@@ -33,7 +33,7 @@ let Account = React.createClass({
           <Link to="activity" className="button gold toggle"><i className="fa fa-bell" /> My Activity</Link>
           <h1>My Account</h1>
           <div className="heading">
-            <Pic {...this.state} />
+            <Pic img={this.state.user.img} />
             <Profile {...this.state} />
             <Orgs />
           </div>
@@ -57,6 +57,13 @@ let Account = React.createClass({
 });
 
 let Pic = React.createClass({
+  getInitialState: function () {
+    return {
+      img: '/assets/avatars/default.jpg',
+      default: '/assets/avatars/default.jpg',
+      upload: 0
+    }
+  },
   componentDidMount: function () {
     this.uploader = document.getElementById('uploader');
     var uploader = new ImageUploader({
@@ -66,15 +73,14 @@ let Pic = React.createClass({
         "Authorization": require('../token').get()
       },
       onProgress: function (event) {
-        console.log('Completed ' + event.done + ' files of ' + event.total + ' total.');
-        console.log((event.done / event.total * 100) + '%');
+        // event.done, event.total
       },
       onFileComplete: function (event, file) {
-      	console.log('Finished file ' + file.fileName + ' with response from server ' + event.target.status);
+      	// file.fileName, event.target.status
       },
       onComplete: function (event) {
-         console.log('Completed all ' + event.done + ' files!');
-         console.log((event.done / event.total * 100) + '%');
+        Actions.get();
+        // event.done, event.total
       },
       maxWidth: 400,
       quality: 1,
@@ -82,17 +88,26 @@ let Pic = React.createClass({
       debug : true
     });
   },
+  componentWillReceiveProps: function (data) {
+    if (data.img) {
+      data.upload = this.state.upload + 1;
+      this.setState(data);
+    }
+  },
   render: function () {
     //<Link href="/account/password">Change my password</Link>
     return (
       <div className="pic">
         <input id="uploader" type="file" name="uploader" className="uploader" />
-        <img src={`/assets/avatars/${this.props.img || 'default'}.jpg`} onClick={this._upload} />
+        <img src={this.state.img + '?upload=' + this.state.upload} onClick={this._upload} onError={this._default} />
       </div>
     );
   },
   _upload: function (e) {
     this.uploader.click()
+  },
+  _default: function () {
+    this.setState({img: this.state.default});
   }
 });
 

@@ -85,9 +85,13 @@ router.post('/pic', (req, res) => {
   var body = new Buffer(req.body, 'base64');
   s3('users', req.user_id, body)
   .then(function (data) {
-    res.send(200);
+    return users.save(req.user_id, {img: data.Location})
+    .then(data => {
+      res.send(200);
+    });
   })
   .catch(function (err) {
+    console.error(err);
     res.send(500);
   });
 });

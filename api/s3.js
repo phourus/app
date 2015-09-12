@@ -24,7 +24,7 @@ module.exports = function (bucket, key, body) {
         console.error("Error uploading data: ", err);
         reject(err);
       } else {
-        resolve(key);
+        resolve(data);
       }
     });
   });
