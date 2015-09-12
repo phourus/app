@@ -2820,3 +2820,19 @@ i.fa-minus {
 .general ol li ol li {
   font-weight: normal;
 }
+/** MESSAGES **/
+.message {
+  cursor: pointer;
+  padding-left: 4px;
+  box-sizing: border-box;
+  background-color: #eee;
+}
+.message.green {
+  border-left: solid 4px #658c00;
+}
+.message.yellow {
+  border-left: solid 4px #FF3;
+}
+.message.red {
+  border-left: solid 4px #bb0202;
+}

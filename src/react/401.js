@@ -3,11 +3,26 @@ let React = require('react');
 let Router = require('react-router');
 let { RouteHandler, State, Navigation, Link } = Router;
 let Actions = require('../actions/account');
+let Store = require('../stores/account');
 
 let View401 = {};
 
 View401.Login = React.createClass({
-  mixins: [Navigation],
+  mixins: [State, Navigation],
+  getInitialState: function () {
+    return {}
+  },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen(data => {
+      if (data.code === 200 && this.context.router.getCurrentRoutes()[1].name === 'login') {
+        this.context.router.transitionTo("activity");
+      }
+      this.setState(data);
+    });
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
     return (
       <div className="login">
@@ -20,6 +35,10 @@ View401.Login = React.createClass({
           Password:
           <input ref="password" className="password" type="password" placeholder="your password" />
         </label>
+        {this.state.code === 401
+          ? <div className="message red" onClick={this._clear}>There was an error logging in. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
+          : false
+        }
         <button onClick={this._login} className="green button">Login</button>
         <button onClick={this._request} className="blue button inverted">Request Access</button>
         <Link to="forgot" className="forgotLink">Forgot your login information? Click here</Link>
@@ -29,10 +48,15 @@ View401.Login = React.createClass({
   _login: function () {
     let username = this.refs.username.getDOMNode().value;
     let password = this.refs.password.getDOMNode().value;
+    this._clear();
     Actions.login(username, password);
   },
   _request: function () {
+    this._clear();
     this.context.router.transitionTo("request");
+  },
+  _clear: function () {
+    this.setState({code: null});
   }
 });
 
@@ -42,27 +66,60 @@ View401.Request = React.createClass({
       email: ""
     }
   },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen(data => {
+      this.setState(data);
+    });
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
     return (
       <div className="request">
         <h1>Request Access</h1>
-        <p>Phourus is currently in Private Beta, so please provide your email with the form below if you'd like to join.</p>
+        <p>Phourus is currently in Private Beta, so please provide your email below if you'd like to join.</p>
         <label>
           Email:
           <input className="username" placeholder="your email address" onChange={this._email} />
         </label>
+        {this.state.code === 500
+          ? <div className="message red" onClick={this._clear}>There was an error requesting access. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
+          : false
+        }
+        {this.state.code === 409
+          ? <div className="message red" onClick={this._clear}>That email already exists. Use a different email address or <Link to="login">login with your existing email.</Link></div>
+          : false
+        }
+        {this.state.code === 202
+          ? <div className="message green" onClick={this._clear}>Your request has been received. We will email you with further instructions if you are accepted.</div>
+          : false
+        }
         <button onClick={this._request} className="green button">Request Access</button>
       </div>
     );
   },
   _email: function (e) { this.setState({email: e.currentTarget.value }); },
   _request: function () {
-    console.log('requested access', this.state.email);
-    //Actions.request(this.state.email);
+    Actions.request(this.state.email);
   },
+  _clear: function () {
+    this.setState({code: null});
+  }
 });
 
 View401.Forgot = React.createClass({
+  getInitialState: function () {
+    return {}
+  },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen(data => {
+      this.setState(data);
+    });
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
     return (
     <div className="forgot">
@@ -71,18 +128,41 @@ View401.Forgot = React.createClass({
         Email:
         <input onChange={this._email} />
       </label>
+      {this.state.code === 500
+        ? <div className="message red" onClick={this._clear}>There was an error sending your reset link. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
+        : false
+      }
+      {this.state.code === 200
+        ? <div className="message green" onClick={this._clear}>Instructions to reset your password have been sent to your email address.</div>
+        : false
+      }
       <button onClick={this._forgot} className="blue button submit">Email me a reset link</button>
     </div>
     );
   },
-  _email: function (e) { this.setState({email: e.currentTarget.value }); },
+  _email: function (e) { this.setState({email: e.currentTarget.value }); this._clear(); },
   _forgot: function () {
     Actions.forgot(this.state.email)
+    this.setState({email: "", code: null});
+  },
+  _clear: function () {
+    this.setState({code: null});
   }
 });
 
 View401.Reset = React.createClass({
   mixins: [State],
+  getInitialState: function () {
+    return {}
+  },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen(data => {
+      this.setState(data);
+    });
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
     return (
     <div className="reset">
@@ -99,6 +179,14 @@ View401.Reset = React.createClass({
         Confirm Password:
         <input onChange={this._confirm} type="password" />
       </label>
+      {this.state.code === 403
+        ? <div className="message red" onClick={this._clear}>There was an error resetting your password. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
+        : false
+      }
+      {this.state.code === 200
+        ? <div className="message green" onClick={this._clear}>Your password has been reset. You can now <Link to="login">login with your new password here.</Link></div>
+        : false
+      }
       <button onClick={this._reset} className="blue button submit">Reset my Password</button>
     </div>
     );
@@ -111,6 +199,9 @@ View401.Reset = React.createClass({
     if (this.state.password === this.state.confirm) {
       Actions.reset(this.state.email, this.state.password, query.token, query.userId);
     }
+  },
+  _clear: function () {
+    this.setState({code: null});
   }
 });
 
@@ -121,6 +212,14 @@ View401.Register = React.createClass({
       password: "",
       confirm: ""
     };
+  },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen(data => {
+      this.setState(data);
+    });
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
   },
   render: function () {
     return (
@@ -138,6 +237,10 @@ View401.Register = React.createClass({
           Confirm Password:
           <input ref="confirm" className="confirm" type="password" placeholder="confirm your password" value={this.state.confirm} onChange={this._confirm} />
         </label>
+        {this.state.code
+          ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
+          : false
+        }
         <button onClick={this._register} className="blue button submit">Sign Up Now</button>
       </div>
     );
@@ -159,6 +262,9 @@ View401.Register = React.createClass({
       Actions.register(this.state.email, this.state.password);
     }
   },
+  _clear: function () {
+    this.setState({code: null});
+  }
 });
 
 module.exports = View401;

@@ -18,14 +18,13 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.deactivate, this._page);
     this.listenTo(Actions.history, this._history);
     this.listenTo(Actions.notifications, this._notifications);
+    this.listenTo(Actions.password, this._password);
     this.listenTo(Actions.orgs, this._orgs);
-
     this.listenTo(Actions.login, this._login);
     this.listenTo(Actions.register, this._register);
     this.listenTo(Actions.request, this._request);
     this.listenTo(Actions.forgot, this._forgot);
     this.listenTo(Actions.reset, this._reset);
-    this.listenTo(Actions.password, this._password);
     this.listenTo(Actions.logout, this._logout);
   },
   _change: function (key, value) {
@@ -42,9 +41,7 @@ module.exports = Reflux.createStore({
     .catch(code => {
       this.authenticated = false;
       this.user = null;
-      if (code != 200) {
-        msg('yellow', 'Account could not be loaded', code);
-      }
+      msg('yellow', 'Account could not be loaded', code);
     });
   },
   _edit: function () {
@@ -55,6 +52,7 @@ module.exports = Reflux.createStore({
       }
     })
     .catch(code => {
+      this.trigger({code: code});
       msg('red', 'Account could not be updated', code);
     });
   },
@@ -66,6 +64,7 @@ module.exports = Reflux.createStore({
       }
     })
     .catch(code => {
+      this.trigger({code: code});
       msg('red', 'Account could not be deactivated', code);
     });
   },
@@ -75,9 +74,8 @@ module.exports = Reflux.createStore({
        this.trigger({notifications: data});
      })
      .catch(code => {
-       if (code != 200) {
-          msg('yellow', 'Notifications could not be loaded', code);
-       }
+       this.trigger({code: code});
+       msg('yellow', 'Notifications could not be loaded', code);
      });
   },
   _history: function () {
@@ -86,63 +84,8 @@ module.exports = Reflux.createStore({
       this.trigger({history: data});
     })
     .catch(code => {
-      if (code != 200) {
-        msg('yellow', 'History could not be loaded', code);
-      }
-    });
-  },
-  _orgs: function () {
-    account.orgs()
-    .then(data => {
-      this.trigger({orgs: data});
-    })
-    .catch(code => {
-      if (code != 200) {
-        msg('yellow', 'Organizations could not be loaded', code);
-      }
-    });
-  },
-  _login: function (email, password) {
-    account.login(email, password)
-    .then((data) => {
-      this.authenticated = true;
-      token.save(data);
-      this._get();
-    })
-    .catch((code) => {
-      msg('red', 'Login unsuccessful', code);
-    });
-  },
-  _register: function (email, password) {
-    account.register(email, password)
-    .then((data) => {
-      this._login(email, password);
-      msg('green', 'Registration complete', code);
-    })
-    .catch((code) => {
-      msg('red', 'Registration unsuccessful', code);
-    });
-  },
-  _request: function (email) {
-    let password = 'random';
-    this._register(email, password);
-  },
-  _forgot: function (email) {
-    account.forgot(email)
-    .then(data => {
-
-    })
-    .catch(code => {
-      msg('red', 'Password reset link could not be sent', code);
-    });
-  },
-  _reset: function (email, password, token, userId) {
-    account.reset(email, password, token, userId)
-    .then(data => {
-
-    })
-    .catch(code => {
-      msg('red', 'Password reset link could not be sent', code);
+      this.trigger({code: code});
+      msg('yellow', 'History could not be loaded', code);
     });
   },
   _password: function (current, updated) {
@@ -153,7 +96,74 @@ module.exports = Reflux.createStore({
       }
     })
     .catch(code => {
+      this.trigger({code: code});
       msg('red', 'Password could not be updated', code);
+    });
+  },
+  _orgs: function () {
+    account.orgs()
+    .then(data => {
+      this.trigger({orgs: data});
+    })
+    .catch(code => {
+      this.trigger({code: code});
+      msg('yellow', 'Organizations could not be loaded', code);
+    });
+  },
+  _login: function (email, password) {
+    account.login(email, password)
+    .then((data) => {
+      this.authenticated = true;
+      token.save(data);
+      this._get();
+      this.trigger({code: 200});
+    })
+    .catch((code) => {
+      this.trigger({code: code});
+      msg('red', 'Login unsuccessful', code);
+    });
+  },
+  _register: function (email, password) {
+    account.register(email, password)
+    .then((data) => {
+      this._login(email, password);
+      msg('green', 'Registration complete', code);
+    })
+    .catch((code) => {
+      this.trigger({code: code});
+      msg('red', 'Registration unsuccessful', code);
+    });
+  },
+  _request: function (email) {
+    let password = Math.random().toString(36).slice(2);
+    account.register(email, password)
+    .then((data) => {
+      this.trigger({code: 202});
+      msg('green', 'Request complete', 202);
+    })
+    .catch((code) => {
+      this.trigger({code: code});
+      msg('red', 'Request unsuccessful', code);
+    });
+  },
+  _forgot: function (email) {
+    account.forgot(email)
+    .then(data => {
+      this.trigger({code: 200});
+    })
+    .catch(code => {
+      this.trigger({code: code});
+      msg('red', 'Password reset link could not be sent', code);
+    });
+  },
+  _reset: function (email, password, token, userId) {
+    account.reset(email, password, token, userId)
+    .then(data => {
+      this.trigger({code: 200});
+    })
+    .catch(code => {
+      this.trigger({code: code});
+      msg('red', 'Password reset link could not be sent', code);
     });
   },
   _logout: function () {

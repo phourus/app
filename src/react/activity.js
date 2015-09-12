@@ -5,10 +5,10 @@ let { RouteHandler, Link } = Router;
 let Store = require('../stores/account');
 let Actions = require('../actions/account');
 let token = require('../token');
-let View401 = require('./401');
+let Login = require('./401').Login;
 let moment = require('moment');
 
-let Activity = React.createClass({
+let Activity = React.createClass({  
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
       this.setState({user: data.user, notifications: data.notifications, history: data.history});
@@ -30,7 +30,7 @@ let Activity = React.createClass({
       );
     } else {
       return (
-        <View401.Login />
+        <Login />
       );
     }
   }

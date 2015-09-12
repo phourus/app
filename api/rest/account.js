@@ -50,7 +50,7 @@ router.post('/login', (req, res) => {
       .then(function (data) {
           if (data === null) {
             console.error('email not found');
-            res.send(404);
+            res.send(401);
             //done();
           }
           return data.id;
@@ -60,7 +60,7 @@ router.post('/login', (req, res) => {
           .then(function (data) {
             if (data !== true) {
               console.error('user_id + hash not found');
-              res.send(404);
+              res.send(401);
             }
             return user_id;
           });

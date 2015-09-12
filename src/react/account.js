@@ -5,7 +5,7 @@ let { RouteHandler, Link } = Router;
 let Store = require('../stores/account');
 let Actions = require('../actions/account');
 let token = require('../token');
-let View401 = require('./401');
+let Login = require('./401').Login;
 let moment = require('moment');
 
 let Account = React.createClass({
@@ -41,7 +41,7 @@ let Account = React.createClass({
       );
     } else {
       return (
-        <View401 />
+        <Login />
       );
     }
   },
