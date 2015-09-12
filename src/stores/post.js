@@ -201,19 +201,22 @@ let Post = Reflux.createStore({
     _add: function (model) {
       links.add(model)
       .then(data => {
+        this.trigger({id: null, title: '', url: '', caption: '', mode: 'add'});
         Post._refresh();
       })
       .catch(code => {
+        this.trigger({code: code, action: 'add'});
         msg('red', 'Link could not be created', code);
       });
     },
     _save: function (id, model) {
       links.save(id, model)
       .then(data => {
-        this.trigger({id: null, url: '', caption: '', mode: 'add'});
+        this.trigger({id: null, title: '', url: '', caption: '', mode: 'add'});
         Post._refresh();
       })
       .catch(code => {
+        this.trigger({code: code, action: 'save'});
         msg('red', 'Link could not be saved', code);
       });
     },
@@ -223,6 +226,7 @@ let Post = Reflux.createStore({
         Post._refresh();
       })
       .catch(code => {
+        this.trigger({code: code, action: 'remove'});
         msg('red', 'Link could not be removed', code);
       });
     }

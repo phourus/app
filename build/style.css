@@ -1738,7 +1738,7 @@ div.alerts button {
   clear: both;
 }
 .postItem .links .fields {
-  width: 33.33333333%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
   background-color: #f7f7f7;
@@ -1754,7 +1754,7 @@ div.alerts button {
   font-size: 2em;
 }
 .postItem .links .list {
-  width: 66.66666667%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
 }
@@ -1870,6 +1870,18 @@ div.alerts button {
   float: right;
   margin: 0;
   padding: 0;
+}
+@media (min-width: 800px) {
+  .postItem .links .fields {
+    width: 33.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .postItem .links .list {
+    width: 66.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
 @media (min-width: 1000px) {
   .postItem {

@@ -684,6 +684,14 @@ let Tags = React.createClass({
 });
 
 let Links = React.createClass({
+	componentDidMount: function () {
+		this.unsubscribe = Store.Links.listen((data) => {
+			this.setState(data);
+		});
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
+	},
 	render: function () {
 		return (
 			<div className="links">
@@ -744,6 +752,10 @@ Links.List = React.createClass({
 			</div>
 		);
 	},
+	_remove: function (e) {
+		let id = e.currentTarget.id;
+		Actions.Links.remove(id);
+	},
 	_icon: function (ext) {
 		let out = '';
 		let icons = {
@@ -795,6 +807,11 @@ Links.Edit = React.createClass({
 		if (this.state.mode === 'edit') {
 			button = <button onClick={this._save} className="button green small edit">Save Changes</button>;
 		}
+		let errors = {
+			add: 'creating Link',
+			save: 'saving Link',
+			remove: 'removing Link'
+		}
 		return (
 			<div className="fields">
 				<label>Link Title:<br />
@@ -808,45 +825,48 @@ Links.Edit = React.createClass({
 				<label>Caption:
 					<textarea type="text" onChange={this._changeCaption} placeholder="enter short description" value={this.state.caption} />
 				</label>
+				{this.state.code
+					? <div className="message red" onClick={this._clear}>There was an error {errors[this.state.action]}</div>
+					: false
+				}
 				{button}
 			</div>
 		);
 	},
 	_add: function () {
-		if (this.props.post.id) {
-			let model = {};
-			model.title = this.state.title;
-			model.url = this.state.url;
-			model.caption = this.state.caption;
-			model.postId = this.props.post.id;
-			Actions.Links.add(model);
-			return;
-		}
-		console.error('post must have an id first');
+		let model = {};
+		model.title = this.state.title;
+		model.url = this.state.url;
+		model.caption = this.state.caption;
+		model.postId = this.props.post.id;
+		Actions.Links.add(model);
+		this._clear();
 	},
-	_remove: function (e) {
-		let id = e.currentTarget.id;
-		Actions.Links.remove(id);
-	},
-
 	_save: function () {
 		let link = {};
 		link.title = this.state.title;
 		link.url = this.state.url;
 		link.caption = this.state.caption;
-		Actions.Links.save(this.state.id,  link);
+		Actions.Links.save(this.state.id, link);
+		this._clear();
 	},
 	_changeTitle: function (e) {
 		let value = e.currentTarget.value;
 		this.setState({title: value});
+		this._clear();
 	},
 	_changeURL: function (e) {
 		let value = e.currentTarget.value;
 		this.setState({url: value});
+		this._clear();
 	},
 	_changeCaption: function (e) {
 		let value = e.currentTarget.value;
 		this.setState({caption: value});
+		this._clear();
+	},
+	_clear: function () {
+		this.setState({code: null, action: null});
 	}
 });
 

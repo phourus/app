@@ -416,7 +416,7 @@
     .Row(100%);
 
     .fields {
-      .Cols(4);
+      .Cols(12);
       background-color: #f7f7f7;
       box-sizing: border-box;
       padding: 20px;
@@ -432,7 +432,7 @@
       }
     }
     .list {
-      .Cols(8);
+      .Cols(12);
 
       > div {
         padding: 2%;
@@ -545,6 +545,20 @@
       float: right;
       margin: 0;
       padding: 0;
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .postItem {
+    .links {
+
+      .fields {
+        .Cols(4);
+      }
+      .list {
+        .Cols(8);
+      }
     }
   }
 }
