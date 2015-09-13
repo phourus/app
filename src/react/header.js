@@ -47,10 +47,10 @@ let Header = React.createClass({
                 </Link>
                 {AccountStore.authenticated
                   ? <ul>
-                    <li><Link to="myPosts">My Posts</Link></li>
-                    <li><Link to="activity">My Activity</Link></li>
-                    <li><Link to="account">My Account</Link></li>
-                    <li><a href="javascript:void(0)" onClick={AccountActions.logout}>Logout</a></li>
+                    <li><Link to="myPosts">My Posts <i className="fa fa-edit" /></Link></li>
+                    <li><Link to="activity">My Activity <i className="fa fa-bell" /></Link></li>
+                    <li><Link to="account">My Account <i className="fa fa-user" /></Link></li>
+                    <li><a href="javascript:void(0)" onClick={AccountActions.logout}>Logout <i className="fa fa-sign-out" /></a></li>
                   </ul>
                   : false
                 }
