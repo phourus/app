@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, State } = Router;
+let { Link, State, Navigation } = Router;
 let posts = require('../api/posts');
 let moment = require('moment');
 let numeral = require('numeral');
@@ -103,6 +103,7 @@ let Head = React.createClass({
 		if (this.state.mode === 'sort') {
 			popup = <Sort {...this.props.params} />
 		}
+		//<button className="fa fa-sort" onClick={this._sort}> Sort</button>
 		return (
 			<div className="heading">
 				<div className="keywords">
@@ -112,8 +113,7 @@ let Head = React.createClass({
 				<div className="refine">
 					<Context {...this.props.context} />
 					<div className="toggles">
-						<button className="fa fa-filter" onClick={this._filter}> Filter</button>
-						<button className="fa fa-sort" onClick={this._sort}> Sort</button>
+						<button className="fa fa-filter" onClick={this._filter}> Advanced</button>
 					</div>
 				</div>
 				{popup}
@@ -141,6 +141,42 @@ let Head = React.createClass({
 });
 
 let Context = React.createClass({
+	mixins: [Navigation],
+	render: function () {
+		let classes = {
+			phourus: "fa fa-flag",
+			organizations: "fa fa-users",
+			users: "fa fa-user"
+		};
+		if (!this.props.type) {
+			classes.phourus += ' selected';
+		}
+		if (this.props.type === 'userPosts') {
+			classes.users += ' selected';
+		}
+		if (this.props.type === 'orgPosts') {
+			classes.organizations += ' selected';
+		}
+		return (
+			<div className="context">
+				<button className={classes.phourus} onClick={this._phourus}> Phourus</button>
+				<button className={classes.organizations} onClick={this._organizations}> Orgs</button>
+				<button className={classes.users} onClick={this._users}> Users</button>
+			</div>
+		);
+	},
+	_phourus: function () {
+		this.context.router.transitionTo("stream");
+	},
+	_organizations: function () {
+		this.context.router.transitionTo("orgPosts", {id: 1});
+	},
+	_users: function () {
+		this.context.router.transitionTo("userPosts", {id: 1});
+	}
+});
+
+let _Context = React.createClass({
 	getDefaultProps: function () {
 		return {
 			id: null,

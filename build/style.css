@@ -1364,7 +1364,7 @@ div.alerts button {
   display: block;
   font-size: 0.6em;
   float: right;
-  color: #ccc;
+  color: #777;
   text-align: right;
 }
 .postItem > a.edit:hover {
@@ -2195,9 +2195,10 @@ div.alerts button {
 }
 .search .heading {
   top: 40px;
-  width: 90%;
-  padding: 2% 5%;
   z-index: 1;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 .search .heading .keywords {
   max-width: 100%;
@@ -2218,10 +2219,11 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
   max-width: none;
+  box-sizing: border-box;
   margin: 0px;
-  padding: 0px;
+  padding: 4px;
   height: 100%;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 .search .heading .keywords button {
   width: 16.66666667%;
@@ -2233,6 +2235,9 @@ div.alerts button {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
+}
+.search .heading .keywords button span {
+  display: none;
 }
 .search .heading .filter,
 .search .heading .sortby {
@@ -2296,7 +2301,6 @@ div.alerts button {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  margin-top: 10px;
 }
 .search .heading .refine:before,
 .search .heading .refine:after {
@@ -2306,21 +2310,47 @@ div.alerts button {
 .search .heading .refine:after {
   clear: both;
 }
+.search .heading .refine .context {
+  text-align: left;
+  border-left: solid 1px #ddd;
+  box-sizing: border-box;
+}
+.search .heading .refine .context button {
+  width: 80px;
+  height: 40px;
+  background-color: #fafafa;
+  border-bottom: solid 1px #ddd;
+  border-right: solid 1px #ddd;
+  border-left: none;
+  border-top: none;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 0.8em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+.search .heading .refine .context button:hover {
+  background-color: #fafafa;
+  color: #3498db;
+}
+.search .heading .refine .context button.selected {
+  height: 44px;
+  border-bottom: solid 4px #5faee3;
+  background-color: #fff;
+  color: #217dbb;
+}
 .search .heading .refine .toggles {
   text-align: left;
 }
 .search .heading .refine .toggles button {
-  width: 80px;
+  background: transparent;
+  border: none;
   height: 40px;
-  background-color: #fafafa;
-  border: solid 1px #bbb;
   cursor: pointer;
-  color: #bbb;
+  color: #777;
   font-size: 0.8em;
-  margin-left: 10px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
+  text-align: right;
 }
 .search .heading .refine .toggles button:hover {
   background-color: #fafafa;
@@ -2413,13 +2443,21 @@ div.alerts button {
   display: block;
 }
 @media (min-width: 500px) {
+  .search .heading {
+    width: 90%;
+    padding: 2% 5%;
+  }
+  .search .heading .keywords button span {
+    display: inline;
+    font-size: 0.8em;
+  }
   .search .heading .refine .context {
-    width: 50%;
+    width: 75%;
     display: inline-block;
     vertical-align: top;
   }
   .search .heading .refine .toggles {
-    width: 50%;
+    width: 25%;
     display: inline-block;
     vertical-align: top;
     text-align: right;
@@ -2645,7 +2683,7 @@ body {
   letter-spacing: 0px;
 }
 div.spacer {
-  height: 40px;
+  height: 50px;
 }
 /** HEADINGS **/
 h1 {

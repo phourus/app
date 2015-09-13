@@ -8,12 +8,13 @@
     margin-top: 100px;
     margin-bottom: 100px;
   }
-  
+
   .heading {
     top: 40px;
-    width: 90%;
-    padding: 2% 5%;
     z-index: 1;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 
     .keywords {
       .Row(100%);
@@ -22,10 +23,11 @@
       input {
         .Cols(10);
         max-width: none;
+        box-sizing: border-box;
         margin: 0px;
-        padding: 0px;
+        padding: 4px;
         height: 100%;
-        font-size: 1.5em;
+        font-size: 1.2em;
       }
 
       button {
@@ -34,6 +36,10 @@
         padding: 0px;
         height: 100%;
         .rounded(0px);
+
+        span {
+          display: none;
+        }
       }
     }
 
@@ -94,25 +100,50 @@
 
     .refine {
       .Row(100%);
-      margin-top: 10px;
 
       .context {
+        text-align: left;
+        border-left: solid 1px #ddd;
+        box-sizing: border-box;
 
+        button {
+          width: 80px;
+          height: 40px;
+          background-color: @off-white;
+          border-bottom: solid 1px #ddd;
+          border-right: solid 1px #ddd;
+          border-left: none;
+          border-top: none;
+          cursor: pointer;
+          color: #aaa;
+          font-size: 0.8em;
+          .rounded(2px);
+
+          &:hover {
+            background-color: @off-white;
+            color: @blue;
+          }
+
+          &.selected {
+            height: 44px;
+            border-bottom: solid 4px @blue-light;
+            background-color: #fff;
+            color: @blue-dark;
+          }
+        }
       }
 
       .toggles {
         text-align: left;
 
         button {
-          width: 80px;
+          background: transparent;
+          border: none;
           height: 40px;
-          background-color: @off-white;
-          border: solid 1px #bbb;
           cursor: pointer;
-          color: #bbb;
+          color: #777;
           font-size: 0.8em;
-          margin-left: 10px;
-          .rounded(2px);
+          text-align: right;
 
           &:hover {
             background-color: @off-white;
@@ -322,13 +353,26 @@
 @media (min-width: 500px) {
   .search {
     .heading {
+      width: 90%;
+      padding: 2% 5%;
+
+      .keywords {
+        button {
+
+          span {
+            display: inline;
+            font-size: 0.8em;
+          }
+        }
+      }
+
       .refine {
         .context {
-          .Cols(6);
+          .Cols(9);
         }
 
         .toggles {
-          .Cols(6);
+          .Cols(3);
           text-align: right;
         }
       }
