@@ -144,11 +144,7 @@ let Post = React.createClass({
 				: <h2 className="title"><Link to="post" params={{id: this.state.post.id}}>{this.state.post.title}</Link></h2>
 				}
 				<div className="details">
-					<div className="pic">
-						<Link to="userPosts" params={{id: this.state.user.id}}>
-								<img src={`/assets/avatars/${this.state.user.img || 'default'}.jpg`} />
-						</Link>
-					</div>
+					<Pic id={this.state.user.id} img={this.state.user.img} />
 					<div className="basic">
 						<span>By <Link to="userPosts" params={{id: this.state.user.id}}>{this.state.user.first} {this.state.user.last} </Link></span>
 						&bull;
@@ -203,6 +199,35 @@ let Post = React.createClass({
 		this.setState({saving: true});
 		Actions.save();
 	}
+});
+
+let Pic = React.createClass({
+  getInitialState: function () {
+    return {
+			id: 0,
+      img: '/assets/avatars/default.jpg',
+      default: '/assets/avatars/default.jpg',
+      upload: 0
+    }
+  },
+  componentWillReceiveProps: function (data) {
+    if (data.img) {
+      data.upload = this.state.upload + 1;
+      this.setState(data);
+    }
+  },
+  render: function () {
+    return (
+      <div className="pic">
+				<Link to="userPosts" params={{id: this.state.id}}>
+        	<img src={this.state.img + '?upload=' + this.state.upload} onClick={this._upload} onError={this._default} />
+				</Link>
+      </div>
+    );
+  },
+  _default: function () {
+    this.setState({img: this.state.default});
+  }
 });
 
 let Orgs = React.createClass({
@@ -1107,11 +1132,7 @@ Comments.Comment = React.createClass({
     */
     return (
       <div className="comment" id={this.props.comment.id}>
-        <div className="pic">
-					<Link to="userPosts" params={{id: this.props.user.id}}>
-						<img src={`/assets/avatars/${this.props.user.img || "default"}.jpg`} />
-					</Link>
-        </div>
+				<Pic id={this.props.user.id} img={this.props.user.img} />
         <div className="content">
 					<Link to="userPosts" params={{id: this.props.user.id}} className="username">
 						{this.props.user.first} {this.props.user.last} ({this.props.user.influence})
