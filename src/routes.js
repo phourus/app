@@ -30,7 +30,9 @@ module.exports = (
     <Route name="reset" handler={View401.Reset} />
     <Route name="request" handler={View401.Request} />
     <Route name="register" handler={View401.Register} />
-    <Route name="activity" path="activity" handler={Activity} />
+    <Route name="activity" handler={Activity} />
+    <Route name="notifications" handler={Activity} />
+    <Route name="history" handler={Activity} />
     <Route name="leaders" handler={Leaders}>
       <DefaultRoute handler={Leaders.Posts} />
       <Route name="topPosts" path="posts" handler={Leaders.Posts} />

@@ -30,7 +30,6 @@ let Account = React.createClass({
     if (Store.authenticated === true) {
       return (
         <div className="account">
-          <Link to="activity" className="button gold toggle"><i className="fa fa-bell" /> My Activity</Link>
           <h1>My Account</h1>
           <div className="heading">
             <Pic img={this.state.user.img} />
