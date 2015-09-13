@@ -3,6 +3,8 @@ var router = require('express').Router();
 var orgs = require('../models/orgs');
 var members = require('../models/members');
 
+var s3 = require('../s3');
+
 router.get('/:id', (req, res) => {
   var id = req.params.id;
   orgs.single(id)
@@ -49,6 +51,26 @@ router.post('', (req, res) => {
     res.send(500);
   });
 });
+
+router.post('/:id/pic', (req, res) => {
+  if (!req.user_id) {
+    return res.send(401);
+  }
+  var id = req.params.id;
+  var body = new Buffer(req.body, 'base64');
+  s3('organizations', id, body)
+  .then(function (data) {
+    return orgs.save(id, {img: data.Location})
+    .then(data => {
+      res.send(200);
+    });
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.send(500);
+  });
+});
+
 router.put('/:id', (req, res) => {
   var id = req.params.id;
   var model = req.body;

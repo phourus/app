@@ -746,8 +746,15 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
 }
+.admin .heading .pic .uploader {
+  position: absolute;
+  left: -9999px;
+}
 .admin .heading .pic img {
-  width: 90%;
+  width: 95%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 }
 .admin .heading .basic {
   width: 75%;

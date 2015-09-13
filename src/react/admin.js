@@ -4,6 +4,7 @@ let { RouteHandler, Link, State } = Router;
 
 let Store = require('../stores/admin');
 let Actions = require('../actions/admin');
+let ImageUploader = require('../pic');
 
 let Admin = React.createClass({
   mixins: [State],
@@ -55,12 +56,14 @@ let Admin = React.createClass({
     this.unsubscribeMembers = Store.Members.listen(data => {
       this.setState({members: data});
     });
-    Actions.single(1);
-    Actions.Members.collection(1);
+    this._route();
   },
   componentWillUnmount: function () {
     this.unsubscribe();
     this.unsubscribeMembers();
+  },
+  componentWillReceiveProps: function () {
+    this._route();
   },
   render: function () {
     return (
@@ -70,6 +73,13 @@ let Admin = React.createClass({
         <RouteHandler {...this.state} />
       </div>
     );
+  },
+  _route: function () {
+    let id = this.getParams().id || null;
+    if (id) {
+      Actions.single(id);
+      Actions.Members.collection(id);
+    }
   }
 });
 
@@ -77,7 +87,7 @@ let Heading = React.createClass({
   render: function () {
     return (
       <div className="heading">
-        <Pic {...this.props} />
+        <Pic id={this.props.org.id} img={this.props.org.img} />
         <Basic {...this.props} />
       </div>
     );
@@ -85,14 +95,57 @@ let Heading = React.createClass({
 });
 
 let Pic = React.createClass({
+  getInitialState: function () {
+    return {
+      img: '/assets/avatars/default.jpg',
+      default: '/assets/avatars/default.jpg',
+      upload: 0
+    }
+  },
+  componentDidMount: function () {
+    this.uploader = document.getElementById('uploader');
+  },
+  componentWillReceiveProps: function (data) {
+    if (data.img) {
+      data.upload = this.state.upload + 1;
+      this.setState(data);
+    }
+  },
   render: function () {
     return (
       <div className="pic">
-        <Link to="user" params={{id: this.props.org.id}}>
-          <img src={`/assets/avatars/${this.props.org.img || 'default'}.jpg`} />
-        </Link>
+        <input id="uploader" type="file" name="uploader" className="uploader" />
+        <img src={this.state.img + '?upload=' + this.state.upload} onClick={this._upload} onError={this._default} />
       </div>
     );
+  },
+  _upload: function (e) {
+    var id = this.state.id;
+    this.uploader.click();
+    var uploader = new ImageUploader({
+      inputElement: this.uploader,
+      uploadUrl: '/rest/orgs/' + id + '/pic',
+      headers: {
+        "Authorization": require('../token').get()
+      },
+      onProgress: function (event) {
+        // event.done, event.total
+      },
+      onFileComplete: function (event, file) {
+        // file.fileName, event.target.status
+      },
+      onComplete: function (event) {
+        Actions.single(id);
+        // event.done, event.total
+      },
+      maxWidth: 400,
+      quality: 1,
+      //timeout: 5000,
+      debug : true
+    });
+  },
+  _default: function () {
+    this.setState({img: this.state.default});
   }
 });
 
