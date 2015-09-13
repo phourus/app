@@ -39,12 +39,6 @@ let Header = React.createClass({
                   Posts
                 </Link>
               </li>
-              <li className="create">
-                <a href="javascript: void(0)" onClick={this._create}>
-                  <i className="fa fa-pencil" />
-                  Create
-                </a>
-              </li>
               <li className="me">
                 <Link to="activity" className="me">
                   <i className="fa fa-user" />
@@ -60,6 +54,12 @@ let Header = React.createClass({
                   </ul>
                   : false
                 }
+              </li>
+              <li className="create">
+                <a href="javascript: void(0)" onClick={this._create}>
+                  <i className="fa fa-pencil" />
+                  Create
+                </a>
               </li>
             </ul>
           </nav>

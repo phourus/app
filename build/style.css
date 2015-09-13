@@ -2543,7 +2543,6 @@ header nav > ul > li .fa {
   font-size: 2em;
   margin-top: 10px;
   margin-bottom: 12px;
-  border-right: solid 1px #1e2f40;
 }
 header nav > ul > li a {
   color: #eee;
@@ -2555,7 +2554,7 @@ header nav > ul > li a span {
   display: block;
 }
 header nav > ul > li a:hover {
-  color: #444;
+  color: #aaa;
 }
 header nav > ul > li.leaders:hover {
   color: #ed0303;
@@ -2565,9 +2564,19 @@ header nav > ul > li.posts:hover {
   color: #217dbb;
   border-bottom: solid 4px #5faee3;
 }
+header nav > ul > li.create {
+  background-color: #658c00;
+}
+header nav > ul > li.create span,
+header nav > ul > li.create i {
+  color: #fff;
+}
 header nav > ul > li.create:hover {
-  color: #658c00;
   border-bottom: solid 4px #9cd900;
+}
+header nav > ul > li.create:hover span,
+header nav > ul > li.create:hover i {
+  color: #eee;
 }
 header nav > ul > li.me:hover {
   color: #ecb010;

@@ -57,10 +57,8 @@ header {
 
 				.fa {
 					font-size: 2em;
-					border-right: solid 1px @theme-dark;
 					margin-top: 10px;
 					margin-bottom: 12px;
-					border-right: solid 1px @theme-dark;
 				}
 
 				a {
@@ -75,7 +73,7 @@ header {
 				}
 
 				a:hover {
-					color: #444;
+					color: #aaa;
 				}
 
 				&.leaders:hover {
@@ -88,10 +86,23 @@ header {
 					border-bottom: solid 4px @blue-light;
 				}
 
-				&.create:hover {
-					color: @green-dark;
-					border-bottom: solid 4px @green-light;
+				&.create {
+					background-color: @green-dark;
+
+					span, i {
+						color: #fff;
+					}
+
+					&:hover {
+						border-bottom: solid 4px @green-light;
+
+						span, i {
+							color: #eee;
+						}
+					}
 				}
+
+
 
 				&.me:hover {
 					color: @gold;
