@@ -55,14 +55,17 @@ input {
     border: none;
     background: transparent;
   }
+
+  &[disabled=disabled], &:disabled {
+    background-color: #eee;
+    color: #aaa;
+    font-style: italic;
+  }
 }
 
 textarea {
   padding: 4px;
   height: 360px;
-  background-color: @form-background;
-  border: solid 1px @form-border;
-  color: @theme-dark;
 }
 
 select {

@@ -11,13 +11,11 @@ let Admin = React.createClass({
   getInitialState: function () {
     return {
       org: {
-        id: 1,
-        img: 1,
-        name: "ABC Company",
-        address: {
-          city: "Santa Monica",
-          state: "CA"
-        },
+        id: 0,
+        img: null,
+        name: "",
+        type: "",
+        address: {},
       },
       changes: {},
       members: [],
@@ -154,8 +152,12 @@ let Basic = React.createClass({
     let address = this.props.org.address || {};
     return (
       <div className="basic">
-        <div>{this.props.org.name}</div>
-        <div>{address.city}, {address.state}</div>
+        <div className="name">{this.props.org.name}</div>
+        <div className={this.props.org.type + " type"}>{this.props.org.type.toUpperCase()}</div>
+        {address.city || address.state ? <div>{address.city}{address.city && address.state ? ", " : ""}{address.state}</div> : false}
+        {this.props.org.website ? <div><a href={this.props.org.website} target="_blank">{this.props.org.website}</a></div> : false}
+        {this.props.org.phone ? <div>{this.props.org.phone}</div> : false}
+        {this.props.org.email ? <div><a href={"mailto:" + this.props.org.email + "&Subject=Phourus"}>{this.props.org.email}</a></div> : false}
       </div>
     );
   }
@@ -163,16 +165,58 @@ let Basic = React.createClass({
 
 let Tabs = React.createClass({
     mixins: [Router.Navigation, Router.State],
-    getInitialState: function () {
-      return {
-        id: 3,
-        details: 70,
-        users: 142,
-        pending: 11
-      }
-    },
     render: function () {
       let view = this.context.router.getCurrentRoutes()[2].name;
+      let categories = this._categories();
+      let details = this._details();
+      let users = this._users();
+      return (
+        <div className="tabs">
+          <div onClick={this._select.bind(this, 'details')} className={'details' === view ? 'selected' : ''}>
+            <div className="number">{details}%</div>
+            <div className="label">Details</div>
+          </div>
+          <div onClick={this._select.bind(this, 'users')} className={'users' === view ? 'selected' : ''}>
+            <div className="number">{users.approved}<span className="pending">{users.pending}</span></div>
+            <div className="label">Users</div>
+          </div>
+          <div onClick={this._select.bind(this, 'categories')} className={'categories' === view ? 'selected' : ''}>
+            <div className="number">{categories.primary}/{categories.subcategories}</div>
+            <div className="label">Categories</div>
+          </div>
+          <div onClick={this._select.bind(this, 'teams')} className={'teams' === view ? 'selected' : ''}>
+            <div className="number">0</div>
+            <div className="label">Teams</div>
+          </div>
+        </div>
+      )
+    },
+    _select: function (id) {
+      this.transitionTo(id, {id: this.props.org.id});
+    },
+    _details: function () {
+      // swap 'name' with 'category' when categories are determined
+      let notNull = ['name', 'email', 'phone', 'fax', 'website', 'people', 'video', 'channel', 'contact', 'about'].filter((key) => {
+        if (this.props.org[key]) {
+          return true;
+        }
+        return false;
+      });
+      return notNull.length * 10;
+    },
+    _users: function () {
+      let approved = this.props.members.filter((obj) => {
+        if (obj.approved) {
+          return true;
+        }
+        return false;
+      });
+      return  {
+        approved: approved.length,
+        pending: (this.props.members.length - approved.length)
+      };
+    },
+    _categories: function () {
       let cats = this.props.categories;
       let countCat = [cats.green.length, cats.blue.length, cats.red.length, cats.gold.length]
       .reduce((prev, current, index, elements) => {
@@ -198,29 +242,10 @@ let Tabs = React.createClass({
       .reduce((prev, current, index, elements) => {
         return current + prev;
       });
-      return (
-        <div className="tabs">
-          <div onClick={this._select.bind(this, 'details')} className={'details' === view ? 'selected' : ''}>
-            <div className="number">{this.state.details}%</div>
-            <div className="label">Details</div>
-          </div>
-          <div onClick={this._select.bind(this, 'users')} className={'users' === view ? 'selected' : ''}>
-            <div className="number">{this.state.users}<span className="pending">{this.state.pending}</span></div>
-            <div className="label">Users</div>
-          </div>
-          <div onClick={this._select.bind(this, 'categories')} className={'categories' === view ? 'selected' : ''}>
-            <div className="number">{countCat}/{countSub}</div>
-            <div className="label">Categories</div>
-          </div>
-          <div onClick={this._select.bind(this, 'apps')} className={'apps' === view ? 'selected' : ''}>
-            <div className="number">0</div>
-            <div className="label">Apps</div>
-          </div>
-        </div>
-      )
-    },
-    _select: function (id) {
-      this.transitionTo(id, {id: this.state.id});
+      return {
+        primary: countCat,
+        subcategories: countSub
+      }
     }
 });
 
@@ -232,7 +257,6 @@ Admin.Details = React.createClass({
     });
     return (
       <div className="info">
-        <h2>Organization Details</h2>
         <div id="user_basic">
           <label>Shortname
             <input className={this.props.changes.shortname ? 'changed' : ''} type="text" value={org.shortname} disabled="true" />
@@ -272,11 +296,11 @@ Admin.Details = React.createClass({
               <option value="">--Please select a category--</option>
             </select>
           </label>
-          <label>About
+          <label className="full">About
             <textarea className={this.props.changes.about ? 'changed' : ''} value={org.about} onChange={this._about}></textarea>
           </label>
+          <button className="button green" onClick={this._save}>Save Changes</button>
         </div>
-        <button className="button green" onClick={this._save}>Save Changes</button>
       </div>
     );
   },
@@ -300,7 +324,6 @@ Admin.Users = React.createClass({
   render: function () {
     return (
       <div>
-        <h2>Manage Users</h2>
         {this.props.members.map(member => {
           return (
             <div>
@@ -337,7 +360,6 @@ Admin.Categories = React.createClass({
   render: function () {
     return (
       <div>
-        <h2>Manage Categories</h2>
         {Object.keys(this.props.categories).map(element => {
           let categories = this.props.categories[element];
           return (
@@ -363,12 +385,12 @@ Admin.Categories = React.createClass({
   }
 });
 
-Admin.Apps = React.createClass({
+Admin.Teams = React.createClass({
   render: function () {
     return (
       <div>
         <h2>Coming Soon</h2>
-        <p>Would you like to expand the capabilities of your Organization account? Apps can help you do just that! <a href="mailto:info@phourus.com&Subject=Apps">Contact us for more information.</a></p>
+        <p>Would you like to create smaller groups within your Organization? Teams can help you do just that! <a href="mailto:info@phourus.com&Subject=Teams">Contact us for more information.</a></p>
       </div>
     );
   }

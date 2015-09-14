@@ -67,12 +67,15 @@ input[type=checkbox] {
   border: none;
   background: transparent;
 }
+input[disabled=disabled],
+input:disabled {
+  background-color: #eee;
+  color: #aaa;
+  font-style: italic;
+}
 textarea {
   padding: 4px;
   height: 360px;
-  background-color: #f6f7f9;
-  border: solid 1px #e4e5e6;
-  color: #1e2f40;
 }
 select {
   height: 36px;
@@ -839,10 +842,16 @@ div.alerts button {
     vertical-align: top;
   }
 }
+.admin .heading {
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
 .admin .heading .pic {
-  width: 25%;
+  width: 50%;
   display: inline-block;
   vertical-align: top;
+  box-sizing: border-box;
+  padding-right: 10px;
 }
 .admin .heading .pic .uploader {
   position: absolute;
@@ -853,11 +862,35 @@ div.alerts button {
   margin: 0;
   padding: 0;
   cursor: pointer;
+  border: solid 4px #999;
 }
 .admin .heading .basic {
-  width: 75%;
+  width: 50%;
   display: inline-block;
   vertical-align: top;
+}
+.admin .heading .basic .name {
+  font-size: 1.5em;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  margin-bottom: 10px;
+}
+.admin .heading .basic .type {
+  font-weight: bold;
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+.admin .heading .basic .type.company {
+  color: #658c00;
+}
+.admin .heading .basic .type.school {
+  color: #217dbb;
+}
+.admin .heading .basic .type.government {
+  color: #bb0202;
+}
+.admin .heading .basic .type.group {
+  color: #bc8c0d;
 }
 .admin ul {
   margin: 0;
@@ -892,6 +925,9 @@ div.alerts button {
   width: 25%;
   font-size: 0.5em;
 }
+.admin .tabs > div .label {
+  font-size: 1.5em;
+}
 .admin .info > div {
   max-width: 96%;
   width: 100%;
@@ -915,9 +951,33 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
 }
+.admin label.full {
+  width: 66.66666667%;
+  display: inline-block;
+  vertical-align: top;
+}
 .admin label input,
 .admin label select {
   display: block;
+}
+.admin label textarea {
+  width: 100%;
+  height: 200px;
+}
+@media (min-width: 500px) {
+  .admin .heading .pic {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .admin .heading .basic {
+    width: 75%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .admin .heading .basic .name {
+    font-size: 2em;
+  }
 }
 @media (min-width: 800px) {
   .admin .tabs > div {

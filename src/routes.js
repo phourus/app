@@ -56,7 +56,7 @@ module.exports = (
       <Route name="details" path="details" handler={Admin.Details} />
       <Route name="users" path="users" handler={Admin.Users} />
       <Route name="categories" path="categories" handler={Admin.Categories} />
-      <Route name="apps" path="apps" handler={Admin.Apps} />
+      <Route name="teams" path="teams" handler={Admin.Teams} />
     </Route>
     <Route name="user" path="user/:id" handler={Profile}>
       <DefaultRoute handler={Profile.About} />

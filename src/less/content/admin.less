@@ -1,9 +1,13 @@
 .admin {
 
   .heading {
+    padding: 10px 0;
+    margin-bottom: 20px;
 
     .pic {
-      .Cols(3);
+      .Cols(6);
+      box-sizing: border-box;
+      padding-right: 10px;
 
       .uploader {
         position: absolute;
@@ -15,11 +19,37 @@
         margin: 0;
         padding: 0;
         cursor: pointer;
+        border: solid 4px #999;
       }
     }
 
     .basic {
-      .Cols(9);
+      .Cols(6);
+
+      .name {
+        font-size: 1.5em;
+        font-family: @font-serif;
+        margin-bottom: 10px;
+      }
+      .type {
+        font-weight: bold;
+        color: #555;
+        font-size: 1em;
+        margin-bottom: 10px;
+
+        &.company {
+          color: @green-dark;
+        }
+        &.school {
+          color: @blue-dark;
+        }
+        &.government {
+          color: @red-dark;
+        }
+        &.group {
+          color: @gold-dark;
+        }
+      }
     }
   }
 
@@ -58,6 +88,10 @@
   .tabs > div {
     width: 25%;
     font-size: 0.5em;
+
+    .label {
+      font-size: 1.5em;
+    }
   }
 
   .info {
@@ -75,14 +109,44 @@
     font-size: 0.8em;
     .Cols(4);
 
+    &.full {
+      .Cols(8);
+    }
+
     input, select {
       display: block;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .admin {
+
+    .heading {
+
+      .pic {
+        .Cols(3);
+      }
+
+      .basic {
+        .Cols(9);
+
+        .name {
+          font-size: 2em;
+        }
+      }
     }
   }
 }
 
 @media (min-width: 800px) {
   .admin {
+
     .tabs > div {
       font-size: 1em;
     }
