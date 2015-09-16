@@ -28,6 +28,13 @@
     font-size: 0.8em;
     text-transform: uppercase;
     margin-bottom: 20px;
+
+    select {
+      width: 40%;
+      margin-right: 20px;
+      max-width: 160px;
+      display: inline-block;
+    }
   }
 
   button.close {
@@ -119,27 +126,6 @@
     }
   }
 
-  .meta > .types {
-
-    > div {
-      display: none;
-      background-color: none;
-
-      &.selected {
-        display: block;
-
-        label {
-          display: inline-block;
-          width: 100px;
-
-        }
-        input, select {
-          display: inline-block;
-          max-width: 100px;
-        }
-      }
-    }
-  }
   .type.blog, .type.event { background-color: @green; color: #fff; }
   .type.subject, .type.question { background-color: @blue; color: #fff; }
   .type.debate, .type.poll { background-color: @red; color: #fff; }
@@ -163,12 +149,22 @@
           font-size: 1.5em;
           line-height: 1.5em;
           font-weight: normal;
+          text-transform: capitalize;
         }
 
         p {
-          margin: 0px;
+          margin: 20px 0;
           padding: 0px;
-          font-size: 0.9em;
+          font-size: 0.8em;
+        }
+
+        label {
+          width: 100%;
+          max-width: 300px;
+          color: #333;
+          font-size: 1.2em;
+          font-weight: bold;
+          text-align: left;
         }
 
         > div {
@@ -591,7 +587,8 @@
         .Cols(1, 5);
         margin: 20px 1% 20px 0;
         box-sizing: border-box;
-        height: 140px;
+        padding: 20px;
+
       }
     }
     .details {

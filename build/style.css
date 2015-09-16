@@ -1509,6 +1509,12 @@ div.alerts button {
   text-transform: uppercase;
   margin-bottom: 20px;
 }
+.postItem .categories select {
+  width: 40%;
+  margin-right: 20px;
+  max-width: 160px;
+  display: inline-block;
+}
 .postItem button.close {
   background: transparent;
   background-color: #555;
@@ -1587,22 +1593,6 @@ div.alerts button {
   margin: 12px 2px 0 0;
   text-align: right;
 }
-.postItem .meta > .types > div {
-  display: none;
-  background-color: none;
-}
-.postItem .meta > .types > div.selected {
-  display: block;
-}
-.postItem .meta > .types > div.selected label {
-  display: inline-block;
-  width: 100px;
-}
-.postItem .meta > .types > div.selected input,
-.postItem .meta > .types > div.selected select {
-  display: inline-block;
-  max-width: 100px;
-}
 .postItem .type.blog,
 .postItem .type.event {
   background-color: #8abf00;
@@ -1653,11 +1643,20 @@ div.alerts button {
   font-size: 1.5em;
   line-height: 1.5em;
   font-weight: normal;
+  text-transform: capitalize;
 }
 .postItem > .types > div p {
-  margin: 0px;
+  margin: 20px 0;
   padding: 0px;
-  font-size: 0.9em;
+  font-size: 0.8em;
+}
+.postItem > .types > div label {
+  width: 100%;
+  max-width: 300px;
+  color: #333;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: left;
 }
 .postItem > .types > div > div.selected {
   display: block;
@@ -2085,7 +2084,7 @@ div.alerts button {
     vertical-align: top;
     margin: 20px 1% 20px 0;
     box-sizing: border-box;
-    height: 140px;
+    padding: 20px;
   }
   .postItem .details .pic {
     width: 25%;

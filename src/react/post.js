@@ -122,21 +122,14 @@ let Post = React.createClass({
 					? <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
 					: false
 				}
+				{this.props.owner && this.props.context.type === 'edit'
+					? <div className="actions">
+							{this.props.context.type === 'edit' && this.props.owner ? <button className="button green" onClick={this._update} disabled={this.props.saving}>{this.props.saving ? 'Saving' : 'Save'}</button> : false}
+						</div>
+					: false
+				}
 				<div className={`type ${this.state.post.type}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
-				<div className="categories">
-					{this.state.post.category
-						? <a href="javascript:void()">{this.state.post.category}</a>
-						: false
-					}
-					{this.state.post.category && this.state.post.subcategory
-						? " >> "
-						: false
-					}
-					{this.state.post.subcategory
-						? <a href='javascript:void(0)'>{this.state.post.subcategory}</a>
-						: false
-					}
-				</div>
+				<Categories {...this.state} context={this.props.context} owner={this.props.owner} />
 				{types}
 				{this.props.context.type === 'edit' && this.props.owner
 					? <select ref="privacy" value={this.state.post.privacy} onChange={this._privacy}>
@@ -202,6 +195,58 @@ let Post = React.createClass({
 	}
 });
 
+let Categories = React.createClass({
+	render: function () {
+		let type = tax[this.props.post.type] || {};
+		if (this.props.owner && this.props.context.type === 'edit') {
+			let cats = type.category || [];
+			let subs = type[this.props.post.category] || false;
+			return (
+				<div className="categories">
+					<select onChange={this._category} value={this.props.post.category}>
+						<option value="">--Please select a category--</option>
+						{cats.map((cat) => {
+							return <option value={cat.value}>{cat.label}</option>
+						})}
+					</select>
+					{this.props.post.category && subs
+						?
+							<select onChange={this._subcategory} value={this.props.post.subcategory}>
+								<option value="">--Please select a subcategory--</option>
+								{subs.map((cat) => {
+									return <option value={cat.value}>{cat.label}</option>
+								})}
+							</select>
+						: false
+					}
+				</div>
+			);
+		}
+		return (
+			<div className="categories">
+				{this.props.post.category
+					? <a href="javascript:void()">{this.props.post.category}</a>
+					: false
+				}
+				{this.props.post.category && this.props.post.subcategory
+					? " >> "
+					: false
+				}
+				{this.props.post.subcategory
+					? <a href='javascript:void(0)'>{this.props.post.subcategory}</a>
+					: false
+				}
+			</div>
+		);
+	},
+	_category: function (e) {
+		Actions.change('category', e.currentTarget.value);
+	},
+	_subcategory: function (e) {
+		Actions.change('subcategory', e.currentTarget.value);
+	}
+});
+
 let Details = React.createClass({
 	render: function () {
 		return (
@@ -213,9 +258,6 @@ let Details = React.createClass({
 					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
 					<Meta post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				</div>
-				<div className="actions">
-					{this.props.context.type === 'edit' && this.props.owner ? <button className="button green" onClick={this._update} disabled={this.props.saving}>{this.props.saving ? 'Saving' : 'Save'}</button> : false}
 				</div>
 			</div>
 		);
@@ -296,7 +338,7 @@ let Types = React.createClass({
 	  let type = this.props.post.type;
 	  let classes = {};
 		for (var i in Object.keys(tax)) {
-			var key = Object.keys(tax)[i].slice(0, -1);
+			var key = Object.keys(tax)[i];
 			classes[key] = key;
 			if (type === key) {
 				classes[key] += ' selected';
@@ -326,7 +368,6 @@ let Types = React.createClass({
 			<div className="types">
 				{['blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'].map((item) => {
 					let fields = <Meta {...this.props} context={this.props.context} owner={this.props.owner} />
-console.log(item, type);
 					return (<div className={classes[item]} onClick={this._select.bind(this, item)}>
 						<strong><i className={"fa fa-" + icons[item]} /> {item}</strong>
 						{item === type
@@ -392,79 +433,79 @@ let Meta = React.createClass({
 				classes[key] += ' selected';
 			}
 		}
-		let fields = {
-			blog: ['positive'],
-			event: ['date', 'address'],
-			subject: ['difficulty'],
-			question: ['difficulty'],
-			debate: ['scope', 'zip'],
-			poll: ['scope', 'zip'],
-			quote: [''],
-			belief: ['author']
-		};
-		let inputs = {
-			positive: (<label>Positive?
+		let	positive = (<label>Positive:
 					{this.props.context.type === 'edit' && this.props.owner
-						? <input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this._positive} />
+						? <input ref="positive" type="checkbox" checked={this.props.post.positive ? true : false} onChange={this._positive} />
 						: <strong>{this.props.post.positive}</strong>
 					}
-				</label>),
-			date: (<label>Date
+				</label>);
+		let	date = (<label>Date:
 					{this.props.context.type === 'edit' && this.props.owner
 						? <input ref="date" value={this.props.post.date} onChange={this._date} />
 						: <strong>{this.props.post.date}</strong>
 					}
-				</label>),
-			address: (<label>Address
+				</label>);
+		let	address = (<label>Address:
 				{this.props.context.type === 'edit' && this.props.owner
 					? <input ref="address" value={this.props.post.address} onChange={this._address} />
 					: <strong>{this.props.post.address}</strong>
 				}
-			</label>),
-			difficulty: (<label>Difficulty:
+			</label>);
+		let	difficulty = (<label>Difficulty:
 				{this.props.context.type === 'edit' && this.props.owner
 					? <select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
-						<option>Easy</option>
-						<option>Medium</option>
-						<option>Hard</option>
+						<option value="easy">Easy</option>
+						<option value="medium">Medium</option>
+						<option value="hard">Hard</option>
 					</select>
 					: <strong>{this.props.post.difficulty}</strong>
 				}
-			</label>),
-			scope: (<label>Scope:
+			</label>);
+		let	scope = (<label>Scope:
 				{this.props.context.type === 'edit' && this.props.owner
 					? <select ref="scope" value={this.props.post.scope} onChange={this._scope}>
-							<option>Local</option>
-							<option>County</option>
-							<option>State</option>
+							<option value="local">Local</option>
+							<option value="county">County</option>
+							<option value="state">State</option>
+							<option value="national">National</option>
+							<option value="international">International</option>
 						</select>
 					: <strong>{this.props.post.scope}</strong>
 				}
-			</label>),
-			zip: (<label>Zip
+			</label>);
+		let	zip = (<label>Zip:
 				{this.props.context.type === 'edit' && this.props.owner
 					? <input ref="zip" value={this.props.post.zip} onChange={this._zip} />
 					: <strong>{this.props.post.zip}</strong>
 				}
-			</label>),
-			author: (<label>Source/Author
+			</label>);
+		let	author = (<label>Source/Author:
 				{this.props.context.type === 'edit' && this.props.owner
 					? <input ref="author" value={this.props.post.author} onChange={this._author} />
 					: <strong>{this.props.post.author}</strong>
 				}
-			</label>)
+			</label>);
+		let fields = {
+			blog: [positive],
+			event: [date, address],
+			subject: [difficulty],
+			question: [difficulty],
+			debate: [scope, zip],
+			poll: [scope, zip],
+			quote: [],
+			belief: [author]
 		};
 		let data = fields[type] || [];
 		return (
 			<div>
 				{data.map((item) => {
-					return inputs[item];
+					return item;
 				})}
 			</div>
 		);
 	},
 	_positive: function (e) {
-		var value = e.currentTarget.value;
+		var value = e.currentTarget.checked;
 		Actions.change('positive', value);
 	},
 	_date: function (e) {

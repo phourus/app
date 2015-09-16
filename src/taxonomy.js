@@ -1,16 +1,16 @@
 "use strict";
-let blogs = {};
-let events = {};
-let subjects = {};
-let debates = {};
-let polls = {};
-let beliefs = {};
+let blog = {};
+let event = {};
+let subject = {};
+let debate = {};
+let poll = {};
+let belief = {};
 let filters = {};
 
 // shared
 let members = [];
 
-subjects.category = [
+subject.category = [
 {label: "English", value:"english"},
 {label: "History", value:"history"},
 {label: "Math", value:"math"},
@@ -21,12 +21,12 @@ subjects.category = [
 {label: "Business", value:"business"}
 ];
 
-subjects.english = [
+subject.english = [
 {label: "Writing", value:"writing"},
 {label: "Literature", value:"literature"}
 ];
 
-subjects.history = [
+subject.history = [
 {label: "Prehistoric", value:"prehistoric"},
 {label: "Ancient", value:"ancient"},
 {label: "Modern", value:"modern"},
@@ -34,7 +34,7 @@ subjects.history = [
 {label: "American", value:"american"}
 ];
 
-subjects.math = [
+subject.math = [
 {label: "Arithmetic", value:"arithemtic"},
 {label: "Algebra", value:"algebra"},
 {label: "Geometry", value:"geometry"},
@@ -43,7 +43,7 @@ subjects.math = [
 {label: "Calculus", value:"calculus"}
 ];
 
-subjects.science = [
+subject.science = [
 {label: "Physics", value:"physics"},
 {label: "Chemistry", value:"chemistry"},
 {label: "Biology", value:"biology"},
@@ -51,13 +51,13 @@ subjects.science = [
 {label: "Computer", value:"computer"}
 ];
 
-subjects.arts = [
+subject.arts = [
 {label: "Art", value:"art"},
 {label: "Music", value:"music"},
 {label: "Theatre", value:"theatre"}
 ];
 
-subjects.trades = [
+subject.trades = [
 {label: "Auto", value:"auto"},
 {label: "Electrician", value:"electrician"},
 {label: "Masonry", value:"masonry"},
@@ -66,14 +66,14 @@ subjects.trades = [
 {label: "Construction", value:"construction"}
 ];
 
-subjects.social = [
+subject.social = [
 {label: "Psychology", value:"psychology"},
 {label: "Health", value:"health"},
 {label: "Government", value:"government"},
 {label: "Economics", value:"economics"}
 ];
 
-subjects.business = [
+subject.business = [
 {label: "Administrative", value:"admin"},
 {label: "Management", value:"management"},
 {label: "Marketing", value:"marketing"},
@@ -83,7 +83,7 @@ subjects.business = [
 /** EVENTS **/
 
 /** BLOGS **/
-blogs.subcategory = [
+blog.subcategory = [
 {label: "Idea", value:"idea"},
 {label: "Fact", value:"fact"},
 {label: "Opinion", value:"opinion"},
@@ -92,22 +92,22 @@ blogs.subcategory = [
 {label: "Humor", value:"humor"}
 ];
 
-blogs.world = [
+blog.world = [
 {label: "Environment", value:"environment"},
 {label: "Economy", value:"economy"},
 {label: "Health", value:"health"},
 {label: "Money", value:"money"}
 ];
 
-blogs.mind = subjects.category;
+blog.mind = subject.category;
 
-blogs.voice = [
+blog.voice = [
 {label: "Rights", value:"rights"},
 {label: "Financial", value:"financial"},
 {label: "Infrastructure", value:"infrastructure"}
 ];
 
-blogs.self = [
+blog.self = [
 {label: "Christianity", value:"christians"},
 {label: "Islam", value:"muslims"},
 {label: "Judaism", value:"jews"},
@@ -120,10 +120,10 @@ blogs.self = [
 {label: "Not Religious", value:"non"}
 ];
 
-debates.category = blogs.voice;
-polls.category = blogs.voice;
+debate.category = blog.voice;
+poll.category = blog.voice;
 
-beliefs.category = blogs.self;
+belief.category = blog.self;
 
 /** MICRO-FILTERS **/
 filters.users = {
@@ -144,8 +144,8 @@ filters.users = {
         {label: "Independent", value:"independent"},
         {label: "Other/No Party", value:"other"}
     ],
-    religion: blogs.self
-}
+    religion: blog.self
+};
 
 members = [
     {label: "1-5", value:"1"},
@@ -174,7 +174,7 @@ filters.companies = {
         {label: "Corporation", value:"corp"}
     ]
     // industry
-}
+};
 
 filters.schools = {
     members: members,
@@ -197,7 +197,7 @@ filters.schools = {
         {label: "Private Education/Tutoring", value:"corp"}
     ]
     // expertise
-}
+};
 
 filters.govs = {
     members: members,
@@ -216,7 +216,7 @@ filters.govs = {
         {label: "Federal", value:"federal"}
     ]
     // specialty
-}
+};
 
 filters.groups = {
     members: members,
@@ -239,16 +239,16 @@ filters.groups = {
         {label: "Private Education/Tutoring", value:"corp"}
     ]
     // focus
-}
+};
 
 module.exports = {
-    blogs: blogs,
-    events: events,
-    subjects: subjects,
-    debates: debates,
-    polls: polls,
-    beliefs: beliefs,
-    quotes: '',
-    questions: '',
+    blog: blog,
+    event: event,
+    subject: subject,
+    debate: debate,
+    poll: poll,
+    belief: belief,
+    quote: belief,
+    question: subject,
     filters: filters
-}
+};
