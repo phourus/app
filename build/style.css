@@ -1504,6 +1504,19 @@ div.alerts button {
 .postItem.selected > a.edit {
   margin-right: 20px;
 }
+.postItem .actions {
+  float: right;
+}
+.postItem .actions button.save,
+.postItem .actions button.delete {
+  height: 30px;
+  font-size: 0.8em;
+  width: 80px;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin-right: 10px;
+}
 .postItem .categories {
   font-size: 0.8em;
   text-transform: uppercase;
@@ -2092,12 +2105,7 @@ div.alerts button {
     vertical-align: top;
   }
   .postItem .details .basic {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .postItem .details .actions {
-    width: 25%;
+    width: 75%;
     display: inline-block;
     vertical-align: top;
   }

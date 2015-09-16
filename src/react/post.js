@@ -124,7 +124,8 @@ let Post = React.createClass({
 				}
 				{this.props.owner && this.props.context.type === 'edit'
 					? <div className="actions">
-							{this.props.context.type === 'edit' && this.props.owner ? <button className="button green" onClick={this._update} disabled={this.props.saving}>{this.props.saving ? 'Saving' : 'Save'}</button> : false}
+							<button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save'}</button>
+							<button className="button red delete inverted"><i className="fa fa-trash" /> Delete</button>
 						</div>
 					: false
 				}
@@ -132,12 +133,12 @@ let Post = React.createClass({
 				<Categories {...this.state} context={this.props.context} owner={this.props.owner} />
 				{types}
 				{this.props.context.type === 'edit' && this.props.owner
-					? <select ref="privacy" value={this.state.post.privacy} onChange={this._privacy}>
+					? <div><strong>Post Privacy</strong><select ref="privacy" value={this.state.post.privacy} onChange={this._privacy}>
 						<option value="private">Private</option>
 						<option value="org">Organization Members only</option>
 						<option value="phourus">Phourus Users only</option>
 						<option value="public">Everyone</option>
-					</select>
+					</select></div>
 					: false
 				}
 				{this.state.post.privacy === 'org' && this.props.context.type === 'edit'
@@ -203,6 +204,7 @@ let Categories = React.createClass({
 			let subs = type[this.props.post.category] || false;
 			return (
 				<div className="categories">
+					<strong>Post Categories</strong><br />
 					<select onChange={this._category} value={this.props.post.category}>
 						<option value="">--Please select a category--</option>
 						{cats.map((cat) => {
