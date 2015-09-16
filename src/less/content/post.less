@@ -24,6 +24,12 @@
     }
   }
 
+  .categories {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
   button.close {
     background: transparent;
     background-color: #555;
@@ -166,7 +172,6 @@
         }
 
         > div {
-          display: none;
 
           &.selected {
             display: block;
@@ -257,7 +262,11 @@
   }
 
   .details {
-    .Cols(8);
+    .Row(100%);
+    background-color: #f7f7f7;
+    padding: 10px;
+    box-sizing: border-box;
+
     .pic {
       .Cols(3);
         img {
@@ -288,8 +297,7 @@
   }
   &.selected .interact {
     margin: 20px 0;
-    border-top: solid 1px #eee;
-    border-bottom: solid 1px #eee;
+    background-color: #f7f7f7;
     padding: 10px 0;
   }
 
@@ -332,13 +340,14 @@
     }
   }
 
-  .footing {
-    margin-top: 1em;
-    padding-top: 1em;
-    border-top: solid 1px @grey-light;
+  /** TAGS **/
+  .tags {
+    border-bottom: solid 1px #eee;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
   }
 
-  /** TAGS **/
   .tag {
     border: solid 1px @grey;
     padding: 0px 6px;
@@ -435,12 +444,12 @@
       .Cols(12);
 
       > div {
-        padding: 2%;
+        padding: 0 2%;
         width: 100%;
         box-sizing: border-box;
-        min-height: 100px;
         border-bottom: solid 1px fade(@blue-light, 30%);
-        margin-bottom: 4px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
 
         > div {
           .Cols(11);
@@ -462,10 +471,16 @@
         }
 
         a {
-          font-size: 2em;
+          font-size: 1em;
+          line-height: 1em;
+          text-decoration: underline;
         }
         p {
-          font-size: 0.9em;
+          font-size: 0.8em;
+          font-style: italic;
+          margin: 5px 0 0 0;
+          padding: 0;
+          line-height: 1.5em;
         }
         button.remove {
           float: right;
@@ -551,6 +566,7 @@
 
 @media (min-width: 800px) {
   .postItem {
+
     .links {
 
       .fields {
@@ -579,7 +595,6 @@
       }
     }
     .details {
-      .Row(100%);
 
       .pic {
         .Cols(3);

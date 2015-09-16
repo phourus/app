@@ -77,7 +77,6 @@ let Post = React.createClass({
 		let stats = <Stats post={this.state.post} context={this.props.context} />;
 		let post = this.state.post;
 		let types = false;
-		let details = false;
 		let comments = false;
 		let tags = false;
 		let content = false;
@@ -96,13 +95,12 @@ let Post = React.createClass({
 		}
 		if (this.props.context.type === 'post' || this.props.context.type === 'edit') {
 			stats = this.props.context.type === 'edit' ? false : <Stats post={this.state.post} context={this.props.context} />;
-		types = this.state.types ? <Types post={this.state.post} type={this._type} /> : false;
+		types = this.state.types ? <Types post={this.state.post} type={this._type} context={this.props.context} owner={this.props.owner} /> : false;
 			tags = <Tags post={this.state.post} context={this.props.context} owner={this.props.owner} />;
 			links = <Links post={this.state.post} context={this.props.context} owner={this.props.owner} />;
 			content = this.props.context.type === 'edit' && this.props.owner ? <TextEditor post={this.state.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.state.post.content}}></div>;
 			comments = this.props.context.type === 'edit' ? false : <Comments post={this.state.post} />;
 			className += " selected";
-			details = <Meta post={this.state.post} context={this.props.context} owner={this.state.owner} />;
 		}
 		if (this.state.post.privacy === 'org') {
 			// let organizations = [{id: 1, name: "Phourus Inc."}, {id: 2, name: "Tyco Intl."}, {id: 3, name: "Intuit Inc."}, {id: 4, name: "Enco Industries Inc."}];
@@ -120,7 +118,25 @@ let Post = React.createClass({
 		return (
 			<div className={className}>
 				<button className="close" onClick={this._back}>X</button>
+				{this.props.owner && this.props.context.type !== 'edit'
+					? <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
+					: false
+				}
 				<div className={`type ${this.state.post.type}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
+				<div className="categories">
+					{this.state.post.category
+						? <a href="javascript:void()">{this.state.post.category}</a>
+						: false
+					}
+					{this.state.post.category && this.state.post.subcategory
+						? " >> "
+						: false
+					}
+					{this.state.post.subcategory
+						? <a href='javascript:void(0)'>{this.state.post.subcategory}</a>
+						: false
+					}
+				</div>
 				{types}
 				{this.props.context.type === 'edit' && this.props.owner
 					? <select ref="privacy" value={this.state.post.privacy} onChange={this._privacy}>
@@ -135,31 +151,16 @@ let Post = React.createClass({
 					? {orgs}
 					: false
 				}
-				{this.props.owner && this.props.context.type !== 'edit'
-					? <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
-					: false
-				}
 				{this.props.context.type === 'edit' && this.props.owner
 					? <input className="title editing" onChange={this._title} value={this.state.post.title} />
 				: <h2 className="title"><Link to="post" params={{id: this.state.post.id}}>{this.state.post.title}</Link></h2>
 				}
-				<div className="details">
-					<Pic id={this.state.user.id} img={this.state.user.img} />
-					<div className="basic">
-						<span>By <Link to="userPosts" params={{id: this.state.user.id}}>{this.state.user.first} {this.state.user.last} </Link></span>
-						&bull;
-						<span className="location"> {this.state.location.city}, {this.state.location.state}</span>
-						<div className="created">{moment(this.state.post.createdAt).fromNow()}</div>
-						{details}
-					</div>
-					<div className="actions">
-						{this.props.context.type === 'edit' && this.props.owner ? <button className="button green" onClick={this._update} disabled={this.state.saving}>{this.state.saving ? 'Saving' : 'Save'}</button> : false}
-					</div>
-				</div>
-				<div className="footing">
-					{tags}
-					{content}
-				</div>
+				{this.props.context.type === 'edit'
+					? false
+					: <Details {...this.state} context={this.props.context} owner={this.props.owner}  />
+				}
+				{tags}
+				{content}
 				{stats}
 				{links}
 				{comments}
@@ -198,6 +199,26 @@ let Post = React.createClass({
 		Store.post.id = this.props.post.id;
 		this.setState({saving: true});
 		Actions.save();
+	}
+});
+
+let Details = React.createClass({
+	render: function () {
+		return (
+			<div className="details">
+				<Pic id={this.props.user.id} img={this.props.user.img} />
+				<div className="basic">
+					<span>By <Link to="userPosts" params={{id: this.props.user.id}}>{this.props.user.first} {this.props.user.last} </Link></span>
+					&bull;
+					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
+					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
+					<Meta post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				</div>
+				<div className="actions">
+					{this.props.context.type === 'edit' && this.props.owner ? <button className="button green" onClick={this._update} disabled={this.props.saving}>{this.props.saving ? 'Saving' : 'Save'}</button> : false}
+				</div>
+			</div>
+		);
 	}
 });
 
@@ -281,51 +302,43 @@ let Types = React.createClass({
 				classes[key] += ' selected';
 			}
 		}
+		let descriptions = {
+			blog: "General Post type, start here if you dont know what to choose",
+			event: "Virtual or real-world event",
+			subject: "Share your knowledge or expertise with the community on a variety of Subjects",
+			question: "Need help or clarification on a topic? Ask it with a Question",
+			debate: "Get the discussion started with a local, county, state or national-level Debate",
+			poll: "Get the discussion started with a local, county, state or national-level Debate",
+			quote: "Has someone else already described how you feel? Post their Quote here",
+			belief: "Tell us more about your Belief on something dear to you"
+		};
+		let icons = {
+			blog: "laptop",
+			event: "calendar",
+			subject: "puzzle-piece",
+			question: "question",
+			debate: "bullhorn",
+			poll: "line-chart",
+			quote: "quote-right",
+			belief: "road"
+		};
 	  return (
-				<div className="types">
-	    			<div className={classes.blog} onClick={this._blog}>
-		    			<strong><i className="fa fa-laptop" /> Blog</strong>
-							<p>General Post type, start here if you dont know what to choose</p>
-						</div>
-	    			<div className={classes.event} onClick={this._events}>
-		    			<strong><i className="fa fa-calendar" /> Event</strong>
-							<p>Virtual or real-world event</p>
-						</div>
-	    			<div className={classes.subject} onClick={this._subjects}>
-		    			<strong><i className="fa fa-puzzle-piece" /> Subject</strong>
-							<p>Share your knowledge or expertise with the community on a variety of Subjects</p>
-						</div>
-	    			<div className={classes.question} onClick={this._questions}>
-		    			<strong><i className="fa fa-question" /> Question</strong>
-							<p>Need help or clarification on a topic? Ask it with a Question</p>
-						</div>
-	    			<div className={classes.debate} onClick={this._debates}>
-		    			<strong><i className="fa fa-bullhorn" /> Debate</strong>
-							<p>Get the discussion started with a local, county, state or national-level Debate</p>
-						</div>
-						<div className={classes.poll} onClick={this._polls}>
-							<strong><i className="fa fa-line-chart" /> Poll</strong>
-							<p>Get the discussion started with a local, county, state or national-level Debate</p>
-						</div>
-	    			<div className={classes.quote} onClick={this._quotes}>
-		    			<strong><i className="fa fa-road" /> Quote</strong>
-							<p>Has someone else already described how you feel? Post their Quote here</p>
-						</div>
-	    			<div className={classes.belief} onClick={this._beliefs}>
-		    			<strong><i className="fa fa-quote-right" /> Belief</strong>
-							<p>Tell us more about your Belief on something dear to you</p>
-						</div>
-				</div>
+			<div className="types">
+				{['blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'].map((item) => {
+					let fields = <Meta {...this.props} context={this.props.context} owner={this.props.owner} />
+console.log(item, type);
+					return (<div className={classes[item]} onClick={this._select.bind(this, item)}>
+						<strong><i className={"fa fa-" + icons[item]} /> {item}</strong>
+						{item === type
+							? <div className=""><p>{descriptions[item]}</p>{fields}</div>
+							: false
+						}
+					</div>)
+				})}
+			</div>
 	  );
 	},
-	_blog: function () { Actions.change('type', 'blog'); this.props.type(); },
-	_events: function () { Actions.change('type', 'event'); this.props.type(); },
-	_subjects: function () { Actions.change('type', 'subject'); this.props.type(); },
-	_questions: function () { Actions.change('type', 'question'); this.props.type(); },
-	_debates: function () { Actions.change('type', 'debate'); this.props.type(); },
-	_polls: function () { Actions.change('type', 'poll'); this.props.type(); },
-	_beliefs: function () { Actions.change('type', 'belief'); this.props.type(); },
-	_quotes: function () { Actions.change('type', 'quote'); this.props.type(); },
+	_select: function (type) { Actions.change('type', type); },
 	_element: function (e) {
 		var value = e.currentTarget.value;
 		Actions.change('element', value);
@@ -379,204 +392,76 @@ let Meta = React.createClass({
 				classes[key] += ' selected';
 			}
 		}
-		let element = this.props.context.type === 'edit' && this.props.owner
-			? <select ref="element" value={this.props.post.element} onChange={this._element}>
-				<option value="world">World</option>
-				<option value="mind">Mind</option>
-				<option value="voice">Voice</option>
-				<option value="self">Self</option>
-			</select>
-			: this.props.post.element;
-	  return (
-			<div className="meta">
-				<div className="types">
-	    			<div className={classes.blog}>
-								<div className={(type === 'blog') ? "selected" : ""}>
-									<label>Element: {element}</label>
-									<label>Category:
-										{this.props.context.type === 'edit' && this.props.owner
-											? <Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.blogs[this.props.post.element]} />
-											: <strong>{this.props.post.category}</strong>
-										}
-									</label>
-									<label>Subcategory:
-										{this.props.context.type === 'edit' && this.props.owner
-											? <Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.blogs.subcategory} />
-											: <strong>{this.props.post.subcategory}</strong>
-										}
-									</label>
-									<label>Positive?
-										{this.props.context.type === 'edit' && this.props.owner
-											? <input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this._positive} />
-											: <strong>{this.props.post.positive}</strong>
-										}
-									</label>
-								</div>
-						</div>
-	    			<div className={classes.event}>
-							<div className={(type === 'event') ? "selected" : ""}>
-								<label>Element:</label>
-								{element}
-								<br />
-								<label>Category:</label>
-									{this.props.context.type === 'edit' && this.props.owner
-										? <Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.events[this.props.post.element]} />
-										: <strong>{this.props.post.category}</strong>
-									}
-								<br />
-								<label>Date</label>
-									{this.props.context.type === 'edit' && this.props.owner
-										? <input ref="date" value={this.props.post.date} onChange={this._date} />
-										: <strong>{this.props.post.date}</strong>
-									}
-								<br />
-								<label>Address</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <input ref="address" value={this.props.post.address} onChange={this._address} />
-									: <strong>{this.props.post.address}</strong>
-								}
-								<br />
-							</div>
-						</div>
-	    			<div className={classes.subject}>
-							<div className={(type === 'subject') ? "selected" : ""}>
-								<label>Category:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.subjects.category} />
-									: <strong>{this.props.post.category}</strong>
-								}
-								<br />
-								<label>Subcategory:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.subjects[this.props.post.category]} />
-									: <strong>{this.props.post.subcategory}</strong>
-								}
-								<br />
-								<label>Difficulty:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
-										<option>Easy</option>
-										<option>Medium</option>
-										<option>Hard</option>
-									</select>
-									: <strong>{this.props.post.difficulty}</strong>
-								}
-								<br />
-							</div>
-						</div>
-	    			<div className={classes.question}>
-							<div className={(type === 'question') ? "selected" : ""}>
-								<label>Category:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.subjects.category} />
-									: <strong>{this.props.post.category}</strong>
-								}
-								<br />
-								<label>Subcategory:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <Select ref="subcategory" value={this.props.post.subcategory} onChange={this._subcategory} data={tax.subjects[this.props.post.category]} />
-									: <strong>{this.props.post.subcategory}</strong>
-								}
-								<br />
-								<label>Difficulty:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
-										<option>Easy</option>
-										<option>Medium</option>
-										<option>Hard</option>
-									</select>
-									: <strong>{this.props.post.difficulty}</strong>
-								}
-								<br />
-							</div>
-						</div>
-	    			<div className={classes.debate}>
-							<div className={(type === 'debate') ? "selected" : ""}>
-								<label>Category:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.debates.category} />
-									: <strong>{this.props.post.category}</strong>
-								}
-								<br />
-								<label>Scope:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <select ref="scope" value={this.props.post.scope} onChange={this._scope}>
-									<option>Local</option>
-									<option>County</option>
-									<option>State</option>
-								</select>
-									: <strong>{this.props.post.scope}</strong>
-								}
-								<br />
-								<label>Zip</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <input ref="zip" value={this.props.post.zip} onChange={this._zip} />
-									: <strong>{this.props.post.zip}</strong>
-								}
-								<br />
-							 </div>
-						</div>
-						<div className={classes.poll}>
-								<div className={(type === 'poll') ? "selected" : ""}>
-									<label>Category:</label>
-									{this.props.context.type === 'edit' && this.props.owner
-										? <Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.debates.category} />
-										: <strong>{this.props.post.category}</strong>
-									}
-									<br />
-									<label>Scope:</label>
-									{this.props.context.type === 'edit' && this.props.owner
-										? <select ref="scope" value={this.props.post.scope} onChange={this._scope}>
-											<option>Local</option>
-											<option>County</option>
-											<option>State</option>
-										</select>
-										: <strong>{this.props.post.scope}</strong>
-									}
-									<br />
-									<label>Zip</label>
-									{this.props.context.type === 'edit' && this.props.owner
-										? <input ref="zip" value={this.props.post.zip} onChange={this._zip} />
-										: <strong>{this.props.post.zip}</strong>
-									}
-									<br />
-								 </div>
-						</div>
-	    			<div className={classes.quote}>
-							<div className={(type === 'quote') ? "selected" : ""}>
-								<label>Source/Author</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <input ref="author" value={this.props.post.author} onChange={this._author} />
-									: <strong>{this.props.post.author}</strong>
-								}
-								<br />
-							</div>
-						</div>
-	    			<div className={classes.belief} onClick={this._beliefs}>
-							<div className={(type === 'belief') ? "selected" : ""}>
-								<label>Category:</label>
-								{this.props.context.type === 'edit' && this.props.owner
-									? <Select ref="category" value={this.props.post.category} onChange={this._category} data={tax.beliefs.category} />
-									: <strong>{this.props.post.category}</strong>
-								}
-								<br />
-							</div>
-						</div>
-				</div>
+		let fields = {
+			blog: ['positive'],
+			event: ['date', 'address'],
+			subject: ['difficulty'],
+			question: ['difficulty'],
+			debate: ['scope', 'zip'],
+			poll: ['scope', 'zip'],
+			quote: [''],
+			belief: ['author']
+		};
+		let inputs = {
+			positive: (<label>Positive?
+					{this.props.context.type === 'edit' && this.props.owner
+						? <input ref="positive" type="checkbox" value={this.props.post.positive} onChange={this._positive} />
+						: <strong>{this.props.post.positive}</strong>
+					}
+				</label>),
+			date: (<label>Date
+					{this.props.context.type === 'edit' && this.props.owner
+						? <input ref="date" value={this.props.post.date} onChange={this._date} />
+						: <strong>{this.props.post.date}</strong>
+					}
+				</label>),
+			address: (<label>Address
+				{this.props.context.type === 'edit' && this.props.owner
+					? <input ref="address" value={this.props.post.address} onChange={this._address} />
+					: <strong>{this.props.post.address}</strong>
+				}
+			</label>),
+			difficulty: (<label>Difficulty:
+				{this.props.context.type === 'edit' && this.props.owner
+					? <select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
+						<option>Easy</option>
+						<option>Medium</option>
+						<option>Hard</option>
+					</select>
+					: <strong>{this.props.post.difficulty}</strong>
+				}
+			</label>),
+			scope: (<label>Scope:
+				{this.props.context.type === 'edit' && this.props.owner
+					? <select ref="scope" value={this.props.post.scope} onChange={this._scope}>
+							<option>Local</option>
+							<option>County</option>
+							<option>State</option>
+						</select>
+					: <strong>{this.props.post.scope}</strong>
+				}
+			</label>),
+			zip: (<label>Zip
+				{this.props.context.type === 'edit' && this.props.owner
+					? <input ref="zip" value={this.props.post.zip} onChange={this._zip} />
+					: <strong>{this.props.post.zip}</strong>
+				}
+			</label>),
+			author: (<label>Source/Author
+				{this.props.context.type === 'edit' && this.props.owner
+					? <input ref="author" value={this.props.post.author} onChange={this._author} />
+					: <strong>{this.props.post.author}</strong>
+				}
+			</label>)
+		};
+		let data = fields[type] || [];
+		return (
+			<div>
+				{data.map((item) => {
+					return inputs[item];
+				})}
 			</div>
-	  );
-	},
-	_element: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('element', value);
-	},
-	_category: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('category', value);
-	},
-	_subcategory: function (e) {
-		var value = e.currentTarget.value;
-		Actions.change('subcategory', value);
+		);
 	},
 	_positive: function (e) {
 		var value = e.currentTarget.value;
@@ -837,6 +722,8 @@ Links.Edit = React.createClass({
 			save: 'saving Link',
 			remove: 'removing Link'
 		}
+		// <Links.Upload />
+		// <button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
 		return (
 			<div className="fields">
 				<label>Link Title:<br />
@@ -844,8 +731,6 @@ Links.Edit = React.createClass({
 				</label>
 				<label className="upload">Link URL/Upload:
 					<input type="text" onChange={this._changeURL} value={this.state.url} placeholder="enter URL or upload"/>
-					<Links.Upload />
-					<button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
 				</label>
 				<label>Caption:
 					<textarea type="text" onChange={this._changeCaption} placeholder="enter short description" value={this.state.caption} />

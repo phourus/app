@@ -58,7 +58,10 @@ let Stream = React.createClass({
 		let hasMore = (this.state.posts.length < this.state.total && this.state.context.type !== 'post' && this.state.context.type !== 'edit');
 		return (
 			<div className="search">
-				<Head {...this.state} />
+				{this.state.context.type === 'edit' || this.state.context.type === 'post'
+					? false
+					: <Head {...this.state} />
+				}
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader"></div>}>
 					<Posts {...this.state} />
 				</Scroll>
