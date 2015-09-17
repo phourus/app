@@ -1611,20 +1611,68 @@ div.alerts button {
   background-color: #8abf00;
   color: #fff;
 }
+.postItem .type.blog.inverted,
+.postItem .type.event.inverted {
+  background-color: #fafafa;
+  border: solid 1px #9cd900;
+  color: #9cd900;
+}
+.postItem .type.blog.inverted:hover,
+.postItem .type.event.inverted:hover {
+  background-color: #658c00;
+  border: none;
+  color: #eeeeee;
+}
 .postItem .type.subject,
 .postItem .type.question {
   background-color: #3498db;
   color: #fff;
+}
+.postItem .type.subject.inverted,
+.postItem .type.question.inverted {
+  background-color: #fafafa;
+  border: solid 1px #5faee3;
+  color: #5faee3;
+}
+.postItem .type.subject.inverted:hover,
+.postItem .type.question.inverted:hover {
+  background-color: #217dbb;
+  border: none;
+  color: #eeeeee;
 }
 .postItem .type.debate,
 .postItem .type.poll {
   background-color: #ed0303;
   color: #fff;
 }
+.postItem .type.debate.inverted,
+.postItem .type.poll.inverted {
+  background-color: #fafafa;
+  border: solid 1px #fc2727;
+  color: #fc2727;
+}
+.postItem .type.debate.inverted:hover,
+.postItem .type.poll.inverted:hover {
+  background-color: #bb0202;
+  border: none;
+  color: #eeeeee;
+}
 .postItem .type.quote,
 .postItem .type.belief {
   background-color: #ecb010;
   color: #fff;
+}
+.postItem .type.quote.inverted,
+.postItem .type.belief.inverted {
+  background-color: #fafafa;
+  border: solid 1px #f2c13d;
+  color: #f2c13d;
+}
+.postItem .type.quote.inverted:hover,
+.postItem .type.belief.inverted:hover {
+  background-color: #bc8c0d;
+  border: none;
+  color: #eeeeee;
 }
 .postItem > .types {
   max-width: 100%;

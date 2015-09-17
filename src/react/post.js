@@ -129,7 +129,7 @@ let Post = React.createClass({
 						</div>
 					: false
 				}
-				<div className={`type ${this.state.post.type}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
+				<div className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				<Categories {...this.state} context={this.props.context} owner={this.props.owner} />
 				{types}
 				{this.props.context.type === 'edit' && this.props.owner

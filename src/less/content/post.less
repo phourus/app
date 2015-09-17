@@ -140,10 +140,66 @@
     }
   }
 
-  .type.blog, .type.event { background-color: @green; color: #fff; }
-  .type.subject, .type.question { background-color: @blue; color: #fff; }
-  .type.debate, .type.poll { background-color: @red; color: #fff; }
-  .type.quote, .type.belief { background-color: @gold; color: #fff; }
+  .type.blog, .type.event {
+    background-color: @green; color: #fff;
+
+    &.inverted {
+			background-color: #fafafa;
+			border: solid 1px @green-light;
+			color: @green-light;
+		}
+
+		&.inverted:hover {
+			background-color: @green-dark;
+			border: none;
+			color: @grey-light;
+		}
+  }
+  .type.subject, .type.question {
+    background-color: @blue; color: #fff;
+
+    &.inverted {
+      background-color: #fafafa;
+      border: solid 1px @blue-light;
+      color: @blue-light;
+    }
+
+    &.inverted:hover {
+      background-color: @blue-dark;
+      border: none;
+      color: @grey-light;
+    }
+  }
+  .type.debate, .type.poll {
+    background-color: @red; color: #fff;
+
+    &.inverted {
+      background-color: #fafafa;
+      border: solid 1px @red-light;
+      color: @red-light;
+    }
+
+    &.inverted:hover {
+      background-color: @red-dark;
+      border: none;
+      color: @grey-light;
+    }
+  }
+  .type.quote, .type.belief {
+    background-color: @gold; color: #fff;
+
+    &.inverted {
+      background-color: #fafafa;
+      border: solid 1px @gold-light;
+      color: @gold-light;
+    }
+
+    &.inverted:hover {
+      background-color: @gold-dark;
+      border: none;
+      color: @grey-light;
+    }
+  }
 
   > .types {
       .Row(100%);
