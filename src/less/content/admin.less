@@ -122,6 +122,40 @@
       height: 200px;
     }
   }
+
+  .members {
+    margin-top: 40px;
+    border-bottom: solid 1px #ddd;
+
+    > div {
+      .Row(100%);
+      margin: 10px 0 10px 0;
+      padding: 10px 0 10px 0;
+      border-top: solid 1px #ddd;
+
+      .userpic {
+        .Cols(4);
+
+        img {
+          width: 100%;
+          padding-right: 20px;
+          box-sizing: border-box;
+        }
+      }
+
+      .profile {
+        .Cols(8);
+      }
+
+      .manage {
+        .Cols(12);
+
+        > button {
+          display: inline-block;
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: 500px) {
@@ -138,6 +172,25 @@
 
         .name {
           font-size: 2em;
+        }
+      }
+    }
+
+    .members {
+      > div {
+        .Row(100%);
+
+        .userpic {
+          .Cols(1);
+        }
+
+        .profile {
+          .Cols(3);
+        }
+
+        .manage {
+          text-align: right;
+          .Cols(8);
         }
       }
     }

@@ -323,19 +323,27 @@ Admin.Details = React.createClass({
 Admin.Users = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className="members">
+        <h2>Manage Users</h2>
         {this.props.members.map(member => {
           return (
             <div>
-              {member.first} {member.last}
-              {member.admin
-                ? <button id={member.memberId} className="button red" onClick={this._revoke}>Revoke Admin</button>
-              : <button id={member.memberId} className="button blue" onClick={this._admin}>Make Admin</button>
-              }
-              {member.approved
-                ? <button id={member.memberId} className="button red" onClick={this._deny}>Remove Member</button>
-                : <button id={member.memberId} className="button green" onClick={this._approve}>Approve Member</button>
-              }
+              <UserPic img={member.img} />
+              <div className="profile">
+                <strong>{member.first} {member.last}</strong>
+                <div>{member.occupation}</div>
+                <a href={"mailto:" + member.email + "&Subject=Phourus"}>{member.email}</a>
+              </div>
+              <div className="manage">
+                {member.admin
+                  ? <button id={member.memberId} className="button blue inverted" onClick={this._revoke}>Revoke Admin</button>
+                  : <button id={member.memberId} className="button blue" onClick={this._admin}>Make Admin</button>
+                }
+                {member.approved
+                  ? <button id={member.memberId} className="button green inverted" onClick={this._deny}>Remove Member</button>
+                  : <button id={member.memberId} className="button green" onClick={this._approve}>Approve Member</button>
+                }
+              </div>
             </div>
           );
         })}
@@ -353,6 +361,33 @@ Admin.Users = React.createClass({
   },
   _deny: function (e) {
     Actions.Members.deny(e.currentTarget.id);
+  }
+});
+
+let UserPic = React.createClass({
+  getInitialState: function () {
+    return {
+			id: 0,
+      img: '/assets/avatars/default.jpg',
+      default: '/assets/avatars/default.jpg'
+    }
+  },
+  componentWillReceiveProps: function (data) {
+    if (data.img) {
+      this.setState(data);
+    }
+  },
+  render: function () {
+    return (
+      <div className="userpic">
+				<Link to="userPosts" params={{id: this.state.id}}>
+        	<img src={this.state.img} onError={this._default} />
+				</Link>
+      </div>
+    );
+  },
+  _default: function () {
+    this.setState({img: this.state.default});
   }
 });
 

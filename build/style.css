@@ -964,6 +964,49 @@ div.alerts button {
   width: 100%;
   height: 200px;
 }
+.admin .members {
+  margin-top: 40px;
+  border-bottom: solid 1px #ddd;
+}
+.admin .members > div {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  margin: 10px 0 10px 0;
+  padding: 10px 0 10px 0;
+  border-top: solid 1px #ddd;
+}
+.admin .members > div:before,
+.admin .members > div:after {
+  content: "";
+  display: table;
+}
+.admin .members > div:after {
+  clear: both;
+}
+.admin .members > div .userpic {
+  width: 33.33333333%;
+  display: inline-block;
+  vertical-align: top;
+}
+.admin .members > div .userpic img {
+  width: 100%;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+.admin .members > div .profile {
+  width: 66.66666667%;
+  display: inline-block;
+  vertical-align: top;
+}
+.admin .members > div .manage {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+.admin .members > div .manage > button {
+  display: inline-block;
+}
 @media (min-width: 500px) {
   .admin .heading .pic {
     width: 25%;
@@ -977,6 +1020,35 @@ div.alerts button {
   }
   .admin .heading .basic .name {
     font-size: 2em;
+  }
+  .admin .members > div {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .admin .members > div:before,
+  .admin .members > div:after {
+    content: "";
+    display: table;
+  }
+  .admin .members > div:after {
+    clear: both;
+  }
+  .admin .members > div .userpic {
+    width: 8.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .admin .members > div .profile {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .admin .members > div .manage {
+    text-align: right;
+    width: 66.66666667%;
+    display: inline-block;
+    vertical-align: top;
   }
 }
 @media (min-width: 800px) {
