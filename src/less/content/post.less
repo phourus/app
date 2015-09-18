@@ -6,6 +6,16 @@
   background-color: white;
   box-sizing: border-box;
 
+  .rte {
+    border-bottom: solid 1px #eee;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+  }
+  .ql-editor, .ql-container {
+    height: initial;
+    min-height: initial;
+  }
+
   &:hover {
     opacity: 1;
   }
@@ -27,14 +37,19 @@
   .actions {
     float: right;
 
-    button.save, button.delete {
+    button.save, button.delete, button.myposts {
       height: 30px;
       font-size: 0.8em;
       width: 80px;
       margin: 0;
-      padding: 0;
+      padding: 4px;
       display: inline-block;
       margin-right: 10px;
+      height: 33px;
+      margin: 4px;
+    }
+    button.myposts {
+      width: 160px;
     }
   }
 

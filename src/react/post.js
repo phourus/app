@@ -115,9 +115,13 @@ let Post = React.createClass({
 			// );
 		}
 		//<Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link>
+		// <Categories {...this.state} context={this.props.context} owner={this.props.owner} />
 		return (
 			<div className={className}>
-				<button className="close" onClick={this._back}>X</button>
+				{this.props.context.type === 'post'
+					? <button className="close" onClick={this._back}>X</button>
+					: false
+				}
 				{this.props.owner && this.props.context.type !== 'edit'
 					? <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
 					: false
@@ -126,21 +130,12 @@ let Post = React.createClass({
 					? <div className="actions">
 							<button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save'}</button>
 							<button className="button red delete inverted"><i className="fa fa-trash" /> Delete</button>
+							<button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
 						</div>
 					: false
 				}
 				<div className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
-				<Categories {...this.state} context={this.props.context} owner={this.props.owner} />
 				{types}
-				{this.props.context.type === 'edit' && this.props.owner
-					? <div><strong>Post Privacy</strong><select ref="privacy" value={this.state.post.privacy} onChange={this._privacy}>
-						<option value="private">Private</option>
-						<option value="org">Organization Members only</option>
-						<option value="phourus">Phourus Users only</option>
-						<option value="public">Everyone</option>
-					</select></div>
-					: false
-				}
 				{this.state.post.privacy === 'org' && this.props.context.type === 'edit'
 					? {orgs}
 					: false
@@ -153,8 +148,24 @@ let Post = React.createClass({
 					? false
 					: <Details {...this.state} context={this.props.context} owner={this.props.owner}  />
 				}
-				{tags}
+				{this.props.context.type !== 'edit'
+					? tags
+					: false
+				}
 				{content}
+				{this.props.context.type === 'edit' && this.props.owner
+					? <div><strong>Post Privacy</strong><select ref="privacy" value={this.state.post.privacy} onChange={this._privacy}>
+						<option value="private">Private</option>
+						<option value="org">Organization Members only</option>
+						<option value="phourus">Phourus Users only</option>
+						<option value="public">Everyone</option>
+					</select></div>
+					: false
+				}
+				{this.props.context.type === 'edit'
+					? tags
+					: false
+				}
 				{stats}
 				{links}
 				{comments}
@@ -177,6 +188,9 @@ let Post = React.createClass({
 				this.context.router.transitionTo("stream");
 			}
 		}
+	},
+	_myposts: function () {
+		this.context.router.transitionTo("myPosts");
 	},
 	_type: function () {
 		if (this.props.context.type === 'edit' && this.props.owner) {
@@ -543,8 +557,8 @@ let TextEditor = React.createClass({
 		}
 		let content = this.props.post.content;
 		return (
-			<div>
-				<RTE ref="content" placeholder="insert content here" value={content} onChange={this._content} theme="snow" />
+			<div className="rte">
+				<RTE ref="content" value={content} onChange={this._content} theme="snow" />
 			</div>
 		);
 	},

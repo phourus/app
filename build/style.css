@@ -1561,6 +1561,16 @@ div.alerts button {
   /** TAGS **/
   /** LINKS **/
 }
+.postItem .rte {
+  border-bottom: solid 1px #eee;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+}
+.postItem .ql-editor,
+.postItem .ql-container {
+  height: initial;
+  min-height: initial;
+}
 .postItem:hover {
   opacity: 1;
 }
@@ -1580,14 +1590,20 @@ div.alerts button {
   float: right;
 }
 .postItem .actions button.save,
-.postItem .actions button.delete {
+.postItem .actions button.delete,
+.postItem .actions button.myposts {
   height: 30px;
   font-size: 0.8em;
   width: 80px;
   margin: 0;
-  padding: 0;
+  padding: 4px;
   display: inline-block;
   margin-right: 10px;
+  height: 33px;
+  margin: 4px;
+}
+.postItem .actions button.myposts {
+  width: 160px;
 }
 .postItem .categories {
   font-size: 0.8em;
