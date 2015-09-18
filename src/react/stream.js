@@ -23,7 +23,7 @@ let Stream = React.createClass({
 	mixins: [State],
 	getInitialState: function () {
 		return {
-			posts: [],
+			posts: null,
 			total: 0,
 			params: {
 				exclude: [],
@@ -55,7 +55,7 @@ let Stream = React.createClass({
 	render: function () {
 		let visible = 'fa fa-minus-square-o';
 		let hidden = 'fa fa-plus-square-o';
-		let hasMore = (this.state.posts.length < this.state.total && this.state.context.type !== 'post' && this.state.context.type !== 'edit');
+		let hasMore = (this.state.posts && this.state.posts.length < this.state.total && this.state.context.type !== 'post' && this.state.context.type !== 'edit');
 		return (
 			<div className="search">
 				{this.state.context.type === 'edit' || this.state.context.type === 'post'
@@ -468,6 +468,10 @@ let Posts = React.createClass({
 		let data = this.props.posts;
 		let filtered = this.props.posts;
 		let list = [];
+
+		if (this.props.posts === null) {
+			return <Loader />
+		}
 
 		if (this.props.context.type === 'post' || this.props.context.type === 'edit') {
 			filtered = data.filter(item => {

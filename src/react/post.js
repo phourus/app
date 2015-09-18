@@ -555,7 +555,7 @@ let TextEditor = React.createClass({
 		if (!this.props.post.hasOwnProperty('content')) {
 			return false;
 		}
-		let content = this.props.post.content;
+		let content = this.props.post.content || "Enter content here";
 		return (
 			<div className="rte">
 				<RTE ref="content" value={content} onChange={this._content} theme="snow" />
@@ -569,14 +569,16 @@ let TextEditor = React.createClass({
 
 let Stats = React.createClass({
 	componentDidMount: function () {
-		let element = document.getElementById(`popularity${this.props.post.id}`);
-		let popularity = new Popularity(element, this.props.post.popularity);
+		this._popularity(this.props);
+	},
+	componentWillReceiveProps: function (data) {
+		this._popularity(data);
 	},
 	render: function () {
+		// <Influence influence={this.props.post.influence}/>
 		return (
 			<div className="interact">
 				{this.props.context.type === 'post' ? <Thumbs post={this.props.post} /> : false}
-				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
 					<canvas id={`popularity${this.props.post.id}`}></canvas>
 					<div>Popularity</div>
@@ -588,6 +590,16 @@ let Stats = React.createClass({
 				</div>
 			</div>
 		);
+	},
+	_popularity: function (data) {
+		if (data.post && data.post.id > 0) {
+			// when _popularity is called by componentWillReceiveProps, element
+			// has not yet been rendered.
+			setTimeout(() => {
+				let element = document.getElementById(`popularity${data.post.id}`);
+				let popularity = new Popularity(element, data.post.popularity || 100);
+			}, 1);
+		}
 	}
 });
 
