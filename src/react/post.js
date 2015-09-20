@@ -29,6 +29,7 @@ let Post = React.createClass({
 	getInitialState: function () {
 		return {
 			scroll: false,
+			confirmTrash: false,
 			owner: false,
 			location: {},
 			saving: false,
@@ -54,6 +55,9 @@ let Post = React.createClass({
 			}
 			if (data.post) {
 				this.setState({post: data.post});
+			}
+			if (data.deleted) {
+				this.context.router.transitionTo("myPosts");
 			}
 			if (data.changes) {
 				let current = this.state.post;
@@ -82,7 +86,6 @@ let Post = React.createClass({
 		let content = false;
 		let links = false;
 		let thumbs = false;
-		let orgs = <Orgs post={this.state.post} />;
 		for (let i = 0, keys = Object.keys(post); i < keys.length; i++) {
 			let key = keys[i];
 			let value = post[keys[i]];
@@ -128,9 +131,17 @@ let Post = React.createClass({
 				}
 				{this.props.owner && this.props.context.type === 'edit'
 					? <div className="actions">
-							<button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save'}</button>
-							<button className="button red delete inverted"><i className="fa fa-trash" /> Delete</button>
-							<button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
+							{this.state.confirmTrash
+								? <div>
+										<button className="button green red" onClick={this._confirm} disabled={this.props.saving}><i className="fa fa-trash" /> Confirm Delete</button>
+										<button className="button red delete inverted" onClick={this._cancel} style={{width: '95%'}}><i className="fa fa-remove" /> Cancel Delete</button>
+									</div>
+								: <div>
+										<button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save'}</button>
+										<button className="button red delete inverted" onClick={this._trash}><i className="fa fa-trash" /> Delete</button>
+										<button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
+									</div>
+							}
 						</div>
 					: false
 				}
@@ -154,12 +165,7 @@ let Post = React.createClass({
 				}
 				{content}
 				{this.props.context.type === 'edit' && this.props.owner
-					? <div><strong>Post Privacy</strong><select ref="privacy" value={this.state.post.privacy} onChange={this._privacy}>
-						<option value="private">Private</option>
-						<option value="org">Organization Members only</option>
-						<option value="phourus">Phourus Users only</option>
-						<option value="public">Everyone</option>
-					</select></div>
+					? <Privacy post={this.state.post} />
 					: false
 				}
 				{this.props.context.type === 'edit'
@@ -197,9 +203,6 @@ let Post = React.createClass({
 			this.setState({types: !this.state.types});
 		}
 	},
-	_privacy: function (e) {
-		Actions.change('privacy', e.currentTarget.value);
-	},
 	_title: function (e) {
 		Actions.change('title', e.currentTarget.value);
 	},
@@ -207,7 +210,80 @@ let Post = React.createClass({
 		Store.post.id = this.props.post.id;
 		this.setState({saving: true});
 		Actions.save();
+	},
+	_trash: function () {
+		this.setState({confirmTrash: true});
+	},
+	_cancel: function () {
+		this.setState({confirmTrash: false});
+	},
+	_confirm: function () {
+		Store.post.id = this.props.post.id;
+		Actions.trash();
 	}
+});
+
+let Privacy = React.createClass({
+	render: function () {
+		return (
+			<div>
+				<strong>Post on behalf of</strong>
+				<Privacy.Orgs {...this.props} />
+				<strong>Post Privacy</strong>
+				<select ref="privacy" value={this.props.post.privacy} onChange={this._privacy}>
+					<option value="private">Private</option>
+					<option value="public">Public</option>
+				</select>
+			</div>
+		);
+	},
+	_privacy: function (e) {
+		Actions.change('privacy', e.currentTarget.value);
+	}
+});
+
+Privacy.Orgs = React.createClass({
+  mixins: [Navigation],
+  getInitialState: function () {
+    return {
+      orgs: []
+    }
+  },
+  componentDidMount: function () {
+    this.unsubscribe = AccountStore.listen((data) => {
+      if (data.orgs) {
+        this.setState({orgs: data.orgs});
+      }
+    });
+    ActionsAccount.orgs();
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
+  render: function () {
+    return (
+      <div className="orgs">
+				<div className="org">
+					Me
+					<button id="0" onClick={this._select} className="button blue" disabled={this.props.post.orgId == 0}>Post on my behalf</button>
+				</div>
+        {this.state.orgs.map((item) => {
+					if (item.approved !== true) {
+						return false;
+					}
+					return (
+            <div className="org">
+							{item.org.name}
+              <button id={item.org.id} onClick={this._select} className="button blue" disabled={parseInt(this.props.post.orgId) === item.org.id}>Select Organization</button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  },
+  _select: function (e) {
+		Actions.change('orgId', e.currentTarget.id);
+  }
 });
 
 let Categories = React.createClass({
@@ -267,7 +343,7 @@ let Details = React.createClass({
 	render: function () {
 		let context = 'user';
 		let org = {};
-		if (this.props.post.org && this.props.post.org.id) {
+		if (this.props.post.org && this.props.post.org.id && this.props.post.org.id != 0) {
 			org = this.props.post.org;
 			context = 'org';
 		}
@@ -314,46 +390,6 @@ let Pic = React.createClass({
   },
   _default: function () {
     this.setState({img: this.state.default});
-  }
-});
-
-let Orgs = React.createClass({
-  mixins: [Navigation],
-  getInitialState: function () {
-    return {
-      orgs: []
-    }
-  },
-  componentDidMount: function () {
-    this.unsubscribe = AccountStore.listen((data) => {
-      if (data.orgs) {
-        this.setState({orgs: data.orgs});
-      }
-    });
-    ActionsAccount.orgs();
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
-  },
-  render: function () {
-    return (
-      <div className="orgs">
-        {this.state.orgs.map((item) => {
-					if (item.approved !== true) {
-						return false;
-					}
-					return (
-            <div className="org">
-							{item.org.name}
-              <button id={item.org.id} onClick={this._select} className="button blue" disabled={this.props.post.orgId === item.org.id}>Select Organization</button>
-            </div>
-          );
-        })}
-      </div>
-    );
-  },
-  _select: function (e) {
-		Actions.change('orgId', e.currentTarget.id);
   }
 });
 

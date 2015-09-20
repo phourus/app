@@ -7,7 +7,7 @@ module.exports = {
   change: Reflux.createAction(),
   add: Reflux.createAction(),
   save: Reflux.createAction(),
-  remove: Reflux.createAction(),
+  trash: Reflux.createAction(),
   Comments: {
     collection: Reflux.createAction(),
     add: Reflux.createAction(),

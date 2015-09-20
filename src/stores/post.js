@@ -21,7 +21,7 @@ let Post = Reflux.createStore({
     this.listenTo(Actions.change, this._change);
     this.listenTo(Actions.add, this._add);
     this.listenTo(Actions.save, this._save);
-    this.listenTo(Actions.remove, this._remove);
+    this.listenTo(Actions.trash, this._trash);
   },
   _single: function (id) {
     if (!id) {
@@ -61,6 +61,18 @@ let Post = Reflux.createStore({
     .catch(code => {
       if (code != 204) {
         msg('red', 'Post could not be saved', code);
+        return;
+      }
+    });
+  },
+  _trash: function () {
+    posts.save(this.post.id, {privacy: 'trash'})
+    .then(data => {
+      this.trigger({deleted: true});
+    })
+    .catch(code => {
+      if (code != 204) {
+        msg('red', 'Post could not be deleted', code);
         return;
       }
     });

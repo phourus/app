@@ -13,7 +13,7 @@ var comments = require('./comments');
 var posts = db.define('posts', {
   // Common
   id: {type: sql.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
-  privacy: {type: sql.ENUM('public', 'phourus', 'org', 'private'), defaultValue: 'private'},
+  privacy: {type: sql.ENUM('public', 'phourus', 'org', 'private', 'trash'), defaultValue: 'private'},
   type: sql.ENUM('blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'),
   title: sql.STRING,
   slug: sql.STRING,
@@ -43,7 +43,7 @@ var posts = db.define('posts', {
 }, {
   classMethods: {
     single: function (id) {
-      return this.findOne({where: {id: id},
+      return this.findOne({where: {id: id, privacy: {$notIn: ['trash']}},
         include: [
           {model: users, as: 'user'},
           {model: tags, as: 'tags'},
@@ -63,7 +63,7 @@ var posts = db.define('posts', {
       return this.update(model, {where: {id: id, userId: model.userId}});
     },
     remove: function (id) {
-      return this.destroy({where: {id: id, userId: model.userId}});
+      //return this.destroy({where: {id: id, userId: model.userId}});
     },
     account: function () {
       return this.findAndCountAll({where: {userId: model.userId}});
