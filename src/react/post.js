@@ -265,10 +265,20 @@ let Categories = React.createClass({
 
 let Details = React.createClass({
 	render: function () {
+		let context = 'user';
+		let org = {};
+		if (this.props.post.org && this.props.post.org.id) {
+			org = this.props.post.org;
+			context = 'org';
+		}
 		return (
 			<div className="details">
-				<Pic id={this.props.user.id} img={this.props.user.img} />
+				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} context={context} />
 				<div className="basic">
+					{context === 'org'
+						? <div><Link to="orgPosts" params={{id: org.id}}>{org.name}</Link><br /><br /></div>
+						: false
+					}
 					<span>By <Link to="userPosts" params={{id: this.props.user.id}}>{this.props.user.first} {this.props.user.last} </Link></span>
 					&bull;
 					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
@@ -285,21 +295,19 @@ let Pic = React.createClass({
     return {
 			id: 0,
       img: '/assets/avatars/default.jpg',
-      default: '/assets/avatars/default.jpg',
-      upload: 0
+      default: '/assets/avatars/default.jpg'
     }
   },
   componentWillReceiveProps: function (data) {
     if (data.img) {
-      data.upload = this.state.upload + 1;
       this.setState(data);
     }
   },
   render: function () {
     return (
       <div className="pic">
-				<Link to="userPosts" params={{id: this.state.id}}>
-        	<img src={this.state.img + '?upload=' + this.state.upload} onClick={this._upload} onError={this._default} />
+				<Link to={this.props.context === 'org' ? "orgPosts" : "userPosts"} params={{id: this.state.id}}>
+        	<img src={this.state.img} onClick={this._upload} onError={this._default} />
 				</Link>
       </div>
     );

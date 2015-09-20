@@ -172,6 +172,7 @@ var posts = db.define('posts', {
       /** USER ASSOCIATION **/
       query.include = [
           {model: users, as: 'user', include: [locations]},
+          {model: orgs, as: 'org'},
           {model: tags, as: 'tags'},
           {model: links, as: 'links'}
       ];
@@ -183,6 +184,7 @@ var posts = db.define('posts', {
 // users
 // users.hasOne posts gives postId on user
 posts.belongsTo(users);
+posts.belongsTo(orgs);
 
 // links
 posts.hasMany(links);

@@ -176,7 +176,7 @@ let Tabs = React.createClass({
             <div className="number">{details}%</div>
             <div className="label">Details</div>
           </div>
-          <div onClick={this._select.bind(this, 'users')} className={'users' === view ? 'selected' : ''}>
+          <div onClick={this._select.bind(this, 'members')} className={'members' === view ? 'selected' : ''}>
             <div className="number">{users.approved}<span className="pending">{users.pending}</span></div>
             <div className="label">Users</div>
           </div>
@@ -320,7 +320,7 @@ Admin.Details = React.createClass({
   }
 });
 
-Admin.Users = React.createClass({
+Admin.Members = React.createClass({
   render: function () {
     return (
       <div className="members">

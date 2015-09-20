@@ -171,7 +171,7 @@ let Stream = Reflux.createStore({
     }
     // users/orgs
     let profile = users;
-    if (type === 'orgPosts') {
+    if (type === 'orgs') {
       profile = orgs;
     }
     profile.single(id)

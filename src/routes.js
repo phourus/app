@@ -42,7 +42,9 @@ module.exports = (
     </Route>
     <Route name="stream" path="stream" handler={Stream}>
       <Route name="myPosts" path="me" handler={Stream} />
-      <Route name="userPosts" path="user/:id" handler={Stream} />
+      <Route name="users" handler={Stream}>
+        <Route name="userPosts" path=":id" handler={Stream} />
+      </Route>
       <Route name="orgs" handler={Stream}>
         <Route name="orgPosts" path=":id" handler={Stream} />
       </Route>
@@ -56,7 +58,7 @@ module.exports = (
     </Route>
     <Route name="admin" path="admin/:id" handler={Admin}>
       <Route name="details" path="details" handler={Admin.Details} />
-      <Route name="users" path="users" handler={Admin.Users} />
+      <Route name="members" path="members" handler={Admin.Members} />
       <Route name="categories" path="categories" handler={Admin.Categories} />
       <Route name="teams" path="teams" handler={Admin.Teams} />
     </Route>
