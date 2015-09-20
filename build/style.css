@@ -842,56 +842,6 @@ div.alerts button {
     vertical-align: top;
   }
 }
-.admin .heading {
-  padding: 10px 0;
-  margin-bottom: 20px;
-}
-.admin .heading .pic {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-  box-sizing: border-box;
-  padding-right: 10px;
-}
-.admin .heading .pic .uploader {
-  position: absolute;
-  left: -9999px;
-}
-.admin .heading .pic img {
-  width: 95%;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-  border: solid 4px #999;
-}
-.admin .heading .basic {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-}
-.admin .heading .basic .name {
-  font-size: 1.5em;
-  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
-  margin-bottom: 10px;
-}
-.admin .heading .basic .type {
-  font-weight: bold;
-  color: #555;
-  font-size: 1em;
-  margin-bottom: 10px;
-}
-.admin .heading .basic .type.company {
-  color: #658c00;
-}
-.admin .heading .basic .type.school {
-  color: #217dbb;
-}
-.admin .heading .basic .type.government {
-  color: #bb0202;
-}
-.admin .heading .basic .type.group {
-  color: #bc8c0d;
-}
 .admin ul {
   margin: 0;
   padding: 0;
@@ -2500,6 +2450,47 @@ div.alerts button {
   margin-top: 100px;
   margin-bottom: 100px;
 }
+.search .organizations {
+  width: 90%;
+  margin: 0 5% 0 5%;
+  border-bottom: solid 1px #ccc;
+}
+.search .organizations .list {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+.search .organizations .list:before,
+.search .organizations .list:after {
+  content: "";
+  display: table;
+}
+.search .organizations .list:after {
+  clear: both;
+}
+.search .organizations .list .org {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #f7f7f7;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+.search .organizations .list .org .name {
+  font-size: 1.5em;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+}
+.search .organizations .list .org:hover {
+  background-color: #fff;
+  cursor: pointer;
+}
+.search .organizations .list .org img {
+  width: 100%;
+  max-width: 150px;
+  max-height: 150px;
+}
 .search .heading {
   top: 40px;
   z-index: 1;
@@ -2750,6 +2741,11 @@ div.alerts button {
   display: block;
 }
 @media (min-width: 500px) {
+  .search .organizations .list .org {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
   .search .heading {
     width: 90%;
     padding: 2% 5%;
@@ -2771,6 +2767,11 @@ div.alerts button {
   }
 }
 @media (min-width: 1000px) {
+  .search .organizations .list .org {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
   .search .heading .filter .types button.button {
     width: 20%;
     margin: 10px 3% 10px 2%;
@@ -3011,6 +3012,99 @@ header nav .notifications {
   }
   .search .heading {
     top: 60px;
+  }
+}
+.profile {
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+.profile .pic {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding-right: 10px;
+}
+.profile .pic .uploader {
+  position: absolute;
+  left: -9999px;
+}
+.profile .pic img {
+  width: 95%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border: solid 4px #999;
+}
+.profile .basic {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+.profile .basic .name {
+  font-size: 1.5em;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  margin-bottom: 10px;
+}
+.profile .basic .type {
+  font-weight: bold;
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+.profile .basic .type.company {
+  color: #658c00;
+}
+.profile .basic .type.school {
+  color: #217dbb;
+}
+.profile .basic .type.government {
+  color: #bb0202;
+}
+.profile .basic .type.group {
+  color: #bc8c0d;
+}
+@media (min-width: 500px) {
+  .profile .pic {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .profile .basic {
+    width: 75%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .profile .basic .name {
+    font-size: 2em;
+  }
+  .search .profile {
+    width: 90%;
+    margin: 0 5% 0 5%;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .search .profile .name {
+    margin: 0;
+    padding: 0;
+  }
+  .search .profile .basic {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .search .profile .back {
+    float: right;
+  }
+  .search .profile .actions {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    vertical-align: bottom;
+  }
+  .search .profile .actions button {
+    float: right;
   }
 }
 /** COLORS **/

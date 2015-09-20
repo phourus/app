@@ -1,0 +1,98 @@
+.profile {
+  padding: 10px 0;
+  margin-bottom: 20px;
+
+  .pic {
+    .Cols(6);
+    box-sizing: border-box;
+    padding-right: 10px;
+
+    .uploader {
+      position: absolute;
+      left: -9999px;
+    }
+
+    img {
+      width: 95%;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+      border: solid 4px #999;
+    }
+  }
+
+  .basic {
+    .Cols(6);
+
+    .name {
+      font-size: 1.5em;
+      font-family: @font-serif;
+      margin-bottom: 10px;
+    }
+    .type {
+      font-weight: bold;
+      color: #555;
+      font-size: 1em;
+      margin-bottom: 10px;
+
+      &.company {
+        color: @green-dark;
+      }
+      &.school {
+        color: @blue-dark;
+      }
+      &.government {
+        color: @red-dark;
+      }
+      &.group {
+        color: @gold-dark;
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) {
+
+  .profile {
+
+    .pic {
+      .Cols(3);
+    }
+
+    .basic {
+      .Cols(9);
+
+      .name {
+        font-size: 2em;
+      }
+    }
+  }
+
+  .search .profile {
+    width: 90%;
+    margin: 0 5% 0 5%;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    
+    .name {
+      margin: 0;
+      padding: 0;
+    }
+    .basic {
+      .Cols(6);
+    }
+
+    .back {
+      float: right;
+    }
+    .actions {
+      .Cols(3);
+      vertical-align: bottom;
+
+      button {
+        float: right;
+      }
+    }
+  }
+}

@@ -66,7 +66,7 @@ let Admin = React.createClass({
   render: function () {
     return (
       <div className="admin">
-        <Heading {...this.state} />
+        <Profile {...this.state} />
         <Tabs {...this.state} />
         <RouteHandler {...this.state} />
       </div>
@@ -81,10 +81,10 @@ let Admin = React.createClass({
   }
 });
 
-let Heading = React.createClass({
+let Profile = React.createClass({
   render: function () {
     return (
-      <div className="heading">
+      <div className="profile">
         <Pic id={this.props.org.id} img={this.props.org.img} />
         <Basic {...this.props} />
       </div>

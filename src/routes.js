@@ -43,7 +43,9 @@ module.exports = (
     <Route name="stream" path="stream" handler={Stream}>
       <Route name="myPosts" path="me" handler={Stream} />
       <Route name="userPosts" path="user/:id" handler={Stream} />
-      <Route name="orgPosts" path="org/:id" handler={Stream} />
+      <Route name="orgs" handler={Stream}>
+        <Route name="orgPosts" path=":id" handler={Stream} />
+      </Route>
       <Route name="edit" path="edit/:id" handler={Stream}></Route>
       <Route name="post" path=":id" handler={Stream} />
     </Route>

@@ -62,6 +62,10 @@ let Stream = React.createClass({
 					? false
 					: <Head {...this.state} />
 				}
+				{this.state.context.type === 'orgs'
+					? <Organizations context={this.state.context} />
+					: false
+				}
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader"></div>}>
 					<Posts {...this.state} />
 				</Scroll>
@@ -143,6 +147,118 @@ let Head = React.createClass({
 	}
 });
 
+let Organizations = React.createClass({
+	mixins: [Navigation],
+	getInitialState: function () {
+		return {
+			orgs: []
+		};
+	},
+	componentDidMount: function () {
+		this.unsubscribe = AccountStore.listen((data) => {
+			this.setState(data);
+		});
+		AccountActions.orgs();
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
+	},
+	render: function () {
+		let membership = this.state.orgs || [];
+		if (this.props.context.id) {
+			let selected = this.state.orgs.filter((org) => {
+				if (org.orgId.toString() === this.props.context.id) {
+					return true;
+				}
+				return false;
+			});
+			return <Profile {...selected[0]} />
+		}
+		return (
+			<div className="organizations">
+				<h1>My Organizations</h1>
+				<div className="list">
+					{membership.map((member) => {
+						let org = member.org;
+						return (
+							<div key={org.id} id={org.id} className="org" onClick={this._select}>
+								<div className="name">{org.name}</div>
+								<Pic img={org.img} />
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		);
+	},
+	_select: function (e) {
+		this.context.router.transitionTo("orgPosts", {id: e.currentTarget.id});
+	}
+});
+
+let Pic = React.createClass({
+  getInitialState: function () {
+    return {
+			id: 0,
+      img: '/assets/avatars/default.jpg',
+      default: '/assets/avatars/default.jpg'
+    }
+  },
+  componentWillReceiveProps: function (data) {
+    if (data.img) {
+      this.setState(data);
+    }
+  },
+  render: function () {
+    return (
+      <div className="pic">
+				<Link to="orgPosts" params={{id: this.state.id}}>
+        	<img src={this.state.img} onError={this._default} />
+				</Link>
+      </div>
+    );
+  },
+  _default: function () {
+    this.setState({img: this.state.default});
+  }
+});
+
+let Profile = React.createClass({
+	mixins: [Navigation],
+	render: function () {
+		let org = {
+			img: 1,
+			id: 0
+		};
+		if (this.props.org) {
+			org = this.props.org;
+			console.log(org);
+		}
+		let address = org.address || {};
+		return (
+			<div className="profile">
+				<button className="button blue inverted back" onClick={this._back}>Back to Organizations</button>
+				<h1 className="name">{org.name}</h1>
+				<Pic img={org.img} />
+				<div className="basic">
+					<div className={org.type + " type"}>{org.type ? org.type.toUpperCase() : ""}</div>
+					{address.city || address.state ? <div>{address.city}{address.city && address.state ? ", " : ""}{address.state}</div> : false}
+					{org.website ? <div><a href={org.website} target="_blank">{org.website}</a></div> : false}
+					{org.phone ? <div>{org.phone}</div> : false}
+					{org.email ? <div><a href={"mailto:" + org.email + "&Subject=Phourus"}>{org.email}</a></div> : false}
+				</div>
+				<div className="actions">
+					<button className="button green">Request Access</button>
+					<button className="button blue disabled">Manage Organization</button>
+				</div>
+			</div>
+		);
+	},
+	_back: function () {
+		this.context.router.transitionTo("orgs");
+	}
+});
+
 let Context = React.createClass({
 	mixins: [Navigation],
 	render: function () {
@@ -157,7 +273,7 @@ let Context = React.createClass({
 		if (this.props.type === 'userPosts') {
 			classes.users += ' selected';
 		}
-		if (this.props.type === 'orgPosts') {
+		if (this.props.type === 'orgPosts' || this.props.type === 'orgs') {
 			classes.organizations += ' selected';
 		}
 		return (
@@ -172,7 +288,7 @@ let Context = React.createClass({
 		this.context.router.transitionTo("stream");
 	},
 	_organizations: function () {
-		this.context.router.transitionTo("orgPosts", {id: 1});
+		this.context.router.transitionTo("orgs");
 	},
 	_users: function () {
 		this.context.router.transitionTo("userPosts", {id: 1});
