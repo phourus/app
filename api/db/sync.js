@@ -1,15 +1,22 @@
 require('./connection');
+var collaborators = require('../models/collaborators');
 var comments = require('../models/comments');
+var favorites = require('../models/favorites');
 var links = require('../models/links');
 var locations = require('../models/locations');
 var members = require('../models/members');
+var mentions = require('../models/mentions');
 var orgs = require('../models/orgs');
 var passwords = require('../models/passwords');
 var posts = require('../models/posts');
+var teammates = require('../models/teammates');
+var teams = require('../models/teams');
 var tags = require('../models/tags');
 var thumbs = require('../models/thumbs');
+var tokens = require('../models/tokens');
 var users = require('../models/users');
 var views = require('../models/views');
+var votes = require('../models/votes');
 
 // passwords
 users.hasOne(passwords);
@@ -42,6 +49,8 @@ members.belongsTo(users);
 users.sync()
 .then(function () {
   passwords.sync();
+  favorites.sync();
+  tokens.sync();
 
   // posts
   posts.sync()
@@ -51,12 +60,21 @@ users.sync()
     locations.sync();
     views.sync();
     thumbs.sync();
-    comments.sync();
+    collaborators.sync();
+    votes.sync();
+    comments.sync()
+    .then(function () {
+      mentions.sync();
+    });
   });
 
   // orgs
   orgs.sync()
   .then(function () {
     members.sync();
+    teams.sync()
+    .then(function () {
+      teammates.sync();
+    });
   });
 });

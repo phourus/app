@@ -3,24 +3,26 @@ var db = require('../db');
 
 var users = require('./users');
 var orgs = require('./orgs');
+var members = require('./members');
 var tags = require('./tags');
 var links = require('./links');
 var locations = require('./locations');
 var views = require('./views');
 var thumbs = require('./thumbs');
 var comments = require('./comments');
+var votes = require('./votes');
+var favorites = require('./favorites');
+var mentions = require('./mentions');
+var collaborators = require('./collaborators');
 
 var posts = db.define('posts', {
   // Common
   id: {type: sql.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
-  privacy: {type: sql.ENUM('public', 'phourus', 'org', 'private', 'trash'), defaultValue: 'private'},
+  privacy: {type: sql.ENUM('public', 'members', 'private', 'trash'), defaultValue: 'private'},
   type: sql.ENUM('blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'),
   title: sql.STRING,
   slug: sql.STRING,
   content: sql.TEXT,
-  element: sql.ENUM('world', 'mind', 'voice', 'self'),
-  category: sql.STRING(40),
-  subcategory: sql.STRING(40),
   lat: sql.FLOAT,
   lng: sql.FLOAT,
 
@@ -32,13 +34,9 @@ var posts = db.define('posts', {
   influence: {type: sql.INTEGER, defaultValue: 0},
 
   // Meta
-  parent_id: sql.INTEGER,
-  difficulty: {type: sql.ENUM('easy', 'medium', 'hard'), allowNull: true},
-  positive: sql.BOOLEAN,
   scope: {type: sql.ENUM('local', 'county', 'state', 'national', 'international'), allowNull: true},
   zip: sql.STRING(5),
   author: sql.STRING,
-  vote: sql.BOOLEAN,
   orgId: {type: sql.INTEGER, defaultValue: null}
 }, {
   classMethods: {
@@ -144,7 +142,7 @@ var posts = db.define('posts', {
       // PRIVACY
       var privacy = ['public'];
       if (this.SESSION_USER !== false) {
-        privacy.push('phourus');
+        privacy.push('members');
       }
 
       // CONTEXT
@@ -154,13 +152,29 @@ var posts = db.define('posts', {
         privacy.push('private');
       }
 
-      if (params.contextType === 'userPosts') {
+      if (params.contextType === 'users') {
         query.where.userId = params.contextId;
       }
 
-      if (params.contextType === 'orgPosts') {
+      if (params.contextType === 'orgs') {
         query.where.orgId = params.contextId;
-        privacy = ['org'];
+        privacy = ['public'];
+        // if member
+        /** NEED TO CREATE ASYNC SOLUTION **/
+        members.isMember(this.SESSION_USER, params.contextId)
+        .then((data) => {
+          if (!data) {
+            return false;
+          }
+          if (data.userId === parseInt(this.SESSION_USER) && data.orgId === parseInt(params.contextId) && data.approved === true) {
+            privacy.push('private');
+            return true;
+          }
+          return false;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
       }
 
       query.where.privacy = {
@@ -202,8 +216,30 @@ views.belongsTo(posts);
 posts.hasMany(thumbs);
 thumbs.belongsTo(posts);
 
+// votes
+posts.hasMany(votes);
+votes.belongsTo(posts);
+users.hasMany(votes);
+votes.belongsTo(users);
+
+// favorites
+users.hasMany(favorites);
+favorites.belongsTo(users);
+
 // comments
 posts.hasMany(comments);
 comments.belongsTo(posts);
+
+// mentions
+comments.hasMany(mentions);
+mentions.belongsTo(comments);
+users.hasMany(mentions);
+mentions.belongsTo(users);
+
+// collaborators
+collaborators.belongsTo(users);
+users.hasMany(collaborators);
+collaborators.belongsTo(posts);
+posts.hasMany(collaborators);
 
 module.exports = posts;

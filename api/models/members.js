@@ -14,7 +14,7 @@ var members = db.define('members', {
       var model = {
         userId: this.SESSION_USER,
         orgId: orgId
-      }
+      };
       return this.create(model);
     },
     save: function (id, model) {
@@ -22,6 +22,9 @@ var members = db.define('members', {
     },
     remove: function (id) {
       return this.destroy({where: {id: id}});
+    },
+    isMember: function (userId, orgId) {
+      return this.findOne({where: {userId: userId, orgId: orgId, approved: 1}});
     },
     getMembers: function (orgId) {
       // return this.findAll({

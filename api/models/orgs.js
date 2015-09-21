@@ -1,6 +1,9 @@
 var types = require('sequelize');
 var db = require('../db');
 
+var teams = require('./teams');
+var teammates = require('./teammates');
+
 var orgs = db.define('orgs', {
   id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
   type: types.ENUM('company', 'school', 'government', 'group'),
@@ -39,5 +42,13 @@ var orgs = db.define('orgs', {
     }
   }
 });
+
+// teams
+orgs.hasMany(teams);
+teams.belongsTo(orgs);
+
+// teammates
+teams.hasMany(teammates);
+teammates.belongsTo(teams);
 
 module.exports = orgs;
