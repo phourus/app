@@ -58,6 +58,9 @@ var posts = db.define('posts', {
     },
     save: function (id, model) {
       model.userId = this.SESSION_USER;
+      if (model.orgId === 'null') {
+        model.orgId = null;
+      }
       return this.update(model, {where: {id: id, userId: model.userId}});
     },
     remove: function (id) {
@@ -142,13 +145,13 @@ var posts = db.define('posts', {
       // PRIVACY
       var privacy = ['public'];
       if (this.SESSION_USER !== false) {
-        privacy.push('members');
+        //privacy.push('members');
       }
 
       // CONTEXT
       if (params.contextType === 'myPosts' && this.SESSION_USER) {
         query.where.userId = this.SESSION_USER;
-        privacy.push('org');
+        //privacy.push('org');
         privacy.push('private');
       }
 

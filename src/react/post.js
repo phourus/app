@@ -51,7 +51,10 @@ let Post = React.createClass({
 	componentDidMount: function () {
 		this.unsubscribe = Store.listen((data) => {
 			if (data.hasOwnProperty('saving')) {
-				this.setState({saving: data.saving});
+				if (data.saving === false) {
+					this.context.router.transitionTo("myPosts");
+				}
+				this.setState({saving: data.saving, types: false});
 			}
 			if (data.post) {
 				this.setState({post: data.post});
@@ -227,11 +230,13 @@ let Privacy = React.createClass({
 	render: function () {
 		return (
 			<div>
+				<h2>Post Privacy</h2>
 				<strong>Post on behalf of</strong>
 				<Privacy.Orgs {...this.props} />
-				<strong>Post Privacy</strong>
+				<strong>Visibility</strong>
 				<select ref="privacy" value={this.props.post.privacy} onChange={this._privacy}>
 					<option value="private">Private</option>
+					<option value="members">{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</option>
 					<option value="public">Public</option>
 				</select>
 			</div>
@@ -265,7 +270,7 @@ Privacy.Orgs = React.createClass({
       <div className="orgs">
 				<div className="org">
 					Me
-					<button id="0" onClick={this._select} className="button blue" disabled={this.props.post.orgId == 0}>Post on my behalf</button>
+					<button id="null" onClick={this._select} className="button blue" disabled={!this.props.post.orgId || this.props.post.orgId === 'null'}>Post on my behalf</button>
 				</div>
         {this.state.orgs.map((item) => {
 					if (item.approved !== true) {
@@ -665,6 +670,7 @@ let Tags = React.createClass({
     let tags = this.props.post.tags || [];
 		return (
       <div className="tags">
+				{this.props.context.type === 'edit' && this.props.owner ? <h2>Edit Tags</h2> : false}
         <i className="fa fa-tag" />
         {tags.map((item, index) => {
           return (
