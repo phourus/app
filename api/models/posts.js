@@ -18,13 +18,17 @@ var collaborators = require('./collaborators');
 var posts = db.define('posts', {
   // Common
   id: {type: sql.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
+  orgId: {type: sql.INTEGER, defaultValue: null},
   privacy: {type: sql.ENUM('public', 'members', 'private', 'trash'), defaultValue: 'private'},
   type: sql.ENUM('blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'),
   title: sql.STRING,
-  slug: sql.STRING,
+  slug: {type: sql.STRING, unique: true},
   content: sql.TEXT,
-  lat: sql.FLOAT,
-  lng: sql.FLOAT,
+
+  // Meta
+  scope: {type: sql.ENUM('local', 'county', 'state', 'national', 'international'), allowNull: true},
+  zip: sql.STRING(5),
+  author: sql.STRING,
 
   // Stats
   totalComments: {type: sql.INTEGER, defaultValue: 0},
@@ -33,11 +37,9 @@ var posts = db.define('posts', {
   popularity: {type: sql.INTEGER, defaultValue: 0},
   influence: {type: sql.INTEGER, defaultValue: 0},
 
-  // Meta
-  scope: {type: sql.ENUM('local', 'county', 'state', 'national', 'international'), allowNull: true},
-  zip: sql.STRING(5),
-  author: sql.STRING,
-  orgId: {type: sql.INTEGER, defaultValue: null}
+  // Location
+  lat: sql.FLOAT,
+  lng: sql.FLOAT
 }, {
   classMethods: {
     single: function (id) {
