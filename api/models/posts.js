@@ -98,6 +98,7 @@ var posts = db.define('posts', {
     queryize: function (params) {
       var defaults = {};
       var query = {};
+      var myPosts = {};
 
       /** DEFAULTS **/
       // sort: influence, comments, views, popularity, thumbs, date, location
@@ -110,7 +111,7 @@ var posts = db.define('posts', {
       query.order = [[(params.sortBy || defaults.sortBy), (params.direction || defaults.direction)]];
       query.offset = ((params.page || defaults.page) - 1) * (defaults.limit || params.limit);
       query.limit = params.limit || defaults.limit;
-      query.where = {};
+      query.where = this._privacy();
 
       /** WHERE **/
       // EXCLUDE
@@ -144,58 +145,48 @@ var posts = db.define('posts', {
           query.where.createdAt.lt = params.endDate;
       }
 
-      // PRIVACY
-      var privacy = ['public'];
-      if (this.SESSION_USER !== false) {
-        //privacy.push('members');
-      }
-
-      // CONTEXT
-      if (params.contextType === 'myPosts' && this.SESSION_USER) {
+      // ME
+      if (params.contextType === 'myPosts') {
         query.where.userId = this.SESSION_USER;
-        //privacy.push('org');
-        privacy.push('private');
+        //query.where.$or.push({'collaborators.teamId': this.SESSION_TEAMS});
+        //query.where.$or.push({'collaborators.userId': this.SESSION_USER});
       }
 
+      // USER
       if (params.contextType === 'users') {
         query.where.userId = params.contextId;
       }
 
+      // ORG
       if (params.contextType === 'orgs') {
         query.where.orgId = params.contextId;
-        privacy = ['public'];
-        // if member
-        /** NEED TO CREATE ASYNC SOLUTION **/
-        members.isMember(this.SESSION_USER, params.contextId)
-        .then((data) => {
-          if (!data) {
-            return false;
-          }
-          if (data.userId === parseInt(this.SESSION_USER) && data.orgId === parseInt(params.contextId) && data.approved === true) {
-            privacy.push('private');
-            return true;
-          }
-          return false;
-        })
-        .catch((err) => {
-          console.error(err);
-        });
       }
 
-      query.where.privacy = {
-        $in: privacy
-      };
-      /** ADVANCED **/
-      // groups, location, org_id
-
-      /** USER ASSOCIATION **/
+      /** ASSOCIATIONS **/
       query.include = [
           {model: users, as: 'user', include: [locations]},
           {model: orgs, as: 'org'},
           {model: tags, as: 'tags'},
-          {model: links, as: 'links'}
+          {model: links, as: 'links'},
+          {model: collaborators, as: 'collaborators'}
       ];
       return query;
+    },
+    _privacy: function () {
+      // GUEST
+      if (!this.SESSION_USER) {
+        return {privacy: 'public'};
+      }
+
+      // AUTHENTICATED
+      return {
+        $or: [
+          {privacy: {$in: ['public']}},
+          {userId: this.SESSION_USER, privacy: "private"},
+          {privacy: 'members', orgId: null},
+          {privacy: 'members', orgId: this.SESSION_ORGANIZATIONS},
+        ]
+      };
     }
   }
 });
