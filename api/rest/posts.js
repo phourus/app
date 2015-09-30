@@ -18,6 +18,9 @@ router.get('/:id', (req, res) => {
 router.get('', (req, res) => {
   var params = req.query;
   posts.SESSION_USER = req.user_id;
+  posts.SESSION_ORGANIZATIONS = req.organizations;
+  posts.SESSION_ADMIN = req.admin;
+  posts.SESSION_TEAMS = req.teams;
   posts.collection(params)
   .then(function (data) {
     res.send(200, data);
