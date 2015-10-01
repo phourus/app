@@ -77,10 +77,13 @@ var posts = db.define('posts', {
       wherePost = {where: {id: id}};
       self = this;
       // views
-      views.count(where)
+      views.add({postId: id, viewerId: this.SESSION_USER})
       .then(function (data) {
-        var model = {totalViews: data};
-        self.update(model, wherePost);
+        views.count(where)
+        .then(function (data) {
+          var model = {totalViews: data};
+          self.update(model, wherePost);
+        });
       });
       // comments
       comments.count(where)

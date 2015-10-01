@@ -14,7 +14,23 @@ module.exports = db.define('views', {
       return this.findAndCountAll(this.queryize(params));
     },
     add: function (model) {
-      return this.create(model);
+      var execute = false;
+      var query = {where: {viewerId: model.viewerId}};
+      if (model.hasOwnProperty('postId')) {
+        execute = true;
+        query.where.postId = model.postId;
+      }
+      if (!execute) {
+        return new Promise(function (resolve, reject) {
+          resolve(true);
+        });
+      }
+      return this.find(query)
+      .then(function (data) {
+        if (!data) {
+          return this.create(model);
+        }
+      });
     },
     queryize: function (params) {
       if (params.post_id) {
