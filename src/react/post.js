@@ -39,7 +39,8 @@ let Post = React.createClass({
 			},
 			user: {
 				id: 0
-			}
+			},
+			privacy: false
 		}
 	},
 	componentDidUpdate: function () {
@@ -142,6 +143,7 @@ let Post = React.createClass({
 									</div>
 								: <div>
 										<button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save'}</button>
+										<button className="button gold inverted save" onClick={this._privacy}><i className="fa fa-lock" /> Privacy</button>
 										<button className="button red delete inverted" onClick={this._trash}><i className="fa fa-trash" /> Delete</button>
 										<button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
 									</div>
@@ -151,6 +153,10 @@ let Post = React.createClass({
 				}
 				<div className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				{types}
+				{this.props.context.type === 'edit' && this.props.owner && this.state.privacy
+					? <Privacy post={this.state.post} />
+					: false
+				}
 				{this.state.post.privacy === 'org' && this.props.context.type === 'edit'
 					? {orgs}
 					: false
@@ -168,10 +174,6 @@ let Post = React.createClass({
 					: false
 				}
 				{content}
-				{this.props.context.type === 'edit' && this.props.owner
-					? <Privacy post={this.state.post} />
-					: false
-				}
 				{this.props.context.type === 'edit'
 					? tags
 					: false
@@ -201,6 +203,9 @@ let Post = React.createClass({
 	},
 	_myposts: function () {
 		this.context.router.transitionTo("myPosts");
+	},
+	_privacy: function () {
+		this.setState({privacy: !this.state.privacy});
 	},
 	_type: function () {
 		if (this.props.context.type === 'edit' && this.props.owner) {
@@ -725,10 +730,10 @@ let Links = React.createClass({
 		this.unsubscribe();
 	},
 	render: function () {
+		// {this.props.context.type === 'edit' && this.props.owner ? <Links.Edit post={this.props.post} {...this.state} /> : false}
 		return (
 			<div className="links">
-				<h2>Links & Attachments</h2>
-				{this.props.context.type === 'edit' && this.props.owner ? <Links.Edit post={this.props.post} {...this.state} /> : false}
+				<h2>Links & Attachments</h2>		
 				<Links.List post={this.props.post} context={this.props.context} owner={this.props.owner} edit={this._edit} />
 			</div>
 		);
