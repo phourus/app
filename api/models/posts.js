@@ -72,27 +72,33 @@ var posts = db.define('posts', {
       return this.findAndCountAll({where: {userId: model.userId}});
     },
     updateStats: function (id) {
-      var self, where, viewTotal, commentTotal, thumbTotal;
+      var self, where, wherePost, viewTotal, commentTotal, thumbTotal, popularity;
       where = {where: {postId: id}};
       wherePost = {where: {id: id}};
       self = this;
       // views
-      viewTotal = views.count(where)
+      views.count(where)
       .then(function (data) {
-        var model = {views: data};
+        var model = {totalViews: data};
         self.update(model, wherePost);
       });
       // comments
-      commentTotal = comments.count(where)
+      comments.count(where)
       .then(function (data) {
-        var model = {comments: data};
+        var model = {totalComments: data};
         self.update(model, wherePost);
       });
-      // thumbs
-      thumbTotal = thumbs.count({where: {id: id}})
+      // thumbs && popularity
+      thumbs.count(where)
       .then(function (data) {
-        var model = {thumbs: data};
+        var model = {totalThumbs: data};
         self.update(model, wherePost);
+        thumbs.count({where: {postId: id, positive: true}})
+        .then(function (positive) {
+          popularity = positive / data * 100;
+          var model = {popularity: popularity};
+          self.update(model, wherePost);
+        });
       });
     },
     queryize: function (params) {
