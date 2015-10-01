@@ -5,11 +5,11 @@ module.exports = function (element, popularity) {
   var radius = 50;
   var posX = 90;
   var posY = element.height / 2;
-  var end = popularity / 100;
+  var end = (100 - popularity) / 100;
 
   ctx.font = "30px 'open sans'";
   ctx.textAlign = 'center';
-  ctx.fillText(100 - popularity + '%', posX, posY + 10);
+  ctx.fillText(popularity + '%', posX, posY + 10);
   ctx.beginPath();
   ctx.strokeStyle = '#99CC33';
   ctx.lineCap = 'square';
@@ -25,4 +25,4 @@ module.exports = function (element, popularity) {
   ctx.stroke();
 
   return ctx;
-}
+};
