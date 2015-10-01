@@ -344,7 +344,6 @@
 
   .details {
     .Row(100%);
-    background-color: #f7f7f7;
     padding: 10px;
     box-sizing: border-box;
 
@@ -369,7 +368,31 @@
       }
     }
   }
+
   .interact {
+    background-color: #f7f7f7;
+
+    .influence, .popularity {
+      width: 60px;
+    }
+
+    .popularity > div {
+      width: 60px;
+    }
+
+    .stats {
+      width: 110px;
+      padding-bottom: 6px;
+    }
+
+    .thumb {
+      width: 360px;
+      text-align: right;
+    }
+
+    i {
+      font-size: 1.5em;
+    }
 
     > div {
       display: inline-block;
@@ -378,7 +401,6 @@
   }
   &.selected .interact {
     margin: 20px 0;
-    background-color: #f7f7f7;
     padding: 10px 0;
   }
 
@@ -410,13 +432,11 @@
       .Cols(4);
       text-align: center;
       font-size: 10px;
-      color: #333;
-      width: 80px;
+      color: #777;
 
      strong {
-       color: @theme-dark;
        font-family: @font-serif;
-       font-size: 2.4em;
+       font-size: 1.8em;
      }
     }
   }

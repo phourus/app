@@ -20,6 +20,7 @@ let Influence = require('../influence');
 let Popularity = require('../popularity');
 let tax = require('../taxonomy');
 let thousands = "0,0";
+let en = numeral.language('en');
 // AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});
 // let S3 = AWS.S3;
 // let s3 = new S3();
@@ -624,18 +625,20 @@ let Stats = React.createClass({
 		this._popularity(data);
 	},
 	render: function () {
-		// <Influence influence={this.props.post.influence}/>
 		return (
 			<div className="interact">
 				{this.props.context.type === 'post' ? <Thumbs post={this.props.post} /> : false}
+				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
-					<canvas id={`popularity${this.props.post.id}`}></canvas>
-					<div>Popularity</div>
+					<div>
+						<canvas id={`popularity${this.props.post.id}`}></canvas>
+						<div>Popularity</div>
+					</div>
 				</div>
 				<div className="stats">
-					<div><strong>{numeral(this.props.post.totalViews).format(thousands)}</strong><br /><i className="fa fa-eye" /> Views</div>
-					<div><strong>{numeral(this.props.post.totalComments).format(thousands)}</strong><br /><i className="fa fa-comments" /> Comments</div>
-					<div><strong>{numeral(this.props.post.totalThumbs).format(thousands)}</strong><br /><i className="fa fa-thumbs-up" /> Thumbs</div>
+					<div><strong>{numeral(this.props.post.totalViews).format('0a')}</strong><br /><i className="fa fa-search" /></div>
+					<div><strong>{numeral(this.props.post.totalComments).format('0a')}</strong><br /><i className="fa fa-comment" /></div>
+					<div><strong>{numeral(this.props.post.totalThumbs).format('0a')}</strong><br /><i className="fa fa-thumbs-up" /></div>
 				</div>
 			</div>
 		);

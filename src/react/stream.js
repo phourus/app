@@ -242,12 +242,11 @@ let Context = React.createClass({
 		if (this.props.type === 'orgPosts' || this.props.type === 'orgs') {
 			classes.organizations += ' selected';
 		}
+		// <button className={classes.phourus} onClick={this._phourus}> Phourus</button>
+		// <button className={classes.organizations} onClick={this._organizations}> Orgs</button>
+		// <button className={classes.users} onClick={this._users}> Users</button>
 		return (
-			<div className="context">
-				<button className={classes.phourus} onClick={this._phourus}> Phourus</button>
-				<button className={classes.organizations} onClick={this._organizations}> Orgs</button>
-				<button className={classes.users} onClick={this._users}> Users</button>
-			</div>
+			<div className="context"></div>
 		);
 	},
 	_phourus: function () {

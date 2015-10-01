@@ -1841,7 +1841,6 @@ div.alerts button {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  background-color: #f7f7f7;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -1875,13 +1874,33 @@ div.alerts button {
   font-size: 0.8em;
   color: #bbb;
 }
+.postItem .interact {
+  background-color: #f7f7f7;
+}
+.postItem .interact .influence,
+.postItem .interact .popularity {
+  width: 60px;
+}
+.postItem .interact .popularity > div {
+  width: 60px;
+}
+.postItem .interact .stats {
+  width: 110px;
+  padding-bottom: 6px;
+}
+.postItem .interact .thumb {
+  width: 360px;
+  text-align: right;
+}
+.postItem .interact i {
+  font-size: 1.5em;
+}
 .postItem .interact > div {
   display: inline-block;
   vertical-align: bottom;
 }
 .postItem.selected .interact {
   margin: 20px 0;
-  background-color: #f7f7f7;
   padding: 10px 0;
 }
 .postItem ul {
@@ -1922,13 +1941,11 @@ div.alerts button {
   vertical-align: top;
   text-align: center;
   font-size: 10px;
-  color: #333;
-  width: 80px;
+  color: #777;
 }
 .postItem .stats div strong {
-  color: #1e2f40;
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
-  font-size: 2.4em;
+  font-size: 1.8em;
 }
 .postItem .tags {
   border-bottom: solid 1px #eee;
