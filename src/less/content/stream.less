@@ -429,6 +429,55 @@
 @media (min-width: 1000px) {
   .search {
 
+    .posts {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+      -webkit-box-align: stretch;
+      -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+      align-items: stretch;
+      -webkit-align-content: stretch;
+      -ms-flex-line-pack: stretch;
+      align-content: stretch;
+
+      &:hover .postItem {
+        opacity: 0.5;
+        transition: opacity .5s ease-in-out;
+        -moz-transition: opacity .5s ease-in-out;
+        -webkit-transition: opacity .5s ease-in-out;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      .postItem {
+        height: 500px;
+        .rounded(10px);
+        opacity: 1;
+        transition: opacity .5s ease-in-out;
+        -moz-transition: opacity .5s ease-in-out;
+        -webkit-transition: opacity .5s ease-in-out;
+        position: relative;
+        margin: 5px;
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+
+        .interact {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }
+      }
+    }
+
     .organizations {
 
       .list {
