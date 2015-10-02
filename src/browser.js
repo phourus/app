@@ -3,6 +3,7 @@ let React = require('react');
 let Router = require('react-router');
 let routes = require('./routes');
 
-Router.run(routes, Router.HistoryLocation, function (Handler) {
-    React.render(<Handler />, document.getElementById("app"));
+Router.run(routes, Router.HistoryLocation, function (Handler, state) {
+  ga('send', 'pageview', state.path);
+  React.render(<Handler />, document.getElementById("app"));
 });

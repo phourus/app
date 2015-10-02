@@ -28,6 +28,7 @@
     "please-ajax": "^1.0.8",
     "react": "0.13.3",
     "react-dropzone-component": "^0.4.4",
+    "react-google-analytics": "^0.2.0",
     "react-infinite-scroll": "^0.1.5",
     "react-quill": "0.2.2",
     "react-router": "0.13.3",

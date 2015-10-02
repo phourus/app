@@ -3,6 +3,8 @@ let React = require('react');
 
 let Router = require('react-router');
 let { Link, RouteHandler} = Router;
+var ga = require('./analytics');
+var Initializer = ga.Initializer;
 
 let Alerts = require('./react/alerts');
 let Header = require('./react/header');
@@ -11,6 +13,7 @@ let App = React.createClass({
   render: function () {
     return  (
       <div>
+        <Initializer />
         <Header />
         <div className="spacer"></div>
         <Alerts {...this.props.alerts} />
