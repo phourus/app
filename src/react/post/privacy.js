@@ -4,34 +4,52 @@ let Router = require('react-router');
 let { Navigation } = Router;
 
 let Actions = require('../../actions/post');
+let ActionsAccount = require('../../actions/account');
+let AccountStore = require('../../stores/account');
 
 let Privacy = React.createClass({
+	getDefaultProps: function () {
+		return {
+			post: {}
+		};
+	},
 	render: function () {
+		let privacy = this.props.post.privacy || 'private';
+		let classes = {
+			private: "button blue",
+			members: "button blue",
+			public: "button blue"
+		};
+		classes[privacy] += " inverted";
 		return (
-			<div>
-				<h2>Post Privacy</h2>
-				<strong>Post on behalf of</strong>
-				<Privacy.Orgs {...this.props} />
-				<strong>Visibility</strong>
-				<select ref="privacy" value={this.props.post.privacy} onChange={this._privacy}>
-					<option value="private">Private</option>
-					<option value="members">{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</option>
-					<option value="public">Public</option>
-				</select>
+			<div className="privacy">
+				<strong>Post Privacy</strong>
+				<div>
+					<button className={classes.private} onClick={this._private}>Private</button>
+					<button className={classes.members} onClick={this._members}>{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</button>
+					<button className={classes.public} onClick={this._public}>Public</button>
+					<Contexts {...this.props} />
+				</div>
 			</div>
 		);
 	},
-	_privacy: function (e) {
-		Actions.change('privacy', e.currentTarget.value);
-	}
+	_private: function (e) {
+		Actions.change('privacy', 'private');
+	},
+	_members: function (e) {
+		Actions.change('privacy', 'members');
+	},
+	_public: function (e) {
+		Actions.change('privacy', 'public');
+	},
 });
 
-Privacy.Orgs = React.createClass({
+let Contexts = React.createClass({
   mixins: [Navigation],
   getInitialState: function () {
     return {
       orgs: []
-    }
+    };
   },
   componentDidMount: function () {
     this.unsubscribe = AccountStore.listen((data) => {
@@ -46,27 +64,25 @@ Privacy.Orgs = React.createClass({
   },
   render: function () {
     return (
-      <div className="orgs">
-				<div className="org">
-					Me
-					<button id="null" onClick={this._select} className="button blue" disabled={!this.props.post.orgId || this.props.post.orgId === 'null'}>Post on my behalf</button>
-				</div>
-        {this.state.orgs.map((item) => {
-					if (item.approved !== true) {
-						return false;
-					}
-					return (
-            <div className="org">
-							{item.org.name}
-              <button id={item.org.id} onClick={this._select} className="button blue" disabled={parseInt(this.props.post.orgId) === item.org.id}>Select Organization</button>
-            </div>
-          );
-        })}
+      <div className="contexts">
+				<select onChange={this._select} value={this.props.post.orgId}>
+					<option value="null">Post on my behalf</option>
+					{this.state.orgs.map((item) => {
+						if (item.approved !== true) {
+							return false;
+						}
+						return (
+							<option value={item.org.id}>
+								{item.org.name}
+							</option>
+						);
+					})}
+				</select>
       </div>
     );
   },
   _select: function (e) {
-		Actions.change('orgId', e.currentTarget.id);
+		Actions.change('orgId', e.currentTarget.value);
   }
 });
 

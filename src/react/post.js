@@ -144,8 +144,7 @@ let Post = React.createClass({
 										<button className="button red delete inverted" onClick={this._cancel} style={{width: '95%'}}><i className="fa fa-remove" /> Cancel Delete</button>
 									</div>
 								: <div>
-										<button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save'}</button>
-										<button className="button gold inverted save" onClick={this._privacy}><i className="fa fa-lock" /> Privacy</button>
+										<button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save Changes'}</button>
 										<button className="button red delete inverted" onClick={this._trash}><i className="fa fa-trash" /> Delete</button>
 										<button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
 									</div>
@@ -155,6 +154,7 @@ let Post = React.createClass({
 				}
 				<div className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				{types}
+				{this.props.owner && this.props.context.type === 'edit' ? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> Privacy</div> : false}
 				{this.props.context.type === 'edit' && this.props.owner && this.state.privacy
 					? <Privacy post={this.state.post} />
 					: false

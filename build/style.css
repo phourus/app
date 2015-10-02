@@ -1535,6 +1535,15 @@ div.alerts button {
 .postItem.selected > a.edit {
   margin-right: 20px;
 }
+.postItem .privacyToggle {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.9em;
+}
+.postItem .privacyToggle:hover {
+  cursor: pointer;
+  color: #5faee3;
+}
 .postItem .actions {
   float: right;
 }
@@ -1543,7 +1552,7 @@ div.alerts button {
 .postItem .actions button.myposts {
   height: 30px;
   font-size: 0.8em;
-  width: 80px;
+  width: 140px;
   margin: 0;
   padding: 4px;
   display: inline-block;
@@ -1872,6 +1881,16 @@ div.alerts button {
 .postItem .details .basic .created {
   font-size: 0.8em;
   color: #bbb;
+}
+.postItem .privacy {
+  background-color: #eee;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.postItem .privacy > div div.contexts,
+.postItem .privacy > div button {
+  display: inline-block;
+  vertical-align: middle;
 }
 .postItem .interact {
   background-color: #efefef;

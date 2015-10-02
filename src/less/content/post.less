@@ -33,13 +33,24 @@
     }
   }
 
+  .privacyToggle {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 0.9em;
+
+    &:hover {
+      cursor: pointer;
+      color: @blue-light;
+    }
+  }
+
   .actions {
     float: right;
 
     button.save, button.delete, button.myposts {
       height: 30px;
       font-size: 0.8em;
-      width: 80px;
+      width: 140px;
       margin: 0;
       padding: 4px;
       display: inline-block;
@@ -364,6 +375,20 @@
       .created {
         font-size: 0.8em;
         color: #bbb;
+      }
+    }
+  }
+
+  .privacy {
+    background-color: #eee;
+    box-sizing: border-box;
+    padding: 10px;
+
+    > div {
+
+      div.contexts, button {
+        display: inline-block;
+        vertical-align: middle;
       }
     }
   }
