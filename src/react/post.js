@@ -90,7 +90,7 @@ let Post = React.createClass({
 		let post = this.state.post;
 		let types = false;
 		let comments = false;
-		let tags = false;
+		let tags = <Tags post={this.state.post} context={this.props.context} owner={this.props.owner} />;
 		let content = false;
 		let links = false;
 		let thumbs = false;
@@ -106,8 +106,7 @@ let Post = React.createClass({
 		}
 		if (this.props.context.type === 'post' || this.props.context.type === 'edit') {
 			stats = this.props.context.type === 'edit' ? false : <Stats post={this.state.post} context={this.props.context} />;
-		types = this.state.types ? <Types post={this.state.post} type={this._type} context={this.props.context} owner={this.props.owner} /> : false;
-			tags = <Tags post={this.state.post} context={this.props.context} owner={this.props.owner} />;
+			types = this.state.types ? <Types post={this.state.post} type={this._type} context={this.props.context} owner={this.props.owner} /> : false;
 			links = <Links post={this.state.post} context={this.props.context} owner={this.props.owner} />;
 			content = this.props.context.type === 'edit' && this.props.owner ? <TextEditor post={this.state.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.state.post.content}}></div>;
 			comments = this.props.context.type === 'edit' ? false : <Comments post={this.state.post} />;

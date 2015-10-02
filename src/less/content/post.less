@@ -2,7 +2,7 @@
   width: 98%;
   margin: 1%;
   padding: 1%;
-  background-color: white;
+  background-color: #f7f7f7;
   box-sizing: border-box;
 
   .rte {
@@ -369,7 +369,7 @@
   }
 
   .interact {
-    background-color: #f7f7f7;
+    background-color: #efefef;
 
     .influence, .popularity {
       width: 60px;
@@ -442,10 +442,13 @@
 
   /** TAGS **/
   .tags {
-    border-bottom: solid 1px #eee;
     margin-top: 10px;
-    margin-bottom: 20px;
     padding-bottom: 10px;
+  }
+
+  &.selected .tags {
+    margin-bottom: 20px;
+    border-bottom: solid 1px #eee;
   }
 
   .tag {
@@ -457,6 +460,7 @@
     color: #999;
     margin-left: 4px;
     display: inline-block;
+    margin-bottom: 4px;
 
     a {
       color: #ccc;

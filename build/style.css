@@ -1505,7 +1505,7 @@ div.alerts button {
   width: 98%;
   margin: 1%;
   padding: 1%;
-  background-color: white;
+  background-color: #f7f7f7;
   box-sizing: border-box;
   /** TAGS **/
   /** LINKS **/
@@ -1874,7 +1874,7 @@ div.alerts button {
   color: #bbb;
 }
 .postItem .interact {
-  background-color: #f7f7f7;
+  background-color: #efefef;
 }
 .postItem .interact .influence,
 .postItem .interact .popularity {
@@ -1947,10 +1947,12 @@ div.alerts button {
   font-size: 1.8em;
 }
 .postItem .tags {
-  border-bottom: solid 1px #eee;
   margin-top: 10px;
-  margin-bottom: 20px;
   padding-bottom: 10px;
+}
+.postItem.selected .tags {
+  margin-bottom: 20px;
+  border-bottom: solid 1px #eee;
 }
 .postItem .tag {
   border: solid 1px #dddddd;
@@ -1963,6 +1965,7 @@ div.alerts button {
   color: #999;
   margin-left: 4px;
   display: inline-block;
+  margin-bottom: 4px;
 }
 .postItem .tag a {
   color: #ccc;
@@ -2799,17 +2802,12 @@ div.alerts button {
     -ms-flex-line-pack: stretch;
     align-content: stretch;
   }
-  .search .posts:hover .postItem {
-    opacity: 0.5;
-    transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    -webkit-transition: opacity 0.5s ease-in-out;
-  }
   .search .posts:hover .postItem:hover {
-    opacity: 1;
+    background-color: #fff;
   }
   .search .posts .postItem {
-    height: 500px;
+    min-height: 500px;
+    padding-bottom: 75px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
@@ -2828,6 +2826,8 @@ div.alerts button {
     position: absolute;
     left: 0;
     bottom: 0;
+    border-top: dotted 3px #eee;
+    background: transparent;
   }
   .search .organizations .list .org {
     width: 25%;
