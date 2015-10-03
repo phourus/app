@@ -22,6 +22,8 @@ let Post = Reflux.createStore({
     this.listenTo(Actions.add, this._add);
     this.listenTo(Actions.save, this._save);
     this.listenTo(Actions.trash, this._trash);
+    this.listenTo(Actions.poll, this._poll);
+    this.listenTo(Actions.vote, this._vote);
   },
   _single: function (id) {
     if (!id) {
@@ -80,6 +82,22 @@ let Post = Reflux.createStore({
   _change: function (key, value) {
     this.changes[key] = value;
     this.trigger({changes: this.changes});
+  },
+  _poll: function (id) {
+    let data = [
+      {label: 'Tom Brady', value: '1200'},
+      {label: 'Peyton Manning', value: '900'},
+      {label: 'Joe Montana', value: '1100'},
+      {label: 'Ryan Leaf', value: '1199'},
+      {label: 'Tom Brady2', value: '1200'},
+      {label: 'Peyton Manning2', value: '900'},
+      {label: 'Joe Montana2', value: '1100'},
+      {label: 'Ryan Leaf2', value: '1199'},
+    ];
+    this.trigger({data: data});
+  },
+  _vote: function (postId, option) {
+    this.trigger({selected: option});
   },
   Comments: Reflux.createStore({
     init: function () {

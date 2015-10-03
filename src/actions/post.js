@@ -8,6 +8,8 @@ module.exports = {
   add: Reflux.createAction(),
   save: Reflux.createAction(),
   trash: Reflux.createAction(),
+  poll: Reflux.createAction(),
+  vote: Reflux.createAction(),
   Comments: {
     collection: Reflux.createAction(),
     add: Reflux.createAction(),

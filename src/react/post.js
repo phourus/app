@@ -17,6 +17,7 @@ let Comments = require('./post/comments');
 let Links = require('./post/links');
 let Meta = require('./post/meta');
 let Pic = require('./post/pic');
+let Poll = require('./post/poll');
 let Privacy = require('./post/privacy');
 let Tags = require('./post/tags');
 let Thumbs = require('./post/thumbs');
@@ -256,6 +257,10 @@ let Details = React.createClass({
 					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
 					<Meta post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				</div>
+				{this.props.post.type === 'poll'
+					? <Poll {...this.props} />
+					: false
+				}
 			</div>
 		);
 	}
