@@ -24,5 +24,11 @@ module.exports = {
   },
   account: function () {
     return http.get(base, settings());
+  },
+  poll: function(id) {
+    return http.get(base + id + '/poll', settings());
+  },
+  vote: function (id, option) {
+    return http.post(base + id + '/vote', {option: option}, settings());
   }
 };

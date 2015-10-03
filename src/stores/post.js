@@ -84,20 +84,28 @@ let Post = Reflux.createStore({
     this.trigger({changes: this.changes});
   },
   _poll: function (id) {
-    let data = [
-      {label: 'Tom Brady', value: '1200'},
-      {label: 'Peyton Manning', value: '900'},
-      {label: 'Joe Montana', value: '1100'},
-      {label: 'Ryan Leaf', value: '1199'},
-      {label: 'Tom Brady2', value: '1200'},
-      {label: 'Peyton Manning2', value: '900'},
-      {label: 'Joe Montana2', value: '1100'},
-      {label: 'Ryan Leaf2', value: '1199'},
-    ];
-    this.trigger({data: data});
+    posts.poll(id)
+    .then(data => {
+      this.trigger({data: data});
+    })
+    .catch(code => {
+      if (code != 200) {
+        msg('red', 'Poll could not be loaded', code);
+        return;
+      }
+    });
   },
   _vote: function (postId, option) {
-    this.trigger({selected: option});
+    posts.vote(postId, option)
+    .then(data => {
+      this.trigger({selected: option});
+    })
+    .catch(code => {
+      if (code != 202) {
+        msg('red', 'Vote could not be saved', code);
+        return;
+      }
+    });
   },
   Comments: Reflux.createStore({
     init: function () {

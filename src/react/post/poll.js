@@ -6,11 +6,15 @@ let Store = require('../../stores/post');
 
 let Poll = React.createClass({
   getInitialState: function () {
-    return {};
+    return {
+      data: []
+    };
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
-      this.setState(data);
+      if (data.data && data.data[0] && data.data[0].postId === this.props.post.id) {
+        this.setState(data);
+      }
     });
     Actions.poll(this.props.post.id);
   },
@@ -37,7 +41,7 @@ let Poll = React.createClass({
   _draw: function () {
     let self = this;
     let columns = this.state.data.map((item) => {
-      return [item.label, item.value];
+      return [item.option, item.count];
     });
     this.chart = c3.generate({
       bindto: '#poll' + this.props.post.id,
@@ -53,9 +57,7 @@ let Poll = React.createClass({
           bottom: 0
         },
         y: {
-          tick: {
-            count: 4
-          }
+          show: false
         },
         x: {
           show: false

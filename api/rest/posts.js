@@ -1,6 +1,7 @@
 var router = require('express').Router();
 
 var posts = require('../models/posts');
+var votes = require('../models/votes');
 
 router.get('/:id', (req, res) => {
   var id = req.params.id;
@@ -86,6 +87,30 @@ router.get('/account', (req, res) => {
   }
   posts.SESSION_USER = req.user_id;
   posts.account()
+  .then(function (data) {
+    res.send(200, data);
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.send(500);
+  });
+});
+router.get('/:id/poll', (req, res) => {
+  var id = req.params.id;
+  votes.poll(id)
+  .then(function (data) {
+    res.send(200, data);
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.send(500);
+  });
+});
+router.post('/:id/vote', (req, res) => {
+  var id = req.params.id;
+  var model = req.body;
+  votes.SESSION_USER = req.user_id;
+  votes.vote(id, model.option)
   .then(function (data) {
     res.send(200, data);
   })

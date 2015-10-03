@@ -7,5 +7,7 @@ module.exports = {
   add: posts.add,
   save: posts.save,
   remove: posts.remove,
-  account: posts.account
+  account: posts.account,
+  poll: posts.poll,
+  vote: posts.vote
 };
