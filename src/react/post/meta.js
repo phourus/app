@@ -34,6 +34,12 @@ let Meta = React.createClass({
 					: <strong>{this.props.post.address}</strong>
 				}
 			</label>);
+		let	poll = (<label>Poll Options:
+				{this.props.context.type === 'edit' && this.props.owner
+					? <input value={this.props.post.poll} onChange={this._poll} />
+					: false
+				}
+			</label>);
 		let	difficulty = (<label>Difficulty:
 				{this.props.context.type === 'edit' && this.props.owner
 					? <select ref="difficulty" value={this.props.post.difficulty} onChange={this._difficulty}>
@@ -69,14 +75,14 @@ let Meta = React.createClass({
 				}
 			</label>);
 		let fields = {
-			blog: [positive],
+			blog: [],
 			event: [date, address],
-			subject: [difficulty],
-			question: [difficulty],
+			subject: [],
+			question: [],
 			debate: [scope, zip],
-			poll: [scope, zip],
-			quote: [],
-			belief: [author]
+			poll: [poll, scope, zip],
+			quote: [author],
+			belief: []
 		};
 		let data = fields[type] || [];
 		return (
@@ -98,6 +104,10 @@ let Meta = React.createClass({
 	_address: function (e) {
 		var value = e.currentTarget.value;
 		Actions.change('address', value);
+	},
+	_poll: function (e) {
+		var value = e.currentTarget.value;
+		Actions.change('poll', value);
 	},
 	_difficulty: function (e) {
 		var value = e.currentTarget.value;

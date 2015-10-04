@@ -58,11 +58,11 @@ let Poll = React.createClass({
     });
     this.chart = c3.generate({
       bindto: '#poll' + this.props.post.id,
+      size: {
+        height: 150
+      },
       axis: {
         rotated: true,
-        size: {
-          width: '100%'
-        },
         padding: {
           top: 0,
           left: 10,

@@ -243,6 +243,7 @@ let Details = React.createClass({
 			org = this.props.post.org;
 			context = 'org';
 		}
+		// <Meta post={this.props.post} context={this.props.context} owner={this.props.owner} />
 		return (
 			<div className="details">
 				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} context={context} />
@@ -255,7 +256,6 @@ let Details = React.createClass({
 					&bull;
 					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
-					<Meta post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				</div>
 				{this.props.post.type === 'poll'
 					? <Poll {...this.props} />
