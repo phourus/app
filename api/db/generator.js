@@ -31,10 +31,20 @@ var ORG_TOTAL = 50;
 var TEAM_TOTAL = 200;
 var COMMENT_TOTAL = 500;
 
+var usernames = [];
+var shortnames = [];
+var slugs = [];
+
 /** TYPES **/
 var User = function User () {
+  do {
+    var username = chance.word();
+  }
+  while (usernames.indexOf(username) > -1);
+  usernames.push(username);
+
   return {
-        username: chance.word(),
+        username: username,
         first: chance.first(),
         last: chance.last(),
         email: chance.email(),
@@ -50,19 +60,33 @@ var User = function User () {
 };
 
 var Post = function Post () {
+  var options = [];
+  var optionCount = chance.integer({min: 3, max: 7});
+  for (var i = 0; i < optionCount; i++) {
+    options.push(chance.word());
+  }
+  do {
+    var slug = chance.word();
+  }
+  while (slugs.indexOf(slug) > -1);
+  slugs.push(slug);
+
   return {
     userId: chance.integer({min: 1, max: USER_TOTAL}),
     orgId: [null, chance.integer({min: 1, max: ORG_TOTAL})][(chance.integer({min: 0, max: 1}))],
     privacy: ['public', 'members', 'private'][chance.integer({min: 0, max: 2})],
     type: ['blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'][chance.integer({min: 0, max: 7})],
     title: chance.sentence(),
-    slug: chance.word(),
+    slug: slug,
     content: chance.paragraph(),
 
     // Meta
     scope: ['local', 'county', 'state', 'national', 'international'][chance.integer({min: 0, max: 4})],
     zip: chance.zip(),
     author: chance.name(),
+    poll: options.join(';'),
+    when: chance.date(),
+    location: chance.street() + ' ' + chance.city() + ' ' + chance.state() + ' ' + chance.zip(),
 
     // Stats
     totalComments: chance.integer({min: 0, max: 1000}),
@@ -140,22 +164,28 @@ var Tag = function Tag () {
 };
 
 var Org = function Org () {
-    return {
-        type: ['company', 'school', 'government', 'group'][chance.integer({min: 0, max: 3})],
-        name: chance.sentence(),
-        shortname: chance.word(),
-        email: chance.email(),
-        phone: chance.phone(),
-        fax: chance.phone(),
-        website: chance.domain(),
-        influence: chance.integer({min: 0, max: 100}),
-        img: '/assets/organizations/' + chance.integer({min: 1, max: 10}) + '.jpg',
-        people: chance.integer({min: 1, max: 10000}),
-        about: chance.paragraph(),
-        video: chance.url(),
-        channel: chance.url(),
-        contact: chance.paragraph()
-    };
+  do {
+    var shortname = chance.word();
+  }
+  while (shortnames.indexOf(shortname) > -1);
+  shortnames.push(shortname);
+
+  return {
+      type: ['company', 'school', 'government', 'group'][chance.integer({min: 0, max: 3})],
+      name: chance.sentence(),
+      shortname: shortname,
+      email: chance.email(),
+      phone: chance.phone(),
+      fax: chance.phone(),
+      website: chance.domain(),
+      influence: chance.integer({min: 0, max: 100}),
+      img: '/assets/organizations/' + chance.integer({min: 1, max: 10}) + '.jpg',
+      people: chance.integer({min: 1, max: 10000}),
+      about: chance.paragraph(),
+      video: chance.url(),
+      channel: chance.url(),
+      contact: chance.paragraph()
+  };
 };
 
 var Collaborator = function Collaborator () {
@@ -195,13 +225,13 @@ var Teammate = function Teammate () {
   };
 };
 
-var Vote = function Vote () {
-  return {
-    option: chance.word(),
-    postId: chance.integer({min: 1, max: POST_TOTAL}),
-    userId: chance.integer({min: 1, max: USER_TOTAL})
-  };
-};
+// var Vote = function Vote () {
+//   return {
+//     option: chance.word(),
+//     postId: chance.integer({min: 1, max: POST_TOTAL}),
+//     userId: chance.integer({min: 1, max: USER_TOTAL})
+//   };
+// };
 // var Clout = function Clout () {
 //     return {
 //         org_id: chance.integer({min: 1, max: ORG_TOTAL}),
@@ -254,10 +284,12 @@ function generate (Model, count, db) {
 /** EXECUTE **/
 // STEP 1
 generate(User, USER_TOTAL, Users);
-generate(Post, POST_TOTAL, Posts);
 generate(Org, ORG_TOTAL, Orgs);
 
 // STEP 2
+// generate(Post, POST_TOTAL, Posts);
+
+// STEP 3
 // generate(Member, ORG_TOTAL * 8, Members);
 // generate(Password, USER_TOTAL, Passwords);
 // generate(Tag, POST_TOTAL * 4, Tags);
@@ -269,8 +301,11 @@ generate(Org, ORG_TOTAL, Orgs);
 // generate(Collaborator, POST_TOTAL, Collaborators);
 // generate(Favorite, USER_TOTAL * 5, Favorites);
 // generate(Mention, COMMENT_TOTAL * 2, Mentions);
-// generate(Team, ORG_TOTAL * 2, Teams);
+// generate(Team, TEAM_TOTAL, Teams);
+
+// STEP 4
 // generate(Teammate, TEAM_TOTAL * 5, Teammates);
+/** VOTES need to be created by iterating through posts **/
 // generate(Vote, POST_TOTAL, Votes);
 
 /*
