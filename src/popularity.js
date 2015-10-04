@@ -7,6 +7,8 @@ module.exports = function (element, popularity) {
   var posY = element.height / 2;
   var end = (100 - popularity) / 100;
 
+  ctx.clearRect(0, 0, element.width, element.height);
+
   ctx.font = "30px 'open sans'";
   ctx.textAlign = 'center';
   ctx.fillText(popularity + '%', posX, posY + 10);
