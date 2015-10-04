@@ -239,6 +239,10 @@ let Details = React.createClass({
 	render: function () {
 		let context = 'user';
 		let org = {};
+		let excerpt = "";
+		if (this.props.post && this.props.post.content) {
+			excerpt = this.props.post.content.replace(/(<([^>]+)>)/ig, "");
+		}
 		if (this.props.post.org && this.props.post.org.id && this.props.post.org.id != 0) {
 			org = this.props.post.org;
 			context = 'org';
@@ -268,6 +272,10 @@ let Details = React.createClass({
 						{this.props.post.when && moment(this.props.post.when).format() !== 'Invalid date' ? <div className="when">{moment(this.props.post.when).format('MMMM Do @ h:mm a')}</div> : false}
 						{this.props.post.location ? <div className="location">{this.props.post.location}</div> : false}
 					</div>
+					: false
+				}
+				{this.props.post.type !== 'event' && this.props.post.type !== 'poll' && this.props.context.type !== 'post' && this.props.context.type !== 'edit'
+					? <div className="extra excerpt"><div>{excerpt}</div></div>
 					: false
 				}
 			</div>

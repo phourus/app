@@ -333,20 +333,36 @@
     }
   }
 
-  .extra.event {
-    text-align: center;
-    margin: 10px 0;
+  .extra {
+    height: 320px;
+    overflow: hidden;
+    margin: 20px 0;
 
-    i {
-      margin-top: 10px;
-      font-size: 6em;
+    &.excerpt {
+      font-size: 0.9em;
+      font-style: italic;
+      color: #333;
+
+      > div {
+        max-height: 240px;
+        overflow: hidden;
+      }
     }
-    .when {
-      font-size: 1.5em;
-      margin: 16px 0;
-    }
-    .location {
-      font-weight: bold;
+
+    &.event {
+      text-align: center;
+
+      i {
+        margin-top: 10px;
+        font-size: 6em;
+      }
+      .when {
+        font-size: 1.5em;
+        margin: 16px 0;
+      }
+      .location {
+        font-weight: bold;
+      }
     }
   }
 
@@ -486,9 +502,12 @@
   .tags {
     margin-top: 10px;
     padding-bottom: 10px;
+    position: absolute;
+    bottom: 80px;
   }
 
   &.selected .tags {
+    position: static;
     margin-bottom: 20px;
     border-bottom: solid 1px #eee;
   }

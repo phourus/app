@@ -1829,9 +1829,22 @@ div.alerts button {
   background-color: #fdfdfd;
   padding: 3px;
 }
+.postItem .extra {
+  height: 320px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.postItem .extra.excerpt {
+  font-size: 0.9em;
+  font-style: italic;
+  color: #333;
+}
+.postItem .extra.excerpt > div {
+  max-height: 240px;
+  overflow: hidden;
+}
 .postItem .extra.event {
   text-align: center;
-  margin: 10px 0;
 }
 .postItem .extra.event i {
   margin-top: 10px;
@@ -1983,8 +1996,11 @@ div.alerts button {
 .postItem .tags {
   margin-top: 10px;
   padding-bottom: 10px;
+  position: absolute;
+  bottom: 80px;
 }
 .postItem.selected .tags {
+  position: static;
   margin-bottom: 20px;
   border-bottom: solid 1px #eee;
 }

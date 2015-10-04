@@ -33,7 +33,7 @@ let Poll = React.createClass({
       this._draw();
     }, 1);
     return (
-      <div className="poll">
+      <div className="extra poll">
         <div id={"poll" + this.props.post.id}></div>
       </div>
     );
