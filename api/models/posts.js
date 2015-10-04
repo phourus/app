@@ -30,6 +30,8 @@ var posts = db.define('posts', {
   zip: sql.STRING(5),
   author: sql.STRING,
   poll: sql.STRING,
+  when: sql.DATE,
+  location: sql.STRING,
 
   // Stats
   totalComments: {type: sql.INTEGER, defaultValue: 0},

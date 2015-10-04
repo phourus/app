@@ -1829,6 +1829,21 @@ div.alerts button {
   background-color: #fdfdfd;
   padding: 3px;
 }
+.postItem .extra.event {
+  text-align: center;
+  margin: 10px 0;
+}
+.postItem .extra.event i {
+  margin-top: 10px;
+  font-size: 6em;
+}
+.postItem .extra.event .when {
+  font-size: 1.5em;
+  margin: 16px 0;
+}
+.postItem .extra.event .location {
+  font-weight: bold;
+}
 .postItem .title {
   font-size: 1.5em;
   line-height: 1em;

@@ -261,6 +261,15 @@ let Details = React.createClass({
 					? <Poll {...this.props} />
 					: false
 				}
+				{this.props.post.type === 'event'
+					?
+					<div className="extra event">
+						<i className="fa fa-calendar" />
+						{this.props.post.when && moment(this.props.post.when).format() !== 'Invalid date' ? <div className="when">{moment(this.props.post.when).format('MMMM Do @ h:mm a')}</div> : false}
+						{this.props.post.location ? <div className="location">{this.props.post.location}</div> : false}
+					</div>
+					: false
+				}
 			</div>
 		);
 	}

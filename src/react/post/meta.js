@@ -22,16 +22,16 @@ let Meta = React.createClass({
 						: <strong>{this.props.post.positive}</strong>
 					}
 				</label>);
-		let	date = (<label>Date:
+		let	when = (<label>When:
 					{this.props.context.type === 'edit' && this.props.owner
-						? <input ref="date" value={this.props.post.date} onChange={this._date} />
-						: <strong>{this.props.post.date}</strong>
+						? <input value={this.props.post.when} onChange={this._when} />
+						: <strong>{this.props.post.when}</strong>
 					}
 				</label>);
-		let	address = (<label>Address:
+		let	location = (<label>Location:
 				{this.props.context.type === 'edit' && this.props.owner
-					? <input ref="address" value={this.props.post.address} onChange={this._address} />
-					: <strong>{this.props.post.address}</strong>
+					? <input value={this.props.post.location} onChange={this._location} />
+					: <strong>{this.props.post.location}</strong>
 				}
 			</label>);
 		let	poll = (<label>Poll Options:
@@ -76,7 +76,7 @@ let Meta = React.createClass({
 			</label>);
 		let fields = {
 			blog: [],
-			event: [date, address],
+			event: [when, location],
 			subject: [],
 			question: [],
 			debate: [scope, zip],
@@ -97,13 +97,13 @@ let Meta = React.createClass({
 		var value = e.currentTarget.checked;
 		Actions.change('positive', value);
 	},
-	_date: function (e) {
+	_when: function (e) {
 		var value = e.currentTarget.value;
-		Actions.change('date', value);
+		Actions.change('when', value);
 	},
-	_address: function (e) {
+	_location: function (e) {
 		var value = e.currentTarget.value;
-		Actions.change('address', value);
+		Actions.change('location', value);
 	},
 	_poll: function (e) {
 		var value = e.currentTarget.value;
