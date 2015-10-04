@@ -29,6 +29,7 @@ var posts = db.define('posts', {
   scope: {type: sql.ENUM('local', 'county', 'state', 'national', 'international'), allowNull: true},
   zip: sql.STRING(5),
   author: sql.STRING,
+  poll: sql.STRING,
 
   // Stats
   totalComments: {type: sql.INTEGER, defaultValue: 0},

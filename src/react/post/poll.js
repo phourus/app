@@ -7,13 +7,20 @@ let Store = require('../../stores/post');
 let Poll = React.createClass({
   getInitialState: function () {
     return {
-      data: []
+      votes: {}
     };
+  },
+  getDefaultProps: function () {
+    return {
+      post: {
+        poll: ''
+      }
+    }
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
-      if (data.data && data.data[0] && data.data[0].postId === this.props.post.id) {
-        this.setState(data);
+      if (data.votes && data.postId === this.props.post.id) {
+        this.setState({votes: data.votes});
       }
     });
     Actions.poll(this.props.post.id);
@@ -40,8 +47,14 @@ let Poll = React.createClass({
   },
   _draw: function () {
     let self = this;
-    let columns = this.state.data.map((item) => {
-      return [item.option, item.count];
+    let options = [];
+    let votes = this.state.votes || {};
+    if (this.props.post && this.props.post.poll) {
+      options = this.props.post.poll.split(';');
+    }
+    let columns = options.map((key) => {
+      let value = votes[key] || 0;
+      return [key, value];
     });
     this.chart = c3.generate({
       bindto: '#poll' + this.props.post.id,
@@ -67,15 +80,18 @@ let Poll = React.createClass({
         show: false
       },
       legend: {
-        position: 'bottom'
+        position: 'bottom',
+        item: {
+          onclick: function (d) {
+            self._vote(d);
+            return false;
+          }
+        }
       },
       data: {
         columns: columns,
         type: 'bar',
-        colors: this._colors(),
-        onclick: function (d, element) {
-          self._vote(d.id);
-        }
+        colors: this._colors()
       },
       bar: {
         width: {
@@ -89,20 +105,24 @@ let Poll = React.createClass({
     let _colors = ['#3498DB', '#ECB010', '#8ABF00', '#ED0303'];
     let _faded = ['#d4eeff', '#ece1c4', '#e2eec3', '#edcfcf'];
     let _palette = _colors;
+    let options = [];
+    if (this.props.post.poll) {
+      options = this.props.post.poll.split(';');
+    }
     if (this.state.selected) {
       _palette = _faded;
     }
     let colors = {};
     let i = 0;
-    this.state.data.forEach((item) => {
+    options.forEach((key) => {
       if (i === _palette.length) {
         i = 0;
       }
       let _c = _palette[i];
-      if (this.state.selected && item.label === this.state.selected) {
+      if (this.state.selected && key === this.state.selected) {
         _c = _dark[i];
       }
-      colors[item.label] = _c;
+      colors[key] = _c;
       i++;
     });
     return colors;

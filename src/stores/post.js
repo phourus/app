@@ -86,7 +86,15 @@ let Post = Reflux.createStore({
   _poll: function (id) {
     posts.poll(id)
     .then(data => {
-      this.trigger({data: data});
+      let votes = {};
+      let postId = 0;
+      if (data[0]) {
+        postId = data[0].postId;
+      }
+      data.forEach((item) => {
+        votes[item.option] = item.count;
+      });
+      this.trigger({votes: votes, postId: postId});
     })
     .catch(code => {
       if (code != 200) {
@@ -98,6 +106,7 @@ let Post = Reflux.createStore({
   _vote: function (postId, option) {
     posts.vote(postId, option)
     .then(data => {
+      this._poll(postId);
       this.trigger({selected: option});
     })
     .catch(code => {
