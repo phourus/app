@@ -9,7 +9,7 @@ var links = db.define('links', {
 }, {
   classMethods: {
     single: function (id) {
-      return this.findOne(id);
+      return this.findById(id);
     },
     collection: function (params) {
       return this.findAll(this.queryize(params));

@@ -15,7 +15,7 @@ module.exports = db.define('locations', {
 }, {
   classMethods: {
     single: function (id) {
-      return this.findOne(id);
+      return this.findById(id);
     },
     collection: function (params) {
       return this.findAndCountAll(this.queryize(params));

@@ -23,7 +23,7 @@ var orgs = db.define('orgs', {
 }, {
   classMethods: {
     single: function (id) {
-      return this.findOne(id);
+      return this.findById(id);
     },
     collection: function (params) {
       return this.findAndCountAll(this.queryize(params));
