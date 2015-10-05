@@ -9,7 +9,7 @@ var votes = db.define('votes', {
     poll: function (id) {
       return this.findAll({
         where: {postId: id},
-        group: 'option',
+        group: ['option'],
         attributes: [
           'postId',
           'option',
