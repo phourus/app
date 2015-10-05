@@ -8,7 +8,7 @@ module.exports = tags = db.define('tags', {
 }, {
   classMethods: {
     single: function (id) {
-      return this.findById(id);
+      return this.findOne(id);
     },
     collection: function (params) {
       return this.findAll(this.queryize(params));
