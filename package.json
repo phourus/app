@@ -23,7 +23,7 @@
     "localStorage": "^1.0.3",
     "mariasql": "0.1.22",
     "moment": "^2.9.0",
-    "mysql": "^2.5.5",
+    "mysql": "^2.9.0",
     "numeral": "^1.5.3",
     "please-ajax": "^1.0.8",
     "react": "0.13.3",

@@ -5,7 +5,7 @@ var username = config.user;
 var password = config.pass;
 var config = {
     host: config.host,
-    dialect: 'mariadb'
+    dialect: 'mysql'
 };
 
 module.exports = new Sequelize(db, username, password, config);
