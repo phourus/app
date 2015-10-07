@@ -2,7 +2,7 @@
 let Reflux = require('reflux');
 
 let Actions = require('../actions/post');
-let { Comments, Thumbs, Tags, Links } = Actions;
+let { Comments, Thumbs, Tags, Links, Collaborators } = Actions;
 
 let posts = require('../api/posts');
 let comments = require('../api/comments');
@@ -278,6 +278,18 @@ let Post = Reflux.createStore({
       });
     }
   }),
+  Collaborators: Reflux.createStore({
+    init: function () {
+      this.listenTo(Collaborators.add, this._add);
+      this.listenTo(Collaborators.remove, this._remove);
+    },
+    _add: function (model) {
+      console.log(model);
+    },
+    _remove: function (type, id) {
+      console.log(type, id);
+    },
+  })
 });
 
 module.exports = Post;

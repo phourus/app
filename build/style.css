@@ -1509,6 +1509,7 @@ div.alerts button {
   box-sizing: border-box;
   /** TAGS **/
   /** LINKS **/
+  /** COLLABORATORS **/
 }
 .postItem .rte {
   border-bottom: solid 1px #eee;
@@ -2226,6 +2227,87 @@ div.alerts button {
   float: right;
   margin: 0;
   padding: 0;
+}
+.postItem .collaborators {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  position: absolute;
+  bottom: 80px;
+}
+.postItem.selected .collaborators {
+  position: static;
+  margin-bottom: 20px;
+  border-bottom: solid 1px #eee;
+}
+.postItem .collaborator {
+  border: solid 1px #dddddd;
+  padding: 0px 6px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  font-size: 1em;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  color: #999;
+  margin-left: 4px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+.postItem .collaborator a {
+  color: #ccc;
+}
+.postItem .collaborator a:hover {
+  border-color: #5faee3;
+  color: #5faee3;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.postItem .collaborator a.remove {
+  border: none;
+  background: transparent;
+  display: inline-block;
+  font-size: 1em;
+  color: inherit;
+  margin-left: 10px;
+}
+.postItem .collaborator a.remove:hover {
+  color: #fc2727;
+  text-decoration: none;
+  cursor: pointer;
+}
+.postItem .collaboratorField {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+.postItem .collaboratorField input {
+  border: solid 1px #dddddd;
+  padding: 0px 6px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  border-radius: 16px;
+  height: 40px;
+  font-size: 1.1em;
+  color: #333;
+  margin-left: 4px;
+  display: inline-block;
+}
+.postItem .collaboratorField button {
+  width: 60px;
+  height: 38px;
+  position: absolute;
+  -webkit-border-radius: 0 15px 15px 0;
+  -moz-border-radius: 0 15px 15px 0;
+  border-radius: 0 15px 15px 0;
+  font-size: 0.5em;
+  border: none;
+  background-color: #217dbb;
+  cursor: pointer;
+  color: #eee;
+  top: 1px;
+  right: 15px;
+}
+.postItem .collaboratorField button:hover {
+  background-color: #5faee3;
 }
 @media (min-width: 1000px) {
   .postItem {

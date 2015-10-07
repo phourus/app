@@ -30,5 +30,9 @@ module.exports = {
     add: Reflux.createAction(),
     save: Reflux.createAction(),
     remove: Reflux.createAction()
+  },
+  Collaborators: {
+    add: Reflux.createAction(),
+    remove: Reflux.createAction()
   }
 };
