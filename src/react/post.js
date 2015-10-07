@@ -155,7 +155,7 @@ let Post = React.createClass({
 				}
 				<div className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				{types}
-				{this.props.owner && this.props.context.type === 'edit' ? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> Privacy</div> : false}
+				{this.props.owner && this.props.context.type === 'edit' ? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> <span style={{textDecoration: 'underline'}}>Privacy: {this.state.post.privacy}</span></div> : false}
 				{this.props.context.type === 'edit' && this.props.owner && this.state.privacy
 					? <Privacy post={this.state.post} />
 					: false

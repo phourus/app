@@ -79,8 +79,8 @@ let Meta = React.createClass({
 			event: [when, location],
 			subject: [],
 			question: [],
-			debate: [scope, zip],
-			poll: [poll, scope, zip],
+			debate: [],
+			poll: [poll],
 			quote: [author],
 			belief: []
 		};

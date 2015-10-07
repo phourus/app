@@ -1540,10 +1540,11 @@ div.alerts button {
   display: inline-block;
   margin-left: 10px;
   font-size: 0.9em;
+  color: #3498db;
 }
 .postItem .privacyToggle:hover {
   cursor: pointer;
-  color: #5faee3;
+  color: #f2c13d;
 }
 .postItem .actions {
   float: right;

@@ -17,11 +17,11 @@ let Privacy = React.createClass({
 	render: function () {
 		let privacy = this.props.post.privacy || 'private';
 		let classes = {
-			private: "button blue",
-			members: "button blue",
-			public: "button blue"
+			private: "button blue inverted",
+			members: "button blue inverted",
+			public: "button blue inverted"
 		};
-		classes[privacy] += " inverted";
+		classes[privacy] = "button blue";
 		return (
 			<div className="privacy">
 				<strong>Post Privacy</strong>
