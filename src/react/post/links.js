@@ -12,6 +12,12 @@ let File = require('react-dropzone-component');
 // let s3 = new S3();
 
 let Links = React.createClass({
+	getInitialState: function () {
+		return {
+			mode: null,
+			post: {}
+		}
+	},
 	componentDidMount: function () {
 		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
@@ -20,18 +26,36 @@ let Links = React.createClass({
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
+	componentWillReceiveProps: function (data) {
+		if (data.post) {
+			this.setState(data);
+		}
+	},
 	render: function () {
-		// {this.props.context.type === 'edit' && this.props.owner ? <Links.Edit post={this.props.post} {...this.state} /> : false}
 		return (
 			<div className="links">
 				<h2>Links & Attachments</h2>
-				<Links.List post={this.props.post} context={this.props.context} owner={this.props.owner} edit={this._edit} />
+				{this.props.context.type === 'edit' && this.props.owner && this.state.mode !== 'edit' && this.state.mode !== 'add'
+					? <button className="green button" onClick={this._add}>Add Link</button>
+					: false
+				}
+				{this.props.context.type === 'edit' && this.props.owner && (this.state.mode === 'edit' || this.state.mode === 'add')
+					? <Links.Edit {...this.state} edit={this._edit} hide={this._hide} />
+					: false
+				}
+				<Links.List {...this.state} context={this.props.context} owner={this.props.owner} edit={this._edit} />
 			</div>
 		);
 	},
+	_add: function () {
+		this.setState({mode: 'add'});
+	},
+	_hide: function () {
+		this.setState({mode: null});
+	},
 	_edit: function (e) {
 		var id = e.currentTarget.id;
-		var state = this.props.post.links[id];
+		var state = this.state.post.links[id];
 		state.mode = 'edit';
 		this.setState(state);
 	}
@@ -121,6 +145,7 @@ Links.Edit = React.createClass({
 		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
 		});
+		this.setState(this.props);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
@@ -158,6 +183,7 @@ Links.Edit = React.createClass({
 					: false
 				}
 				{button}
+				<button className="button red" onClick={this.props.hide}>Cancel</button>
 			</div>
 		);
 	},
@@ -181,20 +207,18 @@ Links.Edit = React.createClass({
 	_changeTitle: function (e) {
 		let value = e.currentTarget.value;
 		this.setState({title: value});
-		this._clear();
 	},
 	_changeURL: function (e) {
 		let value = e.currentTarget.value;
 		this.setState({url: value});
-		this._clear();
 	},
 	_changeCaption: function (e) {
 		let value = e.currentTarget.value;
 		this.setState({caption: value});
-		this._clear();
 	},
 	_clear: function () {
 		this.setState({code: null, action: null});
+		this.props.hide();
 	}
 });
 

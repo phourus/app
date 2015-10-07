@@ -248,7 +248,7 @@ let Post = Reflux.createStore({
     _add: function (model) {
       links.add(model)
       .then(data => {
-        this.trigger({id: null, title: '', url: '', caption: '', mode: 'add'});
+        this.trigger({id: null, title: '', url: '', caption: '', mode: null});
         Post._refresh();
       })
       .catch(code => {
@@ -259,7 +259,7 @@ let Post = Reflux.createStore({
     _save: function (id, model) {
       links.save(id, model)
       .then(data => {
-        this.trigger({id: null, title: '', url: '', caption: '', mode: 'add'});
+        this.trigger({id: null, title: '', url: '', caption: '', mode: null});
         Post._refresh();
       })
       .catch(code => {
