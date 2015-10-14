@@ -7,6 +7,7 @@ var stats = require('./middleware/stats');
 
 var account = require('./rest/account');
 var comments = require('./rest/comments');
+var collaborators = require('./rest/collaborators');
 var links = require('./rest/links');
 var locations = require('./rest/locations');
 var members = require('./rest/members');
@@ -30,6 +31,7 @@ rest.use(auth);
 
 rest.use('/account', account);
 rest.use('/comments', comments);
+rest.use('/collaborators', collaborators);
 rest.use('/links', links);
 rest.use('/locations', locations);
 rest.use('/members', members);
