@@ -7,6 +7,7 @@ let Actions = require('../../actions/post');
 let ActionsCollaborators = require('../../actions/post').Collaborators;
 let ActionsAccount = require('../../actions/account');
 let AccountStore = require('../../stores/account');
+let PostStore = require('../../stores/post');
 
 let Privacy = React.createClass({
 	getDefaultProps: function () {
@@ -94,6 +95,16 @@ let Collaborators = React.createClass({
 			lookup: "",
 			collaborators: []
 		};
+	},
+	componentDidMount: function () {
+		this.unsubscribe = PostStore.listen((data) => {
+			this.setState(data);
+		});
+		ActionsCollaborators.collection(this.props.post.id);
+		ActionsCollaborators.lookup(this.props.post.orgId);
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
 	},
 	render: function () {
     let lookup = this.state.lookup;

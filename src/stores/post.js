@@ -9,6 +9,7 @@ let comments = require('../api/comments');
 let thumbs = require('../api/thumbs');
 let tags = require('../api/tags');
 let links = require('../api/links');
+let collaborators = require('../api/collaborators');
 
 let msg = require("../actions/alerts").add;
 
@@ -280,15 +281,51 @@ let Post = Reflux.createStore({
   }),
   Collaborators: Reflux.createStore({
     init: function () {
+      this.listenTo(Collaborators.collection, this._collection);
       this.listenTo(Collaborators.add, this._add);
       this.listenTo(Collaborators.remove, this._remove);
+      this.listenTo(Collaborators.lookup, this._lookup);
+    },
+    _collection: function (postId) {
+      console.log(postId);
+      collaborators.collection(postId)
+      .then(data => {
+        this.trigger(data);
+      })
+      .catch(code => {
+        msg('red', 'Collaborators could not be loaded', code);
+      });
     },
     _add: function (model) {
       console.log(model);
+      collaborators.add(model)
+      .then(data => {
+        this.trigger(data);
+      })
+      .catch(code => {
+        msg('red', 'Collaborator could not be added', code);
+      });
     },
     _remove: function (type, id) {
       console.log(type, id);
+      collaborators.remove(type, id)
+      .then(data => {
+        this.trigger(data);
+      })
+      .catch(code => {
+        msg('red', 'Collaborator could not be removed', code);
+      });
     },
+    _lookup: function (orgId) {
+      console.log(orgId);
+      collaborators.lookup(orgId)
+      .then(data => {
+        this.trigger(data);
+      })
+      .catch(code => {
+        msg('red', 'Lookup could not be loaded', code);
+      });
+    }
   })
 });
 

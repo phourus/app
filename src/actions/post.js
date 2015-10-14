@@ -32,7 +32,9 @@ module.exports = {
     remove: Reflux.createAction()
   },
   Collaborators: {
+    collection: Reflux.createAction(),
     add: Reflux.createAction(),
-    remove: Reflux.createAction()
+    remove: Reflux.createAction(),
+    lookup: Reflux.createAction()
   }
 };
