@@ -9,6 +9,8 @@ let ActionsCollaborators = require('../../actions/post').Collaborators;
 let ActionsAccount = require('../../actions/account');
 let AccountStore = require('../../stores/account');
 
+let Select = require('react-select');
+
 let Privacy = React.createClass({
 	getDefaultProps: function () {
 		return {
@@ -112,27 +114,20 @@ let Collaborators = React.createClass({
 		return (
       <div className="collaborators">
 				<strong>Collaborators</strong><br />
-        {list.map((item, index) => {
-          return (
-            <span className="collaborator" key={index}>
-							<a href="">{item.name}</a>
-							<a href="javascript:void(0)" id={item.userId || item.teamId} className="remove" onClick={this._remove.bind(this, item)}>x</a>
-						</span>
-          );
-        })}
-				<div className="collaboratorField">
-					<input placeholder="add collaborators here" onChange={this._change} type="text" value={this.state.field} />
-					<button ref="add" onClick={this._add}>Add Collaborator</button>
-				</div>
+				<Select
+					allowCreate={false}
+					onOptionLabelClick={this._click}
+					value={this.state.field}
+					multi
+					placeholder={false}
+					options={lookup}
+					onChange={this._add} />
       </div>
     );
   },
-	_change: function (e) {
-		this.setState({field: e.currentTarget.value});
-	},
-	_add: function () {
+	_add: function (value) {
 		let model = {};
-		let item = this.state.field.split(':');
+		let item = value.split(':');
 		model.postId = this.props.post.id;
 		if (item[0] === 'user') {
 			model.userId = item[1];
@@ -157,26 +152,13 @@ let Collaborators = React.createClass({
 			lookup.members.forEach((item) => {
 				let user = item.user;
 				if (user) {
-					let obj = {
-						id: user.id,
-						name: user.first + ' ' + user.last,
-						email: user.email,
-						username: user.username,
-						type: 'user',
-						search: user.first + ' ' + user.last + ' ' + user.email + ' ' + user.username
-					};
-					out.push(obj)
+					out.push({value: 'user:' + user.id, label: user.first + ' ' + user.last + ' (' + user.username + ') <' + user.email + '>' });
 				}
 			});
 		}
 		if (lookup.teams && lookup.teams.forEach) {
 			lookup.teams.forEach((team) => {
-				let obj = {
-					id: team.id,
-					type: 'team',
-					name: team.name
-				};
-				out.push(obj);
+				out.push({value: 'team:' + team.id, label: 'Team: ' + team.name});
 			});
 		}
 		return out;
