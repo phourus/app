@@ -110,14 +110,14 @@ let Collaborators = React.createClass({
 	},
 	render: function () {
     let lookup = this._lookup();
-		let list = this.state.list;
+		let list = this._values();
 		return (
       <div className="collaborators">
 				<strong>Collaborators</strong><br />
 				<Select
 					allowCreate={false}
 					onOptionLabelClick={this._click}
-					value={this.state.field}
+					value={list}
 					multi
 					placeholder={false}
 					options={lookup}
@@ -162,6 +162,19 @@ let Collaborators = React.createClass({
 			});
 		}
 		return out;
+	},
+	_values: function () {
+		let list = this.state.list;
+		if (list && list.map) {
+			return list.map((item) => {
+				if (item.user) {
+					let user = item.user;
+					return {value: 'user:' + item.userId, label: user.first + ' ' + user.last};
+				}
+				return {value: 'team:' + item.teamId, label: 'Team: ' + item.teamId};
+			});
+		}
+		return [];
 	}
 });
 
