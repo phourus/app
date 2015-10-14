@@ -4,10 +4,10 @@ let Router = require('react-router');
 let { Navigation } = Router;
 
 let Actions = require('../../actions/post');
+let Store = require('../../stores/post').Collaborators;
 let ActionsCollaborators = require('../../actions/post').Collaborators;
 let ActionsAccount = require('../../actions/account');
 let AccountStore = require('../../stores/account');
-let PostStore = require('../../stores/post');
 
 let Privacy = React.createClass({
 	getDefaultProps: function () {
@@ -92,12 +92,12 @@ let Contexts = React.createClass({
 let Collaborators = React.createClass({
 	getInitialState: function () {
 		return {
-			lookup: "",
-			collaborators: []
+			lookup: [],
+			list: []
 		};
 	},
 	componentDidMount: function () {
-		this.unsubscribe = PostStore.listen((data) => {
+		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
 		});
 		ActionsCollaborators.collection(this.props.post.id);
@@ -107,12 +107,12 @@ let Collaborators = React.createClass({
 		this.unsubscribe();
 	},
 	render: function () {
-    let lookup = this.state.lookup;
-		let collaborators = this.state.collaborators;
+    let lookup = this._lookup();
+		let list = this.state.list;
 		return (
       <div className="collaborators">
 				<strong>Collaborators</strong><br />
-        {collaborators.map((item, index) => {
+        {list.map((item, index) => {
           return (
             <span className="collaborator" key={index}>
 							<a href="">{item.name}</a>
@@ -149,6 +149,37 @@ let Collaborators = React.createClass({
 		if (item.teamId) {
 			ActionsCollaborators.remove('team', item.teamId);
 		}
+	},
+	_lookup: function () {
+		let out = [];
+		let lookup = this.state.lookup;
+		if (lookup.members && lookup.members.forEach) {
+			lookup.members.forEach((item) => {
+				let user = item.user;
+				if (user) {
+					let obj = {
+						id: user.id,
+						name: user.first + ' ' + user.last,
+						email: user.email,
+						username: user.username,
+						type: 'user',
+						search: user.first + ' ' + user.last + ' ' + user.email + ' ' + user.username
+					};
+					out.push(obj)
+				}
+			});
+		}
+		if (lookup.teams && lookup.teams.forEach) {
+			lookup.teams.forEach((team) => {
+				let obj = {
+					id: team.id,
+					type: 'team',
+					name: team.name
+				};
+				out.push(obj);
+			});
+		}
+		return out;
 	}
 });
 
