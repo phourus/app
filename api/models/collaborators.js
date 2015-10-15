@@ -17,19 +17,22 @@ var collaborators = db.define('collaborators', {
       return this.create(model);
     },
     remove: function (type, id) {
-      var where;
+      var where = {};
+      var valid = false;
       if (type === 'user') {
+        valid = true;
         where.userId = id;
       }
       if (type === 'team') {
+        valid = true;
         where.teamId = id;
       }
-      if (!where) {
+      if (!valid) {
         return new Promise(function (reject, resolve) {
           reject();
         });
       }
-      return this.destroy(where);
+      return this.destroy({where: where});
     },
     lookup: function (orgId) {
       return members.findAll({

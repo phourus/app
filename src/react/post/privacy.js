@@ -116,34 +116,64 @@ let Collaborators = React.createClass({
 				<strong>Collaborators</strong><br />
 				<Select
 					allowCreate={false}
-					onOptionLabelClick={this._click}
+					delimiter={'|'}
 					value={list}
 					multi
 					placeholder={false}
 					options={lookup}
-					onChange={this._add} />
+					onChange={this._change} />
       </div>
     );
   },
-	_add: function (value) {
-		let model = {};
-		let item = value.split(':');
-		model.postId = this.props.post.id;
-		if (item[0] === 'user') {
-			model.userId = item[1];
+	_change: function (value) {
+		let current = this._values().map((data) => {
+			return data.value;
+		});
+		let updated = value.split('|');
+		let diff = this._diff(updated, current);
+		if (!diff) {
+			return;
 		}
-		if (item[0] === 'team') {
-			model.teamId = item[1];
+		if (diff.action === 'add') {
+			let model = {postId: this.props.post.id};
+			if (diff.type === 'user') {
+				model.userId = diff.id;
+			} else if (diff.type === 'team') {
+				model.teamId = diff.id;
+			} else {
+				return;
+			}
+			ActionsCollaborators.add(model);
 		}
-		ActionsCollaborators.add(model);
+		if (diff.action === 'remove') {
+			ActionsCollaborators.remove(diff.type, diff.id);
+		}
 	},
-	_remove: function (item, e) {
-		if (item.userId) {
-			ActionsCollaborators.remove('user', item.userId);
+	_diff: function (updated, current) {
+		let action = 'add';
+		let long = updated;
+		let short = current;
+		let diff;
+		let out = [];
+		if (updated.length < current.length) {
+			action = 'remove';
+			long = current;
+			short = updated;
 		}
-		if (item.teamId) {
-			ActionsCollaborators.remove('team', item.teamId);
+		long.forEach((item) => {
+			if (short.indexOf(item) === -1 && !diff) {
+				diff = item;
+			}
+		});
+		if (diff) {
+			let out = diff.split(':');
+			return {
+				action: action,
+				type: out[0],
+				id: out[1]
+			};
 		}
+		return false;
 	},
 	_lookup: function () {
 		let out = [];

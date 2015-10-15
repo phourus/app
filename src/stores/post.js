@@ -287,6 +287,7 @@ let Post = Reflux.createStore({
       this.listenTo(Collaborators.lookup, this._lookup);
     },
     _collection: function (postId) {
+      this.postId = postId;
       collaborators.collection(postId)
       .then(data => {
         this.trigger({list: data});
@@ -298,7 +299,7 @@ let Post = Reflux.createStore({
     _add: function (model) {
       collaborators.add(model)
       .then(data => {
-        this.trigger(data);
+        this._refresh();
       })
       .catch(code => {
         msg('red', 'Collaborator could not be added', code);
@@ -307,7 +308,7 @@ let Post = Reflux.createStore({
     _remove: function (type, id) {
       collaborators.remove(type, id)
       .then(data => {
-        this.trigger(data);
+        this._refresh();
       })
       .catch(code => {
         msg('red', 'Collaborator could not be removed', code);
@@ -321,6 +322,9 @@ let Post = Reflux.createStore({
       .catch(code => {
         msg('red', 'Lookup could not be loaded', code);
       });
+    },
+    _refresh: function () {
+      this._collection(this.postId);
     }
   })
 });
