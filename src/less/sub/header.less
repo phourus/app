@@ -8,7 +8,7 @@ header {
 	z-index: 9999;
 
 	.brand {
-	   .Cols(4);
+	   .Cols(3);
 
   		a {
 				display: block;
@@ -26,8 +26,65 @@ header {
   		}
 	}
 
+	.keywords {
+		.Cols(6);
+		height: 40px;
+		background-color: #555;
+		border: solid 1px #666;
+		position: relative;
+		margin-top: 10px;
+		box-sizing: border-box;
+
+		input {
+			position: absolute;
+			max-width: none;
+			box-sizing: border-box;
+			background-color: transparent;
+			border: none;
+			margin: 0px;
+			padding: 4px;
+			height: 100%;
+			font-size: 1.2em;
+			color: #eee;
+		}
+
+		button.filter {
+			position: absolute;
+			background-color: transparent;
+			border: none;
+			width: 40px;
+			right: 40px;
+			top: 10px;
+			font-size: 1em;
+			color: #eee;
+
+			&:hover {
+				cursor: pointer;
+				color: @gold-light;
+			}
+		}
+
+		button.button {
+			position: absolute;
+			margin: 0px;
+			padding: 0px;
+			height: 100%;
+			width: 40px;
+			right: 0;
+			.rounded(0px);
+
+			i {
+				margin-right: 0;
+			}
+
+			span {
+				display: none;
+			}
+		}
+	}
+
 	nav {
-		.Cols(8);
+		.Cols(3);
 		text-align: right;
 
 		> ul {
@@ -195,6 +252,16 @@ header {
     		}
   	}
 
+		.keywords {
+			button {
+
+				span {
+					display: inline;
+					font-size: 0.8em;
+				}
+			}
+		}
+
     nav {
 
 			> ul {
@@ -223,7 +290,7 @@ header {
     height: 60px !important;
   }
 
-  .search {
+  .stream {
     .heading {
       top: 60px;
     }

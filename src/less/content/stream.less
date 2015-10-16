@@ -1,8 +1,8 @@
-#content div.search {
+#content div.stream {
   max-width: 100%;
 }
 
-.search {
+.stream {
 
   .loader {
     margin-top: 100px;
@@ -50,33 +50,6 @@
     width: 100%;
     padding: 0;
     margin: 0;
-
-    .keywords {
-      .Row(100%);
-      height: 40px;
-
-      input {
-        .Cols(10);
-        max-width: none;
-        box-sizing: border-box;
-        margin: 0px;
-        padding: 4px;
-        height: 100%;
-        font-size: 1.2em;
-      }
-
-      button {
-        .Cols(2);
-        margin: 0px;
-        padding: 0px;
-        height: 100%;
-        .rounded(0px);
-
-        span {
-          display: none;
-        }
-      }
-    }
 
     .filter, .sortby {
       background-color: @grey-light;
@@ -386,7 +359,7 @@
 }
 
 @media (min-width: 500px) {
-  .search {
+  .stream {
 
     .organizations {
 
@@ -397,37 +370,11 @@
         }
       }
     }
-
-    .heading {
-      width: 90%;
-      padding: 2% 5%;
-
-      .keywords {
-        button {
-
-          span {
-            display: inline;
-            font-size: 0.8em;
-          }
-        }
-      }
-
-      .refine {
-        .context {
-          .Cols(9);
-        }
-
-        .toggles {
-          .Cols(3);
-          text-align: right;
-        }
-      }
-    }
   }
 }
 
 @media (min-width: 1000px) {
-  .search {
+  .stream {
 
     .posts {
       display: -webkit-box;
@@ -491,26 +438,11 @@
         }
       }
     }
-
-    .heading {
-
-      .filter {
-
-        .types {
-
-          button.button {
-            width: 20%;
-            margin: 10px 3% 10px 2%;
-            display: inline-block;
-          }
-        }
-      }
-    }
   }
 }
 
 @media (min-width: 1400px) {
-  .search {
+  .stream {
 
   }
 }

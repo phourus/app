@@ -58,11 +58,7 @@ let Stream = React.createClass({
 		let hidden = 'fa fa-plus-square-o';
 		let hasMore = (this.state.posts && this.state.posts.length < this.state.total && this.state.context.type !== 'post' && this.state.context.type !== 'edit');
 		return (
-			<div className="search">
-				{this.state.context.type === 'edit' || this.state.context.type === 'post'
-					? false
-					: <Head {...this.state} />
-				}
+			<div className="stream">
 				{this.state.context.type === 'orgs' && !this.state.context.id
 					? <Organizations context={this.state.context} />
 					: false
@@ -100,55 +96,6 @@ let Stream = React.createClass({
 	},
 	_more: function () {
 		Actions.more();
-	}
-});
-
-let Head = React.createClass({
-	getInitialState: function () {
-		return { mode: false };
-	},
-	render: function () {
-		let popup = '';
-		if (this.state.mode === 'filter') {
-			popup = <Filter {...this.props.params} />
-		}
-		if (this.state.mode === 'sort') {
-			popup = <Sort {...this.props.params} />
-		}
-		//<button className="fa fa-sort" onClick={this._sort}> Sort</button>
-		return (
-			<div className="heading">
-				<div className="keywords">
-						<input ref="term" className="term" type="text" placeholder="Search for" />
-						<button className="button blue" ref="search" onClick={this._search}><i className="fa fa-search" /> Search</button>
-				</div>
-				<div className="refine">
-					<Context {...this.props.context} />
-					<div className="toggles">
-						<button className="fa fa-filter" onClick={this._filter}> Advanced</button>
-					</div>
-				</div>
-				{popup}
-			</div>
-		);
-	},
-	_search: function () {
-			let val = this.refs.term.getDOMNode().value;
-			Actions.search(val);
-	},
-	_filter: function () {
-		if (this.state.mode === 'filter') {
-			this.setState({mode: false});
-		} else {
-			this.setState({mode: 'filter'});
-		}
-	},
-	_sort: function () {
-		if (this.state.mode === 'sort') {
-			this.setState({mode: false});
-		} else {
-			this.setState({mode: 'sort'})
-		}
 	}
 });
 

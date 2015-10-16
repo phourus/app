@@ -38,6 +38,7 @@ let Header = React.createClass({
           <div className="brand">
             <Link to="home"></Link>
           </div>
+          <Search />
           <nav className="nav">
             <ul>
               <li className="posts">
@@ -86,6 +87,47 @@ let Header = React.createClass({
       PostActions.add();
     }
   }
+});
+
+let Search = React.createClass({
+	getInitialState: function () {
+		return { mode: false };
+	},
+	render: function () {
+		let popup = '';
+		if (this.state.mode === 'filter') {
+			popup = <Filter {...this.props.params} />
+		}
+		if (this.state.mode === 'sort') {
+			popup = <Sort {...this.props.params} />
+		}
+		//<button className="fa fa-sort" onClick={this._sort}> Sort</button>
+		return (
+  		<div className="keywords">
+  			<input ref="term" className="term" type="text" placeholder="Search for" />
+        <button className="filter fa fa-filter" onClick={this._filter}></button>
+  			<button className="button blue" onClick={this._search}><i className="fa fa-search" /> Search</button>
+  		</div>
+		);
+	},
+	_search: function () {
+			let val = this.refs.term.getDOMNode().value;
+			Actions.search(val);
+	},
+	_filter: function () {
+		if (this.state.mode === 'filter') {
+			this.setState({mode: false});
+		} else {
+			this.setState({mode: 'filter'});
+		}
+	},
+	_sort: function () {
+		if (this.state.mode === 'sort') {
+			this.setState({mode: false});
+		} else {
+			this.setState({mode: 'sort'})
+		}
+	}
 });
 
 module.exports = Header;

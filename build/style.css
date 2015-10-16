@@ -2859,32 +2859,32 @@ div.alerts button {
     display: inline;
   }
 }
-#content div.search {
+#content div.stream {
   max-width: 100%;
 }
-.search .loader {
+.stream .loader {
   margin-top: 100px;
   margin-bottom: 100px;
 }
-.search .organizations {
+.stream .organizations {
   width: 90%;
   margin: 0 5% 0 5%;
   border-bottom: solid 1px #ccc;
 }
-.search .organizations .list {
+.stream .organizations .list {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
 }
-.search .organizations .list:before,
-.search .organizations .list:after {
+.stream .organizations .list:before,
+.stream .organizations .list:after {
   content: "";
   display: table;
 }
-.search .organizations .list:after {
+.stream .organizations .list:after {
   clear: both;
 }
-.search .organizations .list .org {
+.stream .organizations .list .org {
   width: 100%;
   display: inline-block;
   vertical-align: top;
@@ -2894,142 +2894,103 @@ div.alerts button {
   margin: 10px;
   text-align: center;
 }
-.search .organizations .list .org .name {
+.stream .organizations .list .org .name {
   font-size: 1.5em;
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
 }
-.search .organizations .list .org:hover {
+.stream .organizations .list .org:hover {
   background-color: #fff;
   cursor: pointer;
 }
-.search .organizations .list .org img {
+.stream .organizations .list .org img {
   width: 100%;
   max-width: 150px;
   max-height: 150px;
 }
-.search .heading {
+.stream .heading {
   top: 40px;
   z-index: 1;
   width: 100%;
   padding: 0;
   margin: 0;
 }
-.search .heading .keywords {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  height: 40px;
-}
-.search .heading .keywords:before,
-.search .heading .keywords:after {
-  content: "";
-  display: table;
-}
-.search .heading .keywords:after {
-  clear: both;
-}
-.search .heading .keywords input {
-  width: 83.33333333%;
-  display: inline-block;
-  vertical-align: top;
-  max-width: none;
-  box-sizing: border-box;
-  margin: 0px;
-  padding: 4px;
-  height: 100%;
-  font-size: 1.2em;
-}
-.search .heading .keywords button {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0px;
-  padding: 0px;
-  height: 100%;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-}
-.search .heading .keywords button span {
-  display: none;
-}
-.search .heading .filter,
-.search .heading .sortby {
+.stream .heading .filter,
+.stream .heading .sortby {
   background-color: #eeeeee;
   box-shadow: 0px 0px 12px #444444;
   -moz-box-shadow: 0px 0px 12px #444444;
   -webkit-box-shadow: 0px 0px 12px #444444;
 }
-.search .heading .filter .label,
-.search .heading .sortby .label {
+.stream .heading .filter .label,
+.stream .heading .sortby .label {
   font-size: 0.8em;
   color: #aaa;
   text-transform: uppercase;
   padding: 1em;
   margin: 0;
 }
-.search .heading .filter {
+.stream .heading .filter {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
   margin-top: 10px;
 }
-.search .heading .filter:before,
-.search .heading .filter:after {
+.stream .heading .filter:before,
+.stream .heading .filter:after {
   content: "";
   display: table;
 }
-.search .heading .filter:after {
+.stream .heading .filter:after {
   clear: both;
 }
-.search .heading .filter .types {
+.stream .heading .filter .types {
   background-color: #fff;
   border-top: solid 1px #ccc;
 }
-.search .heading .filter .types button.button {
+.stream .heading .filter .types button.button {
   width: 42%;
   margin: 10px 4% 10px 4%;
   display: inline-block;
 }
-.search .heading .filter ul {
+.stream .heading .filter ul {
   display: inline-block;
   list-style: none;
   vertical-align: top;
 }
-.search .heading .filter ul li {
+.stream .heading .filter ul li {
   border-bottom: solid 1px #eee;
 }
-.search .heading .filter ul li a#blogs {
+.stream .heading .filter ul li a#blogs {
   border-left: solid 4px #9cd900;
 }
-.search .heading .filter ul li a#subjects {
+.stream .heading .filter ul li a#subjects {
   border-left: solid 4px #5faee3;
 }
-.search .heading .filter ul li a#debates {
+.stream .heading .filter ul li a#debates {
   border-left: solid 4px #fc2727;
 }
-.search .heading .filter ul li a#beliefs {
+.stream .heading .filter ul li a#beliefs {
   border-left: solid 4px #f2c13d;
 }
-.search .heading .refine {
+.stream .heading .refine {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
 }
-.search .heading .refine:before,
-.search .heading .refine:after {
+.stream .heading .refine:before,
+.stream .heading .refine:after {
   content: "";
   display: table;
 }
-.search .heading .refine:after {
+.stream .heading .refine:after {
   clear: both;
 }
-.search .heading .refine .context {
+.stream .heading .refine .context {
   text-align: left;
   border-left: solid 1px #ddd;
   box-sizing: border-box;
 }
-.search .heading .refine .context button {
+.stream .heading .refine .context button {
   width: 80px;
   height: 40px;
   background-color: #fafafa;
@@ -3044,20 +3005,20 @@ div.alerts button {
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
-.search .heading .refine .context button:hover {
+.stream .heading .refine .context button:hover {
   background-color: #fafafa;
   color: #3498db;
 }
-.search .heading .refine .context button.selected {
+.stream .heading .refine .context button.selected {
   height: 44px;
   border-bottom: solid 4px #5faee3;
   background-color: #fff;
   color: #217dbb;
 }
-.search .heading .refine .toggles {
+.stream .heading .refine .toggles {
   text-align: left;
 }
-.search .heading .refine .toggles button {
+.stream .heading .refine .toggles button {
   background: transparent;
   border: none;
   height: 40px;
@@ -3066,29 +3027,29 @@ div.alerts button {
   font-size: 0.8em;
   text-align: right;
 }
-.search .heading .refine .toggles button:hover {
+.stream .heading .refine .toggles button:hover {
   background-color: #fafafa;
   color: #3498db;
 }
-.search .heading .context {
+.stream .heading .context {
   font-size: 0.9em;
 }
-.search .heading .context img {
+.stream .heading .context img {
   float: left;
   height: 40px;
 }
-.search .heading .context a.close {
+.stream .heading .context a.close {
   font-size: 0.9em;
   color: #111;
 }
-.search .heading .sortby {
+.stream .heading .sortby {
   margin-top: 10px;
   position: absolute;
   right: 5%;
   z-index: 999;
   float: right;
 }
-.search .heading .sortby .triangle {
+.stream .heading .sortby .triangle {
   margin-top: -12px;
   width: 0;
   height: 0;
@@ -3097,43 +3058,43 @@ div.alerts button {
   border-right: 12px solid transparent;
   border-bottom: 12px solid #eeeeee;
 }
-.search .heading .sortby {
+.stream .heading .sortby {
   width: 200px;
 }
-.search .heading .sortby .triangle {
+.stream .heading .sortby .triangle {
   margin-right: 26px;
 }
-.search .heading .sortby ul {
+.stream .heading .sortby ul {
   border-top: solid 1px #ccc;
   margin: 0px;
   padding: 0px;
 }
-.search .heading .sortby ul li {
+.stream .heading .sortby ul li {
   width: 96%;
   border-bottom: solid 1px #ccc;
   padding: 0.5em 2%;
   cursor: pointer;
   list-style: none;
 }
-.search .heading .sortby ul li .fa {
+.stream .heading .sortby ul li .fa {
   color: #dddddd;
 }
-.search .heading .sortby ul li.selected {
+.stream .heading .sortby ul li.selected {
   color: #3498db;
   background-color: white;
   font-size: 1.5em;
 }
-.search .heading .sortby ul li.selected .fa {
+.stream .heading .sortby ul li.selected .fa {
   color: #3498db;
 }
-.search .heading .sortby ul li:hover {
+.stream .heading .sortby ul li:hover {
   background-color: white;
   color: #8abf00;
 }
-.search .heading .sortby ul li:hover .fa {
+.stream .heading .sortby ul li:hover .fa {
   color: #8abf00;
 }
-.search .heading .sortby button {
+.stream .heading .sortby button {
   background-color: white;
   border: none;
   width: 50%;
@@ -3141,49 +3102,30 @@ div.alerts button {
   height: 40px;
   cursor: pointer;
 }
-.search .heading .sortby button.selected {
+.stream .heading .sortby button.selected {
   color: #3498db;
 }
-.search .posts,
-.search .post {
+.stream .posts,
+.stream .post {
   max-width: 1400px;
   margin: auto;
   min-height: 600px;
 }
-.search .post .postItem {
+.stream .post .postItem {
   display: none;
 }
-.search .post .postItem.selected {
+.stream .post .postItem.selected {
   display: block;
 }
 @media (min-width: 500px) {
-  .search .organizations .list .org {
+  .stream .organizations .list .org {
     width: 50%;
     display: inline-block;
     vertical-align: top;
   }
-  .search .heading {
-    width: 90%;
-    padding: 2% 5%;
-  }
-  .search .heading .keywords button span {
-    display: inline;
-    font-size: 0.8em;
-  }
-  .search .heading .refine .context {
-    width: 75%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .search .heading .refine .toggles {
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
-    text-align: right;
-  }
 }
 @media (min-width: 1000px) {
-  .search .posts {
+  .stream .posts {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -3199,10 +3141,10 @@ div.alerts button {
     -ms-flex-line-pack: stretch;
     align-content: stretch;
   }
-  .search .posts:hover .postItem:hover {
+  .stream .posts:hover .postItem:hover {
     background-color: #fff;
   }
-  .search .posts .postItem {
+  .stream .posts .postItem {
     min-height: 500px;
     padding-bottom: 75px;
     -webkit-border-radius: 10px;
@@ -3219,22 +3161,17 @@ div.alerts button {
     -ms-flex: 0 1 auto;
     flex: 0 1 auto;
   }
-  .search .posts .postItem .interact {
+  .stream .posts .postItem .interact {
     position: absolute;
     left: 0;
     bottom: 0;
     border-top: dotted 3px #eee;
     background: transparent;
   }
-  .search .organizations .list .org {
+  .stream .organizations .list .org {
     width: 25%;
     display: inline-block;
     vertical-align: top;
-  }
-  .search .heading .filter .types button.button {
-    width: 20%;
-    margin: 10px 3% 10px 2%;
-    display: inline-block;
   }
 }
 .main {
@@ -3258,8 +3195,8 @@ div.alerts button {
   border: solid 1px #dddddd;
   padding: 3%;
 }
-#content > div.search {
-  margin: 0;
+#content > div.stream {
+  margin: 20px 0 0 0;
   padding: 0;
   width: 100%;
   background: transparent;
@@ -3298,7 +3235,7 @@ header:after {
   clear: both;
 }
 header .brand {
-  width: 33.33333333%;
+  width: 25%;
   display: inline-block;
   vertical-align: top;
 }
@@ -3315,8 +3252,62 @@ header .brand a {
 header .brand a:hover {
   background-image: url('/assets/logos/logo-hover.png');
 }
+header .keywords {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  height: 40px;
+  background-color: #555;
+  border: solid 1px #666;
+  position: relative;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+header .keywords input {
+  position: absolute;
+  max-width: none;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  margin: 0px;
+  padding: 4px;
+  height: 100%;
+  font-size: 1.2em;
+  color: #eee;
+}
+header .keywords button.filter {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  right: 40px;
+  top: 10px;
+  font-size: 1em;
+  color: #eee;
+}
+header .keywords button.filter:hover {
+  cursor: pointer;
+  color: #f2c13d;
+}
+header .keywords button.button {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 40px;
+  right: 0;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+header .keywords button.button i {
+  margin-right: 0;
+}
+header .keywords button.button span {
+  display: none;
+}
 header nav {
-  width: 66.66666667%;
+  width: 25%;
   display: inline-block;
   vertical-align: top;
   text-align: right;
@@ -3453,6 +3444,10 @@ header nav .notifications {
     width: 180px;
     height: 60px;
   }
+  header .keywords button span {
+    display: inline;
+    font-size: 0.8em;
+  }
   header nav > ul > li {
     width: 60px;
   }
@@ -3469,7 +3464,7 @@ header nav .notifications {
   div.spacer {
     height: 60px !important;
   }
-  .search .heading {
+  .stream .heading {
     top: 60px;
   }
 }
@@ -3537,32 +3532,32 @@ header nav .notifications {
   .profile .basic .name {
     font-size: 2em;
   }
-  .search .profile {
+  .stream .profile {
     width: 90%;
     margin: 0 5% 0 5%;
     background-color: #fff;
     padding: 20px;
     box-sizing: border-box;
   }
-  .search .profile .name {
+  .stream .profile .name {
     margin: 0;
     padding: 0;
   }
-  .search .profile .basic {
+  .stream .profile .basic {
     width: 50%;
     display: inline-block;
     vertical-align: top;
   }
-  .search .profile .back {
+  .stream .profile .back {
     float: right;
   }
-  .search .profile .actions {
+  .stream .profile .actions {
     width: 25%;
     display: inline-block;
     vertical-align: top;
     vertical-align: bottom;
   }
-  .search .profile .actions button {
+  .stream .profile .actions button {
     float: right;
   }
 }
