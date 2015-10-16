@@ -42,7 +42,7 @@ let Header = React.createClass({
             <ul>
               <li className="posts">
                 <Link to="stream" >
-                  <i className="fa fa-search" />
+                  <i className="fa fa-file" />
                   Posts
                 </Link>
               </li>

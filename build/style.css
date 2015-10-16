@@ -296,7 +296,7 @@ button:focus {
   outline: none;
 }
 label {
-  color: #425d77;
+  color: #444444;
   margin: 0px 40px 20px 0px;
   display: block;
 }
@@ -319,7 +319,7 @@ select {
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
   background-color: #fafafa;
   font-size: 1.2em;
-  color: #34495e;
+  color: #333333;
   min-width: 120px;
   margin-bottom: 10px;
   border: solid 1px #dddddd;
@@ -546,15 +546,15 @@ a.button {
 #chart .c3-axis {
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
   font-size: 1em;
-  color: #1e2f40;
+  color: #222222;
 }
 #chart .c3-axis-y {
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
   font-size: 1em;
-  color: #1e2f40;
+  color: #222222;
 }
 #chart .domain {
-  fill: #1e2f40 !important;
+  fill: #222222 !important;
   size: 1px;
 }
 #chart .c3-legend-item {
@@ -722,7 +722,7 @@ div.alerts button {
   margin: auto;
 }
 #content .about .basics {
-  background-color: #1e2f40;
+  background-color: #222222;
   color: #fff;
 }
 #content .about .basics > button {
@@ -743,7 +743,7 @@ div.alerts button {
 }
 #content .about .basics > button i {
   font-size: 4em;
-  color: #425d77;
+  color: #444444;
 }
 #content .about .basics .details {
   background-color: #9cd900;
@@ -827,10 +827,10 @@ div.alerts button {
   display: inline-block;
   vertical-align: top;
   font-size: 3em;
-  color: #1e2f40;
+  color: #222222;
 }
 #content .about .contact {
-  background-color: #1e2f40;
+  background-color: #222222;
   color: #fff;
 }
 #content .about .contact > div {
@@ -842,7 +842,7 @@ div.alerts button {
   padding-bottom: 40px;
 }
 #content .about .contact > div i {
-  color: #425d77;
+  color: #444444;
   font-size: 4em;
   text-align: center;
 }
@@ -1429,7 +1429,7 @@ div.alerts button {
   font-size: 3em;
 }
 #content .landing .integrate {
-  background-color: #425d77;
+  background-color: #444444;
   color: #fff;
   padding-bottom: 60px;
   width: 100%;
@@ -1672,7 +1672,7 @@ div.alerts button {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  background-color: #425d77;
+  background-color: #444444;
 }
 .leaders .filter:before,
 .leaders .filter:after {
@@ -2234,7 +2234,7 @@ div.alerts button {
 .postItem ul li {
   list-style: none;
   font-size: 0.8em;
-  color: #425d77;
+  color: #444444;
   margin: 0;
   padding: 0;
   line-height: 1.4;
@@ -2469,7 +2469,7 @@ div.alerts button {
   font-style: italic;
 }
 .postItem .create {
-  background-color: #34495e;
+  background-color: #333333;
   max-width: 96%;
   width: 100%;
   margin: 0 auto;
@@ -3273,7 +3273,7 @@ div.alerts button {
   padding: 20px 0px 10px 0px;
 }
 .footer a {
-  color: #425d77;
+  color: #444444;
 }
 .footer a:hover {
   color: #8abf00;
@@ -3573,7 +3573,7 @@ body {
   background-image: url('/assets/bg.jpg');
   margin: 0px;
   padding: 0px;
-  color: #34495e;
+  color: #333333;
   font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;
   font-size: 100%;
   line-height: 25px;
@@ -3588,19 +3588,19 @@ h1 {
   font-size: 3em;
   font-weight: normal;
   line-height: 1em;
-  color: #34495e;
+  color: #333333;
 }
 h2 {
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
   font-size: 2em;
   font-weight: bold;
-  color: #1e2f40;
+  color: #222222;
 }
 h3 {
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
   font-weight: bold;
   font-size: 1.5em;
-  color: #425d77;
+  color: #444444;
 }
 h4 {
   font-size: 1em;
