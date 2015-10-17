@@ -46,7 +46,7 @@ let Stream = Reflux.createStore({
     .then(data => {
       this.total = data.count;
       if (this.posts) {
-        this.posts = data.rows.concat(this.posts);
+        this.posts = this.posts.concat(data.rows);
       } else {
         this.posts = data.rows;
       }
