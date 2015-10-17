@@ -2,17 +2,22 @@
 let React = require('react');
 
 let Router = require('react-router');
-let { Link, RouteHandler, Navigation } = Router;
+let { Link, Navigation } = Router;
 
 let PostActions = require('../actions/post');
 let PostStore = require('../stores/post');
 let AccountActions = require('../actions/account');
 let AccountStore = require('../stores/account');
+let StreamActions = require('../actions/stream');
+let StreamStore = require('../stores/stream');
 
 let Header = React.createClass({
   mixins: [Navigation],
   getInitialState: function () {
     return {
+      params: {},
+      context: {},
+      filter: false,
       orgs: []
     };
   },
@@ -25,11 +30,15 @@ let Header = React.createClass({
         this.transitionTo("edit", {id: data.post.id});
       }
     });
+    this.unsubscribeStream = StreamStore.listen(data => {
+      this.setState(data);
+    });
     AccountActions.orgs();
   },
   componentWillUnmount: function () {
     this.unsubscribeAccount();
     this.unsubscribePost();
+    this.unsubscribeStream();
   },
   render: function () {
     let orgs = this.state.orgs;
@@ -38,7 +47,7 @@ let Header = React.createClass({
           <div className="brand">
             <Link to="home"></Link>
           </div>
-          <Search />
+          <Search {...this.state.params} filter={this._filter} />
           <nav className="nav">
             <ul>
               <li className="posts">
@@ -77,6 +86,7 @@ let Header = React.createClass({
               </li>
             </ul>
           </nav>
+          {this.state.filter ? <Filter {...this.state.params} /> : false}
         </header>
     );
   },
@@ -86,48 +96,206 @@ let Header = React.createClass({
     } else {
       PostActions.add();
     }
+  },
+  _filter: function () {
+    this.setState({filter: !this.state.filter});
   }
 });
 
 let Search = React.createClass({
-	getInitialState: function () {
-		return { mode: false };
-	},
 	render: function () {
-		let popup = '';
-		if (this.state.mode === 'filter') {
-			popup = <Filter {...this.props.params} />
-		}
-		if (this.state.mode === 'sort') {
-			popup = <Sort {...this.props.params} />
-		}
-		//<button className="fa fa-sort" onClick={this._sort}> Sort</button>
 		return (
   		<div className="keywords">
   			<input ref="term" className="term" type="text" placeholder="Search for" />
-        <button className="filter fa fa-filter" onClick={this._filter}></button>
+        <button className="filter fa fa-filter" onClick={this.props.filter}></button>
   			<button className="button blue" onClick={this._search}><i className="fa fa-search" /> Search</button>
   		</div>
 		);
 	},
 	_search: function () {
-			let val = this.refs.term.getDOMNode().value;
-			Actions.search(val);
+    let val = this.refs.term.getDOMNode().value;
+		StreamActions.search(val);
 	},
-	_filter: function () {
-		if (this.state.mode === 'filter') {
-			this.setState({mode: false});
-		} else {
-			this.setState({mode: 'filter'});
-		}
+});
+
+let Filter = React.createClass({
+	// <button className="clear">
+	// 	Clear All <i className="fa fa-close" />
+	// </button>
+	// <button className="apply">
+	// 	Apply <i className="fa fa-check" />
+	// </button>
+	render: function () {
+		return (
+			<div className="filter">
+				<div className="triangle"></div>
+				<div className="label">Filter By</div>
+				<Filter.Types {...this.props} />
+			</div>
+		);
 	},
-	_sort: function () {
-		if (this.state.mode === 'sort') {
-			this.setState({mode: false});
-		} else {
-			this.setState({mode: 'sort'})
-		}
+	toggleFilter: function (e) {
+		let id = e.currentTarget.id;
+		let prop = id + "Visible";
+		let obj = {};
+		let visibility = this.state[prop] == true ? false : true;
+		obj[prop] = visibility;
+		StreamActions.type(obj);
 	}
+});
+
+Filter.Dates = React.createClass({
+	render: function () {
+		return (
+			<div className="dates">
+				<div>
+					<label>From:</label>
+					<button><i className="fa fa-calendar" /></button>
+					<input />
+				</div>
+				<div>
+					<label>To:</label>
+					<button><i className="fa fa-calendar" /></button>
+					<input />
+				</div>
+			</div>
+		);
+	}
+});
+
+Filter.Types = React.createClass({
+	render: function () {
+		var classes = {
+			blog: "button green",
+			event: "button green",
+			subject: "button blue",
+			question: "button blue",
+			debate: "button red",
+			poll: "button red",
+			belief: "button gold",
+			quote: "button gold"
+		}
+		for (var i = 0; i < this.props.exclude.length; i++) {
+			var key = this.props.exclude[i];
+			classes[key] += " off";
+		}
+		return (
+			<div className="types">
+				<button id="blog" className={classes.blog} onClick={this._toggle}><i className="fa fa-laptop" /> Blogs</button>
+				<button id="event" className={classes.event} onClick={this._toggle}><i className="fa fa-calendar" /> Events</button>
+				<button id="subject" className={classes.subject} onClick={this._toggle}><i className="fa fa-info" /> Subjects</button>
+				<button id="question" className={classes.question} onClick={this._toggle}><i className="fa fa-question" /> Questions</button>
+				<button id="debate" className={classes.debate} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</button>
+				<button id="poll" className={classes.poll} onClick={this._toggle}><i className="fa fa-bar-chart" /> Polls</button>
+				<button id="belief" className={classes.belief} onClick={this._toggle}><i className="fa fa-flag" /> Beliefs</button>
+				<button id="quote" className={classes.quote} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</button>
+			</div>
+		);
+	},
+	_toggle: function (e) {
+		let type = e.currentTarget.id;
+		StreamActions.exclude(type);
+	}
+});
+
+Filter.Categories = React.createClass({
+	getInitialState: function () {
+		return {
+			element: 'blogs',
+			category: '',
+			subcategory: ''
+		}
+	},
+	render: function () {
+		let categories = [];
+		let subcategories = [];
+		categories = Tax[this.state.element];
+
+		if (this.state.element === 'blogs') {
+			categories = Tax.blogs.world;
+		}
+		if (this.state.element === 'subjects') {
+			categories = Tax.subjects.category;
+			subcategories = Tax.subjects[this.state.category || Tax.subjects.category[0].value];
+		}
+		if (this.state.element === 'debates') {
+			categories = Tax.debates.category;
+			subcategories = [];
+		}
+		if (this.state.element === 'beliefs') {
+			categories = Tax.beliefs.category;
+			subcategories = [];
+		}
+		return (
+			<div className="categories">
+				<div className="toggles">
+					<button className="button blue">Select All</button>
+					<button className="button red">Select None</button>
+				</div>
+				<ul>
+					<li><a id="blogs" href="javascript:void(0)" onClick={this._changeElement}>Blogs & Events</a></li>
+					<li><a id="subjects" href="javascript:void(0)" onClick={this._changeElement}>Subjects & Questions</a></li>
+					<li><a id="debates" href="javascript:void(0)" onClick={this._changeElement}>Debates & Polls</a></li>
+					<li><a id="beliefs" href="javascript:void(0)" onClick={this._changeElement}>Beliefs & Quotes</a></li>
+				</ul>
+				<ul>
+					{categories.map((item) => {
+						return <li><a id={item.value} href="javascript:void(0)" onClick={this._changeCategory}>{item.label}</a></li>
+					})}
+				</ul>
+				<ul>
+					{subcategories.map((item) => {
+						return <li><a id={item.value} href="javascript:void(0)" onClick={this._changeCategory}>{item.label}</a></li>
+					})}
+				</ul>
+			</div>
+		);
+	},
+	_changeElement: function (e) {
+		let id = e.currentTarget.id;
+		this.setState({element: id});
+	},
+	_changeCategory: function (e) {
+		let id = e.currentTarget.id;
+		this.setState({category: id});
+	}
+});
+
+let Sort = React.createClass({
+	render: function () {
+		return (
+			<div className="sortby">
+				<div className="triangle"></div>
+				<div className="label">Sort by</div>
+				<ul className="sort" ref="sort">
+					<li className={(this.props.sortBy === 'influence') ? "selected" : ""} onClick={this._influence}><i className="fa fa-check" /> Influence</li>
+					<li className={(this.props.sortBy === 'totalViews') ? "selected" : ""} onClick={this._views}><i className="fa fa-check" /> Views</li>
+					<li className={(this.props.sortBy === 'popularity') ? "selected" : ""} onClick={this._popularity}><i className="fa fa-check" /> Popularity</li>
+					<li className={(this.props.sortBy === 'totalThumbs') ? "selected" : ""} onClick={this._thumbs}><i className="fa fa-check" /> Thumbs</li>
+					<li className={(this.props.sortBy === 'totalComments') ? "selected" : ""} onClick={this._comments}><i className="fa fa-check" /> Comments</li>
+					<li className={(this.props.sortBy === 'location') ? "selected" : ""} onClick={this._location}><i className="fa fa-check" /> Location</li>
+					<li className={(this.props.sortBy === 'date') ? "selected" : ""} onClick={this._date}><i className="fa fa-check" /> Date</li>
+				</ul>
+				<div className="direction"  ref="direction">
+					<button className={(this.props.direction === 'DESC') ? 'selected' : ''} onClick={this._desc}>
+							<i className="fa fa-arrow-down" /> High to Low
+					</button>
+					<button className={(this.props.direction === 'ASC') ? 'selected' : ''} onClick={this._asc}>
+						<i className="fa fa-arrow-up" /> Low to High
+					</button>
+				</div>
+			</div>
+		);
+	},
+	_influence: function (e) { StreamActions.sortBy('influence'); },
+	_views: function (e) { StreamActions.sortBy('totalViews'); },
+	_popularity: function (e) { StreamActions.sortBy('popularity'); },
+	_thumbs: function (e) { StreamActions.sortBy('totalThumbs'); },
+	_comments: function (e) { StreamActions.sortBy('totalComments'); },
+	_location: function (e) { StreamActions.sortBy('location'); },
+	_date: function (e) { StreamActions.sortBy('date'); },
+	_asc: function (e) { StreamActions.direction('ASC'); },
+	_desc: function (e) { StreamActions.direction('DESC'); },
 });
 
 module.exports = Header;

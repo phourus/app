@@ -2648,10 +2648,6 @@ div.alerts button {
   }
 }
 @media (min-width: 1400px) {
-  .postItem {
-    width: 19%;
-    margin-right: 1%;
-  }
   .postItem .details .pic {
     width: 16.66666667%;
     display: inline-block;

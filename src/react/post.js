@@ -95,6 +95,16 @@ let Post = React.createClass({
 		let content = false;
 		let links = false;
 		let thumbs = false;
+		let icons = {
+			blog: "laptop",
+			event: "calendar",
+			subject: "info",
+			question: "question",
+			debate: "bullhorn",
+			poll: "bar-chart",
+			quote: "quote-right",
+			belief: "flag"
+		};
 		for (let i = 0, keys = Object.keys(post); i < keys.length; i++) {
 			let key = keys[i];
 			let value = post[keys[i]];
@@ -153,7 +163,7 @@ let Post = React.createClass({
 						</div>
 					: false
 				}
-				<div className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className="fa fa-bell" /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
+				<div className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className={"fa fa-" + (icons[this.state.post.type] ? icons[this.state.post.type] : 'file')} /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				{types}
 				{this.props.owner && this.props.context.type === 'edit' ? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> <span style={{textDecoration: 'underline'}}>Privacy: {this.state.post.privacy}</span></div> : false}
 				{this.props.context.type === 'edit' && this.props.owner && this.state.privacy
@@ -319,7 +329,7 @@ let Stats = React.createClass({
 					</div>
 				</div>
 				<div className="stats">
-					<div><strong>{numeral(this.props.post.totalViews).format('0a')}</strong><br /><i className="fa fa-search" /></div>
+					<div><strong>{numeral(this.props.post.totalViews).format('0a')}</strong><br /><i className="fa fa-eye" /></div>
 					<div><strong>{numeral(this.props.post.totalComments).format('0a')}</strong><br /><i className="fa fa-comment" /></div>
 					<div><strong>{numeral(this.props.post.totalThumbs).format('0a')}</strong><br /><i className="fa fa-thumbs-up" /></div>
 				</div>

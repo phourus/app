@@ -31,12 +31,12 @@ let Types = React.createClass({
 		let icons = {
 			blog: "laptop",
 			event: "calendar",
-			subject: "puzzle-piece",
+			subject: "info",
 			question: "question",
 			debate: "bullhorn",
-			poll: "line-chart",
+			poll: "bar-chart",
 			quote: "quote-right",
-			belief: "road"
+			belief: "flag"
 		};
 	  return (
 			<div className="types">
