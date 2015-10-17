@@ -10,11 +10,17 @@ let Alerts = require('./react/alerts');
 let Header = require('./react/header');
 
 let App = React.createClass({
+  getInitialState: function () {
+    return {
+      tint: null
+    };
+  },
   render: function () {
     return  (
       <div>
         <Initializer />
-        <Header />
+        {this.state.tint ? <div className="tint"></div> : false}
+        <Header tintOn={this._tintOn} tintOff={this._tintOff} />
         <div className="spacer"></div>
         <Alerts {...this.props.alerts} />
         <div className="main">
@@ -31,6 +37,12 @@ let App = React.createClass({
         </div>
       </div>
     );
+  },
+  _tintOn: function () {
+    this.setState({tint: true});
+  },
+  _tintOff: function () {
+    this.setState({tint: null});
   }
 });
 

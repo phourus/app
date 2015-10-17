@@ -98,6 +98,11 @@ let Header = React.createClass({
     }
   },
   _filter: function () {
+    if (this.state.filter !== true) {
+      this.props.tintOn();
+    } else {
+      this.props.tintOff();
+    }
     this.setState({filter: !this.state.filter});
   }
 });
@@ -131,6 +136,8 @@ let Filter = React.createClass({
 				<div className="triangle"></div>
 				<div className="label">Filter By</div>
 				<Filter.Types {...this.props} />
+        <Filter.Dates {...this.props} />
+        <Filter.Sort {...this.props} />
 			</div>
 		);
 	},
@@ -261,7 +268,7 @@ Filter.Categories = React.createClass({
 	}
 });
 
-let Sort = React.createClass({
+Filter.Sort = React.createClass({
 	render: function () {
 		return (
 			<div className="sortby">
