@@ -29,38 +29,39 @@ header > div.filter {
 
   .sortby {
     .Cols(6);
+    box-sizing: border-box;
+    border-left: solid 1px #444;
 
     ul {
-      border-top: solid 1px #ccc;
       margin: 0px;
       padding: 0px;
       width: 100%;
 
       li {
         width: 96%;
-        border-bottom: solid 1px #ccc;
+        border-bottom: solid 1px #444;
         padding: 0.5em 2%;
         cursor: pointer;
-        color: #fff;
-
+        color: #eee;
+        font-size: 0.9em;
         list-style: none;
 
         .fa {
-          color: @grey;
+          color: @gold-light;
+          margin-right: 10px;
         }
 
         &.selected {
-          color: @blue;
-          background-color: white;
+          background-color: #222;
           font-size: 1.5em;
 
           .fa {
-            color: @blue;
+            color: @green;
           }
         }
 
         &:hover {
-          background-color: white;
+          background-color: #222;
           color: @green;
 
           .fa {
@@ -70,15 +71,21 @@ header > div.filter {
       }
     }
     button {
-      background-color: white;
       border: none;
       width: 50%;
       text-align: center;
       height: 40px;
       cursor: pointer;
+      background-color: #444;
+      color: #eee;
+
+      &:hover {
+        color: @green;
+      }
 
       &.selected {
-        color: @blue;
+        color: @green;
+        background-color: #222;
       }
     }
   }

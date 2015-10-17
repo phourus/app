@@ -329,49 +329,56 @@ header > div.filter .sortby {
   width: 50%;
   display: inline-block;
   vertical-align: top;
+  box-sizing: border-box;
+  border-left: solid 1px #444;
 }
 header > div.filter .sortby ul {
-  border-top: solid 1px #ccc;
   margin: 0px;
   padding: 0px;
   width: 100%;
 }
 header > div.filter .sortby ul li {
   width: 96%;
-  border-bottom: solid 1px #ccc;
+  border-bottom: solid 1px #444;
   padding: 0.5em 2%;
   cursor: pointer;
-  color: #fff;
+  color: #eee;
+  font-size: 0.9em;
   list-style: none;
 }
 header > div.filter .sortby ul li .fa {
-  color: #dddddd;
+  color: #f2c13d;
+  margin-right: 10px;
 }
 header > div.filter .sortby ul li.selected {
-  color: #3498db;
-  background-color: white;
+  background-color: #222;
   font-size: 1.5em;
 }
 header > div.filter .sortby ul li.selected .fa {
-  color: #3498db;
+  color: #8abf00;
 }
 header > div.filter .sortby ul li:hover {
-  background-color: white;
+  background-color: #222;
   color: #8abf00;
 }
 header > div.filter .sortby ul li:hover .fa {
   color: #8abf00;
 }
 header > div.filter .sortby button {
-  background-color: white;
   border: none;
   width: 50%;
   text-align: center;
   height: 40px;
   cursor: pointer;
+  background-color: #444;
+  color: #eee;
+}
+header > div.filter .sortby button:hover {
+  color: #8abf00;
 }
 header > div.filter .sortby button.selected {
-  color: #3498db;
+  color: #8abf00;
+  background-color: #222;
 }
 header > div.filter ul {
   display: inline-block;
@@ -3708,6 +3715,7 @@ i.fa-minus {
   background-color: #333;
   margin: 4px 0;
   cursor: pointer;
+  border: solid 1px transparent;
 }
 .type.blog,
 .type.event {
@@ -3720,10 +3728,9 @@ i.fa-minus {
   border: solid 1px #9cd900;
   color: #9cd900;
 }
-.type.blog.inverted:hover,
-.type.event.inverted:hover {
+.type.blog:hover,
+.type.event:hover {
   background-color: #658c00;
-  border: none;
   color: #eeeeee;
 }
 .type.subject,
@@ -3737,10 +3744,9 @@ i.fa-minus {
   border: solid 1px #5faee3;
   color: #5faee3;
 }
-.type.subject.inverted:hover,
-.type.question.inverted:hover {
+.type.subject:hover,
+.type.question:hover {
   background-color: #217dbb;
-  border: none;
   color: #eeeeee;
 }
 .type.debate,
@@ -3754,10 +3760,9 @@ i.fa-minus {
   border: solid 1px #fc2727;
   color: #fc2727;
 }
-.type.debate.inverted:hover,
-.type.poll.inverted:hover {
+.type.debate:hover,
+.type.poll:hover {
   background-color: #bb0202;
-  border: none;
   color: #eeeeee;
 }
 .type.quote,
@@ -3771,10 +3776,9 @@ i.fa-minus {
   border: solid 1px #f2c13d;
   color: #f2c13d;
 }
-.type.quote.inverted:hover,
-.type.belief.inverted:hover {
+.type.quote:hover,
+.type.belief:hover {
   background-color: #bc8c0d;
-  border: none;
   color: #eeeeee;
 }
 /** MESSAGES **/
