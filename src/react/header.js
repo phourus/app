@@ -133,10 +133,7 @@ let Filter = React.createClass({
 	render: function () {
 		return (
 			<div className="filter">
-				<div className="triangle"></div>
-				<div className="label">Filter By</div>
 				<Filter.Types {...this.props} />
-        <Filter.Dates {...this.props} />
         <Filter.Sort {...this.props} />
 			</div>
 		);
@@ -173,29 +170,30 @@ Filter.Dates = React.createClass({
 Filter.Types = React.createClass({
 	render: function () {
 		var classes = {
-			blog: "button green",
-			event: "button green",
-			subject: "button blue",
-			question: "button blue",
-			debate: "button red",
-			poll: "button red",
-			belief: "button gold",
-			quote: "button gold"
-		}
+			blog: "type blog",
+			event: "type event",
+			subject: "type subject",
+			question: "type question",
+			debate: "type debate",
+			poll: "type poll",
+			belief: "type belief",
+			quote: "type quote"
+		};
 		for (var i = 0; i < this.props.exclude.length; i++) {
 			var key = this.props.exclude[i];
 			classes[key] += " off";
 		}
 		return (
 			<div className="types">
-				<button id="blog" className={classes.blog} onClick={this._toggle}><i className="fa fa-laptop" /> Blogs</button>
-				<button id="event" className={classes.event} onClick={this._toggle}><i className="fa fa-calendar" /> Events</button>
-				<button id="subject" className={classes.subject} onClick={this._toggle}><i className="fa fa-info" /> Subjects</button>
-				<button id="question" className={classes.question} onClick={this._toggle}><i className="fa fa-question" /> Questions</button>
-				<button id="debate" className={classes.debate} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</button>
-				<button id="poll" className={classes.poll} onClick={this._toggle}><i className="fa fa-bar-chart" /> Polls</button>
-				<button id="belief" className={classes.belief} onClick={this._toggle}><i className="fa fa-flag" /> Beliefs</button>
-				<button id="quote" className={classes.quote} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</button>
+        <div className="label">Toggle Types</div>
+				<div id="blog" className={classes.blog} onClick={this._toggle}><i className="fa fa-laptop" /> Blogs</div>
+				<div id="event" className={classes.event} onClick={this._toggle}><i className="fa fa-calendar" /> Events</div><br />
+				<div id="subject" className={classes.subject} onClick={this._toggle}><i className="fa fa-info" /> Subjects</div>
+				<div id="question" className={classes.question} onClick={this._toggle}><i className="fa fa-question" /> Questions</div><br />
+				<div id="debate" className={classes.debate} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</div>
+				<div id="poll" className={classes.poll} onClick={this._toggle}><i className="fa fa-bar-chart" /> Polls</div><br />
+				<div id="belief" className={classes.belief} onClick={this._toggle}><i className="fa fa-flag" /> Beliefs</div>
+				<div id="quote" className={classes.quote} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</div>
 			</div>
 		);
 	},
