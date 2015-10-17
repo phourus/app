@@ -268,6 +268,8 @@ Filter.Categories = React.createClass({
 
 Filter.Sort = React.createClass({
 	render: function () {
+    // <li className={(this.props.sortBy === 'location') ? "selected" : ""} onClick={this._location}><i className={"fa " + (this.props.sortBy === 'location' ? "fa-check" : "fa-globe")} /> Location</li>
+    // <li className={(this.props.sortBy === 'date') ? "selected" : ""} onClick={this._date}><i className={"fa " + (this.props.sortBy === 'date' ? "fa-check" : "fa-calendar")} /> Date</li>
 		return (
 			<div className="sortby">
 				<div className="triangle"></div>
@@ -278,8 +280,6 @@ Filter.Sort = React.createClass({
 					<li className={(this.props.sortBy === 'popularity') ? "selected" : ""} onClick={this._popularity}><i className={"fa " + (this.props.sortBy === 'popularity' ? "fa-check" : "fa-smile-o")} /> Popularity</li>
 					<li className={(this.props.sortBy === 'totalThumbs') ? "selected" : ""} onClick={this._thumbs}><i className={"fa " + (this.props.sortBy === 'totalThumbs' ? "fa-check" : "fa-thumbs-up")} /> Thumbs</li>
 					<li className={(this.props.sortBy === 'totalComments') ? "selected" : ""} onClick={this._comments}><i className={"fa " + (this.props.sortBy === 'totalComments' ? "fa-check" : "fa-comment")} /> Comments</li>
-					<li className={(this.props.sortBy === 'location') ? "selected" : ""} onClick={this._location}><i className={"fa " + (this.props.sortBy === 'location' ? "fa-check" : "fa-globe")} /> Location</li>
-					<li className={(this.props.sortBy === 'date') ? "selected" : ""} onClick={this._date}><i className={"fa " + (this.props.sortBy === 'date' ? "fa-check" : "fa-calendar")} /> Date</li>
 				</ul>
 				<div className="direction"  ref="direction">
 					<button className={(this.props.direction === 'DESC') ? 'selected' : ''} onClick={this._desc}>

@@ -91,6 +91,7 @@ let Stream = Reflux.createStore({
     return false;
   },
   _search: function (search) {
+    this.posts = [];
     this.params.search = search;
     this._collection();
   },
@@ -116,14 +117,17 @@ let Stream = Reflux.createStore({
     this._collection();
   },
   _sortBy: function (sortBy) {
+    this.posts = [];
     this.params.sortBy = sortBy;
     this._collection();
   },
   _direction: function (direction) {
+    this.posts = [];
     this.params.direction = direction;
     this._collection();
   },
   _exclude: function (type) {
+    this.posts = [];
     let exclude = this.params.exclude;
     let index = exclude.indexOf(type);
     if (index > -1) {
