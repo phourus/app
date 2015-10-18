@@ -3378,8 +3378,37 @@ header nav .notifications {
   padding: 10px 0;
   margin-bottom: 20px;
 }
+.profile .type {
+  font-weight: bold;
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 10px;
+  background-color: transparent;
+}
+.profile .type.company {
+  color: #658c00;
+  border: solid 1px #658c00;
+}
+.profile .type.school {
+  color: #217dbb;
+  border: solid 1px #217dbb;
+}
+.profile .type.government {
+  color: #bb0202;
+  border: solid 1px #bb0202;
+}
+.profile .type.group {
+  color: #bc8c0d;
+  border: solid 1px #bc8c0d;
+}
+.profile .detail {
+  width: 33.33333333%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+}
 .profile .pic {
-  width: 50%;
+  width: 33.33333333%;
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
@@ -3397,7 +3426,7 @@ header nav .notifications {
   border: solid 4px #999;
 }
 .profile .basic {
-  width: 50%;
+  width: 33.33333333%;
   display: inline-block;
   vertical-align: top;
 }
@@ -3406,44 +3435,18 @@ header nav .notifications {
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
   margin-bottom: 10px;
 }
-.profile .basic .type {
-  font-weight: bold;
-  color: #555;
-  font-size: 1em;
-  margin-bottom: 10px;
-}
-.profile .basic .type.company {
-  color: #658c00;
-}
-.profile .basic .type.school {
-  color: #217dbb;
-}
-.profile .basic .type.government {
-  color: #bb0202;
-}
-.profile .basic .type.group {
-  color: #bc8c0d;
-}
 @media (min-width: 500px) {
-  .profile .pic {
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .profile .basic {
-    width: 75%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .profile .basic .name {
-    font-size: 2em;
-  }
   .stream .profile {
-    width: 90%;
-    margin: 0 5% 0 5%;
+    width: 100%;
+    margin: -20px 0 20px 0;
     background-color: #fff;
     padding: 20px;
     box-sizing: border-box;
+  }
+  .stream .profile .pic {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
   }
   .stream .profile .name {
     margin: 0;
@@ -3451,6 +3454,11 @@ header nav .notifications {
   }
   .stream .profile .basic {
     width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .stream .profile .detail {
+    width: 33.33333333%;
     display: inline-block;
     vertical-align: top;
   }
@@ -3465,6 +3473,23 @@ header nav .notifications {
   }
   .stream .profile .actions button {
     float: right;
+  }
+}
+@media (min-width: 800px) {
+  .stream .profile .pic {
+    width: 8.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .stream .profile .basic {
+    width: 58.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .stream .profile .detail {
+    width: 33.33333333%;
+    display: inline-block;
+    vertical-align: top;
   }
 }
 /** COLORS **/

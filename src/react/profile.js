@@ -29,19 +29,16 @@ let Profile = React.createClass({
 		let address = profile.address || {};
 		return (
 			<div className="profile">
-				<button className="button blue inverted back" onClick={this._back}>Back to Organizations</button>
-				<h1 className="name">{profile.name || profile.first + ' ' + profile.last}</h1>
 				<Pic img={profile.img} />
 				<div className="basic">
-					<div className={profile.type + " type"}>{profile.type ? profile.type.toUpperCase() : ""}</div>
+					<h1 className="name">{profile.name || profile.first + ' ' + profile.last}</h1>
 					{address.city || address.state ? <div>{address.city}{address.city && address.state ? ", " : ""}{address.state}</div> : false}
 					{profile.website ? <div><a href={profile.website} target="_blank">{profile.website}</a></div> : false}
 					{profile.phone ? <div>{profile.phone}</div> : false}
 					{profile.email ? <div><a href={"mailto:" + profile.email + "&Subject=Phourus"}>{profile.email}</a></div> : false}
 				</div>
-				<div className="actions">
-					<button className="button green">Request Access</button>
-					<button className="button blue disabled">Manage Organization</button>
+				<div className="detail">
+					<div className={profile.type + " type"}>{profile.type ? profile.type.toUpperCase() : ""}</div>
 				</div>
 			</div>
 		);
