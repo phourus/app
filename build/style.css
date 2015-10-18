@@ -3181,6 +3181,18 @@ header .keywords input {
   font-size: 1.2em;
   color: #eee;
 }
+header .keywords span.total {
+  position: absolute;
+  text-align: right;
+  right: 80px;
+  color: #eee;
+  top: 8px;
+  font-size: 0.8em;
+}
+header .keywords span.total .of {
+  font-size: 0.8em;
+  color: #aaa;
+}
 header .keywords button.filter {
   position: absolute;
   background-color: transparent;
