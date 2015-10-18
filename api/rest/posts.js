@@ -3,6 +3,19 @@ var router = require('express').Router();
 var posts = require('../models/posts');
 var votes = require('../models/votes');
 
+router.get('/shared', (req, res) => {
+  var params = req.query;
+  posts.SESSION_USER = req.user_id;
+  posts.SESSION_TEAMS = req.teams;
+  posts.shared(params)
+  .then(function (data) {
+    res.send(200, data);
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.send(500);
+  });
+});
 router.get('/:id', (req, res) => {
   var id = req.params.id;
   posts.SESSION_USER = req.user_id;

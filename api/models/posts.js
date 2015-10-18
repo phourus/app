@@ -57,6 +57,26 @@ var posts = db.define('posts', {
     collection: function (params) {
       return this.findAndCountAll(this.queryize(params));
     },
+    shared: function () {
+      let query = {
+        where: {
+          $or: []
+        }
+      };
+      if (this.SESSION_TEAMS) {
+        query.where.$or.push({teamId: {$in: this.SESSION_TEAMS}});
+      }
+      if (this.SESSION_USER) {
+        query.where.$or.push({userId: this.SESSION_USER});
+      }
+      return collaborators.findAndCountAll(query)
+      .then((data) => {
+        let shared = data.rows.map((c) => {
+          return c.postId;
+        });
+        return this.findAndCountAll({where: {id: {$in: shared}}});
+      });
+    },
     add: function (model) {
       model.userId = this.SESSION_USER;
       return this.create(model);
@@ -133,14 +153,14 @@ var posts = db.define('posts', {
 
       // SEARCH
       // basic search: title, content
-      // advanced search: category, subcategory
-      // specific search: question, author
+      // advanced search: tags, slug
+      // deep search: comments, links, users, orgs, author, location, poll
       if (params.search && params.search !== '') {
           var term = { like:  '%' + params.search + '%' };
-          query.where = sql.or(
-              { title: term },
-              { content: term }
-          );
+          query.where.$or.push({
+            title: term,
+            content: term
+          });
       }
 
       // DATE
@@ -160,8 +180,6 @@ var posts = db.define('posts', {
       // ME
       if (params.contextType === 'myPosts') {
         query.where.userId = this.SESSION_USER;
-        //query.where.$or.push({'collaborators.teamId': this.SESSION_TEAMS});
-        //query.where.$or.push({'collaborators.userId': this.SESSION_USER});
       }
 
       // USER
@@ -180,14 +198,17 @@ var posts = db.define('posts', {
           {model: orgs, as: 'org'},
           {model: tags, as: 'tags'},
           {model: links, as: 'links'},
-          {model: collaborators, as: 'collaborators'}
       ];
       return query;
     },
     _privacy: function () {
       // GUEST
       if (!this.SESSION_USER) {
-        return {privacy: 'public'};
+        return {
+          $or: [
+            {privacy: 'public'}
+          ]
+        };
       }
 
       // AUTHENTICATED
