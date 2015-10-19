@@ -58,7 +58,8 @@ let Activity = React.createClass({
 let Notifications = React.createClass({
   getInitialState: function () {
     return {
-      notifications: []
+      notifications: [],
+      mode: 'comments'
     }
   },
   componentDidMount: function () {
@@ -106,19 +107,31 @@ let Notifications = React.createClass({
     });
     return (<div className={this.props.selected === 'history' ? "notifications" : "notifications selected"}>
       <h3>Notifications</h3>
-      <h4>Comments</h4>
-      <ul>{comments}</ul>
-      <h4>Thumbs</h4>
-      <ul>{thumbs}</ul>
-      <h4>Views</h4>
-      <ul>{views}</ul>
+      <div className="tabs">
+        <div onMouseOver={this._comments}><div>{comments.length}</div>Comments</div>
+        <div onMouseOver={this._thumbs}><div>{thumbs.length}</div>Thumbs</div>
+        <div onMouseOver={this._views}><div>{views.length}</div>Views</div>
+      </div>
+      {this.state.mode === 'comments' ? <ul>{comments}</ul> : false}
+      {this.state.mode === 'thumbs' ? <ul>{thumbs}</ul> : false}
+      {this.state.mode === 'views' ? <ul>{views}</ul> : false}
     </div>);
+  },
+  _comments: function () {
+    this.setState({mode: 'comments'});
+  },
+  _thumbs: function () {
+    this.setState({mode: 'thumbs'});
+  },
+  _views: function () {
+    this.setState({mode: 'views'});
   }
 });
 
 let History = React.createClass({
   getInitialState: function () {
     return {
+      mode: 'comments',
       history: []
     }
   },
@@ -170,13 +183,24 @@ let History = React.createClass({
     return (
       <div className={this.props.selected === 'history' ? "history selected" : "history"}>
         <h3>History</h3>
-        <h4>Comments</h4>
-        <ul>{comments}</ul>
-        <h4>Thumbs</h4>
-        <ul>{thumbs}</ul>
-        <h4>Views</h4>
-        <ul>{views}</ul>
+          <div className="tabs">
+            <div onMouseOver={this._comments}><div>{comments.length}</div>Comments</div>
+            <div onMouseOver={this._thumbs}><div>{thumbs.length}</div>Thumbs</div>
+            <div onMouseOver={this._views}><div>{views.length}</div>Views</div>
+          </div>
+          {this.state.mode === 'comments' ? <ul>{comments}</ul> : false}
+          {this.state.mode === 'thumbs' ? <ul>{thumbs}</ul> : false}
+          {this.state.mode === 'views' ? <ul>{views}</ul> : false}
       </div>);
+  },
+  _comments: function () {
+    this.setState({mode: 'comments'});
+  },
+  _thumbs: function () {
+    this.setState({mode: 'thumbs'});
+  },
+  _views: function () {
+    this.setState({mode: 'views'});
   }
 });
 
