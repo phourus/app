@@ -206,7 +206,10 @@ let Collaborators = React.createClass({
 					let user = item.user;
 					return {value: 'user:' + item.userId, label: user.first + ' ' + user.last};
 				}
-				return {value: 'team:' + item.teamId, label: 'Team: ' + item.teamId};
+				if (item.team) {
+					return {value: 'team:' + item.teamId, label: 'Team: ' + item.team.name};
+				}
+				return false;
 			});
 		}
 		return [];

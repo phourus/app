@@ -6,12 +6,11 @@ var teams = require('./teams');
 var users = require('./users');
 
 var collaborators = db.define('collaborators', {
-  id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
-  teamId: types.INTEGER
+  id: {type: types.INTEGER, autoIncrement: true, unique: true, primaryKey: true}
 }, {
   classMethods: {
     collection: function (postId) {
-      return this.findAll({where: {postId: postId}, include: [users]});
+      return this.findAll({where: {postId: postId}, include: [users, teams]});
     },
     add: function (model) {
       return this.create(model);

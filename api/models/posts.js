@@ -14,6 +14,7 @@ var votes = require('./votes');
 var favorites = require('./favorites');
 var mentions = require('./mentions');
 var collaborators = require('./collaborators');
+var teams = require('./teams');
 
 var posts = db.define('posts', {
   // Common
@@ -270,5 +271,7 @@ collaborators.belongsTo(users);
 users.hasMany(collaborators);
 collaborators.belongsTo(posts);
 posts.hasMany(collaborators);
+collaborators.belongsTo(teams);
+teams.hasMany(collaborators);
 
 module.exports = posts;
