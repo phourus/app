@@ -64,18 +64,22 @@ let Header = React.createClass({
                   Me
                 </Link>
                 {AccountStore.authenticated
-                  ? <ul>
-                    <li><Link to="myPosts">My Posts <i className="fa fa-edit" /></Link></li>
-                    {orgs.map((org) => {
-                      if (!org.approved) {
-                        return false;
-                      }
-                      return <li><Link to="orgPosts" params={{id: org.org.id}}>{org.org.shortname} <i className="fa fa-users" /></Link></li>
-                    })}
-                    <li><Link to="activity">My Activity <i className="fa fa-bell" /></Link></li>
-                    <li><Link to="account">My Account <i className="fa fa-user" /></Link></li>
-                    <li><a href="javascript:void(0)" onClick={AccountActions.logout}>Logout <i className="fa fa-sign-out" /></a></li>
-                  </ul>
+                  ? <div>
+                      <ul>
+                        {orgs.map((org) => {
+                          if (!org.approved) {
+                            return false;
+                          }
+                          return <li><Link to="orgPosts" params={{id: org.org.id}}>{org.org.shortname} <i className="fa fa-users" /></Link></li>
+                        })}
+                      </ul>
+                      <ul>
+                        <li><Link to="myPosts">My Posts <i className="fa fa-edit" /></Link></li>
+                        <li><Link to="activity">My Activity <i className="fa fa-bell" /></Link></li>
+                        <li><Link to="account">My Account <i className="fa fa-user" /></Link></li>
+                        <li><a href="javascript:void(0)" onClick={AccountActions.logout}>Logout <i className="fa fa-sign-out" /></a></li>
+                      </ul>
+                    </div>
                   : false
                 }
               </li>
