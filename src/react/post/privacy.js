@@ -33,7 +33,7 @@ let Privacy = React.createClass({
 					<button className={classes.members} onClick={this._members}>{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</button>
 					<button className={classes.public} onClick={this._public}>Public</button>
 					<Contexts {...this.props} />
-					{this.props.post.orgId ? <Collaborators {...this.props} s/> : false}
+					{this.props.post.orgId && this.props.post.orgId !== 'null' ? <Collaborators {...this.props} s/> : false}
 				</div>
 			</div>
 		);
@@ -104,6 +104,11 @@ let Collaborators = React.createClass({
 		});
 		ActionsCollaborators.collection(this.props.post.id);
 		ActionsCollaborators.lookup(this.props.post.orgId);
+	},
+	componentWillReceiveProps: function (updated) {
+		if (updated.post && updated.post.orgId) {
+			ActionsCollaborators.lookup(updated.post.orgId);
+		}
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
