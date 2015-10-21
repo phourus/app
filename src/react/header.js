@@ -113,19 +113,34 @@ let Header = React.createClass({
 });
 
 let Search = React.createClass({
+  getInitialState: function () {
+    return {
+      search: ""
+    };
+  },
+  componentDidMount: function () {
+    this.setState({search: this.props.search});
+  },
+  componentWillReceiveProps: function (updated, current) {
+    if (updated.search !== current.search) {
+      this.setState({search: updated.search});
+    }
+  },
 	render: function () {
 		return (
   		<div className="keywords">
-  			<input ref="term" className="term" type="text" placeholder="Search for" />
+  			<input className="term" type="text" placeholder="Search for" value={this.state.search} onChange={this._change} />
         <span className="total">{this.props.count} <span className="of">of</span> {this.props.total}</span>
         <button className="filter fa fa-filter" onClick={this.props.filter}></button>
   			<button className="button blue" onClick={this._search}><i className="fa fa-search" /> Search</button>
   		</div>
 		);
 	},
+  _change: function (e) {
+    this.setState({search: e.currentTarget.value});
+  },
 	_search: function () {
-    let val = this.refs.term.getDOMNode().value;
-		StreamActions.search(val);
+		StreamActions.search(this.state.search);
 	},
 });
 

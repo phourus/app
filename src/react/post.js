@@ -91,7 +91,7 @@ let Post = React.createClass({
 		let post = this.state.post;
 		let types = false;
 		let comments = false;
-		let tags = <Tags post={this.state.post} context={this.props.context} owner={this.props.owner} />;
+		let tags = <Tags post={this.state.post} context={this.props.context} owner={this.props.owner} tag={this._tag} />;
 		let content = false;
 		let links = false;
 		let thumbs = false;
@@ -242,6 +242,9 @@ let Post = React.createClass({
 	_confirm: function () {
 		Store.post.id = this.props.post.id;
 		Actions.trash();
+	},
+	_tag: function (tag) {
+		Stream.search(tag);
 	}
 });
 

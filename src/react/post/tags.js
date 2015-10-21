@@ -26,7 +26,7 @@ let Tags = React.createClass({
         {tags.map((item, index) => {
           return (
             <span className="tag" key={index}>
-							<a href="">{item.tag}</a>
+							<a id={item.tag} href="javascript:void(0)" onClick={this._tag}>{item.tag}</a>
 							{this.props.context.type === 'edit' && this.props.owner
 								? <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>x</a>
 								: false
@@ -60,6 +60,10 @@ let Tags = React.createClass({
 	_remove: function (e) {
 		let id = e.currentTarget.id;
 		Actions.remove(id);
+	},
+	_tag: function (e) {
+		let id = e.currentTarget.id;
+		this.props.tag(id);
 	}
 });
 
