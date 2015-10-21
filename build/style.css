@@ -2232,6 +2232,9 @@ div.alerts button {
 .postItem .interact {
   background-color: #efefef;
 }
+.postItem .interact:hover {
+  cursor: pointer;
+}
 .postItem .interact .influence,
 .postItem .interact .popularity {
   width: 60px;

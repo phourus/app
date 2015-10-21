@@ -311,6 +311,7 @@ let TextEditor = React.createClass({
 });
 
 let Stats = React.createClass({
+	mixins: [Navigation],
 	componentDidMount: function () {
 		this._popularity(this.props);
 	},
@@ -319,7 +320,7 @@ let Stats = React.createClass({
 	},
 	render: function () {
 		return (
-			<div className="interact">
+			<div className="interact" onClick={this._single}>
 				{this.props.context.type === 'post' ? <Thumbs post={this.props.post} /> : false}
 				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
@@ -345,6 +346,9 @@ let Stats = React.createClass({
 				let popularity = new Popularity(element, data.post.popularity || 100);
 			}, 1);
 		}
+	},
+	_single: function () {
+		this.context.router.transitionTo('post', {id: this.props.post.id});
 	}
 });
 
