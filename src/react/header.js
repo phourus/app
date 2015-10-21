@@ -42,13 +42,12 @@ let Header = React.createClass({
   },
   render: function () {
     let orgs = this.state.orgs;
-    let count = this.state.posts ? this.state.posts.length : 0;
     return  (
         <header className="header">
           <div className="brand">
             <Link to="home"></Link>
           </div>
-          <Search {...this.state.params} total={this.state.total || 0} count={count} filter={this._filter} />
+          <Search {...this.state.params} filter={this._filter} />
           <nav className="nav">
             <ul>
               <li className="posts">
@@ -130,7 +129,6 @@ let Search = React.createClass({
 		return (
   		<div className="keywords">
   			<input className="term" type="text" placeholder="Search for" value={this.state.search} onChange={this._change} />
-        <span className="total">{this.props.count} <span className="of">of</span> {this.props.total}</span>
         <button className="filter fa fa-filter" onClick={this.props.filter}></button>
   			<button className="button blue" onClick={this._search}><i className="fa fa-search" /> Search</button>
   		</div>

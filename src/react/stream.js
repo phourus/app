@@ -57,6 +57,9 @@ let Stream = React.createClass({
 		let visible = 'fa fa-minus-square-o';
 		let hidden = 'fa fa-plus-square-o';
 		let hasMore = (this.state.posts && this.state.posts.length < this.state.total && this.state.context.type !== 'post' && this.state.context.type !== 'edit');
+		let count = this.state.posts ? this.state.posts.length : 0;
+		let total = this.state.total || 0;
+
 		return (
 			<div className="stream">
 				{this.state.context.type === 'orgs' && !this.state.context.id
@@ -66,6 +69,10 @@ let Stream = React.createClass({
 				{this.state.context.id && (this.state.context.type === 'orgs' || this.state.context.type === 'users')
 					? <Profile context={this.state.context} />
 					: false
+				}
+				{this.state.context.type === 'post' || this.state.context.type === 'edit'
+					? false
+					: <div className="total">Displaying {count} <span className="of">of</span> {total} posts</div>
 				}
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader"></div>}>
 					<Posts {...this.state} />
@@ -308,6 +315,9 @@ let Posts = React.createClass({
 			this.setState(data);
 		});
 		AccountActions.get();
+	},
+	componentWillReceiveProps: function () {
+		this.forceUpdate();
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();

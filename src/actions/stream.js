@@ -13,6 +13,7 @@ module.exports = {
   sortBy: Reflux.createAction(),
   direction: Reflux.createAction(),
   exclude: Reflux.createAction(),
+  type: Reflux.createAction(),
   context: Reflux.createAction(),
   comments: Reflux.createAction(),
   thumb: Reflux.createAction(),

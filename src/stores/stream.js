@@ -39,6 +39,7 @@ let Stream = Reflux.createStore({
     this.listenTo(Actions.sortBy, this._sortBy);
     this.listenTo(Actions.direction, this._direction);
     this.listenTo(Actions.exclude, this._exclude);
+    this.listenTo(Actions.type, this._type);
     this.listenTo(Actions.context, this._context);
   },
   _collection: function () {
@@ -136,6 +137,20 @@ let Stream = Reflux.createStore({
       exclude.push(type);
     }
     this.params.exclude = exclude;
+    this._collection();
+  },
+  _type: function (type) {
+    let types = ['blog', 'event', 'subject', 'question', 'debate', 'poll', 'belief', 'quote'];
+    if (this.params.exclude.length === 7) {
+      this.params.exclude = [];
+    } else {
+      let index = types.indexOf(type);
+      if (index !== -1) {
+        types.splice(index, 1);
+        this.params.exclude = types;
+      }
+    }
+    this.posts = [];
     this._collection();
   },
   _context: function (type, id) {

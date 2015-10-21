@@ -163,7 +163,7 @@ let Post = React.createClass({
 						</div>
 					: false
 				}
-				<div className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className={"fa fa-" + (icons[this.state.post.type] ? icons[this.state.post.type] : 'file')} /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
+				<div id={this.state.post.type} className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className={"fa fa-" + (icons[this.state.post.type] ? icons[this.state.post.type] : 'file')} /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				{types}
 				{this.props.owner && this.props.context.type === 'edit' ? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> <span style={{textDecoration: 'underline'}}>Privacy: {this.state.post.privacy}</span></div> : false}
 				{this.props.context.type === 'edit' && this.props.owner && this.state.privacy
@@ -220,9 +220,12 @@ let Post = React.createClass({
 	_privacy: function () {
 		this.setState({privacy: !this.state.privacy});
 	},
-	_type: function () {
+	_type: function (e) {
 		if (this.props.context.type === 'edit' && this.props.owner) {
 			this.setState({types: !this.state.types});
+		}
+		if (this.props.context.type !== 'post' && this.props.context.type !== 'edit') {
+			Stream.type(e.currentTarget.id);
 		}
 	},
 	_title: function (e) {
