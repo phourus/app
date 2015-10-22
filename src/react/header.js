@@ -48,22 +48,22 @@ let Header = React.createClass({
             <Link to="home"></Link>
           </div>
           <Search {...this.state.params} filter={this._filter} />
-          <nav className="nav">
-            <ul>
-              <li className="posts">
-                <Link to="stream" >
-                  <i className="fa fa-file" />
-                  Posts
-                </Link>
-              </li>
-              <li className="me">
-                <Link to="activity" className="me">
-                  <i className="fa fa-user" />
-                  <span className="notifications"></span>
-                  Me
-                </Link>
-                {AccountStore.authenticated
-                  ? <div>
+          { AccountStore.authenticated
+            ?  <nav className="nav">
+                <ul>
+                  <li className="posts">
+                    <Link to="stream" >
+                      <i className="fa fa-file" />
+                      Posts
+                    </Link>
+                  </li>
+                  <li className="me">
+                    <Link to="activity" className="me">
+                      <i className="fa fa-user" />
+                      <span className="notifications"></span>
+                      Me
+                    </Link>
+                    <div>
                       <ul>
                         {orgs.map((org) => {
                           if (!org.approved) {
@@ -79,27 +79,32 @@ let Header = React.createClass({
                         <li><a href="javascript:void(0)" onClick={AccountActions.logout}>Logout <i className="fa fa-sign-out" /></a></li>
                       </ul>
                     </div>
-                  : false
-                }
-              </li>
-              <li className="create">
-                <a href="javascript: void(0)" onClick={this._create}>
-                  <i className="fa fa-pencil" />
-                  Create
-                </a>
-              </li>
-            </ul>
-          </nav>
+                  </li>
+                  <li className="create">
+                    <a href="javascript: void(0)" onClick={this._create}>
+                      <i className="fa fa-pencil" />
+                      Create
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              : <nav>
+                  <ul>
+                    <li className="create">
+                      <Link to="account">
+                        <i className="fa fa-sign-in" />
+                        Login
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
+          }
           {this.state.filter ? <Filter {...this.state.params} /> : false}
         </header>
     );
   },
   _create: function () {
-    if (!AccountStore.authenticated) {
-      this.context.router.transitionTo("account");
-    } else {
-      PostActions.add();
-    }
+    PostActions.add();
   },
   _filter: function () {
     if (this.state.filter !== true) {
