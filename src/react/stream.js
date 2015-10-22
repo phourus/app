@@ -72,7 +72,7 @@ let Stream = React.createClass({
 				}
 				{this.state.context.type === 'post' || this.state.context.type === 'edit'
 					? false
-					: <div className="total">Displaying {count} <span className="of">of</span> {total} posts</div>
+					: <div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
 				}
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader"></div>}>
 					<Posts {...this.state} />

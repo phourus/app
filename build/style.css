@@ -2892,6 +2892,18 @@ div.alerts button {
 #content div.stream {
   max-width: 100%;
 }
+.stream div.total {
+  margin-left: 2%;
+  color: #555;
+  font-size: 0.8em;
+}
+.stream div.total .of {
+  font-size: 0.8em;
+}
+.stream div.total .number {
+  color: #333;
+  font-weight: bold;
+}
 .stream .loader {
   margin-top: 100px;
   margin-bottom: 100px;
@@ -3183,18 +3195,6 @@ header .keywords input {
   height: 100%;
   font-size: 1.2em;
   color: #eee;
-}
-header .keywords span.total {
-  position: absolute;
-  text-align: right;
-  right: 80px;
-  color: #eee;
-  top: 8px;
-  font-size: 0.8em;
-}
-header .keywords span.total .of {
-  font-size: 0.8em;
-  color: #aaa;
 }
 header .keywords button.filter {
   position: absolute;
