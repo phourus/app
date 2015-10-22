@@ -19,8 +19,8 @@ let App = React.createClass({
     return  (
       <div>
         <Initializer />
-        {this.state.tint ? <div className="tint"></div> : false}
-        <Header tintOn={this._tintOn} tintOff={this._tintOff} />
+        {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
+        <Header tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
         <div className="spacer"></div>
         <Alerts {...this.props.alerts} />
         <div className="main">

@@ -40,6 +40,11 @@ let Header = React.createClass({
     this.unsubscribePost();
     this.unsubscribeStream();
   },
+  componentWillReceiveProps: function (updated) {
+    if (!updated.tint) {
+      this.setState({filter: false});
+    }
+  },
   render: function () {
     let orgs = this.state.orgs;
     return  (
@@ -99,7 +104,7 @@ let Header = React.createClass({
                   </ul>
                 </nav>
           }
-          {this.state.filter ? <Filter {...this.state.params} /> : false}
+          {this.state.filter && this.props.tint ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
         </header>
     );
   },
@@ -157,7 +162,7 @@ let Filter = React.createClass({
 	render: function () {
 		return (
 			<div className="filter">
-				<Filter.Types {...this.props} />
+				<Filter.Types {...this.props} close={this.props.close} />
         <Filter.Sort {...this.props} />
 			</div>
 		);
@@ -217,7 +222,10 @@ Filter.Types = React.createClass({
 				<div id="debate" className={classes.debate} onClick={this._toggle}><i className="fa fa-bullhorn" /> Debates</div>
 				<div id="poll" className={classes.poll} onClick={this._toggle}><i className="fa fa-bar-chart" /> Polls</div><br />
 				<div id="belief" className={classes.belief} onClick={this._toggle}><i className="fa fa-flag" /> Beliefs</div>
-				<div id="quote" className={classes.quote} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</div>
+				<div id="quote" className={classes.quote} onClick={this._toggle}><i className="fa fa-quote-right" /> Quotes</div><br /><br />
+        <div>
+          <button className="button red" style={{width: '240px'}} onClick={this.props.close}>Close <i className="fa fa-close" /></button>
+        </div>
 			</div>
 		);
 	},
