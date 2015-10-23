@@ -16,6 +16,17 @@ var mentions = require('./mentions');
 var collaborators = require('./collaborators');
 var teams = require('./teams');
 
+var search = db.define('search', {
+  title: sql.STRING,
+  slug: sql.STRING,
+  content: sql.STRING,
+  author: sql.STRING,
+  poll: sql.STRING,
+  tags: sql.STRING,
+  links: sql.STRING,
+  comments: sql.STRING
+});
+
 var posts = db.define('posts', {
   // Common
   id: {type: sql.INTEGER, autoIncrement: true, unique: true, primaryKey: true},
@@ -129,98 +140,102 @@ var posts = db.define('posts', {
       });
     },
     queryize: function (params) {
-      var defaults = {};
-      var query = {};
-      var myPosts = {};
-
-      /** DEFAULTS **/
-      // sort: influence, comments, views, popularity, thumbs, date, location
-      defaults.sort = 'influence';
-      defaults.direction = 'DESC';
-      defaults.page = 1;
-      defaults.limit = 10;
-
-      /** STANDARD **/
-      query.order = [[(params.sortBy || defaults.sortBy), (params.direction || defaults.direction)]];
-      query.offset = ((params.page || defaults.page) - 1) * (defaults.limit || params.limit);
-      query.limit = params.limit || defaults.limit;
-      query.where = this._privacy();
-
-      /** WHERE **/
-      // EXCLUDE
-      if (params.exclude && params.exclude.length) {
-          query.where.type = { not: params.exclude.split(',') };
-      }
-
-      // SEARCH
-      // basic search: title, content
-      // advanced search: tags, slug
-      // deep search: comments, links, users, orgs, author, location, poll
-      if (params.search && params.search !== '') {
-          var term = { like:  '%' + params.search + '%' };
-          query.where.$or.push({
-            title: term,
-            content: term
-          });
-      }
-
-      // DATE
-      if (params.startDate && params.endDate) {
-          query.where.createdAt = {};
-          query.where.createdAt.between = [params.startDate, params.endDate];
-      }
-      if (params.startDate) {
-          query.where.createdAt = {};
-          query.where.createdAt.gt = params.startDate;
-      }
-      if (params.endDate) {
-          query.where.createdAt = {};
-          query.where.createdAt.lt = params.endDate;
-      }
-
-      // ME
-      if (params.contextType === 'myPosts') {
-        query.where.userId = this.SESSION_USER;
-      }
-
-      // USER
-      if (params.contextType === 'users') {
-        query.where.userId = params.contextId;
-      }
-
-      // ORG
-      if (params.contextType === 'orgs') {
-        query.where.orgId = params.contextId;
-      }
-
-      /** ASSOCIATIONS **/
-      query.include = [
-          {model: users, as: 'user', include: [locations]},
-          {model: orgs, as: 'org'},
-          {model: tags, as: 'tags'},
-          {model: links, as: 'links'},
-      ];
-      return query;
-    },
-    _privacy: function () {
-      // GUEST
-      if (!this.SESSION_USER) {
-        return {
-          $or: [
-            {privacy: 'public'}
-          ]
+      var search;
+      var Search = function (params) {
+        this.params = params;
+        this.query = {
+          where: {},
+          include: []
         };
-      }
-
-      // AUTHENTICATED
-      return {
-        $or: [
-          {privacy: {$in: ['public']}},
-          {userId: this.SESSION_USER, privacy: "private"},
-          {privacy: 'members', orgId: null},
-          {privacy: 'members', orgId: this.SESSION_ORGANIZATIONS},
-        ]
       };
+      Search.prototype = this._methods;
+      search = new Search(params);
+      search.params.SESSION_USER = this.SESSION_USER;
+      search.params.SESSION_ORGANIZATIONS = this.SESSION_ORGANIZATIONS;
+
+      search._sort();
+      search._types();
+      search._dates();
+      search._context();
+      search._privacy();
+      search._search();
+      search._joins();
+      return search.query;
+    },
+    _methods: {
+      _sort: function () {
+        this.query.order = [[(this.params.sortBy || 'influence'), (this.params.direction || 'DESC')]];
+        this.query.limit = this.params.limit || 10;
+        this.query.offset = this.params.limit * ((this.params.page || 1) - 1);
+      },
+      _types: function () {
+        if (this.params.exclude && this.params.exclude.length) {
+          this.query.where.type = { not: this.params.exclude.split(',') };
+        }
+      },
+      _dates: function () {
+        if (this.params.startDate && this.params.endDate) {
+          this.query.where.createdAt = {};
+          this.query.where.createdAt.between = [this.params.startDate, this.params.endDate];
+        } else {
+          if (this.params.startDate) {
+            this.query.where.createdAt = {};
+            this.query.where.createdAt.gt = this.params.startDate;
+          }
+          if (this.params.endDate) {
+            this.query.where.createdAt = {};
+            this.query.where.createdAt.lt = this.params.endDate;
+          }
+        }
+      },
+      _joins: function () {
+        this.query.include.push({model: users, as: 'user', include: [locations]});
+        this.query.include.push({model: orgs, as: 'org'});
+        this.query.include.push({model: tags, as: 'tags'});
+        this.query.include.push({model: links, as: 'links'});
+      },
+      _context: function () {
+        if (this.params.contextType === 'myPosts') {
+          this.query.where.userId = this.params.SESSION_USER;
+        }
+
+        if (this.params.contextType === 'users') {
+          this.query.where.userId = this.params.contextId;
+        }
+
+        if (this.params.contextType === 'orgs') {
+          this.query.where.orgId = this.params.contextId;
+        }
+      },
+      _search: function () {
+        // basic search: title, slug, content
+        // detailed search: author, poll
+        // deep search: tags, links, comments
+        // primary search: users, orgs
+        if (this.params.search && this.params.search !== '') {
+          //this.query('CREATE VIEW');
+          // this.query.include.push({
+          //   model: search,
+          //   as: 'search',
+          //   having: ["CONCAT(`title`, ' ', `content`) LIKE '%" + this.search + "%'"]
+          // });
+          //this.query.having = ["CONCAT(`title`, ' ', `content`) LIKE '%" + this.params.search + "%'"];
+        }
+      },
+      _privacy: function () {
+        // GUEST
+        if (!this.params.SESSION_USER) {
+          this.query.where.privacy = 'public';
+        }
+
+        // AUTHENTICATED
+        this.query.$or = [
+          {privacy: {$in: ['public']}},
+          {userId: this.params.SESSION_USER, privacy: "private"},
+          {privacy: 'members', orgId: null},
+          {privacy: 'members', orgId: this.params.SESSION_ORGANIZATIONS},
+        ];
+      }
     }
   }
 });
