@@ -235,7 +235,7 @@ var posts = db.define('posts', {
         }
 
         // AUTHENTICATED
-        this.query.$or = [
+        this.query.where.$or = [
           {privacy: {$in: ['public']}},
           {userId: this.params.SESSION_USER, privacy: "private"},
           {privacy: 'members', orgId: null},
