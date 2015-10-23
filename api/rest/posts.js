@@ -35,6 +35,7 @@ router.get('', (req, res) => {
   posts.SESSION_ORGANIZATIONS = req.organizations;
   posts.SESSION_ADMIN = req.admin;
   posts.SESSION_TEAMS = req.teams;
+  posts.SESSION_POSTS = req.posts;
   posts.collection(params)
   .then(function (data) {
     res.send(200, data);

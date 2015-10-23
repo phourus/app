@@ -147,6 +147,7 @@ var posts = db.define('posts', {
       Search.prototype = this._methods;
       search = new Search(params);
       search.params.SESSION_USER = this.SESSION_USER;
+      search.params.SESSION_POSTS = this.SESSION_POSTS;
       search.params.SESSION_ORGANIZATIONS = this.SESSION_ORGANIZATIONS;
 
       search._sort();
@@ -191,10 +192,6 @@ var posts = db.define('posts', {
         this.query.include.push({model: links, as: 'links'});
       },
       _context: function () {
-        if (this.params.contextType === 'myPosts') {
-          this.query.where.userId = this.params.SESSION_USER;
-        }
-
         if (this.params.contextType === 'users') {
           this.query.where.userId = this.params.contextId;
         }
@@ -232,9 +229,21 @@ var posts = db.define('posts', {
         // GUEST
         if (!this.params.SESSION_USER) {
           this.query.where.privacy = 'public';
+          return;
         }
+        this.query.where.$or = [];
 
         // AUTHENTICATED
+        if (this.params.contextType === 'myPosts') {
+          if (this.params.SESSION_POSTS) {
+            this.query.where.$or.push({id: {$in: this.params.SESSION_POSTS}});
+          }
+          if (this.params.SESSION_USER) {
+            this.query.where.$or.push({userId: this.params.SESSION_USER});
+          }
+          return;
+        }
+
         this.query.where.$or = [
           {privacy: {$in: ['public']}},
           {userId: this.params.SESSION_USER, privacy: "private"},

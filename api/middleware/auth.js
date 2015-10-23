@@ -13,6 +13,7 @@ module.exports = function (req, res, next) {
     jwt.verify(token, config.get('salt'));
     var decoded = jwt.decode(token);
     req.user_id = decoded.user_id;
+    req.posts = [];
     members.findAll({where: {userId: req.user_id, approved: 1}})
     .then(function (data) {
       data = data || [];
