@@ -3,6 +3,7 @@ var config = require("../../config");
 
 var members = require('../models/members');
 var teammates = require('../models/teammates');
+var collaborators = require('../models/collaborators');
 
 module.exports = function (req, res, next) {
   var token = req.headers.authorization;
@@ -37,7 +38,23 @@ module.exports = function (req, res, next) {
         req.teams = data.map(function (item) {
           return item.teamId;
         });
-        return next();
+
+        collaborators.findAll({
+          where: {
+            $or: [
+              {userId: req.user_id},
+              {teamId: {$in: req.teams}}
+            ]
+          }
+        })
+        .then(function (posts) {
+          posts = posts || [];
+          req.posts = posts.map(function (item) {
+            return item.postId;
+          });
+
+          return next();
+        });
       });
     })
     .catch(function (err) {
