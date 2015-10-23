@@ -17,14 +17,10 @@ var collaborators = require('./collaborators');
 var teams = require('./teams');
 
 var search = db.define('search', {
-  title: sql.STRING,
-  slug: sql.STRING,
-  content: sql.STRING,
-  author: sql.STRING,
-  poll: sql.STRING,
-  // tags: sql.STRING,
-  // links: sql.STRING,
-  // comments: sql.STRING
+  postSearch: sql.STRING,
+  tagSearch: sql.STRING,
+  linkSearch: sql.STRING,
+  commentSearch: sql.STRING
 });
 
 var posts = db.define('posts', {
@@ -210,10 +206,12 @@ var posts = db.define('posts', {
       _search: function () {
         // basic search: title, slug, content, author, poll
         var required = "'0' AS id, '0' AS createdAt, '0' AS updatedAt, posts.id AS postId,";
-        var columns = "posts.title AS title, posts.slug AS slug, posts.content AS content, posts.author AS author, posts.poll AS poll,";
-        var concat = "CONCAT(`title`, ' ', `slug`, ' ', `content`, ' ', `author`, ' ', `poll`) AS raw";
-        var fields = [required, columns, concat].join(' ');
-        var postSearch = "CREATE OR REPLACE VIEW searches AS SELECT " + fields + " FROM `posts`;";
+        var postSearch = "CONCAT(`title`, ' ', `slug`, ' ', `content`, ' ', `author`, ' ', `poll`) AS postSearch,";
+        var tagSearch = "(SELECT GROUP_CONCAT(tags.tag SEPARATOR ' ') AS tagGroup FROM tags WHERE tags.postId = posts.id) AS tagSearch,";
+        var linkSearch = "'' AS linkSearch,";
+        var commentSearch = "'' AS commentSearch";
+        var fields = [required, postSearch, tagSearch, linkSearch, commentSearch].join(' ');
+        var view = "CREATE OR REPLACE VIEW searches AS SELECT " + fields + " FROM `posts`;";
 
         // deep search: tags, links, comments
         // tags: SELECT postId, GROUP_CONCAT(tags.tag SEPARATOR ' ') AS tagSearch FROM tags GROUP BY postId;
@@ -222,13 +220,11 @@ var posts = db.define('posts', {
         // primary search: users, orgs
         if (this.params.search && this.params.search !== '') {
           // Async? Need to build view before querying?
-          db.query(postSearch);
+          db.query(view);
           this.query.include.push({
             model: search,
             as: 'search',
-            where: {
-              raw: {like: '%' + this.params.search + '%'}
-            }
+            where: ["CONCAT(`postSearch`, ' ', `tagSearch`, ' ', `linkSearch`, ' ', `commentSearch`) LIKE '%" + this.params.search + "%'"]
           });
         }
       },
