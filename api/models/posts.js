@@ -22,9 +22,9 @@ var search = db.define('search', {
   content: sql.STRING,
   author: sql.STRING,
   poll: sql.STRING,
-  tags: sql.STRING,
-  links: sql.STRING,
-  comments: sql.STRING
+  // tags: sql.STRING,
+  // links: sql.STRING,
+  // comments: sql.STRING
 });
 
 var posts = db.define('posts', {
@@ -208,18 +208,28 @@ var posts = db.define('posts', {
         }
       },
       _search: function () {
-        // basic search: title, slug, content
-        // detailed search: author, poll
+        // basic search: title, slug, content, author, poll
+        var required = "'0' AS id, '0' AS createdAt, '0' AS updatedAt, posts.id AS postId,";
+        var columns = "posts.title AS title, posts.slug AS slug, posts.content AS content, posts.author AS author, posts.poll AS poll,";
+        var concat = "CONCAT(`title`, ' ', `slug`, ' ', `content`, ' ', `author`, ' ', `poll`) AS raw";
+        var fields = [required, columns, concat].join(' ');
+        var postSearch = "CREATE OR REPLACE VIEW searches AS SELECT " + fields + " FROM `posts`;";
+
         // deep search: tags, links, comments
+        // tags: SELECT postId, GROUP_CONCAT(tags.tag SEPARATOR ' ') AS tagSearch FROM tags GROUP BY postId;
+        // links: SELECT postId, CONCAT(GROUP_CONCAT(`title` SEPARATOR ' '), GROUP_CONCAT(`caption` SEPARATOR ' ')) AS linkSearch FROM links GROUP BY postId;
+        // comments:
         // primary search: users, orgs
         if (this.params.search && this.params.search !== '') {
-          //this.query('CREATE VIEW');
-          // this.query.include.push({
-          //   model: search,
-          //   as: 'search',
-          //   having: ["CONCAT(`title`, ' ', `content`) LIKE '%" + this.search + "%'"]
-          // });
-          //this.query.having = ["CONCAT(`title`, ' ', `content`) LIKE '%" + this.params.search + "%'"];
+          // Async? Need to build view before querying?
+          db.query(postSearch);
+          this.query.include.push({
+            model: search,
+            as: 'search',
+            where: {
+              raw: {like: '%' + this.params.search + '%'}
+            }
+          });
         }
       },
       _privacy: function () {
@@ -288,5 +298,9 @@ collaborators.belongsTo(posts);
 posts.hasMany(collaborators);
 collaborators.belongsTo(teams);
 teams.hasMany(collaborators);
+
+// search
+posts.hasOne(search);
+search.belongsTo(posts);
 
 module.exports = posts;
