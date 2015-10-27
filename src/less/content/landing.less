@@ -17,6 +17,14 @@
     .Row(100%);
   }
 
+  div.features div.squeeze > div {
+    .Cols(6);
+
+    i {
+      font-size: 2em;
+    }
+  }
+
   .explore, .create, .integrate {
 
     > p {
@@ -127,6 +135,24 @@
       span {
         color: #777;
       }
+      i {
+        font-size: 3em;
+      }
+    }
+  }
+
+  .benefits {
+    width: 100%;
+    height: 500px;
+    background-color: #fff;
+
+    .heading {
+      padding-bottom: 60px;
+    }
+
+    div > div {
+      .Cols(3);
+
       i {
         font-size: 3em;
       }

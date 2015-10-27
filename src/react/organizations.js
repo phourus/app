@@ -15,9 +15,9 @@ let Landing = React.createClass({
       <div className="landing">
         <Slider />
         <Convert />
-        <Explore />
+        <Benefits />
         <Features />
-        <Compete />
+        <Video />
         <Integrate />
       </div>
     );
@@ -32,42 +32,23 @@ let Slider = React.createClass({
     }
   },
   componentDidMount: function () {
-    var self = this;
-    setInterval(function () {
-      self._next();
-    }, this.state.interval);
+    // var self = this;
+    // setInterval(function () {
+    //   self._next();
+    // }, this.state.interval);
   },
   render: function () {
     var classes = ['', '', '', '', ''];
     classes[this.state.slide] = 'selected';
     return (
       <div className="slider">
-        <Emblem slide={this.state.slide} green={this._green} blue={this._blue} red={this._red} gold={this._gold} />
         <div className={classes[0]}>
-          <img src="/assets/landing/home.jpg" className="banner" />
-          <div className="title">The Pursuit of Truth</div>
-          <p>Phourus is about the Pursuit of Truth across the 4 Elements of Society.</p>
-        </div>
-        <div className={classes[1]}>
           <img src="/assets/landing/world.jpg" className="banner" />
-          <div className="title">Economy & Environment</div>
-          <p>The balance between Economy & Environment is vital to the health & prosperity of a nation and it's people.</p>
+          <div className="title">SaaS with a soul</div>
+          <p>Get more out of your productivity tools than just productivity.</p>
         </div>
-        <div className={classes[2]}>
-          <img src="/assets/landing/mind.jpg" className="banner" />
-          <div className="title">Knowledge & Education</div>
-          <p>An educated culture is one that can make effective decisions that improve the lives of many.</p>
-        </div>
-        <div className={classes[3]}>
-          <img src="/assets/landing/voice.jpg" className="banner" />
-          <div className="title">Government & Politics</div>
-          <p>Government exists to protect and serve, not to hinder or limit a society.</p>
-        </div>
-        <div className={classes[4]}>
-          <img src="/assets/landing/self.jpg" className="banner" />
-          <div className="title">Beliefs & Religion</div>
-          <p>Understanding who we are as individuals and why we exist in a vast universe of empty space.</p>
-        </div>
+        <button className="button green">Start Free Trial</button>
+        <button className="button blue inverted">Learn More</button>
       </div>
     );
   },
@@ -108,27 +89,35 @@ let Slider = React.createClass({
   }
 });
 
-let Compete = React.createClass({
+let Benefits = React.createClass({
   render: function () {
     return (
-      <div className="compete">
-        <h2 className="heading">Compete</h2>
+      <div className="benefits">
+        <h2 className="heading">Master Communication & Collaboration within your business</h2>
         <div className="squeeze">
           <div>
-            <i className="fa fa-users" /><br />
-            Engage users
+            <i className="fa fa-lightbulb-o" /><br />
+            Surface important content & ideas
+            <p>Flatten organizational hierarchies and eliminate the political effect hindering progressive growth.</p>
+            <p>Phourus uses a unique algorithm called Influence that offset's the popularity of individual users to ensure valuable content gets the visibility it deserves, not because of who said it.</p>
           </div>
           <div>
             <i className="fa fa-bolt" /><br />
-            Earn Influence points
+            Capture intellectual capital
+            <p>Are you capturing the full capabilities of those you invest significant time and effort recruiting and retaining?</p>
+            <p>Use Subjects & Questions on Phourus to enable Subject Matter Experts (SMEs) to create content in their area of expertise for the benefit of the entire organization.</p>
           </div>
           <div>
-            <i className="fa fa-line-chart" /><br />
-            Rise in rankings
+            <i className="fa fa-language" /><br />
+            Embrace real culture & diversity
+            <p>True culture is not about blue jeans and ping-pong tables. It is about the diverse cultural and socioeconomic backgrounds of each and every employee in a global marketplace.</p>
+            <p>Use Beliefs, Debates and other tools of expression built into Phourus in order to unite and educate a diverse workplace.</p>
           </div>
           <div>
-            <i className="fa fa-trophy" /><br />
-            Become a Leader
+            <i className="fa fa-compass" /><br />
+            Enhance Vision & Engagement
+            <p>Each employee of a business has his or her own idea of what your company is and where is it going. The vision and mission of a business should be an ongoing evolution involving employees and customers alike.</p>
+            <p>Use Beliefs and Quotes to better define your mission and objective, while also engaging employees and acknowledging their contribution to the vision of your business.</p>
           </div>
         </div>
       </div>
