@@ -14,15 +14,24 @@ let Leaders = require('./react/leaders');
 let About = require('./react/about');
 let Terms = require('./react/terms');
 let Privacy = require('./react/privacy');
-let Landing = require('./react/landing');
 let Map = require('./map');
 let View401 = require('./react/401');
 let View404 = require('./react/404');
 
+let Individuals = require('./react/individuals');
+let Business = require('./react/organizations');
+let Education = require('./react/organizations');
+let Government = require('./react/organizations');
+let Nonprofit = require('./react/organizations');
+
 module.exports = (
   <Route handler={App} path="/">
     <DefaultRoute name="home" handler={Stream} />
-    <Route name="landing" handler={Landing} />
+    <Route name="individuals" handler={Individuals} />
+    <Route name="business" handler={Business} />
+    <Route name="education" handler={Education} />
+    <Route name="government" handler={Government} />
+    <Route name="nonprofit" handler={Nonprofit} />
     <Route name="about" handler={About} />
     <Route name="terms" handler={Terms} />
     <Route name="privacy" handler={Privacy} />
