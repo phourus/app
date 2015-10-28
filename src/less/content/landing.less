@@ -64,6 +64,60 @@
   .explore > p { color: #555; }
   .create > p { color: #ccc; }
 
+  .banner {
+    height: 350px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    .actions {
+      position: absolute;
+      bottom: 40px;
+      width: 100%;
+      text-align: center;
+
+      button {
+        display: inline-block;
+      }
+    }
+
+    > div {
+      display: none;
+
+      &.selected {
+        display: block;
+      }
+
+      .title {
+        position: absolute;
+        top: 30%;
+        width: 80%;
+        left: 10%;
+        font-family: @font-serif;
+        color: #fff;
+        font-size: 2em;
+        line-height: 1em;
+        opacity: 0.8;
+      }
+
+      p {
+        position: absolute;
+        left: 10%;
+        top: 50%;
+        color: #fff;
+        font-size: 1em;
+        opacity: 0.8;
+        width: 80%;
+        line-height: 1.5em;
+      }
+
+      img {
+        height: 500px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
   .slider {
     height: 500px;
     width: 100%;
@@ -92,7 +146,7 @@
         color: #fff;
         font-size: 2em;
         line-height: 1em;
-        opacity: 0.5;
+        opacity: 0.8;
       }
 
       p {
@@ -101,7 +155,7 @@
         top: 50%;
         color: #fff;
         font-size: 1em;
-        opacity: 0.6;
+        opacity: 0.8;
         width: 80%;
         line-height: 1.5em;
       }
@@ -337,6 +391,39 @@
 
       > p {
         font-size: 1.5em;
+      }
+    }
+
+    .banner {
+      height: 400px;
+      width: 100%;
+      overflow: hidden;
+
+      > div {
+        display: none;
+
+        &.selected {
+          display: block;
+        }
+
+        .title {
+          width: 60%;
+          left: 20%;
+          font-size: 3em;
+        }
+
+        p {
+          width: 60%;
+          left: 20%;
+          font-size: 1.5em;
+          line-height: 1.5em;
+        }
+
+        img {
+          height: 800px;
+          margin: 0;
+          padding: 0;
+        }
       }
     }
 

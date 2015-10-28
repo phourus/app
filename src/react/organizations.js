@@ -39,14 +39,16 @@ let Slider = React.createClass({
     var classes = ['', '', '', '', ''];
     classes[this.state.slide] = 'selected';
     return (
-      <div className="slider">
+      <div className="banner">
         <div className={classes[0]}>
-          <img src="/assets/landing/world.jpg" className="banner" />
+          <img src="/assets/landing/home.jpg" className="banner" />
           <div className="title">SaaS with a soul</div>
           <p>Get more out of your productivity tools than just productivity.</p>
+          <div className="actions">
+            <button className="button green">Start Free Trial</button>
+            <button className="button blue inverted">Learn More</button>
+          </div>
         </div>
-        <button className="button green">Start Free Trial</button>
-        <button className="button blue inverted">Learn More</button>
       </div>
     );
   },
