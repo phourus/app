@@ -22,7 +22,7 @@ let Features = React.createClass({
             <div>
               <i className="fa fa-check-square" />
               <i className="fa fa-search" />
-              Replaces the outmoded "search and find" approach to content with "fetch and enjoy."
+              Replaces the outmoded "search and find" approach to content with "fetch and enjoy"
             </div>
             <div>
               <i className="fa fa-check-square" />

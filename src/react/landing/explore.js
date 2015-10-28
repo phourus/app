@@ -11,7 +11,7 @@ let Explore = React.createClass({
     return (
       <div className="explore">
         <h2 className="heading">Explore</h2>
-        <p>view our stream of top-rated content</p>
+        <p>see some public Phourus posts in action</p>
         <Explorer />
       </div>
     );

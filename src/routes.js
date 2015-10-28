@@ -26,7 +26,7 @@ let Nonprofit = require('./react/organizations');
 
 module.exports = (
   <Route handler={App} path="/">
-    <DefaultRoute name="home" handler={Stream} />
+    <DefaultRoute name="home" handler={Business} />
     <Route name="individuals" handler={Individuals} />
     <Route name="business" handler={Business} />
     <Route name="education" handler={Education} />

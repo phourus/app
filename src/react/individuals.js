@@ -42,7 +42,6 @@ let Slider = React.createClass({
     classes[this.state.slide] = 'selected';
     return (
       <div className="slider">
-        <Emblem slide={this.state.slide} green={this._green} blue={this._blue} red={this._red} gold={this._gold} />
         <div className={classes[0]}>
           <img src="/assets/landing/home.jpg" className="banner" />
           <div className="title">The Pursuit of Truth</div>
@@ -68,6 +67,7 @@ let Slider = React.createClass({
           <div className="title">Beliefs & Religion</div>
           <p>Understanding who we are as individuals and why we exist in a vast universe of empty space.</p>
         </div>
+        <Emblem slide={this.state.slide} green={this._green} blue={this._blue} red={this._red} gold={this._gold} />
       </div>
     );
   },

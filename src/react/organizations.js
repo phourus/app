@@ -13,18 +13,22 @@ let Landing = React.createClass({
   render: function () {
     return (
       <div className="landing">
-        <Slider />
+        <Slider more={this._more} />
         <Convert />
-        <Benefits />
+        <Benefits ref="benefits" />
         <Features />
         <Explore />
         <Integrate />
       </div>
     );
-  }
+  },
+  _more: function () {
+    React.findDOMNode(this.refs.benefits).scrollIntoView();
+  },
 });
 
 let Slider = React.createClass({
+  mixins: [Router.Navigation],
   getInitialState: function () {
     return {
       slide: 0,
@@ -47,12 +51,15 @@ let Slider = React.createClass({
           <div className="title">SaaS with a soul</div>
           <p>Get more out of your productivity tools than just productivity.</p>
           <div className="actions">
-            <button className="button green">Start Free Trial</button>
-            <button className="button blue inverted">Learn More</button>
+            <button className="button green" onClick={this._signup}>Start Free Trial</button>
+            <button className="button blue inverted" onClick={this.props.more}>Learn More</button>
           </div>
         </div>
       </div>
     );
+  },
+  _signup: function () {
+    this.context.router.transitionTo("account");
   },
   _next: function () {
     if (this.state.slide === 4) {
@@ -95,6 +102,7 @@ let Benefits = React.createClass({
   render: function () {
     return (
       <div className="benefits">
+        <div><br /><br /></div>
         <h2 className="heading">Master Communication & Collaboration</h2>
         <h3 className="subtitle">Take control of the most important part of your business</h3>
         <div className="squeeze">
@@ -104,14 +112,14 @@ let Benefits = React.createClass({
             </div>
             <span className="title">Surface important content & ideas</span>
             <p>Flatten organizational hierarchies and eliminate the political effect hindering progressive growth.</p>
-            <p className="usage">Phourus uses a unique algorithm called Influence that offset's the popularity of individual users to ensure valuable content gets the visibility it deserves, not because of who said it.</p>
+            <p className="usage">Phourus uses a unique algorithm called Influence that offsets the popularity of individual users to ensure valuable content gets the visibility it deserves, not because of who said it.</p>
           </div>
           <div>
             <div className="left">
               <i className="fa fa-bolt" />
             </div>
             <span className="title">Capture intellectual capital</span>
-            <p>Are you capturing the full capabilities of those you invest significant time and effort recruiting and retaining?</p>
+            <p>Are you capturing the full capabilities of the people you invest significant time and effort recruiting and retaining?</p>
             <p className="usage">Use Subjects & Questions on Phourus to enable Subject Matter Experts (SMEs) to create content in their area of expertise for the benefit of the entire organization.</p>
           </div>
           <div>
@@ -119,8 +127,8 @@ let Benefits = React.createClass({
               <i className="fa fa-language" />
             </div>
             <span className="title">Embrace real culture & diversity</span>
-            <p>True culture is not about blue jeans and ping-pong tables. It is about the diverse cultural and socioeconomic backgrounds of each and every employee in a global marketplace.</p>
-            <p className="usage">Use Beliefs, Debates and other tools of expression built into Phourus in order to unite and educate a diverse workplace.</p>
+            <p>True culture is not about blue jeans and ping-pong tables. It is about the diverse cultural and socioeconomic backgrounds of each and every employee.</p>
+            <p className="usage">Use Beliefs, Debates and other tools of expression built into Phourus to unite and educate a diverse workplace.</p>
           </div>
           <div>
             <div className="left">

@@ -2063,6 +2063,9 @@ div.posts,
 .post .postItem.selected {
   display: block;
 }
+.post .postItem.selected .interact {
+  position: static;
+}
 .postItem {
   width: 98%;
   margin: 1%;
