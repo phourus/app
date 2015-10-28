@@ -4,8 +4,8 @@ let React = require('react');
 let Video = React.createClass({
   render: function () {
     return (
-      <div>
-        <video width="400" height="300" controls>
+      <div className="video">
+        <video width="100%" controls>
           <source src="/assets/screencast.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>

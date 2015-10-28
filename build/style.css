@@ -1423,13 +1423,46 @@ div.alerts button {
 #content .landing div.squeeze:after {
   clear: both;
 }
-#content .landing div.features div.squeeze > div {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
+#content .landing div.features div.squeeze {
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  text-align: center;
+  margin: 40px auto;
 }
-#content .landing div.features div.squeeze > div i {
+#content .landing div.features div.squeeze:before,
+#content .landing div.features div.squeeze:after {
+  content: "";
+  display: table;
+}
+#content .landing div.features div.squeeze:after {
+  clear: both;
+}
+#content .landing div.features div.squeeze > div {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+#content .landing div.features div.squeeze > div > div {
+  text-align: left;
+  border-bottom: solid 1px #eee;
+  clear: right;
+  height: 2em;
+  font-size: 0.9em;
+  font-style: italic;
+}
+#content .landing div.features div.squeeze > div > div i {
+  font-size: 1em;
+  width: 40px;
+}
+#content .landing div.features div.squeeze > div > div i.fa-check-square {
+  float: right;
+  color: #8abf00;
   font-size: 2em;
+}
+#content .landing div.features div.squeeze > div.video {
+  text-align: center;
 }
 #content .landing .explore > p,
 #content .landing .create > p,
@@ -1535,20 +1568,49 @@ div.alerts button {
   font-size: 3em;
 }
 #content .landing .benefits {
-  width: 100%;
-  height: 500px;
-  background-color: #fff;
+  width: 80%;
+  margin: auto;
 }
-#content .landing .benefits .heading {
-  padding-bottom: 60px;
+#content .landing .benefits .subtitle {
+  font-size: 2em;
+  font-style: italic;
+  color: #777;
+  margin-bottom: 60px;
+}
+#content .landing .benefits div.left {
+  float: left;
+}
+#content .landing .benefits div.right {
+  float: right;
+}
+#content .landing .benefits div.left,
+#content .landing .benefits div.right {
+  font-size: 2em;
+  box-sizing: border-box;
+  padding: 20px;
 }
 #content .landing .benefits div > div {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
+  clear: both;
+  padding: 20px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+#content .landing .benefits div > div span.title {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: left;
+}
+#content .landing .benefits div > div p {
+  text-align: left;
+  font-size: 1.1em;
+}
+#content .landing .benefits div > div p.usage {
+  font-style: italic;
+  font-size: 0.9em;
 }
 #content .landing .benefits div > div i {
   font-size: 3em;
+  width: 100px;
 }
 #content .landing .compete {
   width: 100%;

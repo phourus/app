@@ -17,11 +17,39 @@
     .Row(100%);
   }
 
-  div.features div.squeeze > div {
-    .Cols(6);
+  div.features div.squeeze {
+    .Row(80%);
+    background-color: #fff;
+    text-align: center;
+    margin: 40px auto;
 
-    i {
-      font-size: 2em;
+    > div {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+
+      > div {
+        text-align: left;
+        border-bottom: solid 1px #eee;
+        clear: right;
+        height: 2em;
+        font-size: 0.9em;
+        font-style: italic;
+
+        i {
+          font-size: 1em;
+          width: 40px;
+        }
+
+        i.fa-check-square {
+          float: right;
+          color: @green;
+          font-size: 2em;
+        }
+      }
+    }
+    > div.video {
+      text-align: center;
     }
   }
 
@@ -142,19 +170,58 @@
   }
 
   .benefits {
-    width: 100%;
-    height: 500px;
-    background-color: #fff;
+    width: 80%;
+    margin: auto;
 
     .heading {
-      padding-bottom: 60px;
+
+    }
+
+    .subtitle {
+      font-size: 2em;
+      font-style: italic;
+      color: #777;
+      margin-bottom: 60px;
+    }
+
+    div.left {
+      float: left;
+    }
+
+    div.right {
+      float: right;
+    }
+
+    div.left, div.right {
+      font-size: 2em;
+      box-sizing: border-box;
+      padding: 20px;
     }
 
     div > div {
-      .Cols(3);
+      clear: both;
+      padding: 20px;
+      margin-bottom: 10px;
+      text-align: left;
+
+      span.title {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: left;
+      }
+      p {
+        text-align: left;
+        font-size: 1.1em;
+
+        &.usage {
+          font-style: italic;
+          font-size: 0.9em;
+        }
+      }
 
       i {
         font-size: 3em;
+        width: 100px;
       }
     }
   }
