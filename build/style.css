@@ -2051,7 +2051,7 @@ div.alerts button {
     display: inline;
   }
 }
-.posts,
+div.posts,
 .post {
   max-width: 1400px;
   margin: auto;
@@ -2794,7 +2794,7 @@ div.alerts button {
   background-color: #5faee3;
 }
 @media (min-width: 1000px) {
-  .posts {
+  div.posts {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -2810,7 +2810,7 @@ div.alerts button {
     -ms-flex-line-pack: stretch;
     align-content: stretch;
   }
-  .posts:hover .postItem:hover {
+  div.posts:hover .postItem:hover {
     background-color: #fff;
   }
   .postItem {
