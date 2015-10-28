@@ -342,7 +342,8 @@ let Posts = React.createClass({
 
 		list = filtered.map((item, i) => {
 			 let location = {};
-			 let owner = (item.user.id == this.state.user.id);
+			 let sharedPosts = this.state.user && this.state.user.SESSION_POSTS && this.state.user.SESSION_POSTS.constructor === Array ? this.state.user.SESSION_POSTS : [];
+			 let owner = (item.user.id == this.state.user.id) || sharedPosts.indexOf(item.id) !== -1;
 			 if (item.user.locations && item.user.locations.length > 0) {
 					 location = item.user.locations[0];
 			 }

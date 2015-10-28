@@ -102,7 +102,13 @@ router.get('', (req, res) => {
   }
   users.single(req.user_id)
   .then(function (data) {
-    res.send(200, data);
+    var json = data.get();
+    json.SESSION_USER = req.user_id;
+    json.SESSION_POSTS = req.posts;
+    json.SESSION_ORGANIZATIONS = req.organizations;
+    json.SESSION_ADMIN = req.admin;
+    json.SESSION_TEAMS = req.teams;
+    res.send(200, json);
   })
   .catch(function (err) {
     console.log(err);
