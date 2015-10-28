@@ -8,6 +8,7 @@ let Explore = require('./landing/explore');
 let Features = require('./landing/features');
 let Integrate = require('./landing/integrate');
 
+
 let Landing = React.createClass({
   render: function () {
     return (
@@ -16,6 +17,7 @@ let Landing = React.createClass({
         <Convert />
         <Benefits />
         <Features />
+        <Explore />
         <Integrate />
       </div>
     );

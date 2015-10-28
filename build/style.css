@@ -2051,12 +2051,25 @@ div.alerts button {
     display: inline;
   }
 }
+.posts,
+.post {
+  max-width: 1400px;
+  margin: auto;
+  min-height: 600px;
+}
+.post .postItem {
+  display: none;
+}
+.post .postItem.selected {
+  display: block;
+}
 .postItem {
   width: 98%;
   margin: 1%;
   padding: 1%;
   background-color: #f7f7f7;
   box-sizing: border-box;
+  text-align: left;
   /** TAGS **/
   /** LINKS **/
   /** COLLABORATORS **/
@@ -2299,7 +2312,7 @@ div.alerts button {
   padding: 3px;
 }
 .postItem .extra {
-  height: 320px;
+  height: 220px;
   overflow: hidden;
   margin: 20px 0;
 }
@@ -2309,7 +2322,7 @@ div.alerts button {
   color: #333;
 }
 .postItem .extra.excerpt > div {
-  max-height: 240px;
+  max-height: 120px;
   overflow: hidden;
 }
 .postItem .extra.event {
@@ -2781,11 +2794,45 @@ div.alerts button {
   background-color: #5faee3;
 }
 @media (min-width: 1000px) {
+  .posts {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+  }
+  .posts:hover .postItem:hover {
+    background-color: #fff;
+  }
   .postItem {
     width: 24%;
     margin: 1% 1% 1% 0;
     display: inline-block;
     box-sizing: border-box;
+    min-height: 500px;
+    padding-bottom: 75px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    position: relative;
+    margin: 5px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
   }
   .postItem > .types > div {
     width: 20%;
@@ -2806,6 +2853,11 @@ div.alerts button {
     vertical-align: top;
   }
   .postItem .interact {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-top: dotted 3px #eee;
+    background: transparent;
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
@@ -3186,18 +3238,6 @@ div.alerts button {
   font-size: 0.9em;
   color: #111;
 }
-.stream .posts,
-.stream .post {
-  max-width: 1400px;
-  margin: auto;
-  min-height: 600px;
-}
-.stream .post .postItem {
-  display: none;
-}
-.stream .post .postItem.selected {
-  display: block;
-}
 @media (min-width: 500px) {
   .stream .organizations .list .org {
     width: 50%;
@@ -3206,49 +3246,6 @@ div.alerts button {
   }
 }
 @media (min-width: 1000px) {
-  .stream .posts {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-box-align: stretch;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
-  }
-  .stream .posts:hover .postItem:hover {
-    background-color: #fff;
-  }
-  .stream .posts .postItem {
-    min-height: 500px;
-    padding-bottom: 75px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    -webkit-transition: opacity 0.5s ease-in-out;
-    position: relative;
-    margin: 5px;
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-  }
-  .stream .posts .postItem .interact {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    border-top: dotted 3px #eee;
-    background: transparent;
-  }
   .stream .organizations .list .org {
     width: 25%;
     display: inline-block;

@@ -32,7 +32,7 @@ let Explorer = React.createClass({
     Actions.collection();
   },
   render: function () {
-    let data = this.state.posts.slice(0, 5);
+    let data = this.state.posts.slice(0, 4);
     let posts = [];
 
     posts = data.map((item, i) => {
