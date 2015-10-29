@@ -15,13 +15,7 @@ var favorites = require('./favorites');
 var mentions = require('./mentions');
 var collaborators = require('./collaborators');
 var teams = require('./teams');
-
-var search = db.define('search', {
-  postSearch: sql.STRING,
-  tagSearch: sql.STRING,
-  linkSearch: sql.STRING,
-  commentSearch: sql.STRING
-});
+var search = require('./search');
 
 var posts = db.define('posts', {
   // Common
@@ -202,13 +196,13 @@ var posts = db.define('posts', {
       },
       _search: function () {
         // basic search: title, slug, content, author, poll
-        var required = "'0' AS id, '0' AS createdAt, '0' AS updatedAt, posts.id AS postId,";
-        var postSearch = "CONCAT(`title`, ' ', `slug`, ' ', `content`, ' ', `author`, ' ', `poll`) AS postSearch,";
-        var tagSearch = "(SELECT GROUP_CONCAT(tags.tag SEPARATOR ' ') AS tagGroup FROM tags WHERE tags.postId = posts.id) AS tagSearch,";
-        var linkSearch = "'' AS linkSearch,";
-        var commentSearch = "'' AS commentSearch";
-        var fields = [required, postSearch, tagSearch, linkSearch, commentSearch].join(' ');
-        var view = "CREATE OR REPLACE VIEW searches AS SELECT " + fields + " FROM `posts`;";
+        // var required = "'0' AS id, '0' AS createdAt, '0' AS updatedAt, posts.id AS postId,";
+        // var postSearch = "CONCAT(`title`, ' ', `slug`, ' ', `content`, ' ', `author`, ' ', `poll`) AS postSearch,";
+        // var tagSearch = "(SELECT GROUP_CONCAT(tags.tag SEPARATOR ' ') AS tagGroup FROM tags WHERE tags.postId = posts.id) AS tagSearch,";
+        // var linkSearch = "'' AS linkSearch,";
+        // var commentSearch = "'' AS commentSearch";
+        // var fields = [required, postSearch, tagSearch, linkSearch, commentSearch].join(' ');
+        // var view = "CREATE OR REPLACE VIEW searches AS SELECT " + fields + " FROM `posts`;";
 
         // deep search: tags, links, comments
         // tags: SELECT postId, GROUP_CONCAT(tags.tag SEPARATOR ' ') AS tagSearch FROM tags GROUP BY postId;
@@ -241,6 +235,7 @@ var posts = db.define('posts', {
           if (this.params.SESSION_USER) {
             this.query.where.$or.push({userId: this.params.SESSION_USER});
           }
+          this.query.order.unshift(['updatedAt', 'DESC']);
           return;
         }
 
