@@ -2,10 +2,10 @@ var sql = require('sequelize');
 var db = require('../db');
 
 var search = db.define('search', {
-  postSearch: {type: sql.STRING, defaultValue: ""},
-  tagSearch: {type: sql.STRING, defaultValue: ""},
-  linkSearch: {type: sql.STRING, defaultValue: ""},
-  commentSearch: {type: sql.STRING, defaultValue: ""}
+  postSearch: {type: sql.TEXT, defaultValue: "", allowNull: false},
+  tagSearch: {type: sql.TEXT, defaultValue: "", allowNull: false},
+  linkSearch: {type: sql.TEXT, defaultValue: "", allowNull: false},
+  commentSearch: {type: sql.TEXT, defaultValue: "", allowNull: false}
 });
 
 module.exports = search;

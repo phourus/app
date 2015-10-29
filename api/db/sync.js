@@ -9,6 +9,7 @@ var mentions = require('../models/mentions');
 var orgs = require('../models/orgs');
 var passwords = require('../models/passwords');
 var posts = require('../models/posts');
+var search = require('../models/search');
 var teammates = require('../models/teammates');
 var teams = require('../models/teams');
 var tags = require('../models/tags');
@@ -62,6 +63,7 @@ users.sync()
     thumbs.sync();
     collaborators.sync();
     votes.sync();
+    search.sync();
     comments.sync()
     .then(function () {
       mentions.sync();

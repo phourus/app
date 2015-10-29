@@ -195,23 +195,10 @@ var posts = db.define('posts', {
         }
       },
       _search: function () {
-        // basic search: title, slug, content, author, poll
-        // var required = "'0' AS id, '0' AS createdAt, '0' AS updatedAt, posts.id AS postId,";
-        // var postSearch = "CONCAT(`title`, ' ', `slug`, ' ', `content`, ' ', `author`, ' ', `poll`) AS postSearch,";
-        // var tagSearch = "(SELECT GROUP_CONCAT(tags.tag SEPARATOR ' ') AS tagGroup FROM tags WHERE tags.postId = posts.id) AS tagSearch,";
-        // var linkSearch = "'' AS linkSearch,";
-        // var commentSearch = "'' AS commentSearch";
-        // var fields = [required, postSearch, tagSearch, linkSearch, commentSearch].join(' ');
-        // var view = "CREATE OR REPLACE VIEW searches AS SELECT " + fields + " FROM `posts`;";
-
+        // basic search: title, slug, content, author, poll, location
         // deep search: tags, links, comments
-        // tags: SELECT postId, GROUP_CONCAT(tags.tag SEPARATOR ' ') AS tagSearch FROM tags GROUP BY postId;
-        // links: SELECT postId, CONCAT(GROUP_CONCAT(`title` SEPARATOR ' '), GROUP_CONCAT(`caption` SEPARATOR ' ')) AS linkSearch FROM links GROUP BY postId;
-        // comments:
         // primary search: users, orgs
         if (this.params.search && this.params.search !== '') {
-          // Async? Need to build view before querying?
-          db.query(view);
           this.query.include.push({
             model: search,
             as: 'search',
