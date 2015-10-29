@@ -49,10 +49,6 @@ let Header = React.createClass({
     let orgs = this.state.orgs;
     return  (
         <header className="header">
-          <div className="brand">
-            <Link to="home"></Link>
-          </div>
-          <Search {...this.state.params} filter={this._filter} />
           { AccountStore.authenticated
             ?  <nav className="nav">
                 <ul>
@@ -104,6 +100,10 @@ let Header = React.createClass({
                   </ul>
                 </nav>
           }
+          <div className="brand">
+            <Link to="home"></Link>
+          </div>
+          <Search {...this.state.params} filter={this._filter} />
           {this.state.filter && this.props.tint ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
         </header>
     );
@@ -198,6 +198,7 @@ Filter.Dates = React.createClass({
 
 Filter.Types = React.createClass({
 	render: function () {
+    let exclude = this.props.exclude || [];
 		var classes = {
 			blog: "type blog",
 			event: "type event",
@@ -208,8 +209,8 @@ Filter.Types = React.createClass({
 			belief: "type belief",
 			quote: "type quote"
 		};
-		for (var i = 0; i < this.props.exclude.length; i++) {
-			var key = this.props.exclude[i];
+		for (var i = 0; i < exclude.length; i++) {
+			var key = exclude[i];
 			classes[key] += " inverted";
 		}
 		return (

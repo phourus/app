@@ -32,7 +32,7 @@
         text-align: left;
         border-bottom: solid 1px #eee;
         clear: right;
-        height: 2em;
+        min-height: 2em;
         font-size: 0.9em;
         font-style: italic;
 
@@ -72,12 +72,12 @@
 
     .actions {
       position: absolute;
-      bottom: 40px;
+      bottom: 10px;
       width: 100%;
       text-align: center;
 
       button {
-        display: inline-block;
+        margin: 4px auto;
       }
     }
 
@@ -103,7 +103,7 @@
       p {
         position: absolute;
         left: 10%;
-        top: 50%;
+        top: 40%;
         color: #fff;
         font-size: 1em;
         opacity: 0.8;
@@ -169,6 +169,7 @@
   }
 
   .convert {
+    padding: 10px 0;
     background-color: #fff;
 
     div {
@@ -176,7 +177,7 @@
       color: #333;
 
       input, button {
-        display: inline-block;
+        margin: auto;
       }
     }
   }
@@ -260,6 +261,7 @@
 
       span.title {
         font-size: 2em;
+        line-height: 1em;
         font-weight: bold;
         text-align: left;
       }
@@ -355,6 +357,25 @@
 
         p {
           font-size: 1.5em;
+        }
+      }
+    }
+
+    .banner {
+      .actions {
+        bottom: 40px;
+
+        button {
+          display: inline-block;
+          margin-right: 4px;
+        }
+      }
+    }
+
+    .convert {
+      div {
+        input, button {
+          display: inline-block;
         }
       }
     }

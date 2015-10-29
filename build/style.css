@@ -287,14 +287,14 @@
   box-shadow: @arguments;
 }*/
 header > div.filter {
-  max-width: 50%;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  margin-top: 10px;
   background-color: #555;
   box-shadow: 0px 0px 12px #444444;
   -moz-box-shadow: 0px 0px 12px #444444;
   -webkit-box-shadow: 0px 0px 12px #444444;
+  margin-top: 40px;
 }
 header > div.filter:before,
 header > div.filter:after {
@@ -324,6 +324,10 @@ header > div.filter .types .label {
 }
 header > div.filter .types .type {
   margin: 2px;
+  max-width: 150px;
+  width: 30%;
+  min-width: 100px;
+  font-size: 0.7em;
 }
 header > div.filter .sortby {
   width: 50%;
@@ -399,6 +403,33 @@ header > div.filter ul li a#debates {
 }
 header > div.filter ul li a#beliefs {
   border-left: solid 4px #f2c13d;
+}
+@media (min-width: 500px) {
+  header > div.filter {
+    margin-top: 50px;
+  }
+  header > div.filter .types,
+  header > div.filter .sortby {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+@media (min-width: 800px) {
+  header > div.filter {
+    max-width: 50%;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  header > div.filter:before,
+  header > div.filter:after {
+    content: "";
+    display: table;
+  }
+  header > div.filter:after {
+    clear: both;
+  }
 }
 /** SANS SERIF **/
 /** SERIF **/
@@ -1448,7 +1479,7 @@ div.alerts button {
   text-align: left;
   border-bottom: solid 1px #eee;
   clear: right;
-  height: 2em;
+  min-height: 2em;
   font-size: 0.9em;
   font-style: italic;
 }
@@ -1484,12 +1515,12 @@ div.alerts button {
 }
 #content .landing .banner .actions {
   position: absolute;
-  bottom: 40px;
+  bottom: 10px;
   width: 100%;
   text-align: center;
 }
 #content .landing .banner .actions button {
-  display: inline-block;
+  margin: 4px auto;
 }
 #content .landing .banner > div {
   display: none;
@@ -1511,7 +1542,7 @@ div.alerts button {
 #content .landing .banner > div p {
   position: absolute;
   left: 10%;
-  top: 50%;
+  top: 40%;
   color: #fff;
   font-size: 1em;
   opacity: 0.8;
@@ -1567,6 +1598,7 @@ div.alerts button {
   padding: 0;
 }
 #content .landing .convert {
+  padding: 10px 0;
   background-color: #fff;
 }
 #content .landing .convert div {
@@ -1575,7 +1607,7 @@ div.alerts button {
 }
 #content .landing .convert div input,
 #content .landing .convert div button {
-  display: inline-block;
+  margin: auto;
 }
 #content .landing .explore {
   padding-bottom: 40px;
@@ -1644,6 +1676,7 @@ div.alerts button {
 }
 #content .landing .benefits div > div span.title {
   font-size: 2em;
+  line-height: 1em;
   font-weight: bold;
   text-align: left;
 }
@@ -1727,6 +1760,17 @@ div.alerts button {
   }
   #content .landing .slider > div p {
     font-size: 1.5em;
+  }
+  #content .landing .banner .actions {
+    bottom: 40px;
+  }
+  #content .landing .banner .actions button {
+    display: inline-block;
+    margin-right: 4px;
+  }
+  #content .landing .convert div input,
+  #content .landing .convert div button {
+    display: inline-block;
   }
   #content .landing .integrate i {
     font-size: 3em;
@@ -3297,9 +3341,7 @@ div.posts,
   color: #8abf00;
 }
 header {
-  max-width: 100%;
   width: 100%;
-  margin: 0 auto;
   height: 50px;
   position: fixed;
   border-bottom: solid 1px #bbb;
@@ -3307,18 +3349,9 @@ header {
   opacity: 1;
   z-index: 9999;
 }
-header:before,
-header:after {
-  content: "";
-  display: table;
-}
-header:after {
-  clear: both;
-}
 header .brand {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
+  width: 40%;
+  float: left;
 }
 header .brand a {
   display: block;
@@ -3334,15 +3367,14 @@ header .brand a:hover {
   background-image: url('/assets/logos/logo-hover.png');
 }
 header .keywords {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
+  top: 40px;
   height: 40px;
   background-color: #555;
   border: solid 1px #666;
   position: relative;
   margin-top: 10px;
   box-sizing: border-box;
+  width: 100%;
 }
 header .keywords input {
   position: absolute;
@@ -3388,9 +3420,8 @@ header .keywords button.button span {
   display: none;
 }
 header nav {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
+  width: 60%;
+  float: right;
   text-align: right;
 }
 header nav > ul {
@@ -3410,10 +3441,11 @@ header nav > ul > li > div {
 header nav > ul > li:hover > div {
   display: block;
   position: absolute;
-  top: 60px;
+  top: 50px;
   background-color: #333;
   width: 300px;
   right: 0;
+  z-index: 9999;
 }
 header nav > ul > li:hover > div ul {
   width: 50%;
@@ -3522,6 +3554,9 @@ header nav .notifications {
   font-weight: bold;
   font-size: 0.4em;
 }
+div.spacer {
+  height: 80px !important;
+}
 @media (min-width: 500px) {
   header {
     height: 60px;
@@ -3530,6 +3565,9 @@ header nav .notifications {
     width: 180px;
     height: 60px;
   }
+  header .keywords {
+    top: 50px;
+  }
   header .keywords button span {
     display: inline;
     font-size: 0.8em;
@@ -3537,21 +3575,37 @@ header nav .notifications {
   header nav > ul > li {
     width: 60px;
   }
-  header nav > ul > li > ul {
+  header nav > ul > li > div {
     display: none;
   }
-  header nav > ul > li:hover > ul {
-    top: 64px;
+  header nav > ul > li:hover > div {
+    top: 60px;
   }
   header nav > ul > li .fa {
     width: 60px;
     font-size: 3em;
   }
   div.spacer {
-    height: 60px !important;
+    height: 100px !important;
   }
   .stream .heading {
     top: 60px;
+  }
+}
+@media (min-width: 800px) {
+  header .brand {
+    width: 25%;
+  }
+  header .keywords {
+    float: left;
+    width: 50%;
+    top: 0px;
+  }
+  header nav {
+    width: 25%;
+  }
+  div.spacer {
+    height: 60px !important;
   }
 }
 .profile {
@@ -3710,6 +3764,7 @@ h1 {
 h2 {
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
   font-size: 2em;
+  line-height: 1em;
   font-weight: bold;
   color: #222222;
 }
