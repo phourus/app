@@ -20,30 +20,10 @@ let Admin = React.createClass({
       changes: {},
       members: [],
       categories: {
-        green: [
-          {category: "Sales", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
-          {category: "Marketing", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
-          {category: "Admin", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
-          {category: "Finance", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
-          {category: "HR", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]},
-          {category: "Product", subcategories: ["Fire Safety", "Security", "Retail", "Personal Protection"]}
-        ],
-        blue: [
-          {category: "Fire Safety", subcategories: ["Commercial", "Residential"]},
-          {category: "Security", subcategories: ["Intrusion", "Video Surveillance", "Access Control"]},
-          {category: "Retail", subcategories: ["RFID tags", "Loss Prevention", "Traffic Intelligence"]},
-          {category: "Personal Protection", subcategories: ["Respiratory", "Eye, Ear & Face", "Communication"]}
-        ],
-        red: [
-          {category: "Fire Safety", subcategories: ["Commercial", "Residential"]},
-          {category: "Security", subcategories: ["Intrusion", "Video Surveillance", "Access Control"]},
-          {category: "Retail", subcategories: ["RFID tags", "Loss Prevention", "Traffic Intelligence"]},
-          {category: "Personal Protection", subcategories: ["Respiratory", "Eye, Ear & Face", "Communication"]}
-        ],
-        gold: [
-          {category: "Vision & Mission"},
-          {category: "Inspiration & Motivation"}
-        ],
+        green: [],
+        blue: [],
+        red: [],
+        gold: []
       }
     }
   },
