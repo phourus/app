@@ -164,9 +164,16 @@ let Stream = Reflux.createStore({
       type: type,
       id: id,
       profile: {}
-    }
+    };
     this.trigger({context: this.params.context});
     this.posts = [];
+    // create
+    if (type === 'create') {
+      let model = {id: 'create', title: '', content: '', user: {}};
+      this.posts = [model];
+      this.trigger({posts: this.posts, total: this.posts.length, params: this.params, scroll: this.scroll});
+      return;
+    }
     // no context
     if (type === null) {
       this._collection();

@@ -46,7 +46,8 @@ let Post = Reflux.createStore({
     this._single(this.post.id);
   },
   _add: function () {
-    posts.add({title: 'New Post'})
+    let model = this.changes;
+    posts.add(model)
     .then(data => {
       this.trigger({add: true, post: data});
     })

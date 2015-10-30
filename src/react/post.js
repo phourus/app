@@ -62,6 +62,9 @@ let Post = React.createClass({
 				}
 				this.setState({saving: data.saving, types: false});
 			}
+			if (data.add === true) {
+				this.context.router.transitionTo("edit", {id: data.post.id});
+			}
 			if (data.post) {
 				this.setState({post: data.post});
 			}
@@ -123,6 +126,14 @@ let Post = React.createClass({
 			comments = this.props.context.type === 'edit' ? false : <Comments post={this.state.post} />;
 			className += " selected";
 		}
+		if (this.props.context.type === 'create') {
+			stats = false;
+			types = this.state.types ? <Types post={this.state.post} type={this._type} context={this.props.context} owner={this.props.owner} /> : false;
+			links = false;
+			content = <TextEditor post={this.state.post} />;
+			comments = false;
+			className += " selected";
+		}
 		if (this.state.post.privacy === 'org') {
 			// let organizations = [{id: 1, name: "Phourus Inc."}, {id: 2, name: "Tyco Intl."}, {id: 3, name: "Intuit Inc."}, {id: 4, name: "Enco Industries Inc."}];
 			// orgs = (
@@ -143,7 +154,7 @@ let Post = React.createClass({
 					? <button className="close" onClick={this._back}>X</button>
 					: false
 				}
-				{this.props.owner && this.props.context.type !== 'edit'
+				{this.props.owner && (this.props.context.type !== 'edit' && this.props.context.type !== 'create')
 					? <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
 					: false
 				}
@@ -163,6 +174,16 @@ let Post = React.createClass({
 						</div>
 					: false
 				}
+				{this.props.context.type === 'create'
+					? <div className="actions">
+							<div>
+								<button className="button green save" onClick={this._post} disabled={this.props.saving}><i className="fa fa-save" /> Post</button>
+								<button className="button red delete inverted" onClick={this._back}><i className="fa fa-close" /> Cancel</button>
+								<button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
+							</div>
+						</div>
+					: false
+				}
 				<div id={this.state.post.type} className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className={"fa fa-" + (icons[this.state.post.type] ? icons[this.state.post.type] : 'file')} /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
 				{types}
 				{this.props.owner && this.props.context.type === 'edit' ? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> <span style={{textDecoration: 'underline'}}>Privacy: {this.state.post.privacy}</span></div> : false}
@@ -174,15 +195,15 @@ let Post = React.createClass({
 					? {orgs}
 					: false
 				}
-				{this.props.context.type === 'edit' && this.props.owner
+				{this.props.context.type === 'create' || this.props.context.type === 'edit' && this.props.owner
 					? <input className="title editing" onChange={this._title} value={this.state.post.title} />
 				: <h2 className="title"><Link to="post" params={{id: this.state.post.id}}>{this.state.post.title}</Link></h2>
 				}
-				{this.props.context.type === 'edit'
+				{this.props.context.type === 'edit' || this.props.context.type === 'post' || this.props.context.type === 'create'
 					? false
 					: <Details {...this.state} context={this.props.context} owner={this.props.owner}  />
 				}
-				{this.props.context.type !== 'edit'
+				{this.props.context.type !== 'edit' && this.props.context.type !== 'create'
 					? tags
 					: false
 				}
@@ -197,11 +218,18 @@ let Post = React.createClass({
 			</div>
 		);
 	},
+	_post: function () {
+		Actions.add();
+	},
 	_context: function (data) {
 		let id = this.getParams().id || null;
 		if (this.props.context.type === 'edit' || this.props.context.type === 'post') {
 			Actions.single(id);
 			Actions.Comments.collection({postId: id});
+		}
+		if (this.props.context.type === 'create') {
+			Actions.change('title', 'New Post');
+			Actions.change('content', 'New Content');
 		}
 		this.setState(data);
 	},
@@ -221,10 +249,10 @@ let Post = React.createClass({
 		this.setState({privacy: !this.state.privacy});
 	},
 	_type: function (e) {
-		if (this.props.context.type === 'edit' && this.props.owner) {
+		if (this.props.context.type === 'create' || this.props.context.type === 'edit' && this.props.owner) {
 			this.setState({types: !this.state.types});
 		}
-		if (this.props.context.type !== 'post' && this.props.context.type !== 'edit') {
+		if (this.props.context.type !== 'post' && this.props.context.type !== 'edit' && this.props.context.type !== 'create') {
 			Stream.type(e.currentTarget.id);
 		}
 	},

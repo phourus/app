@@ -58,6 +58,7 @@ module.exports = (
       <Route name="orgs" handler={Stream}>
         <Route name="orgPosts" path=":id" handler={Stream} />
       </Route>
+      <Route name="create" handler={Stream}></Route>
       <Route name="edit" path="edit/:id" handler={Stream}></Route>
       <Route name="post" path=":id" handler={Stream} />
     </Route>

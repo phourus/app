@@ -99,6 +99,9 @@ let Stream = React.createClass({
 		if (params.id) {
 			id = params.id;
 		}
+		if (type === 'create') {
+			id = 'create';
+		}
 		Actions.context(type, id);
 	},
 	_more: function () {
@@ -303,7 +306,7 @@ let Posts = React.createClass({
 		return {
 			ready: false,
 			user: {
-				id: null
+				id: 0
 			}
 		}
 	},
@@ -331,7 +334,7 @@ let Posts = React.createClass({
 			return <Loader />
 		}
 
-		if (this.props.context.type === 'post' || this.props.context.type === 'edit') {
+		if (this.props.context.type === 'post' || this.props.context.type === 'edit' || this.props.context.type === 'create') {
 			filtered = data.filter(item => {
 				if (item.id == this.props.context.id) {
 					return true;
@@ -342,8 +345,14 @@ let Posts = React.createClass({
 
 		list = filtered.map((item, i) => {
 			 let location = {};
-			 let sharedPosts = this.state.user && this.state.user.SESSION_POSTS && this.state.user.SESSION_POSTS.constructor === Array ? this.state.user.SESSION_POSTS : [];
-			 let owner = (item.user.id == this.state.user.id) || sharedPosts.indexOf(item.id) !== -1;
+			 let owner = false;
+			 if (this.props.context.type === 'create') {
+				 item.user = this.state.user;
+				 owner = true;
+			 } else {
+				 let sharedPosts = this.state.user && this.state.user.SESSION_POSTS && this.state.user.SESSION_POSTS.constructor === Array ? this.state.user.SESSION_POSTS : [];
+				 owner = (item.user.id == this.state.user.id) || sharedPosts.indexOf(item.id) !== -1;
+			 }
 			 if (item.user.locations && item.user.locations.length > 0) {
 					 location = item.user.locations[0];
 			 }
@@ -357,7 +366,7 @@ let Posts = React.createClass({
 			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>
 		}
 		return (
-			<div className={(this.props.context.type === 'post' || this.props.context.type === 'edit') ? "post" : "posts"}>{list}</div>
+			<div className={(this.props.context.type === 'post' || this.props.context.type === 'edit' || this.props.context.type === 'create') ? "post" : "posts"}>{list}</div>
 		);
 	}
 });

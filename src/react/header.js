@@ -4,8 +4,6 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, Navigation } = Router;
 
-let PostActions = require('../actions/post');
-let PostStore = require('../stores/post');
 let AccountActions = require('../actions/account');
 let AccountStore = require('../stores/account');
 let StreamActions = require('../actions/stream');
@@ -25,11 +23,6 @@ let Header = React.createClass({
     this.unsubscribeAccount = AccountStore.listen(data => {
       this.setState(data);
     });
-    this.unsubscribePost = PostStore.listen(data => {
-      if (data.add === true) {
-        this.transitionTo("edit", {id: data.post.id});
-      }
-    });
     this.unsubscribeStream = StreamStore.listen(data => {
       this.setState(data);
     });
@@ -37,7 +30,6 @@ let Header = React.createClass({
   },
   componentWillUnmount: function () {
     this.unsubscribeAccount();
-    this.unsubscribePost();
     this.unsubscribeStream();
   },
   componentWillReceiveProps: function (updated) {
@@ -82,10 +74,10 @@ let Header = React.createClass({
                     </div>
                   </li>
                   <li className="create">
-                    <a href="javascript: void(0)" onClick={this._create}>
+                    <Link to="create">
                       <i className="fa fa-pencil" />
                       Create
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -107,9 +99,6 @@ let Header = React.createClass({
           {this.state.filter && this.props.tint ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
         </header>
     );
-  },
-  _create: function () {
-    PostActions.add();
   },
   _filter: function () {
     if (this.state.filter !== true) {
