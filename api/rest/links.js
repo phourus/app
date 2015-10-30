@@ -1,6 +1,7 @@
 var router = require('express').Router();
 
 var links = require('../models/links');
+var search = require('../models/search');
 
 router.get('/:id', (req, res) => {
     var id;
@@ -28,6 +29,7 @@ router.post('', (req, res) => {
   var model = req.body;
   links.add(model)
   .then(function (data) {
+      search.populate(model.postId);
       res.send(200, data);
   })
   .catch(function (err) {
@@ -45,6 +47,10 @@ router.put('/:id', (req, res) => {
   var model = req.body;
   links.save(id, model)
   .then(function (data) {
+      links.single(id)
+      .then(function (link) {
+        search.populate(link.postId);
+      });
       res.send(200, data);
   })
   .catch(function (err) {

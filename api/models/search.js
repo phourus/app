@@ -13,43 +13,50 @@ var search = db.define('search', {
   commentSearch: {type: sql.TEXT, defaultValue: "", allowNull: false}
 }, {
   classMethods: {
-    update: function (postId) {
+    add: function (post) {
+      var a = [post.title, post.slug, post.content, post.author, post.poll, post.location];
+      var postSearch = a.join(" ");
+      var model = {id: post.id, postId: post.id, postSearch: postSearch};
+      return this.create(model)
+      .catch(function (err) {
+        console.log(err);
+      });
+    },
+    save: function (post) {
+      var a = [post.title, post.slug, post.content, post.author, post.poll, post.location];
+      var postSearch = a.join(" ");
+      return this.update({postSearch: postSearch}, {where: {id: post.id}})
+      .catch(function (err) {
+        console.log(err);
+      });
+    },
+    populate: function (postId) {
       return sql.Promise.join(
-        posts.findOne(postId),
         tags.findAll({where: {postId: postId}}),
         links.findAll({where: {postId: postId}}),
         comments.findAll({where: {postId: postId}}),
-        (posts, tags, links, comments) => {
-          var postSearch = "";
-          var tagSearch = "";
-          var linkSearch = "";
-          var commentSearch = "";
-
-          // posts
-          var a = [posts.title, posts.slug, posts.content, posts.author, posts.poll, posts.location];
-          postSearch = a.join(" ");
+        (tags, links, comments) => {
+          var model = {
+            tagSearch: "",
+            linkSearch: "",
+            commentSearch: ""
+          };
 
           // tags
           tags.forEach(function (item) {
-            tagSearch += " " + item.tag;
+            model.tagSearch += " " + item.tag;
           });
 
           // links
           links.forEach(function (item) {
-            linkSearch += " " + item.title + " " + item.caption;
+            model.linkSearch += " " + item.title + " " + item.caption;
           });
 
           // comments
           comments.forEach(function (item) {
-            commentSearch += " " + item.content;
+            model.commentSearch += " " + item.content;
           });
-
-          return this.upsert({
-            postSearch: postSearch,
-            tagSearch: tagSearch,
-            linkSearch: linkSearch,
-            commentSearch: commentSearch
-          }, {where: {id: postId}});
+          return this.update(model, {where: {id: postId}});
         }
       )
       .catch(function (err) {

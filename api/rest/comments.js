@@ -1,6 +1,7 @@
 var router = require('express').Router();
 
 var comments = require('../models/comments');
+var search = require('../models/search');
 
 router.get('', (req, res) => {
   var params = req.query;
@@ -22,7 +23,8 @@ router.post('', (req, res) => {
   comments.SESSION_USER = req.user_id;
   comments.add(model)
   .then(function (data) {
-      res.send(201, data);
+    search.populate(model.postId);
+    res.send(201, data);
   })
   .catch(function (err) {
       console.error(err);
@@ -39,6 +41,10 @@ router.put('/:id', (req, res) => {
   comments.SESSION_USER = req.user_id;
   comments.save(id, model)
   .then(function (data) {
+      comments.single(id)
+      .then(function (comment) {
+        search.populate(comment.postId);
+      });
       res.send(204, data);
   })
   .catch(function (err) {

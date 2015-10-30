@@ -2,6 +2,7 @@ var router = require('express').Router();
 
 var posts = require('../models/posts');
 var votes = require('../models/votes');
+var search = require('../models/search');
 
 router.get('/shared', (req, res) => {
   var params = req.query;
@@ -54,6 +55,7 @@ router.post('', (req, res) => {
   posts.SESSION_USER = req.user_id;
   posts.add(model)
   .then(function (data) {
+    search.add(data);
     res.send(201, data);
   })
   .catch(function (err) {
@@ -71,6 +73,10 @@ router.put('/:id', (req, res) => {
   posts.SESSION_USER = req.user_id;
   posts.save(id, model)
   .then(function (data) {
+    posts.single(id)
+    .then(function (data) {
+      search.save(data);
+    });
     res.send(204, data);
   })
   .catch(function (err) {
