@@ -88,7 +88,15 @@ var posts = db.define('posts', {
       if (model.orgId === 'null') {
         model.orgId = null;
       }
-      return this.update(model, {where: {id: id, userId: model.userId}});
+      return this.update(model, {
+        where: {
+          id: id,
+          $or: [
+            {userId: model.userId},
+            {id: {$in: this.SESSION_POSTS}}
+          ]
+        }
+      });
     },
     remove: function (id) {
       //return this.destroy({where: {id: id, userId: model.userId}});
