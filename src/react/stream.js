@@ -1,24 +1,17 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, State, Navigation } = Router;
+let { State } = Router;
 let posts = require('../api/posts');
-let moment = require('moment');
-let numeral = require('numeral');
-let thousands = "0,0";
+
 let Store = require('../stores/stream');
 let Actions = require('../actions/stream');
 
-let AccountStore = require('../stores/account');
-let AccountActions = require('../actions/account');
-
 let Profile = require('./profile');
-let Loader = require('./loader');
-let Tax = require('../taxonomy');
-let Influence = require('../influence');
-let Popularity = require('../popularity');
 let Scroll = require('react-infinite-scroll')(React);
-let PostItem = require('./post');
+
+let Posts = require('./stream/posts');
+let Organizations = require('./stream/organizations');
 
 let Stream = React.createClass({
 	mixins: [State],
@@ -39,7 +32,7 @@ let Stream = React.createClass({
 				type: null,
 				id: null
 			}
-		}
+		};
 	},
 	componentDidMount: function () {
 		this.unsubscribe = Store.listen((data) => {
@@ -87,6 +80,7 @@ let Stream = React.createClass({
 		// /stream/org/:id
 		// /stream/edit/:id
 		// /stream/:id
+		// /stream/create
 
 		let route = this.context.router.getCurrentRoutes();
 		let params = this.context.router.getCurrentParams();
@@ -106,268 +100,6 @@ let Stream = React.createClass({
 	},
 	_more: function () {
 		Actions.more();
-	}
-});
-
-let Organizations = React.createClass({
-	mixins: [Navigation],
-	getInitialState: function () {
-		return {
-			orgs: []
-		};
-	},
-	componentDidMount: function () {
-		this.unsubscribe = AccountStore.listen((data) => {
-			this.setState(data);
-		});
-		AccountActions.orgs();
-	},
-	componentWillUnmount: function () {
-		this.unsubscribe();
-	},
-	render: function () {
-		let membership = this.state.orgs || [];
-		let selected = this.state.orgs.filter((org) => {
-			if (org.orgId.toString() === this.props.context.id) {
-				return true;
-			}
-			return false;
-		});
-		return (
-			<div className="organizations">
-				<h1>My Organizations</h1>
-				<div className="list">
-					{membership.map((member) => {
-						let org = member.org;
-						return (
-							<div key={org.id} id={org.id} className="org" onClick={this._select}>
-								<div className="name">{org.name}</div>
-								<Pic img={org.img} />
-							</div>
-						);
-					})}
-				</div>
-			</div>
-		);
-	},
-	_select: function (e) {
-		this.context.router.transitionTo("orgPosts", {id: e.currentTarget.id});
-	}
-});
-
-let Pic = React.createClass({
-  getInitialState: function () {
-    return {
-			id: 0,
-      img: '/assets/avatars/default.jpg',
-      default: '/assets/avatars/default.jpg'
-    }
-  },
-  componentWillReceiveProps: function (data) {
-    if (data.img) {
-      this.setState(data);
-    }
-  },
-  render: function () {
-    return (
-      <div className="pic">
-				<Link to="orgPosts" params={{id: this.state.id}}>
-        	<img src={this.state.img} onError={this._default} />
-				</Link>
-      </div>
-    );
-  },
-  _default: function () {
-    this.setState({img: this.state.default});
-  }
-});
-
-let Context = React.createClass({
-	mixins: [Navigation],
-	render: function () {
-		let classes = {
-			phourus: "fa fa-flag",
-			organizations: "fa fa-users",
-			users: "fa fa-user"
-		};
-		if (!this.props.type) {
-			classes.phourus += ' selected';
-		}
-		if (this.props.type === 'userPosts') {
-			classes.users += ' selected';
-		}
-		if (this.props.type === 'orgPosts' || this.props.type === 'orgs') {
-			classes.organizations += ' selected';
-		}
-		// <button className={classes.phourus} onClick={this._phourus}> Phourus</button>
-		// <button className={classes.organizations} onClick={this._organizations}> Orgs</button>
-		// <button className={classes.users} onClick={this._users}> Users</button>
-		return (
-			<div className="context"></div>
-		);
-	},
-	_phourus: function () {
-		this.context.router.transitionTo("stream");
-	},
-	_organizations: function () {
-		this.context.router.transitionTo("orgs");
-	},
-	_users: function () {
-		this.context.router.transitionTo("users");
-	}
-});
-
-let _Context = React.createClass({
-	getDefaultProps: function () {
-		return {
-			id: null,
-			type: null,
-			profile: null
-		}
-	},
-	render: function () {
-		let label = 'Viewing all public Phourus posts';
-		let img = '/assets/logos/logo-emblem.png';
-		let clear = false;
-		let clearLink = <span> | Clear filters <Link to="stream" className="close">x</Link></span>;
-		let link = false;
-		let name = '';
-		if (this.props.profile) {
-			name = this.props.profile.username || this.props.profile.shortname || '';
-		}
-		if (true === 'user is logged in') {
-			link = <Link to="myPosts">Click here to view your posts</Link>
-		} else {
-			link = <Link to="account">Click here to create posts</Link>
-		}
-		if (this.props.type === 'myPosts') {
-			label = 'Viewing all my posts:';
-			clear = clearLink;
-			img = '/assets/avatars/' + (this.props.profile.img || 'default') + '.jpg';
-			link = <Link to="account">View my account</Link>
-		}
-		if (this.props.type === 'userPosts') {
-			label = 'Viewing posts by:';
-			img = '/assets/avatars/' + (this.props.profile.img || 'default') + '.jpg';
-			clear = clearLink;
-			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
-		}
-		if (this.props.type === 'orgPosts') {
-			label = 'Viewing posts by:';
-			img = '/assets/orgs/' + (this.props.profile.img || 'default') + '.jpg';
-			clear = clearLink;
-			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
-		}
-		return (
-			<div className="context">
-				<img src={img} />
-				{label}<br />
-			  {link} {clear}
-			</div>
-		);
-	},
-	_clear: function () {
-		Actions.context(null, null);
-	}
-});
-
-// let Foot = React.createClass({
-// 	render: function () {
-// 		return (
-// 			<div className="foot">
-// 				<Pagination ref="pagination" page={this.props.params.page} total={this.props.total} limit={this.props.params.limit} />
-// 			</div>
-// 		);
-// 	}
-// });
-//
-// let Pagination = React.createClass({
-// 	render: function () {
-// 		let pages = Math.ceil(this.props.total / this.props.limit);
-// 		return (
-// 			<div className="pagination">
-// 				<div>Displaying page {this.props.page} of {pages} out of {this.props.total} posts</div>
-// 				<button href="javascript:void(0)" ref="prev" className="button blue" onClick={this._previous}>Previous</button>
-// 				<button href="javascript:void(0)" ref="next" className="button blue" onClick={this._next}>Next</button>
-// 			</div>
-// 		);
-// 	},
-// 	_next: function () {
-// 		Actions.nextPage();
-// 	},
-// 	_previous: function () {
-// 		Actions.previousPage();
-// 	}
-// });
-
-/** POSTS **/
-let Posts = React.createClass({
-	getInitialState: function () {
-		return {
-			ready: false,
-			user: {
-				id: 0
-			}
-		}
-	},
-	componentDidMount: function () {
-		this.unsubscribe = AccountStore.listen((data) => {
-			if (this.state.ready === false) {
-				data.ready = true;
-			}
-			this.setState(data);
-		});
-		AccountActions.get();
-	},
-	componentWillReceiveProps: function () {
-		this.forceUpdate();
-	},
-	componentWillUnmount: function () {
-		this.unsubscribe();
-	},
-	render: function () {
-		let data = this.props.posts;
-		let filtered = this.props.posts;
-		let list = [];
-
-		if (this.props.posts === null) {
-			return <Loader />
-		}
-
-		if (this.props.context.type === 'post' || this.props.context.type === 'edit' || this.props.context.type === 'create') {
-			filtered = data.filter(item => {
-				if (item.id == this.props.context.id) {
-					return true;
-				}
-				return false;
-			});
-		}
-
-		list = filtered.map((item, i) => {
-			 let location = {};
-			 let owner = false;
-			 if (this.props.context.type === 'create') {
-				 item.user = this.state.user;
-				 owner = true;
-			 } else {
-				 let sharedPosts = this.state.user && this.state.user.SESSION_POSTS && this.state.user.SESSION_POSTS.constructor === Array ? this.state.user.SESSION_POSTS : [];
-				 owner = (item.user.id == this.state.user.id) || sharedPosts.indexOf(item.id) !== -1;
-			 }
-			 if (item.user.locations && item.user.locations.length > 0) {
-					 location = item.user.locations[0];
-			 }
-			 return <PostItem key={item.id} post={item} user={item.user} context={this.props.context} owner={owner} location={location} scroll={this.props.scroll} />;
-		});
-
-		if (this.state.ready === false) {
-			//return <Loader />
-		}
-		if (list.length < 1) {
-			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>
-		}
-		return (
-			<div className={(this.props.context.type === 'post' || this.props.context.type === 'edit' || this.props.context.type === 'create') ? "post" : "posts"}>{list}</div>
-		);
 	}
 });
 
