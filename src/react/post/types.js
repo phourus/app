@@ -4,10 +4,16 @@ let React = require('react');
 let Actions = require('../../actions/post');
 
 let Meta = require('./meta');
-
 let tax = require('../../taxonomy');
 
 let Types = React.createClass({
+	getDefaultProps: function () {
+		return {
+			context: {},
+			post: {},
+			owner: false
+		}
+	},
 	render: function () {
 	  let type = this.props.post.type;
 	  let classes = {};

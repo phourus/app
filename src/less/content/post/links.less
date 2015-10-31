@@ -1,0 +1,74 @@
+.links {
+  .Row(100%);
+
+  .fields {
+    .Cols(12);
+    background-color: #f7f7f7;
+    box-sizing: border-box;
+    padding: 20px;
+
+    textarea {
+      border: solid 1px @grey;
+      height: 160px;
+    }
+
+    button {
+      width: 200px;
+      font-size: 2em;
+    }
+  }
+  .list {
+    .Cols(12);
+
+    > div {
+      padding: 0 2%;
+      width: 100%;
+      box-sizing: border-box;
+      border-bottom: solid 1px fade(@blue-light, 30%);
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+
+      > div {
+        .Cols(11);
+
+        &.icon {
+          .Cols(1);
+
+          i {
+            font-size: 2em;
+            display: block;
+          }
+
+          a.edit {
+            font-size: 1em;
+            display: block;
+            text-align: left;
+          }
+        }
+      }
+
+      a {
+        font-size: 1em;
+        line-height: 1em;
+        text-decoration: underline;
+      }
+      p {
+        font-size: 0.8em;
+        font-style: italic;
+        margin: 5px 0 0 0;
+        padding: 0;
+        line-height: 1.5em;
+      }
+      button.remove {
+        float: right;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+
+        &:hover {
+          color: @red-light;
+        }
+      }
+    }
+  }
+}

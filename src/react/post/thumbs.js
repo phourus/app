@@ -8,6 +8,11 @@ let Actions = require('../../actions/post').Thumbs;
 
 let Thumbs = React.createClass({
    mixins: [State],
+   getDefaultProps: function () {
+     return {
+       post: {}
+     };
+   },
 	 getInitialState: function () {
 		 return {
 			 id: null,

@@ -7,9 +7,14 @@ let AccountStore = require('../../stores/account');
 let AccountActions = require('../../actions/account');
 
 let Loader = require('../loader');
-let PostItem = require('../post');
+let Post = require('../post');
 
 module.exports = React.createClass({
+	getDefaultProps: function () {
+		return {
+			posts: []
+		};
+	},
 	getInitialState: function () {
 		return {
 			ready: false,
@@ -34,47 +39,66 @@ module.exports = React.createClass({
 		this.unsubscribe();
 	},
 	render: function () {
-		let data = this.props.posts;
-		let filtered = this.props.posts;
-		let list = [];
-
 		if (this.props.posts === null) {
 			return <Loader />
 		}
-
-		if (this.props.context.type === 'post' || this.props.context.type === 'edit' || this.props.context.type === 'create') {
-			filtered = data.filter(item => {
-				if (item.id == this.props.context.id) {
-					return true;
-				}
-				return false;
-			});
+		if (this.props.posts.length < 1) {
+			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>;
 		}
-
-		list = filtered.map((item, i) => {
-			 let location = {};
-			 let owner = false;
-			 if (this.props.context.type === 'create') {
-				 item.user = this.state.user;
-				 owner = true;
-			 } else {
-				 let sharedPosts = this.state.user && this.state.user.SESSION_POSTS && this.state.user.SESSION_POSTS.constructor === Array ? this.state.user.SESSION_POSTS : [];
-				 owner = (item.user.id == this.state.user.id) || sharedPosts.indexOf(item.id) !== -1;
-			 }
-			 if (item.user.locations && item.user.locations.length > 0) {
-					 location = item.user.locations[0];
-			 }
-			 return <PostItem key={item.id} post={item} user={item.user} context={this.props.context} owner={owner} location={location} scroll={this.props.scroll} />;
-		});
-
-		if (this.state.ready === false) {
-			//return <Loader />
+		if (['create', 'edit', 'post'].indexOf(this.props.context.type) !== -1) {
+			return <Single posts={this.props.posts} user={this.state.user} context={this.props.context} owner={this._owner} />;
 		}
-		if (list.length < 1) {
-			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>
-		}
+		return <Collection posts={this.props.posts} user={this.state.user} context={this.props.context} owner={this._owner} />;
+	},
+	_owner: function (post) {
+		let user = this.state.user;
+		let sharedPosts = user && user.SESSION_POSTS && user.SESSION_POSTS.constructor === Array ? user.SESSION_POSTS : [];
+		return (post.user.id == user.id) || sharedPosts.indexOf(post.id) !== -1;
+	}
+});
+
+let Collection = React.createClass({
+	render: function () {
 		return (
-			<div className={(this.props.context.type === 'post' || this.props.context.type === 'edit' || this.props.context.type === 'create') ? "post" : "posts"}>{list}</div>
+			<div className="posts">
+				{this.props.posts.map((item, i) => {
+					 let owner = this.props.owner(item);
+					 let location = {};
+					 if (item.user.locations && item.user.locations.length > 0) {
+							 location = item.user.locations[0];
+					 }
+					 return <Post.Item key={item.id} post={item} user={item.user} context={this.props.context} owner={owner} location={location} scroll={this.props.scroll} />;
+				})}
+			</div>
 		);
+	}
+});
+
+let Single = React.createClass({
+	getDefaultProps: function () {
+		return {
+			posts: [],
+			context: {}
+		};
+	},
+	render: function () {
+		let post = this._post();
+		let owner = this.props.owner(post);
+		return <Post post={post} context={this.props.context} owner={this.props.owner} />;
+	},
+	_post: function () {
+		let post = {};
+		let posts = this.props.posts.filter(item => {
+			if (item.id == this.props.context.id) {
+				return true;
+			}
+			return false;
+		});
+		post = posts[0] || {};
+
+		if (this.props.context.type === 'create') {
+			post.user = this.state.user;
+		}
+		return post;
 	}
 });

@@ -1,0 +1,68 @@
+"use strict";
+let React = require('react');
+let Router = require('react-router');
+let { Link } = Router;
+let moment = require('moment');
+
+let Pic = require('./pic');
+let Poll = require('./poll');
+
+module.exports = React.createClass({
+	getDefaultProps: function () {
+		return {
+			context: {},
+			user: {
+				id: 0
+			},
+			post: {
+				org: {}
+			},
+			location: {}
+		};
+	},
+	render: function () {
+		let context = 'user';
+		let org = {};
+		let excerpt = "";
+		if (this.props.post && this.props.post.content) {
+			excerpt = this.props.post.content.replace(/(<([^>]+)>)/ig, "");
+		}
+		if (this.props.post.org && this.props.post.org.id && this.props.post.org.id != 0) {
+			org = this.props.post.org;
+			context = 'org';
+		}
+		// <Meta post={this.props.post} context={this.props.context} owner={this.props.owner} />
+		return (
+			<div className="details">
+				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} context={context} />
+				<div className="basic">
+					{context === 'org'
+						? <div><Link to="orgPosts" params={{id: org.id}}>{org.name}</Link><br /><br /></div>
+						: false
+					}
+					<span>By <Link to="userPosts" params={{id: this.props.user.id}}>{this.props.user.first} {this.props.user.last} </Link></span>
+					&bull;
+					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
+					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
+				</div>
+				{this.props.post.type === 'poll'
+					? <Poll {...this.props} />
+					: false
+				}
+				{this.props.post.type === 'event'
+					?
+					<div className="extra event">
+						<i className="fa fa-calendar" />
+						{this.props.post.when && moment(this.props.post.when).format() !== 'Invalid date' ? <div className="when">{moment(this.props.post.when).format('MMMM Do @ h:mm a')}</div> : false}
+						{this.props.post.location ? <div className="location">{this.props.post.location}</div> : false}
+					</div>
+					: false
+				}
+				{this.props.post.type !== 'event' && this.props.post.type !== 'poll' && this.props.context.type !== 'post' && this.props.context.type !== 'edit'
+					? <div className="extra excerpt"><div>{excerpt}</div></div>
+					: false
+				}
+			</div>
+		);
+	}
+});

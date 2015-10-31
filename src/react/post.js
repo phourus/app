@@ -2,35 +2,32 @@
 let React = require('react');
 let Router = require('react-router');
 let { Link, State, Navigation } = Router;
-let moment = require('moment');
-let numeral = require('numeral');
-let RTE = require('react-quill');
 
 let Actions = require('../actions/post');
-let Stream = require('../actions/stream');
-let ActionsAccount = require('../actions/account');
-
 let Store = require('../stores/post');
-let AccountStore = require('../stores/account');
 
+let ActionsView = require('./post/actions');
 let Comments = require('./post/comments');
+let Content = require('./post/content');
+let Details = require('./post/details');
 let Links = require('./post/links');
-let Meta = require('./post/meta');
 let Pic = require('./post/pic');
 let Poll = require('./post/poll');
 let Privacy = require('./post/privacy');
+let Stats = require('./post/stats');
 let Tags = require('./post/tags');
 let Thumbs = require('./post/thumbs');
+let Title = require('./post/title');
+let Type = require('./post/type');
 let Types = require('./post/types');
-
-let Loader = require('./loader');
-let Influence = require('../influence');
-let Popularity = require('../popularity');
-let thousands = "0,0";
-let en = numeral.language('en');
 
 let Post = React.createClass({
 	mixins: [State, Navigation],
+	getDefaultProps: function () {
+		return {
+			context: {}
+		};
+	},
 	getInitialState: function () {
 		return {
 			scroll: false,
@@ -88,138 +85,14 @@ let Post = React.createClass({
 		this._context(data);
 	},
 	render: function () {
-		let className = "postItem";
-		let meta = [];
-		let stats = <Stats post={this.state.post} context={this.props.context} />;
-		let post = this.state.post;
-		let types = false;
-		let comments = false;
-		let tags = <Tags post={this.state.post} context={this.props.context} owner={this.props.owner} tag={this._tag} />;
-		let content = false;
-		let links = false;
-		let thumbs = false;
-		let icons = {
-			blog: "laptop",
-			event: "calendar",
-			subject: "info",
-			question: "question",
-			debate: "bullhorn",
-			poll: "bar-chart",
-			quote: "quote-right",
-			belief: "flag"
-		};
-		for (let i = 0, keys = Object.keys(post); i < keys.length; i++) {
-			let key = keys[i];
-			let value = post[keys[i]];
-			if (['element', 'category', 'subcategory', 'difficulty', 'scope', 'zip', 'author', 'vote'].indexOf(key) !== -1 && value !== null) {
-				meta.push(<li key={key} ><strong>{key.toUpperCase()}</strong>: {value}</li>);
-			}
-		}
-		if (this.state.hidden === true) {
-			return false;
-		}
-		if (this.props.context.type === 'post' || this.props.context.type === 'edit') {
-			stats = this.props.context.type === 'edit' ? false : <Stats post={this.state.post} context={this.props.context} />;
-			types = this.state.types ? <Types post={this.state.post} type={this._type} context={this.props.context} owner={this.props.owner} /> : false;
-			links = <Links post={this.state.post} context={this.props.context} owner={this.props.owner} />;
-			content = this.props.context.type === 'edit' && this.props.owner ? <TextEditor post={this.state.post} />: <div className="content" dangerouslySetInnerHTML={{__html: this.state.post.content}}></div>;
-			comments = this.props.context.type === 'edit' ? false : <Comments post={this.state.post} />;
-			className += " selected";
-		}
-		if (this.props.context.type === 'create') {
-			stats = false;
-			types = this.state.types ? <Types post={this.state.post} type={this._type} context={this.props.context} owner={this.props.owner} /> : false;
-			links = false;
-			content = <TextEditor post={this.state.post} />;
-			comments = false;
-			className += " selected";
-		}
-		if (this.state.post.privacy === 'org') {
-			// let organizations = [{id: 1, name: "Phourus Inc."}, {id: 2, name: "Tyco Intl."}, {id: 3, name: "Intuit Inc."}, {id: 4, name: "Enco Industries Inc."}];
-			// orgs = (
-			// 	<label>Organization:
-			// 		<select value={this.state.post.orgId} onChange={this._orgId}>
-			// 			{organizations.map((item) => {
-			// 				return (<option value={item.id}>{item.name}</option>);
-			// 			})}
-			// 		</select>
-			// 	</label>
-			// );
-		}
-		//<Link to="post" params={{id: this.props.post.id}}>{this.props.post.title}</Link>
-		// <Categories {...this.state} context={this.props.context} owner={this.props.owner} />
+		let mode = this.props.context.type;
 		return (
-			<div className={className}>
-				{this.props.context.type === 'post'
-					? <button className="close" onClick={this._back}>X</button>
-					: false
-				}
-				{this.props.owner && (this.props.context.type !== 'edit' && this.props.context.type !== 'create')
-					? <Link to="edit" params={{id: this.state.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
-					: false
-				}
-				{this.props.owner && this.props.context.type === 'edit'
-					? <div className="actions">
-							{this.state.confirmTrash
-								? <div>
-										<button className="button green red" onClick={this._confirm} disabled={this.props.saving}><i className="fa fa-trash" /> Confirm Delete</button>
-										<button className="button red delete inverted" onClick={this._cancel} style={{width: '95%'}}><i className="fa fa-remove" /> Cancel Delete</button>
-									</div>
-								: <div>
-										<button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save Changes'}</button>
-										<button className="button red delete inverted" onClick={this._trash}><i className="fa fa-trash" /> Delete</button>
-										<button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
-									</div>
-							}
-						</div>
-					: false
-				}
-				{this.props.context.type === 'create'
-					? <div className="actions">
-							<div>
-								<button className="button green save" onClick={this._post} disabled={this.props.saving}><i className="fa fa-save" /> Post</button>
-								<button className="button red delete inverted" onClick={this._back}><i className="fa fa-close" /> Cancel</button>
-								<button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
-							</div>
-						</div>
-					: false
-				}
-				<div id={this.state.post.type} className={`type ${this.state.post.type} ${(this.state.types ? 'inverted' : '')}`} onClick={this._type}><i className={"fa fa-" + (icons[this.state.post.type] ? icons[this.state.post.type] : 'file')} /> {this.state.post.type ? this.state.post.type : "Please select a type"}</div>
-				{types}
-				{this.props.owner && this.props.context.type === 'edit' ? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> <span style={{textDecoration: 'underline'}}>Privacy: {this.state.post.privacy}</span></div> : false}
-				{this.props.context.type === 'edit' && this.props.owner && this.state.privacy
-					? <Privacy post={this.state.post} />
-					: false
-				}
-				{this.state.post.privacy === 'org' && this.props.context.type === 'edit'
-					? {orgs}
-					: false
-				}
-				{this.props.context.type === 'create' || this.props.context.type === 'edit' && this.props.owner
-					? <input className="title editing" onChange={this._title} value={this.state.post.title} />
-				: <h2 className="title"><Link to="post" params={{id: this.state.post.id}}>{this.state.post.title}</Link></h2>
-				}
-				{this.props.context.type === 'edit' || this.props.context.type === 'post' || this.props.context.type === 'create'
-					? false
-					: <Details {...this.state} context={this.props.context} owner={this.props.owner}  />
-				}
-				{this.props.context.type !== 'edit' && this.props.context.type !== 'create'
-					? tags
-					: false
-				}
-				{content}
-				{this.props.context.type === 'edit'
-					? tags
-					: false
-				}
-				{stats}
-				{links}
-				{comments}
+			<div className="post">
+				{mode === 'create' ? <Create {...this.state} /> : false}
+				{mode === 'edit' ? <Edit {...this.state} /> : false}
+				{mode === 'post' ? <Single {...this.state} /> : false}
 			</div>
 		);
-	},
-	_post: function () {
-		Actions.add();
 	},
 	_context: function (data) {
 		let id = this.getParams().id || null;
@@ -233,185 +106,67 @@ let Post = React.createClass({
 		}
 		this.setState(data);
 	},
-	_back: function () {
-		if (!this.goBack()) {
-			if (this.props.context.type === 'edit') {
-				this.context.router.transitionTo("myPosts");
-			} else {
-				this.context.router.transitionTo("stream");
-			}
-		}
-	},
-	_myposts: function () {
-		this.context.router.transitionTo("myPosts");
-	},
-	_privacy: function () {
-		this.setState({privacy: !this.state.privacy});
-	},
-	_type: function (e) {
-		if (this.props.context.type === 'create' || this.props.context.type === 'edit' && this.props.owner) {
-			this.setState({types: !this.state.types});
-		}
-		if (this.props.context.type !== 'post' && this.props.context.type !== 'edit' && this.props.context.type !== 'create') {
-			Stream.type(e.currentTarget.id);
-		}
-	},
-	_title: function (e) {
-		Actions.change('title', e.currentTarget.value);
-	},
-	_update: function () {
-		Store.post.id = this.props.post.id;
-		this.setState({saving: true});
-		Actions.save();
-	},
-	_trash: function () {
-		this.setState({confirmTrash: true});
-	},
-	_cancel: function () {
-		this.setState({confirmTrash: false});
-	},
-	_confirm: function () {
-		Store.post.id = this.props.post.id;
-		Actions.trash();
-	},
-	_tag: function (tag) {
-		Stream.search(tag);
-	}
 });
 
-let Details = React.createClass({
+let Create = React.createClass({
 	render: function () {
-		let context = 'user';
-		let org = {};
-		let excerpt = "";
-		if (this.props.post && this.props.post.content) {
-			excerpt = this.props.post.content.replace(/(<([^>]+)>)/ig, "");
-		}
-		if (this.props.post.org && this.props.post.org.id && this.props.post.org.id != 0) {
-			org = this.props.post.org;
-			context = 'org';
-		}
-		// <Meta post={this.props.post} context={this.props.context} owner={this.props.owner} />
 		return (
-			<div className="details">
-				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} context={context} />
-				<div className="basic">
-					{context === 'org'
-						? <div><Link to="orgPosts" params={{id: org.id}}>{org.name}</Link><br /><br /></div>
-						: false
-					}
-					<span>By <Link to="userPosts" params={{id: this.props.user.id}}>{this.props.user.first} {this.props.user.last} </Link></span>
-					&bull;
-					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
-					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
-				</div>
-				{this.props.post.type === 'poll'
-					? <Poll {...this.props} />
-					: false
-				}
-				{this.props.post.type === 'event'
-					?
-					<div className="extra event">
-						<i className="fa fa-calendar" />
-						{this.props.post.when && moment(this.props.post.when).format() !== 'Invalid date' ? <div className="when">{moment(this.props.post.when).format('MMMM Do @ h:mm a')}</div> : false}
-						{this.props.post.location ? <div className="location">{this.props.post.location}</div> : false}
-					</div>
-					: false
-				}
-				{this.props.post.type !== 'event' && this.props.post.type !== 'poll' && this.props.context.type !== 'post' && this.props.context.type !== 'edit'
-					? <div className="extra excerpt"><div>{excerpt}</div></div>
-					: false
-				}
+			<div className="create postItem">
+				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
 			</div>
 		);
 	}
 });
 
-let TextEditor = React.createClass({
+let Edit = React.createClass({
 	render: function () {
-		if (!this.props.post.hasOwnProperty('content')) {
-			return false;
-		}
-		let content = this.props.post.content || "Enter content here";
 		return (
-			<div className="rte">
-				<RTE ref="content" value={content} onChange={this._content} theme="snow" />
+			<div className="edit postItem">
+				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Privacy post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
+				<Links post={this.props.post} context={this.props.context} owner={this.props.owner} />
 			</div>
 		);
-	},
-	_content: function (value) {
-		Actions.change('content', value);
 	}
 });
 
-let Stats = React.createClass({
-	mixins: [Navigation],
-	componentDidMount: function () {
-		this._popularity(this.props);
-	},
-	componentWillReceiveProps: function (data) {
-		this._popularity(data);
-	},
+let Single = React.createClass({
 	render: function () {
 		return (
-			<div className="interact" onClick={this._single}>
-				{this.props.context.type === 'post' ? <Thumbs post={this.props.post} /> : false}
-				<Influence influence={this.props.post.influence}/>
-				<div className="popularity">
-					<div>
-						<canvas id={`popularity${this.props.post.id}`}></canvas>
-						<div>Popularity</div>
-					</div>
-				</div>
-				<div className="stats">
-					<div><strong>{numeral(this.props.post.totalViews).format('0a')}</strong><br /><i className="fa fa-eye" /></div>
-					<div><strong>{numeral(this.props.post.totalComments).format('0a')}</strong><br /><i className="fa fa-comment" /></div>
-					<div><strong>{numeral(this.props.post.totalThumbs).format('0a')}</strong><br /><i className="fa fa-thumbs-up" /></div>
-				</div>
+			<div className="single postItem">
+				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
+				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Stats post={this.props.post} context={this.props.context} />
+				<Links post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Comments post={this.props.post} />
 			</div>
 		);
-	},
-	_popularity: function (data) {
-		if (data.post && data.post.id > 0) {
-			// when _popularity is called by componentWillReceiveProps, element
-			// has not yet been rendered.
-			setTimeout(() => {
-				let element = document.getElementById(`popularity${data.post.id}`);
-				let popularity = new Popularity(element, data.post.popularity || 100);
-			}, 1);
-		}
-	},
-	_single: function () {
-		this.context.router.transitionTo('post', {id: this.props.post.id});
 	}
 });
 
-
-let Select = React.createClass({
-  render: function () {
-    let list =[];
-    if (!this.props.data) {
-      return (<select><option disabled={true}>--Please Select a Category--</option></select>);
-    }
-    list = this.props.data.map(function (item) {
-      return <option key={item.label} value={item.value}>{item.label}</option>;
-    });
-    return (
-      <select>
-      	{list}
-      </select>
-    );
-  }
+Post.Item = React.createClass({
+	render: function () {
+		return (
+			<div className="postItem">
+				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Details post={this.props.post} context={this.props.context} owner={this.props.owner} user={this.props.user} location={this.props.location} />
+				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
+				<Stats post={this.props.post} context={this.props.context} />
+			</div>
+		);
+	}
 });
-
-/*
-<li><strong>Positive:</strong> {this.props.meta.positive}</li>
-<li><strong>Category:</strong> {this.props.meta.category}</li>
-<li><strong>Element:</strong> {this.props.meta.element}</li>
-<li><strong>Date/Time:</strong> {this.props.post.date}</li>
-<li><strong>Address:</strong> {this.props.address.city}</li>
-<li><strong>Difficulty:</strong> {this.props.meta.difficulty}</li>
-<li><strong>Scope:</strong> {this.props.meta.scope}</li>
-*/
 
 module.exports = Post;

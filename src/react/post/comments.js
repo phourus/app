@@ -66,6 +66,11 @@ let Comments = React.createClass({
 });
 
 Comments.Create = React.createClass({
+  getDefaultProps: function () {
+    return {
+      post: {}
+    };
+  },
   getInitialState: function () {
 		return {
 			content: ""
@@ -101,6 +106,14 @@ Comments.Create = React.createClass({
 
 Comments.Comment = React.createClass({
   mixins: [Navigation],
+  getDefaultProps: function () {
+    return {
+      comment: {},
+      user: {
+        id: 0
+      }
+    };
+  },
 	render: function () {
     let textarea = '';
     /*

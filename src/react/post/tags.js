@@ -6,11 +6,13 @@ let Actions = require('../../actions/post').Tags;
 let Tags = React.createClass({
 	getDefaultProps: function () {
 		return {
+			context: {},
 			post: {
 				id: null,
 				tags: []
-			}
-		}
+			},
+			owner: false
+		};
 	},
 	getInitialState: function () {
 		return {
@@ -64,6 +66,9 @@ let Tags = React.createClass({
 	_tag: function (e) {
 		let id = e.currentTarget.id;
 		this.props.tag(id);
+	},
+	_search: function (tag) {
+		Stream.search(tag);
 	}
 });
 

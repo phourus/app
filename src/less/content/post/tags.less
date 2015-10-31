@@ -1,0 +1,85 @@
+.tags {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  position: absolute;
+  bottom: 80px;
+}
+
+div.post .tags {
+  position: static;
+  margin-bottom: 20px;
+  border-bottom: solid 1px #eee;
+}
+
+.tag {
+  border: solid 1px @grey;
+  padding: 0px 6px;
+  .rounded(16px);
+  font-size: 1em;
+  font-family: @font-serif;
+  color: #999;
+  margin-left: 4px;
+  display: inline-block;
+  margin-bottom: 4px;
+
+  a {
+    color: #ccc;
+  }
+
+  a:hover {
+    border-color: @blue-light;
+    color: @blue-light;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  a.remove {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    font-size: 1em;
+    color: inherit;
+    margin-left: 10px;
+
+    &:hover {
+      color: @red-light;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.tagField {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+
+  input {
+    border: solid 1px @grey;
+    padding: 0px 6px;
+    .rounded(16px);
+    height: 40px;
+    font-size: 1.1em;
+    color: #333;
+    margin-left: 4px;
+    display: inline-block;
+  }
+
+  button {
+    width: 60px;
+    height: 38px;
+    position: absolute;
+    .rounded(0 15px 15px 0);
+    font-size: 0.5em;
+    border: none;
+    background-color: @blue-dark;
+    cursor: pointer;
+    color: #eee;
+    top: 1px;
+    right: 15px;
+
+    &:hover {
+      background-color: @blue-light;
+    }
+  }
+}

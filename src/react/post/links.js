@@ -12,6 +12,12 @@ let File = require('react-dropzone-component');
 // let s3 = new S3();
 
 let Links = React.createClass({
+	getDefaultProps: function () {
+		return {
+			context: {},
+			owner: false
+		};
+	},
 	getInitialState: function () {
 		return {
 			mode: null,
@@ -132,6 +138,11 @@ Links.List = React.createClass({
 });
 
 Links.Edit = React.createClass({
+	getDefaultProps: function () {
+		return {
+			post: {}
+		}
+	},
 	getInitialState: function () {
 		return {
 			mode: 'add',

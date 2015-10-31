@@ -14,7 +14,14 @@ let Select = require('react-select');
 let Privacy = React.createClass({
 	getDefaultProps: function () {
 		return {
-			post: {}
+			context: {},
+			post: {},
+			owner: false
+		};
+	},
+	getInitialState: function () {
+		return {
+			privacy: false
 		};
 	},
 	render: function () {
@@ -27,16 +34,28 @@ let Privacy = React.createClass({
 		classes[privacy] = "button blue";
 		return (
 			<div className="privacy">
-				<strong>Post Privacy</strong>
-				<div>
-					<button className={classes.private} onClick={this._private}>Private</button>
-					<button className={classes.members} onClick={this._members}>{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</button>
-					<button className={classes.public} onClick={this._public}>Public</button>
-					<Contexts {...this.props} />
-					{this.props.post.orgId && this.props.post.orgId !== 'null' ? <Collaborators {...this.props} s/> : false}
-				</div>
+				{this.props.owner && this.props.context.type === 'edit'
+					? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> <span style={{textDecoration: 'underline'}}>Privacy: {this.props.post.privacy}</span></div>
+					: false
+				}
+				{this.state.privacy
+					? <div>
+							<strong>Post Privacy</strong>
+							<div>
+								<button className={classes.private} onClick={this._private}>Private</button>
+								<button className={classes.members} onClick={this._members}>{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</button>
+								<button className={classes.public} onClick={this._public}>Public</button>
+								<Contexts {...this.props} />
+								{this.props.post.orgId && this.props.post.orgId !== 'null' ? <Collaborators {...this.props} s/> : false}
+							</div>
+						</div>
+					: false
+				}
 			</div>
 		);
+	},
+	_privacy: function () {
+		this.setState({privacy: !this.state.privacy});
 	},
 	_private: function (e) {
 		Actions.change('privacy', 'private');
@@ -92,6 +111,11 @@ let Contexts = React.createClass({
 });
 
 let Collaborators = React.createClass({
+	getDefaultProps: function () {
+		return {
+			post: {}
+		};
+	},
 	getInitialState: function () {
 		return {
 			lookup: [],

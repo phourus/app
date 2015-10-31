@@ -59,8 +59,8 @@ let Stream = React.createClass({
 					? <Organizations context={this.state.context} />
 					: false
 				}
-				{this.state.context.id && (this.state.context.type === 'orgs' || this.state.context.type === 'users')
-					? <Profile context={this.state.context} />
+				{this.state.context.type === 'post' || this.state.context.type === 'orgs' || this.state.context.type === 'users' || this.state.context.type === 'create' || this.state.context.type === 'edit'
+					? <Profile context={this.state.context} post={this.state.post} />
 					: false
 				}
 				{this.state.context.type === 'post' || this.state.context.type === 'edit'
