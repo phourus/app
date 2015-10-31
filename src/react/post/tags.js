@@ -2,6 +2,7 @@
 let React = require('react');
 
 let Actions = require('../../actions/post').Tags;
+let StreamActions = require('../../actions/stream');
 
 let Tags = React.createClass({
 	getDefaultProps: function () {
@@ -65,10 +66,7 @@ let Tags = React.createClass({
 	},
 	_tag: function (e) {
 		let id = e.currentTarget.id;
-		this.props.tag(id);
-	},
-	_search: function (tag) {
-		Stream.search(tag);
+		StreamActions.search(id);
 	}
 });
 

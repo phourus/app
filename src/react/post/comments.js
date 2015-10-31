@@ -56,9 +56,9 @@ let Comments = React.createClass({
       create = <Comments.Create post={this.props.post} />
     }
     return (
-      <div>
+      <div className="comments">
 				<h2>Comments</h2>
-        <div className="comments">{comments}</div>
+        <div className="list">{comments}</div>
         {create}
       </div>
     );

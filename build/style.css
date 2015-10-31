@@ -2395,9 +2395,15 @@ div.post .collaborators {
 }
 div.post .interact {
   position: static;
+  margin: 20px 0;
+  padding: 10px 0;
 }
 .interact {
   background-color: #efefef;
+}
+.interact > div {
+  display: inline-block;
+  vertical-align: bottom;
 }
 .interact:hover {
   cursor: pointer;
@@ -2420,16 +2426,8 @@ div.post .interact {
 .interact i {
   font-size: 1.5em;
 }
-.interact > div {
-  display: inline-block;
-  vertical-align: bottom;
-}
-.selected .interact {
-  margin: 20px 0;
-  padding: 10px 0;
-}
 @media (min-width: 1000px) {
-  .interact {
+  div.posts .interact {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -2440,30 +2438,16 @@ div.post .interact {
     margin: 0 auto;
     text-align: left;
   }
-  .interact:before,
-  .interact:after {
+  div.posts .interact:before,
+  div.posts .interact:after {
     content: "";
     display: table;
   }
-  .interact:after {
+  div.posts .interact:after {
     clear: both;
   }
-  .interact .influence {
+  div.posts .interact .influence {
     display: inline-block;
-  }
-}
-@media (min-width: 1400px) {
-  .interact {
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
-    text-align: right;
-  }
-  .interact .influence {
-    float: right;
-  }
-  .interact ul {
-    clear: right;
   }
 }
 .links {

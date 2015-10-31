@@ -1,9 +1,16 @@
 div.post .interact {
   position: static;
+  margin: 20px 0;
+  padding: 10px 0;
 }
 
 .interact {
   background-color: #efefef;
+
+  > div {
+    display: inline-block;
+    vertical-align: bottom;
+  }
 
   &:hover {
     cursor: pointer;
@@ -30,26 +37,17 @@ div.post .interact {
   i {
     font-size: 1.5em;
   }
+}
 
-  > div {
-    display: inline-block;
-    vertical-align: bottom;
-  }
-}
-&.selected .interact {
-  margin: 20px 0;
-  padding: 10px 0;
-}
 
 @media (min-width: 1000px) {
 
-  .interact {
+  div.posts .interact {
     position: absolute;
     left: 0;
     bottom: 0;
     border-top: dotted 3px #eee;
     background: transparent;
-
     .Row(100%);
     text-align: left;
 
@@ -61,16 +59,4 @@ div.post .interact {
 
 @media (min-width: 1400px) {
 
-  .interact {
-    .Cols(3);
-    text-align: right;
-
-    .influence {
-      float: right;
-    }
-
-    ul {
-      clear: right;
-    }
-  }
 }
