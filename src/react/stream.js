@@ -12,6 +12,7 @@ let Scroll = require('react-infinite-scroll')(React);
 
 let Posts = require('./stream/posts');
 let Organizations = require('./stream/organizations');
+let Loader = require('./loader');
 
 let Stream = React.createClass({
 	mixins: [State],
@@ -67,7 +68,7 @@ let Stream = React.createClass({
 					? false
 					: <div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
 				}
-				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<div className="loader"></div>}>
+				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<Loader />}>
 					<Posts {...this.state} />
 				</Scroll>
 			</div>
