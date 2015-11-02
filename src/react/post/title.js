@@ -3,6 +3,8 @@ let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
 
+let Actions = require('../../actions/post');
+
 module.exports = React.createClass({
   getDefaultProps: function () {
     return {

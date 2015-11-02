@@ -13,7 +13,7 @@ module.exports = React.createClass({
 		}
 	},
 	render: function () {
-		return this.props.context.type === 'edit' && this.props.owner
+		return this.props.context.type === 'edit' && this.props.owner || this.props.context.type === 'create'
 		? <TextEditor post={this.props.post} />
 		: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
 	}

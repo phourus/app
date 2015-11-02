@@ -53,7 +53,7 @@ module.exports = React.createClass({
 	_owner: function (post) {
 		let user = this.state.user;
 		let sharedPosts = user && user.SESSION_POSTS && user.SESSION_POSTS.constructor === Array ? user.SESSION_POSTS : [];
-		return (post.user.id == user.id) || sharedPosts.indexOf(post.id) !== -1;
+		return (post.user && post.user.id == user.id) || sharedPosts.indexOf(post.id) !== -1;
 	}
 });
 
@@ -97,7 +97,7 @@ let Single = React.createClass({
 		post = posts[0] || {};
 
 		if (this.props.context.type === 'create') {
-			post.user = this.state.user;
+			post.user = this.props.user;
 		}
 		return post;
 	}

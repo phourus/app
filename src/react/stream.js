@@ -64,7 +64,7 @@ let Stream = React.createClass({
 					? <Profile context={this.state.context} />
 					: false
 				}
-				{this.state.context.type === 'post' || this.state.context.type === 'edit'
+				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create'
 					? false
 					: <div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
 				}
