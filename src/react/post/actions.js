@@ -24,7 +24,7 @@ module.exports = React.createClass({
         <Close context={this.props.context} back={this._back} />
         <Edit context={this.props.context} owner={this.props.owner} post={this.props.post} />
         <Create context={this.props.context} back={this._back} />
-        <Controls context={this.props.context} owner={this.props.owner} />
+        <Controls context={this.props.context} owner={this.props.owner} post={this.props.post} myposts={this._myposts} />
       </div>
     );
   },
@@ -49,11 +49,11 @@ let Close = React.createClass({
     };
   },
   render: function () {
-    if (this.props.context.type !== 'single') {
+    if (this.props.context.type !== 'post') {
       return false;
     }
     return (
-      <button className="close" onClick={this.props.back}><i className="fa fa-close" /></button>
+      <button className="close" onClick={this.props.back}><i className="fa fa-remove" /></button>
     );
   }
 });
@@ -109,6 +109,7 @@ let Controls = React.createClass({
   },
   getDefaultProps: function () {
     return {
+      post: {},
       context: {},
       owner: false,
       saving: false
@@ -124,8 +125,8 @@ let Controls = React.createClass({
     if (this.state.confirmTrash) {
       return (
         <div>
-          <button className="button green red" onClick={this._confirm} disabled={this.props.saving}><i className="fa fa-trash" /> Confirm Delete</button>
-          <button className="button red delete inverted" onClick={this._cancel} style={{width: '95%'}}><i className="fa fa-remove" /> Cancel Delete</button>
+          <button className="button red delete" onClick={this._confirm} disabled={this.props.saving}><i className="fa fa-trash" /> Confirm Delete</button>
+          <button className="button red delete inverted" onClick={this._cancel}><i className="fa fa-remove" /> Cancel Delete</button>
         </div>
       );
     }
@@ -133,7 +134,7 @@ let Controls = React.createClass({
       <div>
         <button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save Changes'}</button>
         <button className="button red delete inverted" onClick={this._trash}><i className="fa fa-trash" /> Delete</button>
-        <button className="button blue myposts inverted" onClick={this._myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
+        <button className="button blue myposts inverted" onClick={this.props.myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
       </div>
     );
   },

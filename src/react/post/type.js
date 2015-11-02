@@ -33,6 +33,7 @@ module.exports = React.createClass({
       <div>
         <div id={this.props.post.type} className={`type ${this.props.post.type} ${(this.props.types ? 'inverted' : '')}`} onClick={this._type}>
           <i className={"fa fa-" + (icons[this.props.post.type] ? icons[this.props.post.type] : 'file')} />
+          {" "}
           {this.props.post.type ? this.props.post.type : "Please select a type"}
         </div>
         {this.state.types ? <Types post={this.props.post} type={this._type} context={this.props.context} owner={this.props.owner} /> : false}
