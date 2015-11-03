@@ -3322,10 +3322,13 @@ div.post {
   line-height: 20px;
   padding: 20px 0px 10px 0px;
 }
-.footer a {
+.footer span.muted {
+  color: #777;
+}
+.footer a.muted {
   color: #444444;
 }
-.footer a:hover {
+.footer a.muted:hover {
   color: #8abf00;
 }
 header {

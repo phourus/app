@@ -28,10 +28,13 @@ let App = React.createClass({
             <RouteHandler />
           </div>
           <footer className="footer">
-            © 2015 Phourus Inc. All Rights Reserved.
-            <br />
-            <Link to="terms">Terms</Link> |
-            <Link to="privacy">Privacy</Link>
+            <strong>1-844-PHOURUS</strong><br />
+            <span className="muted">(1-844-746-8787)</span><br />
+            <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
+            <span>© 2015 Phourus Inc. All Rights Reserved.</span><br />
+            <span className="muted">1411 7th St. #305, Santa Monica, CA 90401</span><br />
+            <Link to="terms" className="muted">Terms</Link> |
+            <Link to="privacy" className="muted">Privacy</Link>
             <br clear="all" />
           </footer>
         </div>

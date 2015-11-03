@@ -47,7 +47,7 @@ let Slider = React.createClass({
       <div className="banner">
         <div className={classes[0]}>
           <img src="/assets/landing/home.jpg" className="banner" />
-          <div className="title">SaaS with a soul</div>
+          <div className="title">SaaS with a Soul</div>
           <p>Get more out of your productivity tools than just productivity.</p>
           <div className="actions">
             <button className="button green" onClick={this._signup}>Start Free Trial</button>
