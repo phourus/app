@@ -17,7 +17,6 @@ let Landing = React.createClass({
         <Convert />
         <Benefits ref="benefits" />
         <Features />
-        <Explore />
         <Integrate />
       </div>
     );
