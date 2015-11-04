@@ -10,7 +10,9 @@ let View401 = {};
 View401.Login = React.createClass({
   mixins: [State, Navigation],
   getInitialState: function () {
-    return {}
+    return {
+      loaded: false
+    };
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen(data => {
@@ -22,6 +24,11 @@ View401.Login = React.createClass({
   },
   componentWillUnmount: function () {
     this.unsubscribe();
+  },
+  componentDidUpdate: function () {
+    if (this.state.loaded === false) {
+      this.setState({code: null, loaded: true});
+    }
   },
   render: function () {
     return (
@@ -35,12 +42,11 @@ View401.Login = React.createClass({
           Password:
           <input ref="password" className="password" type="password" placeholder="your password" />
         </label>
-        {this.state.code === 401
+        {this.state.code === 401 && this.state.loaded
           ? <div className="message red" onClick={this._clear}>There was an error logging in. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
           : false
         }
         <button onClick={this._login} className="green button">Login</button>
-        <button onClick={this._request} className="blue button inverted">Request Access</button>
         <Link to="forgot" className="forgotLink">Forgot your login information? Click here</Link>
       </div>
     );
@@ -52,8 +58,8 @@ View401.Login = React.createClass({
     Actions.login(username, password);
   },
   _request: function () {
-    this._clear();
-    this.context.router.transitionTo("request");
+    //this._clear();
+    //this.context.router.transitionTo("request");
   },
   _clear: function () {
     this.setState({code: null});
@@ -210,7 +216,9 @@ View401.Register = React.createClass({
     return {
       email: "",
       password: "",
-      confirm: ""
+      confirm: "",
+      organization: "",
+      loaded: false
     };
   },
   componentDidMount: function () {
@@ -221,27 +229,56 @@ View401.Register = React.createClass({
   componentWillUnmount: function () {
     this.unsubscribe();
   },
+  componentDidUpdate: function () {
+    if (this.state.loaded === false) {
+      this.setState({code: null, loaded: true});
+    }
+  },
   render: function () {
     return (
       <div className="register">
-        <h1>Register</h1>
-        <label>
-          Email:
-          <input ref="email" className="email" placeholder="enter your email address" value={this.state.email} onChange={this._email} />
-        </label>
-        <label>
-          Password:
-          <input ref="password" className="password" type="password" placeholder="enter a password" value={this.state.password} onChange={this._password} />
-        </label>
-        <label>
-          Confirm Password:
-          <input ref="confirm" className="confirm" type="password" placeholder="confirm your password" value={this.state.confirm} onChange={this._confirm} />
-        </label>
-        {this.state.code
-          ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
-          : false
-        }
-        <button onClick={this._register} className="blue button submit">Sign Up Now</button>
+        <h1>Create your Phourus Account</h1>
+        <div className="instructions">
+          <h2>Phourus: SaaS with a Soul</h2>
+          <p></p>
+          <ul>
+            <li>Surface important content & ideas</li>
+            <li>Capture intellectual capital</li>
+            <li>Embrace real culture & diversity</li>
+            <li>Enhance Vision & Engagement</li>
+          </ul>
+          <h2>Step 1. Create personal account</h2>
+          <p>To start using Phourus, you will want to create a personal account. Once you have a personal account, you can create or join existing organization accounts.</p>
+          <h2>Step 2. Create or join organization (optional)</h2>
+          <p>Although Phourus can be used strictly as an individual, the real benefit comes from using it within an organization. If your organization already has a Phourus account, or you'd like to create one, simply type your organization name into the organization field in the signup form.</p>
+        </div>
+        <div className="form">
+          <h2>Signup Form</h2>
+          <div>
+            <label>
+              Your Email:
+              <input ref="email" className="email" placeholder="enter your email address" value={this.state.email} onChange={this._email} />
+            </label>
+            <label>
+              Password:
+              <input ref="password" className="password" type="password" placeholder="enter a password" value={this.state.password} onChange={this._password} />
+            </label>
+            <label>
+              Confirm Password:
+              <input ref="confirm" className="confirm" type="password" placeholder="confirm your password" value={this.state.confirm} onChange={this._confirm} />
+            </label>
+            <label>
+              Organization Name (optional):
+              <input className="confirm" placeholder="organization name" value={this.state.organization} onChange={this._organization} />
+            </label>
+            {this.state.code && this.state.loaded
+              ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
+              : false
+            }
+            <Link to="login">Already have an account? Click here to sign in.</Link>
+            <button onClick={this._register} className="blue button submit">Sign Up Now</button>
+          </div>
+        </div>
       </div>
     );
   },
@@ -256,6 +293,10 @@ View401.Register = React.createClass({
   _confirm: function (e) {
     var value = e.currentTarget.value;
     this.setState({confirm: value});
+  },
+  _organization: function (e) {
+    var value = e.currentTarget.value;
+    this.setState({organization: value});
   },
   _register: function () {
     if (this.state.password === this.state.confirm) {

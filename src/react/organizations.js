@@ -14,7 +14,6 @@ let Landing = React.createClass({
     return (
       <div className="landing">
         <Slider more={this._more} />
-        <Convert />
         <Benefits ref="benefits" />
         <Features />
         <Integrate />
@@ -58,7 +57,7 @@ let Slider = React.createClass({
     );
   },
   _signup: function () {
-    this.context.router.transitionTo("account");
+    this.context.router.transitionTo("register");
   },
   _next: function () {
     if (this.state.slide === 4) {

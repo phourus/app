@@ -1,10 +1,39 @@
-.view401 {
-  .Row(100%);
+.register {
 
-  .login {
-    .Cols(6);
+  .form {
+
+    > div {
+      background-color: #eee;
+      padding: 10px;
+      box-sizing: border-box;
+    }
   }
+}
+
+@media (min-width: 800px) {
+
   .register {
-    .Cols(6);
+
+    .instructions {
+      .Cols(6);
+    }
+
+    .form {
+      .Cols(6);
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+
+  .register {
+
+    .instructions {
+      .Cols(8);
+    }
+
+    .form {
+      .Cols(4);
+    }
   }
 }

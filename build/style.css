@@ -809,28 +809,34 @@ div.alerts .red {
 div.alerts button {
   float: right;
 }
-.view401 {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
+.register .form > div {
+  background-color: #eee;
+  padding: 10px;
+  box-sizing: border-box;
 }
-.view401:before,
-.view401:after {
-  content: "";
-  display: table;
+@media (min-width: 800px) {
+  .register .instructions {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .register .form {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
-.view401:after {
-  clear: both;
-}
-.view401 .login {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-}
-.view401 .register {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
+@media (min-width: 1000px) {
+  .register .instructions {
+    width: 66.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .register .form {
+    width: 33.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
 }
 #content .about {
   margin: 0;
