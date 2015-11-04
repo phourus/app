@@ -28,6 +28,17 @@ var orgs = db.define('orgs', {
     collection: function (params) {
       return this.findAndCountAll(this.queryize(params));
     },
+    lookup: function (name) {
+      return this.findAll({
+        where: {
+          $or: [
+            {name: {$like: name + '%'}},
+            {shortname: {$like: name + '%'}}
+          ]
+        },
+        attributes: ['id', 'name', 'shortname']
+      })
+    },
     add: function (model) {
       return this.create(model);
     },

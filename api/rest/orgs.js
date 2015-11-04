@@ -5,6 +5,18 @@ var members = require('../models/members');
 
 var s3 = require('../s3');
 
+router.get('/lookup', (req, res) => {
+  var query = req.query;
+  orgs.lookup(query.name)
+  .then(function (data) {
+    res.send(200, data);
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.send(500);
+  });
+});
+
 router.get('/:id', (req, res) => {
   var id = req.params.id;
   orgs.single(id)
@@ -40,6 +52,7 @@ router.get('', (req, res) => {
     res.send(500);
   });
 });
+
 router.post('', (req, res) => {
   var model;
   orgs.create(model)
