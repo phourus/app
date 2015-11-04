@@ -10,6 +10,7 @@ module.exports = {
   history: Reflux.createAction(),
   notifications: Reflux.createAction(),
   orgs: Reflux.createAction(),
+  lookup: Reflux.createAction(),
   login: Reflux.createAction(),
   register: Reflux.createAction(),
   request: Reflux.createAction(),

@@ -1,6 +1,7 @@
 "use strict";
 let Reflux = require('reflux');
 let account = require('../api/account');
+let orgs = require('../api/orgs');
 let Actions = require('../actions/account');
 let msg = require("../actions/alerts").add;
 let token = require('../token');
@@ -20,6 +21,7 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.notifications, this._notifications);
     this.listenTo(Actions.password, this._password);
     this.listenTo(Actions.orgs, this._orgs);
+    this.listenTo(Actions.lookup, this._lookup);
     this.listenTo(Actions.login, this._login);
     this.listenTo(Actions.register, this._register);
     this.listenTo(Actions.request, this._request);
@@ -108,6 +110,16 @@ module.exports = Reflux.createStore({
     .catch(code => {
       this.trigger({code: code});
       msg('yellow', 'Organizations could not be loaded', code);
+    });
+  },
+  _lookup: function (name) {
+    orgs.lookup(name)
+    .then(data => {
+      this.trigger({lookup: data});
+    })
+    .catch(code => {
+      this.trigger({code: code});
+      msg('yellow', 'Organizations lookup could not be loaded', code);
     });
   },
   _login: function (email, password) {
