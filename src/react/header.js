@@ -2,7 +2,7 @@
 let React = require('react');
 
 let Router = require('react-router');
-let { Link, Navigation } = Router;
+let { Link, Navigation, State } = Router;
 
 let AccountActions = require('../actions/account');
 let AccountStore = require('../stores/account');
@@ -10,7 +10,7 @@ let StreamActions = require('../actions/stream');
 let StreamStore = require('../stores/stream');
 
 let Header = React.createClass({
-  mixins: [Navigation],
+  mixins: [Navigation, State],
   getInitialState: function () {
     return {
       params: {},
@@ -103,10 +103,17 @@ let Header = React.createClass({
   _filter: function () {
     if (this.state.filter !== true) {
       this.props.tintOn();
+      this._redirect();
     } else {
       this.props.tintOff();
     }
     this.setState({filter: !this.state.filter});
+  },
+  _redirect: function () {
+    let route = this.context.router.getCurrentRoutes();
+    if (route && route[1] && route[1].name !== 'stream') {
+      this.context.router.transitionTo('stream');
+    }
   }
 });
 
