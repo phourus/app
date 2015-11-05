@@ -9,10 +9,10 @@ let Integrate = React.createClass({
         <p>work with the tools you're already using</p>
         <div className="squeeze">
           <i className="fa fa-facebook" />
-          <i className="fa fa-dropbox" />
-          <i className="fa fa-linkedin" />
-          <i className="fa fa-slack" />
           <i className="fa fa-google" />
+          <i className="fa fa-twitter" />
+          <i className="fa fa-linkedin" />
+          <i className="fa fa-dropbox" />          
           <i className="fa fa-rss" />
         </div>
       </div>
