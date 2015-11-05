@@ -28,7 +28,7 @@ module.exports = React.createClass({
     <div className="forgot">
       <label>
         Email:
-        <input onChange={this._email} />
+        <input placeholder={"your email login"} onChange={this._email} />
       </label>
       {this.state.code === 500
         ? <div className="message red" onClick={this._clear}>There was an error sending your reset link. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>

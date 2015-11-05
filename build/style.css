@@ -809,41 +809,54 @@ div.alerts .red {
 div.alerts button {
   float: right;
 }
+.forgot {
+  background-color: #eee;
+  padding-top: 5px;
+}
+.forgot label {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.forgot label span {
+  display: none;
+}
+.forgot label input {
+  width: 95%;
+}
+.forgot button {
+  display: inline-block;
+}
+.forgot a.forgotLink {
+  display: block;
+  font-size: 0.8em;
+}
+.login {
+  background-color: #eee;
+  padding-top: 5px;
+}
 .login label {
   display: inline-block;
-  width: 100px;
+  margin: 0;
+  padding: 0;
+}
+.login label span {
+  display: none;
+}
+.login label input {
+  width: 95%;
 }
 .login button {
   display: inline-block;
+}
+.login a.forgotLink {
+  display: block;
+  font-size: 0.8em;
 }
 .register .form > div {
   background-color: #eee;
   padding: 10px;
   box-sizing: border-box;
-}
-@media (min-width: 800px) {
-  .register .instructions {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .register .form {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-  }
-}
-@media (min-width: 1000px) {
-  .register .instructions {
-    width: 66.66666667%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .register .form {
-    width: 33.33333333%;
-    display: inline-block;
-    vertical-align: top;
-  }
 }
 #content .about {
   margin: 0;
