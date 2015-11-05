@@ -45,7 +45,7 @@ let Slider = React.createClass({
     return (
       <div className="banner">
         <div className={classes[0]}>
-          <img src="/assets/landing/home.jpg" className="banner" />
+          <img src="/assets/landing/banner.jpg" className="banner" />
           <div className="title">SaaS with a Soul</div>
           <p>Get more out of your productivity tools than just productivity.</p>
           <div className="actions">
@@ -106,7 +106,7 @@ let Benefits = React.createClass({
         <div className="squeeze">
           <div>
             <div className="left">
-              <i className="fa fa-lightbulb-o" />
+              <i className="fa fa-lightbulb-o blue" />
             </div>
             <span className="title">Surface important content & ideas</span>
             <p>Flatten organizational hierarchies and eliminate the political effect hindering progressive growth.</p>
@@ -114,7 +114,7 @@ let Benefits = React.createClass({
           </div>
           <div>
             <div className="left">
-              <i className="fa fa-bolt" />
+              <i className="fa fa-bolt gold" />
             </div>
             <span className="title">Capture intellectual capital</span>
             <p>Are you capturing the full capabilities of the people you invest significant time and effort recruiting and retaining?</p>
@@ -122,7 +122,7 @@ let Benefits = React.createClass({
           </div>
           <div>
             <div className="left">
-              <i className="fa fa-language" />
+              <i className="fa fa-language green" />
             </div>
             <span className="title">Embrace real culture & diversity</span>
             <p>True culture is not about blue jeans and ping-pong tables. It is about the diverse cultural and socioeconomic backgrounds of each and every employee.</p>
@@ -130,7 +130,7 @@ let Benefits = React.createClass({
           </div>
           <div>
             <div className="left">
-              <i className="fa fa-compass" />
+              <i className="fa fa-compass red" />
             </div>
             <span className="title">Enhance Vision & Engagement</span>
             <p>Each employee of a business has his or her own idea of what your company is and where is it going. The vision and mission of a business should be an ongoing evolution involving employees and customers alike.</p>

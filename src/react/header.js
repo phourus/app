@@ -39,8 +39,13 @@ let Header = React.createClass({
   },
   render: function () {
     let orgs = this.state.orgs;
+    let home = false;
+    let route = this.context.router.getCurrentRoutes();
+    if (route && route[1].name === 'home') {
+      home = true;
+    }
     return  (
-        <header className="header">
+        <header className={home ? "header home" : "header"}>
           { AccountStore.authenticated
             ?  <nav className="nav">
                 <ul>
@@ -95,8 +100,8 @@ let Header = React.createClass({
           <div className="brand">
             <Link to="home"></Link>
           </div>
-          <Search {...this.state.params} filter={this._filter} />
-          {this.state.filter && this.props.tint ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
+          {home ? false : <Search {...this.state.params} filter={this._filter} />}
+          {this.state.filter && this.props.tint && !home ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
         </header>
     );
   },
