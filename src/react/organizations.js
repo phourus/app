@@ -28,7 +28,6 @@ let Landing = React.createClass({
         <Signup show={this.state.signup} showLogin={this._showLogin} />
         <Forgot show={this.state.forgot} />
         <Benefits ref="benefits" />
-        <Features />
         <Integrate />
       </div>
     );
