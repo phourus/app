@@ -11,6 +11,8 @@ module.exports = {
   notifications: Reflux.createAction(),
   orgs: Reflux.createAction(),
   lookup: Reflux.createAction(),
+  createOrganization: Reflux.createAction(),
+  joinOrganization: Reflux.createAction(),
   login: Reflux.createAction(),
   register: Reflux.createAction(),
   request: Reflux.createAction(),

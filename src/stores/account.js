@@ -22,6 +22,8 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.password, this._password);
     this.listenTo(Actions.orgs, this._orgs);
     this.listenTo(Actions.lookup, this._lookup);
+    this.listenTo(Actions.createOrganization, this._createOrganization);
+    this.listenTo(Actions.joinOrganization, this._joinOrganization);
     this.listenTo(Actions.login, this._login);
     this.listenTo(Actions.register, this._register);
     this.listenTo(Actions.request, this._request);
@@ -120,6 +122,26 @@ module.exports = Reflux.createStore({
     .catch(code => {
       this.trigger({code: code});
       msg('yellow', 'Organizations lookup could not be loaded', code);
+    });
+  },
+  _createOrganization: function (name) {
+    orgs.add(name)
+    .then(data => {
+      this.trigger({org: data});
+    })
+    .catch(code => {
+      this.trigger({code: code});
+      msg('yellow', 'Organization could not be created', code);
+    });
+  },
+  _joinOrganization: function (orgId) {
+    members.request(orgId)
+    .then(data => {
+      this.trigger({request: data});
+    })
+    .catch(code => {
+      this.trigger({code: code});
+      msg('yellow', 'Organization access could not be requested', code);
     });
   },
   _login: function (email, password) {

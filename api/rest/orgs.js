@@ -54,10 +54,22 @@ router.get('', (req, res) => {
 });
 
 router.post('', (req, res) => {
-  var model;
+  var model = req.body;
   orgs.create(model)
-  .then(function (data) {
-      res.send(201, data);
+  .then(function (org) {
+    if (!org.id) {
+      res.send(500);
+    }
+    members.SESSION_USER = req.user_id;
+    members.request(org.id)
+    .then(function (request) {
+      let approve = {
+        admin: 1,
+        approved: 1
+      };
+      members.save(request.id, approve);
+      res.send(201, org);
+    });
   })
   .catch(function (err) {
     console.error(err);

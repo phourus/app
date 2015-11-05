@@ -853,8 +853,65 @@ div.alerts button {
   display: block;
   font-size: 0.8em;
 }
-.register .form > div {
+#content .landing .signup div.squeeze {
+  width: 60%;
+}
+.signup {
   background-color: #eee;
+  padding-bottom: 20px;
+}
+.signup .progress {
+  margin: auto;
+  padding: 20px 0;
+  width: 60%;
+}
+.signup .progress ul {
+  margin: 0;
+  padding: 0;
+}
+.signup .progress ul li {
+  margin: 0;
+  box-sizing: border-box;
+  display: inline-block;
+  list-style: none;
+  background-color: #ccc;
+  color: #333;
+  margin-right: 2px;
+}
+.signup .progress ul li .step {
+  font-size: 2em;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #333;
+  color: #eee;
+  padding: 4px;
+}
+.signup .progress ul li .label {
+  padding: 4px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0.8em;
+}
+.signup .instructions {
+  vertical-align: top;
+  display: inline-block;
+  width: 40%;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+.signup .instructions p {
+  display: none;
+}
+.signup .instructions p.selected {
+  display: block;
+}
+.signup .form {
+  display: inline-block;
+  width: 60%;
+  text-align: left;
+}
+.signup .form > div {
   padding: 10px;
   box-sizing: border-box;
 }

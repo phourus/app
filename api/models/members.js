@@ -10,7 +10,7 @@ var members = db.define('members', {
   approved: types.BOOLEAN
 }, {
   classMethods: {
-    request: function (orgID) {
+    request: function (orgId) {
       var model = {
         userId: this.SESSION_USER,
         orgId: orgId
