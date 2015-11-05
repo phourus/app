@@ -8,12 +8,25 @@ let Explore = require('./landing/explore');
 let Features = require('./landing/features');
 let Integrate = require('./landing/integrate');
 
+let Login = require('./auth/login');
+let Signup = require('./auth/signup');
+let Forgot = require('./auth/forgot');
 
 let Landing = React.createClass({
+  getInitialState: function () {
+    return {
+      login: true,
+      signup: false,
+      forgot: false
+    };
+  },
   render: function () {
     return (
       <div className="landing">
-        <Slider more={this._more} />
+        <Slider more={this._more} showSignup={this._showSignup} />
+        <Login show={this.state.login} showForgot={this._showForgot} />
+        <Signup show={this.state.signup} showLogin={this._showLogin} />
+        <Forgot show={this.state.forgot} />
         <Benefits ref="benefits" />
         <Features />
         <Integrate />
@@ -23,6 +36,15 @@ let Landing = React.createClass({
   _more: function () {
     React.findDOMNode(this.refs.benefits).scrollIntoView();
   },
+  _showLogin: function () {
+    this.setState({login: true, signup: false, forgot: false});
+  },
+  _showSignup: function () {
+    this.setState({login: false, signup: true, forgot: false});
+  },
+  _showForgot: function () {
+    this.setState({login: false, signup: false, forgot: true});
+  }
 });
 
 let Slider = React.createClass({
@@ -49,15 +71,12 @@ let Slider = React.createClass({
           <div className="title">SaaS with a Soul</div>
           <p>Get more out of your productivity tools than just productivity.</p>
           <div className="actions">
-            <button className="button green" onClick={this._signup}>Start Free Trial</button>
+            <button className="button green" onClick={this.props.showSignup}>Sign Up Now</button>
             <button className="button blue inverted" onClick={this.props.more}>Learn More</button>
           </div>
         </div>
       </div>
     );
-  },
-  _signup: function () {
-    this.context.router.transitionTo("register");
   },
   _next: function () {
     if (this.state.slide === 4) {
@@ -108,7 +127,7 @@ let Benefits = React.createClass({
             <div className="left">
               <i className="fa fa-lightbulb-o blue" />
             </div>
-            <span className="title">Surface important content & ideas</span>
+            <span className="title">Surface Important Content & Ideas</span>
             <p>Flatten organizational hierarchies and eliminate the political effect hindering progressive growth.</p>
             <p className="usage">Phourus uses a unique algorithm called Influence that offsets the popularity of individual users to ensure valuable content gets the visibility it deserves, not because of who said it.</p>
           </div>
@@ -116,7 +135,7 @@ let Benefits = React.createClass({
             <div className="left">
               <i className="fa fa-bolt gold" />
             </div>
-            <span className="title">Capture intellectual capital</span>
+            <span className="title">Capture Intellectual Capital</span>
             <p>Are you capturing the full capabilities of the people you invest significant time and effort recruiting and retaining?</p>
             <p className="usage">Use Subjects & Questions on Phourus to enable Subject Matter Experts (SMEs) to create content in their area of expertise for the benefit of the entire organization.</p>
           </div>
@@ -124,7 +143,7 @@ let Benefits = React.createClass({
             <div className="left">
               <i className="fa fa-language green" />
             </div>
-            <span className="title">Embrace real culture & diversity</span>
+            <span className="title">Embrace Real Culture & Diversity</span>
             <p>True culture is not about blue jeans and ping-pong tables. It is about the diverse cultural and socioeconomic backgrounds of each and every employee.</p>
             <p className="usage">Use Beliefs, Debates and other tools of expression built into Phourus to unite and educate a diverse workplace.</p>
           </div>

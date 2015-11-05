@@ -809,6 +809,13 @@ div.alerts .red {
 div.alerts button {
   float: right;
 }
+.login label {
+  display: inline-block;
+  width: 100px;
+}
+.login button {
+  display: inline-block;
+}
 .register .form > div {
   background-color: #eee;
   padding: 10px;

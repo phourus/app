@@ -15,7 +15,6 @@ let About = require('./react/about');
 let Terms = require('./react/terms');
 let Privacy = require('./react/privacy');
 let Map = require('./map');
-let View401 = require('./react/401');
 let View404 = require('./react/404');
 
 let Individuals = require('./react/individuals');
@@ -35,11 +34,6 @@ module.exports = (
     <Route name="about" handler={About} />
     <Route name="terms" handler={Terms} />
     <Route name="privacy" handler={Privacy} />
-    <Route name="login" handler={View401.Login} />
-    <Route name="forgot" handler={View401.Forgot} />
-    <Route name="reset" handler={View401.Reset} />
-    <Route name="request" handler={View401.Request} />
-    <Route name="register" handler={View401.Register} />
     <Route name="activity" handler={Activity} />
     <Route name="notifications" handler={Activity} />
     <Route name="history" handler={Activity} />

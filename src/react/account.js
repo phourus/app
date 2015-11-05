@@ -5,7 +5,7 @@ let { RouteHandler, Link } = Router;
 let Store = require('../stores/account');
 let Actions = require('../actions/account');
 let token = require('../token');
-let Login = require('./401').Login;
+let Login = require('./auth/login');
 let moment = require('moment');
 let ImageUploader = require('../pic');
 
