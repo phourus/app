@@ -19,11 +19,12 @@ module.exports = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen(data => {
-      if (data.code === 200 && this.context.router.getCurrentRoutes()[1].name === 'login') {
-        this.context.router.transitionTo("activity");
+      if (data.code === 200 && this.state.loaded) {
+        this.context.router.transitionTo("myPosts");
       }
       this.setState(data);
     });
+    Actions.get();
   },
   componentWillUnmount: function () {
     this.unsubscribe();
@@ -36,6 +37,14 @@ module.exports = React.createClass({
   render: function () {
     if (!this.props.show) {
       return false;
+    }
+    if (this.state.user) {
+      let name = this.state.user.first;
+      return (
+        <div className="login">
+          Welcome back{name ? " " + name : ""}! <Link to="myPosts">Click here to view your posts</Link>
+        </div>
+      );
     }
     return (
       <div className="login">
