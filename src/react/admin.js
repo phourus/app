@@ -46,7 +46,6 @@ let Admin = React.createClass({
   render: function () {
     return (
       <div className="admin">
-        <Profile {...this.state} />
         <Tabs {...this.state} />
         <RouteHandler {...this.state} />
       </div>

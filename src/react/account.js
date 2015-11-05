@@ -9,6 +9,8 @@ let Login = require('./401').Login;
 let moment = require('moment');
 let ImageUploader = require('../pic');
 
+let Orgs = require('./account/organizations');
+
 // _validate: function () {
 //   var self = this;
 //   var addresses = [];
@@ -53,16 +55,16 @@ let Account = React.createClass({
     this.unsubscribe();
   },
   render: function () {
+    // <div className="heading">
+    //   <Pic img={this.state.user.img} />
+    //   <Profile {...this.state} />
+    // </div>
     if (Store.authenticated === true) {
       return (
         <div className="account">
           <h1>My Account</h1>
-          <div className="heading">
-            <Pic img={this.state.user.img} />
-            <Profile {...this.state} />
-            <Orgs />
-          </div>
           <RouteHandler {...this.state} save={this._save} change={this._change} />
+          <Orgs />
         </div>
       );
     } else {
@@ -152,54 +154,6 @@ let Profile = React.createClass({
   },
   _logout: function () {
     Actions.logout();
-  }
-});
-
-let Orgs = React.createClass({
-  mixins: [Router.Navigation],
-  getInitialState: function () {
-    return {
-      orgs: []
-    }
-  },
-  componentDidMount: function () {
-    this.unsubscribe = Store.listen((data) => {
-      if (data.orgs) {
-        this.setState({orgs: data.orgs});
-      }
-    });
-    Actions.orgs();
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
-  },
-  render: function () {
-    return (
-      <div className="orgs">
-        <strong>My Organizations</strong>
-        {this.state.orgs.map((item) => {
-          var admin = false;
-          if (item.admin === true) {
-            admin = <button id={item.org.id} className="button blue" onClick={this._edit}>Admin</button>
-          }
-          return (
-            <div className="org">
-              {admin}
-              <Link to="orgPosts" params={{id: item.org.id}}>{item.org.name}</Link> <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>Remove Me</a>
-              <div style={{clear: 'right'}}></div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  },
-  _edit: function (e) {
-    var id = e.currentTarget.id;
-    this.context.router.transitionTo('details', {id: id});
-  },
-  _remove: function (e) {
-    var id = e.currentTarget.id;
-    console.warn('remove org' + id);
   }
 });
 
