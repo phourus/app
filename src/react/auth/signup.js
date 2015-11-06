@@ -90,8 +90,8 @@ module.exports = React.createClass({
                 ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
                 : false
               }
-              <a href="javascript:void(0)" onClick={this.props.showLogin}>Already have an account? Click here to sign in.</a>
               <button onClick={this._signup} className="blue button submit">Next: Organizations</button>
+              <a href="javascript:void(0)" onClick={this.props.showLogin}>Cancel</a>
             </div>
             : false
           }

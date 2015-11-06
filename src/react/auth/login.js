@@ -42,7 +42,9 @@ module.exports = React.createClass({
       let name = this.state.user.first;
       return (
         <div className="login">
-          Welcome back{name ? " " + name : ""}! <Link to="myPosts">Click here to view your posts</Link>
+          <span className="welcome">Welcome back{name ? " " + name : ""}! <Link to="stream">Click here to view posts</Link></span><br />
+          <button className="button blue" onClick={this._posts}>View posts</button>
+          <button className="button blue" onClick={this._account}>View my account</button>
         </div>
       );
     }
@@ -77,5 +79,11 @@ module.exports = React.createClass({
   },
   _clear: function () {
     this.setState({code: null});
+  },
+  _posts: function () {
+    this.context.router.transitionTo("stream");
+  },
+  _account: function () {
+    this.context.router.transitionTo("account");
   }
 });

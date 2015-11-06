@@ -39,6 +39,7 @@ module.exports = React.createClass({
         : false
       }
       <button onClick={this._forgot} className="blue button submit">Email me a reset link</button>
+      <a href="javascript: void(0)" onClick={this.props.showLogin}>Cancel</a>
     </div>
     );
   },

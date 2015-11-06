@@ -812,6 +812,7 @@ div.alerts button {
 .forgot {
   background-color: #eee;
   padding-top: 5px;
+  font-size: 0.9em;
 }
 .forgot label {
   display: inline-block;
@@ -829,11 +830,11 @@ div.alerts button {
 }
 .forgot a.forgotLink {
   display: block;
-  font-size: 0.8em;
 }
 .login {
   background-color: #eee;
   padding-top: 5px;
+  font-size: 0.9em;
 }
 .login label {
   display: inline-block;
@@ -851,7 +852,6 @@ div.alerts button {
 }
 .login a.forgotLink {
   display: block;
-  font-size: 0.8em;
 }
 #content .landing .signup div.squeeze {
   width: 60%;
@@ -859,6 +859,7 @@ div.alerts button {
 .signup {
   background-color: #eee;
   padding-bottom: 20px;
+  font-size: 0.9em;
 }
 .signup .progress {
   margin: auto;
@@ -891,7 +892,6 @@ div.alerts button {
   padding: 4px;
   display: inline-block;
   vertical-align: middle;
-  font-size: 0.8em;
 }
 .signup .instructions {
   vertical-align: top;

@@ -26,7 +26,7 @@ let Landing = React.createClass({
         <Slider more={this._more} showSignup={this._showSignup} />
         <Login show={this.state.login} showForgot={this._showForgot} />
         <Signup show={this.state.signup} showLogin={this._showLogin} />
-        <Forgot show={this.state.forgot} />
+        <Forgot show={this.state.forgot} showLogin={this._showLogin} />
         <Benefits ref="benefits" />
         <Integrate />
       </div>
