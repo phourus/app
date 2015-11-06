@@ -3,30 +3,18 @@ let React = require('react');
 let Router = require('react-router');
 
 let Emblem = require('./landing/emblem');
+let Auth = require('./landing/auth');
 let Convert = require('./landing/convert');
 let Explore = require('./landing/explore');
 let Features = require('./landing/features');
 let Integrate = require('./landing/integrate');
 
-let Login = require('./auth/login');
-let Signup = require('./auth/signup');
-let Forgot = require('./auth/forgot');
-
 let Landing = React.createClass({
-  getInitialState: function () {
-    return {
-      login: true,
-      signup: false,
-      forgot: false
-    };
-  },
   render: function () {
     return (
       <div className="landing">
-        <Slider more={this._more} showSignup={this._showSignup} />
-        <Login show={this.state.login} showForgot={this._showForgot} />
-        <Signup show={this.state.signup} showLogin={this._showLogin} />
-        <Forgot show={this.state.forgot} showLogin={this._showLogin} />
+        <Slider more={this._more} showSignup={this._signup} />
+        <Auth ref="auth" />
         <Benefits ref="benefits" />
         <Integrate />
       </div>
@@ -35,14 +23,8 @@ let Landing = React.createClass({
   _more: function () {
     React.findDOMNode(this.refs.benefits).scrollIntoView();
   },
-  _showLogin: function () {
-    this.setState({login: true, signup: false, forgot: false});
-  },
-  _showSignup: function () {
-    this.setState({login: false, signup: true, forgot: false});
-  },
-  _showForgot: function () {
-    this.setState({login: false, signup: false, forgot: true});
+  _signup: function () {
+    this.refs.auth._showSignup();
   }
 });
 

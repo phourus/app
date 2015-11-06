@@ -853,6 +853,25 @@ div.alerts button {
 .login a.forgotLink {
   display: block;
 }
+.reset {
+  background-color: #eee;
+  padding-top: 5px;
+  font-size: 0.9em;
+}
+.reset label {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.reset label span {
+  display: none;
+}
+.reset label input {
+  width: 95%;
+}
+.reset button {
+  display: inline-block;
+}
 #content .landing .signup div.squeeze {
   width: 60%;
 }

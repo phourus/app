@@ -40,7 +40,7 @@ module.exports = Reflux.createStore({
     .then(data => {
       this.authenticated = true;
       this.user = data;
-      this.trigger({user: data});
+      this.trigger({user: data, action: 'get'});
     })
     .catch(code => {
       this.authenticated = false;
@@ -94,13 +94,11 @@ module.exports = Reflux.createStore({
   },
   _password: function (current, updated) {
     account.password(current, updated)
-    .then(code => {
-      if (code == 204) {
-          msg('green', 'Password updated', code);
-      }
+    .then(data => {
+      this.trigger({action: 'password'});
     })
     .catch(code => {
-      this.trigger({code: code});
+      this.trigger({code: code, action: 'password'});
       msg('red', 'Password could not be updated', code);
     });
   },
@@ -150,10 +148,10 @@ module.exports = Reflux.createStore({
       this.authenticated = true;
       token.save(data);
       this._get();
-      this.trigger({code: 200});
+      this.trigger({code: 200, action: 'login'});
     })
     .catch((code) => {
-      this.trigger({code: code});
+      this.trigger({code: code, action: 'login'});
       msg('red', 'Login unsuccessful', code);
     });
   },
@@ -161,10 +159,10 @@ module.exports = Reflux.createStore({
     account.register(email, password)
     .then((data) => {
       this._login(email, password);
-      msg('green', 'Registration complete', code);
+      this.trigger({action: 'register'});
     })
     .catch((code) => {
-      this.trigger({code: code});
+      this.trigger({code: code, action: 'register'});
       msg('red', 'Registration unsuccessful', code);
     });
   },
@@ -183,20 +181,20 @@ module.exports = Reflux.createStore({
   _forgot: function (email) {
     account.forgot(email)
     .then(data => {
-      this.trigger({code: 200});
+      this.trigger({code: 200, action: 'forgot'});
     })
     .catch(code => {
-      this.trigger({code: code});
+      this.trigger({code: code, action: 'forgot'});
       msg('red', 'Password reset link could not be sent', code);
     });
   },
   _reset: function (email, password, token, userId) {
     account.reset(email, password, token, userId)
     .then(data => {
-      this.trigger({code: 200});
+      this.trigger({code: 200, action: 'reset'});
     })
     .catch(code => {
-      this.trigger({code: code});
+      this.trigger({code: code, action: 'reset'});
       msg('red', 'Password reset link could not be sent', code);
     });
   },

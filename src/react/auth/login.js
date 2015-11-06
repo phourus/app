@@ -19,8 +19,8 @@ module.exports = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen(data => {
-      if (data.code === 200 && this.state.loaded) {
-        this.context.router.transitionTo("myPosts");
+      if (data.code === 200 && this.state.loaded && data.action === 'login') {
+        this.context.router.transitionTo("stream");
       }
       this.setState(data);
     });
@@ -58,7 +58,7 @@ module.exports = React.createClass({
           Password:
           <input ref="password" className="password" type="password" placeholder="your password" />
         </label>
-        {this.state.code === 401 && this.state.loaded
+        {this.state.code === 401 && this.state.loaded && this.state.action === 'login'
           ? <div className="message red" onClick={this._clear}>There was an error logging in. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
           : false
         }
