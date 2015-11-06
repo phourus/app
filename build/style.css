@@ -1529,86 +1529,6 @@ div.alerts button {
     font-size: 1em;
   }
 }
-#content .landing {
-  margin: -60px 0 0 0;
-  padding: 0;
-  width: 100%;
-  max-width: 100%;
-  background-color: #fff;
-  text-align: center;
-}
-#content .landing .heading {
-  font-size: 2em;
-  display: block;
-  margin: 0;
-  padding: 60px 0 20px 0;
-}
-#content .landing div.squeeze {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-}
-#content .landing div.squeeze:before,
-#content .landing div.squeeze:after {
-  content: "";
-  display: table;
-}
-#content .landing div.squeeze:after {
-  clear: both;
-}
-#content .landing div.features div.squeeze {
-  max-width: 80%;
-  width: 100%;
-  margin: 0 auto;
-  background-color: #fff;
-  text-align: center;
-  margin: 40px auto;
-}
-#content .landing div.features div.squeeze:before,
-#content .landing div.features div.squeeze:after {
-  content: "";
-  display: table;
-}
-#content .landing div.features div.squeeze:after {
-  clear: both;
-}
-#content .landing div.features div.squeeze > div {
-  padding: 20px;
-  max-width: 900px;
-  margin: auto;
-}
-#content .landing div.features div.squeeze > div > div {
-  text-align: left;
-  border-bottom: solid 1px #eee;
-  clear: right;
-  min-height: 2em;
-  font-size: 0.9em;
-  font-style: italic;
-}
-#content .landing div.features div.squeeze > div > div i {
-  font-size: 1em;
-  width: 40px;
-}
-#content .landing div.features div.squeeze > div > div i.fa-check-square {
-  float: right;
-  color: #8abf00;
-  font-size: 2em;
-}
-#content .landing div.features div.squeeze > div.video {
-  text-align: center;
-}
-#content .landing .explore > p,
-#content .landing .create > p,
-#content .landing .integrate > p {
-  font-style: italic;
-  font-size: 0.8em;
-}
-#content .landing .explore > p {
-  color: #555;
-}
-#content .landing .create > p {
-  color: #ccc;
-}
 #content .landing .banner {
   height: 350px;
   width: 100%;
@@ -1656,97 +1576,43 @@ div.alerts button {
   margin: 0;
   padding: 0;
 }
-#content .landing .slider {
-  height: 500px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+@media (min-width: 500px) {
+  #content .landing .banner .actions {
+    bottom: 40px;
+  }
+  #content .landing .banner .actions button {
+    display: inline-block;
+    margin-right: 4px;
+  }
 }
-#content .landing .slider > div.emblem {
-  position: absolute;
-  bottom: 0;
-  display: block;
-}
-#content .landing .slider > div {
-  display: none;
-}
-#content .landing .slider > div.selected {
-  display: block;
-}
-#content .landing .slider > div .title {
-  position: absolute;
-  top: 30%;
-  width: 80%;
-  left: 10%;
-  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
-  color: #fff;
-  font-size: 2em;
-  line-height: 1em;
-  opacity: 0.8;
-}
-#content .landing .slider > div p {
-  position: absolute;
-  left: 10%;
-  top: 50%;
-  color: #fff;
-  font-size: 1em;
-  opacity: 0.8;
-  width: 80%;
-  line-height: 1.5em;
-}
-#content .landing .slider > div img {
-  height: 500px;
-  margin: 0;
-  padding: 0;
-}
-#content .landing .convert {
-  padding: 10px 0;
-  background-color: #fff;
-}
-#content .landing .convert div {
-  margin: auto;
-  color: #333;
-}
-#content .landing .convert div input,
-#content .landing .convert div button {
-  margin: auto;
-}
-#content .landing .explore {
-  padding-bottom: 40px;
-}
-#content .landing .create {
-  background-color: #fff;
-  color: #fff;
-  padding-bottom: 60px;
-  width: 100%;
-}
-#content .landing .create div {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 40px;
-  color: #ccc;
-  text-align: center;
-  box-sizing: border-box;
-  padding: 20px 0;
-}
-#content .landing .create div.green {
-  border-top: solid 1px #9cd900;
-}
-#content .landing .create div.blue {
-  border-top: solid 1px #5faee3;
-}
-#content .landing .create div.red {
-  border-top: solid 1px #fc2727;
-}
-#content .landing .create div.gold {
-  border-top: solid 1px #f2c13d;
-}
-#content .landing .create div span {
-  color: #777;
-}
-#content .landing .create div i {
-  font-size: 3em;
+@media (min-width: 800px) {
+  #content .landing .banner {
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+  }
+  #content .landing .banner > div {
+    display: none;
+  }
+  #content .landing .banner > div.selected {
+    display: block;
+  }
+  #content .landing .banner > div .title {
+    width: 60%;
+    left: 20%;
+    font-size: 3em;
+  }
+  #content .landing .banner > div p {
+    width: 60%;
+    left: 20%;
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
+  #content .landing .banner > div img {
+    height: 800px;
+    margin: 0;
+    padding: 0;
+  }
 }
 #content .landing .benefits {
   width: 80%;
@@ -1795,38 +1661,52 @@ div.alerts button {
   font-size: 3em;
   width: 100px;
 }
-#content .landing .compete {
-  width: 100%;
-  height: 300px;
-  background-color: #fff;
+#content .landing .explore {
+  padding-bottom: 40px;
 }
-#content .landing .compete .heading {
-  padding-bottom: 60px;
-}
-#content .landing .compete div > div {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-}
-#content .landing .compete div > div i {
-  font-size: 3em;
-}
-#content .landing .integrate {
-  padding-bottom: 60px;
-  width: 100%;
-}
-#content .landing .integrate > p {
+#content .landing .explore > p {
   color: #555;
-  margin-bottom: 60px;
 }
-#content .landing .integrate .heading {
-  color: #333;
+#content .landing div.features div.squeeze {
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  text-align: center;
+  margin: 40px auto;
 }
-#content .landing .integrate i {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
+#content .landing div.features div.squeeze:before,
+#content .landing div.features div.squeeze:after {
+  content: "";
+  display: table;
+}
+#content .landing div.features div.squeeze:after {
+  clear: both;
+}
+#content .landing div.features div.squeeze > div {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+#content .landing div.features div.squeeze > div > div {
+  text-align: left;
+  border-bottom: solid 1px #eee;
+  clear: right;
+  min-height: 2em;
+  font-size: 0.9em;
+  font-style: italic;
+}
+#content .landing div.features div.squeeze > div > div i {
+  font-size: 1em;
+  width: 40px;
+}
+#content .landing div.features div.squeeze > div > div i.fa-check-square {
+  float: right;
+  color: #8abf00;
   font-size: 2em;
+}
+#content .landing div.features div.squeeze > div.video {
+  text-align: center;
 }
 .fa-facebook {
   color: #3b5998;
@@ -1845,6 +1725,214 @@ div.alerts button {
 }
 .fa-rss {
   color: #f26522;
+}
+#content .landing .integrate {
+  padding-bottom: 60px;
+  width: 100%;
+}
+#content .landing .integrate > p {
+  color: #555;
+  margin-bottom: 60px;
+}
+#content .landing .integrate .heading {
+  color: #333;
+}
+#content .landing .integrate i {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 2em;
+}
+@media (min-width: 500px) {
+  #content .landing .integrate i {
+    font-size: 3em;
+  }
+}
+@media (min-width: 800px) {
+  #content .landing .integrate i {
+    font-size: 4em;
+  }
+}
+#content .landing .slider {
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#content .landing .slider > div.emblem {
+  position: absolute;
+  bottom: 0;
+  display: block;
+}
+#content .landing .slider > div {
+  display: none;
+}
+#content .landing .slider > div.selected {
+  display: block;
+}
+#content .landing .slider > div .title {
+  position: absolute;
+  top: 30%;
+  width: 80%;
+  left: 10%;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  color: #fff;
+  font-size: 2em;
+  line-height: 1em;
+  opacity: 0.8;
+}
+#content .landing .slider > div p {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  color: #fff;
+  font-size: 1em;
+  opacity: 0.8;
+  width: 80%;
+  line-height: 1.5em;
+}
+#content .landing .slider > div img {
+  height: 500px;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 500px) {
+  #content .landing .slider > div.emblem {
+    width: 60px;
+  }
+  #content .landing .slider > div .title {
+    font-size: 3em;
+  }
+  #content .landing .slider > div p {
+    font-size: 1.5em;
+  }
+}
+@media (min-width: 800px) {
+  #content .landing .slider {
+    height: 700px;
+    width: 100%;
+    overflow: hidden;
+  }
+  #content .landing .slider > div {
+    display: none;
+  }
+  #content .landing .slider > div.selected {
+    display: block;
+  }
+  #content .landing .slider > div .title {
+    width: 60%;
+    left: 20%;
+    font-size: 4em;
+  }
+  #content .landing .slider > div p {
+    width: 60%;
+    left: 20%;
+    font-size: 2em;
+    line-height: 2em;
+  }
+  #content .landing .slider > div img {
+    height: 800px;
+    margin: 0;
+    padding: 0;
+  }
+}
+#content .landing {
+  margin: -60px 0 0 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  background-color: #fff;
+  text-align: center;
+}
+#content .landing .heading {
+  font-size: 2em;
+  display: block;
+  margin: 0;
+  padding: 60px 0 20px 0;
+}
+#content .landing div.squeeze {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .landing div.squeeze:before,
+#content .landing div.squeeze:after {
+  content: "";
+  display: table;
+}
+#content .landing div.squeeze:after {
+  clear: both;
+}
+#content .landing .explore > p,
+#content .landing .create > p,
+#content .landing .integrate > p {
+  font-style: italic;
+  font-size: 0.8em;
+}
+#content .landing .create > p {
+  color: #ccc;
+}
+#content .landing .convert {
+  padding: 10px 0;
+  background-color: #fff;
+}
+#content .landing .convert div {
+  margin: auto;
+  color: #333;
+}
+#content .landing .convert div input,
+#content .landing .convert div button {
+  margin: auto;
+}
+#content .landing .create {
+  background-color: #fff;
+  color: #fff;
+  padding-bottom: 60px;
+  width: 100%;
+}
+#content .landing .create div {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 40px;
+  color: #ccc;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 20px 0;
+}
+#content .landing .create div.green {
+  border-top: solid 1px #9cd900;
+}
+#content .landing .create div.blue {
+  border-top: solid 1px #5faee3;
+}
+#content .landing .create div.red {
+  border-top: solid 1px #fc2727;
+}
+#content .landing .create div.gold {
+  border-top: solid 1px #f2c13d;
+}
+#content .landing .create div span {
+  color: #777;
+}
+#content .landing .create div i {
+  font-size: 3em;
+}
+#content .landing .compete {
+  width: 100%;
+  height: 300px;
+  background-color: #fff;
+}
+#content .landing .compete .heading {
+  padding-bottom: 60px;
+}
+#content .landing .compete div > div {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .landing .compete div > div i {
+  font-size: 3em;
 }
 @media (min-width: 500px) {
   #content .landing .squeeze {
@@ -1871,28 +1959,9 @@ div.alerts button {
   #content .landing .integrate > p {
     font-size: 1em;
   }
-  #content .landing .slider > div.emblem {
-    width: 60px;
-  }
-  #content .landing .slider > div .title {
-    font-size: 3em;
-  }
-  #content .landing .slider > div p {
-    font-size: 1.5em;
-  }
-  #content .landing .banner .actions {
-    bottom: 40px;
-  }
-  #content .landing .banner .actions button {
-    display: inline-block;
-    margin-right: 4px;
-  }
   #content .landing .convert div input,
   #content .landing .convert div button {
     display: inline-block;
-  }
-  #content .landing .integrate i {
-    font-size: 3em;
   }
 }
 @media (min-width: 800px) {
@@ -1926,63 +1995,6 @@ div.alerts button {
   #content .landing .create > p,
   #content .landing .integrate > p {
     font-size: 1.5em;
-  }
-  #content .landing .banner {
-    height: 500px;
-    width: 100%;
-    overflow: hidden;
-  }
-  #content .landing .banner > div {
-    display: none;
-  }
-  #content .landing .banner > div.selected {
-    display: block;
-  }
-  #content .landing .banner > div .title {
-    width: 60%;
-    left: 20%;
-    font-size: 3em;
-  }
-  #content .landing .banner > div p {
-    width: 60%;
-    left: 20%;
-    font-size: 1.5em;
-    line-height: 1.5em;
-  }
-  #content .landing .banner > div img {
-    height: 800px;
-    margin: 0;
-    padding: 0;
-  }
-  #content .landing .slider {
-    height: 700px;
-    width: 100%;
-    overflow: hidden;
-  }
-  #content .landing .slider > div {
-    display: none;
-  }
-  #content .landing .slider > div.selected {
-    display: block;
-  }
-  #content .landing .slider > div .title {
-    width: 60%;
-    left: 20%;
-    font-size: 4em;
-  }
-  #content .landing .slider > div p {
-    width: 60%;
-    left: 20%;
-    font-size: 2em;
-    line-height: 2em;
-  }
-  #content .landing .slider > div img {
-    height: 800px;
-    margin: 0;
-    padding: 0;
-  }
-  #content .landing .integrate i {
-    font-size: 4em;
   }
 }
 .leaders .profile {

@@ -6,6 +6,7 @@ let Emblem = require('./landing/emblem');
 let Auth = require('./landing/auth');
 let Convert = require('./landing/convert');
 let Explore = require('./landing/explore');
+let Example = require('./landing/example');
 let Features = require('./landing/features');
 let Integrate = require('./landing/integrate');
 
@@ -16,6 +17,8 @@ let Landing = React.createClass({
         <Slider more={this._more} showSignup={this._signup} />
         <Auth ref="auth" />
         <Benefits ref="benefits" />
+        <Example />
+        <Features />
         <Integrate />
       </div>
     );
