@@ -1667,11 +1667,13 @@ div.alerts button {
 #content .landing .explore > p {
   color: #555;
 }
+#content .landing div.features {
+  background-color: #eee;
+}
 #content .landing div.features div.squeeze {
   max-width: 80%;
   width: 100%;
   margin: 0 auto;
-  background-color: #fff;
   text-align: center;
   margin: 40px auto;
 }
@@ -1684,26 +1686,26 @@ div.alerts button {
   clear: both;
 }
 #content .landing div.features div.squeeze > div {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  vertical-align: middle;
+  box-sizing: border-box;
   padding: 20px;
   max-width: 900px;
-  margin: auto;
 }
 #content .landing div.features div.squeeze > div > div {
   text-align: left;
-  border-bottom: solid 1px #eee;
   clear: right;
   min-height: 2em;
   font-size: 0.9em;
   font-style: italic;
+  margin-bottom: 1em;
+  font-size: 1em;
 }
 #content .landing div.features div.squeeze > div > div i {
-  font-size: 1em;
+  font-size: 1.5em;
   width: 40px;
-}
-#content .landing div.features div.squeeze > div > div i.fa-check-square {
-  float: right;
-  color: #8abf00;
-  font-size: 2em;
 }
 #content .landing div.features div.squeeze > div.video {
   text-align: center;
@@ -1848,7 +1850,7 @@ div.alerts button {
   font-size: 2em;
   display: block;
   margin: 0;
-  padding: 60px 0 20px 0;
+  padding: 40px 0 20px 0;
 }
 #content .landing div.squeeze {
   max-width: 100%;
@@ -1952,7 +1954,7 @@ div.alerts button {
     font-size: 2.5em;
     display: block;
     margin: 0;
-    padding: 60px 0 20px 0;
+    padding: 40px 0 20px 0;
   }
   #content .landing .explore > p,
   #content .landing .create > p,
@@ -1989,7 +1991,7 @@ div.alerts button {
     font-size: 3.5em;
     display: block;
     margin: 0;
-    padding: 60px 0 20px 0;
+    padding: 40px 0 20px 0;
   }
   #content .landing .explore > p,
   #content .landing .create > p,

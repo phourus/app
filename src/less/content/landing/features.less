@@ -1,38 +1,38 @@
 #content .landing {
 
-  div.features div.squeeze {
-    .Row(80%);
-    background-color: #fff;
-    text-align: center;
-    margin: 40px auto;
+  div.features {
+    background-color: #eee;
 
-    > div {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
+    div.squeeze {
+      .Row(80%);
+      text-align: center;
+      margin: 40px auto;
 
       > div {
-        text-align: left;
-        border-bottom: solid 1px #eee;
-        clear: right;
-        min-height: 2em;
-        font-size: 0.9em;
-        font-style: italic;
+        .Cols(6);
+        vertical-align: middle;
+        box-sizing: border-box;
+        padding: 20px;
+        max-width: 900px;
 
-        i {
+        > div {
+          text-align: left;
+          clear: right;
+          min-height: 2em;
+          font-size: 0.9em;
+          font-style: italic;
+          margin-bottom: 1em;
           font-size: 1em;
-          width: 40px;
-        }
 
-        i.fa-check-square {
-          float: right;
-          color: @green;
-          font-size: 2em;
+          i {
+            font-size: 1.5em;
+            width: 40px;
+          }
         }
       }
-    }
-    > div.video {
-      text-align: center;
+      > div.video {
+        text-align: center;
+      }
     }
   }
 }
