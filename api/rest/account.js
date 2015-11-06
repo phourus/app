@@ -11,6 +11,7 @@ var thumbs = require('../models/thumbs');
 //var favs = require('../models/favs');
 var jwt = require('jsonwebtoken');
 var s3 = require('../s3');
+var Email = require('../../email');
 
 var authDecode = function (auth) {
   let token = auth.split(' ')[1];
@@ -34,7 +35,7 @@ router.post('/register', (req, res) => {
     });
   })
   .then(function (result) {
-    console.log(result);
+    Email('signup', {email: email});
     res.send(202);
   })
   .catch(function (err) {
