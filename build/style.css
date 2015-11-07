@@ -1531,9 +1531,14 @@ div.alerts button {
 }
 #content .landing .banner {
   height: 350px;
+  top: -50px;
+  margin-bottom: -50px;
   width: 100%;
+  background-image: url('/assets/landing/banner.jpg');
   overflow: hidden;
   position: relative;
+  background-size: 700px 350px;
+  background-position: bottom;
 }
 #content .landing .banner .actions {
   position: absolute;
@@ -1544,13 +1549,7 @@ div.alerts button {
 #content .landing .banner .actions button {
   margin: 4px auto;
 }
-#content .landing .banner > div {
-  display: none;
-}
-#content .landing .banner > div.selected {
-  display: block;
-}
-#content .landing .banner > div .title {
+#content .landing .banner .title {
   position: absolute;
   top: 30%;
   width: 80%;
@@ -1561,7 +1560,7 @@ div.alerts button {
   line-height: 1em;
   opacity: 0.8;
 }
-#content .landing .banner > div p {
+#content .landing .banner p {
   position: absolute;
   left: 10%;
   top: 40%;
@@ -1571,12 +1570,10 @@ div.alerts button {
   width: 80%;
   line-height: 1.5em;
 }
-#content .landing .banner > div img {
-  height: 500px;
-  margin: 0;
-  padding: 0;
-}
 @media (min-width: 500px) {
+  #content .landing .banner {
+    background-size: 800px 400px;
+  }
   #content .landing .banner .actions {
     bottom: 40px;
   }
@@ -1587,31 +1584,30 @@ div.alerts button {
 }
 @media (min-width: 800px) {
   #content .landing .banner {
-    height: 500px;
-    width: 100%;
-    overflow: hidden;
+    height: 400px;
+    background-size: 1200px 600px;
   }
-  #content .landing .banner > div {
-    display: none;
-  }
-  #content .landing .banner > div.selected {
-    display: block;
-  }
-  #content .landing .banner > div .title {
+  #content .landing .banner .title {
     width: 60%;
     left: 20%;
     font-size: 3em;
   }
-  #content .landing .banner > div p {
+  #content .landing .banner p {
     width: 60%;
     left: 20%;
     font-size: 1.5em;
     line-height: 1.5em;
   }
-  #content .landing .banner > div img {
-    height: 800px;
-    margin: 0;
-    padding: 0;
+}
+@media (min-width: 1200px) {
+  #content .landing .banner {
+    height: 500px;
+    background-size: 1600px 800px;
+  }
+}
+@media (min-width: 1600px) {
+  #content .landing .banner {
+    background-size: 2000px 1000px;
   }
 }
 #content .landing .benefits {
@@ -1671,7 +1667,7 @@ div.alerts button {
   background-color: #eee;
 }
 #content .landing div.features div.squeeze {
-  max-width: 80%;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -1686,7 +1682,7 @@ div.alerts button {
   clear: both;
 }
 #content .landing div.features div.squeeze > div {
-  width: 50%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
   vertical-align: middle;
@@ -1709,6 +1705,46 @@ div.alerts button {
 }
 #content .landing div.features div.squeeze > div.video {
   text-align: center;
+}
+@media (min-width: 800px) {
+  #content .landing div.features div.squeeze {
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  #content .landing div.features div.squeeze:before,
+  #content .landing div.features div.squeeze:after {
+    content: "";
+    display: table;
+  }
+  #content .landing div.features div.squeeze:after {
+    clear: both;
+  }
+  #content .landing div.features div.squeeze > div {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    vertical-align: middle;
+    box-sizing: border-box;
+    padding: 20px;
+    max-width: 900px;
+  }
+  #content .landing div.features div.squeeze > div > div {
+    text-align: left;
+    clear: right;
+    min-height: 2em;
+    font-size: 0.9em;
+    font-style: italic;
+    margin-bottom: 1em;
+    font-size: 1em;
+  }
+  #content .landing div.features div.squeeze > div > div i {
+    font-size: 1.5em;
+    width: 40px;
+  }
+  #content .landing div.features div.squeeze > div.video {
+    text-align: center;
+  }
 }
 .fa-facebook {
   color: #3b5998;
