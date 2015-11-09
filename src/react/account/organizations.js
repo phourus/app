@@ -13,12 +13,34 @@ let Orgs = React.createClass({
       <div className="orgs">
         <h3>My Organizations</h3>
         <Search />
-        <p>Organization not listed? Enter organization name below and click 'Create Organization' to create a new organization.</p>
-        <input type="text" placeholder="organization name" />
-        <button className="button green">Create New Organization</button>
+        <Create />
         <List />
       </div>
     );
+  }
+});
+
+let Create = React.createClass({
+  getInitialState: function () {
+    return {
+      name: ""
+    };
+  },
+  render: function () {
+    return (
+      <div className="create">
+        <p>Organization not listed? Enter organization name below and click 'Create Organization' to create a new organization.</p>
+        <input type="text" placeholder="organization name" value={this.state.name} onChange={this._name} />
+        <button className="button green" onClick={this._create}>Create New Organization</button>
+      </div>
+    );
+  },
+  _name: function (e) {
+    let value = e.currentTarget.value;
+    this.setState({name: value});
+  },
+  _create: function () {
+    Actions.createOrganization(this.state.name);
   }
 });
 
