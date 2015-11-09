@@ -54,7 +54,7 @@ let Slider = React.createClass({
         <p>Get more out of your productivity tools than just productivity.</p>
         <div className="actions">
           <button className="button green" onClick={this.props.showSignup}>Sign Up Now</button>
-          <button className="button blue inverted" onClick={this.props.more}>Learn More</button>
+          <button className="button blue" onClick={this.props.more}>Learn More</button>
         </div>
       </div>
     );

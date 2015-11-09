@@ -1548,6 +1548,20 @@ div.alerts button {
 }
 #content .landing .banner .actions button {
   margin: 4px auto;
+  background-color: transparent;
+  color: #fff;
+  border: solid 1px #fff;
+}
+#content .landing .banner .actions button:hover {
+  border: solid 1px;
+}
+#content .landing .banner .actions button:hover.green {
+  color: #9cd900;
+  border-color: #9cd900;
+}
+#content .landing .banner .actions button:hover.blue {
+  color: #5faee3;
+  border-color: #5faee3;
 }
 #content .landing .banner .title {
   position: absolute;
