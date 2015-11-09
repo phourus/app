@@ -18,7 +18,7 @@ module.exports = React.createClass({
             </div>
             <div className="quote">
               <p>I also agree with this statement, but think execution is even more important than ideas, capital and experience.</p>
-              <img src="/assets/landing/jesse.png" />
+              <img src="/assets/landing/matt.png" />
               <div className="employee">
                 <strong>Matt Leddy</strong>
                 <div className="title">COO, Phourus</div>
@@ -34,7 +34,7 @@ module.exports = React.createClass({
                 <strong>Jen Wong</strong>
                 <div className="title">UX Consultant, Phourus</div>
               </div>
-              <img src="/assets/landing/jesse.png" />
+              <img src="/assets/landing/jen.png" />
               <p>I think this is highly dependent upon the industry, product, and market, but still a nice sentiment!</p>
             </div>
             <div className="quote">
@@ -43,7 +43,7 @@ module.exports = React.createClass({
                 <strong>Jennie Kim</strong>
                 <div className="title">Marketing Intern, Phourus</div>
               </div>
-              <img src="/assets/landing/jesse.png" />
+              <img src="/assets/landing/jennie.png" />
             </div>
           </div>
         </div>
