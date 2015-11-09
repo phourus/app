@@ -8,19 +8,17 @@
 
     }
 
+    img {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
     .subtitle {
       font-size: 2em;
       font-style: italic;
       color: #777;
       margin-bottom: 60px;
-    }
-
-    div.left {
-      float: left;
-    }
-
-    div.right {
-      float: right;
     }
 
     div.left, div.right {
@@ -33,7 +31,7 @@
       clear: both;
       padding: 20px;
       margin-bottom: 10px;
-      text-align: left;
+      text-align: center;
 
       span.title {
         font-size: 2em;
@@ -42,7 +40,6 @@
         text-align: left;
       }
       p {
-        text-align: left;
         font-size: 1.1em;
 
         &.usage {
@@ -63,6 +60,20 @@
 @media (min-width: 500px) {
   #content .landing {
 
+    .benefits {
+
+      div.left {
+        float: left;
+      }
+
+      div.right {
+        float: right;
+      }
+
+      div > div {
+        text-align: left;
+      }
+    }
   }
 }
 

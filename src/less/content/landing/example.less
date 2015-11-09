@@ -1,6 +1,7 @@
 #content .landing {
 
   .example {
+    display: none;
     padding: 20px 0;
     background-color: @blue-light;
     color: #fff;
@@ -53,27 +54,19 @@
 
         img {
           max-height: 500px;
+          margin: 0;
+          padding: 0;
         }
       }
     }
   }
 }
 
-@media (min-width: 500px) {
-
+@media (min-width: 1000px) {
   #content .landing {
 
-  }
-}
-
-@media (min-width: 800px) {
-  #content .landing {
-
-  }
-}
-
-@media (min-width: 1400px) {
-  #content .landing {
-
+    .example {
+      display: block;
+    }
   }
 }

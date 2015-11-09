@@ -1628,17 +1628,16 @@ div.alerts button {
   width: 80%;
   margin: auto;
 }
+#content .landing .benefits img {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 #content .landing .benefits .subtitle {
   font-size: 2em;
   font-style: italic;
   color: #777;
   margin-bottom: 60px;
-}
-#content .landing .benefits div.left {
-  float: left;
-}
-#content .landing .benefits div.right {
-  float: right;
 }
 #content .landing .benefits div.left,
 #content .landing .benefits div.right {
@@ -1650,7 +1649,7 @@ div.alerts button {
   clear: both;
   padding: 20px;
   margin-bottom: 10px;
-  text-align: left;
+  text-align: center;
 }
 #content .landing .benefits div > div span.title {
   font-size: 2em;
@@ -1659,7 +1658,6 @@ div.alerts button {
   text-align: left;
 }
 #content .landing .benefits div > div p {
-  text-align: left;
   font-size: 1.1em;
 }
 #content .landing .benefits div > div p.usage {
@@ -1671,7 +1669,19 @@ div.alerts button {
   font-size: 3em;
   width: 100px;
 }
+@media (min-width: 500px) {
+  #content .landing .benefits div.left {
+    float: left;
+  }
+  #content .landing .benefits div.right {
+    float: right;
+  }
+  #content .landing .benefits div > div {
+    text-align: left;
+  }
+}
 #content .landing .example {
+  display: none;
   padding: 20px 0;
   background-color: #5faee3;
   color: #fff;
@@ -1724,6 +1734,13 @@ div.alerts button {
 }
 #content .landing .example .squeeze .image img {
   max-height: 500px;
+  margin: 0;
+  padding: 0;
+}
+@media (min-width: 1000px) {
+  #content .landing .example {
+    display: block;
+  }
 }
 #content .landing .explore {
   padding-bottom: 40px;
