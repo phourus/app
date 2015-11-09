@@ -1657,6 +1657,60 @@ div.alerts button {
   font-size: 3em;
   width: 100px;
 }
+#content .landing .example {
+  padding: 20px 0;
+  background-color: #5faee3;
+  color: #fff;
+}
+#content .landing .example .squeeze {
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .landing .example .squeeze:before,
+#content .landing .example .squeeze:after {
+  content: "";
+  display: table;
+}
+#content .landing .example .squeeze:after {
+  clear: both;
+}
+#content .landing .example .squeeze > div.right div.quote {
+  text-align: right;
+}
+#content .landing .example .squeeze > div {
+  width: 33.33333333%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .landing .example .squeeze > div div.quote {
+  text-align: left;
+  margin-bottom: 100px;
+}
+#content .landing .example .squeeze > div div.quote img {
+  width: 100px;
+  display: inline-block;
+  vertical-align: middle;
+}
+#content .landing .example .squeeze > div div.quote div.employee {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+}
+#content .landing .example .squeeze > div div.quote div.employee strong {
+  font-size: 1.1em;
+  color: #f7f7f7;
+}
+#content .landing .example .squeeze > div div.quote p {
+  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;
+  clear: both;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9em;
+}
+#content .landing .example .squeeze .image img {
+  max-height: 500px;
+}
 #content .landing .explore {
   padding-bottom: 40px;
 }
