@@ -13,7 +13,9 @@ var members = db.define('members', {
     request: function (orgId) {
       var model = {
         userId: this.SESSION_USER,
-        orgId: orgId
+        orgId: orgId,
+        approved: 0,
+        admin: 0
       };
       return this.create(model);
     },
@@ -21,7 +23,7 @@ var members = db.define('members', {
       return this.update(model, {where: {id: id}});
     },
     remove: function (id) {
-      return this.destroy({where: {id: id}});
+      return this.destroy({where: {id: id, userId: this.SESSION_USER}});
     },
     isMember: function (userId, orgId) {
       return this.findOne({where: {userId: userId, orgId: orgId, approved: 1}});

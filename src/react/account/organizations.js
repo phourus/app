@@ -11,8 +11,11 @@ let Orgs = React.createClass({
   render: function () {
     return (
       <div className="orgs">
-        <strong>My Organizations</strong>
+        <h3>My Organizations</h3>
         <Search />
+        <p>Organization not listed? Enter organization name below and click 'Create Organization' to create a new organization.</p>
+        <input type="text" placeholder="organization name" />
+        <button className="button green">Create New Organization</button>
         <List />
       </div>
     );
@@ -45,12 +48,12 @@ let Search = React.createClass({
       value={list}
       matchPos={'start'}
       multi={false}
-      placeholder={false}
+      placeholder={"find organization"}
       options={lookup}
       onChange={this._change} />
   },
   _change: function (value) {
-    console.log(value);
+    Actions.joinOrganization(value);
     // let current = this._values().map((data) => {
     //   return data.value;
     // });
@@ -130,8 +133,19 @@ let List = React.createClass({
           }
           return (
             <div className="org">
-              {admin}
-              <Link to="orgPosts" params={{id: item.org.id}}>{item.org.name}</Link> <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>Remove Me</a>
+              {admin}<br />
+              <Link to="orgPosts" params={{id: item.org.id}}>{item.org.name}</Link><br />
+              {item.approved
+                ? <span className="approved">
+                  <i className="fa fa-check" /> Approved
+                </span>
+                : <span className="pending">
+                  <i className="fa fa-clock-o" /> Pending
+                </span>
+              }
+              <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>
+                {item.approved ? ' Remove Me' : ' Cancel Request'}
+              </a><br />
               <div style={{clear: 'right'}}></div>
             </div>
           );
@@ -145,7 +159,7 @@ let List = React.createClass({
   },
   _remove: function (e) {
     var id = e.currentTarget.id;
-    console.warn('remove org' + id);
+    Actions.removeOrganization(id);
   }
 });
 

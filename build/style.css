@@ -1112,6 +1112,50 @@ div.alerts button {
   font-size: 4em;
   text-align: center;
 }
+.account .orgs {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #f7f7f7;
+  padding: 2%;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+.account .orgs .list {
+  margin-top: 40px;
+}
+.account .orgs .org {
+  border-bottom: solid 1px #eee;
+  border-left: solid 4px #555;
+  padding-left: 10px;
+}
+.account .orgs .org:hover {
+  border-left: solid 4px #5faee3;
+  background-color: #f7f7f7;
+}
+.account .orgs .org a {
+  color: #333;
+}
+.account .orgs .org a:hover {
+  text-decoration: underline;
+  color: #f2c13d;
+}
+.account .orgs .org a.remove {
+  font-size: 80%;
+  color: #5faee3;
+}
+.account .orgs .org button {
+  float: right;
+  height: 30px;
+  width: 60px;
+  font-size: 70%;
+}
+.account .orgs .org span.approved {
+  color: #8abf00;
+}
+.account .orgs .org span.pending {
+  color: #ed0303;
+}
 .account ul {
   list-style: none;
   margin: 0;
@@ -1154,37 +1198,6 @@ div.alerts button {
   width: 50%;
   display: inline-block;
   vertical-align: top;
-}
-.account .heading .orgs {
-  width: 100%;
-  display: inline-block;
-  vertical-align: top;
-}
-.account .heading .orgs .org {
-  border-bottom: solid 1px #eee;
-  border-left: solid 4px #555;
-  padding-left: 10px;
-}
-.account .heading .orgs .org:hover {
-  border-left: solid 4px #5faee3;
-  background-color: #f7f7f7;
-}
-.account .heading .orgs .org a {
-  color: #333;
-}
-.account .heading .orgs .org a:hover {
-  text-decoration: underline;
-  color: #f2c13d;
-}
-.account .heading .orgs .org a.remove {
-  font-size: 80%;
-  color: #5faee3;
-}
-.account .heading .orgs .org button {
-  float: right;
-  height: 30px;
-  width: 60px;
-  font-size: 70%;
 }
 .account .update > div {
   max-width: 96%;

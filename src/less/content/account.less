@@ -1,3 +1,5 @@
+@import 'account/organizations.less';
+
 .account {
   ul {
     list-style: none;
@@ -30,40 +32,6 @@
 
     .profile {
       .Cols(6);
-    }
-
-    .orgs {
-      .Cols(12);
-
-      .org {
-        border-bottom: solid 1px #eee;
-        border-left: solid 4px #555;
-        padding-left: 10px;
-
-        &:hover {
-          border-left: solid 4px @blue-light;
-          background-color: #f7f7f7;
-        }
-
-        a {
-          color: #333;
-        }
-
-        a:hover {
-          text-decoration: underline;
-          color: @gold-light;
-        }
-        a.remove {
-          font-size: 80%;
-          color: @blue-light;
-        }
-        button {
-          float: right;
-          height: 30px;
-          width: 60px;
-          font-size: 70%;
-        }
-      }
     }
   }
 

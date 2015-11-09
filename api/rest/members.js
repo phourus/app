@@ -33,7 +33,8 @@ router.get('', (req, res) => {
 });
 router.post('', (req, res) => {
   var model = req.body;
-  members.create(model)
+  members.SESSION_USER = req.user_id;
+  members.request(model.orgId)
   .then(function (data) {
       res.send(200, data);
   })
@@ -56,9 +57,10 @@ router.put('/:id', (req, res) => {
 });
 router.delete('/:id', (req, res) => {
   var id = req.params.id;
+  members.SESSION_USER = req.user_id;
   members.remove(id)
   .then(function (data) {
-      res.send(200, data);
+      res.send(202);
   })
   .catch(function (err) {
       console.error(err);

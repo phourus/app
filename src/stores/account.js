@@ -2,6 +2,7 @@
 let Reflux = require('reflux');
 let account = require('../api/account');
 let orgs = require('../api/orgs');
+let members = require('../api/members');
 let Actions = require('../actions/account');
 let msg = require("../actions/alerts").add;
 let token = require('../token');
@@ -24,6 +25,7 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.lookup, this._lookup);
     this.listenTo(Actions.createOrganization, this._createOrganization);
     this.listenTo(Actions.joinOrganization, this._joinOrganization);
+    this.listenTo(Actions.removeOrganization, this._removeOrganization);
     this.listenTo(Actions.login, this._login);
     this.listenTo(Actions.register, this._register);
     this.listenTo(Actions.request, this._request);
@@ -136,10 +138,22 @@ module.exports = Reflux.createStore({
     members.request(orgId)
     .then(data => {
       this.trigger({request: data});
+      this._orgs();
     })
     .catch(code => {
       this.trigger({code: code});
       msg('yellow', 'Organization access could not be requested', code);
+    });
+  },
+  _removeOrganization: function (orgId) {
+    members.remove(orgId)
+    .then(data => {
+      this.trigger({remove: data});
+      this._orgs();
+    })
+    .catch(code => {
+      this.trigger({code: code});
+      msg('yellow', 'Organization could not be removed', code);
     });
   },
   _login: function (email, password) {

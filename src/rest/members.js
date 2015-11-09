@@ -40,5 +40,8 @@ module.exports = {
   },
   deny: function (id) {
     return http.delete(base + id, settings());
+  },
+  remove: function (orgId) {
+    return http.delete(base + orgId, settings());
   }
 };

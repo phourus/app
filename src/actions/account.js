@@ -13,6 +13,7 @@ module.exports = {
   lookup: Reflux.createAction(),
   createOrganization: Reflux.createAction(),
   joinOrganization: Reflux.createAction(),
+  removeOrganization: Reflux.createAction(),
   login: Reflux.createAction(),
   register: Reflux.createAction(),
   request: Reflux.createAction(),

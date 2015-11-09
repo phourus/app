@@ -6,5 +6,6 @@ module.exports = {
   approve: members.approve,
   admin: members.admin,
   revoke: members.revoke,
-  deny: members.deny
+  deny: members.deny,
+  remove: members.remove
 };
