@@ -16,11 +16,16 @@ let Header = React.createClass({
       params: {},
       context: {},
       filter: false,
-      orgs: []
+      orgs: [],
+      logout: false
     };
   },
   componentDidMount: function () {
     this.unsubscribeAccount = AccountStore.listen(data => {
+      if (!data.user && this.state.logout === true) {
+        this.context.router.transitionTo("home");
+        data.logout = false;
+      }
       this.setState(data);
     });
     this.unsubscribeStream = StreamStore.listen(data => {
@@ -74,7 +79,7 @@ let Header = React.createClass({
                         <li><Link to="myPosts">My Posts <i className="fa fa-edit" /></Link></li>
                         <li><Link to="activity">My Activity <i className="fa fa-bell" /></Link></li>
                         <li><Link to="account">My Account <i className="fa fa-user" /></Link></li>
-                        <li><a href="javascript:void(0)" onClick={AccountActions.logout}>Logout <i className="fa fa-sign-out" /></a></li>
+                        <li><a href="javascript:void(0)" onClick={this._logout}>Logout <i className="fa fa-sign-out" /></a></li>
                       </ul>
                     </div>
                   </li>
@@ -104,6 +109,10 @@ let Header = React.createClass({
           {this.state.filter && this.props.tint && !home ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
         </header>
     );
+  },
+  _logout: function () {
+    this.setState({logout: true});
+    AccountActions.logout();
   },
   _filter: function () {
     if (this.state.filter !== true) {

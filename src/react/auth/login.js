@@ -9,6 +9,7 @@ module.exports = React.createClass({
   mixins: [State, Navigation],
   getDefaultProps: function () {
     return {
+      clicked: true,
       show: false
     };
   },
@@ -19,7 +20,8 @@ module.exports = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen(data => {
-      if (data.code === 200 && this.state.loaded && data.action === 'login') {
+      if (data.code === 200 && this.state.loaded && this.state.clicked === true) {
+        data.clicked = false;
         this.context.router.transitionTo("stream");
       }
       this.setState(data);
@@ -71,6 +73,7 @@ module.exports = React.createClass({
     let username = this.refs.username.getDOMNode().value;
     let password = this.refs.password.getDOMNode().value;
     this._clear();
+    this.setState({clicked: true});
     Actions.login(username, password);
   },
   _request: function () {

@@ -52,6 +52,9 @@ module.exports = React.createClass({
 	},
 	_owner: function (post) {
 		let user = this.state.user;
+		if (!user || !user.id) {
+			return false;
+		}
 		let sharedPosts = user && user.SESSION_POSTS && user.SESSION_POSTS.constructor === Array ? user.SESSION_POSTS : [];
 		return (post.user && post.user.id == user.id) || sharedPosts.indexOf(post.id) !== -1;
 	}
