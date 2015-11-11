@@ -43,27 +43,27 @@ let Slider = React.createClass({
     return (
       <div className="slider">
         <div className={classes[0]}>
-          <img src="/assets/landing/home.jpg" className="banner" />
+          <img src="/assets/landing/home.jpg" className="banner" alt="Phourus Individuals Slider - Home Image" />
           <div className="title">The Pursuit of Truth</div>
           <p>Phourus is about the Pursuit of Truth across the 4 Elements of Society.</p>
         </div>
         <div className={classes[1]}>
-          <img src="/assets/landing/world.jpg" className="banner" />
+          <img src="/assets/landing/world.jpg" className="banner" alt="Phourus Individuals Slider - Phourus World Image" />
           <div className="title">Economy & Environment</div>
           <p>The balance between Economy & Environment is vital to the health & prosperity of a nation and it's people.</p>
         </div>
         <div className={classes[2]}>
-          <img src="/assets/landing/mind.jpg" className="banner" />
+          <img src="/assets/landing/mind.jpg" className="banner" alt="Phourus Individuals Slider - Phourus Mind Image" />
           <div className="title">Knowledge & Education</div>
           <p>An educated culture is one that can make effective decisions that improve the lives of many.</p>
         </div>
         <div className={classes[3]}>
-          <img src="/assets/landing/voice.jpg" className="banner" />
+          <img src="/assets/landing/voice.jpg" className="banner" alt="Phourus Individuals Slider - Phourus Voice Image" />
           <div className="title">Government & Politics</div>
           <p>Government exists to protect and serve, not to hinder or limit a society.</p>
         </div>
         <div className={classes[4]}>
-          <img src="/assets/landing/self.jpg" className="banner" />
+          <img src="/assets/landing/self.jpg" className="banner" alt="Phourus Individuals Slider - Phourus Self Image" />
           <div className="title">Beliefs & Religion</div>
           <p>Understanding who we are as individuals and why we exist in a vast universe of empty space.</p>
         </div>

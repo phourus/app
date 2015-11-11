@@ -56,11 +56,7 @@ module.exports = (
       <Route name="edit" path="edit/:id" handler={Stream}></Route>
       <Route name="post" path=":id" handler={Stream} />
     </Route>
-    <Route name="account" path="account" handler={Account}>
-      <DefaultRoute handler={Account.Edit} />
-      <Route name="update" path="update" handler={Account.Edit} />
-      <Route name="password" path="password" handler={Account.Password} />
-    </Route>
+    <Route name="account" path="account" handler={Account} />
     <Route name="admin" path="admin/:id" handler={Admin}>
       <Route name="details" path="details" handler={Admin.Details} />
       <Route name="members" path="members" handler={Admin.Members} />

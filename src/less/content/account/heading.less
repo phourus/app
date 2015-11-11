@@ -1,0 +1,75 @@
+.account {
+
+  .heading {
+    .Row(100%);
+
+    .pic {
+      .Cols(6);
+      font-size: 90%;
+      line-height: 120%;
+      a {
+        text-decoration: underline;
+      }
+
+      .uploader {
+        position: absolute;
+        left: -9999px;
+      }
+
+      img {
+        width: 95%;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+    }
+
+    .profile {
+      .Cols(6);
+    }
+  }
+}
+
+@media (min-width: 600px) {
+
+  .account {
+
+    .heading {
+
+      .pic {
+        .Cols(3);
+      }
+
+      .profile {
+        .Cols(6);
+      }
+
+      .posts {
+        .Cols(2);
+        text-align: right;
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+
+  .account {
+
+    .heading {
+      .Row(100%);
+
+      .pic {
+        .Cols(2);
+      }
+
+      .profile {
+        .Cols(4);
+      }
+
+      .orgs {
+        .Cols(6);
+      }
+    }
+  }
+}

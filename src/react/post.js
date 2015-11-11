@@ -11,7 +11,6 @@ let Comments = require('./post/comments');
 let Content = require('./post/content');
 let Details = require('./post/details');
 let Links = require('./post/links');
-let Pic = require('./post/pic');
 let Poll = require('./post/poll');
 let Privacy = require('./post/privacy');
 let Stats = require('./post/stats');

@@ -25,7 +25,7 @@ let About = React.createClass({
     classes[this.state.mode] = "selected";
     return (
       <div className="about">
-        <img src="/assets/banner.jpg" className="banner" />
+        <img src="/assets/banner.jpg" className="banner" alt="Phourus About Banner Image" />
         <div className="description">
           <h3>What is Phourus?</h3>
           <p>For individuals, a free tool to express themselves professionally, educationally, politically and religiously; a place where expression and representation meet.</p>
@@ -59,25 +59,25 @@ let About = React.createClass({
         </div>
         <div className="screenshots">
           <div>
-            <img src="/assets/screenshots/stream.png" />
+            <img src="/assets/screenshots/stream.png" alt="Phourus Stream Screenshot" />
             <h3>Discover Content</h3>
             <p>...using the Phourus Stream with advanced searching and filtering capability</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/editor.png" className="left" />
+            <img src="/assets/screenshots/editor.png" className="left" alt="Phourus Editor Screenshot" />
             <h3>Create Posts</h3>
             <p>...on a variety of topics with rich text, file attachments and detailed metadata</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/comments.png" />
+            <img src="/assets/screenshots/comments.png" alt="Phourus Comments Screenshot" />
             <h3>Interact</h3>
             <p>...with the Phourus community by viewing posts and commenting, voting and sharing</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/editor.png" className="left" />
+            <img src="/assets/screenshots/editor.png" className="left" alt="Phourus Compete Screenshot" />
             <h3>Compete</h3>
             <p>...to become a respected Leader by contributing to the Phourus platform</p>
             <div style={{clear: "both"}}></div>

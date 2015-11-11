@@ -1112,6 +1112,108 @@ div.alerts button {
   font-size: 4em;
   text-align: center;
 }
+.account .heading {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+.account .heading:before,
+.account .heading:after {
+  content: "";
+  display: table;
+}
+.account .heading:after {
+  clear: both;
+}
+.account .heading .pic {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 90%;
+  line-height: 120%;
+}
+.account .heading .pic a {
+  text-decoration: underline;
+}
+.account .heading .pic .uploader {
+  position: absolute;
+  left: -9999px;
+}
+.account .heading .pic img {
+  width: 95%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.account .heading .profile {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+@media (min-width: 600px) {
+  .account .heading .pic {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .account .heading .profile {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .account .heading .posts {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+  }
+}
+@media (min-width: 800px) {
+  .account .heading {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .account .heading:before,
+  .account .heading:after {
+    content: "";
+    display: table;
+  }
+  .account .heading:after {
+    clear: both;
+  }
+  .account .heading .pic {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .account .heading .profile {
+    width: 33.33333333%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  .account .heading .orgs {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+.account .info {
+  max-width: 96%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2%;
+  background-color: #f7f7f7;
+  margin-top: 40px;
+}
+.account .info:before,
+.account .info:after {
+  content: "";
+  display: table;
+}
+.account .info:after {
+  clear: both;
+}
 .account .orgs {
   width: 100%;
   display: inline-block;
@@ -1161,60 +1263,6 @@ div.alerts button {
   margin: 0;
   padding: 0;
 }
-.account .heading {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-}
-.account .heading:before,
-.account .heading:after {
-  content: "";
-  display: table;
-}
-.account .heading:after {
-  clear: both;
-}
-.account .heading .pic {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-  font-size: 90%;
-  line-height: 120%;
-}
-.account .heading .pic a {
-  text-decoration: underline;
-}
-.account .heading .pic .uploader {
-  position: absolute;
-  left: -9999px;
-}
-.account .heading .pic img {
-  width: 95%;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-}
-.account .heading .profile {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-}
-.account .update > div {
-  max-width: 96%;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2%;
-  background-color: #f7f7f7;
-  margin-top: 40px;
-}
-.account .update > div:before,
-.account .update > div:after {
-  content: "";
-  display: table;
-}
-.account .update > div:after {
-  clear: both;
-}
 .account label {
   display: block;
   font-size: 0.8em;
@@ -1225,74 +1273,6 @@ div.alerts button {
 .account label input,
 .account label select {
   display: block;
-}
-@media (min-width: 600px) {
-  .account .heading .pic {
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .account .heading .profile {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .account .heading .posts {
-    width: 16.66666667%;
-    display: inline-block;
-    vertical-align: top;
-    text-align: right;
-  }
-  .account .update {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .account .update:before,
-  .account .update:after {
-    content: "";
-    display: table;
-  }
-  .account .update:after {
-    clear: both;
-  }
-  .account .update div.address label {
-    width: 25%;
-    display: inline-block;
-    vertical-align: top;
-    margin: 0;
-    padding: 0;
-  }
-}
-@media (min-width: 800px) {
-  .account .heading {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .account .heading:before,
-  .account .heading:after {
-    content: "";
-    display: table;
-  }
-  .account .heading:after {
-    clear: both;
-  }
-  .account .heading .pic {
-    width: 16.66666667%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .account .heading .profile {
-    width: 33.33333333%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  .account .heading .orgs {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-  }
 }
 .activity {
   max-width: 100%;

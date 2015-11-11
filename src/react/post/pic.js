@@ -3,13 +3,17 @@ let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
 
-let Pic = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return {
 			id: 0,
       img: '/assets/avatars/default.jpg',
-      default: '/assets/avatars/default.jpg'
-    }
+      default: '/assets/avatars/default.jpg',
+      name: ""
+    };
+  },
+  componentDidMount: function () {
+    this.setState(this.props);
   },
   componentWillReceiveProps: function (data) {
     if (data.img) {
@@ -20,7 +24,7 @@ let Pic = React.createClass({
     return (
       <div className="pic">
 				<Link to={this.props.context === 'org' ? "orgPosts" : "userPosts"} params={{id: this.state.id}}>
-        	<img src={this.state.img} onClick={this._upload} onError={this._default} />
+        	<img src={this.state.img} onClick={this._upload} onError={this._default} alt={"Phourus Profile Pic for " + this.state.name} />
 				</Link>
       </div>
     );
@@ -29,5 +33,3 @@ let Pic = React.createClass({
     this.setState({img: this.state.default});
   }
 });
-
-module.exports = Pic;

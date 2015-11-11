@@ -1,3 +1,5 @@
+@import 'account/heading.less';
+@import 'account/info.less';
 @import 'account/organizations.less';
 
 .account {
@@ -5,48 +7,6 @@
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  .heading {
-    .Row(100%);
-
-    .pic {
-      .Cols(6);
-      font-size: 90%;
-      line-height: 120%;
-      a {
-        text-decoration: underline;
-      }
-
-      .uploader {
-        position: absolute;
-        left: -9999px;
-      }
-
-      img {
-        width: 95%;
-        margin: 0;
-        padding: 0;
-        cursor: pointer;
-      }
-    }
-
-    .profile {
-      .Cols(6);
-    }
-  }
-
-  .update {
-
-    > div {
-      .Row(96%);
-      padding: 2%;
-      background-color: #f7f7f7;
-      margin-top: 40px;
-    }
-  }
-
-  .password {
-
   }
 
   label {
@@ -64,39 +24,6 @@
 
   .account {
 
-    .heading {
-
-      .pic {
-        .Cols(3);
-      }
-
-      .profile {
-        .Cols(6);
-      }
-
-      .posts {
-        .Cols(2);
-        text-align: right;
-      }
-    }
-
-    .update {
-      .Row(100%);
-
-
-      div.info {
-
-      }
-
-      div.address {
-
-        label {
-          .Cols(3);
-          margin: 0;
-          padding: 0;
-        }
-      }
-    }
   }
 }
 
@@ -104,20 +31,5 @@
 
   .account {
 
-    .heading {
-      .Row(100%);
-
-      .pic {
-        .Cols(2);
-      }
-
-      .profile {
-        .Cols(4);
-      }
-
-      .orgs {
-        .Cols(6);
-      }
-    }
   }
 }

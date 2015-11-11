@@ -6,7 +6,7 @@ let { Link, Navigation } = Router;
 let AccountStore = require('../../stores/account');
 let AccountActions = require('../../actions/account');
 
-let Pic = require('./pic');
+let Pic = require('../post/pic');
 
 module.exports = React.createClass({
 	mixins: [Navigation],
@@ -41,7 +41,7 @@ module.exports = React.createClass({
 						return (
 							<div key={org.id} id={org.id} className="org" onClick={this._select}>
 								<div className="name">{org.name}</div>
-								<Pic img={org.img} />
+								<Pic img={org.img} name={org.name} />
 							</div>
 						);
 					})}
