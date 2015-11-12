@@ -47,22 +47,25 @@ module.exports = React.createClass({
       return false;
     }
     let steps = ["", "", ""];
-    steps[this.state.step] = "selected";
+    for (var i = 0; i < this.state.step + 1; i++) {
+      steps[i] = "complete";
+    }
+    //steps[this.state.step] = "selected";
     return (
       <div className="signup">
         <div className="progress">
           <ul>
-            <li>
-              <div className="step">1.</div>
-              <div className="label">Create personal account</div>
+            <li className={steps[0]}>
+              <div className="step"></div>
+              <div className="label">Account Info</div>
             </li>
-            <li>
-              <div className="step">2.</div>
-              <div className="label">Create or join organization (optional)</div>
+            <li className={steps[1]}>
+              <div className="step"></div>
+              <div className="label">Organizations</div>
             </li>
-            <li>
-              <div className="step">3.</div>
-              <div className="label">Go to your account!</div>
+            <li className={steps[2]}>
+              <div className="step"></div>
+              <div className="label">Account Access</div>
             </li>
           </ul>
         </div>
@@ -72,6 +75,25 @@ module.exports = React.createClass({
             <p className={steps[1]}>Although Phourus can be used strictly as an individual, the real benefit comes from using it within an organization. If your organization already has a Phourus account, or you'd like to create one, simply type your organization name into the organization field in the signup form.</p>
             <p className={steps[2]}>Your account has been created, welcome to Phourus! You will receive an email confirmation, and can <a>edit your account here</a>.</p>
           </div>
+          {this.state.step === 0
+            ? <div className="actions">
+                <button onClick={this._signup} className="blue button submit">Next</button>
+              </div>
+            : false
+          }
+          {this.state.step === 1
+            ? <div className="actions">
+                <button onClick={this._organizations} className="blue button submit">Next</button>
+                <button onClick={this._skip} className="gold button submit">Skip</button>
+              </div>
+            : false
+          }
+          {this.state.step === 2
+            ? <div className="actions">
+                <button onClick={this._account} className="blue button submit">Finish</button>
+              </div>
+            : false
+          }
           {this.state.step === 0
             ? <div className="form">
               <label>
@@ -90,8 +112,6 @@ module.exports = React.createClass({
                 ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
                 : false
               }
-              <button onClick={this._signup} className="blue button submit">Next: Organizations</button>
-              <a href="javascript:void(0)" onClick={this.props.showLogin}>Cancel</a>
             </div>
             : false
           }
@@ -99,24 +119,33 @@ module.exports = React.createClass({
             ? <div className="form">
               <label>
                 Organization Name (optional):
-                <input className="confirm" placeholder="organization name" value={this.state.organization} onChange={this._organization} />
+                <input className="organization" placeholder="organization name" value={this.state.organization} onChange={this._organization} />
               </label>
               {this.state.code && this.state.loaded
                 ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
                 : false
               }
-              <button onClick={this._organizations} className="blue button submit">Next: Account</button>
-              <button onClick={this._skip} className="gold button submit">Skip Organizations</button>
             </div>
             : false
           }
           {this.state.step === 2
             ? <div className="form">
+              <label>
+                Your Email Login:
+                <input ref="email" className="email" placeholder="enter your email address" disabled value={this.state.email} onChange={this._email} />
+              </label>
+              <label>
+                Organization Name:
+                <input className="confirm" placeholder="organization name" disabled value={this.state.organization} onChange={this._organization} />
+              </label>
+              <label>
+                Password:
+                <input value={"XXXXXXXXXXX"} disabled />
+              </label>
               {this.state.code && this.state.loaded
                 ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
                 : false
               }
-              <button onClick={this._account} className="blue button submit">Go to my account</button>
             </div>
             : false
           }
@@ -154,7 +183,7 @@ module.exports = React.createClass({
     Actions.joinOrganization(orgId);
   },
   _skip: function () {
-    this.setState({step: 1});
+    this.setState({step: 2});
   },
   _account: function (e) {
     this.context.router.transitionTo("account");

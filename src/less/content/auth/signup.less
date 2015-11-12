@@ -3,7 +3,7 @@
 }
 
 #content .landing .signup {
-  background-color: #eee;
+  background-color: #efefef;
   padding-bottom: 20px;
   font-size: 0.9em;
 
@@ -25,33 +25,36 @@
         position: relative;
         box-sizing: border-box;
         list-style: none;
-        background-color: #ccc;
         color: #333;
         margin-right: 2px;
         margin-bottom: 2px;
         height: 60px;
         width: 300px;
+        vertical-align: top;
 
         .step {
-          font-size: 2em;
-          font-family: @font-serif;
           width: 20px;
-          background-color: #333;
+          background-color: #efefef;
+          border: solid 1px #333;
           color: #eee;
-          padding: 0 4px;
-          height: 60px;
+          height: 20px;
+          border-radius: 50%;
+          margin: auto;
+        }
+
+        &.complete .step {
+          background-color: #333;
         }
 
         .label {
-          position: absolute;
-          top: 0;
-          left: 30px;
+          font-size: 0.9em;
         }
       }
     }
   }
 
   .instructions {
+    display: none;
 
     p {
       display: none;

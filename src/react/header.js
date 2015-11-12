@@ -72,7 +72,7 @@ let Header = React.createClass({
                           if (!org.approved) {
                             return false;
                           }
-                          return <li><Link to="orgPosts" params={{id: org.org.id}}>{org.org.shortname} <i className="fa fa-users" /></Link></li>
+                          return <li><Link to="orgPosts" params={{id: org.org.id}}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></Link></li>
                         })}
                       </ul>
                       <ul>
