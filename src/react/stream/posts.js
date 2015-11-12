@@ -6,7 +6,7 @@ let { Link, State, Navigation } = Router;
 let AccountStore = require('../../stores/account');
 let AccountActions = require('../../actions/account');
 
-let Loader = require('../loader');
+let Loader = require('../shared/loader');
 let Post = require('../post');
 
 module.exports = React.createClass({

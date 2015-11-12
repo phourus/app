@@ -6,7 +6,7 @@ let { Link, Navigation } = Router;
 let AccountStore = require('../../stores/account');
 let AccountActions = require('../../actions/account');
 
-let Pic = require('../post/pic');
+let Pic = require('../shared/pic');
 
 module.exports = React.createClass({
 	mixins: [Navigation],

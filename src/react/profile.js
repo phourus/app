@@ -5,6 +5,7 @@ let { Link, State, Navigation } = Router;
 
 let PostStore = require('../stores/post');
 let PostActions = require('../actions/post');
+let Pic = require('./shared/pic');
 
 let Profile = React.createClass({
 	mixins: [Navigation],
@@ -58,30 +59,19 @@ let Profile = React.createClass({
 	}
 });
 
-let Pic = React.createClass({
-  getInitialState: function () {
-    return {
-			id: 0,
-      img: '/assets/avatars/default.jpg',
-      default: '/assets/avatars/default.jpg'
-    };
-  },
-  componentWillReceiveProps: function (data) {
-    if (data.img) {
-      this.setState(data);
-    }
-  },
+let Basic = React.createClass({
   render: function () {
+    let address = this.props.org.address || {};
     return (
-      <div className="pic">
-				<Link to="orgPosts" params={{id: this.state.id}}>
-        	<img src={this.state.img} onError={this._default} />
-				</Link>
+      <div className="basic">
+        <div className="name">{this.props.org.name}</div>
+        <div className={this.props.org.type + " type"}>{this.props.org.type.toUpperCase()}</div>
+        {address.city || address.state ? <div>{address.city}{address.city && address.state ? ", " : ""}{address.state}</div> : false}
+        {this.props.org.website ? <div><a href={this.props.org.website} target="_blank">{this.props.org.website}</a></div> : false}
+        {this.props.org.phone ? <div>{this.props.org.phone}</div> : false}
+        {this.props.org.email ? <div><a href={"mailto:" + this.props.org.email + "&Subject=Phourus"}>{this.props.org.email}</a></div> : false}
       </div>
     );
-  },
-  _default: function () {
-    this.setState({img: this.state.default});
   }
 });
 

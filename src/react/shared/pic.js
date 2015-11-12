@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
@@ -10,7 +10,7 @@ module.exports = React.createClass({
       img: '/assets/avatars/default.jpg',
       default: '/assets/avatars/default.jpg',
       name: ""
-    };
+    }
   },
   componentDidMount: function () {
     this.setState(this.props);
@@ -23,9 +23,9 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="pic">
-				<Link to={this.props.context === 'org' ? "orgPosts" : "userPosts"} params={{id: this.state.id}}>
-        	<img src={this.state.img} onClick={this._upload} onError={this._default} alt={"Phourus Profile Pic for " + this.state.name} />
-				</Link>
+        <Link to={this.props.context === 'org' ? "orgPosts" : "userPosts"} params={{id: this.state.id}}>
+          <img src={this.state.img} onError={this._default} alt={"Phourus Profile Pic for " + this.state.name} />
+        </Link>
       </div>
     );
   },

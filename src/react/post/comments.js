@@ -9,7 +9,7 @@ let Actions = require('../../actions/post').Comments;
 let Store = require('../../stores/post').Comments;
 let AccountStore = require('../../stores/account');
 
-let Pic = require('./pic');
+let Pic = require('../shared/pic');
 
 let Comments = React.createClass({
   mixins: [State],

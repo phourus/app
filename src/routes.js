@@ -23,6 +23,11 @@ let Education = require('./react/organizations');
 let Government = require('./react/organizations');
 let Nonprofit = require('./react/organizations');
 
+let Categories = require('./react/admin/categories');
+let Details = require('./react/admin/details');
+let Members = require('./react/admin/members');
+let Teams = require('./react/admin/teams');
+
 module.exports = (
   <Route handler={App} path="/">
     <DefaultRoute name="home" handler={Business} />
@@ -58,10 +63,10 @@ module.exports = (
     </Route>
     <Route name="account" path="account" handler={Account} />
     <Route name="admin" path="admin/:id" handler={Admin}>
-      <Route name="details" path="details" handler={Admin.Details} />
-      <Route name="members" path="members" handler={Admin.Members} />
-      <Route name="categories" path="categories" handler={Admin.Categories} />
-      <Route name="teams" path="teams" handler={Admin.Teams} />
+      <Route name="details" path="details" handler={Details} />
+      <Route name="members" path="members" handler={Members} />
+      <Route name="categories" path="categories" handler={Categories} />
+      <Route name="teams" path="teams" handler={Teams} />
     </Route>
     <Route name="user" path="user/:id" handler={Profile}>
       <DefaultRoute handler={Profile.About} />

@@ -12,7 +12,7 @@ let Scroll = require('react-infinite-scroll')(React);
 
 let Posts = require('./stream/posts');
 let Organizations = require('./stream/organizations');
-let Loader = require('./loader');
+let Loader = require('./shared/loader');
 
 let Stream = React.createClass({
 	mixins: [State],

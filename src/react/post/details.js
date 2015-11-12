@@ -4,7 +4,7 @@ let Router = require('react-router');
 let { Link } = Router;
 let moment = require('moment');
 
-let Pic = require('./pic');
+let Pic = require('../shared/pic');
 let Poll = require('./poll');
 
 module.exports = React.createClass({

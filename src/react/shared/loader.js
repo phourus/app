@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Loader = React.createClass({
+module.exports = React.createClass({
   getInitialState: function () {
     return {
       slide: 0
@@ -53,5 +53,3 @@ var Loader = React.createClass({
     </div>);
   },
 });
-
-module.exports = Loader;
