@@ -3,24 +3,37 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, State, Navigation } = Router;
 
+let Store = require('../stores/profile');
+let Actions = require('../actions/profile');
+
+let AccountStore = require('../stores/account');
+let AccountActions = require('../actions/account');
 let PostStore = require('../stores/post');
 let PostActions = require('../actions/post');
 let Pic = require('./shared/pic');
 
 let Profile = React.createClass({
 	mixins: [Navigation],
-	getDefaultProps: function () {
-		return {
-			context: {}
-		};
-	},
   getInitialState: function () {
     return {
+			context: {
+				root: '',
+				type: '',
+				id: 0
+			},
 			profile: null
     };
   },
 	componentDidMount: function () {
-		this.unsubscribe = PostStore.listen((data) => {
+		this.unsubscribe = Store.listen((data) => {
+			this.setState({profile: data});
+		});
+		this.unsubscribeAccount = AccountStore.listen((data) => {
+			if (data.action === 'get' && data.user) {
+				this.setState({profile: data.user});
+			}
+		});
+		this.unsubscribePosts = PostStore.listen((data) => {
 			let post = data.post || {};
 			if (post.org) {
 				this.setState({profile: post.org});
@@ -28,15 +41,27 @@ let Profile = React.createClass({
 				this.setState({profile: post.user});
 			}
 		});
+		this._context();
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
+		this.unsubscribeAccount();
+		this.unsubscribePosts();
+	},
+	componentWillReceiveProps: function () {
+		this._context();
 	},
 	render: function () {
-		let profile = this.props.context.profile || {};
+		let profile = this.state.profile || {};
 		let address = profile.address || {};
-		if (this.props.context.type === 'post') {
+		if (this.state.context.type === 'post') {
 			profile = this.state.profile || {};
+		}
+		if (['stream', 'account', 'admin'].indexOf(this.state.context.root) === -1) {
+			return false;
+		}
+		if (this.state.context.root === 'stream' && !this.state.context.type) {
+			return false;
 		}
 		return (
 			<div className="profile">
@@ -56,6 +81,64 @@ let Profile = React.createClass({
 	},
 	_back: function () {
 		this.context.router.transitionTo("orgs");
+	},
+	_context: function () {
+		/** CONTEXT **/
+		// NONE
+		// /stream
+		// USER
+		// /stream/user/:id
+		// ORG
+		// /stream/org/:id
+		// /admin/:id/*
+		// ME
+		// /account/*
+		// /stream/create
+		// /stream/edit/:id
+		// POST
+		// /stream/:id
+
+		let route = this.context.router.getCurrentRoutes();
+		let params = this.context.router.getCurrentParams();
+		let context = {
+			root: null,
+			type: null,
+			id: null
+		};
+
+		if (route[1]) {
+			context.root = route[1].name;
+		}
+		if (route[2]) {
+			context.type = route[2].name;
+		}
+		if (params.id) {
+			context.id = params.id;
+		}
+		this._load(context);
+		this.setState({context: context});
+	},
+	_load: function (context) {
+		// ADMIN
+		if (context.root === 'admin' && context.id > 0) {
+			Actions.Org.single(context.id);
+		}
+		// ACCOUNT
+		if (context.root === 'account') {
+			AccountActions.get();
+		}
+		// STREAM
+		if (context.root === 'stream') {
+			if (context.type === 'me' || context.type === 'create' || context.type === 'edit') {
+				AccountActions.get();
+			}
+			if (context.type === 'users') {
+				Actions.User.single(context.id);
+			}
+			if (context.type === 'orgs') {
+				Actions.Org.single(context.id);
+			}
+		}
 	}
 });
 

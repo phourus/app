@@ -7,7 +7,6 @@ let posts = require('../api/posts');
 let Store = require('../stores/stream');
 let Actions = require('../actions/stream');
 
-let Profile = require('./profile');
 let Scroll = require('react-infinite-scroll')(React);
 
 let Posts = require('./stream/posts');
@@ -58,10 +57,6 @@ let Stream = React.createClass({
 			<div className="stream">
 				{this.state.context.type === 'orgs' && !this.state.context.id
 					? <Organizations context={this.state.context} />
-					: false
-				}
-				{this.state.context.type === 'post' || this.state.context.type === 'orgs' || this.state.context.type === 'users'
-					? <Profile context={this.state.context} />
 					: false
 				}
 				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create'

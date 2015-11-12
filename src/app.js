@@ -8,6 +8,7 @@ var Initializer = ga.Initializer;
 
 let Alerts = require('./react/alerts');
 let Header = require('./react/header');
+let Profile = require('./react/profile');
 
 let App = React.createClass({
   getInitialState: function () {
@@ -22,6 +23,7 @@ let App = React.createClass({
         {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
         <Header tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
         <div className="spacer"></div>
+        <Profile />
         <Alerts {...this.props.alerts} />
         <div className="main">
           <div id="content">
