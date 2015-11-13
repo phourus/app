@@ -24,6 +24,8 @@ router.get('/:id', (req, res) => {
   .then(function (data) {
     res.send(200, data);
     posts.updateStats(id);
+    //posts.setStats(id);
+    posts.setInfluence(id);
   })
   .catch(function (err) {
     console.error(err);

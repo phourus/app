@@ -1,6 +1,8 @@
 var sql = require('sequelize');
 var db = require('../db');
 
+var Influence = require('../influence');
+
 var users = require('./users');
 var orgs = require('./orgs');
 var members = require('./members');
@@ -103,6 +105,55 @@ var posts = db.define('posts', {
     },
     account: function () {
       return this.findAndCountAll({where: {userId: model.userId}});
+    },
+    getStats: function (id) {
+      let where = {where: {postId: id}};
+      return sql.Promise.join(
+        views.count(where),
+        comments.count(where),
+        thumbs.count(where),
+        thumbs.count({where: {postId: id, positive: true}}),
+        (views, comments, thumbs, positive) => {
+          return {
+            views: views,
+            comments: comments,
+            thumbs: thumbs,
+            positive: positive
+          };
+        }
+      )
+    },
+    setStats: function (id) {
+      this.getStats(id)
+      .then((stats) => {
+        let model = {
+          totalViews: stats.views,
+          totalComments: stats.comments,
+          totalThumbs: stats.thumbs,
+          popularity: stats.positive / stats.thumbs * 100
+        };
+        return this.update(model, {where: {id: id}});
+      });
+    },
+    getInfluence: function (id) {
+      return this.getStats(id)
+      .then((stats) => {
+        return Influence.calculate({
+          views: stats.views,
+          comments: stats.comments,
+          popularity: stats.positive / stats.thumbs * 100,
+          votes: stats.thumbs
+        });
+      });
+    },
+    setInfluence: function (id) {
+      return this.getInfluence(id)
+      .then((influence) => {
+        return this.update({influence: influence}, {where: {id: id}});
+      });
+    },
+    addView: function (id) {
+      return views.add({postId: id, viewerId: this.SESSION_USER});
     },
     updateStats: function (id) {
       var self, where, wherePost, viewTotal, commentTotal, thumbTotal, popularity;
