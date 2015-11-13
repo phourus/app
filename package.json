@@ -19,6 +19,7 @@
     "file": "^0.2.2",
     "gulp-cssmin": "^0.1.6",
     "gulp-less": "^3.0.1",
+    "influence": "^0.2.0",
     "jsonwebtoken": "^5.0.2",
     "localStorage": "^1.0.3",
     "mariasql": "0.1.22",
