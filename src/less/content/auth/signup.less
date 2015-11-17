@@ -7,6 +7,34 @@
   padding-bottom: 20px;
   font-size: 0.9em;
 
+  .instructions {
+    display: none;
+  }
+
+  .next {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+
+    button {
+      font-size: 1.5em;
+
+      > span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      &:hover {
+        color: @blue-light;
+      }
+
+      i {
+        font-size: 2em;
+        vertical-align: middle;
+      }
+    }
+  }
+
   div.squeeze {
     width: 95%;
   }
@@ -90,6 +118,7 @@
 
   .form {
     text-align: left;
+    vertical-align: middle;
 
     > div {
       padding: 10px;
@@ -132,10 +161,12 @@
 
     .instructions {
       .Cols(6);
+      display: none;
     }
 
     .form {
       .Cols(6);
+      vertical-align: middle;
     }
   }
 }

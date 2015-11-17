@@ -88,25 +88,6 @@ module.exports = React.createClass({
             <p className={steps[2]}>Your account has been created, welcome to Phourus! You will receive an email confirmation, and can <a>edit your account here</a>.</p>
           </div>
           {this.state.step === 0
-            ? <div className="actions">
-                <button onClick={this._signup} className="blue button submit">Next</button>
-              </div>
-            : false
-          }
-          {this.state.step === 1
-            ? <div className="actions">
-                <button onClick={this._organizations} className="blue button submit">Next</button>
-                <button onClick={this._skip} className="gold button submit">Skip</button>
-              </div>
-            : false
-          }
-          {this.state.step === 2
-            ? <div className="actions">
-                <button onClick={this._account} className="blue button submit">Finish</button>
-              </div>
-            : false
-          }
-          {this.state.step === 0
             ? <div className="form">
               <label>
                 Your Email:
@@ -159,6 +140,25 @@ module.exports = React.createClass({
                 : false
               }
             </div>
+            : false
+          }
+          {this.state.step === 0
+            ? <div className="next">
+                <button onClick={this._signup}>Next <i className="fa fa-chevron-right" /></button>
+              </div>
+            : false
+          }
+          {this.state.step === 1
+            ? <div className="next">
+                <button onClick={this._organizations}>Next <i className="fa fa-chevron-right" /></button><br />
+                <button onClick={this._skip}>Skip <i className="fa fa-chevron-right" /></button>
+              </div>
+            : false
+          }
+          {this.state.step === 2
+            ? <div className="next">
+                <button onClick={this._account}>Finish <i className="fa fa-chevron-right" /></button>
+              </div>
             : false
           }
         </div>

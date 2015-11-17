@@ -506,6 +506,11 @@ select {
   font-size: 1.1em;
   color: #444444;
 }
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
 button.button[disabled='disabled'],
 button.button:disabled,
 input.button[disabled='disabled'],
@@ -880,6 +885,28 @@ div.alerts button {
   padding-bottom: 20px;
   font-size: 0.9em;
 }
+#content .landing .signup .instructions {
+  display: none;
+}
+#content .landing .signup .next {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+#content .landing .signup .next button {
+  font-size: 1.5em;
+}
+#content .landing .signup .next button > span {
+  display: inline-block;
+  vertical-align: middle;
+}
+#content .landing .signup .next button:hover {
+  color: #5faee3;
+}
+#content .landing .signup .next button i {
+  font-size: 2em;
+  vertical-align: middle;
+}
 #content .landing .signup div.squeeze {
   width: 95%;
 }
@@ -948,6 +975,7 @@ div.alerts button {
 }
 #content .landing .signup .form {
   text-align: left;
+  vertical-align: middle;
 }
 #content .landing .signup .form > div {
   padding: 10px;
@@ -970,11 +998,13 @@ div.alerts button {
     width: 50%;
     display: inline-block;
     vertical-align: top;
+    display: none;
   }
   #content .landing .signup .form {
     width: 50%;
     display: inline-block;
     vertical-align: top;
+    vertical-align: middle;
   }
 }
 #content .about {
