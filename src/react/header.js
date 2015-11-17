@@ -94,7 +94,7 @@ let Header = React.createClass({
               : <nav>
                   <ul>
                     <li className="create">
-                      <Link to="account">
+                      <Link to="home">
                         <i className="fa fa-sign-in" />
                         Login
                       </Link>
