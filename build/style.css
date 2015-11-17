@@ -883,9 +883,24 @@ div.alerts button {
 #content .landing .signup div.squeeze {
   width: 95%;
 }
+#content .landing .signup .steps {
+  margin-bottom: 20px;
+}
+#content .landing .signup .steps ul {
+  margin: 0;
+  padding: 0;
+}
+#content .landing .signup .steps ul li {
+  list-style: none;
+  display: inline-block;
+  width: 100px;
+}
+#content .landing .signup .steps ul li .label {
+  font-size: 0.8em;
+}
 #content .landing .signup .progress {
   margin: auto;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
   width: 300px;
 }
 #content .landing .signup .progress ul {
@@ -900,9 +915,12 @@ div.alerts button {
   color: #333;
   margin-right: 2px;
   margin-bottom: 2px;
-  height: 60px;
-  width: 300px;
-  vertical-align: top;
+  vertical-align: middle;
+  display: inline-block;
+}
+#content .landing .signup .progress ul li.line {
+  border-top: solid 2px #333;
+  width: 90px;
 }
 #content .landing .signup .progress ul li .step {
   width: 20px;
@@ -939,11 +957,13 @@ div.alerts button {
   #content .landing .signup div.squeeze {
     width: 60%;
   }
+  #content .landing .signup .steps ul li {
+    width: 220px;
+  }
   #content .landing .signup .progress {
     width: 100%;
   }
-  #content .landing .signup .progress ul li {
-    display: inline-block;
+  #content .landing .signup .progress ul li.line {
     width: 200px;
   }
   #content .landing .signup .instructions {

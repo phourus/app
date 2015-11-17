@@ -11,9 +11,28 @@
     width: 95%;
   }
 
+  .steps {
+    margin-bottom: 20px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        display: inline-block;
+        width: 100px;
+
+        .label {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+
   .progress {
     margin: auto;
-    padding: 20px 0;
+    padding: 20px 0 0 0;
     width: 300px;
 
     ul {
@@ -28,9 +47,13 @@
         color: #333;
         margin-right: 2px;
         margin-bottom: 2px;
-        height: 60px;
-        width: 300px;
-        vertical-align: top;
+        vertical-align: middle;
+        display: inline-block;
+
+        &.line {
+          border-top: solid 2px #333;
+          width: 90px;
+        }
 
         .step {
           width: 20px;
@@ -83,14 +106,26 @@
       width: 60%;
     }
 
+    .steps {
+
+      ul {
+
+        li {
+          width: 220px;
+        }
+      }
+    }
+
     .progress {
       width: 100%;
 
       ul {
 
         li {
-          display: inline-block;
-          width: 200px;
+
+          &.line {
+            width: 200px;
+          }
         }
       }
     }

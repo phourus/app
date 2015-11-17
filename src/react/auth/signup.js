@@ -57,14 +57,26 @@ module.exports = React.createClass({
           <ul>
             <li className={steps[0]}>
               <div className="step"></div>
-              <div className="label">Account Info</div>
             </li>
+            <li className="line"></li>
             <li className={steps[1]}>
               <div className="step"></div>
-              <div className="label">Organizations</div>
             </li>
+            <li className="line"></li>
             <li className={steps[2]}>
               <div className="step"></div>
+            </li>
+          </ul>
+        </div>
+        <div className="steps">
+          <ul>
+            <li>
+              <div className="label">Account Info</div>
+            </li>
+            <li>
+              <div className="label">Organizations</div>
+            </li>
+            <li>
               <div className="label">Account Access</div>
             </li>
           </ul>
