@@ -3,7 +3,11 @@ let React = require('react');
 let Router = require('react-router');
 let { RouteHandler, Link } = Router;
 
+let AccountActions = require('../../actions/account');
+let OrgActions = require('../../actions/profile').Org;
+
 let ImageUploader = require('../../pic');
+let Token = require('../../token');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -33,12 +37,10 @@ module.exports = React.createClass({
   _upload: function (e) {
     var id = this.state.id;
     this.uploader.click();
-    var uploader = new ImageUploader({
+    var options = {
       inputElement: this.uploader,
-      uploadUrl: '/rest/orgs/' + id + '/pic',
-      uploadUrl: '/rest/account/pic',
       headers: {
-        "Authorization": require('../token').get()
+        "Authorization": Token.get()
       },
       onProgress: function (event) {
         // event.done, event.total
@@ -46,19 +48,29 @@ module.exports = React.createClass({
       onFileComplete: function (event, file) {
         // file.fileName, event.target.status
       },
-      onComplete: function (event) {
-        Actions.single(id);
-        Actions.get();
-        // event.done, event.total
-      },
       maxWidth: 400,
       quality: 1,
       //timeout: 5000,
       debug : true
-    });
-  },
-  _upload: function (e) {
-    this.uploader.click()
+    };
+
+    if (this.props.context.root === 'admin') {
+      let id = this.props.context.id;
+      if (!id) {
+        return;
+      }
+      options.uploadUrl = '/rest/orgs/' + id + '/pic';
+      options.onComplete = function (event) {
+        OrgActions.single(id);
+      };
+    } else {
+      options.uploadUrl = '/rest/account/pic';
+      options.onComplete = function (event) {
+        AccountActions.get();
+      };
+    }
+
+    new ImageUploader(options);
   },
   _default: function () {
     this.setState({img: this.state.default});

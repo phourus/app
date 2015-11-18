@@ -11,6 +11,7 @@ let AccountActions = require('../actions/account');
 let PostStore = require('../stores/post');
 let PostActions = require('../actions/post');
 let Pic = require('./shared/pic');
+let Uploader = require('./shared/uploader');
 
 let Profile = React.createClass({
 	mixins: [Navigation],
@@ -65,7 +66,10 @@ let Profile = React.createClass({
 		}
 		return (
 			<div className="profile">
-				<Pic img={profile.img} />
+				{this.state.context.root === 'account' || this.state.context.root === 'admin'
+					? <Uploader img={profile.img} context={this.state.context} />
+					: <Pic img={profile.img} context={this.state.context} />
+				}
 				<div className="basic">
 					<h1 className="name">{profile.name || profile.first + ' ' + profile.last}</h1>
 					{address.city || address.state ? <div>{address.city}{address.city && address.state ? ", " : ""}{address.state}</div> : false}

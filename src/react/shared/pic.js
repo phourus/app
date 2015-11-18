@@ -4,32 +4,34 @@ let Router = require('react-router');
 let { Link } = Router;
 
 module.exports = React.createClass({
+  getDefaultProps: function () {
+    return {
+      context: {
+        id: 0,
+        type: ""
+      },
+      name: ""
+    };
+  },
   getInitialState: function () {
     return {
-			id: 0,
-      img: '/assets/avatars/default.jpg',
-      default: '/assets/avatars/default.jpg',
-      name: ""
-    }
-  },
-  componentDidMount: function () {
-    this.setState(this.props);
-  },
-  componentWillReceiveProps: function (data) {
-    if (data.img) {
-      this.setState(data);
-    }
+      default: false
+    };
   },
   render: function () {
+    let img = this.props.img;
+    if (this.state.default) {
+      img = '/assets/avatars/default.jpg';
+    }
     return (
       <div className="pic">
-        <Link to={this.props.context === 'org' ? "orgPosts" : "userPosts"} params={{id: this.state.id}}>
-          <img src={this.state.img} onError={this._default} alt={"Phourus Profile Pic for " + this.state.name} />
+        <Link to={this.props.context.type === 'org' ? "orgPosts" : "userPosts"} params={{id: this.props.context.id || 0}}>
+          <img src={img} onError={this._default} alt={"Phourus Profile Pic for " + this.props.name} />
         </Link>
       </div>
     );
   },
   _default: function () {
-    this.setState({img: this.state.default});
+    this.setState({default: true});
   }
 });
