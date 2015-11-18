@@ -150,7 +150,7 @@ let List = React.createClass({
       <div className="list">
         {this.state.orgs.map((item) => {
           var admin = false;
-          if (item.admin === true) {
+          if (item.admin === true && item.approved) {
             admin = <button id={item.org.id} className="button blue" onClick={this._edit}>Admin</button>
           }
           return (
