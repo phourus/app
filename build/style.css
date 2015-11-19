@@ -3805,9 +3805,6 @@ div.spacer {
 .profile .pic img {
   width: 95%;
   margin: 0;
-  padding: 0;
-  cursor: pointer;
-  border: solid 4px #999;
 }
 .profile .basic {
   width: 33.33333333%;
@@ -4202,6 +4199,14 @@ i.fa-minus {
 }
 .gold {
   color: #ecb010;
+}
+/** PIC **/
+.pic img {
+  border-radius: 50%;
+  padding: 1px;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: solid 1px #ddd;
 }
 /** MESSAGES **/
 .message {
