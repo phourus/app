@@ -3453,7 +3453,7 @@ div.post {
 .main:after {
   clear: both;
 }
-.main #sidebar {
+.main.sidebar #sidebar {
   width: 40px;
   position: fixed;
   left: 0;
@@ -3462,14 +3462,14 @@ div.post {
   height: 100%;
   vertical-align: top;
 }
-.main #content {
+.main.sidebar #content {
   position: absolute;
   left: 40px;
 }
-.main.sidebarVisible #sidebar {
+.main.sidebar.visible #sidebar {
   width: 200px;
 }
-.main.sidebarVisible #content {
+.main.sidebar.visible #content {
   left: 200px;
 }
 #content > div {
@@ -3514,7 +3514,7 @@ header {
   width: 100%;
   height: 50px;
   position: fixed;
-  background-color: #333;
+  background-color: #f7f7f7;
   opacity: 1;
   z-index: 9999;
 }
@@ -3530,16 +3530,15 @@ header .brand a {
   height: 50px;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url('/assets/logos/logo-new.png');
+  background-image: url('/assets/logos/logo-dark.png');
 }
 header .brand a:hover {
-  background-image: url('/assets/logos/logo-hover.png');
+  background-image: url('/assets/logos/logo-dark-hover.png');
 }
 header .keywords {
   top: 40px;
   height: 40px;
-  background-color: #555;
-  border: solid 1px #666;
+  border: solid 1px #eee;
   position: relative;
   margin-top: 10px;
   box-sizing: border-box;
@@ -3665,7 +3664,7 @@ header nav > ul > li .fa {
   margin-bottom: 12px;
 }
 header nav > ul > li a {
-  color: #eee;
+  color: #555;
   text-align: center;
   font-size: 0.6em;
 }
@@ -3674,7 +3673,7 @@ header nav > ul > li a span {
   display: block;
 }
 header nav > ul > li a:hover {
-  color: #aaa;
+  color: #333;
 }
 header nav > ul > li.leaders:hover {
   color: #ed0303;

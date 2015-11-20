@@ -2,7 +2,7 @@
 let React = require('react');
 
 let Router = require('react-router');
-let { Link, RouteHandler} = Router;
+let { Link, RouteHandler, State } = Router;
 var ga = require('./analytics');
 var Initializer = ga.Initializer;
 
@@ -11,6 +11,7 @@ let Header = require('./react/header');
 let Profile = require('./react/profile');
 
 let App = React.createClass({
+  mixins: [State],
   getInitialState: function () {
     return {
       sidebarVisible: false,
@@ -18,6 +19,17 @@ let App = React.createClass({
     };
   },
   render: function () {
+    let className = "main";
+    let route = this.context.router.getCurrentRoutes();
+
+    if (route[1] && route[1].name === 'stream') {
+      className += " sidebar";
+
+      if (this.state.sidebarVisible) {
+        className += " visible";
+      }
+    }
+
     return  (
       <div>
         <Initializer />
@@ -26,7 +38,7 @@ let App = React.createClass({
         <div className="spacer"></div>
         <Profile />
         <Alerts {...this.props.alerts} />
-        <div className={this.state.sidebarVisible ? "main sidebarVisible" : "main"}>
+        <div className={className}>
           <Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
           <div id="content">
             <RouteHandler />
