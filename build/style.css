@@ -3453,6 +3453,25 @@ div.post {
 .main:after {
   clear: both;
 }
+.main #sidebar {
+  width: 40px;
+  position: fixed;
+  left: 0;
+  box-sizing: border-box;
+  background-color: #333;
+  height: 100%;
+  vertical-align: top;
+}
+.main #content {
+  position: absolute;
+  left: 40px;
+}
+.main.sidebarVisible #sidebar {
+  width: 200px;
+}
+.main.sidebarVisible #content {
+  left: 200px;
+}
 #content > div {
   margin: 20px auto 0 auto;
   width: 90%;
@@ -3871,6 +3890,37 @@ div.spacer {
     display: inline-block;
     vertical-align: top;
   }
+}
+#sidebar i {
+  font-size: 2em;
+  color: #eee;
+}
+#sidebar ul {
+  margin: 20px 0 0 0;
+  padding: 0;
+  border-top: solid 1px #777;
+}
+#sidebar ul li {
+  border-bottom: solid 1px #777;
+  padding: 10px 0 10px 10px;
+}
+#sidebar ul li:hover {
+  background-color: #000;
+}
+#sidebar ul li .title {
+  font-size: 1.5em;
+  color: #eee;
+}
+#sidebar ul li .count {
+  font-size: 0.8em;
+  font-style: italic;
+}
+#sidebar ul li a {
+  display: block;
+}
+#sidebar ul li a:hover .title,
+#sidebar ul li a:hover .count {
+  color: #ecb010;
 }
 /** COLORS **/
 /** BODY **/

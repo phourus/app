@@ -1,0 +1,43 @@
+#sidebar {
+
+  i {
+    font-size: 2em;
+    color: #eee;
+  }
+
+  ul {
+    margin: 20px 0 0 0;
+    padding: 0;
+    border-top: solid 1px #777;
+
+    li {
+      border-bottom: solid 1px #777;
+      padding: 10px 0 10px 10px;
+
+      &:hover {
+        background-color: #000;
+      }
+
+      .title {
+        font-size: 1.5em;
+        color: #eee;
+      }
+
+      .count {
+        font-size: 0.8em;
+        font-style: italic;
+      }
+
+      a {
+        display: block;
+
+        &:hover {
+
+          .title, .count {
+            color: @gold;
+          }
+        }
+      }
+    }
+  }
+}
