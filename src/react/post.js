@@ -13,6 +13,7 @@ let Details = require('./post/details');
 let Links = require('./post/links');
 let Poll = require('./post/poll');
 let Privacy = require('./post/privacy');
+let Share = require('./post/share');
 let Stats = require('./post/stats');
 let Tags = require('./post/tags');
 let Thumbs = require('./post/thumbs');
@@ -146,6 +147,7 @@ let Single = React.createClass({
 				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
 				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Stats post={this.props.post} context={this.props.context} />
+				<Share />
 				<Links post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Comments post={this.props.post} />
 			</div>

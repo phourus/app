@@ -1915,6 +1915,12 @@ div.alerts button {
 .fa-rss {
   color: #f26522;
 }
+.fa-slack {
+  color: #4D394B;
+}
+.fa-envelope {
+  color: #ccc;
+}
 #content .landing .integrate {
   padding-bottom: 60px;
   width: 100%;
@@ -2871,6 +2877,38 @@ div.post .interact {
 .privacyToggle:hover {
   cursor: pointer;
   color: #f2c13d;
+}
+.postItem .share div.toggle {
+  font-size: 0.9em;
+  padding: 10px;
+}
+.postItem .share div.toggle:hover {
+  color: #3498db;
+  background-color: #eee;
+  cursor: pointer;
+}
+.postItem .share div.toggle i.fa-share {
+  font-size: 2em;
+  margin-right: 10px;
+}
+.postItem .share ul {
+  margin: 0;
+  padding: 0;
+}
+.postItem .share ul li {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px;
+}
+.postItem .share ul li:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.postItem .share ul li > i {
+  font-size: 1.5em;
+}
+.postItem .share ul li i.fa-close {
+  color: #ed0303;
 }
 .stats {
   color: #999;
