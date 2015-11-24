@@ -147,7 +147,7 @@ let Single = React.createClass({
 				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
 				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Stats post={this.props.post} context={this.props.context} />
-				<Share />
+				<Share post={this.props.post} />
 				<Links post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Comments post={this.props.post} />
 			</div>
