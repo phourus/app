@@ -22,7 +22,7 @@ let App = React.createClass({
     let className = "main";
     let route = this.context.router.getCurrentRoutes();
 
-    if (route[1] && route[1].name === 'stream') {
+    if (route[1] && route[1].name === 'INVALID') {
       className += " sidebar";
 
       if (this.state.sidebarVisible) {
