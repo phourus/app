@@ -3648,7 +3648,9 @@ header nav > ul > li:hover > div {
   display: block;
   position: absolute;
   top: 50px;
-  background-color: #333;
+  background-color: #f7f7f7;
+  border: solid 1px #ddd;
+  box-sizing: border-box;
   width: 300px;
   right: 0;
   z-index: 9999;
@@ -3690,8 +3692,7 @@ header nav > ul > li:hover > div ul > li > a i.fa {
   display: block;
 }
 header nav > ul > li:hover > div ul > li > a:hover {
-  background-color: #000;
-  color: #f2c13d;
+  background-color: #ddd;
 }
 header nav > ul > li:hover > div ul .fa {
   font-size: 0.8em;
