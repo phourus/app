@@ -63,6 +63,8 @@ let Post = React.createClass({
 				this.context.router.transitionTo("edit", {id: data.post.id});
 			}
 			if (data.post) {
+				document.title = data.post.title;
+				document.description = data.post.content.slice(0, 120);
 				this.setState({post: data.post});
 			}
 			if (data.deleted) {
