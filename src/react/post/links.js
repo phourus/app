@@ -1,8 +1,8 @@
 "use strict";
 let React = require('react');
 
-let Actions = require('../../actions/post').Links;
-let Store = require('../../stores/post').Links;
+let Actions = require('../../actions/post/links');
+let Store = require('../../stores/post/links');
 
 let File = require('react-dropzone-component');
 

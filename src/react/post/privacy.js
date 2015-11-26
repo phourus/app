@@ -4,8 +4,8 @@ let Router = require('react-router');
 let { Navigation } = Router;
 
 let Actions = require('../../actions/post');
-let Store = require('../../stores/post').Collaborators;
-let ActionsCollaborators = require('../../actions/post').Collaborators;
+let Store = require('../../stores/post/collaborators');
+let ActionsCollaborators = require('../../actions/post/collaborators');
 let ActionsAccount = require('../../actions/account');
 let AccountStore = require('../../stores/account');
 

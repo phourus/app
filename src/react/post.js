@@ -99,7 +99,6 @@ let Post = React.createClass({
 		let id = this.getParams().id || null;
 		if (this.props.context.type === 'edit' || this.props.context.type === 'post') {
 			Actions.single(id);
-			Actions.Comments.collection({postId: id});
 		}
 		if (this.props.context.type === 'create') {
 			Actions.change('title', 'New Post');

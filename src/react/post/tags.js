@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 
-let Actions = require('../../actions/post').Tags;
+let Actions = require('../../actions/post/tags');
 let StreamActions = require('../../actions/stream');
 
 let Tags = React.createClass({

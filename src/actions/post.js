@@ -10,31 +10,4 @@ module.exports = {
   trash: Reflux.createAction(),
   poll: Reflux.createAction(),
   vote: Reflux.createAction(),
-  Comments: {
-    collection: Reflux.createAction(),
-    add: Reflux.createAction(),
-    save: Reflux.createAction(),
-    remove: Reflux.createAction()
-  },
-  Thumbs: {
-    post: Reflux.createAction(),
-    add: Reflux.createAction(),
-    save: Reflux.createAction(),
-    remove: Reflux.createAction()
-  },
-  Tags: {
-    add: Reflux.createAction(),
-    remove: Reflux.createAction()
-  },
-  Links: {
-    add: Reflux.createAction(),
-    save: Reflux.createAction(),
-    remove: Reflux.createAction()
-  },
-  Collaborators: {
-    collection: Reflux.createAction(),
-    add: Reflux.createAction(),
-    remove: Reflux.createAction(),
-    lookup: Reflux.createAction()
-  }
 };

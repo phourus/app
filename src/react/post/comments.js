@@ -4,9 +4,9 @@ let Router = require('react-router');
 let { Link, State, Navigation } = Router;
 let moment = require('moment');
 
-let Actions = require('../../actions/post').Comments;
+let Actions = require('../../actions/post/comments');
+let Store = require('../../stores/post/comments');
 
-let Store = require('../../stores/post').Comments;
 let AccountStore = require('../../stores/account');
 
 let Pic = require('../shared/pic');

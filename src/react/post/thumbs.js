@@ -3,8 +3,8 @@ let React = require('react');
 let Router = require('react-router');
 let { State } = Router;
 
-let Store = require('../../stores/post').Thumbs;
-let Actions = require('../../actions/post').Thumbs;
+let Store = require('../../stores/post/thumbs');
+let Actions = require('../../actions/post/thumbs');
 
 let Thumbs = React.createClass({
    mixins: [State],
