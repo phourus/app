@@ -53,7 +53,7 @@ let Share = React.createClass({
   _fb: function () {
     let url = "https://www.facebook.com/dialog/share";
     let params = {
-      app_id: 145634995501895,
+      app_id: 1663090460638387,
       display: 'popup',
       href: this.state.base + this.props.post.id,
       redirect_uri: this.state.base + this.props.post.id
