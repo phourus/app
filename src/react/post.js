@@ -13,6 +13,7 @@ let Details = require('./post/details');
 let Links = require('./post/links');
 let Poll = require('./post/poll');
 let Privacy = require('./post/privacy');
+let Profile = require('./profile');
 let Share = require('./post/share');
 let Stats = require('./post/stats');
 let Tags = require('./post/tags');
@@ -142,12 +143,13 @@ let Single = React.createClass({
 		return (
 			<div className="single postItem">
 				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
 				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Stats post={this.props.post} context={this.props.context} />
 				<Share post={this.props.post} />
+				<Profile context={this.props.context} postMode={true} />
+				<Stats post={this.props.post} context={this.props.context} />
 				<Links post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Comments post={this.props.post} />
 			</div>

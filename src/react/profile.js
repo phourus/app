@@ -64,6 +64,12 @@ let Profile = React.createClass({
 		if (this.state.context.root === 'stream' && !this.state.context.type) {
 			return false;
 		}
+		if (this.state.context.type === 'post' && !this.props.postMode) {
+			return false;
+		}
+		if (this.state.context.type === 'edit') {
+			return false;
+		}
 		return (
 			<div className="profile">
 				{this.state.context.root === 'account' || this.state.context.root === 'admin'

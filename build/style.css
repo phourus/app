@@ -2720,7 +2720,7 @@ div.post .collaborators {
 }
 div.post .interact {
   position: static;
-  margin: 20px 0;
+  margin: 0 0 20px 0;
   padding: 10px 0;
 }
 .interact {
@@ -3135,6 +3135,7 @@ div.post {
 div.post {
   width: 100%;
   max-width: 100%;
+  margin-top: 60px;
 }
 .postItem {
   width: 98%;
