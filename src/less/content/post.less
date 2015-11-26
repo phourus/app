@@ -18,6 +18,11 @@ div.posts, div.post {
   min-height: 600px;
 }
 
+div.post {
+  width: 100%;
+  max-width: 100%;
+}
+
 .postItem {
   width: 98%;
   margin: 1%;
@@ -42,6 +47,17 @@ div.posts, div.post {
 
     > a.edit {
       margin-right: 20px;
+    }
+  }
+
+  &.single {
+    width: 100%;
+    margin: 0;
+    background-color: #fff;
+    margin-top: -60px;
+
+    .title {
+      font-size: 2em;
     }
   }
 

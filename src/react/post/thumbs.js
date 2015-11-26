@@ -30,8 +30,8 @@ let Thumbs = React.createClass({
      this.unsubscribe();
    },
    render: function () {
-		 let classLike = "button green medium";
-		 let classDislike = "button red medium";
+		 let classLike = "button up medium";
+		 let classDislike = "button down medium";
      if (this.state.positive === true) {
        classLike += ' selected';
      } else if (this.state.positive === false) {
@@ -41,8 +41,8 @@ let Thumbs = React.createClass({
      return (
         <div className="thumb">
           <div className="buttons">
-            <button className={classLike} onClick={this.state.positive === true ? this._remove : this._like}><i className="fa fa-arrow-circle-o-up" /> <span className="total"> Like</span></button>
-            <button className={classDislike} onClick={this.state.positive === false ? this._remove: this._dislike}><i className="fa fa-arrow-circle-o-down" /> <span className="total"> Dislike</span></button>
+            <button className={classLike} onClick={this.state.positive === true ? this._remove : this._like}><i className="fa fa-angle-up" /> <span className="total"> Like</span></button>
+            <button className={classDislike} onClick={this.state.positive === false ? this._remove: this._dislike}><i className="fa fa-angle-down" /> <span className="total"> Dislike</span></button>
           </div>
         </div>
      );

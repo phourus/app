@@ -57,9 +57,8 @@ let Comments = React.createClass({
     }
     return (
       <div className="comments">
-				<h2>Comments</h2>
-        <div className="list">{comments}</div>
         {create}
+        <div className="list">{comments}</div>
       </div>
     );
   }
@@ -84,7 +83,7 @@ Comments.Create = React.createClass({
             <img src={"/assets/avatars/1.jpg"} />
           </Link>
         </div>
-        <textarea ref="comment" placeholder="Comment goes here" value={this.state.content} onChange={this._content} />
+        <textarea ref="comment" placeholder="Enter your comment here" value={this.state.content} onChange={this._content} />
         <button className="button green add" onClick={this._add}>
           <i className="fa fa-comment" /> Post Comment
         </button>
@@ -142,7 +141,7 @@ Comments.Comment = React.createClass({
 				<Pic id={this.props.user.id} img={this.props.user.img} />
         <div className="content">
 					<Link to="userPosts" params={{id: this.props.user.id}} className="username">
-						{this.props.user.first} {this.props.user.last} ({this.props.user.influence})
+						{this.props.user.first} {this.props.user.last}
 					</Link>
           <p>{this.props.comment.content}</p>
           <span className="date">{moment(this.props.comment.createdAt).fromNow()}</span>

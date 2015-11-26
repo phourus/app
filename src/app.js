@@ -39,7 +39,6 @@ let App = React.createClass({
         <Profile />
         <Alerts {...this.props.alerts} />
         <div className={className}>
-          <Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
           <div id="content">
             <RouteHandler />
           </div>

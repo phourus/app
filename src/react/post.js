@@ -144,8 +144,8 @@ let Single = React.createClass({
 		return (
 			<div className="single postItem">
 				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
 				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Stats post={this.props.post} context={this.props.context} />

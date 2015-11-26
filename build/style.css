@@ -2594,7 +2594,6 @@ div.post .collaborators {
   font-style: italic;
 }
 .comments .create {
-  background-color: #333333;
   max-width: 96%;
   width: 100%;
   margin: 0 auto;
@@ -2610,8 +2609,8 @@ div.post .collaborators {
   clear: both;
 }
 .comments .create .pic {
-  width: 10%;
-  display: inline-block;
+  width: 0%;
+  display: none;
   vertical-align: top;
 }
 .comments .create .pic img {
@@ -2622,11 +2621,11 @@ div.post .collaborators {
 .comments .create textarea {
   display: inline-block;
   border: none;
-  height: 160px;
-  width: 90%;
+  height: 120px;
+  width: 100%;
+  background-color: #eee;
 }
 .comments .create button.button {
-  float: right;
   margin: 0;
   padding: 0;
 }
@@ -2725,7 +2724,8 @@ div.post .interact {
   padding: 10px 0;
 }
 .interact {
-  background-color: #efefef;
+  border-top: solid 1px #eee;
+  border-bottom: solid 1px #eee;
 }
 .interact > div {
   display: inline-block;
@@ -2744,10 +2744,6 @@ div.post .interact {
 .interact .stats {
   width: 110px;
   padding-bottom: 6px;
-}
-.interact .thumb {
-  width: 360px;
-  text-align: right;
 }
 .interact i {
   font-size: 1.5em;
@@ -3009,41 +3005,43 @@ div.post .tags {
 .tagField button:hover {
   background-color: #5faee3;
 }
-.thumb {
-  float: right;
-}
 .thumb button.button {
   font-size: 0.7em;
-  height: 60px;
-  width: 160px;
+  height: 40px;
+  width: 120px;
   display: inline-block;
 }
+.thumb button.button.up,
+.thumb button.button.down {
+  color: #333;
+}
+.thumb button.button:hover.up {
+  color: #9cd900;
+}
+.thumb button.button:hover.down {
+  color: #fc2727;
+}
 .thumb button.button.selected {
-  background-color: #eee;
   box-sizing: border-box;
 }
-.thumb button.button.selected.green {
-  border: solid 1px #9cd900;
+.thumb button.button.selected.up {
+  color: #8abf00;
 }
-.thumb button.button.selected.red {
-  border: solid 1px #fc2727;
+.thumb button.button.selected.down {
+  color: #ed0303;
 }
 .thumb button.button i {
   font-size: 3em;
-  color: #FFF;
   opacity: 0.5;
   float: left;
 }
 .thumb button.button .total {
   font-size: 1.5em;
-  color: #FFF;
   opacity: 0.9;
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
   display: block;
-  width: 100px;
-  float: right;
-  margin: 12px 2px 0 0;
-  text-align: right;
+  margin: 12px 2px 0 10px;
+  text-align: left;
 }
  > .types {
   max-width: 100%;
@@ -3195,6 +3193,10 @@ div.post {
   margin: auto;
   min-height: 600px;
 }
+div.post {
+  width: 100%;
+  max-width: 100%;
+}
 .postItem {
   width: 98%;
   margin: 1%;
@@ -3219,6 +3221,15 @@ div.post {
 }
 .postItem.selected > a.edit {
   margin-right: 20px;
+}
+.postItem.single {
+  width: 100%;
+  margin: 0;
+  background-color: #fff;
+  margin-top: -60px;
+}
+.postItem.single .title {
+  font-size: 2em;
 }
 .postItem ul {
   margin: 20px 0 0 0;

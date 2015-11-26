@@ -40,7 +40,7 @@ let Links = React.createClass({
 	render: function () {
 		return (
 			<div className="links">
-				<h2>Links & Attachments</h2>
+				{this.props.context.type === 'edit' ? <h2>Links & Attachments</h2> : false}
 				{this.props.context.type === 'edit' && this.props.owner && this.state.mode !== 'edit' && this.state.mode !== 'add'
 					? <button className="green button" onClick={this._add}>Add Link</button>
 					: false
@@ -72,9 +72,7 @@ Links.List = React.createClass({
 		let links = this.props.post.links || [];
 		if (links.length < 1) {
 			return (
-				<div className="list">
-					<h3>This post does not have any links</h3>
-				</div>
+				<div className="list"></div>
 			);
 		}
 		return (
