@@ -1,0 +1,75 @@
+.type {
+  font-size: 0.8em;
+  text-transform: capitalize;
+  .rounded(6px);
+  color: white;
+  padding: 4px;
+  text-align: center;
+  width: 100px;
+  background-color: #333;
+  margin: 4px 0;
+  cursor: pointer;
+  border: solid 1px transparent;
+}
+
+.type.blog, .type.event {
+  background-color: @green; color: #fff;
+
+  &.inverted {
+    background-color: #fafafa;
+    border: solid 1px @green-light;
+    color: @green-light;
+  }
+
+  &:hover {
+    background-color: @green-dark;
+    color: @grey-light;
+  }
+}
+.type.subject, .type.question {
+  background-color: @blue; color: #fff;
+
+  &.inverted {
+    background-color: #fafafa;
+    border: solid 1px @blue-light;
+    color: @blue-light;
+  }
+
+  &:hover {
+    background-color: @blue-dark;
+    color: @grey-light;
+  }
+}
+.type.debate, .type.poll {
+  background-color: @red; color: #fff;
+
+  &.inverted {
+    background-color: #fafafa;
+    border: solid 1px @red-light;
+    color: @red-light;
+  }
+
+  &:hover {
+    background-color: @red-dark;
+    color: @grey-light;
+  }
+}
+.type.quote, .type.belief {
+  background-color: @gold; color: #fff;
+
+  &.inverted {
+    background-color: #fafafa;
+    border: solid 1px @gold-light;
+    color: @gold-light;
+  }
+
+  &:hover {
+    background-color: @gold-dark;
+    color: @grey-light;
+  }
+}
+
+.selector {
+  position: absolute;
+  z-index: 99999;
+}

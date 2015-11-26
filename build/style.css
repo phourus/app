@@ -3043,149 +3043,88 @@ div.post .tags {
   margin: 12px 2px 0 10px;
   text-align: left;
 }
- > .types {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-}
- > .types:before,
- > .types:after {
-  content: "";
-  display: table;
-}
- > .types:after {
-  clear: both;
-}
- > .types > div {
-  width: 98%;
-  margin: 10px 1% 10px 0;
-  text-align: center;
-  border: solid 1px #dddddd;
-  box-sizing: border-box;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  cursor: pointer;
-  padding: 1%;
-  min-height: 4em;
-}
- > .types > div strong {
-  font-size: 1.5em;
-  line-height: 1.5em;
-  font-weight: normal;
-  text-transform: capitalize;
-}
- > .types > div p {
-  margin: 20px 0;
-  padding: 0px;
+.type {
   font-size: 0.8em;
+  text-transform: capitalize;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  color: white;
+  padding: 4px;
+  text-align: center;
+  width: 100px;
+  background-color: #333;
+  margin: 4px 0;
+  cursor: pointer;
+  border: solid 1px transparent;
 }
- > .types > div label {
-  width: 100%;
-  max-width: 300px;
-  color: #333;
-  font-size: 1.2em;
-  font-weight: bold;
-  text-align: left;
+.type.blog,
+.type.event {
+  background-color: #8abf00;
+  color: #fff;
 }
- > .types > div > div.selected {
-  display: block;
+.type.blog.inverted,
+.type.event.inverted {
+  background-color: #fafafa;
+  border: solid 1px #9cd900;
+  color: #9cd900;
 }
- > .types > div.blog,
- > .types > div.event {
-  border-left: solid 4px #658c00;
+.type.blog:hover,
+.type.event:hover {
+  background-color: #658c00;
+  color: #eeeeee;
 }
- > .types > div.blog:hover,
- > .types > div.event:hover {
-  background-color: rgba(138, 191, 0, 0.1);
+.type.subject,
+.type.question {
+  background-color: #3498db;
+  color: #fff;
 }
- > .types > div.blog.selected,
- > .types > div.event.selected {
-  background-color: rgba(138, 191, 0, 0.2);
+.type.subject.inverted,
+.type.question.inverted {
+  background-color: #fafafa;
+  border: solid 1px #5faee3;
+  color: #5faee3;
 }
- > .types > div.subject,
- > .types > div.question {
-  border-left: solid 4px #217dbb;
+.type.subject:hover,
+.type.question:hover {
+  background-color: #217dbb;
+  color: #eeeeee;
 }
- > .types > div.subject:hover,
- > .types > div.question:hover {
-  background-color: rgba(52, 152, 219, 0.1);
+.type.debate,
+.type.poll {
+  background-color: #ed0303;
+  color: #fff;
 }
- > .types > div.subject.selected,
- > .types > div.question.selected {
-  background-color: rgba(52, 152, 219, 0.2);
+.type.debate.inverted,
+.type.poll.inverted {
+  background-color: #fafafa;
+  border: solid 1px #fc2727;
+  color: #fc2727;
 }
- > .types > div.debate,
- > .types > div.poll {
-  border-left: solid 4px #bb0202;
+.type.debate:hover,
+.type.poll:hover {
+  background-color: #bb0202;
+  color: #eeeeee;
 }
- > .types > div.debate:hover,
- > .types > div.poll:hover {
-  background-color: rgba(237, 3, 3, 0.1);
+.type.quote,
+.type.belief {
+  background-color: #ecb010;
+  color: #fff;
 }
- > .types > div.debate.selected,
- > .types > div.poll.selected {
-  background-color: rgba(237, 3, 3, 0.2);
+.type.quote.inverted,
+.type.belief.inverted {
+  background-color: #fafafa;
+  border: solid 1px #f2c13d;
+  color: #f2c13d;
 }
- > .types > div.quote,
- > .types > div.belief {
-  border-left: solid 4px #bc8c0d;
+.type.quote:hover,
+.type.belief:hover {
+  background-color: #bc8c0d;
+  color: #eeeeee;
 }
- > .types > div.quote:hover,
- > .types > div.belief:hover {
-  background-color: rgba(236, 176, 16, 0.1);
-}
- > .types > div.quote.selected,
- > .types > div.belief.selected {
-  background-color: rgba(236, 176, 16, 0.2);
-}
-@media (min-width: 1000px) {
-   > .types {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-  }
-   > .types:before,
-   > .types:after {
-    content: "";
-    display: table;
-  }
-   > .types:after {
-    clear: both;
-  }
-   > .types > div {
-    width: 20%;
-    display: inline-block;
-    vertical-align: top;
-    margin: 20px 1% 20px 0;
-    box-sizing: border-box;
-    padding: 20px;
-  }
-   > .types button {
-    width: 11.11111111%;
-    display: inline-block;
-    vertical-align: top;
-  }
-}
-@media (min-width: 1400px) {
-  .types {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .types:before,
-  .types:after {
-    content: "";
-    display: table;
-  }
-  .types:after {
-    clear: both;
-  }
-  .types button {
-    width: 11.11111111%;
-    display: inline-block;
-    vertical-align: top;
-  }
+.selector {
+  position: absolute;
+  z-index: 99999;
 }
 div.posts,
 div.post {
@@ -4204,87 +4143,6 @@ i.fa-minus {
 }
 .general ol li ol li {
   font-weight: normal;
-}
-/** TYPES **/
-.type {
-  font-size: 0.8em;
-  text-transform: capitalize;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  color: white;
-  padding: 4px;
-  text-align: center;
-  display: inline-block;
-  min-width: 100px;
-  background-color: #333;
-  margin: 4px 0;
-  cursor: pointer;
-  border: solid 1px transparent;
-}
-.type.blog,
-.type.event {
-  background-color: #8abf00;
-  color: #fff;
-}
-.type.blog.inverted,
-.type.event.inverted {
-  background-color: #fafafa;
-  border: solid 1px #9cd900;
-  color: #9cd900;
-}
-.type.blog:hover,
-.type.event:hover {
-  background-color: #658c00;
-  color: #eeeeee;
-}
-.type.subject,
-.type.question {
-  background-color: #3498db;
-  color: #fff;
-}
-.type.subject.inverted,
-.type.question.inverted {
-  background-color: #fafafa;
-  border: solid 1px #5faee3;
-  color: #5faee3;
-}
-.type.subject:hover,
-.type.question:hover {
-  background-color: #217dbb;
-  color: #eeeeee;
-}
-.type.debate,
-.type.poll {
-  background-color: #ed0303;
-  color: #fff;
-}
-.type.debate.inverted,
-.type.poll.inverted {
-  background-color: #fafafa;
-  border: solid 1px #fc2727;
-  color: #fc2727;
-}
-.type.debate:hover,
-.type.poll:hover {
-  background-color: #bb0202;
-  color: #eeeeee;
-}
-.type.quote,
-.type.belief {
-  background-color: #ecb010;
-  color: #fff;
-}
-.type.quote.inverted,
-.type.belief.inverted {
-  background-color: #fafafa;
-  border: solid 1px #f2c13d;
-  color: #f2c13d;
-}
-.type.quote:hover,
-.type.belief:hover {
-  background-color: #bc8c0d;
-  color: #eeeeee;
 }
 /** COLORS **/
 .green {

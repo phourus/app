@@ -19,7 +19,6 @@ let Tags = require('./post/tags');
 let Thumbs = require('./post/thumbs');
 let Title = require('./post/title');
 let Type = require('./post/type');
-let Types = require('./post/types');
 
 let Post = React.createClass({
 	mixins: [State, Navigation],
