@@ -2877,10 +2877,10 @@ div.post .interact {
 .postItem .share div.toggle {
   font-size: 0.9em;
   padding: 10px;
+  color: #444;
 }
 .postItem .share div.toggle:hover {
   color: #3498db;
-  background-color: #eee;
   cursor: pointer;
 }
 .postItem .share div.toggle i.fa-share {
