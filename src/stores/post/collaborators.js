@@ -5,6 +5,8 @@ let Actions = require('../../actions/post/collaborators');
 
 let collaborators = require('../../api/collaborators');
 
+let msg = require("../../actions/alerts").add;
+
 module.exports = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);

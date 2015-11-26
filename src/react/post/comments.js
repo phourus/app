@@ -25,13 +25,21 @@ let Comments = React.createClass({
 			if (this.state.ready === false) {
 				data.ready = true;
 			}
+      if (data.added) {
+        data.added.user = AccountStore.user;
+        data.rows = this.state.rows;
+        data.rows.unshift(data.added);
+      }
 			this.setState(data);
     });
-		// Actions.Comments.collection moved to Post component because initial
-		// render postID = 0
   },
   componentWillUnmount: function () {
     this.unsubscribe();
+  },
+  componentWillReceiveProps: function (newProps) {
+    if (newProps.post && newProps.post.id) {
+      Actions.collection({postId: newProps.post.id});
+    }
   },
   render: function () {
     let create = <h3>You must be logged-in to comment</h3>

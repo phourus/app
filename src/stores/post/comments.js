@@ -5,6 +5,8 @@ let Actions = require('../../actions/post/comments');
 
 let comments = require('../../api/comments');
 
+let msg = require("../../actions/alerts").add;
+
 module.exports = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);
@@ -25,7 +27,7 @@ module.exports = Reflux.createStore({
   _add: function (model) {
     comments.add(model)
     .then(data => {
-      this._collection(this.params);
+      this.trigger({added: data});
     })
     .catch(code => {
       msg('red', 'Comment could not be created', code);
@@ -34,7 +36,7 @@ module.exports = Reflux.createStore({
   _save: function (id, model) {
     comments.save(id, model)
     .then(data => {
-      this._collection(this.params);
+      this.trigger({saved: data});
     })
     .catch(code => {
       msg('red', 'Comment could not be updated', code);
@@ -43,7 +45,7 @@ module.exports = Reflux.createStore({
   _remove: function (id) {
     comments.remove(id)
     .then(data => {
-      this._collection(this.params);
+      this.trigger({removed: id});
     })
     .catch(code => {
       msg('red', 'Comment could not be removed', code);

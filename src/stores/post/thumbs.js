@@ -5,6 +5,8 @@ let Actions = require('../../actions/post/thumbs');
 
 let thumbs = require('../../api/thumbs');
 
+let msg = require("../../actions/alerts").add;
+
 module.exports = Reflux.createStore({
   postId: null,
   init: function () {

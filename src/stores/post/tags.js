@@ -5,6 +5,8 @@ let Actions = require('../../actions/post/tags');
 
 let tags = require('../../api/tags');
 
+let msg = require("../../actions/alerts").add;
+
 module.exports = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.add, this._add);
