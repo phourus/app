@@ -2,6 +2,7 @@
 let React = require('react');
 let Router = require('react-router');
 let { State } = Router;
+let ga = require('../../analytics');
 
 let Store = require('../../stores/post/thumbs');
 let Actions = require('../../actions/post/thumbs');
@@ -53,9 +54,11 @@ let Thumbs = React.createClass({
 		 };
 		 if (this.state.id) {
 			 Actions.save(this.state.id, model);
+       ga('send', 'event', 'engagement', 'changevote');
 		 } else {
 			 model.postId = this.props.post.id;
 			 Actions.add(model);
+       ga('send', 'event', 'engagement', 'upvote');
 		 }
 	 },
 	 _dislike: function () {
@@ -64,13 +67,16 @@ let Thumbs = React.createClass({
 		 };
 			if (this.state.id) {
 				Actions.save(this.state.id, model);
+        ga('send', 'event', 'engagement', 'changevote');
 			} else {
 				model.postId = this.props.post.id;
 				Actions.add(model);
+        ga('send', 'event', 'engagement', 'downvote');
 			}
 	 },
 	 _remove: function () {
 		 Actions.remove(this.state.id);
+     ga('send', 'event', 'engagement', 'unvote');
 	 }
 });
 

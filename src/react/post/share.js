@@ -1,6 +1,8 @@
 "use strict";
 let React = require('react');
 
+let ga = require('../../analytics');
+
 module.exports = React.createClass({
   getInitialState: function () {
     return {
@@ -40,17 +42,21 @@ let Share = React.createClass({
   render: function () {
     return (
       <ul>
-        <li onClick={this._fb}><i className="fa fa-facebook" /> Facebook</li>
+        <li onClick={this._facebook}><i className="fa fa-facebook" /> Facebook</li>
         <li onClick={this._twitter}><i className="fa fa-twitter" /> Twitter</li>
         <li onClick={this._linkedin}><i className="fa fa-linkedin" /> LinkedIn</li>
         <li onClick={this._google}><i className="fa fa-google" /> Google +</li>
         <li onClick={this._slack}><i className="fa fa-slack" /> Slack</li>
         <li onClick={this._email}><i className="fa fa-envelope" /> Email</li>
-        <li onClick={this.props.toggle}><i className="fa fa-close" /> Cancel</li>
+        <li onClick={this._cancel}><i className="fa fa-close" /> Cancel</li>
       </ul>
     );
   },
-  _fb: function () {
+  _cancel: function () {
+    ga('send', 'event', 'engagement', 'share', 'cancel');
+    this.props.toggle();
+  },
+  _facebook: function () {
     let url = "https://www.facebook.com/dialog/share";
     let params = {
       app_id: 1663090460638387,
@@ -60,6 +66,7 @@ let Share = React.createClass({
     };
     this.setState({selected: 'facebook'});
     this._open(url, params);
+    ga('send', 'event', 'engagement', 'share', 'facebook');
   },
   _twitter: function () {
     let url = "https://twitter.com/intent/tweet";
@@ -77,6 +84,7 @@ let Share = React.createClass({
     };
     this.setState({selected: 'twitter'});
     this._open(url, params);
+    ga('send', 'event', 'engagement', 'share', 'twitter');
   },
   _linkedin: function () {
     let url = "https://www.linkedin.com/shareArticle";
@@ -89,6 +97,7 @@ let Share = React.createClass({
     };
     this.setState({selected: 'linkedin'});
     this._open(url, params);
+    ga('send', 'event', 'engagement', 'share', 'linkedin');
   },
   _google: function () {
     let url = "https://plus.google.com/share";
@@ -97,13 +106,16 @@ let Share = React.createClass({
     };
     this.setState({selected: 'google'});
     this._open(url, params);
+    ga('send', 'event', 'engagement', 'share', 'google');
   },
   _slack: function () {
     this.setState({selected: 'slack'});
+    ga('send', 'event', 'engagement', 'share', 'slack');
   },
   _email: function () {
     let body = "The following post has been shared with you from Phourus.com: \r\n \r\n '" + this.props.post.title + "' \r\n \r\n " + this.state.base + this.props.post.id;
     this.setState({selected: 'email'});
+    ga('send', 'event', 'engagement', 'share', 'email');
     window.location.href = encodeURI('mailto:recipient@yourfriend.com?Subject=Somebody shared a Post from Phourus.com with you&body=' + body);
   },
   _open: function (url, params) {

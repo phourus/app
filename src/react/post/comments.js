@@ -3,6 +3,7 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, State, Navigation } = Router;
 let moment = require('moment');
+let ga = require('../../analytics');
 
 let Actions = require('../../actions/post/comments');
 let Store = require('../../stores/post/comments');
@@ -104,6 +105,7 @@ Comments.Create = React.createClass({
 		model.postId = this.props.post.id;
 		Actions.add(model);
 		this.setState({content: ""});
+    ga('send', 'event', 'engagement', 'comment');
 	},
 	_content: function (e) {
 		let value = e.currentTarget.value;
