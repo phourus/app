@@ -1,5 +1,6 @@
 "use strict";
 let React = require('react');
+let ga = require('../../analytics');
 
 let Actions = require('../../actions/account');
 
@@ -68,5 +69,6 @@ module.exports = React.createClass({
   _gender: function (e) { Actions.change('gender', e.currentTarget.value); },
   _save: function () {
     Actions.edit();
+    ga('send', 'event', 'account', 'edit');
   }
 });

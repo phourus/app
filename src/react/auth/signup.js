@@ -4,6 +4,7 @@ let Router = require('react-router');
 let { Link, Navigation } = Router;
 let Actions = require('../../actions/account');
 let Store = require('../../stores/account');
+let ga = require('../../analytics');
 
 module.exports = React.createClass({
   mixins: [Navigation],
@@ -184,6 +185,7 @@ module.exports = React.createClass({
   _signup: function () {
     if (this.state.password === this.state.confirm) {
       Actions.register(this.state.email, this.state.password);
+      ga('send', 'event', 'account', 'signup');
     }
   },
   _organizations: function (e) {

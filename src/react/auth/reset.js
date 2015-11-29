@@ -4,6 +4,7 @@ let Router = require('react-router');
 let { RouteHandler, State, Navigation, Link } = Router;
 let Actions = require('../../actions/account');
 let Store = require('../../stores/account');
+let ga = require('../../analytics');
 
 module.exports = React.createClass({
   mixins: [State],
@@ -62,6 +63,7 @@ module.exports = React.createClass({
     let query = this.context.router.getCurrentQuery();
     if (this.state.password === this.state.confirm && query.token) {
       Actions.reset(this.state.email, this.state.password, query.token, query.userId);
+      ga('send', 'event', 'account', 'reset');
     }
   },
   _clear: function () {

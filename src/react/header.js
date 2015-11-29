@@ -3,6 +3,7 @@ let React = require('react');
 
 let Router = require('react-router');
 let { Link, Navigation, State } = Router;
+let ga = require('../analytics');
 
 let AccountActions = require('../actions/account');
 let AccountStore = require('../stores/account');
@@ -113,6 +114,7 @@ let Header = React.createClass({
   _logout: function () {
     this.setState({logout: true});
     AccountActions.logout();
+    ga('send', 'event', 'account', 'logout');
   },
   _filter: function () {
     if (this.state.filter !== true) {

@@ -4,6 +4,7 @@ let Router = require('react-router');
 let { RouteHandler, State, Navigation, Link } = Router;
 let Actions = require('../../actions/account');
 let Store = require('../../stores/account');
+let ga = require('../../analytics');
 
 module.exports = React.createClass({
   mixins: [State, Navigation],
@@ -75,6 +76,7 @@ module.exports = React.createClass({
     this._clear();
     this.setState({clicked: true});
     Actions.login(username, password);
+    ga('send', 'event', 'account', 'login');
   },
   _request: function () {
     //this._clear();

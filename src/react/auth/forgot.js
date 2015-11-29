@@ -2,6 +2,7 @@
 let React = require('react');
 let Actions = require('../../actions/account');
 let Store = require('../../stores/account');
+let ga = require('../../analytics');
 
 module.exports = React.createClass({
   getDefaultProps: function () {
@@ -47,6 +48,7 @@ module.exports = React.createClass({
   _forgot: function () {
     Actions.forgot(this.state.email)
     this.setState({email: "", code: null});
+    ga('send', 'event', 'account', 'forgot');
   },
   _clear: function () {
     this.setState({code: null});
