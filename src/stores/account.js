@@ -1,11 +1,23 @@
 "use strict";
 let Reflux = require('reflux');
+let moment = require('moment');
 let account = require('../api/account');
 let orgs = require('../api/orgs');
 let members = require('../api/members');
 let Actions = require('../actions/account');
 let msg = require("../actions/alerts").add;
 let token = require('../token');
+
+let gaDimensions = function (user) {
+  let age = moment().diff(user.dob, "years");
+  ga('set', 'dimension1', user.id);
+  ga('set', 'dimension2', user.createdAt);
+  ga('set', 'dimension3', age);
+  ga('set', 'dimension4', user.gender);
+  ga('set', 'dimension5', user.occupation);
+  ga('set', 'dimension6', user.city);
+  ga('set', 'dimension7', user.state);
+};
 
 module.exports = Reflux.createStore({
   authenticated: false,
@@ -43,6 +55,7 @@ module.exports = Reflux.createStore({
       this.authenticated = true;
       this.user = data;
       this.trigger({user: data, action: 'get'});
+      gaDimensions(data);
     })
     .catch(code => {
       this.authenticated = false;
