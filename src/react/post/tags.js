@@ -2,6 +2,7 @@
 let React = require('react');
 
 let Actions = require('../../actions/post/tags');
+let Store = require('../../stores/post/tags');
 let StreamActions = require('../../actions/stream');
 
 let Tags = React.createClass({
@@ -17,11 +18,41 @@ let Tags = React.createClass({
 	},
 	getInitialState: function () {
 		return {
+			post: {
+				id: null,
+				tags: []
+			},
 			tag: ""
 		}
 	},
+	componentDidMount: function () {
+		this.unsubscribe = Store.listen((data) => {
+			let tags = this.state.post.tags;
+			if (data.added) {
+				tags.push(data.added);
+				this.setState({post: {tags: tags}});
+			}
+			if (data.removed) {
+				tags = tags.filter((item) => {
+					if (parseInt(item.id) !== parseInt(data.removed)) {
+						return true;
+					}
+					return false;
+				});
+				this.setState({post: {tags: tags}});
+			}
+		});
+	},
+	componentWillUnmount: function () {
+		this.unsubscribe();
+	},
+	componentWillReceiveProps: function (data) {
+		if (data.post) {
+			this.setState(data);
+		}
+	},
 	render: function () {
-    let tags = this.props.post.tags || [];
+    let tags = this.state.post.tags || [];
 		return (
       <div className="tags">
 				{this.props.context.type === 'edit' && this.props.owner ? <h2>Edit Tags</h2> : false}
