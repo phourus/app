@@ -21,12 +21,35 @@ let Links = React.createClass({
 	getInitialState: function () {
 		return {
 			mode: null,
-			post: {}
+			post: {
+				links: []
+			}
 		}
 	},
 	componentDidMount: function () {
 		this.unsubscribe = Store.listen((data) => {
-			this.setState(data);
+			let links = this.state.post.links;
+			if (data.added) {
+				links.push(data.added);
+				this.setState({post: {links: links}});
+			}
+			if (data.saved) {
+				links.forEach((item, index) => {
+					if (parseInt(item.id) === parseInt(data.saved.id)) {
+						links[index] = data.saved;
+					}
+				});
+				this.setState({post: {links: links}});
+			}
+			if (data.removed) {
+				links = links.filter((item) => {
+					if (parseInt(item.id) !== parseInt(data.removed)) {
+						return true;
+					}
+					return false;
+				});
+				this.setState({post: {links: links}});
+			}
 		});
 	},
 	componentWillUnmount: function () {
@@ -54,7 +77,7 @@ let Links = React.createClass({
 		);
 	},
 	_add: function () {
-		this.setState({mode: 'add'});
+		this.setState({mode: 'add', id: null, url: "", caption: "", title: ""});
 	},
 	_hide: function () {
 		this.setState({mode: null});

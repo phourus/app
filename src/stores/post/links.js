@@ -26,7 +26,7 @@ module.exports = Reflux.createStore({
   _save: function (id, model) {
     links.save(id, model)
     .then(data => {
-      this.trigger({id: null, title: '', url: '', caption: '', mode: null, saved: id});
+      this.trigger({id: null, title: '', url: '', caption: '', mode: null, saved: data});
     })
     .catch(code => {
       this.trigger({code: code, action: 'save'});

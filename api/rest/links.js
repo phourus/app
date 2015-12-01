@@ -47,11 +47,11 @@ router.put('/:id', (req, res) => {
   var model = req.body;
   links.save(id, model)
   .then(function (data) {
-      links.single(id)
-      .then(function (link) {
-        search.populate(link.postId);
-      });
-      res.send(200, data);
+    links.single(id)
+    .then(function (link) {
+      search.populate(link.postId);
+      res.send(200, link);
+    });
   })
   .catch(function (err) {
       console.error(err);
