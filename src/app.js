@@ -43,6 +43,7 @@ let App = React.createClass({
             <RouteHandler />
           </div>
         </div>
+        <Helper />
         <footer className="footer">
           <strong>1-844-PHOURUS</strong><br />
           <span className="muted">(1-844-746-8787)</span><br />
@@ -100,6 +101,47 @@ let Sidebar = React.createClass({
         </ul>
       </div>
     );
+  }
+});
+
+let Helper = React.createClass({
+  getInitialState: function () {
+    return {
+      active: false
+    };
+  },
+  render: function () {
+    let className = this.state.active ? "helper active" : "helper";
+    return (
+      <div className={className}>
+        <div className="popout" onClick={this._inactive}>
+          <div>
+            <ul>
+              <li><Link to="about">About Us</Link></li>
+              <li><Link to="pricing">Pricing</Link></li>
+              <li><Link to="docs">Documentation</Link></li>
+              <li><Link to="contact">Contact Us</Link></li>
+            </ul>
+          </div>
+          <div>
+            <strong>1-844-PHOURUS</strong><br />
+            <div>(1-844-746-8787)</div>
+            <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
+            <div>1411 7th St. #305</div>
+            <div>Santa Monica, CA 90401</div>
+          </div>
+        </div>
+        <div className="icon" onClick={this._active}>
+          <i className="fa fa-question" />
+        </div>
+      </div>
+    );
+  },
+  _active: function () {
+    this.setState({active: true});
+  },
+  _inactive: function () {
+    this.setState({active: false});
   }
 });
 

@@ -11,9 +11,12 @@ let Activity = require('./react/activity');
 let Admin = require('./react/admin');
 let Profile = require('./react/profile');
 let Leaders = require('./react/leaders');
-let About = require('./react/about');
-let Terms = require('./react/terms');
-let Privacy = require('./react/privacy');
+let About = require('./react/static/about');
+let Pricing = require('./react/static/pricing');
+let Docs = require('./react/static/docs');
+let Contact = require('./react/static/contact');
+let Terms = require('./react/static/terms');
+let Privacy = require('./react/static/privacy');
 let Map = require('./map');
 let View404 = require('./react/404');
 
@@ -37,6 +40,9 @@ module.exports = (
     <Route name="government" handler={Government} />
     <Route name="nonprofit" handler={Nonprofit} />
     <Route name="about" handler={About} />
+    <Route name="pricing" handler={Pricing} />
+    <Route name="docs" handler={Docs} />
+    <Route name="contact" handler={Contact} />
     <Route name="terms" handler={Terms} />
     <Route name="privacy" handler={Privacy} />
     <Route name="activity" handler={Activity} />

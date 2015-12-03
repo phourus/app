@@ -3766,6 +3766,48 @@ div.spacer {
     height: 60px !important;
   }
 }
+.helper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.helper .popout {
+  display: none;
+  background-color: #333;
+  color: #eee;
+}
+.helper .popout > div {
+  display: inline-block;
+  vertical-align: top;
+}
+.helper .popout > div ul {
+  margin: 0;
+  padding: 0;
+}
+.helper .popout > div ul li {
+  list-style: none;
+}
+.helper.active .popout {
+  display: block;
+  position: relative;
+}
+.helper.active .icon {
+  display: none;
+}
+.helper .icon {
+  background-color: #5faee3;
+  border-radius: 50%;
+  width: 50px;
+  height: 40px;
+  padding-top: 10px;
+  text-align: center;
+  color: #fff;
+  font-size: 2em;
+}
+.helper .icon:hover {
+  cursor: pointer;
+  background-color: #217dbb;
+}
 .profile {
   padding: 10px 0;
   margin-bottom: 20px;
