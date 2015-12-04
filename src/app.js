@@ -115,6 +115,10 @@ let Helper = React.createClass({
     return (
       <div className={className}>
         <div className="popout" onClick={this._inactive}>
+          <div className="title">
+            <span>Help</span>
+            <i className="fa fa-close" onClick={this._inactive} />
+          </div>
           <div>
             <ul>
               <li><Link to="about">About Us</Link></li>
@@ -126,9 +130,7 @@ let Helper = React.createClass({
           <div>
             <strong>1-844-PHOURUS</strong><br />
             <div>(1-844-746-8787)</div>
-            <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
-            <div>1411 7th St. #305</div>
-            <div>Santa Monica, CA 90401</div>
+            <a href="mailto:info@phourus.com?Subject=Help">info@phourus.com</a>
           </div>
         </div>
         <div className="icon" onClick={this._active}>
@@ -138,9 +140,11 @@ let Helper = React.createClass({
     );
   },
   _active: function () {
+    ga('send', 'event', 'helper', 'show');
     this.setState({active: true});
   },
   _inactive: function () {
+    ga('send', 'event', 'helper', 'hide');
     this.setState({active: false});
   }
 });

@@ -5,19 +5,44 @@
 
   .popout {
     display: none;
-    background-color: #333;
-    color: #eee;
+    background-color: #fff;
+    border: solid 1px #ccc;
+    color: #333;
+    padding: 10px;
+    font-size: 0.9em;
+    .box-shadow(0px, 0px, 10px, #999);
+
+    div.title {
+      display: block;
+      background-color: #eee;
+      border-bottom: #ccc;
+      text-transform: uppercase;
+      font-size: 1em;
+      padding: 4px;
+
+      i {
+        float: right;
+        font-size: 2em;
+
+        &:hover {
+          background-color: #333;
+          color: #eee;
+          cursor: pointer;
+        }
+      }
+    }
 
     > div {
       display: inline-block;
       vertical-align: top;
 
       ul {
-        margin: 0;
+        margin: 0 10px 0 0;
         padding: 0;
 
         li {
           list-style: none;
+          text-align: right;
         }
       }
     }

@@ -3790,19 +3790,43 @@ div.spacer {
 }
 .helper .popout {
   display: none;
+  background-color: #fff;
+  border: solid 1px #ccc;
+  color: #333;
+  padding: 10px;
+  font-size: 0.9em;
+  box-shadow: 0px 0px 10px #999999;
+  -moz-box-shadow: 0px 0px 10px #999999;
+  -webkit-box-shadow: 0px 0px 10px #999999;
+}
+.helper .popout div.title {
+  display: block;
+  background-color: #eee;
+  border-bottom: #ccc;
+  text-transform: uppercase;
+  font-size: 1em;
+  padding: 4px;
+}
+.helper .popout div.title i {
+  float: right;
+  font-size: 2em;
+}
+.helper .popout div.title i:hover {
   background-color: #333;
   color: #eee;
+  cursor: pointer;
 }
 .helper .popout > div {
   display: inline-block;
   vertical-align: top;
 }
 .helper .popout > div ul {
-  margin: 0;
+  margin: 0 10px 0 0;
   padding: 0;
 }
 .helper .popout > div ul li {
   list-style: none;
+  text-align: right;
 }
 .helper.active .popout {
   display: block;
