@@ -50,7 +50,7 @@ let _Context = React.createClass({
 	},
 	render: function () {
 		let label = 'Viewing all public Phourus posts';
-		let img = '/assets/logos/logo-emblem.png';
+		let img = '/assets/logos/emblem.png';
 		let clear = false;
 		let clearLink = <span> | Clear filters <Link to="stream" className="close">x</Link></span>;
 		let link = false;

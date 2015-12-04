@@ -27,12 +27,26 @@ header {
 				height: 50px;
 				background-repeat: no-repeat;
 				background-size: 100%;
-				background-image: url('/assets/logos/logo-dark.png');
+				background-image: url('/assets/logos/dark/normal.png');
 
 				&:hover {
-					background-image: url('/assets/logos/logo-dark-hover.png');
+					background-image: url('/assets/logos/dark/hover.png');
 				}
   		}
+	}
+
+	&.home {
+
+		.brand {
+
+			a {
+				background-image: url('/assets/logos/light/normal.png');
+
+				&:hover {
+					background-image: url('/assets/logos/light/hover.png');
+				}
+			}
+		}
 	}
 
 	.keywords {

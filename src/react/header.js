@@ -10,7 +10,7 @@ let AccountStore = require('../stores/account');
 let StreamActions = require('../actions/stream');
 let StreamStore = require('../stores/stream');
 
-let Header = React.createClass({
+module.exports = React.createClass({
   mixins: [Navigation, State],
   getInitialState: function () {
     return {
@@ -45,13 +45,12 @@ let Header = React.createClass({
   },
   render: function () {
     let orgs = this.state.orgs;
-    let home = false;
     let route = this.context.router.getCurrentRoutes();
     if (route && route[1].name === 'home') {
-      home = true;
+      return <Home />
     }
     return  (
-        <header className={home ? "header home" : "header"}>
+        <header className="header">
           { AccountStore.authenticated
             ?  <nav className="nav">
                 <ul>
@@ -106,8 +105,8 @@ let Header = React.createClass({
           <div className="brand">
             <Link to="home"></Link>
           </div>
-          {home ? false : <Search {...this.state.params} filter={this._filter} />}
-          {this.state.filter && this.props.tint && !home ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
+          <Search {...this.state.params} filter={this._filter} />
+          {this.state.filter && this.props.tint ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
         </header>
     );
   },
@@ -130,6 +129,18 @@ let Header = React.createClass({
     if (route && route[1] && route[1].name !== 'stream') {
       this.context.router.transitionTo('stream');
     }
+  }
+});
+
+let Home = React.createClass({
+  render: function () {
+    return (
+      <header className="header home">
+        <div className="brand">
+          <Link to="home"></Link>
+        </div>
+      </header>
+    );
   }
 });
 
@@ -347,5 +358,3 @@ Filter.Sort = React.createClass({
 	_asc: function (e) { StreamActions.direction('ASC'); },
 	_desc: function (e) { StreamActions.direction('DESC'); },
 });
-
-module.exports = Header;

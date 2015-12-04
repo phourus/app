@@ -3278,6 +3278,17 @@ div.post {
     background-color: #fff;
   }
 }
+.docs .menu {
+  background-color: #eaeaea;
+  display: inline-block;
+}
+.docs .menu ul {
+  margin: 0;
+  padding: 0;
+}
+.docs .menu ul li {
+  list-style: none;
+}
 #content div.stream {
   max-width: 100%;
 }
@@ -3519,10 +3530,16 @@ header .brand a {
   height: 50px;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url('/assets/logos/logo-dark.png');
+  background-image: url('/assets/logos/dark/normal.png');
 }
 header .brand a:hover {
-  background-image: url('/assets/logos/logo-dark-hover.png');
+  background-image: url('/assets/logos/dark/hover.png');
+}
+header.home .brand a {
+  background-image: url('/assets/logos/light/normal.png');
+}
+header.home .brand a:hover {
+  background-image: url('/assets/logos/light/hover.png');
 }
 header .keywords {
   top: 40px;
