@@ -44,6 +44,7 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.forgot, this._forgot);
     this.listenTo(Actions.reset, this._reset);
     this.listenTo(Actions.logout, this._logout);
+    this.listenTo(Actions.contact, this._contact);
   },
   _change: function (key, value) {
     this.changes[key] = value;
@@ -230,5 +231,15 @@ module.exports = Reflux.createStore({
     this.user = null;
     this.authenticated = false;
     this.trigger({user: this.user});
+  },
+  _contact: function (email, message) {
+    account.contact(email, message)
+    .then(data => {
+      this.trigger({code: 200, action: 'contact'});
+    })
+    .catch(code => {
+      this.trigger({code: code, action: 'contact'});
+      msg('red', 'Message could not be sent', code);
+    });
   }
 });

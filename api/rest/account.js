@@ -257,4 +257,11 @@ router.get('/orgs', (req, res) => {
   });
 });
 
+router.post('/contact', (req, res) => {
+  var model = req.body;
+  Email('contact', {email: model.email, message: model.message});
+  Email('contact', {email: 'info@phourus.com', message: model.message});
+  res.send(200, req.body);
+});
+
 module.exports = router;

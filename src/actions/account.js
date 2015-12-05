@@ -19,5 +19,6 @@ module.exports = {
   request: Reflux.createAction(),
   forgot: Reflux.createAction(),
   reset: Reflux.createAction(),
-  logout: Reflux.createAction()
+  logout: Reflux.createAction(),
+  contact: Reflux.createAction()
 };

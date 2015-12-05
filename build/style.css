@@ -3303,16 +3303,10 @@ div.post {
   }
 }
 #content .contact {
-  margin: 0;
+  margin: 20px 0 0 0;
   padding: 0;
   width: 100%;
   max-width: 100%;
-}
-#content .contact .banner {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
 }
 #content .contact .description {
   width: 75%;
@@ -3336,133 +3330,15 @@ div.post {
 #content .contact .help button.button {
   margin: auto;
 }
-#content .contact .basics {
-  background-color: #222222;
-  color: #fff;
+#content .contact .form {
+  margin: 40px;
 }
-#content .contact .basics > button {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-  background: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  height: 100px;
+#content .contact .form textarea {
+  width: 75%;
 }
-#content .contact .basics > button:hover {
-  background-color: #658c00;
-}
-#content .contact .basics > button.selected {
-  background-color: #9cd900;
-}
-#content .contact .basics > button i {
-  font-size: 4em;
-  color: #444444;
-}
-#content .contact .basics .details {
-  background-color: #9cd900;
-  text-align: center;
-}
-#content .contact .basics .details .title {
-  margin: 0;
-  padding: 0;
-}
-#content .contact .basics .details div.signup,
-#content .contact .basics .details div.create,
-#content .contact .basics .details div.interact,
-#content .contact .basics .details div.rank {
-  max-width: 80%;
-  width: 100%;
-  margin: 0 auto;
-}
-#content .contact .basics .details div.signup:before,
-#content .contact .basics .details div.create:before,
-#content .contact .basics .details div.interact:before,
-#content .contact .basics .details div.rank:before,
-#content .contact .basics .details div.signup:after,
-#content .contact .basics .details div.create:after,
-#content .contact .basics .details div.interact:after,
-#content .contact .basics .details div.rank:after {
-  content: "";
-  display: table;
-}
-#content .contact .basics .details div.signup:after,
-#content .contact .basics .details div.create:after,
-#content .contact .basics .details div.interact:after,
-#content .contact .basics .details div.rank:after {
-  clear: both;
-}
-#content .contact .basics .details div.signup > div,
-#content .contact .basics .details div.create > div,
-#content .contact .basics .details div.interact > div,
-#content .contact .basics .details div.rank > div {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: left;
-}
-#content .contact .basics .details div.signup > div i,
-#content .contact .basics .details div.create > div i,
-#content .contact .basics .details div.interact > div i,
-#content .contact .basics .details div.rank > div i {
-  font-size: 3em;
-  float: left;
-}
-#content .contact .team .title {
-  text-align: center;
-}
-#content .contact .team > div {
-  border-bottom: solid 1px #eee;
-  width: 80%;
-  margin: 60px auto;
-  padding-bottom: 60px;
-}
-#content .contact .team img {
+#content .contact .form button {
   float: right;
-  width: 200px;
-}
-#content .contact .team img.left {
-  float: left;
-}
-#content .contact .integrations {
-  text-align: center;
-  padding-bottom: 40px;
-  max-width: 80%;
-  width: 100%;
-  margin: 0 auto;
-}
-#content .contact .integrations:before,
-#content .contact .integrations:after {
-  content: "";
-  display: table;
-}
-#content .contact .integrations:after {
-  clear: both;
-}
-#content .contact .integrations i {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
-  font-size: 3em;
-  color: #222222;
-}
-#content .contact .contact {
-  background-color: #222222;
-  color: #fff;
-}
-#content .contact .contact > div {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-  color: #eee;
-  padding-bottom: 40px;
-}
-#content .contact .contact > div i {
-  color: #444444;
-  font-size: 4em;
-  text-align: center;
+  margin-right: 25%;
 }
 #content .docs .menu {
   background-color: #eaeaea;

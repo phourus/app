@@ -46,5 +46,8 @@ module.exports = {
       userId: userId
     };
     return http.post('/rest/passwords/reset', model, _settings);
+  },
+  contact: function (email, message) {
+    return http.post(base + 'contact', {email: email, message: message}, settings());
   }
 };

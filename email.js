@@ -2,6 +2,12 @@ var sendgrid  = require('sendgrid')('phourus', 'v2O%2*d4"e,A');
 var footer = "Thank you,<br /><br />The Phourus Team<br />1411 7th St #305<br />Santa Monica, CA 90401<br /><br /><strong>1-844-PHOURUS</strong><br />(844-746-8787)<br /><a href='mailto:info@phourus.com'>info@phourus.com</a>";
 var generate = function (template, data) {
   var templates = {
+    contact: {
+      name: 'Phourus.com',
+      from: 'info@phourus.com',
+      subject: 'Message Received',
+      content: 'Hello, <p>We have received your message and will follow up as soon as possible. Below is a record of the message we received:</p><i>' + data.message + '</i><br /><br />' + footer
+    },
     reset: {
       name: 'Phourus.com',
       from: 'info@phourus.com',

@@ -1,15 +1,8 @@
 #content .contact {
-  margin: 0;
+  margin: 20px 0 0 0;
   padding: 0;
   width: 100%;
   max-width: 100%;
-
-  .banner {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
 
   .description {
     .Cols(9);
@@ -32,106 +25,16 @@
     }
   }
 
-  .basics {
-    background-color: @theme-dark;
-    color: #fff;
+  .form {
+    margin: 40px;
 
-     > button {
-      .Cols(3);
-      background: transparent;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      height: 100px;
-
-      &:hover {
-        background-color: @green-dark;
-      }
-
-      &.selected {
-        background-color: @green-light;
-      }
-
-      i {
-        font-size: 4em;
-        color: @theme-light;
-      }
+    textarea {
+      width: 75%;
     }
 
-    .details {
-      background-color: @green-light;
-      text-align: center;
-
-      .title {
-        margin: 0;
-        padding: 0;
-      }
-
-      div.signup, div.create, div.interact, div.rank {
-       .Row(80%);
-
-       > div {
-         .Cols(6);
-         text-align: left;
-
-         i {
-           font-size: 3em;
-           float: left;
-         }
-       }
-      }
-    }
-  }
-
-  .team {
-
-    .title {
-      text-align: center;
-    }
-
-    > div {
-      border-bottom: solid 1px #eee;
-      width: 80%;
-      margin: 60px auto;
-      padding-bottom: 60px;
-    }
-    img {
+    button {
       float: right;
-      width: 200px;
-
-      &.left {
-        float: left;
-      }
-    }
-  }
-
-  .integrations {
-    text-align: center;
-    padding-bottom: 40px;
-    .Row(80%);
-
-    i {
-      .Cols(2);
-      font-size: 3em;
-      color: @theme-dark;
-    }
-  }
-
-  .contact {
-    background-color: @theme-dark;
-    color: #fff;
-
-    > div {
-      .Cols(3);
-      text-align: center;
-      color: #eee;
-      padding-bottom: 40px;
-
-      i {
-        color: @theme-light;
-        font-size: 4em;
-        text-align: center;
-      }
+      margin-right: 25%;
     }
   }
 }

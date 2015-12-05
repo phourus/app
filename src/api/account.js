@@ -13,5 +13,6 @@ module.exports = {
   register: account.register,
   request: account.request,
   forgot: account.forgot,
-  reset: account.reset
+  reset: account.reset,
+  contact: account.contact
 };
