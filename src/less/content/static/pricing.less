@@ -1,0 +1,159 @@
+#content .pricing {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+
+  .options {
+    background-color: #eee;
+    padding: 0 20px 0 20px;
+    .Row(80%);
+
+    .user, .organization {
+
+      .currency {
+        font-size: 2em;
+      }
+
+      .amount {
+        font-family: @font-serif;
+        font-size: 8em;
+        text-align: center;
+      }
+
+      .per {
+        font-size: 1em;
+        text-align: center;
+      }
+
+      .period {
+        font-size: 2em;
+      }
+
+      button {
+        margin: auto;
+      }
+
+      p {
+        font-size: 0.8em;
+      }
+
+      .asterisk {
+        font-size: 0.7em;
+      }
+
+      table {
+        border: solid 1px #ccc;
+        width: 100%;
+        background-color: #f7f7f7;
+
+        th {
+          font-weight: normal;
+          font-size: 0.9em;
+          text-transform: uppercase;
+          text-align: left;
+          border-bottom: solid 4px #ccc;
+        }
+
+        tr {
+          margin-bottom: 10px;
+
+          td {
+            letter-spacing: 1px;
+            font-size: 0.8em;
+            border-bottom: solid 1px #ddd;
+          }
+        }
+        .users {
+          font-size: 1.2em;
+        }
+      }
+    }
+
+    .user {
+      text-align: center;
+      .Cols(3);
+
+      .title {
+        text-align: left;
+      }
+    }
+
+    .or {
+      .Cols(1);
+      padding: 60px 0;
+      text-align: center;
+
+      .vertical {
+        border-right: solid 1px #999;
+        height: 200px;
+        width: 1px;
+        margin: auto;
+      }
+
+      .text {
+        font-size: 2em;
+        font-weight: bold;
+        font-family: @font-serif;
+        text-transform: uppercase;
+        text-align: center;
+      }
+    }
+
+    .organization {
+      .Cols(8);
+    }
+  }
+
+  .screenshots {
+
+    .title {
+      text-align: center;
+    }
+
+    > div {
+      border-bottom: solid 1px #eee;
+      width: 80%;
+      margin: 60px auto;
+      padding-bottom: 60px;
+    }
+    img {
+      float: right;
+      max-width: 60%;
+
+      &.left {
+        float: left;
+      }
+    }
+  }
+
+  .integrations {
+    text-align: center;
+    padding-bottom: 40px;
+    .Row(80%);
+
+    i {
+      .Cols(2);
+      font-size: 3em;
+      color: @theme-dark;
+    }
+  }
+
+  .contact {
+    background-color: @theme-dark;
+    color: #fff;
+
+    > div {
+      .Cols(3);
+      text-align: center;
+      color: #eee;
+      padding-bottom: 40px;
+
+      i {
+        color: @theme-light;
+        font-size: 4em;
+        text-align: center;
+      }
+    }
+  }
+}

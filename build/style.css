@@ -1114,17 +1114,20 @@ div.alerts button {
   font-size: 3em;
   float: left;
 }
-#content .about .screenshots > div {
+#content .about .team .title {
+  text-align: center;
+}
+#content .about .team > div {
   border-bottom: solid 1px #eee;
   width: 80%;
   margin: 60px auto;
   padding-bottom: 60px;
 }
-#content .about .screenshots img {
+#content .about .team img {
   float: right;
-  max-width: 60%;
+  width: 200px;
 }
-#content .about .screenshots img.left {
+#content .about .team img.left {
   float: left;
 }
 #content .about .integrations {
@@ -3278,16 +3281,347 @@ div.post {
     background-color: #fff;
   }
 }
-.docs .menu {
-  background-color: #eaeaea;
-  display: inline-block;
+#content .contact {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
 }
-.docs .menu ul {
+#content .contact .banner {
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
 }
-.docs .menu ul li {
+#content .contact .description {
+  width: 75%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding: 20px 40px 0 40px;
+  color: #444;
+  vertical-align: middle;
+}
+#content .contact .help {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  border-left: solid 1px #eee;
+  padding-left: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+#content .contact .help button.button {
+  margin: auto;
+}
+#content .contact .basics {
+  background-color: #222222;
+  color: #fff;
+}
+#content .contact .basics > button {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  height: 100px;
+}
+#content .contact .basics > button:hover {
+  background-color: #658c00;
+}
+#content .contact .basics > button.selected {
+  background-color: #9cd900;
+}
+#content .contact .basics > button i {
+  font-size: 4em;
+  color: #444444;
+}
+#content .contact .basics .details {
+  background-color: #9cd900;
+  text-align: center;
+}
+#content .contact .basics .details .title {
+  margin: 0;
+  padding: 0;
+}
+#content .contact .basics .details div.signup,
+#content .contact .basics .details div.create,
+#content .contact .basics .details div.interact,
+#content .contact .basics .details div.rank {
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .contact .basics .details div.signup:before,
+#content .contact .basics .details div.create:before,
+#content .contact .basics .details div.interact:before,
+#content .contact .basics .details div.rank:before,
+#content .contact .basics .details div.signup:after,
+#content .contact .basics .details div.create:after,
+#content .contact .basics .details div.interact:after,
+#content .contact .basics .details div.rank:after {
+  content: "";
+  display: table;
+}
+#content .contact .basics .details div.signup:after,
+#content .contact .basics .details div.create:after,
+#content .contact .basics .details div.interact:after,
+#content .contact .basics .details div.rank:after {
+  clear: both;
+}
+#content .contact .basics .details div.signup > div,
+#content .contact .basics .details div.create > div,
+#content .contact .basics .details div.interact > div,
+#content .contact .basics .details div.rank > div {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+#content .contact .basics .details div.signup > div i,
+#content .contact .basics .details div.create > div i,
+#content .contact .basics .details div.interact > div i,
+#content .contact .basics .details div.rank > div i {
+  font-size: 3em;
+  float: left;
+}
+#content .contact .team .title {
+  text-align: center;
+}
+#content .contact .team > div {
+  border-bottom: solid 1px #eee;
+  width: 80%;
+  margin: 60px auto;
+  padding-bottom: 60px;
+}
+#content .contact .team img {
+  float: right;
+  width: 200px;
+}
+#content .contact .team img.left {
+  float: left;
+}
+#content .contact .integrations {
+  text-align: center;
+  padding-bottom: 40px;
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .contact .integrations:before,
+#content .contact .integrations:after {
+  content: "";
+  display: table;
+}
+#content .contact .integrations:after {
+  clear: both;
+}
+#content .contact .integrations i {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 3em;
+  color: #222222;
+}
+#content .contact .contact {
+  background-color: #222222;
+  color: #fff;
+}
+#content .contact .contact > div {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  color: #eee;
+  padding-bottom: 40px;
+}
+#content .contact .contact > div i {
+  color: #444444;
+  font-size: 4em;
+  text-align: center;
+}
+#content .docs .menu {
+  background-color: #eaeaea;
+  display: inline-block;
+}
+#content .docs .menu ul {
+  margin: 0;
+  padding: 0;
+}
+#content .docs .menu ul li {
   list-style: none;
+}
+#content .pricing {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+}
+#content .pricing .options {
+  background-color: #eee;
+  padding: 0 20px 0 20px;
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .pricing .options:before,
+#content .pricing .options:after {
+  content: "";
+  display: table;
+}
+#content .pricing .options:after {
+  clear: both;
+}
+#content .pricing .options .user .currency,
+#content .pricing .options .organization .currency {
+  font-size: 2em;
+}
+#content .pricing .options .user .amount,
+#content .pricing .options .organization .amount {
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  font-size: 8em;
+  text-align: center;
+}
+#content .pricing .options .user .per,
+#content .pricing .options .organization .per {
+  font-size: 1em;
+  text-align: center;
+}
+#content .pricing .options .user .period,
+#content .pricing .options .organization .period {
+  font-size: 2em;
+}
+#content .pricing .options .user button,
+#content .pricing .options .organization button {
+  margin: auto;
+}
+#content .pricing .options .user p,
+#content .pricing .options .organization p {
+  font-size: 0.8em;
+}
+#content .pricing .options .user .asterisk,
+#content .pricing .options .organization .asterisk {
+  font-size: 0.7em;
+}
+#content .pricing .options .user table,
+#content .pricing .options .organization table {
+  border: solid 1px #ccc;
+  width: 100%;
+  background-color: #f7f7f7;
+}
+#content .pricing .options .user table th,
+#content .pricing .options .organization table th {
+  font-weight: normal;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  text-align: left;
+  border-bottom: solid 4px #ccc;
+}
+#content .pricing .options .user table tr,
+#content .pricing .options .organization table tr {
+  margin-bottom: 10px;
+}
+#content .pricing .options .user table tr td,
+#content .pricing .options .organization table tr td {
+  letter-spacing: 1px;
+  font-size: 0.8em;
+  border-bottom: solid 1px #ddd;
+}
+#content .pricing .options .user table .users,
+#content .pricing .options .organization table .users {
+  font-size: 1.2em;
+}
+#content .pricing .options .user {
+  text-align: center;
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .pricing .options .user .title {
+  text-align: left;
+}
+#content .pricing .options .or {
+  width: 8.33333333%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 60px 0;
+  text-align: center;
+}
+#content .pricing .options .or .vertical {
+  border-right: solid 1px #999;
+  height: 200px;
+  width: 1px;
+  margin: auto;
+}
+#content .pricing .options .or .text {
+  font-size: 2em;
+  font-weight: bold;
+  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+  text-transform: uppercase;
+  text-align: center;
+}
+#content .pricing .options .organization {
+  width: 66.66666667%;
+  display: inline-block;
+  vertical-align: top;
+}
+#content .pricing .screenshots .title {
+  text-align: center;
+}
+#content .pricing .screenshots > div {
+  border-bottom: solid 1px #eee;
+  width: 80%;
+  margin: 60px auto;
+  padding-bottom: 60px;
+}
+#content .pricing .screenshots img {
+  float: right;
+  max-width: 60%;
+}
+#content .pricing .screenshots img.left {
+  float: left;
+}
+#content .pricing .integrations {
+  text-align: center;
+  padding-bottom: 40px;
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .pricing .integrations:before,
+#content .pricing .integrations:after {
+  content: "";
+  display: table;
+}
+#content .pricing .integrations:after {
+  clear: both;
+}
+#content .pricing .integrations i {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 3em;
+  color: #222222;
+}
+#content .pricing .contact {
+  background-color: #222222;
+  color: #fff;
+}
+#content .pricing .contact > div {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  color: #eee;
+  padding-bottom: 40px;
+}
+#content .pricing .contact > div i {
+  color: #444444;
+  font-size: 4em;
+  text-align: center;
 }
 #content div.stream {
   max-width: 100%;

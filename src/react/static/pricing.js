@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let Link = Router.Link;
+let { Link, Navigation } = Router;
 
 let About = React.createClass({
   getInitialState: function () {
@@ -24,38 +24,44 @@ let About = React.createClass({
     };
     classes[this.state.mode] = "selected";
     return (
-      <div className="about">
-        <img src="/assets/banner.jpg" className="banner" alt="Phourus About Banner Image" />
-        <div className="description">
-          <h3>Pricing</h3>
-          <p>For individuals, a free tool to express themselves professionally, educationally, politically and religiously; a place where expression and representation meet.</p>
-          <p>For organizations, such as businesses, government agencies, religious/charitable organizations and educational institutions, Phourus is a tool to create valuable content both internally and externally, with a competitive, social spin with the purpose of giving higher visibility to great content.</p>
-        </div>
-        <div className="help">
-          <h3>Have questions or need help?</h3>
-          <button className="button blue">Contact Support</button>
-          <p>1-800-PHOURUS</p>
-          <a href='mailto:info@phourus.com?Subject=Support'>info@phourus.com</a>
-        </div>
-        <div className="basics">
-          <h2>How does it work?</h2>
-          <button className={classes.signup} onClick={this._signup}>
-            <i className="fa fa-user-plus" /><br />
-            Sign Up
-          </button>
-          <button className={classes.create} onClick={this._create}>
-            <i className="fa fa-edit" /><br />
-            Create Posts
-          </button>
-          <button className={classes.interact} onClick={this._interact}>
-            <i className="fa fa-bar-chart" /><br />
-            Interact
-          </button>
-          <button className={classes.rank} onClick={this._rank}>
-            <i className="fa fa-trophy" /><br />
-            Rank
-          </button>
-          <div className="details">{views[this.state.mode]}</div>
+      <div className="pricing">
+        <div className="options">
+          <h1>Pricing Options</h1>
+          <div className="user">
+            <h3 className="title">Per User</h3>
+            <br /><br /><br />
+            <span className="currency">$</span>
+            <span className="amount">4</span>
+            <span className="per">/user</span>
+            <br /><br /><br />
+            <div className="period">per month</div><br /><br />
+            <div className="asterisk">* Free for individual use</div>
+            <br /><br />
+            <button className="button green" onClick={this._start}>Get Started</button>
+          </div>
+          <div className="or">
+            <div className="vertical"></div>
+            <div className="text">or</div>
+            <div className="vertical"></div>
+          </div>
+          <div className="organization">
+            <h3>Organization Rate</h3>
+            <p>Discounted rates are available for organizations that purchase for all employees. Pricing is based on organization size, not per user.</p>
+            <table>
+              <thead>
+                <th>Total Employees</th><th>Monthly Rate</th>
+              </thead>
+              <tr><td className="users">Up to 20</td><td><strong>$40/month</strong><br />($2/user)</td></tr>
+              <tr><td className="users">50</td><td><strong>$100/month</strong><br />($2/user)</td></tr>
+              <tr><td className="users">100</td><td><strong>$200/month</strong><br />($2/user)</td></tr>
+              <tr><td className="users">500</td><td><strong>$500/month</strong><br />($1/user)</td></tr>
+              <tr><td className="users">1k</td><td><strong>$1,000/month</strong><br />($1/user)</td></tr>
+              <tr><td className="users">2k</td><td><strong>$2,000/month</strong><br />($1/user)</td></tr>
+              <tr><td className="users">5k</td><td><strong>$4,000/month</strong><br />($0.80/user)</td></tr>
+              <tr><td className="users">More than 10k</td><td><Link to="contact">Contact Us</Link></td></tr>
+            </table>
+            <div className="asterisk">* After 14-day free trial</div>
+          </div>
         </div>
         <div className="screenshots">
           <div>
@@ -106,8 +112,8 @@ let About = React.createClass({
           </div>
           <div>
             <i className="fa fa-phone" /><br />
-            1-800-PHOURUS<br />
-            1-800-746-8787<br />
+            1-844-PHOURUS<br />
+            1-844-746-8787<br />
           <a href="mailto:info@phourus.com?Subject=Support">info@phourus.com</a>
           </div>
           <div></div>
@@ -126,6 +132,9 @@ let About = React.createClass({
   },
   _rank: function () {
     this.setState({mode: 'rank'});
+  },
+  _start: function () {
+    this.context.router.transitionTo("home");
   }
 });
 

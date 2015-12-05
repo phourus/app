@@ -25,7 +25,6 @@ let About = React.createClass({
     classes[this.state.mode] = "selected";
     return (
       <div className="about">
-        <img src="/assets/banner.jpg" className="banner" alt="Phourus About Banner Image" />
         <div className="description">
           <h3>Contact Us</h3>
           <p>For individuals, a free tool to express themselves professionally, educationally, politically and religiously; a place where expression and representation meet.</p>
@@ -34,66 +33,8 @@ let About = React.createClass({
         <div className="help">
           <h3>Have questions or need help?</h3>
           <button className="button blue">Contact Support</button>
-          <p>1-800-PHOURUS</p>
+          <p>1-844-PHOURUS</p>
           <a href='mailto:info@phourus.com?Subject=Support'>info@phourus.com</a>
-        </div>
-        <div className="basics">
-          <h2>How does it work?</h2>
-          <button className={classes.signup} onClick={this._signup}>
-            <i className="fa fa-user-plus" /><br />
-            Sign Up
-          </button>
-          <button className={classes.create} onClick={this._create}>
-            <i className="fa fa-edit" /><br />
-            Create Posts
-          </button>
-          <button className={classes.interact} onClick={this._interact}>
-            <i className="fa fa-bar-chart" /><br />
-            Interact
-          </button>
-          <button className={classes.rank} onClick={this._rank}>
-            <i className="fa fa-trophy" /><br />
-            Rank
-          </button>
-          <div className="details">{views[this.state.mode]}</div>
-        </div>
-        <div className="screenshots">
-          <div>
-            <img src="/assets/screenshots/stream.png" alt="Phourus Stream Screenshot" />
-            <h3>Discover Content</h3>
-            <p>...using the Phourus Stream with advanced searching and filtering capability</p>
-            <div style={{clear: "both"}}></div>
-          </div>
-          <div>
-            <img src="/assets/screenshots/editor.png" className="left" alt="Phourus Editor Screenshot" />
-            <h3>Create Posts</h3>
-            <p>...on a variety of topics with rich text, file attachments and detailed metadata</p>
-            <div style={{clear: "both"}}></div>
-          </div>
-          <div>
-            <img src="/assets/screenshots/comments.png" alt="Phourus Comments Screenshot" />
-            <h3>Interact</h3>
-            <p>...with the Phourus community by viewing posts and commenting, voting and sharing</p>
-            <div style={{clear: "both"}}></div>
-          </div>
-          <div>
-            <img src="/assets/screenshots/editor.png" className="left" alt="Phourus Compete Screenshot" />
-            <h3>Compete</h3>
-            <p>...to become a respected Leader by contributing to the Phourus platform</p>
-            <div style={{clear: "both"}}></div>
-          </div>
-        </div>
-        <div className="platforms"></div>
-        <div className="integrations">
-          <br />
-          <h2>Integrations</h2>
-          <br />
-          <i className="fa fa-facebook" />
-          <i className="fa fa-dropbox" />
-          <i className="fa fa-linkedin" />
-          <i className="fa fa-slack" />
-          <i className="fa fa-google" />
-          <i className="fa fa-rss" />
         </div>
         <div className="contact">
           <h2>Contact Us</h2>

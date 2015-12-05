@@ -1,9 +1,10 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let Link = Router.Link;
+let { Navigation, Link } = Router;
 
 let About = React.createClass({
+  mixins: [Navigation],
   getInitialState: function () {
     return {
       mode: "signup"
@@ -33,8 +34,8 @@ let About = React.createClass({
         </div>
         <div className="help">
           <h3>Have questions or need help?</h3>
-          <button className="button blue">Contact Support</button>
-          <p>1-800-PHOURUS</p>
+          <button className="button blue" onClick={this._contact}>Contact Support</button>
+          <p>1-844-PHOURUS</p>
           <a href='mailto:info@phourus.com?Subject=Support'>info@phourus.com</a>
         </div>
         <div className="basics">
@@ -57,43 +58,33 @@ let About = React.createClass({
           </button>
           <div className="details">{views[this.state.mode]}</div>
         </div>
-        <div className="screenshots">
+        <div className="team">
+          <h2 className="title">The Phourus Team</h2>
+          <p>Based out of Santa Monica CA, Phourus is a small, agile team working together to improve employee relationships.</p>
           <div>
-            <img src="/assets/screenshots/stream.png" alt="Phourus Stream Screenshot" />
-            <h3>Discover Content</h3>
+            <img src="/assets/landing/jesse.png" alt="Phourus Team - Jesse Drelick" />
+            <h3>Jesse Drelick</h3>
             <p>...using the Phourus Stream with advanced searching and filtering capability</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/editor.png" className="left" alt="Phourus Editor Screenshot" />
-            <h3>Create Posts</h3>
+            <img src="/assets/landing/matt.png" className="left" alt="Phourus Team - Matt Leddy" />
+            <h3>Matt Leddy</h3>
             <p>...on a variety of topics with rich text, file attachments and detailed metadata</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/comments.png" alt="Phourus Comments Screenshot" />
-            <h3>Interact</h3>
+            <img src="/assets/landing/jen.png" alt="Phourus Team - Jennifer Wong" />
+            <h3>Jennifer Wong</h3>
             <p>...with the Phourus community by viewing posts and commenting, voting and sharing</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/editor.png" className="left" alt="Phourus Compete Screenshot" />
-            <h3>Compete</h3>
+            <img src="/assets/landing/edwin.png" className="left" alt="Phourus Team - Edwin Chu" />
+            <h3>Edwin Chu</h3>
             <p>...to become a respected Leader by contributing to the Phourus platform</p>
             <div style={{clear: "both"}}></div>
           </div>
-        </div>
-        <div className="platforms"></div>
-        <div className="integrations">
-          <br />
-          <h2>Integrations</h2>
-          <br />
-          <i className="fa fa-facebook" />
-          <i className="fa fa-dropbox" />
-          <i className="fa fa-linkedin" />
-          <i className="fa fa-slack" />
-          <i className="fa fa-google" />
-          <i className="fa fa-rss" />
         </div>
         <div className="contact">
           <h2>Contact Us</h2>
@@ -106,14 +97,17 @@ let About = React.createClass({
           </div>
           <div>
             <i className="fa fa-phone" /><br />
-            1-800-PHOURUS<br />
-            1-800-746-8787<br />
+            1-844-PHOURUS<br />
+            1-844-746-8787<br />
           <a href="mailto:info@phourus.com?Subject=Support">info@phourus.com</a>
           </div>
           <div></div>
         </div>
       </div>
     );
+  },
+  _contact: function () {
+    this.context.router.transitionTo("contact");
   },
   _signup: function () {
     this.setState({mode: 'signup'});
