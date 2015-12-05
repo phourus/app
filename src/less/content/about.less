@@ -67,6 +67,25 @@
         padding: 0;
       }
 
+      div.interact {
+        border: none;
+      }
+
+      div.signup {
+
+        button {
+          margin: 40px auto;
+          background-color: transparent;
+          color: #fff;
+          border: solid 1px #fff;
+
+          &:hover {
+            border-color: #333;
+            color: #333;
+          }
+        }
+      }
+
       div.signup, div.create, div.interact, div.rank {
        .Row(80%);
 
@@ -74,9 +93,15 @@
          .Cols(6);
          text-align: left;
 
+         .title {
+           display: inline-block;
+           vertical-align: middle;
+         }
+
          i {
            font-size: 3em;
-           float: left;
+           vertical-align: middle;
+           margin-right: 10px;
          }
        }
       }

@@ -1073,6 +1073,19 @@ div.alerts button {
   margin: 0;
   padding: 0;
 }
+#content .about .basics .details div.interact {
+  border: none;
+}
+#content .about .basics .details div.signup button {
+  margin: 40px auto;
+  background-color: transparent;
+  color: #fff;
+  border: solid 1px #fff;
+}
+#content .about .basics .details div.signup button:hover {
+  border-color: #333;
+  color: #333;
+}
 #content .about .basics .details div.signup,
 #content .about .basics .details div.create,
 #content .about .basics .details div.interact,
@@ -1107,12 +1120,20 @@ div.alerts button {
   vertical-align: top;
   text-align: left;
 }
+#content .about .basics .details div.signup > div .title,
+#content .about .basics .details div.create > div .title,
+#content .about .basics .details div.interact > div .title,
+#content .about .basics .details div.rank > div .title {
+  display: inline-block;
+  vertical-align: middle;
+}
 #content .about .basics .details div.signup > div i,
 #content .about .basics .details div.create > div i,
 #content .about .basics .details div.interact > div i,
 #content .about .basics .details div.rank > div i {
   font-size: 3em;
-  float: left;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 #content .about .team .title {
   text-align: center;
