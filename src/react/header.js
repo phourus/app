@@ -46,8 +46,12 @@ module.exports = React.createClass({
   render: function () {
     let orgs = this.state.orgs;
     let route = this.context.router.getCurrentRoutes();
-    if (route && route[1].name === 'home') {
+    let r = route[1] ? route[1].name : '';
+    if (r === 'home') {
       return <Home />
+    }
+    if (route && (r === 'contact' || r === 'pricing' || r === 'about' || r === 'docs')) {
+      return <Static />
     }
     return  (
         <header className="header">
@@ -139,6 +143,26 @@ let Home = React.createClass({
         <div className="brand">
           <Link to="home"></Link>
         </div>
+      </header>
+    );
+  }
+});
+
+let Static = React.createClass({
+  render: function () {
+    return (
+      <header className="header">
+        <div className="brand">
+          <Link to="home"></Link>
+        </div>
+        <nav>
+          <ul>
+            <li><Link to="about">About</Link></li>
+            <li><Link to="pricing">Pricing</Link></li>
+            <li><Link to="docs">Docs</Link></li>
+            <li><Link to="contact">Contact</Link></li>
+          </ul>
+        </nav>
       </header>
     );
   }

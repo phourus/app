@@ -41,7 +41,9 @@ module.exports = (
     <Route name="nonprofit" handler={Nonprofit} />
     <Route name="about" handler={About} />
     <Route name="pricing" handler={Pricing} />
-    <Route name="docs" handler={Docs} />
+    <Route name="docs" handler={Docs}>
+      <Route name="docPage" path=":id" handler={Docs} />
+    </Route>
     <Route name="contact" handler={Contact} />
     <Route name="terms" handler={Terms} />
     <Route name="privacy" handler={Privacy} />

@@ -29,8 +29,8 @@ let About = React.createClass({
         <img src="/assets/banner.jpg" className="banner" alt="Phourus About Banner Image" />
         <div className="description">
           <h3>What is Phourus?</h3>
-          <p>For individuals, a free tool to express themselves professionally, educationally, politically and religiously; a place where expression and representation meet.</p>
-          <p>For organizations, such as businesses, government agencies, religious/charitable organizations and educational institutions, Phourus is a tool to create valuable content both internally and externally, with a competitive, social spin with the purpose of giving higher visibility to great content.</p>
+          <p>Phourus is about people and the organizations they are part of. Between payroll and the time spent recruiting, engaging and retaining employees, the people of a company are it's biggest investment.</p>
+          <p>Phourus it the only platform focused on nurturing the thoughts, ideas and opinions of employees and keeping them in a central, secure place for easy access and collaboration</p>
         </div>
         <div className="help">
           <h3>Have questions or need help?</h3>
@@ -64,25 +64,25 @@ let About = React.createClass({
           <div>
             <img src="/assets/landing/jesse.png" alt="Phourus Team - Jesse Drelick" />
             <h3>Jesse Drelick</h3>
-            <p>...using the Phourus Stream with advanced searching and filtering capability</p>
+            <p>Technology and product</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
             <img src="/assets/landing/matt.png" className="left" alt="Phourus Team - Matt Leddy" />
             <h3>Matt Leddy</h3>
-            <p>...on a variety of topics with rich text, file attachments and detailed metadata</p>
+            <p>Sales and account management</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
             <img src="/assets/landing/jen.png" alt="Phourus Team - Jennifer Wong" />
             <h3>Jennifer Wong</h3>
-            <p>...with the Phourus community by viewing posts and commenting, voting and sharing</p>
+            <p>UX and analytics</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
             <img src="/assets/landing/edwin.png" className="left" alt="Phourus Team - Edwin Chu" />
             <h3>Edwin Chu</h3>
-            <p>...to become a respected Leader by contributing to the Phourus platform</p>
+            <p>Business development and lead generation</p>
             <div style={{clear: "both"}}></div>
           </div>
         </div>
@@ -141,7 +141,7 @@ let Signup = React.createClass({
           <h3 className="title">Sign up as an Organization</h3>
           <button className="button blue" onClick={this._trial}>Start Trial</button>
         </div>
-        <p>Already have an account with Phourus? <Link to="account">Click here to login.</Link></p>
+        <p>Already have an account with Phourus? <Link to="home">Click here to login.</Link></p>
       </div>
     )
   },

@@ -4,6 +4,7 @@ let Router = require('react-router');
 let { Link, Navigation } = Router;
 
 let About = React.createClass({
+  mixins: [Navigation],
   getInitialState: function () {
     return {
       mode: "signup"
