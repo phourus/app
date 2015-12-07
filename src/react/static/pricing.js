@@ -3,6 +3,8 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, Navigation } = Router;
 
+let Features = require('../landing/features');
+
 let About = React.createClass({
   mixins: [Navigation],
   getInitialState: function () {
@@ -90,6 +92,7 @@ let About = React.createClass({
             <div style={{clear: "both"}}></div>
           </div>
         </div>
+        <Features />
         <div className="platforms"></div>
         <div className="integrations">
           <br />

@@ -1838,25 +1838,25 @@ div.alerts button {
 #content .landing .explore > p {
   color: #555;
 }
-#content .landing div.features {
+div.features {
   background-color: #eee;
 }
-#content .landing div.features div.squeeze {
+div.features div.squeeze {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
   text-align: center;
   margin: 40px auto;
 }
-#content .landing div.features div.squeeze:before,
-#content .landing div.features div.squeeze:after {
+div.features div.squeeze:before,
+div.features div.squeeze:after {
   content: "";
   display: table;
 }
-#content .landing div.features div.squeeze:after {
+div.features div.squeeze:after {
   clear: both;
 }
-#content .landing div.features div.squeeze > div {
+div.features div.squeeze > div {
   width: 100%;
   display: inline-block;
   vertical-align: top;
@@ -1865,7 +1865,7 @@ div.alerts button {
   padding: 20px;
   max-width: 900px;
 }
-#content .landing div.features div.squeeze > div > div {
+div.features div.squeeze > div > div {
   text-align: left;
   clear: right;
   min-height: 2em;
@@ -1874,28 +1874,28 @@ div.alerts button {
   margin-bottom: 1em;
   font-size: 1em;
 }
-#content .landing div.features div.squeeze > div > div i {
+div.features div.squeeze > div > div i {
   font-size: 1.5em;
   width: 40px;
 }
-#content .landing div.features div.squeeze > div.video {
+div.features div.squeeze > div.video {
   text-align: center;
 }
 @media (min-width: 800px) {
-  #content .landing div.features div.squeeze {
+  div.features div.squeeze {
     max-width: 80%;
     width: 100%;
     margin: 0 auto;
   }
-  #content .landing div.features div.squeeze:before,
-  #content .landing div.features div.squeeze:after {
+  div.features div.squeeze:before,
+  div.features div.squeeze:after {
     content: "";
     display: table;
   }
-  #content .landing div.features div.squeeze:after {
+  div.features div.squeeze:after {
     clear: both;
   }
-  #content .landing div.features div.squeeze > div {
+  div.features div.squeeze > div {
     width: 50%;
     display: inline-block;
     vertical-align: top;
@@ -1904,7 +1904,7 @@ div.alerts button {
     padding: 20px;
     max-width: 900px;
   }
-  #content .landing div.features div.squeeze > div > div {
+  div.features div.squeeze > div > div {
     text-align: left;
     clear: right;
     min-height: 2em;
@@ -1913,11 +1913,11 @@ div.alerts button {
     margin-bottom: 1em;
     font-size: 1em;
   }
-  #content .landing div.features div.squeeze > div > div i {
+  div.features div.squeeze > div > div i {
     font-size: 1.5em;
     width: 40px;
   }
-  #content .landing div.features div.squeeze > div.video {
+  div.features div.squeeze > div.video {
     text-align: center;
   }
 }
