@@ -3752,8 +3752,30 @@ header.home {
   background: transparent;
   position: absolute;
 }
-header.home nav {
-  display: none;
+header nav.home > ul > li,
+nav.static > ul > li {
+  display: inline-block;
+}
+header nav.home > ul > li > a,
+nav.static > ul > li > a {
+  padding: 20px 4px 15px 4px;
+  display: block;
+  font-size: 0.8em;
+  color: #fff;
+}
+header nav.home > ul > li > a:hover,
+nav.static > ul > li > a:hover {
+  background-color: #fff;
+  opacity: 0.5;
+  color: #333;
+}
+header nav.static > ul > li > a {
+  color: #333;
+}
+header nav.static > ul > li > a:hover {
+  background-color: #000;
+  opacity: 0.7;
+  color: #fff;
 }
 header {
   width: 100%;

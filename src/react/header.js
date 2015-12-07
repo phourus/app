@@ -143,6 +143,7 @@ let Home = React.createClass({
         <div className="brand">
           <Link to="home"></Link>
         </div>
+        <Nav classType="home" />
       </header>
     );
   }
@@ -155,15 +156,23 @@ let Static = React.createClass({
         <div className="brand">
           <Link to="home"></Link>
         </div>
-        <nav>
-          <ul>
-            <li><Link to="about">About</Link></li>
-            <li><Link to="pricing">Pricing</Link></li>
-            <li><Link to="docs">Docs</Link></li>
-            <li><Link to="contact">Contact</Link></li>
-          </ul>
-        </nav>
+        <Nav classType="static" />
       </header>
+    );
+  }
+});
+
+let Nav = React.createClass({
+  render: function () {
+    return (
+      <nav className={this.props.classType}>
+        <ul>
+          <li><Link to="about">About</Link></li>
+          <li><Link to="pricing">Pricing</Link></li>
+          <li><Link to="docs">Docs</Link></li>
+          <li><Link to="contact">Contact</Link></li>
+        </ul>
+      </nav>
     );
   }
 });
