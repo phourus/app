@@ -85,12 +85,6 @@ let About = React.createClass({
             <p>...with the Phourus community by viewing posts and commenting, voting and sharing</p>
             <div style={{clear: "both"}}></div>
           </div>
-          <div>
-            <img src="/assets/screenshots/editor.png" className="left" alt="Phourus Compete Screenshot" />
-            <h3>Compete</h3>
-            <p>...to become a respected Leader by contributing to the Phourus platform</p>
-            <div style={{clear: "both"}}></div>
-          </div>
         </div>
         <Features />
         <div className="platforms"></div>
