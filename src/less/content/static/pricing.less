@@ -5,9 +5,9 @@
   max-width: 100%;
 
   .options {
-    background-color: #eee;
+    .Row(100%);
     padding: 0 20px 0 20px;
-    .Row(80%);
+
 
     .user, .organization {
 
@@ -72,7 +72,6 @@
 
     .user {
       text-align: center;
-      .Cols(3);
 
       .title {
         text-align: left;
@@ -80,29 +79,9 @@
     }
 
     .or {
-      .Cols(1);
-      padding: 60px 0;
-      text-align: center;
-
-      .vertical {
-        border-right: solid 1px #999;
-        height: 200px;
-        width: 1px;
-        margin: auto;
-      }
-
-      .text {
-        font-size: 2em;
-        font-weight: bold;
-        font-family: @font-serif;
-        text-transform: uppercase;
-        text-align: center;
-      }
+      display: none;
     }
 
-    .organization {
-      .Cols(8);
-    }
   }
 
   .screenshots {
@@ -131,11 +110,11 @@
   .integrations {
     text-align: center;
     padding-bottom: 40px;
-    .Row(80%);
+    .Row(100%);
 
     i {
       .Cols(2);
-      font-size: 3em;
+      font-size: 2em;
       color: @theme-dark;
     }
   }
@@ -145,7 +124,7 @@
     color: #fff;
 
     > div {
-      .Cols(3);
+      .Cols(12);
       text-align: center;
       color: #eee;
       padding-bottom: 40px;
@@ -154,6 +133,72 @@
         color: @theme-light;
         font-size: 4em;
         text-align: center;
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  #content .pricing {
+
+    .contact {
+
+      > div {
+        .Cols(3);
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+
+  #content .pricing {
+
+    .options {
+      .Row(80%);
+      background-color: #eee;
+
+      .user {
+        .Cols(3);
+
+        .title {
+
+        }
+      }
+
+      .or {
+        .Cols(1);
+        padding: 60px 0;
+        text-align: center;
+
+        .vertical {
+          border-right: solid 1px #999;
+          height: 200px;
+          width: 1px;
+          margin: auto;
+        }
+
+        .text {
+          font-size: 2em;
+          font-weight: bold;
+          font-family: @font-serif;
+          text-transform: uppercase;
+          text-align: center;
+        }
+      }
+
+      .organization {
+        .Cols(8);
+      }
+    }
+
+    .integrations {
+      .Row(80%);
+
+      i {
+        .Cols(2);
+        font-size: 3em;
+        color: @theme-dark;
       }
     }
   }

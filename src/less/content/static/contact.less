@@ -5,17 +5,17 @@
   max-width: 100%;
 
   .description {
-    .Cols(9);
+    .Cols(12);
     box-sizing: border-box;
     padding: 20px 40px 0 40px;
     color: #444;
     vertical-align: middle;
+    text-align: center;
   }
 
   .help {
-    .Cols(3);
+    .Cols(12);
     box-sizing: border-box;
-    border-left: solid 1px #eee;
     padding-left: 10px;
     text-align: center;
     vertical-align: middle;
@@ -26,15 +26,49 @@
   }
 
   .form {
-    margin: 40px;
+    margin: 10px;
 
     textarea {
-      width: 75%;
+      width: 100%;
     }
 
     button {
       float: right;
-      margin-right: 25%;
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  #content .contact {
+
+    .description {
+      .Cols(9);
+      box-sizing: border-box;
+      padding: 20px 40px 0 40px;
+      color: #444;
+      vertical-align: middle;
+      text-align: left;
+    }
+
+    .help {
+      .Cols(3);
+      box-sizing: border-box;
+      border-left: solid 1px #eee;
+      padding-left: 10px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .form {
+      margin: 40px;
+
+      textarea {
+        width: 75%;
+      }
+
+      button {
+        margin-right: 25%;
+      }
     }
   }
 }

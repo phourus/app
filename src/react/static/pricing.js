@@ -31,7 +31,6 @@ let About = React.createClass({
         <div className="options">
           <h1>Pricing Options</h1>
           <div className="user">
-            <h3 className="title">Per User</h3>
             <br /><br /><br />
             <span className="currency">$</span>
             <span className="amount">4</span>
@@ -48,7 +47,6 @@ let About = React.createClass({
             <div className="vertical"></div>
           </div>
           <div className="organization">
-            <h3>Organization Rate</h3>
             <p>Discounted rates are available for organizations that purchase for all employees. Pricing is based on organization size, not per user.</p>
             <table>
               <thead>

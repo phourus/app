@@ -1007,189 +1007,6 @@ div.alerts button {
     vertical-align: middle;
   }
 }
-#content .about {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-width: 100%;
-}
-#content .about .banner {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-}
-#content .about .description {
-  width: 75%;
-  display: inline-block;
-  vertical-align: top;
-  box-sizing: border-box;
-  padding: 20px 40px 0 40px;
-  color: #444;
-  vertical-align: middle;
-}
-#content .about .help {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-  box-sizing: border-box;
-  border-left: solid 1px #eee;
-  padding-left: 10px;
-  text-align: center;
-  vertical-align: middle;
-}
-#content .about .help button.button {
-  margin: auto;
-}
-#content .about .basics {
-  background-color: #222222;
-  color: #fff;
-}
-#content .about .basics > button {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-  background: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  height: 100px;
-}
-#content .about .basics > button:hover {
-  background-color: #658c00;
-}
-#content .about .basics > button.selected {
-  background-color: #9cd900;
-}
-#content .about .basics > button i {
-  font-size: 4em;
-  color: #444444;
-}
-#content .about .basics .details {
-  background-color: #9cd900;
-  text-align: center;
-}
-#content .about .basics .details .title {
-  margin: 0;
-  padding: 0;
-}
-#content .about .basics .details div.interact {
-  border: none;
-}
-#content .about .basics .details div.signup button {
-  margin: 40px auto;
-  background-color: transparent;
-  color: #fff;
-  border: solid 1px #fff;
-}
-#content .about .basics .details div.signup button:hover {
-  border-color: #333;
-  color: #333;
-}
-#content .about .basics .details div.signup,
-#content .about .basics .details div.create,
-#content .about .basics .details div.interact,
-#content .about .basics .details div.rank {
-  max-width: 80%;
-  width: 100%;
-  margin: 0 auto;
-}
-#content .about .basics .details div.signup:before,
-#content .about .basics .details div.create:before,
-#content .about .basics .details div.interact:before,
-#content .about .basics .details div.rank:before,
-#content .about .basics .details div.signup:after,
-#content .about .basics .details div.create:after,
-#content .about .basics .details div.interact:after,
-#content .about .basics .details div.rank:after {
-  content: "";
-  display: table;
-}
-#content .about .basics .details div.signup:after,
-#content .about .basics .details div.create:after,
-#content .about .basics .details div.interact:after,
-#content .about .basics .details div.rank:after {
-  clear: both;
-}
-#content .about .basics .details div.signup > div,
-#content .about .basics .details div.create > div,
-#content .about .basics .details div.interact > div,
-#content .about .basics .details div.rank > div {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: left;
-}
-#content .about .basics .details div.signup > div .title,
-#content .about .basics .details div.create > div .title,
-#content .about .basics .details div.interact > div .title,
-#content .about .basics .details div.rank > div .title {
-  display: inline-block;
-  vertical-align: middle;
-}
-#content .about .basics .details div.signup > div i,
-#content .about .basics .details div.create > div i,
-#content .about .basics .details div.interact > div i,
-#content .about .basics .details div.rank > div i {
-  font-size: 3em;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-#content .about .team .title {
-  text-align: center;
-}
-#content .about .team > div {
-  border-bottom: solid 1px #eee;
-  width: 80%;
-  margin: 60px auto;
-  padding-bottom: 60px;
-}
-#content .about .team img {
-  float: right;
-  width: 200px;
-}
-#content .about .team img.left {
-  float: left;
-}
-#content .about .integrations {
-  text-align: center;
-  padding-bottom: 40px;
-  max-width: 80%;
-  width: 100%;
-  margin: 0 auto;
-}
-#content .about .integrations:before,
-#content .about .integrations:after {
-  content: "";
-  display: table;
-}
-#content .about .integrations:after {
-  clear: both;
-}
-#content .about .integrations i {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
-  font-size: 3em;
-  color: #222222;
-}
-#content .about .contact {
-  background-color: #222222;
-  color: #fff;
-}
-#content .about .contact > div {
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-  color: #eee;
-  padding-bottom: 40px;
-}
-#content .about .contact > div i {
-  color: #444444;
-  font-size: 4em;
-  text-align: center;
-}
 .account .heading {
   max-width: 100%;
   width: 100%;
@@ -3302,14 +3119,20 @@ div.post {
     background-color: #fff;
   }
 }
-#content .contact {
-  margin: 20px 0 0 0;
+#content .about {
+  margin: 0;
   padding: 0;
   width: 100%;
   max-width: 100%;
 }
-#content .contact .description {
-  width: 75%;
+#content .about .banner {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#content .about .description {
+  width: 100%;
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
@@ -3317,8 +3140,8 @@ div.post {
   color: #444;
   vertical-align: middle;
 }
-#content .contact .help {
-  width: 25%;
+#content .about .help {
+  width: 100%;
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
@@ -3327,18 +3150,256 @@ div.post {
   text-align: center;
   vertical-align: middle;
 }
+#content .about .help button.button {
+  margin: auto;
+}
+#content .about .basics {
+  background-color: #222222;
+  color: #fff;
+}
+#content .about .basics > button {
+  width: 25%;
+  display: inline-block;
+  vertical-align: top;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  height: 100px;
+}
+#content .about .basics > button:hover {
+  background-color: #658c00;
+}
+#content .about .basics > button.selected {
+  background-color: #9cd900;
+}
+#content .about .basics > button i {
+  font-size: 4em;
+  color: #444444;
+}
+#content .about .basics .details {
+  background-color: #9cd900;
+  text-align: center;
+}
+#content .about .basics .details .title {
+  margin: 0;
+  padding: 0;
+}
+#content .about .basics .details div.interact {
+  border: none;
+}
+#content .about .basics .details div.signup button {
+  margin: 40px auto;
+  background-color: transparent;
+  color: #fff;
+  border: solid 1px #fff;
+}
+#content .about .basics .details div.signup button:hover {
+  border-color: #333;
+  color: #333;
+}
+#content .about .basics .details div.signup,
+#content .about .basics .details div.create,
+#content .about .basics .details div.interact,
+#content .about .basics .details div.rank {
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .about .basics .details div.signup:before,
+#content .about .basics .details div.create:before,
+#content .about .basics .details div.interact:before,
+#content .about .basics .details div.rank:before,
+#content .about .basics .details div.signup:after,
+#content .about .basics .details div.create:after,
+#content .about .basics .details div.interact:after,
+#content .about .basics .details div.rank:after {
+  content: "";
+  display: table;
+}
+#content .about .basics .details div.signup:after,
+#content .about .basics .details div.create:after,
+#content .about .basics .details div.interact:after,
+#content .about .basics .details div.rank:after {
+  clear: both;
+}
+#content .about .basics .details div.signup > div,
+#content .about .basics .details div.create > div,
+#content .about .basics .details div.interact > div,
+#content .about .basics .details div.rank > div {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+#content .about .basics .details div.signup > div .title,
+#content .about .basics .details div.create > div .title,
+#content .about .basics .details div.interact > div .title,
+#content .about .basics .details div.rank > div .title {
+  display: inline-block;
+  vertical-align: middle;
+}
+#content .about .basics .details div.signup > div i,
+#content .about .basics .details div.create > div i,
+#content .about .basics .details div.interact > div i,
+#content .about .basics .details div.rank > div i {
+  font-size: 3em;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+#content .about .team .title {
+  text-align: center;
+}
+#content .about .team > div {
+  border-bottom: solid 1px #eee;
+  width: 80%;
+  margin: 60px auto;
+  padding-bottom: 60px;
+}
+#content .about .team img {
+  float: right;
+  width: 200px;
+}
+#content .about .team img.left {
+  float: left;
+}
+#content .about .team > p {
+  text-align: center;
+}
+#content .about .integrations {
+  text-align: center;
+  padding-bottom: 40px;
+  max-width: 80%;
+  width: 100%;
+  margin: 0 auto;
+}
+#content .about .integrations:before,
+#content .about .integrations:after {
+  content: "";
+  display: table;
+}
+#content .about .integrations:after {
+  clear: both;
+}
+#content .about .integrations i {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 3em;
+  color: #222222;
+}
+#content .about .contact {
+  background-color: #222222;
+  color: #fff;
+}
+#content .about .contact > div {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  color: #eee;
+  padding-bottom: 40px;
+}
+#content .about .contact > div i {
+  color: #444444;
+  font-size: 4em;
+  text-align: center;
+}
+@media (min-width: 500px) {
+  #content .about .contact > div {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+@media (min-width: 800px) {
+  #content .about .description {
+    width: 75%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 20px 40px 0 40px;
+    color: #444;
+    vertical-align: middle;
+  }
+  #content .about .help {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    border-left: solid 1px #eee;
+    padding-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+#content .contact {
+  margin: 20px 0 0 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+}
+#content .contact .description {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding: 20px 40px 0 40px;
+  color: #444;
+  vertical-align: middle;
+  text-align: center;
+}
+#content .contact .help {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding-left: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
 #content .contact .help button.button {
   margin: auto;
 }
 #content .contact .form {
-  margin: 40px;
+  margin: 10px;
 }
 #content .contact .form textarea {
-  width: 75%;
+  width: 100%;
 }
 #content .contact .form button {
   float: right;
-  margin-right: 25%;
+}
+@media (min-width: 800px) {
+  #content .contact .description {
+    width: 75%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 20px 40px 0 40px;
+    color: #444;
+    vertical-align: middle;
+    text-align: left;
+  }
+  #content .contact .help {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    border-left: solid 1px #eee;
+    padding-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  #content .contact .form {
+    margin: 40px;
+  }
+  #content .contact .form textarea {
+    width: 75%;
+  }
+  #content .contact .form button {
+    margin-right: 25%;
+  }
 }
 #content .docs .menu {
   display: inline-block;
@@ -3372,11 +3433,10 @@ div.post {
   max-width: 100%;
 }
 #content .pricing .options {
-  background-color: #eee;
-  padding: 0 20px 0 20px;
-  max-width: 80%;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
+  padding: 0 20px 0 20px;
 }
 #content .pricing .options:before,
 #content .pricing .options:after {
@@ -3447,37 +3507,12 @@ div.post {
 }
 #content .pricing .options .user {
   text-align: center;
-  width: 25%;
-  display: inline-block;
-  vertical-align: top;
 }
 #content .pricing .options .user .title {
   text-align: left;
 }
 #content .pricing .options .or {
-  width: 8.33333333%;
-  display: inline-block;
-  vertical-align: top;
-  padding: 60px 0;
-  text-align: center;
-}
-#content .pricing .options .or .vertical {
-  border-right: solid 1px #999;
-  height: 200px;
-  width: 1px;
-  margin: auto;
-}
-#content .pricing .options .or .text {
-  font-size: 2em;
-  font-weight: bold;
-  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
-  text-transform: uppercase;
-  text-align: center;
-}
-#content .pricing .options .organization {
-  width: 66.66666667%;
-  display: inline-block;
-  vertical-align: top;
+  display: none;
 }
 #content .pricing .screenshots .title {
   text-align: center;
@@ -3499,7 +3534,7 @@ div.post {
 #content .pricing .integrations {
   text-align: center;
   padding-bottom: 40px;
-  max-width: 80%;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
 }
@@ -3515,7 +3550,7 @@ div.post {
   width: 16.66666667%;
   display: inline-block;
   vertical-align: top;
-  font-size: 3em;
+  font-size: 2em;
   color: #222222;
 }
 #content .pricing .contact {
@@ -3523,7 +3558,7 @@ div.post {
   color: #fff;
 }
 #content .pricing .contact > div {
-  width: 25%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
   text-align: center;
@@ -3534,6 +3569,79 @@ div.post {
   color: #444444;
   font-size: 4em;
   text-align: center;
+}
+@media (min-width: 500px) {
+  #content .pricing .contact > div {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+@media (min-width: 800px) {
+  #content .pricing .options {
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #eee;
+  }
+  #content .pricing .options:before,
+  #content .pricing .options:after {
+    content: "";
+    display: table;
+  }
+  #content .pricing .options:after {
+    clear: both;
+  }
+  #content .pricing .options .user {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  #content .pricing .options .or {
+    width: 8.33333333%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 60px 0;
+    text-align: center;
+  }
+  #content .pricing .options .or .vertical {
+    border-right: solid 1px #999;
+    height: 200px;
+    width: 1px;
+    margin: auto;
+  }
+  #content .pricing .options .or .text {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  #content .pricing .options .organization {
+    width: 66.66666667%;
+    display: inline-block;
+    vertical-align: top;
+  }
+  #content .pricing .integrations {
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+  }
+  #content .pricing .integrations:before,
+  #content .pricing .integrations:after {
+    content: "";
+    display: table;
+  }
+  #content .pricing .integrations:after {
+    clear: both;
+  }
+  #content .pricing .integrations i {
+    width: 16.66666667%;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 3em;
+    color: #222222;
+  }
 }
 #content div.stream {
   max-width: 100%;
