@@ -7,11 +7,12 @@ header nav.home, nav.static {
 
 	 > ul > li {
 		 display: inline-block;
+		 width: initial;
 
 	 	> a {
-			padding: 20px 4px 15px 4px;
+			padding: 12px 4px 15px 4px;
 			display: block;
-			font-size: 0.8em;
+			font-size: 0.6em;
 			color: #fff;
 
 			&:hover {
@@ -303,6 +304,30 @@ div.spacer {
 }
 
 @media (min-width: 500px) {
+
+	header nav.home, nav.static {
+
+		 > ul > li {
+
+		 	> a {
+				padding: 20px 4px 15px 4px;
+				font-size: 0.8em;
+			}
+		}
+	}
+
+	header nav.static {
+
+		> ul > li {
+
+		 > a {
+
+			 &:hover {
+
+			 }
+		 }
+	 }
+	}
 
 	header {
 		height: 60px;
