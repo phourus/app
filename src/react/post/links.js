@@ -4,7 +4,8 @@ let React = require('react');
 let Actions = require('../../actions/post/links');
 let Store = require('../../stores/post/links');
 
-let File = require('react-dropzone-component');
+// Isomorphic support?
+//let File = require('react-dropzone-component');
 
 //let AWS = require('aws-sdk');
 // AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});

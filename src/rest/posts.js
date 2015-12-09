@@ -1,4 +1,5 @@
-var http = require('../ajax')(window);
+let w = require('window-or-global');
+var http = require('../xhr')(w);
 var base = '/rest/posts/';
 var settings = require('../settings');
 
