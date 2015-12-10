@@ -66,19 +66,19 @@ let About = React.createClass({
         </div>
         <div className="screenshots">
           <div>
-            <img src="/assets/screenshots/stream.png" alt="Phourus Stream Screenshot" />
+            <img src="/assets/screenshots/stream.jpg" alt="Phourus Stream Screenshot" />
             <h3>Discover Content</h3>
             <p>...using the Phourus Stream with advanced searching and filtering capability</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/editor.png" className="left" alt="Phourus Editor Screenshot" />
+            <img src="/assets/screenshots/editor.jpg" className="left" alt="Phourus Editor Screenshot" />
             <h3>Create Posts</h3>
             <p>...on a variety of topics with rich text, file attachments and detailed metadata</p>
             <div style={{clear: "both"}}></div>
           </div>
           <div>
-            <img src="/assets/screenshots/comments.png" alt="Phourus Comments Screenshot" />
+            <img src="/assets/screenshots/comments.jpg" alt="Phourus Comments Screenshot" />
             <h3>Interact</h3>
             <p>...with the Phourus community by viewing posts and commenting, voting and sharing</p>
             <div style={{clear: "both"}}></div>
