@@ -50,8 +50,8 @@ let Slider = React.createClass({
     classes[this.state.slide] = 'selected';
     return (
       <div className="banner">
-        <div className="title">SaaS with a Soul</div>
-        <p>Get more out of your productivity tools than just productivity.</p>
+        <div className="title">Every company has a story</div>
+        <p>Make sure you're on the same page</p>
         <div className="actions">
           <button className="button green" onClick={this.props.showSignup}>Sign Up Now</button>
           <button className="button blue" onClick={this.props.more}>Learn More</button>
