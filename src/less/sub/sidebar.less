@@ -2,25 +2,27 @@
 
   i {
     font-size: 2em;
-    color: #eee;
+    color: #333;
   }
 
   ul {
     margin: 20px 0 0 0;
     padding: 0;
-    border-top: solid 1px #777;
 
     li {
-      border-bottom: solid 1px #777;
       padding: 10px 0 10px 10px;
 
       &:hover {
-        background-color: #000;
+        border-right: 4px solid @blue;
+      }
+
+      &.selected {
+        border-color: @green;
       }
 
       .title {
         font-size: 1.5em;
-        color: #eee;
+        color: #333;
       }
 
       .count {
@@ -34,7 +36,11 @@
         &:hover {
 
           .title, .count {
-            color: @gold;
+            color: @blue;
+          }
+
+          .count {
+            color: #333;
           }
         }
       }

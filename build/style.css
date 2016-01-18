@@ -3885,7 +3885,6 @@ div.post {
   position: fixed;
   left: 0;
   box-sizing: border-box;
-  background-color: #333;
   height: 100%;
   vertical-align: top;
 }
@@ -4420,23 +4419,24 @@ div.spacer {
 }
 #sidebar i {
   font-size: 2em;
-  color: #eee;
+  color: #333;
 }
 #sidebar ul {
   margin: 20px 0 0 0;
   padding: 0;
-  border-top: solid 1px #777;
 }
 #sidebar ul li {
-  border-bottom: solid 1px #777;
   padding: 10px 0 10px 10px;
 }
 #sidebar ul li:hover {
-  background-color: #000;
+  border-right: 4px solid #3498db;
+}
+#sidebar ul li.selected {
+  border-color: #8abf00;
 }
 #sidebar ul li .title {
   font-size: 1.5em;
-  color: #eee;
+  color: #333;
 }
 #sidebar ul li .count {
   font-size: 0.8em;
@@ -4447,7 +4447,10 @@ div.spacer {
 }
 #sidebar ul li a:hover .title,
 #sidebar ul li a:hover .count {
-  color: #ecb010;
+  color: #3498db;
+}
+#sidebar ul li a:hover .count {
+  color: #333;
 }
 /** COLORS **/
 /** BODY **/

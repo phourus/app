@@ -22,7 +22,7 @@ let App = React.createClass({
     let className = "main";
     let route = this.context.router.getCurrentRoutes();
 
-    if (route[1] && route[1].name === 'INVALID') {
+    if (route[1] && route[1].name === 'stream') {
       className += " sidebar";
 
       if (this.state.sidebarVisible) {
@@ -39,6 +39,7 @@ let App = React.createClass({
         <Profile />
         <Alerts {...this.props.alerts} />
         <div className={className}>
+          <Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
           <div id="content">
             <RouteHandler />
           </div>
