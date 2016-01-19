@@ -17,7 +17,11 @@
       }
 
       &.selected {
-        border-color: @green;
+        border-right: 4px solid @green;
+
+        a:hover .title {
+          color: @green;
+        }
       }
 
       .title {

@@ -70,8 +70,14 @@ let App = React.createClass({
 });
 
 let Sidebar = React.createClass({
+  getInitialState: function () {
+    return {
+      selected: 0
+    };
+  },
   render: function () {
     let tags = [
+      {name: 'All Posts (Default)', count: 86},
       {name: 'Marketing', count: 32},
       {name: 'Development', count: 22},
       {name: 'Sales', count: 17},
@@ -89,10 +95,10 @@ let Sidebar = React.createClass({
       <div id="sidebar">
         <button className="toggle" onClick={this.props.sidebar}><i className="fa fa-navicon" /></button>
         <ul>
-          {tags.map((item) => {
+          {tags.map((item, index) => {
             return (
-              <li>
-                <a href="">
+              <li className={index === this.state.selected ? "selected" : ""}>
+                <a id={'id' + index} href="javascript:void(0)" onClick={this._select}>
                   <span className="title">{item.name}</span><br />
                   <span className="count">{item.count} posts</span>
                 </a>
@@ -102,6 +108,11 @@ let Sidebar = React.createClass({
         </ul>
       </div>
     );
+  },
+  _select: function (e) {
+    let id = e.currentTarget.id;
+    id = id.replace('id', '');
+    this.setState({selected: parseInt(id)});
   }
 });
 

@@ -4432,7 +4432,10 @@ div.spacer {
   border-right: 4px solid #3498db;
 }
 #sidebar ul li.selected {
-  border-color: #8abf00;
+  border-right: 4px solid #8abf00;
+}
+#sidebar ul li.selected a:hover .title {
+  color: #8abf00;
 }
 #sidebar ul li .title {
   font-size: 1.5em;
