@@ -2,6 +2,9 @@
 let React = require('react');
 let { DropTarget } = require('react-dnd');
 
+let Actions = require('../../actions/post/folders');
+let Store = require('../../stores/post/folders');
+
 let Drop = React.createClass({
   render: function () {
     return <button>Here</button>
@@ -13,6 +16,15 @@ module.exports = React.createClass({
     return {
       selected: 0
     };
+  },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen((data) => {
+      this.setState(data);
+    });
+    Actions.collection();
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
   },
   render: function () {
     let spec = {
@@ -34,27 +46,32 @@ module.exports = React.createClass({
       canDrop: monitor.canDrop(),
       itemType: monitor.getItemType()
     }))(Drop);
-    let tags = [
-      {name: 'All Posts (Default)', count: 86},
-      {name: 'Marketing', count: 32},
-      {name: 'Development', count: 22},
-      {name: 'Sales', count: 17},
-      {name: 'Executive', count: 14},
-      {name: 'Admin', count: 6}
-    ];
+    let folders = this.state.folders;
     if (!this.props.sidebarVisible) {
       return false;
     }
     return (
       <div id="sidebar">
         <ul>
-          {tags.map((item, index) => {
+          {folders.map((item, index) => {
             return (
               <li className={index === this.state.selected ? "selected" : ""}>
                 <a id={'id' + index} href="javascript:void(0)" onClick={this._select}>
                   <span className="title">{item.name}</span><br />
-                  <span className="count">{item.count} posts</span>
+                  {index === this.state.selected
+                    ? false
+                    : <span className="count">{item.id} posts</span>
+                  }
                 </a>
+                {index === this.state.selected
+                  ? <ul>
+                    <li>Social Media</li>
+                    <li>Search Engine Management</li>
+                    <li>Direct</li>
+                    <li><input /><button>Add subfolder</button></li>
+                    </ul>
+                  : false
+                }
               </li>
             );
           })}

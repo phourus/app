@@ -2,6 +2,7 @@ require('./connection');
 var collaborators = require('../models/collaborators');
 var comments = require('../models/comments');
 var favorites = require('../models/favorites');
+var folders = require('../models/folders');
 var links = require('../models/links');
 var locations = require('../models/locations');
 var members = require('../models/members');
@@ -9,6 +10,7 @@ var mentions = require('../models/mentions');
 var orgs = require('../models/orgs');
 var passwords = require('../models/passwords');
 var posts = require('../models/posts');
+var saved = require('../models/saved');
 var search = require('../models/search');
 var teammates = require('../models/teammates');
 var teams = require('../models/teams');
@@ -41,6 +43,14 @@ thumbs.belongsTo(users);
 users.hasMany(comments);
 comments.belongsTo(users);
 
+// folders
+users.hasMany(folders);
+folders.belongsTo(users);
+
+// saved
+posts.hasMany(saved);
+saved.belongsTo(posts);
+
 // membership
 orgs.hasMany(members);
 members.belongsTo(orgs);
@@ -52,6 +62,7 @@ users.sync()
   passwords.sync();
   favorites.sync();
   tokens.sync();
+  folders.sync();
 
   // posts
   posts.sync()
@@ -63,6 +74,7 @@ users.sync()
     thumbs.sync();
     collaborators.sync();
     votes.sync();
+    saved.sync();
     search.sync();
     comments.sync()
     .then(function () {
