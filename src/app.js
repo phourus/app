@@ -10,6 +10,9 @@ let Alerts = require('./react/alerts');
 let Header = require('./react/header');
 let Profile = require('./react/profile');
 
+let HTML5Backend = require('react-dnd-html5-backend');
+let { DragDropContext, DropTarget } = require('react-dnd');
+
 let App = React.createClass({
   mixins: [State],
   getInitialState: function () {
@@ -69,6 +72,12 @@ let App = React.createClass({
   }
 });
 
+let Drop = React.createClass({
+  render: function () {
+    return <button>Here</button>
+  }
+});
+
 let Sidebar = React.createClass({
   getInitialState: function () {
     return {
@@ -76,6 +85,25 @@ let Sidebar = React.createClass({
     };
   },
   render: function () {
+    let spec = {
+    	drop(props, monitor, component) {
+        console.log(props);
+    		return {
+    			name: props.name
+    		};
+    	}
+    };
+
+    let Target = DropTarget('folders', spec, (connect, monitor) => ({
+      // Call this function inside render()
+      // to let React DnD handle the drag events:
+      connectDropTarget: connect.dropTarget(),
+      // You can ask the monitor about the current drag state:
+      isOver: monitor.isOver(),
+      isOverCurrent: monitor.isOver({ shallow: true }),
+      canDrop: monitor.canDrop(),
+      itemType: monitor.getItemType()
+    }))(Drop);
     let tags = [
       {name: 'All Posts (Default)', count: 86},
       {name: 'Marketing', count: 32},
@@ -94,6 +122,7 @@ let Sidebar = React.createClass({
     return (
       <div id="sidebar">
         <button className="toggle" onClick={this.props.sidebar}><i className="fa fa-navicon" /></button>
+        <Target />
         <ul>
           {tags.map((item, index) => {
             return (
@@ -161,4 +190,4 @@ let Helper = React.createClass({
   }
 });
 
-module.exports = App;
+module.exports = DragDropContext(HTML5Backend)(App);
