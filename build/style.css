@@ -3077,48 +3077,6 @@ div.post {
 .postItem .content:after {
   clear: both;
 }
-@media (min-width: 1000px) {
-  div.posts {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-box-align: stretch;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
-  }
-  div.posts .postItem {
-    width: 24%;
-    margin: 1% 1% 1% 0;
-    display: inline-block;
-    box-sizing: border-box;
-    min-height: 500px;
-    padding-bottom: 75px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    -webkit-transition: opacity 0.5s ease-in-out;
-    position: relative;
-    margin: 5px;
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-  }
-  div.posts:hover .postItem:hover {
-    background-color: #fff;
-  }
-}
 #content .about {
   margin: 0;
   padding: 0;
@@ -3716,6 +3674,64 @@ div.post {
     color: #222222;
   }
 }
+@media (min-width: 800px) {
+  div.posts.sidebar {
+    width: 75%;
+    margin-left: 25%;
+  }
+  div.posts.sidebar .postItem {
+    width: 100%;
+  }
+}
+@media (min-width: 1000px) {
+  div.posts {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+  }
+  div.posts.sidebar {
+    width: 75%;
+    margin-left: 25%;
+  }
+  div.posts.sidebar .postItem {
+    width: 32%;
+  }
+  div.posts .postItem {
+    width: 24%;
+    margin: 1% 1% 1% 0;
+    display: inline-block;
+    box-sizing: border-box;
+    min-height: 500px;
+    padding-bottom: 75px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    position: relative;
+    margin: 5px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+  }
+  div.posts:hover .postItem:hover {
+    background-color: #fff;
+  }
+}
 #content div.stream {
   max-width: 100%;
 }
@@ -3879,24 +3895,6 @@ div.post {
 }
 .main:after {
   clear: both;
-}
-.main.sidebar #sidebar {
-  width: 40px;
-  position: fixed;
-  left: 0;
-  box-sizing: border-box;
-  height: 100%;
-  vertical-align: top;
-}
-.main.sidebar #content {
-  position: absolute;
-  left: 40px;
-}
-.main.sidebar.visible #sidebar {
-  width: 200px;
-}
-.main.sidebar.visible #content {
-  left: 200px;
 }
 #content > div {
   margin: 20px auto 0 auto;
@@ -4416,6 +4414,14 @@ div.spacer {
     display: inline-block;
     vertical-align: top;
   }
+}
+#sidebar {
+  width: 25%;
+  position: fixed;
+  left: 0;
+  box-sizing: border-box;
+  height: 100%;
+  vertical-align: top;
 }
 #sidebar i {
   font-size: 2em;

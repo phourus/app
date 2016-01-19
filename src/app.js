@@ -9,7 +9,6 @@ var Initializer = ga.Initializer;
 let Alerts = require('./react/alerts');
 let Header = require('./react/header');
 let Profile = require('./react/profile');
-let Sidebar = require('./react/sidebar');
 
 let HTML5Backend = require('react-dnd-html5-backend');
 let { DragDropContext } = require('react-dnd');
@@ -42,8 +41,7 @@ let App = React.createClass({
         <div className="spacer"></div>
         <Profile />
         <Alerts {...this.props.alerts} />
-        <div className={className}>
-          <Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
+        <div>
           <div id="content">
             <RouteHandler />
           </div>
@@ -67,9 +65,6 @@ let App = React.createClass({
   },
   _tintOff: function () {
     this.setState({tint: null});
-  },
-  _sidebar: function () {
-    this.setState({sidebarVisible: !this.state.sidebarVisible});
   }
 });
 

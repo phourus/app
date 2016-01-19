@@ -48,7 +48,7 @@ module.exports = React.createClass({
 		if (['create', 'edit', 'post'].indexOf(this.props.context.type) !== -1) {
 			return <Single posts={this.props.posts} user={this.state.user} context={this.props.context} owner={this._owner} />;
 		}
-		return <Collection posts={this.props.posts} user={this.state.user} context={this.props.context} owner={this._owner} />;
+		return <Collection posts={this.props.posts} user={this.state.user} context={this.props.context} owner={this._owner} sidebarVisible={this.props.sidebarVisible} />;
 	},
 	_owner: function (post) {
 		let user = this.state.user;
@@ -63,7 +63,7 @@ module.exports = React.createClass({
 let Collection = React.createClass({
 	render: function () {
 		return (
-			<div className="posts">
+			<div className={this.props.sidebarVisible ? "posts sidebar" : "posts"}>
 				{this.props.posts.map((item, i) => {
 					 let owner = this.props.owner(item);
 					 let location = {};

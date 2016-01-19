@@ -12,6 +12,7 @@ let Scroll = require('react-infinite-scroll')(React);
 let Posts = require('./stream/posts');
 let Organizations = require('./stream/organizations');
 let Loader = require('./shared/loader');
+let Sidebar = require('./stream/sidebar');
 
 let Stream = React.createClass({
 	mixins: [State],
@@ -59,12 +60,20 @@ let Stream = React.createClass({
 					? <Organizations context={this.state.context} />
 					: false
 				}
+				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create' || this.state.sidebarVisible
+					? false
+					: <button className="toggle" onClick={this._sidebar}><i className="fa fa-navicon" /></button>
+				}
 				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create'
 					? false
 					: <div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
 				}
+				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create'
+					? false
+					: <Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
+				}
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<Loader />}>
-					<Posts {...this.state} />
+					<Posts {...this.state} sidebarVisible={this.state.sidebarVisible} />
 				</Scroll>
 			</div>
 		);
@@ -96,7 +105,10 @@ let Stream = React.createClass({
 	},
 	_more: function () {
 		Actions.more();
-	}
+	},
+  _sidebar: function () {
+    this.setState({sidebarVisible: !this.state.sidebarVisible});
+  }
 });
 
 module.exports = Stream;

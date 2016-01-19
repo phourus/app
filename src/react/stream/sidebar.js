@@ -43,16 +43,10 @@ module.exports = React.createClass({
       {name: 'Admin', count: 6}
     ];
     if (!this.props.sidebarVisible) {
-      return (
-        <div id="sidebar">
-          <button className="toggle" onClick={this.props.sidebar}><i className="fa fa-navicon" /></button>
-        </div>
-      );
+      return false;
     }
     return (
       <div id="sidebar">
-        <button className="toggle" onClick={this.props.sidebar}><i className="fa fa-navicon" /></button>
-        <Target />
         <ul>
           {tags.map((item, index) => {
             return (
@@ -65,6 +59,8 @@ module.exports = React.createClass({
             );
           })}
         </ul>
+        <Target />
+        <button className="toggle" onClick={this.props.sidebar}><i className="fa fa-navicon" /></button>
       </div>
     );
   },
