@@ -3003,6 +3003,33 @@ div.post {
 .postItem.selected > a.edit {
   margin-right: 20px;
 }
+.postItem.edit,
+.postItem.create {
+  background: transparent;
+}
+.postItem.edit .toolbar,
+.postItem.create .toolbar {
+  background-color: #fff;
+  border-top: solid 1px #ddd;
+  border-bottom: solid 1px #ddd;
+  position: fixed;
+  top: 60px;
+  height: 40px;
+  width: 100%;
+  left: 0;
+}
+.postItem.edit .title,
+.postItem.create .title {
+  font-size: 3em;
+  line-height: 2em;
+  height: 2em;
+}
+.postItem.edit .actions,
+.postItem.create .actions {
+  position: fixed;
+  top: 60px;
+  right: 0;
+}
 .postItem.single {
   width: 100%;
   margin: 0;
@@ -3054,7 +3081,6 @@ div.post {
   color: #ecb010;
 }
 .postItem .rte {
-  border-bottom: solid 1px #eee;
   margin-bottom: 40px;
   padding-bottom: 20px;
 }
@@ -3062,6 +3088,17 @@ div.post {
 .postItem .ql-container {
   height: initial;
   min-height: initial;
+}
+.postItem div.ql-toolbar {
+  position: fixed;
+  top: 60px;
+  opacity: 1;
+}
+.postItem .quill-contents {
+  background-color: #fff;
+}
+.postItem .ql-container {
+  position: static;
 }
 .postItem .content {
   max-width: 100%;
@@ -4497,10 +4534,10 @@ h1 {
   color: #333333;
 }
 h2 {
-  font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
-  font-size: 2em;
+  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;
+  font-size: 1.5em;
   line-height: 1em;
-  font-weight: bold;
+  font-weight: normal;
   color: #222222;
 }
 h3 {

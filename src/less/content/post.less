@@ -51,6 +51,33 @@ div.post {
     }
   }
 
+  &.edit, &.create {
+    background: transparent;
+
+    .toolbar {
+      background-color: #fff;
+      border-top: solid 1px #ddd;
+      border-bottom: solid 1px #ddd;
+      position: fixed;
+      top: 60px;
+      height: 40px;
+      width: 100%;
+      left: 0;
+    }
+
+    .title {
+      font-size: 3em;
+      line-height: 2em;
+      height: 2em;
+    }
+
+    .actions {
+      position: fixed;
+      top: 60px;
+      right: 0;
+    }
+  }
+
   &.single {
     width: 100%;
     margin: 0;
@@ -112,13 +139,26 @@ div.post {
 
   /** CONTENT **/
   .rte {
-    border-bottom: solid 1px #eee;
     margin-bottom: 40px;
     padding-bottom: 20px;
   }
   .ql-editor, .ql-container {
     height: initial;
     min-height: initial;
+  }
+
+  div.ql-toolbar {
+    position: fixed;
+    top: 60px;
+    opacity: 1;
+  }
+
+  .quill-contents {
+    background-color: #fff;
+  }
+
+  .ql-container {
+    position: static;
   }
 
   .content {

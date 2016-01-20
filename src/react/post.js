@@ -115,6 +115,7 @@ let Create = React.createClass({
 	render: function () {
 		return (
 			<div className="create postItem">
+				<div className="toolbar"></div>
 				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
@@ -128,11 +129,12 @@ let Edit = React.createClass({
 	render: function () {
 		return (
 			<div className="edit postItem">
+				<div className="toolbar"></div>
 				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Privacy post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Privacy post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
 				<Links post={this.props.post} context={this.props.context} owner={this.props.owner} />
 			</div>
