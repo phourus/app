@@ -4,6 +4,7 @@ let { DropTarget } = require('react-dnd');
 
 let Actions = require('../../actions/post/folders');
 let Store = require('../../stores/post/folders');
+let Stream = require('../../actions/stream');
 
 let Drop = React.createClass({
   render: function () {
@@ -46,7 +47,8 @@ module.exports = React.createClass({
       canDrop: monitor.canDrop(),
       itemType: monitor.getItemType()
     }))(Drop);
-    let folders = this.state.folders;
+    let folders = this.state.folders || [];
+    folders.unshift({id: 0, name: 'All Posts'});
     if (!this.props.sidebarVisible) {
       return false;
     }
@@ -56,8 +58,8 @@ module.exports = React.createClass({
         <ul>
           {folders.map((item, index) => {
             return (
-              <li className={index === this.state.selected ? "selected" : ""}>
-                <a id={'id' + index} href="javascript:void(0)" onClick={this._select}>
+              <li key={item.name} className={index === this.state.selected ? "selected" : ""}>
+                <a id={'id' + item.id} href="javascript:void(0)" onClick={this._select}>
                   <span className="title">{item.name}</span><br />
                   {index === this.state.selected && 1
                     ? false
@@ -84,6 +86,7 @@ module.exports = React.createClass({
   _select: function (e) {
     let id = e.currentTarget.id;
     id = id.replace('id', '');
+    Stream.folder(id);
     this.setState({selected: parseInt(id)});
   }
 });

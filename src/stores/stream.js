@@ -22,6 +22,7 @@ let Stream = Reflux.createStore({
     direction: 'DESC',
     page: 1,
     limit: 10,
+    folder: 0,
     context: {
       type: '',
       id: null
@@ -41,6 +42,7 @@ let Stream = Reflux.createStore({
     this.listenTo(Actions.exclude, this._exclude);
     this.listenTo(Actions.type, this._type);
     this.listenTo(Actions.context, this._context);
+    this.listenTo(Actions.folder, this._folder);
   },
   _collection: function () {
     posts.collection(this.params)
@@ -216,6 +218,12 @@ let Stream = Reflux.createStore({
            msg('red', 'Could not load posts for this profile', code);
         }
       });
+  },
+  _folder: function (id) {
+    this.posts = null;
+    this.params.page = 1;
+    this.params.folder = id;
+    this._collection();
   }
 });
 

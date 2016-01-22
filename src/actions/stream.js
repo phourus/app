@@ -17,5 +17,6 @@ module.exports = {
   context: Reflux.createAction(),
   comments: Reflux.createAction(),
   thumb: Reflux.createAction(),
-  thumbs: Reflux.createAction()
-}
+  thumbs: Reflux.createAction(),
+  folder: Reflux.createAction()
+};

@@ -208,6 +208,7 @@ var posts = db.define('posts', {
       search._dates();
       search._context();
       search._privacy();
+      search._folder();
       search._search();
       search._joins();
       return search.query;
@@ -263,6 +264,21 @@ var posts = db.define('posts', {
             as: 'search',
             where: ["CONCAT(`postSearch`, ' ', `tagSearch`, ' ', `linkSearch`, ' ', `commentSearch`) LIKE '%" + this.params.search + "%'"]
           });
+        }
+      },
+      _folder: function () {
+        let folder = parseInt(this.params.folder);
+        if (folder) {
+          var folders = [
+            [],
+            [6,26,18],
+            [32,35],
+            [],
+            [],
+            [36,509]
+          ];
+          var list = folders[folder] || [];
+          this.query.where.id = {$in: list};
         }
       },
       _privacy: function () {
