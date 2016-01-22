@@ -52,18 +52,20 @@ module.exports = React.createClass({
     }
     return (
       <div id="sidebar">
+        <button className="toggle" onClick={this.props.sidebar}><i className="fa fa-angle-right" /> Collapse Sidebar</button>
         <ul>
           {folders.map((item, index) => {
             return (
               <li className={index === this.state.selected ? "selected" : ""}>
                 <a id={'id' + index} href="javascript:void(0)" onClick={this._select}>
                   <span className="title">{item.name}</span><br />
-                  {index === this.state.selected
+                  {index === this.state.selected && 1
                     ? false
-                    : <span className="count">{item.id} posts</span>
+                    : false
+                    //: <span className="count">{item.id} posts</span>
                   }
                 </a>
-                {index === this.state.selected
+                {index === this.state.selected && 0
                   ? <ul>
                     <li>Social Media</li>
                     <li>Search Engine Management</li>
@@ -76,8 +78,6 @@ module.exports = React.createClass({
             );
           })}
         </ul>
-        <Target />
-        <button className="toggle" onClick={this.props.sidebar}><i className="fa fa-navicon" /></button>
       </div>
     );
   },

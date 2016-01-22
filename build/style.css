@@ -3772,8 +3772,20 @@ div.post {
 #content div.stream {
   max-width: 100%;
 }
+.stream button.toggle {
+  vertical-align: middle;
+}
+.stream button.toggle i {
+  font-size: 2em;
+  vertical-align: middle;
+}
+.stream button.toggle:hover {
+  color: #3498db;
+}
 .stream div.total {
-  margin-left: 2%;
+  text-align: right;
+  float: right;
+  margin-right: 2%;
   color: #555;
   font-size: 0.8em;
 }

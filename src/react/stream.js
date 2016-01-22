@@ -62,7 +62,7 @@ let Stream = React.createClass({
 				}
 				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create' || this.state.sidebarVisible
 					? false
-					: <button className="toggle" onClick={this._sidebar}><i className="fa fa-navicon" /></button>
+					: <button className="toggle" onClick={this._sidebar}><i className="fa fa-navicon" /> Show my folders</button>
 				}
 				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create'
 					? false
