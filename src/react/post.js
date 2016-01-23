@@ -165,6 +165,7 @@ Post.Item = React.createClass({
 	render: function () {
 		return (
 			<div className="postItem">
+				<Drag id={this.props.post.id} />
 				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
 				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />

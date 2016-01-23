@@ -1,20 +1,15 @@
 "use strict";
 let React = require('react');
-let { DropTarget } = require('react-dnd');
+let Drop = require('./drop');
 
 let Actions = require('../../actions/post/folders');
 let Store = require('../../stores/post/folders');
 let Stream = require('../../actions/stream');
 
-let Drop = React.createClass({
-  render: function () {
-    return <button>Here</button>
-  }
-});
-
 module.exports = React.createClass({
   getInitialState: function () {
     return {
+      folders: [],
       selected: 0
     };
   },
@@ -28,27 +23,11 @@ module.exports = React.createClass({
     this.unsubscribe();
   },
   render: function () {
-    let spec = {
-    	drop(props, monitor, component) {
-        console.log(props);
-    		return {
-    			name: props.name
-    		};
-    	}
-    };
+    var folders = this.state.folders;
+    if (folders[0] && folders[0].id !== 0) {
+      folders.unshift({id: 0, name: 'All Posts'});
+    }
 
-    let Target = DropTarget('folders', spec, (connect, monitor) => ({
-      // Call this function inside render()
-      // to let React DnD handle the drag events:
-      connectDropTarget: connect.dropTarget(),
-      // You can ask the monitor about the current drag state:
-      isOver: monitor.isOver(),
-      isOverCurrent: monitor.isOver({ shallow: true }),
-      canDrop: monitor.canDrop(),
-      itemType: monitor.getItemType()
-    }))(Drop);
-    let folders = this.state.folders || [];
-    folders.unshift({id: 0, name: 'All Posts'});
     if (!this.props.sidebarVisible) {
       return false;
     }
@@ -58,25 +37,7 @@ module.exports = React.createClass({
         <ul>
           {folders.map((item, index) => {
             return (
-              <li key={item.name} className={index === this.state.selected ? "selected" : ""}>
-                <a id={'id' + item.id} href="javascript:void(0)" onClick={this._select}>
-                  <span className="title">{item.name}</span><br />
-                  {index === this.state.selected && 1
-                    ? false
-                    : false
-                    //: <span className="count">{item.id} posts</span>
-                  }
-                </a>
-                {index === this.state.selected && 0
-                  ? <ul>
-                    <li>Social Media</li>
-                    <li>Search Engine Management</li>
-                    <li>Direct</li>
-                    <li><input /><button>Add subfolder</button></li>
-                    </ul>
-                  : false
-                }
-              </li>
+              <Drop item={item} index={index} select={this._select} selected={this.state.selected} />
             );
           })}
         </ul>

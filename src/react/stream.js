@@ -18,6 +18,7 @@ let Stream = React.createClass({
 	mixins: [State],
 	getInitialState: function () {
 		return {
+			sidebarVisible: true,
 			posts: null,
 			total: 0,
 			params: {

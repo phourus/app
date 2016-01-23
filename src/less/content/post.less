@@ -51,6 +51,20 @@ div.post {
     }
   }
 
+  .handle {
+    float: right;
+    cursor: pointer;
+    color: #aaa;
+
+    &:hover {
+      color: #888;
+    }
+
+    &.dragging {
+      color: @green;
+    }
+  }
+
   &.edit, &.create {
     background: transparent;
 

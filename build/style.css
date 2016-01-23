@@ -3003,6 +3003,17 @@ div.post {
 .postItem.selected > a.edit {
   margin-right: 20px;
 }
+.postItem .handle {
+  float: right;
+  cursor: pointer;
+  color: #aaa;
+}
+.postItem .handle:hover {
+  color: #888;
+}
+.postItem .handle.dragging {
+  color: #8abf00;
+}
 .postItem.edit,
 .postItem.create {
   background: transparent;
@@ -4491,6 +4502,13 @@ div.spacer {
 }
 #sidebar ul li.selected a:hover .title {
   color: #8abf00;
+}
+#sidebar ul li.over {
+  background-color: #8abf00;
+  cursor: copy;
+}
+#sidebar ul li.over a span {
+  color: #eee;
 }
 #sidebar ul li .title {
   font-size: 1.5em;

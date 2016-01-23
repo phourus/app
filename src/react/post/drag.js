@@ -2,39 +2,37 @@
 let React = require('react');
 let { DragSource } = require('react-dnd');
 
-let boxSource = {
+let target = {
 	beginDrag: function (props) {
-		console.log(props);
 		return {
-			name: props.name
+			id: props.id
 		};
-	},
-
-	endDrag: function (props, monitor) {
-		const item = monitor.getItem();
-		const dropResult = monitor.getDropResult();
-		console.log(item);
-
-		if (dropResult) {
-			window.alert( // eslint-disable-line no-alert
-				`You dropped ${item.name} into ${dropResult.name}!`
-			);
-		}
 	}
 };
 
-let Handle = React.createClass({
-  render: function () {
-    return <button>Drag here</button>;
-  }
-});
+let collect = function (connect, monitor) {
+  return {
+		connectDragSource: connect.dragSource(),
+ 	 	isDragging: monitor.isDragging()
+  };
+}
 
-module.exports = React.createClass({
+let Drag = React.createClass({
 	render: function () {
-		let Out = DragSource('post', boxSource, (connect, monitor) => ({
-  		 connectDragSource: connect.dragSource(),
-  		 isDragging: monitor.isDragging()
-  	 }))(Handle);
-     return <Out />
+		var className = ['handle'];
+		var id = this.props.id;
+		var isDragging = this.props.isDragging;
+		var connectDragSource = this.props.connectDragSource;
+		if (isDragging) {
+			className.push('dragging')
+		}
+
+		return connectDragSource(
+			<div className={className.join(' ')}>
+				<i className="fa fa-th" />
+			</div>
+		);
 	}
 });
+
+module.exports = DragSource('posts', target, collect)(Drag);
