@@ -3,6 +3,7 @@ let Reflux = require('reflux');
 
 let Actions = require('../actions/stream');
 
+let folders = require('../api/folders');
 let posts = require('../api/posts');
 let account = require('../api/account');
 let users = require('../api/users');
@@ -43,6 +44,7 @@ let Stream = Reflux.createStore({
     this.listenTo(Actions.type, this._type);
     this.listenTo(Actions.context, this._context);
     this.listenTo(Actions.folder, this._folder);
+    this.listenTo(Actions.save, this._save);
   },
   _collection: function () {
     posts.collection(this.params)
@@ -224,6 +226,9 @@ let Stream = Reflux.createStore({
     this.params.page = 1;
     this.params.folder = id;
     this._collection();
+  },
+  _save: function (postId, folderId) {
+    folders.folder(postId, folderId);
   }
 });
 

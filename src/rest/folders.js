@@ -22,5 +22,11 @@ module.exports = {
   },
   remove: function(id) {
     return http.delete(base + id, settings());
+  },
+  folder: function (id, folderId) {
+    if (folderId === 0) {
+      return http.delete(base + folderId + '/' + id, settings());
+    }
+    return http.post(base + folderId + '/' + id, settings());
   }
 };

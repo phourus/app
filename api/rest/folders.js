@@ -1,6 +1,7 @@
 var router = require('express').Router();
 
 var folders = require('../models/folders');
+var saved = require('../models/saved');
 
 router.get('/:id', (req, res) => {
   let id = req.params.id;
@@ -38,6 +39,25 @@ router.post('', (req, res) => {
     res.send(500);
   });
 });
+router.post('/:id/:postId', (req, res) => {
+  let id = req.params.id;
+  let postId = req.params.postId;
+
+  if (!req.folders || req.folders.indexOf(id) < 0) {
+    //res.send(403);
+    //return;
+  }
+  saved.SESSION_FOLDERS = req.folders;
+  saved.SESSION_USER = req.user_id;
+  saved.add(postId, id)
+  .then(function (data) {
+    res.send(201, data);
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.send(500);
+  });
+});
 router.put('/:id', (req, res) => {
   let id = req.params.id;
   let model = req.body;
@@ -51,10 +71,29 @@ router.put('/:id', (req, res) => {
   });
 });
 router.delete('/:id', (req, res) => {
+  // let id = req.params.id;
+  // folders.remove(id)
+  // .then(function (data) {
+  //   res.send(202);
+  // })
+  // .catch(function (err) {
+  //   console.error(err);
+  //   res.send(500);
+  // });
+});
+router.delete('/:id/:postId', (req, res) => {
   let id = req.params.id;
-  folders.remove(id)
+  let postId = req.params.postId;
+
+  if (req.folders.indexOf(id) < 0) {
+    res.send(403);
+    return;
+  }
+  saved.SESSION_FOLDERS = req.folders;
+  saved.SESSION_USER = req.user_id;
+  saved.remove(postId, id)
   .then(function (data) {
-    res.send(202);
+    res.send(201, data);
   })
   .catch(function (err) {
     console.error(err);

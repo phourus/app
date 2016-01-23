@@ -9,5 +9,6 @@ module.exports = {
   remove: posts.remove,
   account: posts.account,
   poll: posts.poll,
-  vote: posts.vote
+  vote: posts.vote,
+  folder: posts.folder
 };

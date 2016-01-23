@@ -5,5 +5,6 @@ module.exports = {
   collection: folders.collection,
   add: folders.add,
   save: folders.save,
-  remove: folders.remove
+  remove: folders.remove,
+  folder: folders.folder
 };

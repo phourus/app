@@ -1,10 +1,12 @@
-var React = require('react');
-var DropTarget = require('react-dnd').DropTarget;
+let React = require('react');
+let DropTarget = require('react-dnd').DropTarget;
+
+let Actions = require('../../actions/stream')
 
 let target = {
   drop: function (props, monitor, component) {
     var item = monitor.getItem();
-    console.log(props.item.id, item.id);
+    Actions.save(item.id, props.item.id);
     return {
       postId: item.id,
       folderId: props.item.id
