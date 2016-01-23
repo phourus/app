@@ -18,6 +18,7 @@ var mentions = require('./mentions');
 var collaborators = require('./collaborators');
 var teams = require('./teams');
 var search = require('./search');
+var saved = require('./saved');
 
 var posts = db.define('posts', {
   // Common
@@ -59,6 +60,18 @@ var posts = db.define('posts', {
       });
     },
     collection: function (params) {
+      if (params.folder) {
+        return saved.findAll({where: {folderId: params.folder}})
+        .then((data) => {
+          params.folderPosts = data.map(function (item) {
+            return item.postId;
+          });
+          return this.findAndCountAll(this.queryize(params));
+        })
+        .catch(function (err) {
+          console.error(err);
+        });
+      }
       return this.findAndCountAll(this.queryize(params));
     },
     shared: function () {
@@ -267,18 +280,8 @@ var posts = db.define('posts', {
         }
       },
       _folder: function () {
-        let folder = parseInt(this.params.folder);
-        if (folder) {
-          var folders = [
-            [],
-            [6,26,18],
-            [32,35],
-            [],
-            [],
-            [36,509]
-          ];
-          var list = folders[folder] || [];
-          this.query.where.id = {$in: list};
+        if (this.params.folderPosts && this.params.folderPosts.length) {
+          this.query.where.id = {$in: this.params.folderPosts};
         }
       },
       _privacy: function () {
