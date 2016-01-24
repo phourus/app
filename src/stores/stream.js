@@ -228,7 +228,21 @@ let Stream = Reflux.createStore({
     this._collection();
   },
   _save: function (postId, folderId) {
-    folders.folder(postId, folderId);
+    let remove = false;
+    let folder = folderId;
+    if (folderId === 0 && this.params.folder > 0) {
+      remove = true;
+      folder = this.params.folder;
+    }
+    folders.folder(postId, folder, remove)
+    .then(data => {
+      if (remove) {
+        this._folder(folder);
+      }
+    })
+    .catch(code => {
+      console.warn(code);
+    });
   }
 });
 

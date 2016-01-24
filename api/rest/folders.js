@@ -86,14 +86,14 @@ router.delete('/:id/:postId', (req, res) => {
   let postId = req.params.postId;
 
   if (req.folders.indexOf(id) < 0) {
-    res.send(403);
-    return;
+    //res.send(403);
+    //return;
   }
   saved.SESSION_FOLDERS = req.folders;
   saved.SESSION_USER = req.user_id;
-  saved.remove(postId, id)
+  saved.destroy({where: {folderId: id, postId: postId}})
   .then(function (data) {
-    res.send(201, data);
+    res.send(204);
   })
   .catch(function (err) {
     console.error(err);
