@@ -1,13 +1,13 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, Navigation } = Router;
+let { Link, History } = Router;
 
 let Actions = require('../../actions/post');
 let Store = require('../../stores/post');
 
 module.exports = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   getDefaultProps: function () {
     return {
       context: {},
@@ -31,14 +31,14 @@ module.exports = React.createClass({
   _back: function () {
     if (!this.goBack()) {
       if (this.props.context.type === 'edit') {
-        this.context.router.transitionTo("myPosts");
+        //this.context.router.transitionTo("myPosts");
       } else {
-        this.context.router.transitionTo("stream");
+        //this.context.router.transitionTo("stream");
       }
     }
   },
   _myposts: function () {
-  	this.context.router.transitionTo("myPosts");
+  	//this.context.router.transitionTo("myPosts");
   }
 });
 
@@ -73,7 +73,7 @@ let Edit = React.createClass({
       return false;
     }
     return (
-      <Link to="edit" params={{id: this.props.post.id}} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
+      <Link to={`stream/edit/${this.props.post.id}`} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
     );
   }
 });

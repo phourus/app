@@ -1,13 +1,12 @@
 'use strict';
 let React = require('react');
 let Router = require('react-router');
-let { RouteHandler, Link, State } = Router;
+let { Link, History } = Router;
 
 let Store = require('../stores/admin');
 let Actions = require('../actions/admin');
 
 let Admin = React.createClass({
-  mixins: [State],
   getInitialState: function () {
     return {
       org: {
@@ -46,13 +45,14 @@ let Admin = React.createClass({
   render: function () {
     return (
       <div className="admin">
-        <Tabs {...this.state} />
-        <RouteHandler {...this.state} />
+        <Tabs {...this.state} routes={this.props.routes} />
+        {this.props.children}
       </div>
     );
   },
   _route: function () {
-    let id = this.getParams().id || null;
+    let params = this.props.params || {};
+    let id = params.id;
     if (id) {
       Actions.single(id);
       Actions.Members.collection(id);
@@ -61,9 +61,9 @@ let Admin = React.createClass({
 });
 
 let Tabs = React.createClass({
-    mixins: [Router.Navigation, Router.State],
+    mixins: [History],
     render: function () {
-      let view = this.context.router.getCurrentRoutes()[2].name;
+      let view = this.props.routes[2].name;
       let categories = this._categories();
       let details = this._details();
       let users = this._users();
@@ -89,7 +89,7 @@ let Tabs = React.createClass({
       )
     },
     _select: function (id) {
-      this.transitionTo(id, {id: this.props.org.id});
+      //this.transitionTo(id, {id: this.props.org.id});
     },
     _details: function () {
       // swap 'name' with 'category' when categories are determined

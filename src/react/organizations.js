@@ -1,6 +1,6 @@
 "use strict";
 let React = require('react');
-let Router = require('react-router');
+let { History } = require('react-router');
 
 let Emblem = require('./landing/emblem');
 let Auth = require('./landing/auth');
@@ -15,7 +15,7 @@ let Landing = React.createClass({
     return (
       <div className="landing">
         <Slider more={this._more} showSignup={this._signup} />
-        <Auth ref="auth" />
+        <Auth ref="auth" location={this.props.location} />
         <Benefits ref="benefits" />
         <Example />
         <Features />
@@ -32,7 +32,7 @@ let Landing = React.createClass({
 });
 
 let Slider = React.createClass({
-  mixins: [Router.Navigation],
+  mixins: [History],
   getInitialState: function () {
     return {
       slide: 0,

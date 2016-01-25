@@ -1,13 +1,13 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, Navigation } = Router;
+let { Link, History } = Router;
 let Actions = require('../../actions/account');
 let Store = require('../../stores/account');
 let ga = require('../../analytics');
 
 module.exports = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   getDefaultProps: function () {
     return {
       show: false
@@ -200,7 +200,7 @@ module.exports = React.createClass({
     this.setState({step: 2});
   },
   _account: function (e) {
-    this.context.router.transitionTo("account");
+    //this.context.router.transitionTo("account");
   },
   _clear: function () {
     this.setState({code: null});

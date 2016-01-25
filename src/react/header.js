@@ -2,7 +2,7 @@
 let React = require('react');
 
 let Router = require('react-router');
-let { Link, Navigation, State } = Router;
+let { Link, History } = Router;
 let ga = require('../analytics');
 
 let AccountActions = require('../actions/account');
@@ -11,7 +11,7 @@ let StreamActions = require('../actions/stream');
 let StreamStore = require('../stores/stream');
 
 module.exports = React.createClass({
-  mixins: [Navigation, State],
+  mixins: [History],
   getInitialState: function () {
     return {
       params: {},
@@ -24,7 +24,7 @@ module.exports = React.createClass({
   componentDidMount: function () {
     this.unsubscribeAccount = AccountStore.listen(data => {
       if (!data.user && this.state.logout === true) {
-        this.context.router.transitionTo("home");
+        //this.context.router.transitionTo("home");
         data.logout = false;
       }
       this.setState(data);
@@ -45,7 +45,7 @@ module.exports = React.createClass({
   },
   render: function () {
     let orgs = this.state.orgs;
-    let route = this.context.router.getCurrentRoutes();
+    let route = this.props.routes || [];
     let r = route[1] ? route[1].name : '';
     if (r === 'home') {
       return <Home />
@@ -76,11 +76,11 @@ module.exports = React.createClass({
                           if (!org.approved) {
                             return false;
                           }
-                          return <li><Link to="orgPosts" params={{id: org.org.id}}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></Link></li>
+                          return <li key={org.org.id}><Link to={`stream/orgs/${org.org.id}`}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></Link></li>
                         })}
                       </ul>
                       <ul>
-                        <li><Link to="myPosts">My Posts <i className="fa fa-edit" /></Link></li>
+                        <li><Link to="stream/me">My Posts <i className="fa fa-edit" /></Link></li>
                         <li><Link to="activity">My Activity <i className="fa fa-bell" /></Link></li>
                         <li><Link to="account">My Account <i className="fa fa-user" /></Link></li>
                         <li><a href="javascript:void(0)" onClick={this._logout}>Logout <i className="fa fa-sign-out" /></a></li>
@@ -88,7 +88,7 @@ module.exports = React.createClass({
                     </div>
                   </li>
                   <li className="create">
-                    <Link to="create">
+                    <Link to="stream/create">
                       <i className="fa fa-pencil" />
                       Create
                     </Link>
@@ -129,9 +129,9 @@ module.exports = React.createClass({
     this.setState({filter: !this.state.filter});
   },
   _redirect: function () {
-    let route = this.context.router.getCurrentRoutes();
+    let route = this.props.routes;
     if (route && route[1] && route[1].name !== 'stream') {
-      this.context.router.transitionTo('stream');
+      //this.context.router.transitionTo('stream');
     }
   }
 });

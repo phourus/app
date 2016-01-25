@@ -1,14 +1,12 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { State } = Router;
 let ga = require('../../analytics');
 
 let Store = require('../../stores/post/thumbs');
 let Actions = require('../../actions/post/thumbs');
 
 let Thumbs = React.createClass({
-   mixins: [State],
    getDefaultProps: function () {
      return {
        post: {}

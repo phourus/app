@@ -1,13 +1,13 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, State } = Router;
+let { Link, History } = Router;
 
 let Actions = require('../../actions/pages');
 let Store = require('../../stores/pages');
 
 module.exports = React.createClass({
-  mixins: [State],
+  mixins: [History],
   getInitialState: function () {
     return {
       menu: true,
@@ -42,7 +42,7 @@ module.exports = React.createClass({
   },
   _route: function () {
     let page = '';
-    let params = this.context.router.getCurrentParams();
+    let params = this.props.params;
     if (params && params.id) {
       Actions.get(params.id);
     }

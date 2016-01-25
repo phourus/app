@@ -1,12 +1,12 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, Navigation } = Router;
+let { Link, History } = Router;
 
 let Features = require('../landing/features');
 
 let About = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   getInitialState: function () {
     return {
       mode: "signup"
@@ -130,7 +130,7 @@ let About = React.createClass({
     this.setState({mode: 'rank'});
   },
   _start: function () {
-    this.context.router.transitionTo("home");
+    //this.context.router.transitionTo("home");
   }
 });
 

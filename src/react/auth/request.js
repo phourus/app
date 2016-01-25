@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { RouteHandler, State, Navigation, Link } = Router;
+let { Link } = Router;
 let Actions = require('../../actions/account');
 let Store = require('../../stores/account');
 

@@ -1,10 +1,9 @@
 "use strict";
 let React = require('react');
-let Router = require('react-router');
-let Link = Router.Link;
+let { Link, History } = require('react-router');
 
 let Convert = React.createClass({
-  mixins: [Router.Navigation],
+  mixins: [History],
   render: function () {
     return (
       <div className="convert">
@@ -17,7 +16,7 @@ let Convert = React.createClass({
     );
   },
   _register: function () {
-    this.context.router.transitionTo("account");
+    //this.context.router.transitionTo("account");
   }
 });
 

@@ -1,23 +1,18 @@
 'use strict';
 let React = require('react');
-let Router = require('react-router');
-let { Route, DefaultRoute, NotFoundRoute, HistoryLocation } = Router;
+let { Router, Route } = require('react-router');
 
 let App = require('./app');
 let Stream = require('./react/stream');
-let Post = require('./react/post');
 let Account = require('./react/account');
 let Activity = require('./react/activity');
 let Admin = require('./react/admin');
-let Profile = require('./react/profile');
-let Leaders = require('./react/leaders');
 let About = require('./react/static/about');
 let Pricing = require('./react/static/pricing');
 let Docs = require('./react/static/docs');
 let Contact = require('./react/static/contact');
 let Terms = require('./react/static/terms');
 let Privacy = require('./react/static/privacy');
-let Map = require('./map');
 let View404 = require('./react/404');
 
 let Individuals = require('./react/individuals');
@@ -32,58 +27,39 @@ let Members = require('./react/admin/members');
 let Teams = require('./react/admin/teams');
 
 module.exports = (
-  <Route handler={App} path="/">
-    <DefaultRoute name="home" handler={Business} />
-    <Route name="individuals" handler={Individuals} />
-    <Route name="business" handler={Business} />
-    <Route name="education" handler={Education} />
-    <Route name="government" handler={Government} />
-    <Route name="nonprofit" handler={Nonprofit} />
-    <Route name="about" handler={About} />
-    <Route name="pricing" handler={Pricing} />
-    <Route name="docs" handler={Docs}>
-      <Route name="docPage" path=":id" handler={Docs} />
-    </Route>
-    <Route name="contact" handler={Contact} />
-    <Route name="terms" handler={Terms} />
-    <Route name="privacy" handler={Privacy} />
-    <Route name="activity" handler={Activity} />
-    <Route name="notifications" handler={Activity} />
-    <Route name="history" handler={Activity} />
-    <Route name="leaders" handler={Leaders}>
-      <DefaultRoute handler={Leaders.Posts} />
-      <Route name="topPosts" path="posts" handler={Leaders.Posts} />
-      <Route name="topUsers" path="users" handler={Leaders.Users} />
-      <Route name="topOrgs" path="orgs" handler={Leaders.Orgs} />
-      <Route name="topPhourus" path="phourus" handler={Leaders.Phourus} />
-    </Route>
-    <Route name="stream" path="stream" handler={Stream}>
-      <Route name="myPosts" path="me" handler={Stream} />
-      <Route name="users" handler={Stream}>
-        <Route name="userPosts" path=":id" handler={Stream} />
+  <Router>
+    <Route component={App} path="/">
+      <Route path="home" component={Business} />
+      <Route path="individuals" component={Individuals} />
+      <Route path="business" component={Business} />
+      <Route path="education" component={Education} />
+      <Route path="government" component={Government} />
+      <Route path="nonprofit" component={Nonprofit} />
+      <Route path="about" component={About} />
+      <Route path="pricing" component={Pricing} />
+      <Route path="docs/:id" component={Docs} />
+      <Route path="contact" component={Contact} />
+      <Route path="terms" component={Terms} />
+      <Route path="privacy" component={Privacy} />
+      <Route path="activity" component={Activity} />
+      <Route path="notifications" component={Activity} />
+      <Route path="history" component={Activity} />
+      <Route path="account" component={Account} />
+      <Route path="stream" component={Stream}>
+        <Route path="me" component={Stream} />
+        <Route path="create" component={Stream}></Route>
+        <Route path="users/:id" component={Stream} />
+        <Route path="orgs/:id" component={Stream} />
+        <Route name="edit/:id" path="edit/:id" component={Stream}></Route>
+        <Route path=":id" component={Stream} />
       </Route>
-      <Route name="orgs" handler={Stream}>
-        <Route name="orgPosts" path=":id" handler={Stream} />
+      <Route path="admin/:id" component={Admin}>
+        <Route path="details" component={Details} />
+        <Route path="members" component={Members} />
+        <Route path="categories" component={Categories} />
+        <Route path="teams" component={Teams} />
       </Route>
-      <Route name="create" handler={Stream}></Route>
-      <Route name="edit" path="edit/:id" handler={Stream}></Route>
-      <Route name="post" path=":id" handler={Stream} />
+      <Route path="*" component={View404} />
     </Route>
-    <Route name="account" path="account" handler={Account} />
-    <Route name="admin" path="admin/:id" handler={Admin}>
-      <Route name="details" path="details" handler={Details} />
-      <Route name="members" path="members" handler={Members} />
-      <Route name="categories" path="categories" handler={Categories} />
-      <Route name="teams" path="teams" handler={Teams} />
-    </Route>
-    <Route name="user" path="user/:id" handler={Profile}>
-      <DefaultRoute handler={Profile.About} />
-      <Route name="posts" path="posts" handler={Profile.Posts} />
-      <Route name="rank" path="rank" handler={Profile.Rank} />
-      <Route name="membership" path="membership" handler={Profile.Membership} />
-      <Route name="events" path="events" handler={Profile.Events} />
-      <Route name="reviews" path="reviews" handler={Profile.Reviews} />
-    </Route>
-    <NotFoundRoute handler={View404}/>
-  </Route>
+  </Router>
 );

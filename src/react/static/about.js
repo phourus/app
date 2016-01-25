@@ -1,10 +1,10 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Navigation, Link } = Router;
+let { History, Link } = Router;
 
 let About = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   getInitialState: function () {
     return {
       mode: "signup"
@@ -107,7 +107,7 @@ let About = React.createClass({
     );
   },
   _contact: function () {
-    this.context.router.transitionTo("contact");
+    //this.context.router.transitionTo("contact");
   },
   _signup: function () {
     this.setState({mode: 'signup'});
@@ -124,7 +124,7 @@ let About = React.createClass({
 });
 
 let Signup = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   render: function () {
     return (
       <div className="signup">
@@ -146,10 +146,10 @@ let Signup = React.createClass({
     )
   },
   _register: function () {
-    this.context.router.transitionTo("home");
+    //this.context.router.transitionTo("home");
   },
   _trial: function () {
-    this.context.router.transitionTo("home");
+    //this.context.router.transitionTo("home");
   }
 });
 

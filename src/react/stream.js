@@ -1,7 +1,6 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { State } = Router;
 let posts = require('../api/posts');
 
 let Store = require('../stores/stream');
@@ -15,7 +14,6 @@ let Loader = require('./shared/loader');
 let Sidebar = require('./stream/sidebar');
 
 let Stream = React.createClass({
-	mixins: [State],
 	getInitialState: function () {
 		return {
 			sidebarVisible: true,
@@ -88,13 +86,25 @@ let Stream = React.createClass({
 		// /stream/:id
 		// /stream/create
 
-		let route = this.context.router.getCurrentRoutes();
-		let params = this.context.router.getCurrentParams();
+		let route = this.props.routes;
+		let params = this.props.params;
 		let id = null;
 		let type = null;
 
 		if (route[2]) {
-			type = route[2].name;
+			type = route[2].path;
+			if (type === ':id') {
+				type = 'post';
+			}
+			if (type === 'edit/:id') {
+				type = 'edit';
+			}
+			if (type === 'orgs/:id') {
+				type = 'orgs';
+			}
+			if (type === 'users/:id') {
+				type = 'users';
+			}
 		}
 		if (params.id) {
 			id = params.id;

@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, State, Navigation } = Router;
+let { Link, History } = Router;
 let moment = require('moment');
 let ga = require('../../analytics');
 
@@ -13,7 +13,6 @@ let AccountStore = require('../../stores/account');
 let Pic = require('../shared/pic');
 
 let Comments = React.createClass({
-  mixins: [State],
   getInitialState: function () {
     return {
 			ready: false,
@@ -114,7 +113,7 @@ Comments.Create = React.createClass({
 });
 
 Comments.Comment = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   getDefaultProps: function () {
     return {
       comment: {},
@@ -150,7 +149,7 @@ Comments.Comment = React.createClass({
       <div className="comment" id={this.props.comment.id}>
 				<Pic id={this.props.user.id} img={this.props.user.img} />
         <div className="content">
-					<Link to="userPosts" params={{id: this.props.user.id}} className="username">
+					<Link to={`stream/user/${this.props.user.id}`} className="username">
 						{this.props.user.first} {this.props.user.last}
 					</Link>
           <p>{this.props.comment.content}</p>

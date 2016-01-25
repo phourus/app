@@ -19,7 +19,6 @@ let Explore = React.createClass({
 });
 
 let Explorer = React.createClass({
-  mixins: [Router.State],
   getInitialState: function () {
     return {
       posts: []
@@ -51,7 +50,7 @@ let Explorer = React.createClass({
     );
   },
   _more: function () {
-    this.context.router.transitionTo('stream');
+    //this.context.router.transitionTo('stream');
   }
 });
 

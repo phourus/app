@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, Navigation } = Router;
+let { Link, History } = Router;
 
 let AccountStore = require('../../stores/account');
 let AccountActions = require('../../actions/account');
@@ -9,7 +9,7 @@ let AccountActions = require('../../actions/account');
 let Pic = require('../shared/pic');
 
 module.exports = React.createClass({
-	mixins: [Navigation],
+	mixins: [History],
 	getInitialState: function () {
 		return {
 			orgs: []
@@ -50,6 +50,6 @@ module.exports = React.createClass({
 		);
 	},
 	_select: function (e) {
-		this.context.router.transitionTo("orgPosts", {id: e.currentTarget.id});
+		//this.context.router.transitionTo("orgPosts", {id: e.currentTarget.id});
 	}
 });

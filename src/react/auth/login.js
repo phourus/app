@@ -1,13 +1,13 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { RouteHandler, State, Navigation, Link } = Router;
+let { History, Link } = Router;
 let Actions = require('../../actions/account');
 let Store = require('../../stores/account');
 let ga = require('../../analytics');
 
 module.exports = React.createClass({
-  mixins: [State, Navigation],
+  mixins: [History],
   getDefaultProps: function () {
     return {
       clicked: true,
@@ -23,7 +23,7 @@ module.exports = React.createClass({
     this.unsubscribe = Store.listen(data => {
       if (data.code === 200 && this.state.loaded && this.state.clicked === true) {
         data.clicked = false;
-        this.context.router.transitionTo("stream");
+        //this.context.router.transitionTo("stream");
       }
       this.setState(data);
     });
@@ -86,9 +86,9 @@ module.exports = React.createClass({
     this.setState({code: null});
   },
   _posts: function () {
-    this.context.router.transitionTo("stream");
+    //this.context.router.transitionTo("stream");
   },
   _account: function () {
-    this.context.router.transitionTo("account");
+    //this.context.router.transitionTo("account");
   }
 });

@@ -1,8 +1,7 @@
 "use strict";
 let React = require('react');
 
-let Router = require('react-router');
-let { Link, RouteHandler, State } = Router;
+let { Link } = require('react-router');
 var ga = require('./analytics');
 var Initializer = ga.Initializer;
 
@@ -14,7 +13,6 @@ let HTML5Backend = require('react-dnd-html5-backend');
 let { DragDropContext } = require('react-dnd');
 
 let App = React.createClass({
-  mixins: [State],
   getInitialState: function () {
     return {
       sidebarVisible: false,
@@ -23,7 +21,7 @@ let App = React.createClass({
   },
   render: function () {
     let className = "main";
-    let route = this.context.router.getCurrentRoutes();
+    let route = this.props.routes;
 
     if (route[1] && route[1].name === 'stream') {
       className += " sidebar";
@@ -32,18 +30,17 @@ let App = React.createClass({
         className += " visible";
       }
     }
-
     return  (
       <div>
         <Initializer />
         {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
         <Header tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
         <div className="spacer"></div>
-        <Profile />
+        <Profile routes={this.props.routes} params={this.props.params} />
         <Alerts {...this.props.alerts} />
         <div>
           <div id="content">
-            <RouteHandler />
+            {this.props.children}
           </div>
         </div>
         <Helper />

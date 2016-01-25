@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Navigation } = Router;
+let { History } = Router;
 let numeral = require('numeral');
 
 let Influence = require('../../influence');
@@ -12,7 +12,7 @@ let thousands = "0,0";
 let en = numeral.language('en');
 
 module.exports = React.createClass({
-	mixins: [Navigation],
+	mixins: [History],
 	getDefaultProps: function () {
 		return {
 			context: {},
@@ -55,6 +55,6 @@ module.exports = React.createClass({
 		}
 	},
 	_single: function () {
-		this.context.router.transitionTo('post', {id: this.props.post.id});
+		//this.context.router.transitionTo('post', {id: this.props.post.id});
 	}
 });

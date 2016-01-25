@@ -37,7 +37,7 @@ module.exports = React.createClass({
         <ul>
           {folders.map((item, index) => {
             return (
-              <Drop item={item} index={index} select={this._select} selected={this.state.selected} />
+              <Drop key={item.id} item={item} index={index} select={this._select} selected={this.state.selected} />
             );
           })}
         </ul>

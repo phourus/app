@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Navigation } = Router;
+let { History } = Router;
 
 let Actions = require('../../actions/post');
 let Store = require('../../stores/post/collaborators');
@@ -69,7 +69,7 @@ let Privacy = React.createClass({
 });
 
 let Contexts = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   getInitialState: function () {
     return {
       orgs: []

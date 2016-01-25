@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, State, Navigation } = Router;
+let { Link, History } = Router;
 
 let Actions = require('../actions/post');
 let Store = require('../stores/post');
@@ -24,7 +24,7 @@ let Type = require('./post/type');
 let Drag = require('./post/drag');
 
 let Post = React.createClass({
-	mixins: [State, Navigation],
+	mixins: [History],
 	getDefaultProps: function () {
 		return {
 			context: {}
@@ -57,12 +57,12 @@ let Post = React.createClass({
 		this.unsubscribe = Store.listen((data) => {
 			if (data.hasOwnProperty('saving')) {
 				if (data.saving === false) {
-					this.context.router.transitionTo("myPosts");
+					//this.context.router.transitionTo("myPosts");
 				}
 				this.setState({saving: data.saving, types: false});
 			}
 			if (data.add === true) {
-				this.context.router.transitionTo("edit", {id: data.post.id});
+				//this.context.router.transitionTo("edit", {id: data.post.id});
 			}
 			if (data.post) {
 				document.title = data.post.title;
@@ -70,7 +70,7 @@ let Post = React.createClass({
 				this.setState({post: data.post});
 			}
 			if (data.deleted) {
-				this.context.router.transitionTo("myPosts");
+				//this.context.router.transitionTo("myPosts");
 			}
 			if (data.changes) {
 				let current = this.state.post;
@@ -99,7 +99,8 @@ let Post = React.createClass({
 		);
 	},
 	_context: function (data) {
-		let id = this.getParams().id || null;
+		let params = this.props.params || {};
+		let id = params.id;
 		if (this.props.context.type === 'edit' || this.props.context.type === 'post') {
 			Actions.single(id);
 		}

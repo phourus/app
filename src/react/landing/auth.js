@@ -8,7 +8,6 @@ let Forgot = require('../auth/forgot');
 let Reset = require('../auth/reset');
 
 module.exports = React.createClass({
-  mixins: [Router.State],
   getInitialState: function () {
     return {
       login: true,
@@ -34,7 +33,7 @@ module.exports = React.createClass({
     );
   },
   _context: function () {
-    let query = this.context.router.getCurrentQuery();
+    let query = this.props.location.query;
     if (query && query.reset && query.token) {
       this._showReset();
     }

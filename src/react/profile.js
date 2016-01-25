@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, State, Navigation } = Router;
+let { Link, History } = Router;
 
 let Store = require('../stores/profile');
 let Actions = require('../actions/profile');
@@ -14,7 +14,7 @@ let Pic = require('./shared/pic');
 let Uploader = require('./shared/uploader');
 
 let Profile = React.createClass({
-	mixins: [Navigation],
+	mixins: [History],
   getInitialState: function () {
     return {
 			context: {
@@ -90,7 +90,7 @@ let Profile = React.createClass({
 		);
 	},
 	_back: function () {
-		this.context.router.transitionTo("orgs");
+		//this.context.router.transitionTo("orgs");
 	},
 	_context: function () {
 		/** CONTEXT **/
@@ -108,8 +108,8 @@ let Profile = React.createClass({
 		// POST
 		// /stream/:id
 
-		let route = this.context.router.getCurrentRoutes();
-		let params = this.context.router.getCurrentParams();
+		let route = this.props.routes;
+		let params = this.props.params;
 		let context = {
 			root: null,
 			type: null,

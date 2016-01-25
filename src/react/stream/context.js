@@ -1,12 +1,12 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, Navigation } = Router;
+let { Link, History } = Router;
 
 let Actions = require('../../actions/stream');
 
 module.exports = React.createClass({
-	mixins: [Navigation],
+	mixins: [History],
 	render: function () {
 		let classes = {
 			phourus: "fa fa-flag",
@@ -30,13 +30,13 @@ module.exports = React.createClass({
 		);
 	},
 	_phourus: function () {
-		this.context.router.transitionTo("stream");
+		//this.context.router.transitionTo("stream");
 	},
 	_organizations: function () {
-		this.context.router.transitionTo("orgs");
+		//this.context.router.transitionTo("orgs");
 	},
 	_users: function () {
-		this.context.router.transitionTo("users");
+		//this.context.router.transitionTo("users");
 	}
 });
 
@@ -59,7 +59,7 @@ let _Context = React.createClass({
 			name = this.props.profile.username || this.props.profile.shortname || '';
 		}
 		if (true === 'user is logged in') {
-			link = <Link to="myPosts">Click here to view your posts</Link>
+			link = <Link to="stream/me">Click here to view your posts</Link>
 		} else {
 			link = <Link to="account">Click here to create posts</Link>
 		}

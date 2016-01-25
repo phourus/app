@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { RouteHandler, Link, State } = Router;
+let { Link } = Router;
 let Store = require('../stores/account');
 let Actions = require('../actions/account');
 let token = require('../token');
@@ -9,7 +9,6 @@ let Login = require('./auth/login');
 let moment = require('moment');
 
 let Activity = React.createClass({
-  mixins: [State],
   getInitialState: function () {
     return {
       selected: "notifications"
@@ -46,7 +45,7 @@ let Activity = React.createClass({
     }
   },
   _route: function () {
-    let route = this.context.router.getCurrentRoutes();
+    let route = this.props.routes;
     if (route[1].name === 'history') {
       this.setState({selected: 'history'});
     } else {

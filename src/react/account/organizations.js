@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, Navigation } = Router;
+let { Link, History } = Router;
 let Store = require('../../stores/account');
 let Actions = require('../../actions/account');
 
@@ -128,7 +128,7 @@ let Search = React.createClass({
 });
 
 let List = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   getInitialState: function () {
     return {
       orgs: []
@@ -156,7 +156,7 @@ let List = React.createClass({
           return (
             <div className="org">
               {admin}<br />
-              <Link to="orgPosts" params={{id: item.org.id}}>{item.org.name}</Link><br />
+            <Link to={`stream/orgs/${item.org.id}`}>{item.org.name}</Link><br />
               {item.approved
                 ? <span className="approved">
                   <i className="fa fa-check" /> Approved
@@ -177,7 +177,7 @@ let List = React.createClass({
   },
   _edit: function (e) {
     var id = e.currentTarget.id;
-    this.context.router.transitionTo('details', {id: id});
+    //this.context.router.transitionTo('details', {id: id});
   },
   _remove: function (e) {
     var id = e.currentTarget.id;

@@ -1,12 +1,12 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let { Link, Navigation } = Router;
+let { Link, History } = Router;
 
 let Form = require('./form');
 
 module.exports = React.createClass({
-  mixins: [Navigation],
+  mixins: [History],
   render: function () {
     return (
       <div className="contact">
@@ -28,6 +28,6 @@ module.exports = React.createClass({
     );
   },
   _docs: function () {
-    this.context.router.transitionTo("docs");
+    //this.context.router.transitionTo("docs");
   }
 });

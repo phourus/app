@@ -1,9 +1,8 @@
 "use strict";
 let React = require('react');
-let Router = require('react-router');
-let routes = require('./routes');
+let { render } = require('react-dom');
+let Routes = require('./routes');
 
-Router.run(routes, Router.HistoryLocation, function (Handler, state) {
-  ga('send', 'pageview', state.path);
-  React.render(<Handler />, document.getElementById("app"));
-});
+// Router.HistoryLocation
+//ga('send', 'pageview', state.path);
+render(Routes, document.getElementById("app"));
