@@ -152,6 +152,7 @@ AWS.util.update(AWS.S3.prototype, {
   computableChecksumOperations: {
     putBucketCors: true,
     putBucketLifecycle: true,
+    putBucketLifecycleConfiguration: true,
     putBucketTagging: true,
     deleteObjects: true
   },
@@ -272,6 +273,10 @@ AWS.util.update(AWS.S3.prototype, {
       return true;
     } else if (error && error.code === 'RequestTimeout') {
       return true;
+    } else if (error && error.code === 'AuthorizationHeaderMalformed' &&
+        error.region && error.region != request.httpRequest.region) {
+      request.httpRequest.region = error.region;
+      return true;
     } else {
       var _super = AWS.Service.prototype.retryableError;
       return _super.call(this, error, request);
@@ -312,6 +317,8 @@ AWS.util.update(AWS.S3.prototype, {
 
     var code = resp.httpResponse.statusCode;
     var body = resp.httpResponse.body || '';
+    var requestId = resp.requestId;
+    var extendedRequestId = resp.httpResponse.headers ? resp.httpResponse.headers['x-amz-id-2'] : null;
     if (codes[code] && body.length === 0) {
       resp.error = AWS.util.error(new Error(), {
         code: codes[resp.httpResponse.statusCode],
@@ -321,9 +328,12 @@ AWS.util.update(AWS.S3.prototype, {
       var data = new AWS.XML.Parser().parse(body.toString());
       resp.error = AWS.util.error(new Error(), {
         code: data.Code || code,
-        message: data.Message || null
+        message: data.Message || null,
+        region: data.Region || null
       });
     }
+    resp.error.requestId = requestId || null;
+    resp.error.extendedRequestId = extendedRequestId || null;
   },
 
   /**
@@ -430,6 +440,11 @@ AWS.util.update(AWS.S3.prototype, {
    *     s3.upload(params, options, function(err, data) {
    *       console.log(err, data);
    *     });
+   * @callback callback function(err, data)
+   *   @param err [Error] an error or null if no error occurred.
+   *   @param data [map] The response data from the successful upload:
+   *     * `Location` (String) the URL of the uploaded object
+   *     * `ETag` (String) the ETag of the uploaded object
    *   @see AWS.S3.ManagedUpload
    */
   upload: function upload(params, options, callback) {

@@ -304,6 +304,7 @@ AWS.Request = inherit({
   constructor: function Request(service, operation, params) {
     var endpoint = service.endpoint;
     var region = service.config.region;
+    var customUserAgent = service.config.customUserAgent;
 
     // global endpoints sign as us-east-1
     if (service.isGlobalEndpoint) region = 'us-east-1';
@@ -312,7 +313,7 @@ AWS.Request = inherit({
     this.service = service;
     this.operation = operation;
     this.params = params || {};
-    this.httpRequest = new AWS.HttpRequest(endpoint, region);
+    this.httpRequest = new AWS.HttpRequest(endpoint, region, customUserAgent);
     this.startTime = AWS.util.date.getDate();
 
     this.response = new AWS.Response(this);
@@ -634,7 +635,7 @@ AWS.Request = inherit({
   toUnauthenticated: function toUnauthenticated() {
     this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
     this.removeListener('sign', AWS.EventListeners.Core.SIGN);
-    return this.toGet();
+    return this;
   },
 
   /**
