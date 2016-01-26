@@ -107,7 +107,7 @@ let About = React.createClass({
     );
   },
   _contact: function () {
-    //this.context.router.transitionTo("contact");
+    this.history.pushState(null, "/contact");
   },
   _signup: function () {
     this.setState({mode: 'signup'});
@@ -146,10 +146,10 @@ let Signup = React.createClass({
     )
   },
   _register: function () {
-    //this.context.router.transitionTo("home");
+    this.history.pushState(null, "/home");
   },
   _trial: function () {
-    //this.context.router.transitionTo("home");
+    this.history.pushState(null, "/home");
   }
 });
 

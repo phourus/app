@@ -55,6 +55,6 @@ module.exports = React.createClass({
 		}
 	},
 	_single: function () {
-		//this.context.router.transitionTo('post', {id: this.props.post.id});
+		this.history.pushState(null, `/post/${this.props.post.id}`);
 	}
 });

@@ -50,7 +50,7 @@ let Explorer = React.createClass({
     );
   },
   _more: function () {
-    //this.context.router.transitionTo('stream');
+    this.history.pushState(null, '/stream');
   }
 });
 

@@ -28,6 +28,6 @@ module.exports = React.createClass({
     );
   },
   _docs: function () {
-    //this.context.router.transitionTo("docs");
+    this.history.pushState(null, "/docs");
   }
 });

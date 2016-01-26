@@ -24,7 +24,7 @@ module.exports = React.createClass({
   componentDidMount: function () {
     this.unsubscribeAccount = AccountStore.listen(data => {
       if (!data.user && this.state.logout === true) {
-        //this.context.router.transitionTo("home");
+        this.history.pushState(null, "/home");
         data.logout = false;
       }
       this.setState(data);
@@ -131,7 +131,7 @@ module.exports = React.createClass({
   _redirect: function () {
     let route = this.props.routes;
     if (route && route[1] && route[1].name !== 'stream') {
-      //this.context.router.transitionTo('stream');
+      this.history.pushState(null, '/stream');
     }
   }
 });

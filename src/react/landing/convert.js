@@ -16,7 +16,7 @@ let Convert = React.createClass({
     );
   },
   _register: function () {
-    //this.context.router.transitionTo("account");
+    this.history.pushState(null, "/account");
   }
 });
 

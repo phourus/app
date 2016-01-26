@@ -30,13 +30,13 @@ module.exports = React.createClass({
 		);
 	},
 	_phourus: function () {
-		//this.context.router.transitionTo("stream");
+		this.history.pushState(null, "/stream");
 	},
 	_organizations: function () {
-		//this.context.router.transitionTo("orgs");
+		this.history.pushState(null, "/stream");
 	},
 	_users: function () {
-		//this.context.router.transitionTo("users");
+		this.history.pushState(null, "/stream");
 	}
 });
 

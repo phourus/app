@@ -23,7 +23,7 @@ module.exports = React.createClass({
     this.unsubscribe = Store.listen(data => {
       if (data.code === 200 && this.state.loaded && this.state.clicked === true) {
         data.clicked = false;
-        //this.context.router.transitionTo("stream");
+        this.history.pushState(null, "/stream");
       }
       this.setState(data);
     });
@@ -80,15 +80,15 @@ module.exports = React.createClass({
   },
   _request: function () {
     //this._clear();
-    //this.context.router.transitionTo("request");
+    this.history.pushState(null, "/request");
   },
   _clear: function () {
     this.setState({code: null});
   },
   _posts: function () {
-    //this.context.router.transitionTo("stream");
+    this.history.pushState(null, "/stream");
   },
   _account: function () {
-    //this.context.router.transitionTo("account");
+    this.history.pushState(null, "/account");
   }
 });

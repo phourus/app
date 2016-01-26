@@ -90,7 +90,7 @@ let Profile = React.createClass({
 		);
 	},
 	_back: function () {
-		//this.context.router.transitionTo("orgs");
+		this.history.pushState(null, "/stream");
 	},
 	_context: function () {
 		/** CONTEXT **/

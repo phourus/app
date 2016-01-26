@@ -31,14 +31,14 @@ module.exports = React.createClass({
   _back: function () {
     if (!this.goBack()) {
       if (this.props.context.type === 'edit') {
-        //this.context.router.transitionTo("myPosts");
+        this.history.pushState(null, "/stream/me");
       } else {
-        //this.context.router.transitionTo("stream");
+        this.history.pushState(null, "/stream");
       }
     }
   },
   _myposts: function () {
-  	//this.context.router.transitionTo("myPosts");
+  	this.history.pushState(null, "/stream/me");
   }
 });
 

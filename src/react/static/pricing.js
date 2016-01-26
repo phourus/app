@@ -130,7 +130,7 @@ let About = React.createClass({
     this.setState({mode: 'rank'});
   },
   _start: function () {
-    //this.context.router.transitionTo("home");
+    this.history.pushState(null, "/home");
   }
 });
 

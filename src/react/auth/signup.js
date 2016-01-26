@@ -200,7 +200,7 @@ module.exports = React.createClass({
     this.setState({step: 2});
   },
   _account: function (e) {
-    //this.context.router.transitionTo("account");
+    this.history.pushState(null, "/account");
   },
   _clear: function () {
     this.setState({code: null});

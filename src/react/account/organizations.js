@@ -177,7 +177,7 @@ let List = React.createClass({
   },
   _edit: function (e) {
     var id = e.currentTarget.id;
-    //this.context.router.transitionTo('details', {id: id});
+    this.history.pushState(null, `/admin/${id}/details`);
   },
   _remove: function (e) {
     var id = e.currentTarget.id;

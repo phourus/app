@@ -89,7 +89,7 @@ let Tabs = React.createClass({
       )
     },
     _select: function (id) {
-      //this.transitionTo(id, {id: this.props.org.id});
+      this.history.pushState(null, `/admin/${this.props.org.id}/${id}`);
     },
     _details: function () {
       // swap 'name' with 'category' when categories are determined
