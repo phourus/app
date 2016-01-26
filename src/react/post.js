@@ -25,11 +25,6 @@ let Drag = require('./post/drag');
 
 let Post = React.createClass({
 	mixins: [History],
-	getDefaultProps: function () {
-		return {
-			context: {}
-		};
-	},
 	getInitialState: function () {
 		return {
 			scroll: false,
@@ -47,7 +42,8 @@ let Post = React.createClass({
 		}
 	},
 	componentDidUpdate: function () {
-		if ((this.props.context.type === 'post' || this.props.context.type === 'edit') && this.props.scroll === false) {
+		let type = this.props._route;
+		if ((type === 'post' || type === 'edit') && this.props.scroll === false) {
 			let element = this.getDOMNode();
 			let y = element.offsetTop - element.scrollTop + element.clientTop - 80;
 			window.scrollTo(0, y);
@@ -80,35 +76,36 @@ let Post = React.createClass({
 				this.setState({post: current});
 			}
 		});
-		this._context(this.props);
+		this._context();
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
 	componentWillReceiveProps: function (data) {
-		this._context(data);
+		this._context();
 	},
 	render: function () {
-		let mode = this.props.context.type;
+		let mode = this.props._route.type;
 		return (
 			<div className="post">
-				{mode === 'create' ? <Create {...this.state} /> : false}
-				{mode === 'edit' ? <Edit {...this.state} /> : false}
-				{mode === 'post' ? <Single {...this.state} /> : false}
+				{mode === 'create' ? <Create {...this.state} _route={this.props._route} /> : false}
+				{mode === 'edit' ? <Edit {...this.state} _route={this.props._route} /> : false}
+				{mode === 'post' ? <Single {...this.state} _route={this.props._route} /> : false}
 			</div>
 		);
 	},
-	_context: function (data) {
-		let params = this.props.params || {};
-		let id = params.id;
-		if (this.props.context.type === 'edit' || this.props.context.type === 'post') {
+	_context: function () {
+		let route = this.props._route;
+		let params = route.params;
+		let id = route.id;
+		let type = route.type;
+		if (type === 'edit' || type === 'post') {
 			Actions.single(id);
 		}
-		if (this.props.context.type === 'create') {
+		if (type === 'create') {
 			Actions.change('title', 'New Post');
 			Actions.change('content', 'New Content');
 		}
-		this.setState(data);
 	},
 });
 
@@ -117,10 +114,10 @@ let Create = React.createClass({
 		return (
 			<div className="create postItem">
 				<div className="toolbar"></div>
-				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Title post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Content post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 			</div>
 		);
 	}
@@ -131,13 +128,13 @@ let Edit = React.createClass({
 		return (
 			<div className="edit postItem">
 				<div className="toolbar"></div>
-				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Privacy post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
-				<Links post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Title post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Content post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Privacy post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Tags post={this.props.post} _route={this.props._route} owner={this.props.owner} tag={this.props.tag} />
+				<Links post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 			</div>
 		);
 	}
@@ -147,15 +144,15 @@ let Single = React.createClass({
 	render: function () {
 		return (
 			<div className="single postItem">
-				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
-				<Content post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Title post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Tags post={this.props.post} _route={this.props._route} owner={this.props.owner} tag={this.props.tag} />
+				<Content post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Share post={this.props.post} />
-				<Profile context={this.props.context} postMode={true} />
-				<Stats post={this.props.post} context={this.props.context} />
-				<Links post={this.props.post} context={this.props.context} owner={this.props.owner} />
+				<Profile _route={this.props._route} postMode={true} />
+				<Stats post={this.props.post} _route={this.props._route} />
+				<Links post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Comments post={this.props.post} />
 			</div>
 		);
@@ -167,12 +164,12 @@ Post.Item = React.createClass({
 		return (
 			<div className="postItem">
 				<Drag id={this.props.post.id} />
-				<ActionsView post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Type post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Title post={this.props.post} context={this.props.context} owner={this.props.owner} />
-				<Details post={this.props.post} context={this.props.context} owner={this.props.owner} user={this.props.user} location={this.props.location} />
-				<Tags post={this.props.post} context={this.props.context} owner={this.props.owner} tag={this.props.tag} />
-				<Stats post={this.props.post} context={this.props.context} />
+				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Title post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Details post={this.props.post} _route={this.props._route} owner={this.props.owner} user={this.props.user} location={this.props.location} />
+				<Tags post={this.props.post} _route={this.props._route} owner={this.props.owner} tag={this.props.tag} />
+				<Stats post={this.props.post} _route={this.props._route} />
 			</div>
 		);
 	}

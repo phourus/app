@@ -37,7 +37,6 @@ module.exports = (
       <Route path="nonprofit" component={Nonprofit} />
       <Route path="about" component={About} />
       <Route path="pricing" component={Pricing} />
-      <Route path="docs/:id" component={Docs} />
       <Route path="contact" component={Contact} />
       <Route path="terms" component={Terms} />
       <Route path="privacy" component={Privacy} />
@@ -48,11 +47,12 @@ module.exports = (
       <Route path="stream" component={Stream}>
         <Route path="me" component={Stream} />
         <Route path="create" component={Stream}></Route>
-        <Route path="users/:id" component={Stream} />
-        <Route path="orgs/:id" component={Stream} />
+        <Route path="user/:id" component={Stream} />
+        <Route path="org/:id" component={Stream} />
         <Route name="edit/:id" path="edit/:id" component={Stream}></Route>
         <Route path=":id" component={Stream} />
       </Route>
+      <Route path="docs/:id" component={Docs} />
       <Route path="admin/:id" component={Admin}>
         <Route path="details" component={Details} />
         <Route path="members" component={Members} />

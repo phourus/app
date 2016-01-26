@@ -8,7 +8,6 @@ let Actions = require('../../actions/post');
 module.exports = React.createClass({
   getDefaultProps: function () {
     return {
-      context: {},
       post: {
         id: 0
       },
@@ -16,7 +15,7 @@ module.exports = React.createClass({
     };
   },
   render: function () {
-    return this.props.context.type === 'create' || this.props.context.type === 'edit' && this.props.owner
+    return this.props._route.type === 'create' || this.props._route.type === 'edit' && this.props.owner
     ? <input className="title editing" onChange={this._title} value={this.props.post.title} />
   : <h2 className="title"><Link to={`stream/${this.props.post.id}`}>{this.props.post.title}</Link></h2>;
   },

@@ -27,7 +27,7 @@ module.exports = React.createClass({
 	render: function () {
 		let membership = this.state.orgs || [];
 		let selected = this.state.orgs.filter((org) => {
-			if (org.orgId.toString() === this.props.context.id) {
+			if (org.orgId.toString() === this.props._route.id) {
 				return true;
 			}
 			return false;

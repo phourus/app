@@ -37,7 +37,6 @@ module.exports = React.createClass({
 	},
 	getDefaultProps: function () {
 		return {
-			context: {},
 			post: {},
 			owner: false
 		};
@@ -64,15 +63,17 @@ module.exports = React.createClass({
 					{" "}
 					{this.props.post.type}
 				</div>
-				{this.state.select ? <Selector post={this.props.post} type={this._type} context={this.props.context} owner={this.props.owner} /> : false}
+				{this.state.select ? <Selector post={this.props.post} type={this._type} _route={this.props._route} owner={this.props.owner} /> : false}
 			</div>
 		);
 	},
 	_select: function (e) {
-		if (this.props.context.type === 'create' || this.props.context.type === 'edit' && this.props.owner) {
+		let route = this.props._route;
+		let type = route.type;
+		if (type === 'create' || type === 'edit' && this.props.owner) {
 			this.setState({select: !this.state.select});
 		}
-		if (this.props.context.type !== 'post' && this.props.context.type !== 'edit' && this.props.context.type !== 'create') {
+		if (type !== 'post' && type !== 'edit' && type !== 'create') {
 			StreamActions.type(e.currentTarget.id);
 		}
 	},
@@ -91,7 +92,7 @@ let Selector = React.createClass({
 						{item === 0
 							? <div className="">
 									<p>{descriptions[item]}</p>
-									<Meta {...this.props} context={this.props.context} owner={this.props.owner} />
+									<Meta {...this.props} _route={this.props._route} owner={this.props.owner} />
 								</div>
 							: false
 						}

@@ -7,13 +7,12 @@ let Actions = require('../../actions/post');
 module.exports = React.createClass({
 	getDefaultProps: function () {
 		return {
-			context: {},
 			post: {},
 			owner: false
 		}
 	},
 	render: function () {
-		return this.props.context.type === 'edit' && this.props.owner || this.props.context.type === 'create'
+		return this.props._route.type === 'edit' && this.props.owner || this.props._route.type === 'create'
 		? <TextEditor post={this.props.post} />
 		: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
 	}

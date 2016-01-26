@@ -33,7 +33,7 @@ module.exports = React.createClass({
     );
   },
   _context: function () {
-    let query = this.props.location.query;
+    let query = this.props._route.query;
     if (query && query.reset && query.token) {
       this._showReset();
     }

@@ -15,7 +15,6 @@ module.exports = React.createClass({
 	mixins: [History],
 	getDefaultProps: function () {
 		return {
-			context: {},
 			post: {}
 		};
 	},
@@ -28,7 +27,7 @@ module.exports = React.createClass({
 	render: function () {
 		return (
 			<div className="interact" onClick={this._single}>
-				{this.props.context.type === 'post' ? <Thumbs post={this.props.post} /> : false}
+				{this.props._route.type === 'post' ? <Thumbs post={this.props.post} _route={this.props._route} /> : false}
 				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
 					<div>

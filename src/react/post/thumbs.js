@@ -19,7 +19,7 @@ let Thumbs = React.createClass({
 		 }
 	 },
    componentDidMount: function () {
-     let params = this.getParams();
+     let params = this.props._route.params;
      this.unsubscribe = Store.listen((data) => {
 			 this.setState(data);
      });

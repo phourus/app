@@ -6,10 +6,6 @@ let { Link } = Router;
 module.exports = React.createClass({
   getDefaultProps: function () {
     return {
-      context: {
-        id: 0,
-        type: ""
-      },
       name: ""
     };
   },
@@ -25,7 +21,7 @@ module.exports = React.createClass({
     }
     return (
       <div className="pic">
-        <Link to={this.props.context.type === 'org' ? "orgPosts" : "userPosts"} params={{id: this.props.context.id || 0}}>
+        <Link to={this.props._route.type === 'org' ? "orgPosts" : "userPosts"} params={{id: this.props._route.id || 0}}>
           <img src={img} onError={this._default} alt={"Phourus Profile Pic for " + this.props.name} />
         </Link>
       </div>

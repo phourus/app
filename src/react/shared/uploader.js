@@ -54,8 +54,8 @@ module.exports = React.createClass({
       debug : true
     };
 
-    if (this.props.context.root === 'admin') {
-      let id = this.props.context.id;
+    if (this.props._route.root === 'admin') {
+      let id = this.props._route.id;
       if (!id) {
         return;
       }

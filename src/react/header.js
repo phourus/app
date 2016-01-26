@@ -14,8 +14,6 @@ module.exports = React.createClass({
   mixins: [History],
   getInitialState: function () {
     return {
-      params: {},
-      context: {},
       filter: false,
       orgs: [],
       logout: false
@@ -45,12 +43,12 @@ module.exports = React.createClass({
   },
   render: function () {
     let orgs = this.state.orgs;
-    let route = this.props.routes || [];
-    let r = route[1] ? route[1].name : '';
+    let route = this.props._route;
+    let r = route.root;
     if (r === 'home') {
       return <Home />
     }
-    if (route && (r === 'contact' || r === 'pricing' || r === 'about' || r === 'docs')) {
+    if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
       return <Static />
     }
     return  (
@@ -76,7 +74,7 @@ module.exports = React.createClass({
                           if (!org.approved) {
                             return false;
                           }
-                          return <li key={org.org.id}><Link to={`stream/orgs/${org.org.id}`}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></Link></li>
+                          return <li key={org.org.id}><Link to={`stream/org/${org.org.id}`}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></Link></li>
                         })}
                       </ul>
                       <ul>
@@ -129,8 +127,8 @@ module.exports = React.createClass({
     this.setState({filter: !this.state.filter});
   },
   _redirect: function () {
-    let route = this.props.routes;
-    if (route && route[1] && route[1].name !== 'stream') {
+    let route = this.props._route;
+    if (route.root !== 'stream') {
       this.history.pushState(null, '/stream');
     }
   }

@@ -10,7 +10,6 @@ let Poll = require('./poll');
 module.exports = React.createClass({
 	getDefaultProps: function () {
 		return {
-			context: {},
 			user: {
 				id: 0
 			},
@@ -42,16 +41,15 @@ module.exports = React.createClass({
 			profileName = org.shortname;
 			context = 'org';
 		}
-		// <Meta post={this.props.post} context={this.props.context} owner={this.props.owner} />
 		return (
 			<div className="details">
-				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} context={context} name={profileName} />
+				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} _route={this.props._route} name={profileName} />
 				<div className="basic">
 					{context === 'org'
-						? <div><Link to={`stream/orgs/${org.id}`}>{org.name}</Link><br /><br /></div>
+						? <div><Link to={`stream/org/${org.id}`}>{org.name}</Link><br /><br /></div>
 						: false
 					}
-					<span>By <Link to={`stream/users/${this.props.user.id}`}>{this.props.user.first} {this.props.user.last} </Link></span>
+					<span>By <Link to={`stream/user/${this.props.user.id}`}>{this.props.user.first} {this.props.user.last} </Link></span>
 					&bull;
 					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
@@ -69,7 +67,7 @@ module.exports = React.createClass({
 					</div>
 					: false
 				}
-				{this.props.post.type !== 'event' && this.props.post.type !== 'poll' && this.props.context.type !== 'post' && this.props.context.type !== 'edit'
+				{this.props.post.type !== 'event' && this.props.post.type !== 'poll' && this.props._route.type !== 'post' && this.props._route.type !== 'edit'
 					? <div className="extra excerpt"><div>{excerpt}</div></div>
 					: false
 				}

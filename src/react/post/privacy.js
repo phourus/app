@@ -14,7 +14,6 @@ let Select = require('react-select');
 let Privacy = React.createClass({
 	getDefaultProps: function () {
 		return {
-			context: {},
 			post: {},
 			owner: false
 		};
@@ -34,7 +33,7 @@ let Privacy = React.createClass({
 		classes[privacy] = "button blue";
 		return (
 			<div className="privacy">
-				{this.props.owner && this.props.context.type === 'edit'
+				{this.props.owner && this.props._route.type === 'edit'
 					? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> <span style={{textDecoration: 'underline'}}>Privacy: {this.props.post.privacy}</span></div>
 					: false
 				}

@@ -10,7 +10,6 @@ module.exports = React.createClass({
   mixins: [History],
   getDefaultProps: function () {
     return {
-      context: {},
       post: {
         id: 0
       },
@@ -21,16 +20,16 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="actions">
-        <Close context={this.props.context} back={this._back} />
-        <Edit context={this.props.context} owner={this.props.owner} post={this.props.post} />
-        <Create context={this.props.context} back={this._back} />
-        <Controls context={this.props.context} owner={this.props.owner} post={this.props.post} myposts={this._myposts} />
+        <Close _route={this.props._route} back={this._back} />
+        <Edit _route={this.props._route} owner={this.props.owner} post={this.props.post} />
+        <Create _route={this.props._route} back={this._back} />
+        <Controls _route={this.props._route} owner={this.props.owner} post={this.props.post} myposts={this._myposts} />
       </div>
     );
   },
   _back: function () {
     if (!this.goBack()) {
-      if (this.props.context.type === 'edit') {
+      if (this.props._route.type === 'edit') {
         this.history.pushState(null, "/stream/me");
       } else {
         this.history.pushState(null, "/stream");
@@ -43,13 +42,8 @@ module.exports = React.createClass({
 });
 
 let Close = React.createClass({
-  getDefaultProps: function () {
-    return {
-      context: {}
-    };
-  },
   render: function () {
-    if (this.props.context.type !== 'post') {
+    if (this.props._route.type !== 'post') {
       return false;
     }
     return (
@@ -61,7 +55,6 @@ let Close = React.createClass({
 let Edit = React.createClass({
   getDefaultProps: function () {
     return {
-      context: {},
       owner: false
     };
   },
@@ -69,7 +62,7 @@ let Edit = React.createClass({
     if (!this.props.owner) {
       return false;
     }
-    if (this.props.context.type === 'edit' || this.props.context.type === 'create') {
+    if (this.props._route.type === 'edit' || this.props._route.type === 'create') {
       return false;
     }
     return (
@@ -81,12 +74,11 @@ let Edit = React.createClass({
 let Create = React.createClass({
   getDefaultProps: function () {
     return {
-      context: {},
       saving: false
     };
   },
   render: function () {
-    if (this.props.context.type !== 'create') {
+    if (this.props._route.type !== 'create') {
       return false;
     }
     return (
@@ -110,7 +102,6 @@ let Controls = React.createClass({
   getDefaultProps: function () {
     return {
       post: {},
-      context: {},
       owner: false,
       saving: false
     };
@@ -119,7 +110,7 @@ let Controls = React.createClass({
     if (!this.props.owner) {
       return false;
     }
-    if (this.props.context.type !== 'edit') {
+    if (this.props._route.type !== 'edit') {
       return false;
     }
     if (this.state.confirmTrash) {

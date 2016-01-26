@@ -15,7 +15,6 @@ let Store = require('../../stores/post/links');
 let Links = React.createClass({
 	getDefaultProps: function () {
 		return {
-			context: {},
 			owner: false
 		};
 	},
@@ -62,18 +61,20 @@ let Links = React.createClass({
 		}
 	},
 	render: function () {
+		let route = this.props._route;
+		let type = route.type;
 		return (
 			<div className="links">
-				{this.props.context.type === 'edit' ? <h2>Links & Attachments</h2> : false}
-				{this.props.context.type === 'edit' && this.props.owner && this.state.mode !== 'edit' && this.state.mode !== 'add'
+				{type === 'edit' ? <h2>Links & Attachments</h2> : false}
+				{type === 'edit' && this.props.owner && this.state.mode !== 'edit' && this.state.mode !== 'add'
 					? <button className="green button" onClick={this._add}>Add Link</button>
 					: false
 				}
-				{this.props.context.type === 'edit' && this.props.owner && (this.state.mode === 'edit' || this.state.mode === 'add')
+				{type === 'edit' && this.props.owner && (this.state.mode === 'edit' || this.state.mode === 'add')
 					? <Links.Edit {...this.state} edit={this._edit} hide={this._hide} />
 					: false
 				}
-				<Links.List {...this.state} context={this.props.context} owner={this.props.owner} edit={this._edit} />
+				<Links.List {...this.state} _route={this.props._route} owner={this.props.owner} edit={this._edit} />
 			</div>
 		);
 	},
@@ -112,13 +113,13 @@ Links.List = React.createClass({
 						<div className="link" key={item.id}>
 							<div className="icon">
 								<i className={icon} />
-								{this.props.context.type === 'edit' && this.props.owner
+								{this.props._route.type === 'edit' && this.props.owner
 									? <a id={index} href="javascript:void(0)" className="edit" onClick={this.props.edit}>Edit</a>
 									: false
 								}
 							</div>
 							<div>
-								{this.props.context.type === 'edit' && this.props.owner
+								{this.props._route.type === 'edit' && this.props.owner
 									? <button id={item.id} className="remove" onClick={this._remove}>X</button>
 									: false
 								}

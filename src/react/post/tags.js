@@ -8,7 +8,6 @@ let StreamActions = require('../../actions/stream');
 let Tags = React.createClass({
 	getDefaultProps: function () {
 		return {
-			context: {},
 			post: {
 				id: null,
 				tags: []
@@ -53,22 +52,24 @@ let Tags = React.createClass({
 	},
 	render: function () {
     let tags = this.state.post.tags || [];
+		let route = this.props._route;
+		let type = route.type;
 		return (
       <div className="tags">
-				{this.props.context.type === 'edit' && this.props.owner ? <h2>Edit Tags</h2> : false}
+				{type === 'edit' && this.props.owner ? <h2>Edit Tags</h2> : false}
         <i className="fa fa-tag" />
         {tags.map((item, index) => {
           return (
             <span className="tag" key={index}>
 							<a id={item.tag} href="javascript:void(0)" onClick={this._tag}>{item.tag}</a>
-							{this.props.context.type === 'edit' && this.props.owner
+							{type === 'edit' && this.props.owner
 								? <a href="javascript:void(0)" id={item.id} className="remove" onClick={this._remove}>x</a>
 								: false
 							}
 						</span>
           );
         })}
-				{this.props.context.type === 'edit' && this.props.owner
+				{type === 'edit' && this.props.owner
 					? <div className="tagField">
 					<input placeholder="add tags here" onChange={this._change} type="text" value={this.state.tag} />
 					<button ref="add" onClick={this._add}>Add Tag</button>

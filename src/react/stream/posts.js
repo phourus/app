@@ -39,16 +39,17 @@ module.exports = React.createClass({
 		this.unsubscribe();
 	},
 	render: function () {
+		let route = this.props._route;
 		if (this.props.posts === null) {
 			return <Loader />
 		}
 		if (this.props.posts.length < 1) {
 			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>;
 		}
-		if (['create', 'edit', 'post'].indexOf(this.props.context.type) !== -1) {
-			return <Single posts={this.props.posts} user={this.state.user} context={this.props.context} owner={this._owner} />;
+		if (['create', 'edit', 'post'].indexOf(route.type) !== -1) {
+			return <Single posts={this.props.posts} user={this.state.user} _route={route} owner={this._owner} />;
 		}
-		return <Collection posts={this.props.posts} user={this.state.user} context={this.props.context} owner={this._owner} sidebarVisible={this.props.sidebarVisible} />;
+		return <Collection posts={this.props.posts} user={this.state.user} _route={route} owner={this._owner} sidebarVisible={this.props.sidebarVisible} />;
 	},
 	_owner: function (post) {
 		let user = this.state.user;
@@ -70,7 +71,7 @@ let Collection = React.createClass({
 					 if (item.user.locations && item.user.locations.length > 0) {
 							 location = item.user.locations[0];
 					 }
-					 return <Post.Item key={item.id} post={item} user={item.user} context={this.props.context} owner={owner} location={location} scroll={this.props.scroll} />;
+					 return <Post.Item key={item.id} post={item} user={item.user} _route={this.props._route} owner={owner} location={location} scroll={this.props.scroll} />;
 				})}
 			</div>
 		);
@@ -80,26 +81,25 @@ let Collection = React.createClass({
 let Single = React.createClass({
 	getDefaultProps: function () {
 		return {
-			posts: [],
-			context: {}
+			posts: []
 		};
 	},
 	render: function () {
 		let post = this._post();
 		let owner = this.props.owner(post);
-		return <Post post={post} context={this.props.context} owner={this.props.owner} />;
+		return <Post post={post} _route={this.props._route} owner={this.props.owner} />;
 	},
 	_post: function () {
 		let post = {};
 		let posts = this.props.posts.filter(item => {
-			if (item.id == this.props.context.id) {
+			if (item.id == this.props._route.id) {
 				return true;
 			}
 			return false;
 		});
 		post = posts[0] || {};
 
-		if (this.props.context.type === 'create') {
+		if (this.props._route.type === 'create') {
 			post.user = this.props.user;
 		}
 		return post;

@@ -27,10 +27,6 @@ let Stream = React.createClass({
 				page: 1,
 				limit: 10,
 				total: 0
-			},
-			context: {
-				type: null,
-				id: null
 			}
 		};
 	},
@@ -47,72 +43,42 @@ let Stream = React.createClass({
 		this._context();
 	},
 	render: function () {
+		let route = this.props._route;
+		let type = route.type;
+		let id = route.id;
 		let visible = 'fa fa-minus-square-o';
 		let hidden = 'fa fa-plus-square-o';
-		let hasMore = (this.state.posts && this.state.posts.length < this.state.total && this.state.context.type !== 'post' && this.state.context.type !== 'edit');
+		let hasMore = (this.state.posts && this.state.posts.length < this.state.total && type !== 'post' && type !== 'edit');
 		let count = this.state.posts ? this.state.posts.length : 0;
 		let total = this.state.total || 0;
 
 		return (
 			<div className="stream">
-				{this.state.context.type === 'orgs' && !this.state.context.id
-					? <Organizations context={this.state.context} />
+				{type === 'orgs' && !id
+					? <Organizations _route={this.props._route} />
 					: false
 				}
-				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create' || this.state.sidebarVisible
+				{type === 'post' || type === 'edit' || type === 'create' || this.state.sidebarVisible
 					? false
 					: <button className="toggle" onClick={this._sidebar}><i className="fa fa-navicon" /> Show my folders</button>
 				}
-				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create'
+				{type === 'post' || type === 'edit' || type === 'create'
 					? false
 					: <div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
 				}
-				{this.state.context.type === 'post' || this.state.context.type === 'edit' || this.state.context.type === 'create'
+				{type === 'post' || type === 'edit' || type === 'create'
 					? false
 					: <Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
 				}
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<Loader />}>
-					<Posts {...this.state} sidebarVisible={this.state.sidebarVisible} />
+					<Posts {...this.state} _route={this.props._route} sidebarVisible={this.state.sidebarVisible} />
 				</Scroll>
 			</div>
 		);
 	},
 	_context: function () {
-		/** CONTEXT **/
-		// /stream
-		// /stream/user/:id
-		// /stream/org/:id
-		// /stream/edit/:id
-		// /stream/:id
-		// /stream/create
-
-		let route = this.props.routes;
-		let params = this.props.params;
-		let id = null;
-		let type = null;
-
-		if (route[2]) {
-			type = route[2].path;
-			if (type === ':id') {
-				type = 'post';
-			}
-			if (type === 'edit/:id') {
-				type = 'edit';
-			}
-			if (type === 'orgs/:id') {
-				type = 'orgs';
-			}
-			if (type === 'users/:id') {
-				type = 'users';
-			}
-		}
-		if (params.id) {
-			id = params.id;
-		}
-		if (type === 'create') {
-			id = 'create';
-		}
-		Actions.context(type, id);
+		let route = this.props._route;
+		Actions.context(route.type, route.id);
 	},
 	_more: function () {
 		Actions.more();

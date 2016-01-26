@@ -8,7 +8,7 @@ let tax = require('../../taxonomy');
 let Categories = React.createClass({
 	render: function () {
 		let type = tax[this.props.post.type] || {};
-		if (this.props.owner && this.props.context.type === 'edit') {
+		if (this.props.owner && this.props._route.type === 'edit') {
 			let cats = type.category || [];
 			let subs = type[this.props.post.category] || false;
 			return (

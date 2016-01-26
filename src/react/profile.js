@@ -17,11 +17,6 @@ let Profile = React.createClass({
 	mixins: [History],
   getInitialState: function () {
     return {
-			context: {
-				root: '',
-				type: '',
-				id: 0
-			},
 			profile: null
     };
   },
@@ -42,7 +37,7 @@ let Profile = React.createClass({
 				this.setState({profile: post.user});
 			}
 		});
-		this._context();
+		this._load();
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
@@ -50,31 +45,33 @@ let Profile = React.createClass({
 		this.unsubscribePosts();
 	},
 	componentWillReceiveProps: function () {
-		this._context();
+		this._load();
 	},
 	render: function () {
 		let profile = this.state.profile || {};
 		let address = profile.address || {};
-		if (this.state.context.type === 'post') {
+		let root = this.props._route.root;
+		let type = this.props._route.type;
+		if (type === 'post') {
 			profile = this.state.profile || {};
 		}
-		if (['stream', 'account', 'admin'].indexOf(this.state.context.root) === -1) {
+		if (['stream', 'account', 'admin'].indexOf(root) === -1) {
 			return false;
 		}
-		if (this.state.context.root === 'stream' && !this.state.context.type) {
+		if (root === 'stream' && !type) {
 			return false;
 		}
-		if (this.state.context.type === 'post' && !this.props.postMode) {
+		if (type === 'post' && !this.props.postMode) {
 			return false;
 		}
-		if (this.state.context.type === 'edit') {
+		if (type === 'edit') {
 			return false;
 		}
 		return (
 			<div className="profile">
-				{this.state.context.root === 'account' || this.state.context.root === 'admin'
-					? <Uploader img={profile.img} context={this.state.context} />
-					: <Pic img={profile.img} context={this.state.context} />
+				{root === 'account' || root === 'admin'
+					? <Uploader img={profile.img} _route={this.props._route} />
+					: <Pic img={profile.img} _route={this.props._route} />
 				}
 				<div className="basic">
 					<h1 className="name">{profile.name || profile.first + ' ' + profile.last}</h1>
@@ -92,61 +89,28 @@ let Profile = React.createClass({
 	_back: function () {
 		this.history.pushState(null, "/stream");
 	},
-	_context: function () {
-		/** CONTEXT **/
-		// NONE
-		// /stream
-		// USER
-		// /stream/user/:id
-		// ORG
-		// /stream/org/:id
-		// /admin/:id/*
-		// ME
-		// /account/*
-		// /stream/create
-		// /stream/edit/:id
-		// POST
-		// /stream/:id
-
-		let route = this.props.routes;
-		let params = this.props.params;
-		let context = {
-			root: null,
-			type: null,
-			id: null
-		};
-
-		if (route[1]) {
-			context.root = route[1].name;
-		}
-		if (route[2]) {
-			context.type = route[2].name;
-		}
-		if (params.id) {
-			context.id = params.id;
-		}
-		this._load(context);
-		this.setState({context: context});
-	},
-	_load: function (context) {
+	_load: function () {
+		let root = this.props._route.root;
+		let type = this.props._route.type;
+		let id = this.props._route.id;
 		// ADMIN
-		if (context.root === 'admin' && context.id > 0) {
-			Actions.Org.single(context.id);
+		if (root === 'admin' && id > 0) {
+			Actions.Org.single(id);
 		}
 		// ACCOUNT
-		if (context.root === 'account') {
+		if (root === 'account') {
 			AccountActions.get();
 		}
 		// STREAM
-		if (context.root === 'stream') {
-			if (context.type === 'me' || context.type === 'create' || context.type === 'edit') {
+		if (root === 'stream') {
+			if (type === 'me' || type === 'create' || type === 'edit') {
 				AccountActions.get();
 			}
-			if (context.type === 'users') {
-				Actions.User.single(context.id);
+			if (type === 'users') {
+				Actions.User.single(id);
 			}
-			if (context.type === 'orgs') {
-				Actions.Org.single(context.id);
+			if (type === 'orgs') {
+				Actions.Org.single(id);
 			}
 		}
 	}
