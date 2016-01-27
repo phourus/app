@@ -31,58 +31,57 @@ let App = React.createClass({
         className += " visible";
       }
     }
-
+    // <html lang="en">
+    //   <head>
+    //     <title>Phourus.com</title>
+    //     <meta name="Author" content="Phourus.com" />
+    //     <meta name="Description" content="A central place to manage the information, content and ideas for your organization" />
+    //     <meta name="Keywords" content="Information,Content,Ideas,Organization" />
+    //     <meta charSet="utf-8" />
+    //     <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    //     <link rel="stylesheet" href="/style.css" type="text/css" />
+    //     <link rel="stylesheet" href="/quill.base.css" type="text/css" />
+    //     <link rel="stylesheet" href="/quill.snow.css" type="text/css" />
+    //     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+    //     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+    //     <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css' />
+    //   </head>
+    //   <body className="body">
+    //     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    //     <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    //     <script src="http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+    //     <script type="text/javascript" src="/app.js"></script>
+    //   </body>
+    // </html>
     return  (
-      <html lang="en">
-        <head>
-          <title>Phourus.com</title>
-          <meta name="Author" content="Phourus.com" />
-          <meta name="Description" content="A central place to manage the information, content and ideas for your organization" />
-          <meta name="Keywords" content="Information,Content,Ideas,Organization" />
-          <meta charSet="utf-8" />
-          <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" name="viewport" />
-          <link rel="stylesheet" href="/style.css" type="text/css" />
-          <link rel="stylesheet" href="/quill.base.css" type="text/css" />
-          <link rel="stylesheet" href="/quill.snow.css" type="text/css" />
-          <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
-          <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
-          <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css' />
-        </head>
-        <body className="body">
-          <div id="app">
-            <Initializer />
-            {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
-            <Header _route={_route} tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
-            <div className="spacer"></div>
-            <Profile _route={_route} />
-            <Alerts {...this.props.alerts} />
-            <div>
-              <div id="content">
-                {React.cloneElement(this.props.children,
-                  {
-                    _route: _route
-                  }
-                )}
-              </div>
-            </div>
-            <Helper />
-            <footer className="footer">
-              <strong>1-844-PHOURUS</strong><br />
-              <span className="muted">(1-844-746-8787)</span><br />
-              <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
-              <span>© 2015 Phourus Inc. All Rights Reserved.</span><br />
-              <span className="muted">1411 7th St. #305, Santa Monica, CA 90401</span><br />
-              <Link to="terms" className="muted">Terms</Link> |
-              <Link to="privacy" className="muted">Privacy</Link>
-              <br clear="all" />
-            </footer>
+      <div id="app">
+        <Initializer />
+        {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
+        <Header _route={_route} tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
+        <div className="spacer"></div>
+        <Profile _route={_route} />
+        <Alerts {...this.props.alerts} />
+        <div>
+          <div id="content">
+            {React.cloneElement(this.props.children,
+              {
+                _route: _route
+              }
+            )}
           </div>
-          <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-          <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-          <script src="http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
-          <script type="text/javascript" src="/app.js"></script>
-        </body>
-      </html>
+        </div>
+        <Helper />
+        <footer className="footer">
+          <strong>1-844-PHOURUS</strong><br />
+          <span className="muted">(1-844-746-8787)</span><br />
+          <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
+          <span>© 2015 Phourus Inc. All Rights Reserved.</span><br />
+          <span className="muted">1411 7th St. #305, Santa Monica, CA 90401</span><br />
+          <Link to="terms" className="muted">Terms</Link> |
+          <Link to="privacy" className="muted">Privacy</Link>
+          <br clear="all" />
+        </footer>
+      </div>
     );
   },
   _tintOn: function () {
@@ -95,7 +94,7 @@ let App = React.createClass({
     let context = {
       route: this.props.routes || [],
       params: this.props.params || {},
-      query: this.props.location.query || {},
+      //query: this.props.location.query || {},
       root: '',
       id: '',
       type: '',
