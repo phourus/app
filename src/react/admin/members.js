@@ -13,7 +13,7 @@ module.exports = React.createClass({
         {this.props.members.map(member => {
           return (
             <div>
-              <Pic img={member.img} />
+              <Pic img={member.img} _route={this.props._route} />
               <div className="profile">
                 <strong>{member.first} {member.last}</strong>
                 <div>{member.occupation}</div>

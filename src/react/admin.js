@@ -43,10 +43,12 @@ let Admin = React.createClass({
     this._route();
   },
   render: function () {
+    let copy = this.state;
+    copy._route = this.props._route;
     return (
       <div className="admin">
-        <Tabs {...this.state} routes={this.props.routes} />
-        {this.props.children}
+        <Tabs {...this.state} _route={this.props._route} />
+        {React.cloneElement(this.props.children, copy)}
       </div>
     );
   },
@@ -63,7 +65,8 @@ let Admin = React.createClass({
 let Tabs = React.createClass({
     mixins: [History],
     render: function () {
-      let view = this.props.routes[2].name;
+      let route = this.props._route;
+      let view = route.type;
       let categories = this._categories();
       let details = this._details();
       let users = this._users();
