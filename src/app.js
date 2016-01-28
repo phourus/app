@@ -109,8 +109,8 @@ let App = React.createClass({
     let types = {
       ':id': 'post',
       'edit/:id': 'edit',
-      'org/:id': 'orgs',
-      'user/:id': 'users',
+      'org/:id': 'org',
+      'user/:id': 'user',
     };
 
     // ROOT

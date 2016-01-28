@@ -54,7 +54,7 @@ let Stream = React.createClass({
 
 		return (
 			<div className="stream">
-				{type === 'orgs' && !id
+				{type === 'org' && !id
 					? <Organizations _route={this.props._route} />
 					: false
 				}

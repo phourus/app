@@ -64,7 +64,7 @@ let Profile = React.createClass({
 		if (type === 'post' && !this.props.postMode) {
 			return false;
 		}
-		if (type === 'edit') {
+		if (type === 'edit' || type === 'create') {
 			return false;
 		}
 		return (
@@ -106,10 +106,10 @@ let Profile = React.createClass({
 			if (type === 'me' || type === 'create' || type === 'edit') {
 				AccountActions.get();
 			}
-			if (type === 'users') {
+			if (type === 'user') {
 				Actions.User.single(id);
 			}
-			if (type === 'orgs') {
+			if (type === 'org') {
 				Actions.Org.single(id);
 			}
 		}

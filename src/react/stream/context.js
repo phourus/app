@@ -16,10 +16,10 @@ module.exports = React.createClass({
 		if (!this.props.type) {
 			classes.phourus += ' selected';
 		}
-		if (this.props.type === 'userPosts') {
+		if (this.props.type === 'user') {
 			classes.users += ' selected';
 		}
-		if (this.props.type === 'orgPosts' || this.props.type === 'orgs') {
+		if (this.props.type === 'org') {
 			classes.organizations += ' selected';
 		}
 		// <button className={classes.phourus} onClick={this._phourus}> Phourus</button>
@@ -63,19 +63,19 @@ let _Context = React.createClass({
 		} else {
 			link = <Link to="account">Click here to create posts</Link>
 		}
-		if (this.props.type === 'myPosts') {
+		if (this.props.type === 'me') {
 			label = 'Viewing all my posts:';
 			clear = clearLink;
 			img = '/assets/avatars/' + (this.props.profile.img || 'default') + '.jpg';
 			link = <Link to="account">View my account</Link>
 		}
-		if (this.props.type === 'userPosts') {
+		if (this.props.type === 'user') {
 			label = 'Viewing posts by:';
 			img = '/assets/avatars/' + (this.props.profile.img || 'default') + '.jpg';
 			clear = clearLink;
 			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
 		}
-		if (this.props.type === 'orgPosts') {
+		if (this.props.type === 'org') {
 			label = 'Viewing posts by:';
 			img = '/assets/orgs/' + (this.props.profile.img || 'default') + '.jpg';
 			clear = clearLink;

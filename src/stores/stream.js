@@ -190,7 +190,7 @@ let Stream = Reflux.createStore({
     }
 
     // me
-    if (type === 'myPosts') {
+    if (type === 'me') {
       account.get()
         .then(data => {
           this.params.context.profile = data;
@@ -206,7 +206,7 @@ let Stream = Reflux.createStore({
     }
     // users/orgs
     let profile = users;
-    if (type === 'orgs') {
+    if (type === 'org') {
       profile = orgs;
     }
     profile.single(id)

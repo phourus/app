@@ -259,11 +259,11 @@ var posts = db.define('posts', {
         this.query.include.push({model: links, as: 'links'});
       },
       _context: function () {
-        if (this.params.contextType === 'users') {
+        if (this.params.contextType === 'user') {
           this.query.where.userId = this.params.contextId;
         }
 
-        if (this.params.contextType === 'orgs') {
+        if (this.params.contextType === 'org') {
           this.query.where.orgId = this.params.contextId;
         }
       },
@@ -293,7 +293,7 @@ var posts = db.define('posts', {
         this.query.where.$or = [];
 
         // AUTHENTICATED
-        if (this.params.contextType === 'myPosts') {
+        if (this.params.contextType === 'me') {
           if (this.params.SESSION_POSTS) {
             this.query.where.$or.push({id: {$in: this.params.SESSION_POSTS}});
           }

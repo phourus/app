@@ -50,6 +50,6 @@ module.exports = React.createClass({
 		);
 	},
 	_select: function (e) {
-		this.history.pushState(null, `/stream/orgs/${e.currentTarget.id}`);
+		this.history.pushState(null, `/stream/org/${e.currentTarget.id}`);
 	}
 });
