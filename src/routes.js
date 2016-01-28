@@ -1,6 +1,12 @@
 'use strict';
 let React = require('react');
-let { Router, Route } = require('react-router');
+let ga = require('./analytics');
+let { Router, Route, IndexRoute } = require('react-router');
+let createBrowserHistory = require('history/lib/createBrowserHistory');
+let history = createBrowserHistory();
+history.listen((loc) => {
+  ga('send', 'pageview', loc.pathname);
+});
 
 let App = require('./app');
 let Stream = require('./react/stream');
@@ -27,8 +33,9 @@ let Members = require('./react/admin/members');
 let Teams = require('./react/admin/teams');
 
 module.exports = (
-  <Router>
+  <Router history={history}>
     <Route component={App} path="/">
+      <IndexRoute component={Business}/>
       <Route path="home" component={Business} />
       <Route path="individuals" component={Individuals} />
       <Route path="business" component={Business} />
