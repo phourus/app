@@ -22,15 +22,15 @@ module.exports = React.createClass({
   },
   componentWillReceiveProps: function (data) {
     if (data.img) {
-      data.upload = this.state.upload + 1;
       this.setState(data);
     }
   },
   render: function () {
+    let upload = 'ca8rwbsdf8';
     return (
       <div className="pic">
         <input id="uploader" type="file" name="uploader" className="uploader" />
-        <img src={this.state.img + '?upload=' + this.state.upload} onClick={this._upload} onError={this._default} alt="Phourus Profile Image Uploader" />
+        <img src={this.state.img + '?upload=' + upload} onClick={this._upload} onError={this._default} alt="Phourus Profile Image Uploader" />
       </div>
     );
   },
