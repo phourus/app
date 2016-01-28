@@ -41,7 +41,7 @@ module.exports = React.createClass({
 						return (
 							<div key={org.id} id={org.id} className="org" onClick={this._select}>
 								<div className="name">{org.name}</div>
-								<Pic img={org.img} name={org.name} />
+								<Pic id={org.id} img={org.img} name={org.shortname} type="org" />
 							</div>
 						);
 					})}

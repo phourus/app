@@ -43,7 +43,7 @@ module.exports = React.createClass({
 		}
 		return (
 			<div className="details">
-				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} _route={this.props._route} name={profileName} />
+				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} type={context} name={profileName} />
 				<div className="basic">
 					{context === 'org'
 						? <div><Link to={`stream/org/${org.id}`}>{org.name}</Link><br /><br /></div>

@@ -28,7 +28,7 @@ module.exports = React.createClass({
     );
   },
   _back: function () {
-    if (!this.goBack()) {
+    if (!this.history.goBack()) {
       if (this.props._route.type === 'edit') {
         this.history.pushState(null, "/stream/me");
       } else {

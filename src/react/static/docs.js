@@ -6,6 +6,8 @@ let { Link, History } = Router;
 let Actions = require('../../actions/pages');
 let Store = require('../../stores/pages');
 
+const DEFAULT_PAGE = 'create-account';
+
 module.exports = React.createClass({
   mixins: [History],
   getInitialState: function () {
@@ -17,7 +19,7 @@ module.exports = React.createClass({
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
       if (data.page) {
-        this.setState({page: data, menu: false});
+        this.setState({page: data.page, menu: false, id: data.id});
       }
     });
     this._route();
@@ -34,7 +36,7 @@ module.exports = React.createClass({
         <h2>Documentation</h2>
         <i className="fa fa-bars toggle" onClick={this._toggle} />
         <Menu menu={this.state.menu} />
-        <div className="page">
+        <div key={this.state.id} className="page">
           {this.state.page}
         </div>
       </div>
@@ -45,6 +47,8 @@ module.exports = React.createClass({
     let params = this.props.params;
     if (params && params.id) {
       Actions.get(params.id);
+    } else {
+      Actions.get(DEFAULT_PAGE);
     }
   },
   _toggle: function () {
@@ -111,7 +115,7 @@ let Menu = React.createClass({
           </li>
           <li><i className="fa fa-question" /> MORE INFORMATION
             <ul>
-              <li><Link to="docPage" params={{id: 'help'}}>Additional Help</Link></li>
+              <li><Link to="/docs/help">Additional Help</Link></li>
             </ul>
           </li>
         </ul>

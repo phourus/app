@@ -6,7 +6,9 @@ let { Link } = Router;
 module.exports = React.createClass({
   getDefaultProps: function () {
     return {
-      name: ""
+      id: 0,
+      name: "",
+      type: ""
     };
   },
   getInitialState: function () {
@@ -21,7 +23,7 @@ module.exports = React.createClass({
     }
     return (
       <div className="pic">
-        <Link to={this.props._route.type === 'org' ? "orgPosts" : "userPosts"} params={{id: this.props._route.id || 0}}>
+        <Link to={`/stream/${this.props.type}/${this.props.id}`}>
           <img src={img} onError={this._default} alt={"Phourus Profile Pic for " + this.props.name} />
         </Link>
       </div>

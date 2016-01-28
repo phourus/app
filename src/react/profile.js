@@ -32,9 +32,9 @@ let Profile = React.createClass({
 		this.unsubscribePosts = PostStore.listen((data) => {
 			let post = data.post || {};
 			if (post.org) {
-				this.setState({profile: post.org});
+				this.setState({profile: post.org, type: 'org'});
 			} else if (post.user) {
-				this.setState({profile: post.user});
+				this.setState({profile: post.user, type: 'user'});
 			}
 		});
 		this._load();
@@ -71,7 +71,7 @@ let Profile = React.createClass({
 			<div className="profile">
 				{root === 'account' || root === 'admin'
 					? <Uploader img={profile.img} _route={this.props._route} />
-					: <Pic img={profile.img} _route={this.props._route} />
+					: <Pic id={profile.id} img={profile.img} type={this.state.type} name={this.state.type === 'org' ? profile.shortname : profile.username} />
 				}
 				<div className="basic">
 					<h1 className="name">{profile.name || profile.first + ' ' + profile.last}</h1>

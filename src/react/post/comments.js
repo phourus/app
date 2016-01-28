@@ -124,6 +124,7 @@ Comments.Comment = React.createClass({
   },
 	render: function () {
     let textarea = '';
+    let user = this.props.user || {};
     /*
     if (owner === true) {
     textarea =   <textarea>{this.props.id}</textarea>
@@ -147,7 +148,7 @@ Comments.Comment = React.createClass({
     */
     return (
       <div className="comment" id={this.props.comment.id}>
-				<Pic id={this.props.user.id} img={this.props.user.img} />
+				<Pic id={user.id} img={user.img} name={user.username} type='user' />
         <div className="content">
 					<Link to={`stream/user/${this.props.user.id}`} className="username">
 						{this.props.user.first} {this.props.user.last}

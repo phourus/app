@@ -52,7 +52,9 @@ module.exports = (
         <Route name="edit/:id" path="edit/:id" component={Stream}></Route>
         <Route path=":id" component={Stream} />
       </Route>
-      <Route path="docs/:id" component={Docs} />
+      <Route path="docs" component={Docs}>
+        <Route path=":id" component={Docs} />
+      </Route>
       <Route path="admin/:id" component={Admin}>
         <Route path="details" component={Details} />
         <Route path="members" component={Members} />
