@@ -1,12 +1,6 @@
 'use strict';
 let React = require('react');
-let ga = require('./analytics');
-let { Router, Route, IndexRoute } = require('react-router');
-let createBrowserHistory = require('history/lib/createBrowserHistory');
-let history = createBrowserHistory();
-history.listen((loc) => {
-  ga('send', 'pageview', loc.pathname);
-});
+let { Route, IndexRoute } = require('react-router');
 
 let App = require('./app');
 let Stream = require('./react/stream');
@@ -33,42 +27,40 @@ let Members = require('./react/admin/members');
 let Teams = require('./react/admin/teams');
 
 module.exports = (
-  <Router history={history}>
-    <Route component={App} path="/">
-      <IndexRoute component={Business}/>
-      <Route path="home" component={Business} />
-      <Route path="individuals" component={Individuals} />
-      <Route path="business" component={Business} />
-      <Route path="education" component={Education} />
-      <Route path="government" component={Government} />
-      <Route path="nonprofit" component={Nonprofit} />
-      <Route path="about" component={About} />
-      <Route path="pricing" component={Pricing} />
-      <Route path="contact" component={Contact} />
-      <Route path="terms" component={Terms} />
-      <Route path="privacy" component={Privacy} />
-      <Route path="activity" component={Activity} />
-      <Route path="notifications" component={Activity} />
-      <Route path="history" component={Activity} />
-      <Route path="account" component={Account} />
-      <Route path="stream" component={Stream}>
-        <Route path="me" component={Stream} />
-        <Route path="create" component={Stream}></Route>
-        <Route path="user/:id" component={Stream} />
-        <Route path="org/:id" component={Stream} />
-        <Route name="edit/:id" path="edit/:id" component={Stream}></Route>
-        <Route path=":id" component={Stream} />
-      </Route>
-      <Route path="docs" component={Docs}>
-        <Route path=":id" component={Docs} />
-      </Route>
-      <Route path="admin/:id" component={Admin}>
-        <Route path="details" component={Details} />
-        <Route path="members" component={Members} />
-        <Route path="categories" component={Categories} />
-        <Route path="teams" component={Teams} />
-      </Route>
-      <Route path="*" component={View404} />
+  <Route component={App} path="/">
+    <IndexRoute component={Business}/>
+    <Route path="home" component={Business} />
+    <Route path="individuals" component={Individuals} />
+    <Route path="business" component={Business} />
+    <Route path="education" component={Education} />
+    <Route path="government" component={Government} />
+    <Route path="nonprofit" component={Nonprofit} />
+    <Route path="about" component={About} />
+    <Route path="pricing" component={Pricing} />
+    <Route path="contact" component={Contact} />
+    <Route path="terms" component={Terms} />
+    <Route path="privacy" component={Privacy} />
+    <Route path="activity" component={Activity} />
+    <Route path="notifications" component={Activity} />
+    <Route path="history" component={Activity} />
+    <Route path="account" component={Account} />
+    <Route path="stream" component={Stream}>
+      <Route path="me" component={Stream} />
+      <Route path="create" component={Stream}></Route>
+      <Route path="user/:id" component={Stream} />
+      <Route path="org/:id" component={Stream} />
+      <Route name="edit/:id" path="edit/:id" component={Stream}></Route>
+      <Route path=":id" component={Stream} />
     </Route>
-  </Router>
+    <Route path="docs" component={Docs}>
+      <Route path=":id" component={Docs} />
+    </Route>
+    <Route path="admin/:id" component={Admin}>
+      <Route path="details" component={Details} />
+      <Route path="members" component={Members} />
+      <Route path="categories" component={Categories} />
+      <Route path="teams" component={Teams} />
+    </Route>
+    <Route path="*" component={View404} />
+  </Route>
 );
