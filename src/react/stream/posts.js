@@ -28,7 +28,10 @@ module.exports = React.createClass({
 			if (this.state.ready === false) {
 				data.ready = true;
 			}
-			this.setState(data);
+			// privacy click re-render issue
+			if (!data.orgs) {
+				this.setState(data);
+			}
 		});
 		AccountActions.get();
 	},
