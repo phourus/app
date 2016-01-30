@@ -46,10 +46,10 @@ module.exports = React.createClass({
 				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} type={context} name={profileName} />
 				<div className="basic">
 					{context === 'org'
-						? <div><Link to={`stream/org/${org.id}`}>{org.name}</Link><br /><br /></div>
+						? <div><Link to={`/stream/org/${org.id}`}>{org.name}</Link><br /><br /></div>
 						: false
 					}
-					<span>By <Link to={`stream/user/${this.props.user.id}`}>{this.props.user.first} {this.props.user.last} </Link></span>
+					<span>By <Link to={`/stream/user/${this.props.user.id}`}>{this.props.user.first} {this.props.user.last} </Link></span>
 					&bull;
 					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>

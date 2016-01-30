@@ -45,7 +45,7 @@ module.exports = React.createClass({
       let name = this.state.user.first;
       return (
         <div className="login">
-          <span className="welcome">Welcome back{name ? " " + name : ""}! <Link to="stream">Click here to view posts</Link></span><br />
+          <span className="welcome">Welcome back{name ? " " + name : ""}! <Link to="/stream">Click here to view posts</Link></span><br />
           <button className="button blue" onClick={this._posts}>View posts</button>
           <button className="button blue" onClick={this._account}>View my account</button>
         </div>

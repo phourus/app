@@ -87,7 +87,7 @@ Comments.Create = React.createClass({
     return (
       <div className="create">
         <div className="pic">
-          <Link to="account">
+          <Link to="/account">
             <img src={"/assets/avatars/1.jpg"} />
           </Link>
         </div>
@@ -150,7 +150,7 @@ Comments.Comment = React.createClass({
       <div className="comment" id={this.props.comment.id}>
 				<Pic id={user.id} img={user.img} name={user.username} type='user' />
         <div className="content">
-					<Link to={`stream/user/${this.props.user.id}`} className="username">
+					<Link to={`/stream/user/${this.props.user.id}`} className="username">
 						{this.props.user.first} {this.props.user.last}
 					</Link>
           <p>{this.props.comment.content}</p>

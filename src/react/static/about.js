@@ -141,7 +141,7 @@ let Signup = React.createClass({
           <h3 className="title">Sign up as an Organization</h3>
           <button className="button blue" onClick={this._trial}>Start Trial</button>
         </div>
-        <p>Already have an account with Phourus? <Link to="home">Click here to login.</Link></p>
+        <p>Already have an account with Phourus? <Link to="/home">Click here to login.</Link></p>
       </div>
     )
   },

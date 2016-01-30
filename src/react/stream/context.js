@@ -52,34 +52,34 @@ let _Context = React.createClass({
 		let label = 'Viewing all public Phourus posts';
 		let img = '/assets/logos/emblem.png';
 		let clear = false;
-		let clearLink = <span> | Clear filters <Link to="stream" className="close">x</Link></span>;
+		let clearLink = <span> | Clear filters <Link to="/stream" className="close">x</Link></span>;
 		let link = false;
 		let name = '';
 		if (this.props.profile) {
 			name = this.props.profile.username || this.props.profile.shortname || '';
 		}
 		if (true === 'user is logged in') {
-			link = <Link to="stream/me">Click here to view your posts</Link>
+			link = <Link to="/stream/me">Click here to view your posts</Link>
 		} else {
-			link = <Link to="account">Click here to create posts</Link>
+			link = <Link to="/account">Click here to create posts</Link>
 		}
 		if (this.props.type === 'me') {
 			label = 'Viewing all my posts:';
 			clear = clearLink;
 			img = '/assets/avatars/' + (this.props.profile.img || 'default') + '.jpg';
-			link = <Link to="account">View my account</Link>
+			link = <Link to="/account">View my account</Link>
 		}
 		if (this.props.type === 'user') {
 			label = 'Viewing posts by:';
 			img = '/assets/avatars/' + (this.props.profile.img || 'default') + '.jpg';
 			clear = clearLink;
-			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
+			link = <Link to="/user" params={{id: this.props.id}}>{name}</Link>
 		}
 		if (this.props.type === 'org') {
 			label = 'Viewing posts by:';
 			img = '/assets/orgs/' + (this.props.profile.img || 'default') + '.jpg';
 			clear = clearLink;
-			link = <Link to="user" params={{id: this.props.id}}>{name}</Link>
+			link = <Link to="/user" params={{id: this.props.id}}>{name}</Link>
 		}
 		return (
 			<div className="context">

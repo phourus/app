@@ -32,7 +32,7 @@ let Activity = React.createClass({
       return (
         <div className="activity">
           <div className="toggle">
-            <h3><Link to="notifications">Notifications</Link> | <Link to="history">History</Link></h3>
+            <h3><Link to="/notifications">Notifications</Link> | <Link to="/history">History</Link></h3>
           </div>
           <Notifications selected={this.state.selected} />
           <History selected={this.state.selected} />

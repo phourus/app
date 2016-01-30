@@ -57,13 +57,13 @@ module.exports = React.createClass({
             ?  <nav className="nav">
                 <ul>
                   <li className="posts">
-                    <Link to="stream" >
+                    <Link to="/stream" >
                       <i className="fa fa-file" />
                       Posts
                     </Link>
                   </li>
                   <li className="me">
-                    <Link to="activity" className="me">
+                    <Link to="/activity" className="me">
                       <i className="fa fa-user" />
                       <span className="notifications"></span>
                       Me
@@ -74,19 +74,19 @@ module.exports = React.createClass({
                           if (!org.approved) {
                             return false;
                           }
-                          return <li key={org.org.id}><Link to={`stream/org/${org.org.id}`}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></Link></li>
+                          return <li key={org.org.id}><Link to={`/stream/org/${org.org.id}`}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></Link></li>
                         })}
                       </ul>
                       <ul>
-                        <li><Link to="stream/me">My Posts <i className="fa fa-edit" /></Link></li>
-                        <li><Link to="activity">My Activity <i className="fa fa-bell" /></Link></li>
-                        <li><Link to="account">My Account <i className="fa fa-user" /></Link></li>
+                        <li><Link to="/stream/me">My Posts <i className="fa fa-edit" /></Link></li>
+                        <li><Link to="/activity">My Activity <i className="fa fa-bell" /></Link></li>
+                        <li><Link to="/account">My Account <i className="fa fa-user" /></Link></li>
                         <li><a href="javascript:void(0)" onClick={this._logout}>Logout <i className="fa fa-sign-out" /></a></li>
                       </ul>
                     </div>
                   </li>
                   <li className="create">
-                    <Link to="stream/create">
+                    <Link to="/stream/create">
                       <i className="fa fa-pencil" />
                       Create
                     </Link>
@@ -96,7 +96,7 @@ module.exports = React.createClass({
               : <nav>
                   <ul>
                     <li className="create">
-                      <Link to="home">
+                      <Link to="/home">
                         <i className="fa fa-sign-in" />
                         Login
                       </Link>
@@ -105,7 +105,7 @@ module.exports = React.createClass({
                 </nav>
           }
           <div className="brand">
-            <Link to="home"></Link>
+            <Link to="/home"></Link>
           </div>
           <Search {...this.state.params} filter={this._filter} />
           {this.state.filter && this.props.tint ? <Filter {...this.state.params} tint={this.props.tint} close={this._filter} /> : false}
@@ -139,7 +139,7 @@ let Home = React.createClass({
     return (
       <header className="header home">
         <div className="brand">
-          <Link to="home"></Link>
+          <Link to="/home"></Link>
         </div>
         <Nav classType="home" />
       </header>
@@ -152,7 +152,7 @@ let Static = React.createClass({
     return (
       <header className="header">
         <div className="brand">
-          <Link to="home"></Link>
+          <Link to="/home"></Link>
         </div>
         <Nav classType="static" />
       </header>
@@ -165,10 +165,10 @@ let Nav = React.createClass({
     return (
       <nav className={this.props.classType}>
         <ul>
-          <li><Link to="about">About</Link></li>
-          <li><Link to="pricing">Pricing</Link></li>
-          <li><Link to="docs">Docs</Link></li>
-          <li><Link to="contact">Contact</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/pricing">Pricing</Link></li>
+          <li><Link to="/docs">Docs</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
         </ul>
       </nav>
     );

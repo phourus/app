@@ -59,7 +59,7 @@ let About = React.createClass({
               <tr><td className="users">1k</td><td><strong>$1,000/month</strong><br />($1/user)</td></tr>
               <tr><td className="users">2k</td><td><strong>$2,000/month</strong><br />($1/user)</td></tr>
               <tr><td className="users">5k</td><td><strong>$4,000/month</strong><br />($0.80/user)</td></tr>
-              <tr><td className="users">More than 10k</td><td><Link to="contact">Contact Us</Link></td></tr>
+              <tr><td className="users">More than 10k</td><td><Link to="/contact">Contact Us</Link></td></tr>
             </table>
             <div className="asterisk">* After 14-day free trial</div>
           </div>
@@ -151,7 +151,7 @@ let Signup = React.createClass({
           <h3>Sign up as an Organization</h3>
           <button className="button blue">Sign Up Now</button>
         </div>
-        <p>Already have an account with Phourus? <Link to="account">Click here to login.</Link></p>
+        <p>Already have an account with Phourus? <Link to="/account">Click here to login.</Link></p>
       </div>
     )
   }

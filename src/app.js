@@ -77,8 +77,8 @@ let App = React.createClass({
           <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
           <span>© 2015 Phourus Inc. All Rights Reserved.</span><br />
           <span className="muted">1411 7th St. #305, Santa Monica, CA 90401</span><br />
-          <Link to="terms" className="muted">Terms</Link> |
-          <Link to="privacy" className="muted">Privacy</Link>
+          <Link to="/terms" className="muted">Terms</Link> |
+          <Link to="/privacy" className="muted">Privacy</Link>
           <br clear="all" />
         </footer>
       </div>
@@ -158,10 +158,10 @@ let Helper = React.createClass({
           </div>
           <div>
             <ul>
-              <li><Link to="about">About Us</Link></li>
-              <li><Link to="pricing">Pricing</Link></li>
-              <li><Link to="docs">Documentation</Link></li>
-              <li><Link to="contact">Contact Us</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/pricing">Pricing</Link></li>
+              <li><Link to="/docs">Documentation</Link></li>
+              <li><Link to="/contact">Contact Us</Link></li>
             </ul>
           </div>
           <div>

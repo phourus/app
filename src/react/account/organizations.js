@@ -156,7 +156,7 @@ let List = React.createClass({
           return (
             <div className="org">
               {admin}<br />
-            <Link to={`stream/org/${item.org.id}`}>{item.org.name}</Link><br />
+            <Link to={`/stream/org/${item.org.id}`}>{item.org.name}</Link><br />
               {item.approved
                 ? <span className="approved">
                   <i className="fa fa-check" /> Approved

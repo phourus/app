@@ -10,7 +10,7 @@ let Convert = React.createClass({
         <div>
           <input placeholder="email" />
           <button className="button green" onClick={this._register}>Sign Up Now</button>
-          Already registered? <Link to="account">Login here</Link>.
+          Already registered? <Link to="/account">Login here</Link>.
         </div>
       </div>
     );
