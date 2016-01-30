@@ -2,6 +2,7 @@
 let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
+let ReactMarkdown = require('react-markdown');
 
 let Actions = require('../../actions/pages');
 let Store = require('../../stores/pages');
@@ -33,11 +34,10 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="docs">
-        <h2>Documentation</h2>
         <i className="fa fa-bars toggle" onClick={this._toggle} />
         <Menu menu={this.state.menu} />
         <div key={this.state.id} className="page">
-          {this.state.page}
+          <ReactMarkdown source={this.state.page} />
         </div>
       </div>
     );
