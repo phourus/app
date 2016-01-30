@@ -88,9 +88,9 @@ let Post = React.createClass({
 		let mode = this.props._route.type;
 		return (
 			<div className="post">
-				{mode === 'create' ? <Create {...this.state} _route={this.props._route} /> : false}
-				{mode === 'edit' ? <Edit {...this.state} _route={this.props._route} /> : false}
-				{mode === 'post' ? <Single {...this.state} _route={this.props._route} /> : false}
+				{mode === 'create' ? <Create {...this.state} _route={this.props._route} owner={this.props.owner} /> : false}
+				{mode === 'edit' ? <Edit {...this.state} _route={this.props._route} owner={this.props.owner} /> : false}
+				{mode === 'post' ? <Single {...this.state} _route={this.props._route} owner={this.props.owner} /> : false}
 			</div>
 		);
 	},

@@ -12,7 +12,9 @@ module.exports = React.createClass({
 		}
 	},
 	render: function () {
-		return this.props._route.type === 'edit' && this.props.owner || this.props._route.type === 'create'
+		let route = this.props._route;
+		let type = route.type;
+		return type === 'edit' && this.props.owner || type === 'create'
 		? <TextEditor post={this.props.post} />
 		: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
 	}

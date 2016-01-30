@@ -87,7 +87,7 @@ let Single = React.createClass({
 	render: function () {
 		let post = this._post();
 		let owner = this.props.owner(post);
-		return <Post post={post} _route={this.props._route} owner={this.props.owner} />;
+		return <Post post={post} _route={this.props._route} owner={owner} />;
 	},
 	_post: function () {
 		let post = {};
