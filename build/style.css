@@ -4126,7 +4126,7 @@ header .keywords input {
   padding: 4px;
   height: 100%;
   font-size: 1.2em;
-  color: #eee;
+  color: #333;
 }
 header .keywords button.filter {
   position: absolute;
