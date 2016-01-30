@@ -34,7 +34,7 @@ router.delete('/:type/:id', (req, res) => {
 
   collaborators.remove(type, id)
   .then(function (data) {
-    res.send(200, data);
+    res.send(200);
   })
   .catch(function (err) {
     console.error(err);

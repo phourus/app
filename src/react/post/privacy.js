@@ -157,7 +157,9 @@ let Collaborators = React.createClass({
 		let current = this._values().map((data) => {
 			return data.value;
 		});
-		let updated = value.split('|');
+		let updated = value.map((data) => {
+			return data.value;
+		});
 		let diff = this._diff(updated, current);
 		if (!diff) {
 			return;

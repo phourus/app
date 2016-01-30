@@ -74,8 +74,8 @@ let Search = React.createClass({
       options={lookup}
       onChange={this._change} />
   },
-  _change: function (value) {
-    Actions.joinOrganization(value);
+  _change: function (selected) {
+    Actions.joinOrganization(selected.value);
     // let current = this._values().map((data) => {
     //   return data.value;
     // });
