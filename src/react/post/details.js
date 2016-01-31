@@ -23,10 +23,6 @@ module.exports = React.createClass({
 		let context = 'user';
 		let profileName = "Phourus User";
 		let org = {};
-		let excerpt = "";
-		if (this.props.post && this.props.post.content) {
-			excerpt = this.props.post.content.replace(/(<([^>]+)>)/ig, "");
-		}
 		if (this.props.post.user && this.props.post.user.id && this.props.post.user.id != 0) {
 			let user = this.props.post.user;
 			if (user.username) {
@@ -54,24 +50,33 @@ module.exports = React.createClass({
 					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
 				</div>
-				{this.props.post.type === 'poll'
-					? <Poll {...this.props} />
-					: false
-				}
-				{this.props.post.type === 'event'
-					?
-					<div className="extra event">
-						<i className="fa fa-calendar" />
-						{this.props.post.when && moment(this.props.post.when).format() !== 'Invalid date' ? <div className="when">{moment(this.props.post.when).format('MMMM Do @ h:mm a')}</div> : false}
-						{this.props.post.location ? <div className="location">{this.props.post.location}</div> : false}
-					</div>
-					: false
-				}
-				{this.props.post.type !== 'event' && this.props.post.type !== 'poll' && this.props._route.type !== 'post' && this.props._route.type !== 'edit'
-					? <div className="extra excerpt"><div>{excerpt}</div></div>
-					: false
-				}
+				<Extra post={this.props.post} _route={this.props._route} />
 			</div>
 		);
+	}
+});
+
+let Extra = React.createClass({
+	render: function () {
+		return false;
+		let type = this.props.post.type;
+
+		if (type === 'poll') {
+			return <Poll {...this.props} />
+		} else if (type === 'event') {
+			return (<div className="extra event">
+				<i className="fa fa-calendar" />
+				{this.props.post.when && moment(this.props.post.when).format() !== 'Invalid date' ? <div className="when">{moment(this.props.post.when).format('MMMM Do @ h:mm a')}</div> : false}
+				{this.props.post.location ? <div className="location">{this.props.post.location}</div> : false}
+			</div>);
+		} else if (this.props._route.type !== 'post' && this.props._route.type !== 'edit') {
+			let excerpt = "";
+			if (this.props.post && this.props.post.content) {
+				excerpt = this.props.post.content.replace(/(<([^>]+)>)/ig, "");
+			}
+			return <div className="extra excerpt"><div>{excerpt}</div></div>
+		} else {
+			return false;
+		}
 	}
 });
