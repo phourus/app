@@ -146,6 +146,7 @@ let Single = React.createClass({
 			<div className="single postItem">
 				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Privacy post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Title post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Tags post={this.props.post} _route={this.props._route} owner={this.props.owner} tag={this.props.tag} />
 				<Content post={this.props.post} _route={this.props._route} owner={this.props.owner} />
@@ -166,6 +167,7 @@ Post.Item = React.createClass({
 				<Drag id={this.props.post.id} />
 				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
+				<Privacy post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Title post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Details post={this.props.post} _route={this.props._route} owner={this.props.owner} user={this.props.user} location={this.props.location} />
 				<Tags post={this.props.post} _route={this.props._route} owner={this.props.owner} tag={this.props.tag} />

@@ -25,19 +25,28 @@ let Privacy = React.createClass({
 	},
 	render: function () {
 		let privacy = this.props.post.privacy || 'private';
+		let icons = {
+			private: "fa fa-lock",
+			members: "fa fa-building",
+			public: "fa fa-globe",
+			trash: "fa fa-trash"
+		};
 		let classes = {
 			private: "button blue inverted",
 			members: "button blue inverted",
 			public: "button blue inverted"
 		};
 		classes[privacy] = "button blue";
+		if (this.props._route.type !== 'edit') {
+			return <i className={icons[privacy]} />
+		}
 		return (
 			<div className="privacy">
 				{this.props.owner && this.props._route.type === 'edit'
-					? <div className="privacyToggle" onClick={this._privacy}><i className="fa fa-lock" /> <span style={{textDecoration: 'underline'}}>Privacy: {this.props.post.privacy}</span></div>
+					? <div className="privacyToggle" onClick={this._privacy}><i className={icons[privacy]} /> <span style={{textDecoration: 'underline'}}>Privacy: {this.props.post.privacy}</span></div>
 					: false
 				}
-				{this.state.privacy
+				{this.props.owner && this.props._route.type === 'edit' && this.state.privacy
 					? <div>
 							<strong>Post Privacy</strong>
 							<div>
