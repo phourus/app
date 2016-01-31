@@ -34,13 +34,15 @@ let Stream = React.createClass({
 		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
 		});
-		this._context();
+		this._load(this.props._route);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
-	componentWillReceiveProps: function () {
-		this._context();
+	componentWillReceiveProps: function (nextProps) {
+		if (nextProps._route) {
+			this._load(nextProps._route);
+		}
 	},
 	render: function () {
 		let route = this.props._route;
@@ -76,8 +78,7 @@ let Stream = React.createClass({
 			</div>
 		);
 	},
-	_context: function () {
-		let route = this.props._route;
+	_load: function (route) {
 		Actions.context(route.type, route.id);
 	},
 	_more: function () {

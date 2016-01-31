@@ -37,15 +37,17 @@ let Profile = React.createClass({
 				this.setState({profile: post.user, type: 'user'});
 			}
 		});
-		this._load();
+		this._load(this.props._route);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
 		this.unsubscribeAccount();
 		this.unsubscribePosts();
 	},
-	componentWillReceiveProps: function () {
-		this._load();
+	componentWillReceiveProps: function (nextProps) {
+		if (nextProps._route) {
+			this._load(nextProps._route);
+		}
 	},
 	render: function () {
 		let profile = this.state.profile || {};
@@ -89,10 +91,10 @@ let Profile = React.createClass({
 	_back: function () {
 		this.history.pushState(null, "/stream");
 	},
-	_load: function () {
-		let root = this.props._route.root;
-		let type = this.props._route.type;
-		let id = this.props._route.id;
+	_load: function (route) {
+		let root = route.root;
+		let type = route.type;
+		let id = route.id;
 		// ADMIN
 		if (root === 'admin' && id > 0) {
 			Actions.Org.single(id);
