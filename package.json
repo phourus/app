@@ -34,6 +34,7 @@
     "react-dropzone-component": "^0.8.1",
     "react-google-analytics": "^0.2.0",
     "react-infinite-scroll": "^0.1.5",
+    "react-joyride": "^1.1.1",
     "react-markdown": "^1.2.4",
     "react-quill": "^0.3.0",
     "react-router": "1.0.3",
