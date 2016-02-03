@@ -6,6 +6,8 @@ let { Link } = Router;
 let AccountStore = require('../../stores/account');
 let AccountActions = require('../../actions/account');
 
+let TutorialActions = require('../../actions/tutorial');
+
 let Loader = require('../shared/loader');
 let Post = require('../post');
 
@@ -65,6 +67,9 @@ module.exports = React.createClass({
 });
 
 let Collection = React.createClass({
+	componentDidMount: function () {
+		TutorialActions.ready(true);
+	},
 	render: function () {
 		return (
 			<div className={this.props.sidebarVisible ? "posts sidebar" : "posts"}>
@@ -82,6 +87,9 @@ let Collection = React.createClass({
 });
 
 let Single = React.createClass({
+	componentDidMount: function () {
+		TutorialActions.ready(true);
+	},
 	getDefaultProps: function () {
 		return {
 			posts: []

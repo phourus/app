@@ -20,7 +20,7 @@ let Privacy = React.createClass({
 	},
 	getInitialState: function () {
 		return {
-			privacy: false
+			privacy: true
 		};
 	},
 	render: function () {

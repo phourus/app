@@ -4082,7 +4082,7 @@ header {
   position: fixed;
   background-color: #f7f7f7;
   opacity: 1;
-  z-index: 9999;
+  z-index: 999;
 }
 header .brand {
   width: 40%;

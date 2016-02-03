@@ -163,7 +163,7 @@ let Single = React.createClass({
 Post.Item = React.createClass({
 	render: function () {
 		return (
-			<div className="postItem">
+			<div className="postItem" id={`post${this.props.post.id}`}>
 				<Drag id={this.props.post.id} />
 				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />

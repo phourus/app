@@ -8,6 +8,9 @@ var Initializer = ga.Initializer;
 let Alerts = require('./react/alerts');
 let Header = require('./react/header');
 let Profile = require('./react/profile');
+let Tutorial = require('./react/tutorial');
+
+let TutorialActions = require('./actions/tutorial');
 
 let HTML5Backend = require('react-dnd-html5-backend');
 let { DragDropContext } = require('react-dnd');
@@ -33,9 +36,10 @@ let App = React.createClass({
     }
     return  (
       <div id="app">
+        <Tutorial _route={_route} />
         <Initializer />
-        {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
         <Header _route={_route} tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
+        {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
         <div className="spacer"></div>
         <Profile _route={_route} />
         <Alerts {...this.props.alerts} />
@@ -137,7 +141,7 @@ let Helper = React.createClass({
           <div>
             <ul>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/pricing">Pricing</Link></li>
+              <li><a href="javascript:void(0)" onClick={this._tutorial}>Tutorial</a></li>
               <li><Link to="/docs">Documentation</Link></li>
               <li><Link to="/contact">Contact Us</Link></li>
             </ul>
@@ -161,6 +165,10 @@ let Helper = React.createClass({
   _inactive: function () {
     ga('send', 'event', 'helper', 'hide');
     this.setState({active: false});
+  },
+  _tutorial: function () {
+    ga('send', 'event', 'helper', 'tutorial');
+    TutorialActions.reset();
   }
 });
 

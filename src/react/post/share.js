@@ -6,7 +6,7 @@ let ga = require('../../analytics');
 module.exports = React.createClass({
   getInitialState: function () {
     return {
-      visible: false
+      visible: true
     };
   },
   render: function () {
@@ -40,6 +40,7 @@ let Share = React.createClass({
     };
   },
   render: function () {
+    //<li onClick={this._cancel}><i className="fa fa-close" /> Cancel</li>
     return (
       <ul>
         <li onClick={this._facebook}><i className="fa fa-facebook" /> Facebook</li>
@@ -48,7 +49,6 @@ let Share = React.createClass({
         <li onClick={this._google}><i className="fa fa-google" /> Google +</li>
         <li onClick={this._slack}><i className="fa fa-slack" /> Slack</li>
         <li onClick={this._email}><i className="fa fa-envelope" /> Email</li>
-        <li onClick={this._cancel}><i className="fa fa-close" /> Cancel</li>
       </ul>
     );
   },

@@ -3,6 +3,7 @@ let React = require('react');
 
 let Store = require('../stores/account');
 let Actions = require('../actions/account');
+let TutorialActions = require('../actions/tutorial');
 
 let Info = require('./account/info');
 let Orgs = require('./account/organizations');
@@ -20,6 +21,7 @@ let Account = React.createClass({
       this.setState(data);
     });
     Actions.get();
+    TutorialActions.ready(true);
   },
   componentWillUnmount: function () {
     this.unsubscribe();

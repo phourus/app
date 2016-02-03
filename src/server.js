@@ -17,6 +17,7 @@ module.exports = React.createClass({
           <link rel="stylesheet" href="/style.css" type="text/css" />
           <link rel="stylesheet" href="/quill.base.css" type="text/css" />
           <link rel="stylesheet" href="/quill.snow.css" type="text/css" />
+          <link rel="stylesheet" href="/joyride.css" type="text/css" />
           <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
           <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
           <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css' />
