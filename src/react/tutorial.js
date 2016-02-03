@@ -87,13 +87,13 @@ module.exports = React.createClass({
     }
   },
   _stepCallback: function (step, close) {
-    let module = Store.module;
+    let module = this.state.module;
     let index = 0;
     let progress = this.refs.joyride.getProgress();
     if (progress) {
       index = progress.index;
     }
-    ga('send', 'event', 'tutorial', module, index.toString());
+    ga('send', 'event', 'tutorial', index.toString(), module);
     if (step.cb && typeof step.cb === 'function') {
       step.cb.apply(this);
     }
@@ -107,7 +107,7 @@ module.exports = React.createClass({
     }
     this._setLocal(copy);
     this.setState({module: false, ready: false, complete: copy});
-    ga('send', 'event', 'tutorial', module, action);
+    ga('send', 'event', 'tutorial', action, module);
   },
   _setLocal: function (completeArray) {
     try {
