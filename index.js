@@ -6,7 +6,7 @@ var express = require('express');
 var React = require('react');
 var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
-var match = Router.match;
+var match = require('react-router/lib/Match');
 
 var api = require('./api/rest');
 var routes = require('./src/routes');
