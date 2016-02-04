@@ -40,20 +40,25 @@ let Privacy = React.createClass({
 		if (this.props._route.type !== 'edit') {
 			return <i className={icons[privacy]} />
 		}
+		// <button className={classes.private} onClick={this._private}>Private</button>
+		// <button className={classes.members} onClick={this._members}>{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</button>
+		// <button className={classes.public} onClick={this._public}>Public</button>
+
 		return (
 			<div className="privacy">
-				{this.props.owner && this.props._route.type === 'edit'
-					? <div className="privacyToggle" onClick={this._privacy}><i className={icons[privacy]} /> <span style={{textDecoration: 'underline'}}>Privacy: {this.props.post.privacy}</span></div>
-					: false
-				}
 				{this.props.owner && this.props._route.type === 'edit' && this.state.privacy
 					? <div>
-							<strong>Post Privacy</strong>
+							<h2>Privacy
+								{this.props.owner && this.props._route.type === 'IGNORE'
+									? <div className="privacyToggle" onClick={this._privacy}><i className={icons[privacy]} /> <span style={{textDecoration: 'underline'}}>{this.props.post.privacy}</span></div>
+									: false
+								}
+							</h2>
 							<div>
-								<button className={classes.private} onClick={this._private}>Private</button>
-								<button className={classes.members} onClick={this._members}>{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</button>
-								<button className={classes.public} onClick={this._public}>Public</button>
 								<Contexts {...this.props} />
+								<input type="radio" onClick={this._private} checked={privacy === 'private'} /><label>Private</label><br />
+								<input type="radio" onClick={this._public} checked={privacy === 'public'} /><label>Public</label><br />
+								<input type="radio" onClick={this._members} checked={privacy === 'members'} /><label>Internal</label>
 								{this.props.post.orgId && this.props.post.orgId !== 'null' ? <Collaborators {...this.props} s/> : false}
 							</div>
 						</div>
