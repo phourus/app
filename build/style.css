@@ -3045,59 +3045,21 @@ div.post .tags {
   position: absolute;
   z-index: 99999;
 }
-div.posts,
-div.post {
-  max-width: 1400px;
+#content > div.post {
   margin: auto;
+  margin-top: 20px;
   min-height: 600px;
-}
-div.post {
-  width: 100%;
-  max-width: 100%;
-  margin-top: 60px;
-}
-.postItem {
-  width: 98%;
-  margin: 1%;
-  padding: 1%;
-  background-color: #f7f7f7;
-  box-sizing: border-box;
-  text-align: left;
+  background: transparent;
+  border: none;
+  /** HANDLE **/
   /** TITLE **/
-  /** CONTENT **/
 }
-.postItem:hover {
-  opacity: 1;
-}
-.postItem.selected {
-  width: 98%;
-  margin: 1%;
-  opacity: 1;
-  padding: 1%;
-}
-.postItem.selected > button.close {
-  display: block;
-}
-.postItem.selected > a.edit {
-  margin-right: 20px;
-}
-.postItem .handle {
-  float: right;
-  cursor: pointer;
-  color: #aaa;
-}
-.postItem .handle:hover {
-  color: #888;
-}
-.postItem .handle.dragging {
-  color: #8ABF00;
-}
-.postItem.edit,
-.postItem.create {
+#content > div.post .edit,
+#content > div.post .create {
   background: transparent;
 }
-.postItem.edit .toolbar,
-.postItem.create .toolbar {
+#content > div.post .edit .toolbar,
+#content > div.post .create .toolbar {
   background-color: #fff;
   border-top: solid 1px #ddd;
   border-bottom: solid 1px #ddd;
@@ -3107,32 +3069,26 @@ div.post {
   width: 100%;
   left: 0;
 }
-.postItem.edit .title,
-.postItem.create .title {
-  font-size: 3em;
-  line-height: 2em;
-  height: 2em;
-}
-.postItem.edit .actions,
-.postItem.create .actions {
+#content > div.post .edit .actions,
+#content > div.post .create .actions {
   position: fixed;
   top: 60px;
   right: 0;
 }
-.postItem.single {
-  width: 100%;
+#content > div.post .single {
+  width: 96%;
+  padding: 2%;
   margin: 0;
   background-color: #fff;
-  margin-top: -60px;
 }
-.postItem.single .title {
+#content > div.post .single .title {
   font-size: 2em;
 }
-.postItem ul {
+#content > div.post ul {
   margin: 20px 0 0 0;
   padding: 0;
 }
-.postItem ul li {
+#content > div.post ul li {
   list-style: none;
   font-size: 0.8em;
   color: #444;
@@ -3140,20 +3096,28 @@ div.post {
   padding: 0;
   line-height: 1.4;
 }
-.postItem input.title {
-  border: none;
-  background: transparent;
+#content > div.post .handle {
+  float: right;
+  cursor: pointer;
+  color: #aaa;
+}
+#content > div.post .handle:hover {
+  color: #888;
+}
+#content > div.post .handle.dragging {
+  color: #8ABF00;
+}
+#content > div.post input.title {
   width: 100%;
   max-width: 100%;
   min-width: 100%;
 }
-.postItem input.title.editing:hover,
-.postItem input.title.editing:focus {
-  border: solid 1px #ddd;
+#content > div.post input.title.editing:hover,
+#content > div.post input.title.editing:focus {
+  border: solid 1px #3498DB;
   background-color: #fdfdfd;
-  padding: 3px;
 }
-.postItem .title {
+#content > div.post .title {
   font-size: 1.5em;
   line-height: 1em;
   font-family: 'rokkitt', Palatino, "Palatino Linotype", "Book Antiqua", serif;
@@ -3163,45 +3127,11 @@ div.post {
   margin: 10px 0;
   padding: 5px;
 }
-.postItem .title a {
+#content > div.post .title a {
   color: #444;
 }
-.postItem .title a:hover {
+#content > div.post .title a:hover {
   color: #ECB010;
-}
-.postItem .rte {
-  margin-bottom: 40px;
-  padding-bottom: 20px;
-}
-.postItem .ql-editor,
-.postItem .ql-container {
-  height: initial;
-  min-height: initial;
-}
-.postItem div.ql-toolbar {
-  position: fixed;
-  top: 60px;
-  opacity: 1;
-}
-.postItem .quill-contents {
-  background-color: #fff;
-}
-.postItem .ql-container {
-  position: static;
-}
-.postItem .content {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-}
-.postItem .content:before,
-.postItem .content:after {
-  content: "";
-  display: table;
-}
-.postItem .content:after {
-  clear: both;
 }
 #content .about {
   margin: 0;
@@ -3800,6 +3730,14 @@ div.post {
     color: #222;
   }
 }
+div.posts .postItem {
+  width: 98%;
+  margin: 1%;
+  padding: 1%;
+  background-color: #f7f7f7;
+  box-sizing: border-box;
+  text-align: left;
+}
 @media (min-width: 800px) {
   div.posts.sidebar {
     width: 75%;
@@ -4036,7 +3974,7 @@ div.post {
 }
 #content > div {
   margin: 20px auto 0 auto;
-  width: 90%;
+  width: 94%;
   max-width: 1200px;
   background-color: white;
   border: solid 1px #DDD;
@@ -4048,6 +3986,45 @@ div.post {
   width: 100%;
   background: transparent;
   border: none;
+}
+.rte {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+}
+.ql-editor,
+.ql-container {
+  height: initial;
+  min-height: initial;
+}
+div.ql-toolbar {
+  position: fixed;
+  top: 60px;
+  opacity: 1;
+}
+.quill-contents {
+  background-color: #fff;
+  border: solid 1px #ddd;
+}
+.quill-contents:hover,
+.quill-contents:focus {
+  border-color: #3498DB;
+}
+.ql-container {
+  position: static;
+}
+.content {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.content:before,
+.content:after {
+  content: "";
+  display: table;
+}
+.content:after {
+  clear: both;
 }
 .footer {
   color: #444;

@@ -85,12 +85,13 @@ let App = React.createClass({
     let roots = {
       'docs/:id': 'docs',
       'admin/:id': 'admin',
+      'edit/:id': 'edit',
+      'post/:id': 'post',
+      'post/create': 'create',
       '*': '404'
     };
 
     let types = {
-      ':id': 'post',
-      'edit/:id': 'edit',
       'org/:id': 'org',
       'user/:id': 'user',
     };
@@ -118,6 +119,10 @@ let App = React.createClass({
 
     if (context.type === 'create') {
       context.id = 'create';
+    }
+
+    if (context.root === 'edit' || context.root === 'post' || context.root === 'create') {
+      context.type = context.root;
     }
     return context;
   }

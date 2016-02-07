@@ -56,22 +56,12 @@ let Stream = React.createClass({
 
 		return (
 			<div className="stream">
-				{type === 'org' && !id
-					? <Organizations _route={this.props._route} />
+				{!this.state.sidebarVisible
+					? <button className="toggle" onClick={this._sidebar}><i className="fa fa-navicon" /> Show my folders</button>
 					: false
 				}
-				{type === 'post' || type === 'edit' || type === 'create' || this.state.sidebarVisible
-					? false
-					: <button className="toggle" onClick={this._sidebar}><i className="fa fa-navicon" /> Show my folders</button>
-				}
-				{type === 'post' || type === 'edit' || type === 'create'
-					? false
-					: <div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
-				}
-				{type === 'post' || type === 'edit' || type === 'create'
-					? false
-					: <Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
-				}
+				<div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
+				<Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<Loader />}>
 					<Posts {...this.state} _route={this.props._route} sidebarVisible={this.state.sidebarVisible} />
 				</Scroll>

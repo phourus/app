@@ -4,6 +4,7 @@ let { Route, IndexRoute } = require('react-router');
 
 let App = require('./app');
 let Stream = require('./react/stream');
+let Post = require('./react/post');
 let Account = require('./react/account');
 let Activity = require('./react/activity');
 let Admin = require('./react/admin');
@@ -46,12 +47,12 @@ module.exports = (
     <Route path="account" component={Account} />
     <Route path="stream" component={Stream}>
       <Route path="me" component={Stream} />
-      <Route path="create" component={Stream}></Route>
       <Route path="user/:id" component={Stream} />
       <Route path="org/:id" component={Stream} />
-      <Route name="edit/:id" path="edit/:id" component={Stream}></Route>
-      <Route path=":id" component={Stream} />
     </Route>
+    <Route path="post/create" component={Post} />
+    <Route path="post/:id" component={Post} />
+    <Route path="edit/:id" component={Post} />
     <Route path="docs" component={Docs}>
       <Route path=":id" component={Docs} />
     </Route>

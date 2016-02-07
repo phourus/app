@@ -12,60 +12,14 @@
 @import 'post/thumbs.less';
 @import 'post/type.less';
 
-div.posts, div.post {
-  max-width: 1400px;
+#content > div.post {
   margin: auto;
+  margin-top: 20px;
   min-height: 600px;
-}
+  background: transparent;
+  border: none;
 
-div.post {
-  width: 100%;
-  max-width: 100%;
-  margin-top: 60px;
-}
-
-.postItem {
-  width: 98%;
-  margin: 1%;
-  padding: 1%;
-  background-color: #f7f7f7;
-  box-sizing: border-box;
-  text-align: left;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  &.selected {
-    width: 98%;
-    margin: 1%;
-    opacity: 1;
-    padding: 1%;
-
-    > button.close {
-      display: block;
-    }
-
-    > a.edit {
-      margin-right: 20px;
-    }
-  }
-
-  .handle {
-    float: right;
-    cursor: pointer;
-    color: #aaa;
-
-    &:hover {
-      color: #888;
-    }
-
-    &.dragging {
-      color: @green;
-    }
-  }
-
-  &.edit, &.create {
+  .edit, .create {
     background: transparent;
 
     .toolbar {
@@ -79,12 +33,6 @@ div.post {
       left: 0;
     }
 
-    .title {
-      font-size: 3em;
-      line-height: 2em;
-      height: 2em;
-    }
-
     .actions {
       position: fixed;
       top: 60px;
@@ -92,11 +40,11 @@ div.post {
     }
   }
 
-  &.single {
-    width: 100%;
+  .single {
+    width: 96%;
+    padding: 2%;
     margin: 0;
     background-color: #fff;
-    margin-top: -60px;
 
     .title {
       font-size: 2em;
@@ -117,18 +65,30 @@ div.post {
     }
   }
 
+  /** HANDLE **/
+  .handle {
+    float: right;
+    cursor: pointer;
+    color: #aaa;
+
+    &:hover {
+      color: #888;
+    }
+
+    &.dragging {
+      color: @green;
+    }
+  }
+
   /** TITLE **/
   input.title {
-    border: none;
-    background: transparent;
     width: 100%;
     max-width: 100%;
     min-width: 100%;
 
     &.editing:hover, &.editing:focus {
-      border: solid 1px #ddd;
+      border: solid 1px @blue;
       background-color: #fdfdfd;
-      padding: 3px;
     }
   }
 
@@ -149,34 +109,5 @@ div.post {
         color: @gold;
       }
     }
-  }
-
-  /** CONTENT **/
-  .rte {
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-  }
-  .ql-editor, .ql-container {
-    height: initial;
-    min-height: initial;
-  }
-
-  div.ql-toolbar {
-    position: fixed;
-    top: 60px;
-    opacity: 1;
-  }
-
-  .quill-contents {
-    background-color: #fff;
-  }
-
-  .ql-container {
-    position: static;
-  }
-
-  .content {
-    .Row(100%);
-    overflow: hidden;
   }
 }

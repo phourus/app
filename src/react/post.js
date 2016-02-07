@@ -6,6 +6,9 @@ let { Link, History } = Router;
 let Actions = require('../actions/post');
 let Store = require('../stores/post');
 
+let AccountStore = require('../stores/account');
+let TutorialActions = require('../actions/tutorial');
+
 let ActionsView = require('./post/actions');
 let Comments = require('./post/comments');
 let Content = require('./post/content');
@@ -76,26 +79,29 @@ let Post = React.createClass({
 				this.setState({post: current});
 			}
 		});
-		this._context();
+		this._context(this.props._route);
+		TutorialActions.ready(true);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
-	componentWillReceiveProps: function (data) {
-		this._context();
+	componentWillReceiveProps: function (nextProps) {
+		if (nextProps._route) {
+			this._context(nextProps._route);
+		}
 	},
 	render: function () {
-		let mode = this.props._route.type;
+		let type = this.props._route.type;
+		let owner = this._owner();
 		return (
 			<div className="post">
-				{mode === 'create' ? <Create {...this.state} _route={this.props._route} owner={this.props.owner} /> : false}
-				{mode === 'edit' ? <Edit {...this.state} _route={this.props._route} owner={this.props.owner} /> : false}
-				{mode === 'post' ? <Single {...this.state} _route={this.props._route} owner={this.props.owner} /> : false}
+				{type === 'create' ? <Create {...this.state} _route={this.props._route} owner={owner} /> : false}
+				{type === 'edit' ? <Edit {...this.state} _route={this.props._route} owner={owner} /> : false}
+				{type === 'post' ? <Single {...this.state} _route={this.props._route} owner={owner} /> : false}
 			</div>
 		);
 	},
-	_context: function () {
-		let route = this.props._route;
+	_context: function (route) {
 		let params = route.params;
 		let id = route.id;
 		let type = route.type;
@@ -103,17 +109,24 @@ let Post = React.createClass({
 			Actions.single(id);
 		}
 		if (type === 'create') {
-			Actions.change('type', 'blog');
-			Actions.change('title', 'Enter your post title here');
-			Actions.change('content', CreateContent);
+			Actions.single('create');
 		}
 	},
+	_owner: function () {
+		let user = AccountStore.user;
+		let post = this.state.post;
+		if (!user || !user.id) {
+			return false;
+		}
+		let sharedPosts = user && user.SESSION_POSTS && user.SESSION_POSTS.constructor === Array ? user.SESSION_POSTS : [];
+		return (post.user && post.user.id == user.id) || sharedPosts.indexOf(post.id) !== -1;
+	}
 });
 
 let Create = React.createClass({
 	render: function () {
 		return (
-			<div className="create postItem">
+			<div className="create">
 				<div className="toolbar"></div>
 				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
@@ -126,8 +139,14 @@ let Create = React.createClass({
 
 let Edit = React.createClass({
 	render: function () {
+		if (!this.props.owner) {
+			return (<div className="edit 403">
+				<h2>You are not authorized to edit this post</h2>
+				<p>If you are the author or collaborator for this post, please make sure you are logged in.</p>
+			</div>);
+		}
 		return (
-			<div className="edit postItem">
+			<div className="edit">
 				<div className="toolbar"></div>
 				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
@@ -144,7 +163,7 @@ let Edit = React.createClass({
 let Single = React.createClass({
 	render: function () {
 		return (
-			<div className="single postItem">
+			<div className="single">
 				<ActionsView post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Type post={this.props.post} _route={this.props._route} owner={this.props.owner} />
 				<Privacy post={this.props.post} _route={this.props._route} owner={this.props.owner} />
@@ -179,5 +198,3 @@ Post.Item = React.createClass({
 });
 
 module.exports = Post;
-
-const CreateContent = `<div><span style="font-size: 32px;">Creating a Post</span></div><div><br></div><div>To create a post on Phourus, you can quickly clear or replace the text in this box, and use the formatting toolbar above. When you are finished, click 'Post' to publish your post. If you wish not to save your work, then just click cancel instead. </div><div><br></div><div><i>There are 4 different categories of posts on Phourus, each color coded:</i></div><div><br></div><ol><li><b>General information</b> - Green [Blogs, Ideas]</li><li><b>Educational</b> - Blue [Subjects, Questions]</li><li><b>Divisionary</b> - Red [Debates, Polls]</li><li><b>Cultural</b> - Gold [Opinions, Quotes] </li></ol><div><br></div><div><i><u><b>Research</b></u></i></div><div>Whenever research is being done, Phourus should come to mind. The ideal place to store, find and centralize research done in a variety of departments.</div><div><br></div><div>- Market analysis</div><div>- Data-driven conclusions</div><div>- Engineering research</div><div>- Competitor research</div><div>- Doctorate/Post-Grad Thesis</div><div>- Theoretical research</div><div>- Medical information</div><div><br></div><div><u style="background-color: inherit;"><i><b>Training</b></i></u></div><div>Having a go-to source for new employees to go for a variety of information such as:</div><div><br></div><div>- Company policy</div><div>- Product or service information</div><div>- Latest research or findings</div><div>- Company vision or mission</div><div>- Training resource</div><div>- Question about company or product</div><div>- Budget or financial information</div><div>- Product specs</div><div>- Support material</div><div><br></div><div><u style="background-color: inherit;"><i><b>Public</b></i></u></div><div>With advanced post permissions you can create posts to interact with the public such as:</div><div><br></div><div>- Poll most important product features</div><div>- Educate consumers, prospects or customers</div><div>- Report news to customers, investors or shareholders</div><div>- Discuss company direction</div><div><br></div><div><u style="background-color: inherit;"><i><b>Feedback</b></i></u></div><div>Internal and external feedback is imperative to an organization:</div><div><br></div><div>- Business strategy or overall vision</div><div>- The good, bad or ugly</div><div>- Internal poll for a challenging decision</div><div>- Cross-department collaboration</div><div>- Management feedback</div><div>- Debate purchasing decisions</div><div><br></div><div><i><u><b>Ideas</b></u></i></div><div>Ideas for new products, campaigns, strategies are j</div><div><br></div><div>- Idea for product or service</div><div>- Improve internal operations</div><div>- New procedure idea</div><div>- Marketing campaign idea</div><div>- Customer ideas</div><div><br></div><div><i><u><b>Vision</b></u></i></div><div>Ideas, opinions and inspiration serve as important keys to success:</div><div><br></div><div>- Goal for the organization or team</div><div>- Personal opinion&nbsp;</div><div>- Inspirational quote</div><div>- Sales pitch tip</div><div>- Marketing or sales strategy</div><div>- Poor experience</div><div><br></div><div><br></div><div><br></div>`;

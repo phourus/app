@@ -66,7 +66,7 @@ let Edit = React.createClass({
       return false;
     }
     return (
-      <Link to={`/stream/edit/${this.props.post.id}`} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
+      <Link to={`/edit/${this.props.post.id}`} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
     );
   }
 });

@@ -16,7 +16,7 @@
 
     > div {
       margin: 20px auto 0 auto;
-      width: 90%;
+      width: 94%;
       max-width: 1200px;
       background-color: white;
       border: solid 1px @grey;
@@ -30,4 +30,37 @@
       background: transparent;
       border: none;
     }
+}
+
+.rte {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+}
+.ql-editor, .ql-container {
+  height: initial;
+  min-height: initial;
+}
+
+div.ql-toolbar {
+  position: fixed;
+  top: 60px;
+  opacity: 1;
+}
+
+.quill-contents {
+  background-color: #fff;
+  border: solid 1px #ddd;
+
+  &:hover, &:focus {
+    border-color: @blue;
+  }
+}
+
+.ql-container {
+  position: static;
+}
+
+.content {
+  .Row(100%);
+  overflow: hidden;
 }

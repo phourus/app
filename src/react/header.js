@@ -86,7 +86,7 @@ module.exports = React.createClass({
                     </div>
                   </li>
                   <li className="create">
-                    <Link to="/stream/create">
+                    <Link to="/post/create">
                       <i className="fa fa-pencil" />
                       Create
                     </Link>

@@ -35,6 +35,7 @@ module.exports = React.createClass({
 				this.setState(data);
 			}
 		});
+		TutorialActions.ready(true);
 		AccountActions.get();
 	},
 	componentWillReceiveProps: function () {
@@ -51,10 +52,18 @@ module.exports = React.createClass({
 		if (this.props.posts.length < 1) {
 			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>;
 		}
-		if (['create', 'edit', 'post'].indexOf(route.type) !== -1) {
-			return <Single posts={this.props.posts} user={this.state.user} _route={route} owner={this._owner} />;
-		}
-		return <Collection posts={this.props.posts} user={this.state.user} _route={route} owner={this._owner} sidebarVisible={this.props.sidebarVisible} />;
+		return (
+			<div className={this.props.sidebarVisible ? "posts sidebar" : "posts"}>
+				{this.props.posts.map((item, i) => {
+					 let owner = this._owner(item);
+					 let location = {};
+					 if (item.user.locations && item.user.locations.length > 0) {
+							 location = item.user.locations[0];
+					 }
+					 return <Post.Item key={item.id} post={item} user={item.user} _route={route} owner={owner} location={location} scroll={this.props.scroll} />;
+				})}
+			</div>
+		);
 	},
 	_owner: function (post) {
 		let user = this.state.user;
@@ -63,56 +72,5 @@ module.exports = React.createClass({
 		}
 		let sharedPosts = user && user.SESSION_POSTS && user.SESSION_POSTS.constructor === Array ? user.SESSION_POSTS : [];
 		return (post.user && post.user.id == user.id) || sharedPosts.indexOf(post.id) !== -1;
-	}
-});
-
-let Collection = React.createClass({
-	componentDidMount: function () {
-		TutorialActions.ready(true);
-	},
-	render: function () {
-		return (
-			<div className={this.props.sidebarVisible ? "posts sidebar" : "posts"}>
-				{this.props.posts.map((item, i) => {
-					 let owner = this.props.owner(item);
-					 let location = {};
-					 if (item.user.locations && item.user.locations.length > 0) {
-							 location = item.user.locations[0];
-					 }
-					 return <Post.Item key={item.id} post={item} user={item.user} _route={this.props._route} owner={owner} location={location} scroll={this.props.scroll} />;
-				})}
-			</div>
-		);
-	}
-});
-
-let Single = React.createClass({
-	componentDidMount: function () {
-		TutorialActions.ready(true);
-	},
-	getDefaultProps: function () {
-		return {
-			posts: []
-		};
-	},
-	render: function () {
-		let post = this._post();
-		let owner = this.props.owner(post);
-		return <Post post={post} _route={this.props._route} owner={owner} />;
-	},
-	_post: function () {
-		let post = {};
-		let posts = this.props.posts.filter(item => {
-			if (item.id == this.props._route.id) {
-				return true;
-			}
-			return false;
-		});
-		post = posts[0] || {};
-
-		if (this.props._route.type === 'create') {
-			post.user = this.props.user;
-		}
-		return post;
 	}
 });
