@@ -3053,6 +3053,7 @@ div.post .tags {
   border: none;
   /** HANDLE **/
   /** TITLE **/
+  /** EDITOR **/
 }
 #content > div.post .edit,
 #content > div.post .create {
@@ -3132,6 +3133,46 @@ div.post .tags {
 }
 #content > div.post .title a:hover {
   color: #ECB010;
+}
+#content > div.post .rte {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+}
+#content > div.post .ql-editor,
+#content > div.post .ql-container {
+  height: initial;
+  min-height: initial;
+}
+#content > div.post div.ql-toolbar {
+  position: fixed;
+  top: 60px;
+  opacity: 1;
+}
+#content > div.post .quill-contents {
+  background-color: #fff;
+  border: solid 1px #ddd;
+}
+#content > div.post .quill-contents:hover,
+#content > div.post .quill-contents:focus {
+  border-color: #3498DB;
+}
+#content > div.post .ql-container {
+  position: static;
+  z-index: -1;
+}
+#content > div.post .content {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+#content > div.post .content:before,
+#content > div.post .content:after {
+  content: "";
+  display: table;
+}
+#content > div.post .content:after {
+  clear: both;
 }
 #content .about {
   margin: 0;
@@ -3986,45 +4027,6 @@ div.posts .postItem {
   width: 100%;
   background: transparent;
   border: none;
-}
-.rte {
-  margin-bottom: 40px;
-  padding-bottom: 20px;
-}
-.ql-editor,
-.ql-container {
-  height: initial;
-  min-height: initial;
-}
-div.ql-toolbar {
-  position: fixed;
-  top: 60px;
-  opacity: 1;
-}
-.quill-contents {
-  background-color: #fff;
-  border: solid 1px #ddd;
-}
-.quill-contents:hover,
-.quill-contents:focus {
-  border-color: #3498DB;
-}
-.ql-container {
-  position: static;
-}
-.content {
-  max-width: 100%;
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-}
-.content:before,
-.content:after {
-  content: "";
-  display: table;
-}
-.content:after {
-  clear: both;
 }
 .footer {
   color: #444;

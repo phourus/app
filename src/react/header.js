@@ -30,6 +30,7 @@ module.exports = React.createClass({
     this.unsubscribeStream = StreamStore.listen(data => {
       this.setState(data);
     });
+    AccountActions.get();
     AccountActions.orgs();
   },
   componentWillUnmount: function () {

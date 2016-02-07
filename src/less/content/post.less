@@ -110,4 +110,39 @@
       }
     }
   }
+
+  /** EDITOR **/
+  .rte {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+  }
+  .ql-editor, .ql-container {
+    height: initial;
+    min-height: initial;
+  }
+
+  div.ql-toolbar {
+    position: fixed;
+    top: 60px;
+    opacity: 1;
+  }
+
+  .quill-contents {
+    background-color: #fff;
+    border: solid 1px #ddd;
+
+    &:hover, &:focus {
+      border-color: @blue;
+    }
+  }
+
+  .ql-container {
+    position: static;
+    z-index: -1;
+  }
+
+  .content {
+    .Row(100%);
+    overflow: hidden;
+  }
 }

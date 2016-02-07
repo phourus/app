@@ -7,6 +7,7 @@ let Actions = require('../actions/post');
 let Store = require('../stores/post');
 
 let AccountStore = require('../stores/account');
+let AccountActions = require('../actions/account');
 let TutorialActions = require('../actions/tutorial');
 
 let ActionsView = require('./post/actions');
@@ -79,11 +80,18 @@ let Post = React.createClass({
 				this.setState({post: current});
 			}
 		});
+		this.unsubscribeAccount = AccountStore.listen(data => {
+			if (data.user) {
+				this.setState({user: data.user});
+			}
+		});
+		AccountActions.get();
 		this._context(this.props._route);
 		TutorialActions.ready(true);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
+		this.unsubscribeAccount();
 	},
 	componentWillReceiveProps: function (nextProps) {
 		if (nextProps._route) {
@@ -113,9 +121,10 @@ let Post = React.createClass({
 		}
 	},
 	_owner: function () {
-		let user = AccountStore.user;
+		let user = this.state.user;
 		let post = this.state.post;
 		if (!user || !user.id) {
+			AccountActions.get();
 			return false;
 		}
 		let sharedPosts = user && user.SESSION_POSTS && user.SESSION_POSTS.constructor === Array ? user.SESSION_POSTS : [];

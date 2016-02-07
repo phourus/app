@@ -49,20 +49,23 @@ module.exports = React.createClass({
     }
   },
   shouldComponentUpdate: function () {
-    return true;
-    //return this.state.module === this._current();
+    let current = this._current(this.props._route);
+    return this.state.module === current;
   },
   componentDidUpdate: function () {
     let incomplete = this.state.complete.indexOf(this.state.module) === -1;
     if (this.state.ready && incomplete) {
-      this.refs.joyride.reset();
-      this.refs.joyride.start(true);
+      try {
+        //this.refs.joyride.reset();
+        //this.refs.joyride.start(true);
+      } catch (e) {
+        console.warn(e);
+      }
     }
   },
   render: function () {
     let module = this.state.module;
     let steps = Steps[module] || [];
-
     return (
       <Joyride ref="joyride" type={'continuous'} steps={steps} scrollOffset={80}
         showStepsProgress={true} showSkipButton={true} showOverlay={true}
