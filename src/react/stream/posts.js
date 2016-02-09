@@ -35,7 +35,6 @@ module.exports = React.createClass({
 				this.setState(data);
 			}
 		});
-		TutorialActions.ready(true);
 		AccountActions.get();
 	},
 	componentWillReceiveProps: function () {
@@ -43,6 +42,12 @@ module.exports = React.createClass({
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
+	},
+	componentDidUpdate: function () {
+		let posts = this.props.posts;
+		if (posts && posts.length > 1) {
+			TutorialActions.ready(true);
+		}
 	},
 	render: function () {
 		let route = this.props._route;

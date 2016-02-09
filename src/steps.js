@@ -143,13 +143,13 @@ module.exports = {
     {
       title: 'Cancel',
       text: 'You can create custom folders and subfolders to help make your life easier managing all the useful content on Phourus.<br /><br />After creating the folder structure you like, simply drag and drop posts to save it to that folder.',
-      selector: '.close',
+      selector: '.delete',
       position: 'right',
     },
     {
       title: 'Rich Text',
       text: 'You can create custom folders and subfolders to help make your life easier managing all the useful content on Phourus.<br /><br />After creating the folder structure you like, simply drag and drop posts to save it to that folder.',
-      selector: '.close',
+      selector: '.quill-toolbar',
       position: 'right',
     },
     {

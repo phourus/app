@@ -56,8 +56,8 @@ module.exports = React.createClass({
     let incomplete = this.state.complete.indexOf(this.state.module) === -1;
     if (this.state.ready && incomplete) {
       try {
-        //this.refs.joyride.reset();
-        //this.refs.joyride.start(true);
+        this.refs.joyride.reset();
+        this.refs.joyride.start(true);
       } catch (e) {
         console.warn(e);
       }

@@ -104,7 +104,13 @@
                 }
             };
         } else {
-            var XHR = root.XMLHttpRequest || ActiveXObject;
+            var XHR = root.XMLHttpRequest || root.ActiveXObject;
+
+            if (!XHR) {
+              return new Promise(function(resolve, reject) {
+                reject('not in browser environment');
+              });
+            }
             request = new XHR('MSXML2.XMLHTTP.3.0');
             request.open(type, url, true);
             request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');

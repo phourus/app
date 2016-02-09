@@ -87,7 +87,6 @@ let Post = React.createClass({
 		});
 		AccountActions.get();
 		this._context(this.props._route);
-		TutorialActions.ready(true);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
@@ -133,6 +132,9 @@ let Post = React.createClass({
 });
 
 let Create = React.createClass({
+	componentDidUpdate: function () {
+		TutorialActions.ready(true);
+	},
 	render: function () {
 		return (
 			<div className="create">
@@ -147,6 +149,11 @@ let Create = React.createClass({
 });
 
 let Edit = React.createClass({
+	componentDidUpdate: function () {
+		if (this.props.owner) {
+			TutorialActions.ready(true);
+		}
+	},
 	render: function () {
 		if (!this.props.owner) {
 			return (<div className="edit 403">
@@ -170,6 +177,9 @@ let Edit = React.createClass({
 });
 
 let Single = React.createClass({
+	componentDidMount: function () {
+		TutorialActions.ready(true);
+	},
 	render: function () {
 		return (
 			<div className="single">
