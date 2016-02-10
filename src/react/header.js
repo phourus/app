@@ -46,7 +46,7 @@ module.exports = React.createClass({
     let orgs = this.state.orgs;
     let route = this.props._route;
     let r = route.root;
-    if (r === 'home') {
+    if (!r || r === 'home') {
       return <Home />
     }
     if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
