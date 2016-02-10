@@ -5,8 +5,6 @@ let Actions = require('../../actions/post/collaborators');
 
 let collaborators = require('../../api/collaborators');
 
-let msg = require("../../actions/alerts").add;
-
 module.exports = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);
@@ -21,7 +19,14 @@ module.exports = Reflux.createStore({
       this.trigger({list: data});
     })
     .catch(code => {
-      msg('red', 'Collaborators could not be loaded', code);
+      let alert = {
+        action: 'collection',
+        color: 'red',
+        code: code,
+        msg: 'Collaborators could not be loaded'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _add: function (model) {
@@ -30,7 +35,14 @@ module.exports = Reflux.createStore({
       this._refresh();
     })
     .catch(code => {
-      msg('red', 'Collaborator could not be added', code);
+      let alert = {
+        action: 'add',
+        color: 'red',
+        code: code,
+        msg: 'Collaborator could not be added'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _remove: function (type, id) {
@@ -39,7 +51,14 @@ module.exports = Reflux.createStore({
       this._refresh();
     })
     .catch(code => {
-      msg('red', 'Collaborator could not be removed', code);
+      let alert = {
+        action: 'remove',
+        color: 'red',
+        code: code,
+        msg: 'Collaborator could not be removed'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _lookup: function (orgId) {
@@ -48,7 +67,14 @@ module.exports = Reflux.createStore({
       this.trigger({lookup: data});
     })
     .catch(code => {
-      msg('red', 'Lookup could not be loaded', code);
+      let alert = {
+        action: 'lookup',
+        color: 'red',
+        code: code,
+        msg: 'Lookup could not be loaded'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _refresh: function () {

@@ -5,8 +5,6 @@ let Actions = require('../../actions/post/comments');
 
 let comments = require('../../api/comments');
 
-let msg = require("../../actions/alerts").add;
-
 module.exports = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);
@@ -21,7 +19,14 @@ module.exports = Reflux.createStore({
       this.trigger(data);
     })
     .catch(code => {
-      msg('yellow', 'Comments could not be loaded', code);
+      let alert = {
+        action: 'collection',
+        color: 'yellow',
+        code: code,
+        msg: 'Comments could not be loaded'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _add: function (model) {
@@ -30,7 +35,14 @@ module.exports = Reflux.createStore({
       this.trigger({added: data});
     })
     .catch(code => {
-      msg('red', 'Comment could not be created', code);
+      let alert = {
+        action: 'add',
+        color: 'red',
+        code: code,
+        msg: 'Comment could not be created'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _save: function (id, model) {
@@ -39,7 +51,14 @@ module.exports = Reflux.createStore({
       this.trigger({saved: data});
     })
     .catch(code => {
-      msg('red', 'Comment could not be updated', code);
+      let alert = {
+        action: 'save',
+        color: 'red',
+        code: code,
+        msg: 'Comment could not be updated'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _remove: function (id) {
@@ -48,7 +67,14 @@ module.exports = Reflux.createStore({
       this.trigger({removed: id});
     })
     .catch(code => {
-      msg('red', 'Comment could not be removed', code);
+      let alert = {
+        action: 'remove',
+        color: 'red',
+        code: code,
+        msg: 'Comment could not be removed'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   }
 });

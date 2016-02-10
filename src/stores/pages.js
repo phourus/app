@@ -4,8 +4,6 @@ let Actions = require('../actions/pages');
 
 let pages = require('../rest/pages');
 
-let msg = require("../actions/alerts").add;
-
 module.exports = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.get, this._get);
@@ -17,7 +15,14 @@ module.exports = Reflux.createStore({
     })
     .catch(code => {
       if (code != 200) {
-        msg('yellow', 'Page could not be loaded', code);
+        let alert = {
+          action: 'load',
+          color: 'yellow',
+          code: code,
+          msg: 'Page could not be loaded'
+        };
+        this.trigger({alert: alert});
+        console.warn(alert);
       }
     });
   }

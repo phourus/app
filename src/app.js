@@ -5,7 +5,6 @@ let { Link } = require('react-router');
 var ga = require('./analytics');
 var Initializer = ga.Initializer;
 
-let Alerts = require('./react/alerts');
 let Header = require('./react/header');
 let Profile = require('./react/profile');
 let Tutorial = require('./react/tutorial');
@@ -42,7 +41,6 @@ let App = React.createClass({
         {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
         <div className="spacer"></div>
         <Profile _route={_route} />
-        <Alerts {...this.props.alerts} />
         <div>
           <div id="content">
             {React.cloneElement(this.props.children,

@@ -1,6 +1,5 @@
 "use strict";
 let Reflux = require('reflux');
-let msg = require("../actions/alerts").add;
 
 let { User, Org } = require('../actions/profile');
 let users = require('../api/users');
@@ -19,7 +18,14 @@ let Profile = Reflux.createStore({
       })
       .catch(code => {
         if (code != 200) {
-           msg('red', 'User could not be loaded', code);
+          let alert = {
+            action: 'load',
+            color: 'red',
+            code: code,
+            msg: 'User could not be loaded'
+          };
+          this.trigger({alert: alert});
+          console.warn(alert);
         }
       });
   },
@@ -30,7 +36,14 @@ let Profile = Reflux.createStore({
       })
       .catch(code => {
         if (code != 200) {
-           msg('red', 'Organization could not be loaded', code);
+          let alert = {
+            action: 'load',
+            color: 'red',
+            code: code,
+            msg: 'Organization could not be loaded'
+          };
+          this.trigger({alert: alert});
+          console.warn(alert);
         }
       });
   }

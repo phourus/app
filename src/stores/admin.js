@@ -1,6 +1,5 @@
 "use strict";
 let Reflux = require('reflux');
-let msg = require("../actions/alerts").add;
 
 let Actions = require('../actions/admin');
 let { Members, Categories } = Actions;
@@ -24,7 +23,14 @@ let Admin = Reflux.createStore({
       })
       .catch(code => {
         if (code != 200) {
-           msg('red', 'Organization could not be loaded', code);
+           let alert = {
+             action: 'load',
+             color: 'red',
+             code: code,
+             msg: 'Organization could not be loaded'
+           };
+           this.trigger({alert: alert});
+           console.warn(alert);
         }
       });
   },
@@ -35,7 +41,14 @@ let Admin = Reflux.createStore({
       })
       .catch(code => {
         if (code != 200) {
-           msg('red', 'Organization details could not be saved', code);
+           let alert = {
+             action: 'save',
+             color: 'red',
+             code: code,
+             msg: 'Organization details could not be saved'
+           };
+           this.trigger({alert: alert});
+           console.warn(alert);
         }
       });
   },
@@ -63,7 +76,14 @@ let Admin = Reflux.createStore({
         })
         .catch(code => {
           if (code != 200) {
-             msg('red', 'Members could not be loaded', code);
+             let alert = {
+               action: 'load',
+               color: 'red',
+               code: code,
+               msg: 'Members could not be loaded'
+             };
+             this.trigger({alert: alert});
+             console.warn(alert);
           }
         });
     },
@@ -74,7 +94,14 @@ let Admin = Reflux.createStore({
         })
         .catch(code => {
           if (code != 200) {
-             msg('red', 'Request could not be sent', code);
+             let alert = {
+               action: 'request',
+               color: 'red',
+               code: code,
+               msg: 'Request could not be sent'
+             };
+             this.trigger({alert: alert});
+             console.warn(alert);
           }
         });
     },
@@ -85,7 +112,14 @@ let Admin = Reflux.createStore({
         })
         .catch(code => {
           if (code != 200) {
-             msg('red', 'Membership could not be granted', code);
+           let alert = {
+             action: 'approve',
+             color: 'red',
+             code: code,
+             msg: 'Membership could not be granted'
+           };
+           this.trigger({alert: alert});
+           console.warn(alert);
           }
         });
     },
@@ -96,7 +130,14 @@ let Admin = Reflux.createStore({
         })
         .catch(code => {
           if (code != 200) {
-             msg('red', 'Admin privileges could not be granted', code);
+            let alert = {
+              action: 'grant',
+              color: 'red',
+              code: code,
+              msg: 'Admin privileges could not be granted'
+            };
+            this.trigger({alert: alert});
+            console.warn(alert);
           }
         });
     },
@@ -107,7 +148,14 @@ let Admin = Reflux.createStore({
         })
         .catch(code => {
           if (code != 200) {
-             msg('red', 'Admin privileges could not be revoked', code);
+            let alert = {
+              action: 'revoke',
+              color: 'red',
+              code: code,
+              msg: 'Admin privileges could not be revoked'
+            };
+            this.trigger({alert: alert});
+            console.warn(alert);
           }
         });
     },
@@ -118,7 +166,14 @@ let Admin = Reflux.createStore({
         })
         .catch(code => {
           if (code != 200) {
-             msg('red', 'Member could not be denied', code);
+            let alert = {
+              action: 'deny',
+              color: 'red',
+              code: code,
+              msg: 'Member could not be denied'
+            };
+            this.trigger({alert: alert});
+            console.warn(alert);
           }
         });
     },

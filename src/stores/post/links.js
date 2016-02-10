@@ -5,8 +5,6 @@ let Actions = require('../../actions/post/links');
 
 let links = require('../../api/links');
 
-let msg = require("../../actions/alerts").add;
-
 module.exports = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.add, this._add);
@@ -20,7 +18,14 @@ module.exports = Reflux.createStore({
     })
     .catch(code => {
       this.trigger({code: code, action: 'add'});
-      msg('red', 'Link could not be created', code);
+      let alert = {
+        action: 'add',
+        color: 'red',
+        code: code,
+        msg: 'Link could not be created'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _save: function (id, model) {
@@ -29,8 +34,15 @@ module.exports = Reflux.createStore({
       this.trigger({id: null, title: '', url: '', caption: '', mode: null, saved: data});
     })
     .catch(code => {
-      this.trigger({code: code, action: 'save'});
-      msg('red', 'Link could not be saved', code);
+      //this.trigger({code: code, action: 'save'});
+      let alert = {
+        action: 'save',
+        color: 'red',
+        code: code,
+        msg: 'Link could not be saved'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _remove: function (id) {
@@ -39,8 +51,15 @@ module.exports = Reflux.createStore({
       this.trigger({removed: id});
     })
     .catch(code => {
-      this.trigger({code: code, action: 'remove'});
-      msg('red', 'Link could not be removed', code);
+      //this.trigger({code: code, action: 'remove'});
+      let alert = {
+        action: 'remove',
+        color: 'red',
+        code: code,
+        msg: 'Link could not be removed'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   }
 });

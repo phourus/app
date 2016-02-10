@@ -9,8 +9,6 @@ let account = require('../api/account');
 let users = require('../api/users');
 let orgs = require('../api/orgs');
 
-let msg = require("../actions/alerts").add;
-
 let Stream = Reflux.createStore({
   posts: null,
   total: 0,
@@ -63,8 +61,14 @@ let Stream = Reflux.createStore({
     })
     .catch(code => {
       if (code != 200) {
-         console.error(code);
-         msg('red', 'Posts could not be loaded', code);
+         let alert = {
+           action: 'collection',
+           color: 'red',
+           code: code,
+           msg: 'Posts could not be loaded'
+         };
+         this.trigger({alert: alert});
+         console.warn(alert);
       }
     });
   },
@@ -85,8 +89,14 @@ let Stream = Reflux.createStore({
     })
     .catch(code => {
       if (code != 200) {
-         console.error(code);
-         msg('red', 'Post could not be loaded', code);
+         let alert = {
+           action: 'load',
+           color: 'red',
+           code: code,
+           msg: 'Post could not be loaded'
+         };
+         this.trigger({alert: alert});
+         console.warn(alert);
       }
     });
   },
@@ -199,7 +209,14 @@ let Stream = Reflux.createStore({
         })
         .catch(code => {
           if (code != 200) {
-             msg('red', 'Could not load posts for this profile', code);
+             let alert = {
+               action: 'me',
+               color: 'red',
+               code: code,
+               msg: 'Could not load posts for your profile'
+             };
+             this.trigger({alert: alert});
+             console.warn(alert);
           }
         });
       return;
@@ -217,7 +234,14 @@ let Stream = Reflux.createStore({
       })
       .catch(code => {
         if (code != 200) {
-           msg('red', 'Could not load posts for this profile', code);
+           let alert = {
+             action: 'profile',
+             color: 'red',
+             code: code,
+             msg: 'Could not load posts for this profile'
+           };
+           this.trigger({alert: alert});
+           console.warn(alert);
         }
       });
   },
@@ -241,7 +265,14 @@ let Stream = Reflux.createStore({
       }
     })
     .catch(code => {
-      console.warn(code);
+      let alert = {
+        action: 'save',
+        color: 'red',
+        code: code,
+        msg: 'Could not save to folder'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   }
 });

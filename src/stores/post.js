@@ -4,8 +4,6 @@ let Reflux = require('reflux');
 let Actions = require('../actions/post');
 let posts = require('../api/posts');
 
-let msg = require("../actions/alerts").add;
-
 module.exports = Reflux.createStore({
   init: function () {
     this.post = {};
@@ -41,7 +39,14 @@ module.exports = Reflux.createStore({
     })
     .catch(code => {
       if (code != 200) {
-          msg('yellow', 'Post could not be loaded', code);
+        let alert = {
+          action: 'load',
+          color: 'yellow',
+          code: code,
+          msg: 'Post could not be loaded'
+        };
+        this.trigger({alert: alert});
+        console.warn(alert);
        }
     });
   },
@@ -55,8 +60,14 @@ module.exports = Reflux.createStore({
       this.trigger({add: true, post: data});
     })
     .catch(code => {
-       msg('red', 'Post could not be created', code);
-       return;
+      let alert = {
+        action: 'add',
+        color: 'red',
+        code: code,
+        msg: 'Post could not be created'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _save: function () {
@@ -66,8 +77,14 @@ module.exports = Reflux.createStore({
     })
     .catch(code => {
       if (code != 204) {
-        msg('red', 'Post could not be saved', code);
-        return;
+        let alert = {
+          action: 'save',
+          color: 'red',
+          code: code,
+          msg: 'Post could not be saved'
+        };
+        this.trigger({alert: alert});
+        console.warn(alert);
       }
     });
   },
@@ -78,8 +95,14 @@ module.exports = Reflux.createStore({
     })
     .catch(code => {
       if (code != 204) {
-        msg('red', 'Post could not be deleted', code);
-        return;
+        let alert = {
+          action: 'delete',
+          color: 'red',
+          code: code,
+          msg: 'Post could not be deleted'
+        };
+        this.trigger({alert: alert});
+        console.warn(alert);
       }
     });
   },
@@ -102,8 +125,14 @@ module.exports = Reflux.createStore({
     })
     .catch(code => {
       if (code != 200) {
-        msg('red', 'Poll could not be loaded', code);
-        return;
+        let alert = {
+          action: 'poll',
+          color: 'red',
+          code: code,
+          msg: 'Poll could not be loaded'
+        };
+        this.trigger({alert: alert});
+        console.warn(alert);
       }
     });
   },
@@ -115,8 +144,14 @@ module.exports = Reflux.createStore({
     })
     .catch(code => {
       if (code != 202) {
-        msg('red', 'Vote could not be saved', code);
-        return;
+        let alert = {
+          action: 'vote',
+          color: 'red',
+          code: code,
+          msg: 'Vote could not be saved'
+        };
+        this.trigger({alert: alert});
+        console.warn(alert);
       }
     });
   }

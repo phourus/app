@@ -5,8 +5,6 @@ let Actions = require('../../actions/post/thumbs');
 
 let thumbs = require('../../api/thumbs');
 
-let msg = require("../../actions/alerts").add;
-
 module.exports = Reflux.createStore({
   postId: null,
   init: function () {
@@ -25,7 +23,14 @@ module.exports = Reflux.createStore({
       }
     })
     .catch(code => {
-      msg('red', 'Thumbs could not be loaded', code);
+      let alert = {
+        action: 'load',
+        color: 'red',
+        code: code,
+        msg: 'Thumbs could not be loaded'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _add: function (model) {
@@ -34,7 +39,14 @@ module.exports = Reflux.createStore({
       this._post(this.postId);
     })
     .catch(code => {
-      msg('red', 'Thumb could not be added', code);
+      let alert = {
+        action: 'add',
+        color: 'red',
+        code: code,
+        msg: 'Thumb could not be added'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _save: function (id, model) {
@@ -43,7 +55,14 @@ module.exports = Reflux.createStore({
       this._post(this.postId);
     })
     .catch(code => {
-      msg('red', 'Thumb could not be saved', code);
+      let alert = {
+        action: 'save',
+        color: 'red',
+        code: code,
+        msg: 'Thumb could not be saved'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _remove: function (id) {
@@ -52,7 +71,14 @@ module.exports = Reflux.createStore({
       this.trigger({id: null, positive: null});
     })
     .catch(code => {
-      msg('red', 'Thumb could not be removed', code);
+      let alert = {
+        action: 'remove',
+        color: 'red',
+        code: code,
+        msg: 'Thumb could not be removed'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   }
 });

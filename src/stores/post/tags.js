@@ -5,8 +5,6 @@ let Actions = require('../../actions/post/tags');
 
 let tags = require('../../api/tags');
 
-let msg = require("../../actions/alerts").add;
-
 module.exports = Reflux.createStore({
   init: function () {
     this.listenTo(Actions.add, this._add);
@@ -18,7 +16,14 @@ module.exports = Reflux.createStore({
       this.trigger({added: data});
     })
     .catch(code => {
-      msg('red', 'Tag could not be created', code);
+      let alert = {
+        action: 'add',
+        color: 'red',
+        code: code,
+        msg: 'Tag could not be created'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   },
   _remove: function (id) {
@@ -27,7 +32,14 @@ module.exports = Reflux.createStore({
       this.trigger({removed: id});
     })
     .catch(code => {
-      msg('red', 'Tag could not be removed', code);
+      let alert = {
+        action: 'remove',
+        color: 'red',
+        code: code,
+        msg: 'Tag could not be removed'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
     });
   }
 });
