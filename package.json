@@ -42,7 +42,7 @@
     "react-joyride": "^1.1.1",
     "react-markdown": "^1.2.4",
     "react-quill": "^0.3.0",
-    "react-router": "^1.0.3",
+    "react-router": "^2.0.0",
     "react-select": "^1.0.0-beta8",
     "reflux": "^0.2.6",
     "sendgrid": "^1.9.2",
