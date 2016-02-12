@@ -57,6 +57,10 @@ module.exports = React.createClass({
             <div className="number">0</div>
             <div className="label">Teams</div>
           </div>
+          <div onClick={this._select.bind(this, 'billing')} className={'billing' === view ? 'selected' : ''}>
+            <div className="number"><i className="fa fa-check" /></div>
+            <div className="label">Billing</div>
+          </div>
         </div>
       )
     },

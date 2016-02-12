@@ -22,7 +22,7 @@ let Education = require('./react/organizations');
 let Government = require('./react/organizations');
 let Nonprofit = require('./react/organizations');
 
-let Categories = require('./react/admin/categories');
+let Billing = require('./react/admin/billing');
 let Details = require('./react/admin/details');
 let Members = require('./react/admin/members');
 let Teams = require('./react/admin/teams');
@@ -59,8 +59,8 @@ module.exports = (
     <Route path="admin/:id" component={Admin}>
       <Route path="details" component={Details} />
       <Route path="members" component={Members} />
-      <Route path="categories" component={Categories} />
       <Route path="teams" component={Teams} />
+      <Route path="billing" component={Billing} />
     </Route>
     <Route path="*" component={View404} />
   </Route>
