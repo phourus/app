@@ -6,8 +6,6 @@ let { Link, History } = Router;
 let Actions = require('../actions/post');
 let Store = require('../stores/post');
 
-let AccountStore = require('../stores/account');
-let AccountActions = require('../actions/account');
 let TutorialActions = require('../actions/tutorial');
 
 let ActionsView = require('./post/actions');
@@ -29,6 +27,9 @@ let Drag = require('./post/drag');
 
 let Post = React.createClass({
 	mixins: [History],
+	contextTypes: {
+		session: React.PropTypes.object
+	},
 	getInitialState: function () {
 		return {
 			scroll: false,
@@ -80,17 +81,10 @@ let Post = React.createClass({
 				this.setState({post: current});
 			}
 		});
-		this.unsubscribeAccount = AccountStore.listen(data => {
-			if (data.user) {
-				this.setState({user: data.user});
-			}
-		});
-		AccountActions.get();
 		this._context(this.props._route);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
-		this.unsubscribeAccount();
 	},
 	componentWillReceiveProps: function (nextProps) {
 		if (nextProps._route) {
@@ -120,10 +114,10 @@ let Post = React.createClass({
 		}
 	},
 	_owner: function () {
-		let user = this.state.user;
+		let session = this.context.session;
+		let user = session.user;
 		let post = this.state.post;
-		if (!user || !user.id) {
-			AccountActions.get();
+		if (!session.authenticated || !user.id) {
 			return false;
 		}
 		let sharedPosts = user && user.SESSION_POSTS && user.SESSION_POSTS.constructor === Array ? user.SESSION_POSTS : [];
@@ -132,10 +126,23 @@ let Post = React.createClass({
 });
 
 let Create = React.createClass({
+	contextTypes: {
+		session: React.PropTypes.object
+	},
 	componentDidUpdate: function () {
 		TutorialActions.ready(true);
 	},
 	render: function () {
+		let session = this.context.session;
+
+		// 401
+		if (!session.authenticated) {
+			return (<div className="create 401">
+				<h2>You need to login first to create posts</h2>
+				<p>Please log in or create an account if you'd like create a post.</p>
+			</div>);
+		}
+
 		return (
 			<div className="create">
 				<div className="toolbar"></div>
@@ -149,18 +156,33 @@ let Create = React.createClass({
 });
 
 let Edit = React.createClass({
+	contextTypes: {
+		session: React.PropTypes.object
+	},
 	componentDidUpdate: function () {
 		if (this.props.owner) {
 			TutorialActions.ready(true);
 		}
 	},
 	render: function () {
-		if (!this.props.owner) {
-			return (<div className="edit 403">
-				<h2>You are not authorized to edit this post</h2>
+		let session = this.context.session;
+
+		// 401
+		if (!session.authenticated) {
+			return (<div className="edit 401">
+				<h2>You need to login first to edit posts</h2>
 				<p>If you are the author or collaborator for this post, please make sure you are logged in.</p>
 			</div>);
 		}
+
+		// 403
+		if (!this.props.owner) {
+			return (<div className="edit 403">
+				<h2>You are not authorized to edit this post</h2>
+				<p>You must be the author or a collaborator to edit this post.</p>
+			</div>);
+		}
+
 		return (
 			<div className="edit">
 				<div className="toolbar"></div>

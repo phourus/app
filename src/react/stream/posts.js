@@ -3,45 +3,19 @@ let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
 
-let AccountStore = require('../../stores/account');
-let AccountActions = require('../../actions/account');
-
 let TutorialActions = require('../../actions/tutorial');
 
 let Loader = require('../shared/loader');
 let Post = require('../post');
 
 module.exports = React.createClass({
+	contextTypes: {
+		session: React.PropTypes.object
+	},
 	getDefaultProps: function () {
 		return {
 			posts: []
 		};
-	},
-	getInitialState: function () {
-		return {
-			ready: false,
-			user: {
-				id: 0
-			}
-		};
-	},
-	componentDidMount: function () {
-		this.unsubscribe = AccountStore.listen((data) => {
-			if (this.state.ready === false) {
-				data.ready = true;
-			}
-			// privacy click re-render issue
-			if (!data.orgs) {
-				this.setState(data);
-			}
-		});
-		AccountActions.get();
-	},
-	componentWillReceiveProps: function () {
-		this.forceUpdate();
-	},
-	componentWillUnmount: function () {
-		this.unsubscribe();
 	},
 	componentDidUpdate: function () {
 		let posts = this.props.posts;
@@ -71,8 +45,9 @@ module.exports = React.createClass({
 		);
 	},
 	_owner: function (post) {
-		let user = this.state.user;
-		if (!user || !user.id) {
+		let session = this.context.session;
+		let user = session.user;
+		if (!session.authenticated || !user.id) {
 			return false;
 		}
 		let sharedPosts = user && user.SESSION_POSTS && user.SESSION_POSTS.constructor === Array ? user.SESSION_POSTS : [];

@@ -3,31 +3,34 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 
-let Store = require('../stores/profile');
-let Actions = require('../actions/profile');
+let UserStore = require('../stores/users');
+let UserActions = require('../actions/profile').User;
 
-let AccountStore = require('../stores/account');
-let AccountActions = require('../actions/account');
+let OrgStore = require('../stores/orgs');
+let OrgActions = require('../actions/profile').Org;
+
 let PostStore = require('../stores/post');
 let PostActions = require('../actions/post');
+
 let Pic = require('./shared/pic');
 let Uploader = require('./shared/uploader');
 
 let Profile = React.createClass({
 	mixins: [History],
+	contextTypes: {
+		session: React.PropTypes.object
+	},
   getInitialState: function () {
     return {
 			profile: null
     };
   },
 	componentDidMount: function () {
-		this.unsubscribe = Store.listen((data) => {
+		this.unsubscribeUser = UserStore.listen((data) => {
 			this.setState({profile: data});
 		});
-		this.unsubscribeAccount = AccountStore.listen((data) => {
-			if (data.action === 'get' && data.user) {
-				this.setState({profile: data.user});
-			}
+		this.unsubscribeOrg = OrgStore.listen((data) => {
+			this.setState({profile: data});
 		});
 		this.unsubscribePosts = PostStore.listen((data) => {
 			let post = data.post || {};
@@ -40,8 +43,8 @@ let Profile = React.createClass({
 		this._load(this.props._route);
 	},
 	componentWillUnmount: function () {
-		this.unsubscribe();
-		this.unsubscribeAccount();
+		this.unsubscribeUser();
+		this.unsubscribeOrg();
 		this.unsubscribePosts();
 	},
 	componentWillReceiveProps: function (nextProps) {
@@ -97,22 +100,20 @@ let Profile = React.createClass({
 		let id = route.id;
 		// ADMIN
 		if (root === 'admin' && id > 0) {
-			Actions.Org.single(id);
+			OrgActions.single(id);
 		}
 		// ACCOUNT
 		if (root === 'account') {
-			AccountActions.get();
+			let session = this.context.session;
+			this.setState({profile: session.user});
 		}
 		// STREAM
 		if (root === 'stream') {
-			if (type === 'me' || type === 'create' || type === 'edit') {
-				AccountActions.get();
-			}
 			if (type === 'user') {
-				Actions.User.single(id);
+				UserActions.single(id);
 			}
 			if (type === 'org') {
-				Actions.Org.single(id);
+				OrgActions.single(id);
 			}
 		}
 	}

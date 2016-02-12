@@ -1,13 +1,16 @@
 "use strict";
 let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
-let Store = require('../../stores/account');
-let Actions = require('../../actions/account');
-
 let Select = require('react-select');
 
-let Orgs = React.createClass({
+let Router = require('react-router');
+let { Link, History } = Router;
+
+let Store = require('../../stores/orgs');
+let Actions = require('../../actions/profile').Org;
+
+let MemberActions = require('../../actions/members');
+
+module.exports = React.createClass({
   render: function () {
     return (
       <div className="orgs">
@@ -40,7 +43,7 @@ let Create = React.createClass({
     this.setState({name: value});
   },
   _create: function () {
-    Actions.createOrganization(this.state.name);
+    Actions.create(this.state.name);
   }
 });
 
@@ -75,7 +78,7 @@ let Search = React.createClass({
       onChange={this._change} />
   },
   _change: function (selected) {
-    Actions.joinOrganization(selected.value);
+    MemberActions.request(selected.value);
     // let current = this._values().map((data) => {
     //   return data.value;
     // });
@@ -129,26 +132,15 @@ let Search = React.createClass({
 
 let List = React.createClass({
   mixins: [History],
-  getInitialState: function () {
-    return {
-      orgs: []
-    }
-  },
-  componentDidMount: function () {
-    this.unsubscribe = Store.listen((data) => {
-      if (data.orgs) {
-        this.setState({orgs: data.orgs});
-      }
-    });
-    Actions.orgs();
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
+  contextTypes: {
+    session: React.PropTypes.object
   },
   render: function () {
+    let session = this.context.session;
+    let orgs = session.orgs;
     return (
       <div className="list">
-        {this.state.orgs.map((item) => {
+        {orgs.map((item) => {
           var admin = false;
           if (item.admin === true && item.approved) {
             admin = <button id={item.org.id} className="button blue" onClick={this._edit}>Admin</button>
@@ -181,8 +173,6 @@ let List = React.createClass({
   },
   _remove: function (e) {
     var id = e.currentTarget.id;
-    Actions.removeOrganization(id);
+    MemberActions.remove(id);
   }
 });
-
-module.exports = Orgs;

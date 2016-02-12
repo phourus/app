@@ -2,8 +2,8 @@
 let React = require('react');
 let Router = require('react-router');
 let { History, Link } = Router;
-let Actions = require('../../actions/account');
-let Store = require('../../stores/account');
+let Actions = require('../../actions/auth');
+let Store = require('../../stores/auth');
 let ga = require('../../analytics');
 
 module.exports = React.createClass({

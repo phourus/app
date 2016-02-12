@@ -1,10 +1,17 @@
 "use strict";
 let React = require('react');
+let ga = require('../../analytics');
+
 let Router = require('react-router');
 let { Link, History } = Router;
-let Actions = require('../../actions/account');
-let Store = require('../../stores/account');
-let ga = require('../../analytics');
+
+let Actions = require('../../actions/auth');
+let Store = require('../../stores/auth');
+
+let ProfileActions = require('../../actions/profile').Orgs;
+let ProfileStore = require('../../stores/orgs');
+
+let MemberActions = require('../../actions/members');
 
 module.exports = React.createClass({
   mixins: [History],
@@ -30,6 +37,8 @@ module.exports = React.createClass({
       if (data.user && data.user.id) {
         this.setState({user: data.user, step: 1});
       }
+    });
+    this.unsubscribeProfile = ProfileStore.listen(data => {
       if (data.org) {
         this.setState({org: data.org, step: 2});
       }
@@ -37,6 +46,7 @@ module.exports = React.createClass({
   },
   componentWillUnmount: function () {
     this.unsubscribe();
+    this.unsubscribeProfile();
   },
   componentDidUpdate: function () {
     if (this.state.loaded === false) {
@@ -190,11 +200,11 @@ module.exports = React.createClass({
   },
   _organizations: function (e) {
     if (this.state.user && this.state.user.id) {
-      Actions.createOrganization(this.state.organization);
+      ProfileActions.create(this.state.organization);
     }
   },
   _join: function (orgId) {
-    Actions.joinOrganization(orgId);
+    MemberActions.request(orgId);
   },
   _skip: function () {
     this.setState({step: 2});

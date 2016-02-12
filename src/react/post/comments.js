@@ -8,11 +8,12 @@ let ga = require('../../analytics');
 let Actions = require('../../actions/post/comments');
 let Store = require('../../stores/post/comments');
 
-let AccountStore = require('../../stores/account');
-
 let Pic = require('../shared/pic');
 
 let Comments = React.createClass({
+  contextTypes: {
+    session: React.PropTypes.object
+  },
   getInitialState: function () {
     return {
 			ready: false,
@@ -26,7 +27,7 @@ let Comments = React.createClass({
 				data.ready = true;
 			}
       if (data.added) {
-        data.added.user = AccountStore.user;
+        data.added.user = this.context.session.user;
         data.rows = this.state.rows;
         data.rows.unshift(data.added);
       }
@@ -44,6 +45,7 @@ let Comments = React.createClass({
   render: function () {
     let create = <h3>You must be logged-in to comment</h3>
     let token = null;
+    let session = this.context.session;
     if (token === null) {
       //pic = <a href="#user/{this.props.id}"><img src="{this.props.pic}" width="100"></a>
     }
@@ -60,7 +62,7 @@ let Comments = React.createClass({
     } else {
 			//comments = <Loader />
 		}
-    if (AccountStore.authenticated) {
+    if (session.authenticated) {
       create = <Comments.Create post={this.props.post} />
     }
     return (

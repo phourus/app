@@ -3,11 +3,11 @@ let React = require('react');
 let Router = require('react-router');
 let { History } = Router;
 
-let Actions = require('../../actions/post');
+
 let Store = require('../../stores/post/collaborators');
-let ActionsCollaborators = require('../../actions/post/collaborators');
-let ActionsAccount = require('../../actions/account');
-let AccountStore = require('../../stores/account');
+let Actions = require('../../actions/post/collaborators');
+
+let PostActions = require('../../actions/post');
 
 let Select = require('react-select');
 
@@ -40,9 +40,6 @@ let Privacy = React.createClass({
 		if (this.props._route.type !== 'edit') {
 			return <i className={icons[privacy]} />
 		}
-		// <button className={classes.private} onClick={this._private}>Private</button>
-		// <button className={classes.members} onClick={this._members}>{!this.props.post.orgId || this.props.post.orgId === 'null' ? "Phourus Members only" : "Organization Members only" }</button>
-		// <button className={classes.public} onClick={this._public}>Public</button>
 
 		return (
 			<div className="privacy">
@@ -71,40 +68,29 @@ let Privacy = React.createClass({
 		this.setState({privacy: !this.state.privacy});
 	},
 	_private: function (e) {
-		Actions.change('privacy', 'private');
+		PostActions.change('privacy', 'private');
 	},
 	_members: function (e) {
-		Actions.change('privacy', 'members');
+		PostActions.change('privacy', 'members');
 	},
 	_public: function (e) {
-		Actions.change('privacy', 'public');
+		PostActions.change('privacy', 'public');
 	},
 });
 
 let Contexts = React.createClass({
   mixins: [History],
-  getInitialState: function () {
-    return {
-      orgs: []
-    };
-  },
-  componentDidMount: function () {
-    this.unsubscribe = AccountStore.listen((data) => {
-      if (data.orgs) {
-        this.setState({orgs: data.orgs});
-      }
-    });
-    ActionsAccount.orgs();
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
-  },
+	contextTypes: {
+		session: React.PropTypes.object
+	},
   render: function () {
+		let session = this.context.session;
+		let orgs = session.orgs || [];
     return (
       <div className="contexts">
 				<select onChange={this._select} value={this.props.post.orgId}>
 					<option value="null">Post on my behalf</option>
-					{this.state.orgs.map((item) => {
+					{orgs.map((item) => {
 						if (item.approved !== true) {
 							return false;
 						}
@@ -119,7 +105,7 @@ let Contexts = React.createClass({
     );
   },
   _select: function (e) {
-		Actions.change('orgId', e.currentTarget.value);
+		PostActions.change('orgId', e.currentTarget.value);
   }
 });
 
@@ -139,12 +125,12 @@ let Collaborators = React.createClass({
 		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
 		});
-		ActionsCollaborators.collection(this.props.post.id);
-		ActionsCollaborators.lookup(this.props.post.orgId);
+		Actions.collection(this.props.post.id);
+		Actions.lookup(this.props.post.orgId);
 	},
 	componentWillReceiveProps: function (updated) {
 		if (updated.post && updated.post.orgId) {
-			ActionsCollaborators.lookup(updated.post.orgId);
+			Actions.lookup(updated.post.orgId);
 		}
 	},
 	componentWillUnmount: function () {
@@ -187,10 +173,10 @@ let Collaborators = React.createClass({
 			} else {
 				return;
 			}
-			ActionsCollaborators.add(model);
+			Actions.add(model);
 		}
 		if (diff.action === 'remove') {
-			ActionsCollaborators.remove(diff.type, diff.id);
+			Actions.remove(diff.type, diff.id);
 		}
 	},
 	_diff: function (updated, current) {

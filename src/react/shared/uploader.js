@@ -3,7 +3,7 @@ let React = require('react');
 let Router = require('react-router');
 let { RouteHandler, Link } = Router;
 
-let AccountActions = require('../../actions/account');
+let AccountActions = require('../../actions/profile').User;
 let OrgActions = require('../../actions/profile').Org;
 
 let ImageUploader = require('../../pic');
@@ -66,7 +66,7 @@ module.exports = React.createClass({
     } else {
       options.uploadUrl = '/rest/account/pic';
       options.onComplete = function (event) {
-        AccountActions.get();
+        UserActions.get();
       };
     }
 

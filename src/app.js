@@ -9,17 +9,72 @@ let Header = require('./react/header');
 let Profile = require('./react/profile');
 let Tutorial = require('./react/tutorial');
 
+let Actions = require('./actions/session');
+let Store = require('./stores/session');
+
 let TutorialActions = require('./actions/tutorial');
 
 let HTML5Backend = require('react-dnd-html5-backend');
 let { DragDropContext } = require('react-dnd');
 
 let App = React.createClass({
+  childContextTypes: {
+    session: React.PropTypes.object,
+    route: React.PropTypes.object
+  },
+  getChildContext: function () {
+    return {
+      session: this.state.session,
+      route: this.state.route
+    };
+  },
   getInitialState: function () {
     return {
       sidebarVisible: false,
-      tint: null
+      tint: null,
+      session: {
+        authenticated: false,
+        user: {
+          SESSION_ADMIN: [],
+          SESSION_ORGANIZATIONS: [],
+          SESSION_POSTS: [],
+          SESSION_TEAMS: [],
+          SESSION_USER: 0
+        },
+        orgs: []
+      },
+      route: {
+        route: [],
+        params: {},
+        query: {},
+        root: '',
+        id: '',
+        type: ''
+      }
     };
+  },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen(data => {
+      let session = this.state.session;
+
+      // get
+      if (data.authenticated === true) {
+        session.authenticated = true;
+        session.user = data.user;
+      }
+
+      // orgs
+      if (data.orgs) {
+        session.orgs = data.orgs;
+      }
+
+      this.setState({session: session});
+    });
+    Actions.get();
+    Actions.orgs();
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
   },
   render: function () {
     let className = "main";

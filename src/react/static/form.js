@@ -1,28 +1,30 @@
 "use strict";
 let React = require('react');
 
-let Store = require('../../stores/account');
-let Actions = require('../../actions/account');
+let Actions = require('../../actions/util');
+let Store = require('../../stores/util');
 
 module.exports = React.createClass({
+  contextTypes: {
+    session: React.PropTypes.object
+  },
   getInitialState: function () {
     return {
       email: "",
-      message: "",
-      user: {}
+      message: ""
     };
   },
   componentDidMount: function () {
+    let session = this.context.session;
+    let user = session.user;
+    if (user && user.email) {
+      this.setState({email: user.email});
+    }
     this.unsubscribe = Store.listen((data) => {
-      this.setState(data);
-      if (data.user && data.user.email) {
-        this.setState(data.user.email);
-      }
       if (data.code === 200) {
         this.setState({email: "", message: "", code: 200});
       }
     });
-    Actions.get();
   },
   componentWillUnmount: function () {
     this.unsubscribe();

@@ -1,16 +1,37 @@
 'use strict';
 let React = require('react');
 
-let Actions = require('../../actions/admin');
+let Actions = require('../../actions/members');
+let Store = require('../../stores/members');
 
 let Pic = require('../shared/pic');
 
 module.exports = React.createClass({
+  getDefaultProps: function () {
+    return {
+      _route: {}
+    };
+  },
+  getInitialState: function () {
+    return {
+      members: []
+    };
+  },
+  componentDidMount: function () {
+    let route = this.props._route;
+    this.unsubscribe = Store.listen(data => {
+      this.setState({members: data});
+    });
+    Actions.collection(route.id);
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
     return (
       <div className="members">
         <h2>Manage Users</h2>
-        {this.props.members.map(member => {
+        {this.state.members.map(member => {
           return (
             <div>
               <Pic img={member.img} id={member.id} type="user" name={member.username} />
@@ -36,15 +57,15 @@ module.exports = React.createClass({
     );
   },
   _approve: function (e) {
-    Actions.Members.approve(e.currentTarget.id);
+    Actions.approve(e.currentTarget.id);
   },
   _admin: function (e) {
-    Actions.Members.admin(e.currentTarget.id);
+    Actions.admin(e.currentTarget.id);
   },
   _revoke: function (e) {
-    Actions.Members.revoke(e.currentTarget.id);
+    Actions.revoke(e.currentTarget.id);
   },
   _deny: function (e) {
-    Actions.Members.deny(e.currentTarget.id);
+    Actions.deny(e.currentTarget.id);
   }
 });

@@ -2,19 +2,35 @@
 let React = require('react');
 let ga = require('../../analytics');
 
-let Actions = require('../../actions/account');
+let Store = require('../../stores/users');
+let Actions = require('../../actions/profile').User;
+
+let TutorialActions = require('../../actions/tutorial');
 
 module.exports = React.createClass({
-  getDefaultProps: function () {
+  contextTypes: {
+    session: React.PropTypes.object
+  },
+  getInitialState: function () {
     return {
       user: {},
       changes: {}
     };
   },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen((data) => {
+      this.setState(data);
+    });
+    TutorialActions.ready(true);
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
-    let account = this.props.user;
-    Object.keys(this.props.changes).forEach((key) => {
-      account[key] = this.props.changes[key];
+    let session = this.context.session;
+    let account = session.user;
+    Object.keys(this.state.changes).forEach((key) => {
+      account[key] = this.state.changes[key];
     });
     return (
       <div className="info">
@@ -68,7 +84,7 @@ module.exports = React.createClass({
   _dob: function (e) { Actions.change('dob', e.currentTarget.value); },
   _gender: function (e) { Actions.change('gender', e.currentTarget.value); },
   _save: function () {
-    Actions.edit();
+    Actions.save();
     ga('send', 'event', 'account', 'edit');
   }
 });

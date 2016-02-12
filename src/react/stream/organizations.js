@@ -3,30 +3,18 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 
-let AccountStore = require('../../stores/account');
-let AccountActions = require('../../actions/account');
-
 let Pic = require('../shared/pic');
 
 module.exports = React.createClass({
 	mixins: [History],
-	getInitialState: function () {
-		return {
-			orgs: []
-		};
-	},
-	componentDidMount: function () {
-		this.unsubscribe = AccountStore.listen((data) => {
-			this.setState(data);
-		});
-		AccountActions.orgs();
-	},
-	componentWillUnmount: function () {
-		this.unsubscribe();
+	contextTypes: {
+		session: React.PropTypes.object
 	},
 	render: function () {
-		let membership = this.state.orgs || [];
-		let selected = this.state.orgs.filter((org) => {
+		let session = this.context.session;
+		let orgs = session.orgs || [];
+		let membership = orgs;
+		let selected = orgs.filter((org) => {
 			if (org.orgId.toString() === this.props._route.id) {
 				return true;
 			}

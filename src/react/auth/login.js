@@ -1,13 +1,18 @@
 "use strict";
 let React = require('react');
+let ga = require('../../analytics');
+
 let Router = require('react-router');
 let { History, Link } = Router;
-let Actions = require('../../actions/account');
-let Store = require('../../stores/account');
-let ga = require('../../analytics');
+
+let Actions = require('../../actions/session');
+let Store = require('../../stores/session');
 
 module.exports = React.createClass({
   mixins: [History],
+  contextTypes: {
+    session: React.PropTypes.object
+  },
   getDefaultProps: function () {
     return {
       clicked: true,
@@ -21,28 +26,24 @@ module.exports = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen(data => {
-      if (data.code === 200 && this.state.loaded && this.state.clicked === true) {
+      if (data.code === 200 && this.state.clicked === true) {
         data.clicked = false;
         this.history.pushState(null, "/stream");
       }
       this.setState(data);
     });
-    Actions.get();
   },
   componentWillUnmount: function () {
     this.unsubscribe();
   },
-  componentDidUpdate: function () {
-    if (this.state.loaded === false) {
-      this.setState({code: null, loaded: true});
-    }
-  },
   render: function () {
+    let session = this.context.session;
+    let user = session.user;
     if (!this.props.show) {
       return false;
     }
-    if (this.state.user) {
-      let name = this.state.user.first;
+    if (session.authenticated) {
+      let name = user.first;
       return (
         <div className="login">
           <span className="welcome">Welcome back{name ? " " + name : ""}! <Link to="/stream">Click here to view posts</Link></span><br />

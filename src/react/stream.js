@@ -1,7 +1,6 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let posts = require('../api/posts');
 
 let Store = require('../stores/stream');
 let Actions = require('../actions/stream');

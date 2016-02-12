@@ -3,9 +3,17 @@ let Reflux = require('reflux');
 
 module.exports = {
   User: {
-    single: Reflux.createAction()
+    change: Reflux.createAction(),
+    single: Reflux.createAction(),
+    save: Reflux.createAction(),
+    deactivate: Reflux.createAction()
   },
   Org: {
-    single: Reflux.createAction()
+    change: Reflux.createAction(),
+    create: Reflux.createAction(),
+    single: Reflux.createAction(),
+    save: Reflux.createAction(),
+    lookup: Reflux.createAction(),
+    deactivate: Reflux.createAction()
   }
-}
+};
