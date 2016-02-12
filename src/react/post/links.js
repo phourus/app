@@ -13,6 +13,9 @@ let Store = require('../../stores/post/links');
 // let s3 = new S3();
 
 let Links = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	getDefaultProps: function () {
 		return {
 			owner: false
@@ -61,7 +64,7 @@ let Links = React.createClass({
 		}
 	},
 	render: function () {
-		let route = this.props._route;
+		let route = this.context.route;
 		let type = route.type;
 		return (
 			<div className="links">
@@ -74,7 +77,7 @@ let Links = React.createClass({
 					? <Links.Edit {...this.state} edit={this._edit} hide={this._hide} />
 					: false
 				}
-				<Links.List {...this.state} _route={this.props._route} owner={this.props.owner} edit={this._edit} />
+				<Links.List {...this.state} owner={this.props.owner} edit={this._edit} />
 			</div>
 		);
 	},
@@ -93,6 +96,9 @@ let Links = React.createClass({
 });
 
 Links.List = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	render: function () {
 		let links = this.props.post.links || [];
 		if (links.length < 1) {
@@ -113,13 +119,13 @@ Links.List = React.createClass({
 						<div className="link" key={item.id}>
 							<div className="icon">
 								<i className={icon} />
-								{this.props._route.type === 'edit' && this.props.owner
+								{this.context.route.type === 'edit' && this.props.owner
 									? <a id={index} href="javascript:void(0)" className="edit" onClick={this.props.edit}>Edit</a>
 									: false
 								}
 							</div>
 							<div>
-								{this.props._route.type === 'edit' && this.props.owner
+								{this.context.route.type === 'edit' && this.props.owner
 									? <button id={item.id} className="remove" onClick={this._remove}>X</button>
 									: false
 								}

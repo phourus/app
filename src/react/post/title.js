@@ -6,6 +6,9 @@ let { Link } = Router;
 let Actions = require('../../actions/post');
 
 module.exports = React.createClass({
+  contextTypes: {
+    route: React.PropTypes.object
+  },
   getDefaultProps: function () {
     return {
       post: {
@@ -15,7 +18,7 @@ module.exports = React.createClass({
     };
   },
   render: function () {
-    return this.props._route.type === 'create' || this.props._route.type === 'edit' && this.props.owner
+    return this.context.route.type === 'create' || this.context.route.type === 'edit' && this.props.owner
     ? <input className="title editing" onChange={this._title} value={this.props.post.title} />
   : <h2 className="title"><Link to={`/post/${this.props.post.id}`}>{this.props.post.title}</Link></h2>;
   },

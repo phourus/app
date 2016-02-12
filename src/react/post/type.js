@@ -30,6 +30,9 @@ let descriptions = {
 };
 
 module.exports = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	getInitialState: function () {
 		return {
 			select: false
@@ -63,12 +66,12 @@ module.exports = React.createClass({
 					{" "}
 					{this.props.post.type}
 				</div>
-				{this.state.select ? <Selector post={this.props.post} type={this._type} _route={this.props._route} owner={this.props.owner} /> : false}
+				{this.state.select ? <Selector post={this.props.post} type={this._type} owner={this.props.owner} /> : false}
 			</div>
 		);
 	},
 	_select: function (e) {
-		let route = this.props._route;
+		let route = this.context.route;
 		let type = route.type;
 		if (type === 'create' || type === 'edit' && this.props.owner) {
 			this.setState({select: !this.state.select});
@@ -92,7 +95,7 @@ let Selector = React.createClass({
 						{item === 0
 							? <div className="">
 									<p>{descriptions[item]}</p>
-									<Meta {...this.props} _route={this.props._route} owner={this.props.owner} />
+									<Meta {...this.props} owner={this.props.owner} />
 								</div>
 							: false
 						}

@@ -6,6 +6,9 @@ let Store = require('../../stores/post/tags');
 let StreamActions = require('../../actions/stream');
 
 let Tags = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	getDefaultProps: function () {
 		return {
 			post: {
@@ -52,7 +55,7 @@ let Tags = React.createClass({
 	},
 	render: function () {
     let tags = this.state.post.tags || [];
-		let route = this.props._route;
+		let route = this.context.route;
 		let type = route.type;
 		return (
       <div className="tags">

@@ -76,10 +76,13 @@ let App = React.createClass({
   componentWillUnmount: function () {
     this.unsubscribe();
   },
+  componentWillReceiveProps: function (nextProps) {
+    this._route(nextProps);
+  },
   render: function () {
     let className = "main";
-    let _route = this._route();
-    let root = _route.root;
+    let route = this.state.route;
+    let root = route.root;
 
     if (root === 'stream') {
       className += " sidebar";
@@ -90,19 +93,15 @@ let App = React.createClass({
     }
     return  (
       <div id="app">
-        <Tutorial _route={_route} />
+        <Tutorial />
         <Initializer />
-        <Header _route={_route} tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
+        <Header tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
         {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
         <div className="spacer"></div>
-        <Profile _route={_route} />
+        <Profile />
         <div>
           <div id="content">
-            {React.cloneElement(this.props.children,
-              {
-                _route: _route
-              }
-            )}
+            {React.cloneElement(this.props.children, {})}
           </div>
         </div>
         <Helper />
@@ -125,10 +124,10 @@ let App = React.createClass({
   _tintOff: function () {
     this.setState({tint: null});
   },
-  _route: function () {
+  _route: function (nextProps) {
     let context = {
-      route: this.props.routes || [],
-      params: this.props.params || {},
+      route: nextProps.routes || [],
+      params: nextProps.params || {},
       //query: this.props.location.query || {},
       root: '',
       id: '',
@@ -177,7 +176,7 @@ let App = React.createClass({
     if (context.root === 'edit' || context.root === 'post' || context.root === 'create') {
       context.type = context.root;
     }
-    return context;
+    this.setState({route: context});
   }
 });
 

@@ -50,13 +50,16 @@ module.exports = React.createClass({
 					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>
 				</div>
-				<Extra post={this.props.post} _route={this.props._route} />
+				<Extra post={this.props.post} />
 			</div>
 		);
 	}
 });
 
 let Extra = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	render: function () {
 		return false;
 		let type = this.props.post.type;
@@ -69,7 +72,7 @@ let Extra = React.createClass({
 				{this.props.post.when && moment(this.props.post.when).format() !== 'Invalid date' ? <div className="when">{moment(this.props.post.when).format('MMMM Do @ h:mm a')}</div> : false}
 				{this.props.post.location ? <div className="location">{this.props.post.location}</div> : false}
 			</div>);
-		} else if (this.props._route.type !== 'post' && this.props._route.type !== 'edit') {
+		} else if (this.context.route.type !== 'post' && this.context.route.type !== 'edit') {
 			let excerpt = "";
 			if (this.props.post && this.props.post.content) {
 				excerpt = this.props.post.content.replace(/(<([^>]+)>)/ig, "");

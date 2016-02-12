@@ -11,10 +11,8 @@ let MemberStore = require('../../stores/members');
 
 module.exports = React.createClass({
     mixins: [History],
-    getDefaultProps: function () {
-      return {
-        _route: {}
-      };
+    contextTypes: {
+      route: React.PropTypes.object
     },
     getInitialState: function () {
       return {
@@ -23,7 +21,7 @@ module.exports = React.createClass({
       };
     },
     componentDidMount: function () {
-      let session = this.props._route;
+      let session = this.context.route;
       this.unsubscribeOrgs = OrgStore.listen(data => {
         this.setState({org: data});
       });
@@ -40,7 +38,7 @@ module.exports = React.createClass({
       this.unsubscribeMembers();
     },
     render: function () {
-      let route = this.props._route;
+      let route = this.context.route;
       let view = route.type;
 
       let details = this._details();
@@ -63,7 +61,7 @@ module.exports = React.createClass({
       )
     },
     _select: function (tab) {
-      let route = this.props._route;
+      let route = this.context.route;
       let id = route.id;
       if (id) {
         this.history.pushState(null, `/admin/${id}/${tab}`);

@@ -8,6 +8,9 @@ let Forgot = require('../auth/forgot');
 let Reset = require('../auth/reset');
 
 module.exports = React.createClass({
+  contextTypes: {
+    route: React.PropTypes.object
+  },
   getInitialState: function () {
     return {
       login: true,
@@ -33,7 +36,7 @@ module.exports = React.createClass({
     );
   },
   _context: function () {
-    let query = this.props._route.query;
+    let query = this.context.route.query;
     if (query && query.reset && query.token) {
       this._showReset();
     }

@@ -11,7 +11,10 @@ let PostActions = require('../../actions/post');
 
 let Select = require('react-select');
 
-let Privacy = React.createClass({
+module.exports = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	getDefaultProps: function () {
 		return {
 			post: {},
@@ -37,16 +40,16 @@ let Privacy = React.createClass({
 			public: "button blue inverted"
 		};
 		classes[privacy] = "button blue";
-		if (this.props._route.type !== 'edit') {
+		if (this.context.route.type !== 'edit') {
 			return <i className={icons[privacy]} />
 		}
 
 		return (
 			<div className="privacy">
-				{this.props.owner && this.props._route.type === 'edit' && this.state.privacy
+				{this.props.owner && this.context.route.type === 'edit' && this.state.privacy
 					? <div>
 							<h2>Privacy
-								{this.props.owner && this.props._route.type === 'IGNORE'
+								{this.props.owner && this.context.route.type === 'IGNORE'
 									? <div className="privacyToggle" onClick={this._privacy}><i className={icons[privacy]} /> <span style={{textDecoration: 'underline'}}>{this.props.post.privacy}</span></div>
 									: false
 								}
@@ -240,5 +243,3 @@ let Collaborators = React.createClass({
 		return [];
 	}
 });
-
-module.exports = Privacy;

@@ -5,6 +5,9 @@ let RTE = require('react-quill');
 let Actions = require('../../actions/post');
 
 module.exports = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	getDefaultProps: function () {
 		return {
 			post: {},
@@ -12,7 +15,7 @@ module.exports = React.createClass({
 		}
 	},
 	render: function () {
-		let route = this.props._route;
+		let route = this.context.route;
 		let type = route.type;
 		return type === 'edit' && this.props.owner || type === 'create'
 		? <TextEditor post={this.props.post} />

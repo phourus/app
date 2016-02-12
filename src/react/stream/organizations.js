@@ -8,14 +8,15 @@ let Pic = require('../shared/pic');
 module.exports = React.createClass({
 	mixins: [History],
 	contextTypes: {
-		session: React.PropTypes.object
+		session: React.PropTypes.object,
+		route: React.PropTypes.object
 	},
 	render: function () {
 		let session = this.context.session;
 		let orgs = session.orgs || [];
 		let membership = orgs;
 		let selected = orgs.filter((org) => {
-			if (org.orgId.toString() === this.props._route.id) {
+			if (org.orgId.toString() === this.context.route.id) {
 				return true;
 			}
 			return false;

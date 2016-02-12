@@ -7,6 +7,9 @@ let Store = require('../../stores/post/thumbs');
 let Actions = require('../../actions/post/thumbs');
 
 let Thumbs = React.createClass({
+  contextTypes: {
+    route: React.PropTypes.object
+  },
    getDefaultProps: function () {
      return {
        post: {}
@@ -19,7 +22,7 @@ let Thumbs = React.createClass({
 		 }
 	 },
    componentDidMount: function () {
-     let params = this.props._route.params;
+     let params = this.context.route.params;
      this.unsubscribe = Store.listen((data) => {
 			 this.setState(data);
      });

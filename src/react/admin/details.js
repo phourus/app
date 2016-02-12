@@ -5,10 +5,8 @@ let Actions = require('../../actions/profile').Org;
 let Store = require('../../stores/orgs');
 
 module.exports = React.createClass({
-  getDefaultProps: function () {
-    return {
-      _route: {}
-    };
+  contextTypes: {
+    route: React.PropTypes.object
   },
   getInitialState: function () {
     return {
@@ -17,7 +15,7 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function () {
-    let route = this.props._route;
+    let route = this.context.route;
     this.unsubscribe = Store.listen(data => {
       this.setState(data);
     });

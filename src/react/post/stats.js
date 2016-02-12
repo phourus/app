@@ -13,6 +13,9 @@ let en = numeral.language('en');
 
 module.exports = React.createClass({
 	mixins: [History],
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	getDefaultProps: function () {
 		return {
 			post: {}
@@ -27,7 +30,7 @@ module.exports = React.createClass({
 	render: function () {
 		return (
 			<div className="interact" onClick={this._single}>
-				{this.props._route.type === 'post' ? <Thumbs post={this.props.post} _route={this.props._route} /> : false}
+				{this.context.route.type === 'post' ? <Thumbs post={this.props.post} /> : false}
 				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
 					<div>

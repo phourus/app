@@ -19,6 +19,9 @@ if (typeof window === 'object') {
 }
 
 module.exports = React.createClass({
+  contextTypes: {
+    route: React.PropTypes.object
+  },
   getInitialState: function () {
     return {
       active: true,
@@ -42,14 +45,14 @@ module.exports = React.createClass({
     this.unsubscribe();
   },
   componentWillReceiveProps: function (nextProps) {
-    let route = nextProps._route;
-    if (route) {
-      let current = this._current(route);
-      this.setState({module: current, ready: false});
-    }
+    // let route = nextProps._route;
+    // if (route) {
+    //   let current = this._current(route);
+    //   this.setState({module: current, ready: false});
+    // }
   },
   shouldComponentUpdate: function () {
-    let current = this._current(this.props._route);
+    let current = this._current(this.context.route);
     return this.state.module === current;
   },
   componentDidUpdate: function () {

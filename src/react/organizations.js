@@ -15,7 +15,7 @@ let Landing = React.createClass({
     return (
       <div className="landing">
         <Slider more={this._more} showSignup={this._signup} />
-        <Auth ref="auth" _route={this.props._route} />
+        <Auth ref="auth" />
         <Benefits ref="benefits" />
         <Example />
         <Features />

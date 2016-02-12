@@ -10,6 +10,9 @@ let ImageUploader = require('../../pic');
 let Token = require('../../token');
 
 module.exports = React.createClass({
+  contextTypes: {
+    route: React.PropTypes.object
+  },
   getInitialState: function () {
     return {
       img: '/assets/avatars/default.jpg',
@@ -54,8 +57,8 @@ module.exports = React.createClass({
       debug : true
     };
 
-    if (this.props._route.root === 'admin') {
-      let id = this.props._route.id;
+    if (this.context.route.root === 'admin') {
+      let id = this.context.route.id;
       if (!id) {
         return;
       }

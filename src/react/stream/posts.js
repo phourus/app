@@ -10,7 +10,8 @@ let Post = require('../post');
 
 module.exports = React.createClass({
 	contextTypes: {
-		session: React.PropTypes.object
+		session: React.PropTypes.object,
+		route: React.PropTypes.object
 	},
 	getDefaultProps: function () {
 		return {
@@ -24,7 +25,7 @@ module.exports = React.createClass({
 		}
 	},
 	render: function () {
-		let route = this.props._route;
+		let route = this.context.route;
 		if (this.props.posts === null) {
 			return <Loader />
 		}
@@ -39,7 +40,7 @@ module.exports = React.createClass({
 					 if (item.user.locations && item.user.locations.length > 0) {
 							 location = item.user.locations[0];
 					 }
-					 return <Post.Item key={item.id} post={item} user={item.user} _route={route} owner={owner} location={location} scroll={this.props.scroll} />;
+					 return <Post.Item key={item.id} post={item} user={item.user} owner={owner} location={location} scroll={this.props.scroll} />;
 				})}
 			</div>
 		);

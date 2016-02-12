@@ -6,8 +6,11 @@ let Actions = require('../../actions/post');
 let tax = require('../../taxonomy');
 
 let Meta = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	render: function () {
-		let route = this.props._route;
+		let route = this.context.route;
 	  let type = this.props.post.type;
 	  let classes = {};
 		for (var i in Object.keys(tax)) {

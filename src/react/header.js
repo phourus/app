@@ -12,11 +12,12 @@ let Search = require('./stream/search');
 module.exports = React.createClass({
   mixins: [History],
   contextTypes: {
-    session: React.PropTypes.object
+    session: React.PropTypes.object,
+    route: React.PropTypes.object
   },
   render: function () {
     let session = this.context.session;
-    let route = this.props._route;
+    let route = this.context.route;
     let r = route.root;
     if (!r || r === 'home') {
       return <Home />

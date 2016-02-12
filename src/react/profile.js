@@ -15,10 +15,11 @@ let PostActions = require('../actions/post');
 let Pic = require('./shared/pic');
 let Uploader = require('./shared/uploader');
 
-let Profile = React.createClass({
+module.exports = React.createClass({
 	mixins: [History],
 	contextTypes: {
-		session: React.PropTypes.object
+		session: React.PropTypes.object,
+		route: React.PropTypes.object
 	},
   getInitialState: function () {
     return {
@@ -40,7 +41,7 @@ let Profile = React.createClass({
 				this.setState({profile: post.user, type: 'user'});
 			}
 		});
-		this._load(this.props._route);
+		this._load(this.context.route);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribeUser();
@@ -48,15 +49,15 @@ let Profile = React.createClass({
 		this.unsubscribePosts();
 	},
 	componentWillReceiveProps: function (nextProps) {
-		if (nextProps._route) {
-			this._load(nextProps._route);
-		}
+		// if (nextProps._route) {
+		// 	this._load(nextProps._route);
+		// }
 	},
 	render: function () {
 		let profile = this.state.profile || {};
 		let address = profile.address || {};
-		let root = this.props._route.root;
-		let type = this.props._route.type;
+		let root = this.context.route.root;
+		let type = this.context.route.type;
 		if (type === 'post') {
 			profile = this.state.profile || {};
 		}
@@ -75,7 +76,7 @@ let Profile = React.createClass({
 		return (
 			<div className="profile">
 				{root === 'account' || root === 'admin'
-					? <Uploader img={profile.img} _route={this.props._route} />
+					? <Uploader img={profile.img} />
 					: <Pic id={profile.id} img={profile.img} type={this.state.type} name={this.state.type === 'org' ? profile.shortname : profile.username} />
 				}
 				<div className="basic">
@@ -134,5 +135,3 @@ let Basic = React.createClass({
     );
   }
 });
-
-module.exports = Profile;

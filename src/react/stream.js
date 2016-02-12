@@ -13,6 +13,9 @@ let Loader = require('./shared/loader');
 let Sidebar = require('./stream/sidebar');
 
 let Stream = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	getInitialState: function () {
 		return {
 			sidebarVisible: true,
@@ -33,18 +36,18 @@ let Stream = React.createClass({
 		this.unsubscribe = Store.listen((data) => {
 			this.setState(data);
 		});
-		this._load(this.props._route);
+		this._load(this.context.route);
 	},
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
 	componentWillReceiveProps: function (nextProps) {
-		if (nextProps._route) {
-			this._load(nextProps._route);
-		}
+		// if (nextProps._route) {
+		// 	this._load(nextProps._route);
+		// }
 	},
 	render: function () {
-		let route = this.props._route;
+		let route = this.context.route;
 		let type = route.type;
 		let id = route.id;
 		let visible = 'fa fa-minus-square-o';
@@ -62,7 +65,7 @@ let Stream = React.createClass({
 				<div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
 				<Sidebar sidebar={this._sidebar} sidebarVisible={this.state.sidebarVisible} />
 				<Scroll pageStart={0} loadMore={this._more} hasMore={hasMore} loader={<Loader />}>
-					<Posts {...this.state} _route={this.props._route} sidebarVisible={this.state.sidebarVisible} />
+					<Posts {...this.state} sidebarVisible={this.state.sidebarVisible} />
 				</Scroll>
 			</div>
 		);

@@ -6,9 +6,12 @@ let Actions = require('../../actions/post');
 let tax = require('../../taxonomy');
 
 let Categories = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	render: function () {
 		let type = tax[this.props.post.type] || {};
-		if (this.props.owner && this.props._route.type === 'edit') {
+		if (this.props.owner && this.context.route.type === 'edit') {
 			let cats = type.category || [];
 			let subs = type[this.props.post.category] || false;
 			return (
