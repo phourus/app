@@ -8,6 +8,9 @@ let Pic = require('../shared/pic');
 let Poll = require('./poll');
 
 module.exports = React.createClass({
+	contextTypes: {
+		route: React.PropTypes.object
+	},
 	getDefaultProps: function () {
 		return {
 			user: {
@@ -20,9 +23,11 @@ module.exports = React.createClass({
 		};
 	},
 	render: function () {
+		let route = this.context.route;
 		let context = 'user';
 		let profileName = "Phourus User";
 		let org = {};
+		let link = '';
 		if (this.props.post.user && this.props.post.user.id && this.props.post.user.id != 0) {
 			let user = this.props.post.user;
 			if (user.username) {
@@ -35,17 +40,18 @@ module.exports = React.createClass({
 		if (this.props.post.org && this.props.post.org.id && this.props.post.org.id != 0) {
 			org = this.props.post.org;
 			profileName = org.shortname;
+			link = route.createOrgLink(profileName);
 			context = 'org';
 		}
 		return (
 			<div className="details">
-				<Pic id={context === 'org' ? org.id : this.props.user.id} img={context === 'org' ? org.img : this.props.user.img} type={context} name={profileName} />
+				<Pic id={context === 'org' ? org.shortname : this.props.user.username} img={context === 'org' ? org.img : this.props.user.img} type={context} name={profileName} />
 				<div className="basic">
 					{context === 'org'
-						? <div><Link to={`/stream/org/${org.id}`}>{org.name}</Link><br /><br /></div>
+						? <div><a href={link}>{org.name}</a><br /><br /></div>
 						: false
 					}
-					<span>By <Link to={`/stream/user/${this.props.user.id}`}>{this.props.user.first} {this.props.user.last} </Link></span>
+					<span>By <Link to={`/${this.props.user.username}`}>{this.props.user.first} {this.props.user.last} </Link></span>
 					&bull;
 					<span className="location"> {this.props.location.city}, {this.props.location.state}</span>
 					<div className="created">{moment(this.props.post.createdAt).fromNow()}</div>

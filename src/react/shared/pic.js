@@ -4,6 +4,9 @@ let Router = require('react-router');
 let { Link } = Router;
 
 module.exports = React.createClass({
+  contextTypes: {
+    route: React.PropTypes.route
+  },
   getDefaultProps: function () {
     return {
       id: 0,
@@ -18,14 +21,20 @@ module.exports = React.createClass({
   },
   render: function () {
     let img = this.props.img;
+    let link = this.context.route.createOrgLink(this.props.id);
     if (this.state.default) {
       img = '/assets/avatars/default.jpg';
     }
     return (
       <div className="pic">
-        <Link to={`/stream/${this.props.type}/${this.props.id}`}>
-          <img src={img} onError={this._default} alt={"Phourus Profile Pic for " + this.props.name} />
-        </Link>
+        {this.props.type === 'org'
+          ? <a href={link}>
+            <img src={img} onError={this._default} alt={"Phourus Profile Pic for " + this.props.name} />
+          </a>
+          : <Link to={`/${this.props.id}`}>
+            <img src={img} onError={this._default} alt={"Phourus Profile Pic for " + this.props.name} />
+          </Link>
+        }
       </div>
     );
   },

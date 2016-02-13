@@ -41,10 +41,10 @@ let Stream = React.createClass({
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
-	componentWillReceiveProps: function (nextProps) {
-		// if (nextProps._route) {
-		// 	this._load(nextProps._route);
-		// }
+	componentWillReceiveProps: function (nextProps, nextContext) {
+		if (nextContext.route) {
+			this._load(nextContext.route);
+		}
 	},
 	render: function () {
 		let route = this.context.route;

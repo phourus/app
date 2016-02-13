@@ -33,14 +33,14 @@ module.exports = React.createClass({
   _back: function () {
     if (!this.history.goBack()) {
       if (this.context.route.type === 'edit') {
-        this.history.pushState(null, "/stream/me");
+        this.history.pushState(null, "/me");
       } else {
         this.history.pushState(null, "/stream");
       }
     }
   },
   _myposts: function () {
-  	this.history.pushState(null, "/stream/me");
+  	this.history.pushState(null, "/me");
   }
 });
 
@@ -75,7 +75,7 @@ let Edit = React.createClass({
       return false;
     }
     return (
-      <Link to={`/edit/${this.props.post.id}`} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
+      <Link to={`/${this.props.user.username}/${this.props.post.slug}/edit`} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
     );
   }
 });

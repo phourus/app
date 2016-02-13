@@ -72,6 +72,7 @@ let App = React.createClass({
     });
     Actions.get();
     Actions.orgs();
+    this._route(this.props);
   },
   componentWillUnmount: function () {
     this.unsubscribe();
@@ -128,6 +129,16 @@ let App = React.createClass({
     let context = {
       route: nextProps.routes || [],
       params: nextProps.params || {},
+      createOrgLink: function (shortname) {
+        let protocol = location.protocol;
+        let host = location.host;
+        let parts = host.split('.');
+        // www.phourus.com/.local, phourus.com/.local, phourus-staging
+        if (['www', 'phourus', 'phourus-staging'].indexOf(parts[0]) === -1) {
+          host.shift();
+        }
+        return `${protocol}//${shortname}.${host}`
+      },
       //query: this.props.location.query || {},
       root: '',
       id: '',
@@ -136,16 +147,12 @@ let App = React.createClass({
 
     let roots = {
       'docs/:id': 'docs',
-      'admin/:id': 'admin',
-      'edit/:id': 'edit',
-      'post/:id': 'post',
-      'post/create': 'create',
-      '*': '404'
+      ':user': 'stream',
+      ':user/:post': 'post'
     };
 
     let types = {
-      'org/:id': 'org',
-      'user/:id': 'user',
+      ':user/:post/edit': 'edit',
     };
 
     // ROOT
@@ -159,6 +166,14 @@ let App = React.createClass({
     // ID
     if (context.params.id) {
       context.id = context.params.id;
+    }
+
+    if (context.params.user) {
+      context.id = context.params.user;
+    }
+
+    if (context.params.post) {
+      context.id = context.params.post;
     }
 
     // TYPE
@@ -175,6 +190,17 @@ let App = React.createClass({
 
     if (context.root === 'edit' || context.root === 'post' || context.root === 'create') {
       context.type = context.root;
+    }
+
+    if (context.root === 'me') {
+      context.root = 'stream';
+      context.type = 'me';
+    }
+
+    let subdomain = location.hostname.split('.').shift();
+    if (subdomain !== 'www') {
+      //context.id = subdomain;
+      //context.type = 'orgs';
     }
     this.setState({route: context});
   }

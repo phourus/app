@@ -68,7 +68,7 @@ module.exports = React.createClass({
       let route = this.context.route;
       let id = route.id;
       if (id) {
-        this.history.pushState(null, `/admin/${id}/${tab}`);
+        this.history.pushState(null, `/admin/${tab}`);
       }
     },
     _details: function () {

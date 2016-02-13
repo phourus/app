@@ -30,38 +30,31 @@ let Teams = require('./react/admin/teams');
 module.exports = (
   <Route component={App} path="/">
     <IndexRoute component={Business}/>
+    <Route path="stream" component={Stream} />
     <Route path="home" component={Business} />
-    <Route path="individuals" component={Individuals} />
-    <Route path="business" component={Business} />
-    <Route path="education" component={Education} />
-    <Route path="government" component={Government} />
-    <Route path="nonprofit" component={Nonprofit} />
     <Route path="about" component={About} />
     <Route path="pricing" component={Pricing} />
     <Route path="contact" component={Contact} />
     <Route path="terms" component={Terms} />
     <Route path="privacy" component={Privacy} />
+    <Route path="account" component={Account} />
+    <Route path="me" component={Stream} />
+    <Route path="create" component={Post} />
     <Route path="activity" component={Activity} />
     <Route path="notifications" component={Activity} />
     <Route path="history" component={Activity} />
-    <Route path="account" component={Account} />
-    <Route path="stream" component={Stream}>
-      <Route path="me" component={Stream} />
-      <Route path="user/:id" component={Stream} />
-      <Route path="org/:id" component={Stream} />
-    </Route>
-    <Route path="post/create" component={Post} />
-    <Route path="post/:id" component={Post} />
-    <Route path="edit/:id" component={Post} />
     <Route path="docs" component={Docs}>
       <Route path=":id" component={Docs} />
     </Route>
-    <Route path="admin/:id" component={Admin}>
+    <Route path="admin" component={Admin}>
       <Route path="details" component={Details} />
       <Route path="members" component={Members} />
       <Route path="teams" component={Teams} />
       <Route path="billing" component={Billing} />
     </Route>
-    <Route path="*" component={View404} />
+    <Route path=":user/:post" component={Post}>
+      <Route path="edit" component={Post} />
+    </Route>
+    <Route path=":user" component={Stream} />
   </Route>
 );

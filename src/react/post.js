@@ -59,12 +59,12 @@ let Post = React.createClass({
 		this.unsubscribe = Store.listen((data) => {
 			if (data.hasOwnProperty('saving')) {
 				if (data.saving === false) {
-					this.history.pushState(null, "/stream/me");
+					this.history.pushState(null, "/me");
 				}
 				this.setState({saving: data.saving, types: false});
 			}
 			if (data.add === true) {
-				this.history.pushState(null, `/edit/${data.post.id}`);
+				this.history.pushState(null, `/${data.user.username}/${data.post.slug}/edit`);
 			}
 			if (data.post) {
 				document.title = data.post.title;
@@ -72,7 +72,7 @@ let Post = React.createClass({
 				this.setState({post: data.post});
 			}
 			if (data.deleted) {
-				this.history.pushState(null, "/stream/me");
+				this.history.pushState(null, "/me");
 			}
 			if (data.changes) {
 				let current = this.state.post;
@@ -87,10 +87,10 @@ let Post = React.createClass({
 	componentWillUnmount: function () {
 		this.unsubscribe();
 	},
-	componentWillReceiveProps: function (nextProps) {
-		// if (nextProps._route) {
-		// 	this._context(nextProps._route);
-		// }
+	componentWillReceiveProps: function (nextProps, nextContext) {
+		if (nextContext.route) {
+			this._context(nextContext.route);
+		}
 	},
 	render: function () {
 		let type = this.context.route.type;

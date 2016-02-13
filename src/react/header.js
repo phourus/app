@@ -82,11 +82,13 @@ let Static = React.createClass({
 
 let Private = React.createClass({
   contextTypes: {
-    session: React.PropTypes.object
+    session: React.PropTypes.object,
+    route: React.PropTypes.route
   },
   render: function () {
     let session = this.context.session;
     let orgs = session.orgs;
+    let route = this.context.route;
 
     return (
       <nav className="nav">
@@ -106,14 +108,15 @@ let Private = React.createClass({
               <div>
                 <ul>
                   {orgs.map((org) => {
+                    let link = route.createOrgLink(org.org.shortname);
                     if (!org.approved) {
                       return false;
                     }
-                    return <li key={org.org.id}><Link to={`/stream/org/${org.org.id}`}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></Link></li>
+                    return <li key={org.org.id}><a href={link}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></a></li>
                   })}
                 </ul>
                 <ul>
-                  <li><Link to="/stream/me">My Posts <i className="fa fa-edit" /></Link></li>
+                  <li><Link to="/me">My Posts <i className="fa fa-edit" /></Link></li>
                   <li><Link to="/activity">My Activity <i className="fa fa-bell" /></Link></li>
                   <li><Link to="/account">My Account <i className="fa fa-user" /></Link></li>
                   <li><a href="javascript:void(0)" onClick={this._logout}>Logout <i className="fa fa-sign-out" /></a></li>
@@ -121,7 +124,7 @@ let Private = React.createClass({
               </div>
             </li>
             <li className="create">
-              <Link to="/post/create">
+              <Link to="/create">
                 <i className="fa fa-pencil" />
                 Create
               </Link>

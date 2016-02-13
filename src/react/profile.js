@@ -48,31 +48,26 @@ module.exports = React.createClass({
 		this.unsubscribeOrg();
 		this.unsubscribePosts();
 	},
-	componentWillReceiveProps: function (nextProps) {
-		// if (nextProps._route) {
-		// 	this._load(nextProps._route);
-		// }
+	componentWillReceiveProps: function (nextProps, nextContext) {
+		if (nextContext.route) {
+			this._load(nextContext.route);
+		}
 	},
 	render: function () {
 		let profile = this.state.profile || {};
 		let address = profile.address || {};
 		let root = this.context.route.root;
 		let type = this.context.route.type;
-		if (type === 'post') {
-			profile = this.state.profile || {};
-		}
-		if (['stream', 'account', 'admin'].indexOf(root) === -1) {
+
+		// stream, account, activity, admin
+		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
 			return false;
 		}
-		if (root === 'stream' && !type) {
+		// if stream not (my posts, org posts, user posts)
+		if (root === 'stream' && ['org', 'me', 'user'].indexOf(type) === -1) {
 			return false;
 		}
-		if (type === 'post' && !this.props.postMode) {
-			return false;
-		}
-		if (type === 'edit' || type === 'create') {
-			return false;
-		}
+
 		return (
 			<div className="profile">
 				{root === 'account' || root === 'admin'

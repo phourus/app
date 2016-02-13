@@ -35,7 +35,7 @@ let Share = React.createClass({
   getInitialState: function () {
     return {
       selected: '',
-      base: 'https://phourus.com/stream/',
+      base: 'https://phourus.com',
       popup: 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600'
     };
   },
@@ -61,7 +61,7 @@ let Share = React.createClass({
     let params = {
       app_id: 1663090460638387,
       display: 'popup',
-      href: this.state.base + this.props.post.id,
+      href: `${this.state.base}/${this.props.post.user.username}/${this.props.post.slug}`,
       redirect_uri: this.state.base + this.props.post.id
     };
     this.setState({selected: 'facebook'});
@@ -78,7 +78,7 @@ let Share = React.createClass({
     }
     let params = {
       text: this.props.post.title,
-      url: this.state.base + this.props.post.id,
+      url: `${this.state.base}/${this.props.post.user.username}/${this.props.post.slug}`,
       hashtags: tags,
       //via: '@'
     };
@@ -90,7 +90,7 @@ let Share = React.createClass({
     let url = "https://www.linkedin.com/shareArticle";
     let params = {
       mini: true,
-      url: this.state.base + this.props.post.id,
+      url: `${this.state.base}/${this.props.post.user.username}/${this.props.post.slug}`,
       title: this.props.post.title,
       summary: 'Post shared from Phourus.com',
       source: 'Phourus.com'
@@ -102,7 +102,7 @@ let Share = React.createClass({
   _google: function () {
     let url = "https://plus.google.com/share";
     let params = {
-      url: this.state.base + this.props.post.id
+      url: `${this.state.base}/${this.props.post.user.username}/${this.props.post.slug}`
     };
     this.setState({selected: 'google'});
     this._open(url, params);
@@ -113,7 +113,7 @@ let Share = React.createClass({
     ga('send', 'event', 'engagement', 'share', 'slack');
   },
   _email: function () {
-    let body = "The following post has been shared with you from Phourus.com: \r\n \r\n '" + this.props.post.title + "' \r\n \r\n " + this.state.base + this.props.post.id;
+    let body = "The following post has been shared with you from Phourus.com: \r\n \r\n '" + this.props.post.title + "' \r\n \r\n " + `${this.state.base}/${this.props.post.user.username}/${this.props.post.slug}`;
     this.setState({selected: 'email'});
     ga('send', 'event', 'engagement', 'share', 'email');
     window.location.href = encodeURI('mailto:recipient@yourfriend.com?Subject=Somebody shared a Post from Phourus.com with you&body=' + body);

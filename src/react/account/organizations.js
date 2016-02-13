@@ -133,22 +133,26 @@ let Search = React.createClass({
 let List = React.createClass({
   mixins: [History],
   contextTypes: {
-    session: React.PropTypes.object
+    session: React.PropTypes.object,
+    route: React.PropTypes.object
   },
   render: function () {
     let session = this.context.session;
+    let route = this.context.route;
     let orgs = session.orgs;
     return (
       <div className="list">
         {orgs.map((item) => {
           var admin = false;
+          let link = route.createOrgLink(item.org.shortname);
+
           if (item.admin === true && item.approved) {
-            admin = <button id={item.org.id} className="button blue" onClick={this._edit}>Admin</button>
+            admin = <button id={item.org.shortname} className="button blue" onClick={this._edit}>Admin</button>
           }
           return (
             <div className="org">
               {admin}<br />
-            <Link to={`/stream/org/${item.org.id}`}>{item.org.name}</Link><br />
+            <a href={link}>{item.org.name}</a><br />
               {item.approved
                 ? <span className="approved">
                   <i className="fa fa-check" /> Approved
@@ -168,8 +172,9 @@ let List = React.createClass({
     );
   },
   _edit: function (e) {
-    var id = e.currentTarget.id;
-    this.history.pushState(null, `/admin/${id}/details`);
+    let route = this.context.route;
+    let id = e.currentTarget.id;
+    window.location = route.createOrgLink(id) + '/admin/details';
   },
   _remove: function (e) {
     var id = e.currentTarget.id;

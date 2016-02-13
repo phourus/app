@@ -51,7 +51,7 @@ var posts = db.define('posts', {
 }, {
   classMethods: {
     single: function (id) {
-      return this.findOne({where: {id: id, privacy: {$notIn: ['trash']}},
+      return this.findOne({where: {slug: id, privacy: {$notIn: ['trash']}},
         include: [
           {model: users, as: 'user'},
           {model: tags, as: 'tags'},

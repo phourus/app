@@ -44,12 +44,12 @@ module.exports = React.createClass({
   componentWillUnmount: function () {
     this.unsubscribe();
   },
-  componentWillReceiveProps: function (nextProps) {
-    // let route = nextProps._route;
-    // if (route) {
-    //   let current = this._current(route);
-    //   this.setState({module: current, ready: false});
-    // }
+  componentWillReceiveProps: function (nextProps, nextContext) {
+    let route = nextContext.route;
+    if (route) {
+      let current = this._current(route);
+      this.setState({module: current, ready: false});
+    }
   },
   shouldComponentUpdate: function () {
     let current = this._current(this.context.route);

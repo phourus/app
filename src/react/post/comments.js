@@ -152,7 +152,7 @@ Comments.Comment = React.createClass({
       <div className="comment" id={this.props.comment.id}>
 				<Pic id={user.id} img={user.img} name={user.username} type='user' />
         <div className="content">
-					<Link to={`/stream/user/${this.props.user.id}`} className="username">
+					<Link to={`/${this.props.user.username}`} className="username">
 						{this.props.user.first} {this.props.user.last}
 					</Link>
           <p>{this.props.comment.content}</p>

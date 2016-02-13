@@ -59,7 +59,7 @@ let _Context = React.createClass({
 			name = this.props.profile.username || this.props.profile.shortname || '';
 		}
 		if (true === 'user is logged in') {
-			link = <Link to="/stream/me">Click here to view your posts</Link>
+			link = <Link to="/me">Click here to view your posts</Link>
 		} else {
 			link = <Link to="/account">Click here to create posts</Link>
 		}

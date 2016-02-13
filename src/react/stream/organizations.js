@@ -28,7 +28,7 @@ module.exports = React.createClass({
 					{membership.map((member) => {
 						let org = member.org;
 						return (
-							<div key={org.id} id={org.id} className="org" onClick={this._select}>
+							<div key={org.id} id={org.shortname} className="org" onClick={this._select}>
 								<div className="name">{org.name}</div>
 								<Pic id={org.id} img={org.img} name={org.shortname} type="org" />
 							</div>
@@ -39,6 +39,6 @@ module.exports = React.createClass({
 		);
 	},
 	_select: function (e) {
-		this.history.pushState(null, `/stream/org/${e.currentTarget.id}`);
+		window.location = this.context.route.createOrgLink(e.currentTarget.id);
 	}
 });

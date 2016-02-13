@@ -57,6 +57,11 @@ module.exports = React.createClass({
 		}
 	},
 	_single: function () {
-		this.history.pushState(null, `/post/${this.props.post.id}`);
+		let username = '';
+		let user = this.props.post.user;
+		if (user && user.username) {
+			username = user.username;
+		}
+		this.history.pushState(null, `/${username}/${this.props.post.slug}`);
 	}
 });
