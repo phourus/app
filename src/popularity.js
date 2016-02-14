@@ -1,4 +1,7 @@
 module.exports = function (element, popularity) {
+  if (!element) {
+    return false;
+  }
   var ctx = element.getContext('2d');
   var circ = Math.PI * 2;
   var quart = Math.PI / 2;

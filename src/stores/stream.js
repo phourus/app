@@ -5,7 +5,6 @@ let Actions = require('../actions/stream');
 
 let folders = require('../api/folders');
 let posts = require('../api/posts');
-let account = require('../api/account');
 let users = require('../api/users');
 let orgs = require('../api/orgs');
 
@@ -201,24 +200,9 @@ let Stream = Reflux.createStore({
 
     // me
     if (type === 'me') {
-      account.get()
-        .then(data => {
-          this.params.context.profile = data;
-          this.trigger({context: this.params.context});
-          this._collection();
-        })
-        .catch(code => {
-          if (code != 200) {
-             let alert = {
-               action: 'me',
-               color: 'red',
-               code: code,
-               msg: 'Could not load posts for your profile'
-             };
-             this.trigger({alert: alert});
-             console.warn(alert);
-          }
-        });
+      //this.params.context.profile = data;
+      this.trigger({context: this.params.context});
+      this._collection();
       return;
     }
     // users/orgs

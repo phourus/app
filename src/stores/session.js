@@ -42,13 +42,15 @@ module.exports = Reflux.createStore({
           gaDimensions(data);
         })
         .catch(code => {
-          let alert = {
-            action: 'get',
-            color: 'yellow',
-            code: code,
-            msg: 'Account could not be loaded'
-          };
-          this.trigger({alert: alert});
+          if (code !== 401) {
+            let alert = {
+              action: 'get',
+              color: 'yellow',
+              code: code,
+              msg: 'Account could not be loaded'
+            };
+            this.trigger({alert: alert});
+          }
         });
       });
     });

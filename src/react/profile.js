@@ -58,7 +58,9 @@ module.exports = React.createClass({
 		let address = profile.address || {};
 		let root = this.context.route.root;
 		let type = this.context.route.type;
-
+		if (type === 'me') {
+			profile = this.context.session.user;
+		}
 		// stream, account, activity, admin
 		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
 			return false;
@@ -99,7 +101,7 @@ module.exports = React.createClass({
 			OrgActions.single(id);
 		}
 		// ACCOUNT
-		if (root === 'account') {
+		if (root === 'account' || root === 'activity') {
 			let session = this.context.session;
 			this.setState({profile: session.user});
 		}

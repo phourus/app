@@ -22,7 +22,7 @@ module.exports = React.createClass({
   render: function () {
     let img = this.props.img;
     let link = this.context.route.createOrgLink(this.props.id);
-    if (this.state.default) {
+    if (this.state.default || !this.props.img) {
       img = '/assets/avatars/default.jpg';
     }
     return (

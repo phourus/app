@@ -68,14 +68,19 @@ let Edit = React.createClass({
     };
   },
   render: function () {
+    let post = this.props.post;
+    let username = 'post';
     if (!this.props.owner) {
       return false;
     }
     if (this.context.route.type === 'edit' || this.context.route.type === 'create') {
       return false;
     }
+    if (post.user && post.user.username) {
+      username = post.user.username;
+    }
     return (
-      <Link to={`/${this.props.user.username}/${this.props.post.slug}/edit`} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
+      <Link to={`/${username}/${post.slug}/edit`} className="edit"><i className="fa fa-pencil" /><br />Edit</Link>
     );
   }
 });

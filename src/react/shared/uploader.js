@@ -42,9 +42,6 @@ module.exports = React.createClass({
     this.uploader.click();
     var options = {
       inputElement: this.uploader,
-      headers: {
-        "Authorization": Token.get()
-      },
       onProgress: function (event) {
         // event.done, event.total
       },
@@ -69,11 +66,20 @@ module.exports = React.createClass({
     } else {
       options.uploadUrl = '/rest/account/pic';
       options.onComplete = function (event) {
-        UserActions.get();
+        AccountActions.get();
       };
     }
 
-    new ImageUploader(options);
+    Token.onConnect()
+    .then(() => {
+      Token.get('token')
+      .then((data) => {
+        options.headers = {
+          "Authorization": data
+        };
+        new ImageUploader(options);
+      });
+    });
   },
   _default: function () {
     this.setState({img: this.state.default});
