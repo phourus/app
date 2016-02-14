@@ -95,7 +95,7 @@ let Private = React.createClass({
       <nav className="nav">
           <ul>
             <li className="posts">
-              <Link to="/stream" >
+              <Link to={route.subdomain ? "/" : "/stream"} >
                 <i className="fa fa-file" />
                 Posts
               </Link>
