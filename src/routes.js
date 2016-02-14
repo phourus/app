@@ -27,9 +27,19 @@ let Details = require('./react/admin/details');
 let Members = require('./react/admin/members');
 let Teams = require('./react/admin/teams');
 
+let Index = Stream;
+
+if (typeof document !== 'undefined') {
+  let subdomain = window.location.hostname;
+  let parts = subdomain.split('.');
+  if (['phourus', 'www', 'us-west-2'].indexOf(parts[0]) > -1) {
+    Index = Business;
+  }
+}
+
 module.exports = (
   <Route component={App} path="/">
-    <IndexRoute component={Business}/>
+    <IndexRoute component={Index}/>
     <Route path="stream" component={Stream} />
     <Route path="home" component={Business} />
     <Route path="about" component={About} />

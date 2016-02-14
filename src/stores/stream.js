@@ -213,6 +213,7 @@ let Stream = Reflux.createStore({
     profile.single(id)
       .then(data => {
         this.params.context.profile = data;
+        this.params.context.id = data.id;
         this.trigger({context: this.params.context});
         this._collection();
       })

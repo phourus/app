@@ -169,10 +169,12 @@ let App = React.createClass({
     }
 
     if (context.params.user) {
+      context.type = 'user';
       context.id = context.params.user;
     }
 
     if (context.params.post) {
+      context.type = 'post';
       context.id = context.params.post;
     }
 
@@ -197,10 +199,12 @@ let App = React.createClass({
       context.type = 'me';
     }
 
-    let subdomain = location.hostname.split('.').shift();
-    if (subdomain !== 'www') {
-      //context.id = subdomain;
-      //context.type = 'orgs';
+    let parts = location.hostname.split('.');
+    if (['phourus', 'www', 'us-west-2'].indexOf(parts[0]) === -1 && !context.type) {
+      context.id = parts[0];
+      context.type = 'org';
+      context.root = 'stream';
+      context.subdomain = parts[0];
     }
     this.setState({route: context});
   }

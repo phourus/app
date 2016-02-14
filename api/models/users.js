@@ -28,7 +28,7 @@ var users = db.define('users', {
       return this.findOne(id);
     },
     single: function (id) {
-      return this.findOne({username: id});
+      return this.findOne({where: {username: id}});
     },
     collection: function (params) {
       return this.findAndCountAll(this.queryize(params));

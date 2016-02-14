@@ -18,7 +18,10 @@ module.exports = React.createClass({
     let session = this.context.session;
     let route = this.context.route;
     let r = route.root;
-    if (!r || r === 'home') {
+    if (!r && route.type !== 'org') {
+      return <Home />
+    }
+    if (r === 'home') {
       return <Home />
     }
     if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
@@ -40,7 +43,10 @@ module.exports = React.createClass({
           : <Private />
         }
         <div className="brand">
-          <Link to="/home"></Link>
+          {route.subdomain
+            ? <a href="https://phourus.com"></a>
+            : <Link to="/"></Link>
+          }
         </div>
         <Search />
       </header>
