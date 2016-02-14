@@ -9,6 +9,9 @@ let Actions = require('../actions/session');
 
 let account = require('../api/account');
 
+// ms * sec * min * hours * days;
+const TTL = 1000 * 60 * 60 * 24 * 30;
+
 let gaDimensions = function (user) {
   let age = moment().diff(user.dob, "years");
   ga('set', 'dimension1', user.id);
@@ -28,27 +31,39 @@ module.exports = Reflux.createStore({
     this.listenTo(Actions.orgs, this._orgs);
   },
   _get: function () {
-    account.get()
-    .then(data => {
-      this.trigger({authenticated: true, user: data, action: 'get'});
-      gaDimensions(data);
-    })
-    .catch(code => {
-      let alert = {
-        action: 'get',
-        color: 'yellow',
-        code: code,
-        msg: 'Account could not be loaded'
-      };
-      this.trigger({alert: alert});
+    token.onConnect()
+    .then(() => {
+      token.get('token')
+      .then((data) => {
+        account.get()
+        .then(data => {
+          this._orgs();
+          this.trigger({authenticated: true, user: data, action: 'get'});
+          gaDimensions(data);
+        })
+        .catch(code => {
+          let alert = {
+            action: 'get',
+            color: 'yellow',
+            code: code,
+            msg: 'Account could not be loaded'
+          };
+          this.trigger({alert: alert});
+        });
+      });
     });
   },
   _login: function (email, password) {
     account.login(email, password)
     .then((data) => {
-      token.save(data);
-      this._get();
-      this.trigger({code: 200, action: 'login'});
+      token.onConnect()
+      .then(() => {
+        token.set('token', data, TTL)
+        .then(() => {
+          this._get();
+          this.trigger({code: 200, action: 'login'});
+        });
+      })
     })
     .catch((code) => {
       this.trigger({code: code, action: 'login'});
@@ -63,8 +78,14 @@ module.exports = Reflux.createStore({
     });
   },
   _logout: function () {
-    token.remove();
-    this.trigger({authenticated: false, user: {}, action: 'logout'});
+    token.onConnect()
+    .then(() => {
+      token.del('token')
+      .then(() => {
+        this._get();
+        this.trigger({authenticated: false, user: {}, action: 'logout'});
+      });
+    });
   },
   _orgs: function () {
     account.orgs()

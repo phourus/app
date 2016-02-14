@@ -1,0 +1,17 @@
+<!doctype html>
+<head>
+  <title>Cross Storage Hub</title>
+</head>
+<body>
+  <script type="text/javascript" src="hub.js"></script>
+  <script>
+    // Limit requests to any client running on .localhost:300x
+    CrossStorageHub.init([
+      {
+        origin: /(:\/\/)?([a-zA-Z0-9]?[a-zA-Z0-9-]+\.)*(phourus|elasticbeanstalk)\.(local|com):?([a-zA-Z0-9]*)?/,
+        allow: ['get', 'set', 'del']
+      },
+    ]);
+  </script>
+</body>
+</html>

@@ -10,7 +10,6 @@ let Actions = require('../actions/session');
 let Search = require('./stream/search');
 
 module.exports = React.createClass({
-  mixins: [History],
   contextTypes: {
     session: React.PropTypes.object,
     route: React.PropTypes.object
@@ -46,11 +45,6 @@ module.exports = React.createClass({
         <Search />
       </header>
     );
-  },
-  _logout: function () {
-    Actions.logout();
-    this.history.pushState(null, "/home");
-    ga('send', 'event', 'account', 'logout');
   }
 });
 
@@ -81,6 +75,7 @@ let Static = React.createClass({
 });
 
 let Private = React.createClass({
+  mixins: [History],
   contextTypes: {
     session: React.PropTypes.object,
     route: React.PropTypes.route
@@ -132,6 +127,11 @@ let Private = React.createClass({
           </ul>
         </nav>
     );
+  },
+  _logout: function () {
+    Actions.logout();
+    this.history.pushState(null, "/home");
+    ga('send', 'event', 'account', 'logout');
   }
 });
 

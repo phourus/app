@@ -18,6 +18,7 @@
     "bcrypt": "^0.8.5",
     "body-parser": "^1.13.1",
     "convict": "^0.6.1",
+    "cross-storage": "^0.8.1",
     "express": "4.0.x",
     "express-jwt": "^0.5.1",
     "file": "^0.2.2",

@@ -71,7 +71,6 @@ let App = React.createClass({
       this.setState({session: session});
     });
     Actions.get();
-    Actions.orgs();
     this._route(this.props);
   },
   componentWillUnmount: function () {
@@ -135,7 +134,8 @@ let App = React.createClass({
         let parts = host.split('.');
         // www.phourus.com/.local, phourus.com/.local, phourus-staging
         if (['www', 'phourus', 'phourus-staging'].indexOf(parts[0]) === -1) {
-          host.shift();
+          parts.shift();
+          host = parts.join('.');
         }
         return `${protocol}//${shortname}.${host}`
       },
