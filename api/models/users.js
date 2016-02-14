@@ -24,6 +24,9 @@ var users = db.define('users', {
   img: types.STRING
 }, {
   classMethods: {
+    account: function (id) {
+      return this.findOne(id);
+    },
     single: function (id) {
       return this.findOne({username: id});
     },

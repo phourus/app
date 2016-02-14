@@ -101,7 +101,7 @@ router.get('', (req, res) => {
   if (!req.user_id) {
     return res.send(401);
   }
-  users.single(req.user_id)
+  users.account(req.user_id)
   .then(function (data) {
     var json = data.get();
     json.SESSION_USER = req.user_id;
