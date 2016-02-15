@@ -30,10 +30,10 @@ module.exports = {
     _settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
     return http.post(base + 'login', {}, _settings);
   },
-  register: function (email, password) {
+  register: function (email, password, username) {
     var _settings = settings();
     _settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
-    return http.post(base + 'register', {}, _settings);
+    return http.post(base + 'register', {username: username}, _settings);
   },
   forgot: function (email) {
     return http.post('/rest/passwords/forgot', {email: email}, settings());

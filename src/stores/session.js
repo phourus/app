@@ -25,10 +25,29 @@ let gaDimensions = function (user) {
 
 module.exports = Reflux.createStore({
   init: function () {
+    this.listenTo(Actions.register, this._register);
     this.listenTo(Actions.get, this._get);
     this.listenTo(Actions.login, this._login);
     this.listenTo(Actions.logout, this._logout);
     this.listenTo(Actions.orgs, this._orgs);
+  },
+  _register: function (email, password, username) {
+    account.register(email, password, username)
+    .then((data) => {
+      this._login(email, password);
+      this.trigger({action: 'register'});
+    })
+    .catch((code) => {
+      this.trigger({code: code, action: 'register'});
+      let alert = {
+        action: 'register',
+        color: 'red',
+        code: code,
+        msg: 'Registration unsuccessful'
+      };
+      this.trigger({alert: alert});
+      console.warn(alert);
+    });
   },
   _get: function () {
     token.onConnect()

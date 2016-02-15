@@ -7,29 +7,10 @@ let account = require('../api/account');
 
 module.exports = Reflux.createStore({
   init: function () {
-    this.listenTo(Actions.register, this._register);
     this.listenTo(Actions.request, this._request);
     this.listenTo(Actions.forgot, this._forgot);
     this.listenTo(Actions.reset, this._reset);
     this.listenTo(Actions.password, this._password);
-  },
-  _register: function (email, password) {
-    account.register(email, password)
-    .then((data) => {
-      this._login(email, password);
-      this.trigger({action: 'register'});
-    })
-    .catch((code) => {
-      this.trigger({code: code, action: 'register'});
-      let alert = {
-        action: 'register',
-        color: 'red',
-        code: code,
-        msg: 'Registration unsuccessful'
-      };
-      this.trigger({alert: alert});
-      console.warn(alert);
-    });
   },
   _request: function (email) {
     let password = Math.random().toString(36).slice(2);

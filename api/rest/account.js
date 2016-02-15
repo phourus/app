@@ -24,9 +24,10 @@ var authDecode = function (auth) {
 
 router.post('/register', (req, res) => {
   let auth = req.headers.authorization;
+  let body = req.body;
   let { email, password } = authDecode(auth);
   return db.transaction(function (t) {
-    return users.create({email: email}, {transaction: t})
+    return users.create({email: email, username: body.username}, {transaction: t})
     .then(function (user) {
         return passwords.hash(password)
         .then(function (hash) {

@@ -5,7 +5,7 @@ let ga = require('../../analytics');
 let Router = require('react-router');
 let { Link, History } = Router;
 
-let Actions = require('../../actions/auth');
+let Actions = require('../../actions/session');
 let Store = require('../../stores/auth');
 
 let ProfileActions = require('../../actions/profile').Orgs;
@@ -112,6 +112,13 @@ module.exports = React.createClass({
                 Confirm Password:
                 <input ref="confirm" className="confirm" type="password" placeholder="confirm your password" value={this.state.confirm} onChange={this._confirm} />
               </label>
+              <label>
+                Username:
+                <div>
+                  <span>phourus.com/</span>
+                  <input ref="username" className="username" placeholder="username" value={this.state.username} onChange={this._username} />
+                </div>
+              </label>
               {this.state.code && this.state.loaded
                 ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
                 : false
@@ -124,6 +131,13 @@ module.exports = React.createClass({
               <label>
                 Organization Name (optional):
                 <input className="organization" placeholder="organization name" value={this.state.organization} onChange={this._organization} />
+              </label>
+              <label>
+                Organization homepage:
+                <div>
+                  <input className="shortname" placeholder="subdomain" disabled value={this.state.shortname} onChange={this._shortname} />
+                  <span>.phourus.com</span>
+                </div>
               </label>
               {this.state.code && this.state.loaded
                 ? <div className="error" onClick={this._clear}>There was an error creating your account. Please try again or <a href="mailto:info@phourus.com&subject=Error">contact us.</a></div>
@@ -139,8 +153,8 @@ module.exports = React.createClass({
                 <input ref="email" className="email" placeholder="enter your email address" disabled value={this.state.email} onChange={this._email} />
               </label>
               <label>
-                Organization Name:
-                <input className="confirm" placeholder="organization name" disabled value={this.state.organization} onChange={this._organization} />
+                Username:
+                <input value={this.state.username} disabled />
               </label>
               <label>
                 Password:
@@ -188,13 +202,17 @@ module.exports = React.createClass({
     var value = e.currentTarget.value;
     this.setState({confirm: value});
   },
+  _username: function (e) {
+    var value = e.currentTarget.value;
+    this.setState({username: value});
+  },
   _organization: function (e) {
     var value = e.currentTarget.value;
     this.setState({organization: value});
   },
   _signup: function () {
     if (this.state.password === this.state.confirm) {
-      Actions.register(this.state.email, this.state.password);
+      Actions.register(this.state.email, this.state.password, this.state.username);
       ga('send', 'event', 'account', 'signup');
     }
   },
