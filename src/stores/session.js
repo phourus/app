@@ -81,7 +81,6 @@ module.exports = Reflux.createStore({
       .then(() => {
         token.set('token', data, TTL)
         .then(() => {
-          this._get();
           this.trigger({code: 200, action: 'login'});
         });
       })

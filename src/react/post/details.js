@@ -4,13 +4,12 @@ let Router = require('react-router');
 let { Link } = Router;
 let moment = require('moment');
 
+let util = require('../../util');
+
 let Pic = require('../shared/pic');
 let Poll = require('./poll');
 
 module.exports = React.createClass({
-	contextTypes: {
-		route: React.PropTypes.object
-	},
 	getDefaultProps: function () {
 		return {
 			user: {
@@ -23,7 +22,6 @@ module.exports = React.createClass({
 		};
 	},
 	render: function () {
-		let route = this.context.route;
 		let context = 'user';
 		let profileName = "Phourus User";
 		let org = {};
@@ -40,7 +38,7 @@ module.exports = React.createClass({
 		if (this.props.post.org && this.props.post.org.id && this.props.post.org.id != 0) {
 			org = this.props.post.org;
 			profileName = org.shortname;
-			link = route.createOrgLink(profileName);
+			link = util.createOrgLink(profileName);
 			context = 'org';
 		}
 		return (

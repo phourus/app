@@ -3,10 +3,9 @@ let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
 
+let util = require('../../util');
+
 module.exports = React.createClass({
-  contextTypes: {
-    route: React.PropTypes.route
-  },
   getDefaultProps: function () {
     return {
       id: 0,
@@ -21,7 +20,7 @@ module.exports = React.createClass({
   },
   render: function () {
     let img = this.props.img;
-    let link = this.context.route.createOrgLink(this.props.id);
+    let link = util.createOrgLink(this.props.id);
     if (this.state.default || !this.props.img) {
       img = '/assets/avatars/default.jpg';
     }

@@ -3,6 +3,8 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 
+let util = require('../../util');
+
 let Pic = require('../shared/pic');
 
 module.exports = React.createClass({
@@ -39,6 +41,6 @@ module.exports = React.createClass({
 		);
 	},
 	_select: function (e) {
-		window.location = this.context.route.createOrgLink(e.currentTarget.id);
+		window.location = util.createOrgLink(e.currentTarget.id);
 	}
 });

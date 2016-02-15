@@ -2,11 +2,13 @@
 let React = require('react');
 let ga = require('../../analytics');
 
+let util = require('../../util');
+
 let Router = require('react-router');
 let { Link, History } = Router;
 
 let Actions = require('../../actions/session');
-let Store = require('../../stores/auth');
+let Store = require('../../stores/session');
 
 let ProfileActions = require('../../actions/profile').Orgs;
 let ProfileStore = require('../../stores/orgs');
@@ -15,6 +17,9 @@ let MemberActions = require('../../actions/members');
 
 module.exports = React.createClass({
   mixins: [History],
+  contextTypes: {
+    route: React.PropTypes.object
+  },
   getDefaultProps: function () {
     return {
       show: false
@@ -34,8 +39,13 @@ module.exports = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen(data => {
-      if (data.user && data.user.id) {
-        this.setState({user: data.user, step: 1});
+      if (data.action === 'login' && data.code === 200) {
+        let url = util.createHomeURL();
+        let route = this.context.route;
+        if (!route.subdomain) {
+          url = url + '/stream';
+        }
+        window.location = url;
       }
     });
     this.unsubscribeProfile = ProfileStore.listen(data => {
@@ -54,44 +64,16 @@ module.exports = React.createClass({
     }
   },
   render: function () {
-    if (!this.props.show) {
-      return false;
-    }
     let steps = ["", "", ""];
-    for (var i = 0; i < this.state.step + 1; i++) {
+    for (var i = 0; i < this.props.step + 1; i++) {
       steps[i] = "complete";
     }
     //steps[this.state.step] = "selected";
+    if (!this.props.show) {
+      return false;
+    }
     return (
       <div className="signup">
-        <div className="progress">
-          <ul>
-            <li className={steps[0]}>
-              <div className="step"></div>
-            </li>
-            <li className="line"></li>
-            <li className={steps[1]}>
-              <div className="step"></div>
-            </li>
-            <li className="line"></li>
-            <li className={steps[2]}>
-              <div className="step"></div>
-            </li>
-          </ul>
-        </div>
-        <div className="steps">
-          <ul>
-            <li>
-              <div className="label">Account Info</div>
-            </li>
-            <li>
-              <div className="label">Organizations</div>
-            </li>
-            <li>
-              <div className="label">Account Access</div>
-            </li>
-          </ul>
-        </div>
         <div className="squeeze">
           <div className="instructions">
             <p className={steps[0]}>To start using Phourus, you will want to create a personal account. Once you have a personal account, you can create or join existing organization accounts.</p>
@@ -232,5 +214,47 @@ module.exports = React.createClass({
   },
   _clear: function () {
     this.setState({code: null});
+  }
+});
+
+let Progress = React.createClass({
+  getDefaultProps: function () {
+    return {
+      step: 0
+    };
+  },
+  render: function () {
+    return (
+      <div>
+        <div className="steps">
+          <ul>
+            <li>
+              <div className="label">Account Info</div>
+            </li>
+            <li>
+              <div className="label">Organizations</div>
+            </li>
+            <li>
+              <div className="label">Account Access</div>
+            </li>
+          </ul>
+        </div>
+        <div className="progress">
+          <ul>
+            <li className={steps[0]}>
+              <div className="step"></div>
+            </li>
+            <li className="line"></li>
+            <li className={steps[1]}>
+              <div className="step"></div>
+            </li>
+            <li className="line"></li>
+            <li className={steps[2]}>
+              <div className="step"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    );
   }
 });

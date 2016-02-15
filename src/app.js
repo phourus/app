@@ -128,17 +128,6 @@ let App = React.createClass({
     let context = {
       route: nextProps.routes || [],
       params: nextProps.params || {},
-      createOrgLink: function (shortname) {
-        let protocol = location.protocol;
-        let host = location.host;
-        let parts = host.split('.');
-        // www.phourus.com/.local, phourus.com/.local, phourus-staging
-        if (['www', 'phourus', 'phourus-staging'].indexOf(parts[0]) === -1) {
-          parts.shift();
-          host = parts.join('.');
-        }
-        return `${protocol}//${shortname}.${host}`
-      },
       //query: this.props.location.query || {},
       root: '',
       id: '',

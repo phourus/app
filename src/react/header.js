@@ -5,7 +5,10 @@ let Router = require('react-router');
 let { Link, History } = Router;
 let ga = require('../analytics');
 
+let util = require('../util');
+
 let Actions = require('../actions/session');
+let Store = require('../stores/session');
 
 let Search = require('./stream/search');
 
@@ -44,7 +47,7 @@ module.exports = React.createClass({
         }
         <div className="brand">
           {route.subdomain
-            ? <a href="https://phourus.com"></a>
+            ? <a href={util.createHomeURL()}></a>
             : <Link to="/"></Link>
           }
         </div>
@@ -86,6 +89,18 @@ let Private = React.createClass({
     session: React.PropTypes.object,
     route: React.PropTypes.route
   },
+  componentDidMount: function () {
+    this.unsubscribe = Store.listen(data => {
+      if (data.action === 'logout') {
+        let url = util.createHomeURL();
+        window.location = url;
+      }
+      this.setState(data);
+    });
+  },
+  componentWillUnmount: function () {
+    this.unsubscribe();
+  },
   render: function () {
     let session = this.context.session;
     let orgs = session.orgs;
@@ -109,7 +124,7 @@ let Private = React.createClass({
               <div>
                 <ul>
                   {orgs.map((org) => {
-                    let link = route.createOrgLink(org.org.shortname);
+                    let link = util.createOrgLink(org.org.shortname);
                     if (!org.approved) {
                       return false;
                     }
@@ -136,7 +151,6 @@ let Private = React.createClass({
   },
   _logout: function () {
     Actions.logout();
-    this.history.pushState(null, "/home");
     ga('send', 'event', 'account', 'logout');
   }
 });

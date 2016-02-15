@@ -2,6 +2,8 @@
 let React = require('react');
 let ga = require('../../analytics');
 
+let util = require('../../util');
+
 let Router = require('react-router');
 let { History, Link } = Router;
 
@@ -11,7 +13,8 @@ let Store = require('../../stores/session');
 module.exports = React.createClass({
   mixins: [History],
   contextTypes: {
-    session: React.PropTypes.object
+    session: React.PropTypes.object,
+    route: React.PropTypes.object
   },
   getDefaultProps: function () {
     return {
@@ -28,7 +31,12 @@ module.exports = React.createClass({
     this.unsubscribe = Store.listen(data => {
       if (data.code === 200 && this.state.clicked === true) {
         data.clicked = false;
-        this.history.pushState(null, "/stream");
+        let url = util.createHomeURL();
+        let route = this.context.route;
+        if (!route.subdomain) {
+          url = url + '/stream';
+        }
+        window.location = url;
       }
       this.setState(data);
     });
