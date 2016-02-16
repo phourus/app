@@ -126,75 +126,85 @@ let App = React.createClass({
   },
   _route: function (nextProps) {
     let context = {
-      route: nextProps.routes || [],
-      params: nextProps.params || {},
-      //query: this.props.location.query || {},
       root: '',
       id: '',
       type: '',
     };
-
-    let roots = {
-      'docs/:id': 'docs',
-      ':user': 'stream',
-      ':user/:post': 'post'
-    };
-
-    let types = {
-      ':user/:post/edit': 'edit',
-    };
-
-    // ROOT
-    if (context.route[1]) {
-      context.root = context.route[1].path;
-      if (roots[context.route[1].path]) {
-        context.root = roots[context.route[1].path];
-      }
-    }
-
-    // ID
-    if (context.params.id) {
-      context.id = context.params.id;
-    }
-
-    if (context.params.user) {
-      context.type = 'user';
-      context.id = context.params.user;
-    }
-
-    if (context.params.post) {
-      context.type = 'post';
-      context.id = context.params.post;
-    }
-
-    // TYPE
-    if (context.route[2]) {
-      context.type = context.route[2].path;
-      if (types[context.route[2].path]) {
-        context.type = types[context.route[2].path];
-      }
-    }
-
-    if (context.type === 'create') {
-      context.id = 'create';
-    }
-
-    if (context.root === 'edit' || context.root === 'post' || context.root === 'create') {
-      context.type = context.root;
-    }
-
-    if (context.root === 'me') {
-      context.root = 'stream';
-      context.type = 'me';
-    }
-
     let parts = location.hostname.split('.');
-    if (['phourus', 'www', 'us-west-2'].indexOf(parts[0]) === -1 && !context.type) {
-      context.id = parts[0];
-      context.type = 'org';
-      context.root = 'stream';
+    if (['phourus', 'www', 'us-west-2'].indexOf(parts[0]) === -1) {
       context.subdomain = parts[0];
     }
+
+    context.route = nextProps.routes || [];
+    context.params = nextProps.params || {};
+    context.query = this.props.location.query || {};
+
+    // index, stream, home?,
+    // account, me, create,
+    // activity, notifications, history
+    // admin,
+    // :user/:post -> edit, :user
+    let route = context.route;
+    switch (route[1].path) {
+      case 'stream':
+        context.root = 'stream',
+        context.type = '';
+        context.id = 0;
+      break;
+      case 'account':
+        context.root = 'account';
+        context.type = 'account';
+        context.id = 0;
+      break;
+      case 'me':
+        context.root = 'stream';
+        context.type = 'me';
+        context.id = 0;
+      break;
+      case 'create':
+        context.root = 'create';
+        context.type = 'create';
+        context.id = 0;
+      break;
+      case 'activity':
+        context.root = 'activity';
+        context.type = 'activity';
+        context.id = 0;
+      break;
+      case 'notifications':
+        context.root = 'activity';
+        context.type = 'activity';
+        context.id = 0;
+      break;
+      case 'history':
+        context.root = 'activity';
+        context.type = 'activity';
+        context.id = 0;
+      break;
+      case 'admin':
+        context.root = 'admin';
+        context.type = 'admin';
+        context.id = context.subdomain;
+        if (route[2] && route[2].path) {
+          context.type = route[2].path;
+        }
+      break;
+      case ':user/:post':
+        context.root = 'post';
+        context.type = 'post';
+        context.id = context.params.post;
+
+        if (route[2] && route[2].path === 'edit') {
+          context.type = 'edit';
+        }
+      break;
+      case ':user':
+        context.root = 'stream';
+        context.type = 'user';
+        context.id = context.params.user;
+      break;
+    }
+
     this.setState({route: context});
   }
 });
