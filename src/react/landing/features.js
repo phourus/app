@@ -8,6 +8,7 @@ let Features = React.createClass({
       <div className="features">
         <div className="squeeze">
           <h2 className="heading">Features</h2>
+          <img src="/assets/landing/devices.png" className="devices" alt="Phourus Landing Page Mobile and Laptop Screenshot" />
           <div>
             <div>
               <i className="fa fa-sort-amount-desc" />

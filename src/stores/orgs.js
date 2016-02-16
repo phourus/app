@@ -38,9 +38,7 @@ module.exports = Reflux.createStore({
   _single: function (id) {
     orgs.single(id)
       .then(data => {
-        //this.org = data;
-        //this.trigger({org: data});
-        this.trigger(data);
+        this.trigger({org: data});
       })
       .catch(code => {
         if (code != 200) {

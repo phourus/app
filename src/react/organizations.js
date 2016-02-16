@@ -103,7 +103,6 @@ let Benefits = React.createClass({
         <div><br /><br /></div>
         <h2 className="heading">Master Communication & Collaboration</h2>
         <h3 className="subtitle">Take control of the most important part of your business</h3>
-        <img src="/assets/landing/devices.jpg" className="devices" alt="Phourus Landing Page Mobile and Laptop Screenshot" />
         <div className="squeeze">
           <div>
             <div className="left">

@@ -18,7 +18,7 @@ let Stream = React.createClass({
 	},
 	getInitialState: function () {
 		return {
-			sidebarVisible: true,
+			sidebarVisible: false,
 			posts: null,
 			total: 0,
 			params: {

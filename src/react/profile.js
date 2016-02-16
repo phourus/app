@@ -28,10 +28,17 @@ module.exports = React.createClass({
   },
 	componentDidMount: function () {
 		this.unsubscribeUser = UserStore.listen((data) => {
-			this.setState({profile: data});
+			if (data.user) {
+				this.setState({profile: data.user});
+			}
 		});
 		this.unsubscribeOrg = OrgStore.listen((data) => {
-			this.setState({profile: data});
+			if (data.lookup) {
+				this.setState({lookup: data.lookup});
+			}
+			if (data.org) {
+				this.setState({profile: data.org});
+			}
 		});
 		this.unsubscribePosts = PostStore.listen((data) => {
 			let post = data.post || {};
@@ -58,9 +65,7 @@ module.exports = React.createClass({
 		let address = profile.address || {};
 		let root = this.context.route.root;
 		let type = this.context.route.type;
-		if (type === 'me') {
-			profile = this.context.session.user;
-		}
+		let name = '';
 		// stream, account, activity, admin
 		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
 			return false;
@@ -69,7 +74,15 @@ module.exports = React.createClass({
 		if (root === 'stream' && ['org', 'me', 'user'].indexOf(type) === -1) {
 			return false;
 		}
-
+		if (profile.first && profile.last) {
+			name = profile.first + ' ' + profile.last;
+		} else if (profile.username) {
+			name = profile.username;
+		} else if (profile.name) {
+			name = profile.name;
+		} else if (profile.shortname) {
+			name = profile.shortname;
+		}
 		return (
 			<div className="profile">
 				{root === 'account' || root === 'admin'
@@ -77,7 +90,7 @@ module.exports = React.createClass({
 					: <Pic id={profile.id} img={profile.img} type={this.state.type} name={this.state.type === 'org' ? profile.shortname : profile.username} />
 				}
 				<div className="basic">
-					<h1 className="name">{profile.name || profile.first + ' ' + profile.last}</h1>
+					<h1 className="name">{name}</h1>
 					{address.city || address.state ? <div>{address.city}{address.city && address.state ? ", " : ""}{address.state}</div> : false}
 					{profile.website ? <div><a href={profile.website} target="_blank">{profile.website}</a></div> : false}
 					{profile.phone ? <div>{profile.phone}</div> : false}
@@ -101,9 +114,9 @@ module.exports = React.createClass({
 			OrgActions.single(id);
 		}
 		// ACCOUNT
-		if (root === 'account' || root === 'activity') {
+		if (root === 'account' || root === 'activity' || type === 'me') {
 			let session = this.context.session;
-			this.setState({profile: session.user});
+			return this.setState({profile: session.user});
 		}
 		// STREAM
 		if (root === 'stream') {

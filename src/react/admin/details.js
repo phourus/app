@@ -17,7 +17,12 @@ module.exports = React.createClass({
   componentDidMount: function () {
     let route = this.context.route;
     this.unsubscribe = Store.listen(data => {
-      this.setState(data);
+      if (data.org) {
+        this.setState({org: data.org});
+      }
+      if (data.changes) {
+        this.setState({changes: data.changes});
+      }
     });
     if (route.id) {
       Actions.single(route.id);

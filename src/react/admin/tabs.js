@@ -23,7 +23,9 @@ module.exports = React.createClass({
     componentDidMount: function () {
       let session = this.context.route;
       this.unsubscribeOrgs = OrgStore.listen(data => {
-        this.setState({org: data});
+        if (data.org) {
+          this.setState({org: data.org});
+        }
       });
       this.unsubscribeMembers = MemberStore.listen(data => {
         this.setState({members: data});

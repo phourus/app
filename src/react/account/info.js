@@ -19,7 +19,12 @@ module.exports = React.createClass({
   },
   componentDidMount: function () {
     this.unsubscribe = Store.listen((data) => {
-      this.setState(data);
+      if (data.user) {
+        this.setState({user: data.user});
+      }
+      if (data.changes) {
+        this.setState({changes: data.changes});
+      }
     });
     TutorialActions.ready(true);
   },

@@ -29,8 +29,8 @@ let About = React.createClass({
         <img src="/assets/banner.jpg" className="banner" alt="Phourus About Banner Image" />
         <div className="description">
           <h3>What is Phourus?</h3>
-          <p>Phourus is about people and the organizations they are part of. Between payroll and the time spent recruiting, engaging and retaining employees, the people of a company are it's biggest investment.</p>
-          <p>Phourus it the only platform focused on nurturing the thoughts, ideas and opinions of employees and keeping them in a central, secure place for easy access and collaboration</p>
+          <p>Your company's most valuable asset and most significant investment is the people you've worked so hard to recruit, engage and retain. Phourus is driven to unite employees and employers across teams, departments, locations and hierarchies, making communication and collaboration more effective for everyone.</p>
+          <p>Phourus provides a centralized, consolidated, and comprehensive resource for both intra-business and public communication. Within its innovative, user-friendly architecture, team members easily share and discover ideas and opinions, document research and collect feedback.</p>
         </div>
         <div className="help">
           <h3>Have questions or need help?</h3>
