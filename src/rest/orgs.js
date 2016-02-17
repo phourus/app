@@ -10,8 +10,8 @@ module.exports = {
   lookup: function (name) {
     return http.get(base + 'lookup/?name=' + name, settings());
   },
-  add: function (name) {
-    let model = {name: name};
+  add: function (shortname) {
+    let model = {shortname: shortname};
     return http.post(base, model, settings());
   },
   save: function (id, model) {

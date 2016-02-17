@@ -18,8 +18,8 @@ module.exports = Reflux.createStore({
     this.changes[key] = value;
     this.trigger({changes: this.changes});
   },
-  _create: function (name) {
-    orgs.add(name)
+  _create: function (shortname) {
+    orgs.add(shortname)
     .then(data => {
       this.trigger({org: data});
     })

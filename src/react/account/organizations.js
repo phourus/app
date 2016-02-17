@@ -28,24 +28,28 @@ module.exports = React.createClass({
 let Create = React.createClass({
   getInitialState: function () {
     return {
-      name: ""
+      shortname: ""
     };
   },
   render: function () {
     return (
       <div className="create">
         <p>Organization not listed? Enter organization name below and click 'Create Organization' to create a new organization.</p>
-        <input type="text" placeholder="organization name" value={this.state.name} onChange={this._name} />
+        <div>
+          <span>https://</span>
+          <input type="text" placeholder="organization name" value={this.state.shortname} onChange={this._shortname} pattern="[A-Za-z0-9]" />
+          <span>.phourus.com</span>
+        </div>
         <button className="button green" onClick={this._create}>Create New Organization</button>
       </div>
     );
   },
-  _name: function (e) {
+  _shortname: function (e) {
     let value = e.currentTarget.value;
-    this.setState({name: value});
+    this.setState({shortname: value});
   },
   _create: function () {
-    Actions.create(this.state.name);
+    Actions.create(this.state.shortname);
   }
 });
 
@@ -152,7 +156,7 @@ let List = React.createClass({
           return (
             <div className="org">
               {admin}<br />
-            <a href={link}>{item.org.name}</a><br />
+            <a href={link}>{item.org.name || item.org.shortname}</a><br />
               {item.approved
                 ? <span className="approved">
                   <i className="fa fa-check" /> Approved
