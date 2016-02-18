@@ -124,7 +124,10 @@ let Private = React.createClass({
               <div>
                 <ul>
                   {orgs.map((org) => {
-                    let link = util.createOrgLink(org.org.shortname);
+                    let link = '';
+                    if (org.org && org.org.shortname) {
+                      link = util.createOrgLink(org.org.shortname);
+                    }
                     if (!org.approved) {
                       return false;
                     }
