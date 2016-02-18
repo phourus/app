@@ -131,7 +131,7 @@ let App = React.createClass({
       type: '',
     };
     let parts = location.hostname.split('.');
-    if (['phourus', 'www', 'us-west-2'].indexOf(parts[0]) === -1) {
+    if (['phourus', 'www', 'phourus-staging'].indexOf(parts[0]) === -1) {
       context.subdomain = parts[0];
     }
 
