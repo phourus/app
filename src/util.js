@@ -21,13 +21,15 @@ module.exports = {
     }
     let out = {
       production: 'https://phourus.com',
-      staging: 'http://us-west-2.elasticbeanstalk.com',
+      staging: 'http://phourus-staging.us-west-2.elasticbeanstalk.com',
       dev: 'http://' + local
     };
     return out[env];
   },
   createOrgLink: function (shortname) {
     let protocol = location.protocol;
+    // need wildcard ssl
+    protocol = 'http';
     let host = location.host;
     let parts = host.split('.');
     // www.phourus.com/.local, phourus.com/.local, phourus-staging

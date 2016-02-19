@@ -1594,11 +1594,6 @@ div.alerts button {
   width: 80%;
   margin: auto;
 }
-#content .landing .benefits img {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
 #content .landing .benefits .subtitle {
   font-size: 2em;
   font-style: italic;
@@ -1716,6 +1711,11 @@ div.alerts button {
 }
 div.features {
   background-color: #eee;
+}
+div.features img {
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 div.features div.squeeze {
   max-width: 100%;

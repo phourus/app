@@ -14,6 +14,11 @@ var server = require('./src/server');
 
 var phourus = express();
 
+process.on('uncaughtException', function (err) {
+  console.log("---UNCAUGHT EXCEPTION---");
+  console.error(err);
+});
+
 phourus.use(express.static(__dirname + '/build'));
 phourus.use('/rest', api);
 

@@ -23,9 +23,9 @@ router.get('/:id', (req, res) => {
   posts.single(id)
   .then(function (data) {
     res.send(200, data);
-    posts.updateStats(id);
+    posts.updateStats(data.id);
     //posts.setStats(id);
-    posts.setInfluence(id);
+    posts.setInfluence(data.id);
   })
   .catch(function (err) {
     console.error(err);
