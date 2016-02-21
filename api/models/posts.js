@@ -1,6 +1,6 @@
 var sql = require('sequelize');
 var db = require('../db');
-var slug = require('slug');
+//var slug = require('slug');
 
 var Influence = require('../influence');
 
@@ -98,9 +98,11 @@ var posts = db.define('posts', {
     add: function (model) {
       model.userId = this.SESSION_USER;
       if (model.slug) {
-        model.slug = slug(model.slug)
+        //model.slug = slug(model.slug);
+        model.slug = model.slug;
       } else if (model.title) {
-        model.slug = slug(model.title);
+        model.slug = model.title;
+        //model.slug = slug(model.title);
       }
       if (model.slug) {
         model.slug = model.slug.toLowerCase();
@@ -113,7 +115,8 @@ var posts = db.define('posts', {
         model.orgId = null;
       }
       if (model.slug) {
-        model.slug = slug(model.slug).toLowerCase();
+        model.slug = model.slug.toLowerCase();
+        //model.slug = slug(model.slug).toLowerCase();
       }
       return this.update(model, {
         where: {
