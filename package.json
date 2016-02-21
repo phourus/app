@@ -28,7 +28,7 @@
     "influence": "^0.2.0",
     "jsonwebtoken": "^5.0.2",
     "localStorage": "^1.0.3",
-    "mariasql": "0.1.22",
+    "mariasql": "^0.2.5",
     "moment": "^2.9.0",
     "mysql": "^2.9.0",
     "numeral": "^1.5.3",
