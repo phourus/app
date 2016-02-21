@@ -70,7 +70,7 @@
     "start": "node index.js",
     "test": "jest",
     "build": "./node_modules/gulp/bin/gulp.js",
-    "postinstall": "mv ./node_modules/react-router/lib/Match.js ./node_modules/react-router/lib/match.js"
+    "prestart": "mv ./node_modules/react-router/lib/Match.js ./node_modules/react-router/lib/match.js"
   },
   "jest": {
     "testDirectoryName": "tests",
