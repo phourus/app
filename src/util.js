@@ -37,6 +37,6 @@ module.exports = {
       parts.shift();
       host = parts.join('.');
     }
-    return `${protocol}//${shortname}.${host}`
+    return `${protocol}://${shortname}.${host}`
   }
 };
