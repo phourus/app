@@ -203,6 +203,10 @@ let App = React.createClass({
         context.type = 'user';
         context.id = context.params.user;
       break;
+      default:
+        context.root = route[1] ? route[1].path : '';
+        context.type = route[2] ? route[2].path : '';
+      break;
     }
 
     this.setState({route: context});

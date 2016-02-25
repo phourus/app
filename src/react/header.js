@@ -21,14 +21,14 @@ module.exports = React.createClass({
     let session = this.context.session;
     let route = this.context.route;
     let r = route.root;
-    if (!r && route.type !== 'org') {
-      return <Home />
+    if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
+      return <Static />
     }
     if (r === 'home') {
       return <Home />
     }
-    if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
-      return <Static />
+    if (!r && !route.subdomain) {
+      return <Home />
     }
     return  (
       <header className="header">
