@@ -57,7 +57,15 @@ module.exports = React.createClass({
   },
   componentDidUpdate: function () {
     let incomplete = this.state.complete.indexOf(this.state.module) === -1;
-    if (this.state.ready && incomplete) {
+    let mod = this.state.module;
+    let steps = Steps[mod];
+    if (!steps || !steps[0] || !steps[0].selector) {
+      return;
+    }
+    let selector = steps[0].selector;
+    let exists = document.querySelector(selector);
+
+    if (this.state.ready && incomplete && exists) {
       try {
         this.refs.joyride.reset();
         this.refs.joyride.start(true);
@@ -68,7 +76,10 @@ module.exports = React.createClass({
   },
   render: function () {
     let module = this.state.module;
-    let steps = Steps[module] || [];
+    let steps = Steps[module];
+    if (!steps) {
+      return false;
+    }
     return (
       <Joyride ref="joyride" type={'continuous'} steps={steps} scrollOffset={80}
         showStepsProgress={true} showSkipButton={true} showOverlay={true}
