@@ -57,15 +57,8 @@ module.exports = React.createClass({
   },
   componentDidUpdate: function () {
     let incomplete = this.state.complete.indexOf(this.state.module) === -1;
-    let mod = this.state.module;
-    let steps = Steps[mod];
-    if (!steps || !steps[0] || !steps[0].selector) {
-      return;
-    }
-    let selector = steps[0].selector;
-    let exists = document.querySelector(selector);
 
-    if (this.state.ready && incomplete && exists) {
+    if (this.state.ready && incomplete) {
       try {
         this.refs.joyride.reset();
         this.refs.joyride.start(true);
@@ -77,7 +70,7 @@ module.exports = React.createClass({
   render: function () {
     let module = this.state.module;
     let steps = Steps[module];
-    if (!steps) {
+    if (!steps || !this._exists()) {
       return false;
     }
     return (
@@ -87,6 +80,15 @@ module.exports = React.createClass({
         locale={{last: 'Finish', next: 'Next', skip: 'Skip', back: 'Back'}} />
     );
     return false;
+  },
+  _exists: function () {
+    let mod = this.state.module;
+    let steps = Steps[mod];
+    if (!steps || !steps[0] || !steps[0].selector) {
+      return false;
+    }
+    let selector = steps[0].selector;
+    return document.querySelector(selector);
   },
   _current: function (nextRoute) {
     let modules = ['account', 'stream', 'post', 'create', 'edit'];
