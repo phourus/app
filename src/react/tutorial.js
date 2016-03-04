@@ -88,7 +88,10 @@ module.exports = React.createClass({
       return false;
     }
     let selector = steps[0].selector;
-    return document.querySelector(selector);
+    if (typeof document !== 'undefined') {
+      return document.querySelector(selector);
+    }
+    return false;
   },
   _current: function (nextRoute) {
     let modules = ['account', 'stream', 'post', 'create', 'edit'];
