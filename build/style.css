@@ -2325,7 +2325,8 @@ div.features div.squeeze > div.video {
 }
 .actions button.save,
 .actions button.delete,
-.actions button.myposts {
+.actions button.myposts,
+.actions button.rich {
   height: 30px;
   font-size: 0.8em;
   width: 140px;
@@ -2339,6 +2340,9 @@ div.features div.squeeze > div.video {
 }
 .actions button.myposts {
   width: 160px;
+}
+.actions button.rich {
+  width: 200px;
 }
 .actions button.close {
   background: transparent;
@@ -3173,6 +3177,11 @@ div.post .tags {
 }
 #content > div.post .content:after {
   clear: both;
+}
+#content > div.post .create textarea,
+#content > div.post .edit textarea {
+  min-height: 300px;
+  width: 100%;
 }
 #content .about {
   margin: 0;

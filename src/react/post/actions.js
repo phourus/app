@@ -25,7 +25,7 @@ module.exports = React.createClass({
       <div className="actions">
         <Close back={this._back} />
         <Edit owner={this.props.owner} post={this.props.post} />
-        <Create back={this._back} />
+        <Create back={this._back} post={this.props.post} />
         <Controls owner={this.props.owner} post={this.props.post} myposts={this._myposts} />
       </div>
     );
@@ -41,6 +41,18 @@ module.exports = React.createClass({
   },
   _myposts: function () {
   	this.history.pushState(null, "/me");
+  }
+});
+
+let Rich = React.createClass({
+  render: function () {
+    return (this.props.post.rich
+      ? false
+      : <button className="button gold rich" onClick={this._rich}><i className="fa fa-font" /> Enable Rich Text</button>
+    );
+  },
+  _rich: function () {
+    Actions.change('rich', 1);
   }
 });
 
@@ -100,6 +112,7 @@ let Create = React.createClass({
     }
     return (
       <div>
+        <Rich owner={this.props.owner} post={this.props.post} />
         <button className="button green save" onClick={this._post} disabled={this.props.saving}><i className="fa fa-save" /> Post</button>
         <button className="button red delete inverted" onClick={this.props.back}><i className="fa fa-close" /> Cancel</button>
       </div>
@@ -143,6 +156,7 @@ let Controls = React.createClass({
     }
     return (
       <div>
+        <Rich owner={this.props.owner} post={this.props.post} />
         <button className="button green save" onClick={this._update} disabled={this.props.saving}><i className="fa fa-save" /> {this.props.saving ? 'Saving' : 'Save Changes'}</button>
         <button className="button red delete inverted" onClick={this._trash}><i className="fa fa-trash" /> Delete</button>
         <button className="button blue myposts inverted" onClick={this.props.myposts}><i className="fa fa-arrow-left" /> Back to My Posts</button>
