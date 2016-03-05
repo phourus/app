@@ -64,7 +64,12 @@ let Post = React.createClass({
 				this.setState({saving: data.saving, types: false});
 			}
 			if (data.add === true) {
-				this.history.pushState(null, `/${data.user.username}/${data.post.slug}/edit`);
+				let username = 'me';
+				let session = this.context.session;
+				if (session.user && session.user.username) {
+					username = session.user.username;
+				}
+				this.history.pushState(null, `/${username}/${data.post.slug}/edit`);
 			}
 			if (data.post) {
 				document.title = data.post.title;

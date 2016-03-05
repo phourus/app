@@ -28,7 +28,7 @@ module.exports = Reflux.createStore({
         title: 'Enter your post title here',
         content: CreateContent
       };
-      this.changes = {};
+      this.changes = this.post;
       return this.trigger({post: this.post, changes: this.changes});
     }
 
