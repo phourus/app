@@ -27,7 +27,7 @@ module.exports = React.createClass({
       username = post.user.username;
     }
     return this.context.route.type === 'create' || this.context.route.type === 'edit' && this.props.owner
-    ? <input className="title editing" onChange={this._title} value={post.title} />
+    ? <input className="title editing" onChange={this._title} defaultValue={post.title} />
     : <h2 className="title"><Link to={`/${username}/${post.slug}`}>{post.title}</Link></h2>;
   },
   _title: function (e) {
