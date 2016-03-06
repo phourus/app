@@ -14,6 +14,11 @@ let ProfileActions = require('../../actions/profile').Orgs;
 let ProfileStore = require('../../stores/orgs');
 
 let MemberActions = require('../../actions/members');
+let Alert = require('../shared/alert');
+
+let emailReg = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+let usernameReg = /^([a-z]|[A-Z]|[0-9]|-){2,20}$/;
+let passwordReg = /^(.){6,20}$/;
 
 module.exports = React.createClass({
   mixins: [History],
@@ -30,11 +35,13 @@ module.exports = React.createClass({
       step: 0,
       email: "",
       password: "",
+      username: "",
       confirm: "",
       organization: "",
       loaded: false,
       user: {},
-      org: {}
+      org: {},
+      invalid: {}
     };
   },
   componentDidMount: function () {
@@ -83,18 +90,22 @@ module.exports = React.createClass({
           {this.state.step === 0
             ? <div className="form">
               <label>
+                {this.state.invalid.email ? <Alert msg={this.state.invalid.email} color='red' /> : false }
                 Your Email:
                 <input ref="email" className="email" placeholder="enter your email address" value={this.state.email} onChange={this._email} />
               </label>
               <label>
+                {this.state.invalid.password ? <Alert msg={this.state.invalid.password} color='red' /> : false }
                 Password:
                 <input ref="password" className="password" type="password" placeholder="enter a password" value={this.state.password} onChange={this._password} />
               </label>
               <label>
+                {this.state.invalid.confirm ? <Alert msg={this.state.invalid.confirm} color='red' /> : false }
                 Confirm Password:
                 <input ref="confirm" className="confirm" type="password" placeholder="confirm your password" value={this.state.confirm} onChange={this._confirm} />
               </label>
               <label>
+                {this.state.invalid.username ? <Alert msg={this.state.invalid.username} color='red' /> : false }
                 Username:
                 <div>
                   <span>phourus.com/</span>
@@ -193,10 +204,12 @@ module.exports = React.createClass({
     this.setState({organization: value});
   },
   _signup: function () {
-    if (this.state.password === this.state.confirm) {
+    let invalid = this._validate();
+    if (!Object.keys(invalid).length) {
       Actions.register(this.state.email, this.state.password, this.state.username);
       ga('send', 'event', 'account', 'signup');
     }
+    this.setState({invalid: invalid});
   },
   _organizations: function (e) {
     if (this.state.user && this.state.user.id) {
@@ -214,6 +227,22 @@ module.exports = React.createClass({
   },
   _clear: function () {
     this.setState({code: null});
+  },
+  _validate: function () {
+    let invalid = {};
+    if (!this.state.email.match(emailReg)) {
+      invalid.email = "Email is invalid";
+    }
+    if (!this.state.password.match(passwordReg)) {
+      invalid.password = 'Password is invalid';
+    }
+    if (!this.state.username.match(usernameReg)) {
+      invalid.username = 'Username is invalid';
+    }
+    if (this.state.confirm !== this.state.password) {
+      invalid.confirm = 'Passwords do not match';
+    }
+    return invalid;
   }
 });
 

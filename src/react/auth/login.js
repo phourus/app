@@ -10,6 +10,9 @@ let { History, Link } = Router;
 let Actions = require('../../actions/session');
 let Store = require('../../stores/session');
 
+let Loader = require('../shared/loader');
+let Alert = require('../shared/alert');
+
 module.exports = React.createClass({
   mixins: [History],
   contextTypes: {
@@ -24,7 +27,7 @@ module.exports = React.createClass({
   },
   getInitialState: function () {
     return {
-      loaded: false
+      ready: true
     };
   },
   componentDidMount: function () {
@@ -38,6 +41,10 @@ module.exports = React.createClass({
         }
         window.location = url;
       }
+      if (!data.alert) {
+        data.alert = null;
+      }
+      data.ready = true;
       this.setState(data);
     });
   },
@@ -49,6 +56,9 @@ module.exports = React.createClass({
     let user = session.user;
     if (!this.props.show) {
       return false;
+    }
+    if (!this.state.ready) {
+      return <Loader />
     }
     if (session.authenticated) {
       let name = user.first;
@@ -62,6 +72,10 @@ module.exports = React.createClass({
     }
     return (
       <div className="login">
+        {this.state.alert
+          ? <Alert {...this.state.alert} />
+          : false
+        }
         <label>
           Email:
           <input ref="username" className="username" placeholder="your email address"/>
@@ -83,7 +97,7 @@ module.exports = React.createClass({
     let username = this.refs.username.getDOMNode().value;
     let password = this.refs.password.getDOMNode().value;
     this._clear();
-    this.setState({clicked: true});
+    this.setState({clicked: true, ready: false});
     Actions.login(username, password);
     ga('send', 'event', 'account', 'login');
   },

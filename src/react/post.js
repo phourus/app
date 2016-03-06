@@ -24,6 +24,7 @@ let Title = require('./post/title');
 let Type = require('./post/type');
 
 let Drag = require('./post/drag');
+let Loader = require('./shared/loader');
 
 let Post = React.createClass({
 	mixins: [History],
@@ -33,6 +34,7 @@ let Post = React.createClass({
 	},
 	getInitialState: function () {
 		return {
+			ready: false,
 			scroll: false,
 			confirmTrash: false,
 			owner: false,
@@ -57,6 +59,9 @@ let Post = React.createClass({
 	},
 	componentDidMount: function () {
 		this.unsubscribe = Store.listen((data) => {
+			if (!this.state.ready) {
+				this.setState({ready: true});
+			}
 			if (data.hasOwnProperty('saving')) {
 				if (data.saving === false) {
 					this.history.pushState(null, "/me");
@@ -100,6 +105,11 @@ let Post = React.createClass({
 	render: function () {
 		let type = this.context.route.type;
 		let owner = this._owner();
+		if (!this.state.ready) {
+			return (
+				<div className="post"><Loader /></div>
+			);
+		}
 		return (
 			<div className="post">
 				{type === 'create' ? <Create {...this.state} owner={owner} /> : false}
@@ -118,6 +128,7 @@ let Post = React.createClass({
 		if (type === 'create') {
 			Actions.single('create');
 		}
+		this.setState({ready: false});
 	},
 	_owner: function () {
 		let session = this.context.session;

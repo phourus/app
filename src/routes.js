@@ -14,7 +14,6 @@ let Docs = require('./react/static/docs');
 let Contact = require('./react/static/contact');
 let Terms = require('./react/static/terms');
 let Privacy = require('./react/static/privacy');
-let View404 = require('./react/404');
 
 let Individuals = require('./react/individuals');
 let Business = require('./react/organizations');
