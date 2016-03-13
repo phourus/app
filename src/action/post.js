@@ -2,136 +2,158 @@
 import posts from '../api/posts'
 
 export function single(id) {
-  if (!id) {
-    this.post = {};
-    return;
-  }
-  if (id === 'create') {
-    this.post = {
-      type: 'blog',
-      title: 'Enter your post title here',
-      content: CreateContent
-    };
-    this.changes = this.post;
-    return this.trigger({post: this.post, changes: this.changes});
-  }
+  return (dispatch) => {
+    // if (!id) {
+    //   this.post = {};
+    //   return;
+    // }
+    // if (id === 'create') {
+    //   this.post = {
+    //     type: 'blog',
+    //     title: 'Enter your post title here',
+    //     content: CreateContent
+    //   };
+    //   this.changes = this.post;
+    //   return dispatch({post: this.post, changes: this.changes});
+    // }
 
-  posts.single(id)
-  .then(data => {
-    this.post = data;
-    this.trigger({post: data});
-  })
-  .catch(code => {
-    if (code != 200) {
-      let alert = {
-        action: 'load',
-        color: 'yellow',
-        code: code,
-        msg: 'Post could not be loaded'
-      };
-      this.trigger({alert: alert});
-      console.warn(alert);
-     }
-  });
+    dispatch({type: 'REQUEST_POST_SINGLE'});
+    posts.single(id)
+    .then(data => {
+      //this.post = data;
+      dispatch({type: 'RECEIVE_POST_SINGLE', data});
+    })
+    .catch(code => {
+      if (code != 200) {
+        let alert = {
+          action: 'load',
+          color: 'yellow',
+          code: code,
+          msg: 'Post could not be loaded'
+        };
+        dispatch({alert: alert});
+        console.warn(alert);
+       }
+    });
+  }
 }
 
 export function refresh() {
-  this._single(this.post.id);
+  //this._single(this.post.id);
 }
 
 export function add() {
-  let model = this.changes;
-  posts.add(model)
-  .then(data => {
-    this.trigger({add: true, post: data});
-  })
-  .catch(code => {
-    let alert = {
-      action: 'add',
-      color: 'red',
-      code: code,
-      msg: 'Post could not be created'
-    };
-    this.trigger({alert: alert});
-    console.warn(alert);
-  });
+  return (dispatch, getState) => {
+    dispatch({type: 'REQUEST_POST_ADD'});
+    let model = getState().changes;
+    posts.add(model)
+    .then(data => {
+      dispatch({type: 'RECEIVE_POST_ADD', data});
+    })
+    .catch(code => {
+      let alert = {
+        action: 'add',
+        color: 'red',
+        code: code,
+        msg: 'Post could not be created'
+      };
+      dispatch({type: 'ALERT', alert});
+      console.warn(alert);
+    });
+  }
 }
 
 export function save() {
-  posts.save(this.post.id, this.changes)
-  .then(data => {
-    this.trigger({saving: false});
-  })
-  .catch(code => {
-    if (code != 204) {
-      let alert = {
-        action: 'save',
-        color: 'red',
-        code: code,
-        msg: 'Post could not be saved'
-      };
-      this.trigger({alert: alert});
-      console.warn(alert);
-    }
-  });
+  return (dispatch, getState) => {
+    dispatch({type: 'REQUEST_POST_SAVE'});
+    let state = getState();
+    posts.save(state.post.id, state.changes)
+    .then(data => {
+      dispatch({type: 'RECEIVE_POST_SAVE', data});
+    })
+    .catch(code => {
+      if (code != 204) {
+        let alert = {
+          action: 'save',
+          color: 'red',
+          code: code,
+          msg: 'Post could not be saved'
+        };
+        dispatch({type: 'ALERT', alert});
+        console.warn(alert);
+      }
+    });
+  }
 }
 
 export function trash() {
-  posts.save(this.post.id, {privacy: 'trash'})
-  .then(data => {
-    this.trigger({deleted: true});
-  })
-  .catch(code => {
-    if (code != 204) {
-      let alert = {
-        action: 'delete',
-        color: 'red',
-        code: code,
-        msg: 'Post could not be deleted'
-      };
-      this.trigger({alert: alert});
-      console.warn(alert);
-    }
-  });
+  return (dispatch, getState) => {
+    dispatch({type: 'REQUEST_POST_TRASH'});
+    let post = getState().post
+    posts.save(post.id, {privacy: 'trash'})
+    .then(data => {
+      dispatch({type: 'RECEIVE_POST_TRASH', data});
+    })
+    .catch(code => {
+      if (code != 204) {
+        let alert = {
+          action: 'delete',
+          color: 'red',
+          code: code,
+          msg: 'Post could not be deleted'
+        };
+        dispatch({type: 'ALERT', alert});
+        console.warn(alert);
+      }
+    });
+  }
 }
 
 export function change(key, value) {
-  this.changes[key] = value;
-  this.trigger({changes: this.changes});
+  return (dispatch, getState) => {
+    let changes = getState();
+    changes[key] = value;
+    dispatch({type: 'CHANGE_POST', changes});
+  }
 }
 
 export function poll(id) {
-  posts.poll(id)
-  .then(data => {
-    let votes = {};
-    let postId = 0;
-    if (data[0]) {
-      postId = data[0].postId;
-    }
-    data.forEach((item) => {
-      votes[item.option] = item.count;
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_POLL'});
+    posts.poll(id)
+    .then(data => {
+      let votes = {};
+      let postId = 0;
+      if (data[0]) {
+        postId = data[0].postId;
+      }
+      data.forEach((item) => {
+        votes[item.option] = item.count;
+      });
+      dispatch({type: 'RECEIVE_POLL', votes, postId});
+    })
+    .catch(code => {
+      if (code != 200) {
+        let alert = {
+          action: 'poll',
+          color: 'red',
+          code: code,
+          msg: 'Poll could not be loaded'
+        };
+        dispatch({type: 'ALERT', alert});
+        console.warn(alert);
+      }
     });
-    this.trigger({votes: votes, postId: postId});
-  })
-  .catch(code => {
-    if (code != 200) {
-      let alert = {
-        action: 'poll',
-        color: 'red',
-        code: code,
-        msg: 'Poll could not be loaded'
-      };
-      this.trigger({alert: alert});
-      console.warn(alert);
-    }
-  });
+  }
 }
 
 export function vote(postId, option) {
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_VOTE'});
     posts.vote(postId, option)
     .then(data => {
-      this._poll(postId);
-      this.trigger({selected: option});
+      //this._poll(postId);
+      dispatch({type: 'RECEIVE_VOTE', postId, option});
     })
     .catch(code => {
       if (code != 202) {
@@ -141,7 +163,7 @@ export function vote(postId, option) {
           code: code,
           msg: 'Vote could not be saved'
         };
-        this.trigger({alert: alert});
+        dispatch({type: 'ALERT', alert});
         console.warn(alert);
       }
     });

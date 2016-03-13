@@ -3,14 +3,19 @@ import users from '../api/users'
 import account from '../api/account'
 
 export function change(key, value) {
-  this.changes[key] = value;
-  this.trigger({changes: this.changes});
+  return (dispatch, getState) => {
+    let changes = getState().changes;
+    changes[key] = value;
+    dispatch({type: 'CHANGE_USER', changes});
+  }
 }
 
 export function single(id) {
-  users.single(id)
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_SINGLE_USER'});
+    users.single(id)
     .then(data => {
-      this.trigger({user: data});
+      dispatch({type: 'RECEIVE_SINGLE_USER', data, id});
     })
     .catch(code => {
       if (code != 200) {
@@ -20,54 +25,64 @@ export function single(id) {
           code: code,
           msg: 'User could not be loaded'
         };
-        this.trigger({alert: alert});
+        dispatch({type: 'ALERT', alert});
         console.warn(alert);
       }
     });
+  }
 }
 
 export function save() {
-  account.edit(this.changes)
-  .then(data => {
-    if (code == 204) {
-      msg('green', 'Account updated', code);
-    }
-  })
-  .catch(code => {
-    let alert = {
-      action: 'save',
-      color: 'red',
-      code: code,
-      msg: 'Account could not be updated'
-    };
-    this.trigger({alert: alert});
-    console.warn(alert);
-  });
+  return (dispatch, getState) => {
+    let changes = getState().changes;
+    account.edit(changes)
+    .then(data => {
+      if (code == 204) {
+        let alert = {
+          action: 'save',
+          color: 'green',
+          code: code,
+          msg: 'Account updated'
+        };
+        dispatch({type: 'ALERT', alert});
+      }
+    })
+    .catch(code => {
+      let alert = {
+        action: 'save',
+        color: 'red',
+        code: code,
+        msg: 'Account could not be updated'
+      };
+      dispatch({type: 'ALERT', alert});
+      console.warn(alert);
+    });
+  }
 }
 
 export function deactivate() {
-  account.deactivate
-  .then(code => {
-    if (code == 202) {
-      msg('green', 'Account deactivated', code);
+  return (dispatch) => {
+    account.deactivate
+    .then(code => {
+      if (code == 202) {
+        let alert = {
+          action: 'deactivate',
+          color: 'green',
+          code: code,
+          msg: 'Account deactivated'
+        };
+        dispatch({type: 'ALERT', alert});
+      }
+    })
+    .catch(code => {
       let alert = {
         action: 'deactivate',
-        color: 'green',
+        color: 'red',
         code: code,
-        msg: 'Account deactivated'
+        msg: 'Account could not be deactivated'
       };
-      this.trigger({alert: alert});
-    }
-  })
-  .catch(code => {
-    this.trigger({code: code});
-    let alert = {
-      action: 'deactivate',
-      color: 'red',
-      code: code,
-      msg: 'Account could not be deactivated'
-    };
-    this.trigger({alert: alert});
-    console.warn(alert);
-  });
+      dispatch({type: 'ALERT', alert});
+      console.warn(alert);
+    });
+  }
 }

@@ -1,9 +1,13 @@
 "use strict";
 
 export function ready(ready) {
-  this.trigger({ready: ready});
+  return (dispatch) => {
+    dispatch({type: 'TUTORIAL_READY', ready});
+  }
 }
 
 export function reset() {
-  this.trigger({reset: true});
+  return (dispatch) => {
+    dispatch({type: 'TUTORIAL_RESET', reset: true});
+  }
 }

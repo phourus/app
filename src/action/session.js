@@ -21,99 +21,111 @@ let gaDimensions = function (user) {
 }
 
 export function register(email, password, username) {
-  account.register(email, password, username)
-  .then((data) => {
-    this._login(email, password);
-    this.trigger({action: 'register'});
-  })
-  .catch((code) => {
-    this.trigger({code: code, action: 'register'});
-    let alert = {
-      action: 'register',
-      color: 'red',
-      code: code,
-      msg: 'Registration unsuccessful'
-    };
-    this.trigger({alert: alert});
-    console.warn(alert);
-  });
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_REGISTER'});
+    account.register(email, password, username)
+    .then((data) => {
+      //this._login(email, password);
+      dispatch({type: 'RECEIVE_REGISTER', data});
+    })
+    .catch((code) => {
+      let alert = {
+        action: 'register',
+        color: 'red',
+        code: code,
+        msg: 'Registration unsuccessful'
+      };
+      dispatch({type: 'ALERT', alert});
+      console.warn(alert);
+    });
+  }
 }
 
 export function get() {
-  token.onConnect()
-  .then(() => {
-    token.get('token')
-    .then((data) => {
-      account.get()
-      .then(data => {
-        this._orgs();
-        this.trigger({authenticated: true, user: data, action: 'get'});
-        gaDimensions(data);
-      })
-      .catch(code => {
-        if (code !== 401) {
-          let alert = {
-            action: 'get',
-            color: 'yellow',
-            code: code,
-            msg: 'Account could not be loaded'
-          };
-          this.trigger({alert: alert});
-        }
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_SESSION'});
+    token.onConnect()
+    .then(() => {
+      token.get('token')
+      .then((data) => {
+        account.get()
+        .then(data => {
+          //this._orgs();
+          dispatch({type: 'RECEIVE_SESSION', authenticated: true, data});
+          gaDimensions(data);
+        })
+        .catch(code => {
+          if (code !== 401) {
+            let alert = {
+              action: 'get',
+              color: 'yellow',
+              code: code,
+              msg: 'Account could not be loaded'
+            };
+            dispatch({type: 'ALERT', alert});
+          }
+        });
       });
     });
-  });
+  }
 }
 
 export function login(email, password) {
-  account.login(email, password)
-  .then((data) => {
-    token.onConnect()
-    .then(() => {
-      token.set('token', data, TTL)
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_LOGIN'});
+    account.login(email, password)
+    .then((data) => {
+      token.onConnect()
       .then(() => {
-        this.trigger({code: 200, action: 'login'});
-      });
+        token.set('token', data, TTL)
+        .then(() => {
+          dispatch({type: 'RECEIVE_LOGIN', code: 200});
+        });
+      })
     })
-  })
-  .catch((code) => {
-    this.trigger({code: code, action: 'login'});
-    let alert = {
-      action: 'login',
-      color: 'red',
-      code: code,
-      msg: 'Login unsuccessful'
-    };
-    this.trigger({alert: alert});
-    console.warn(alert);
-  });
+    .catch((code) => {
+      let alert = {
+        action: 'login',
+        color: 'red',
+        code: code,
+        msg: 'Login unsuccessful'
+      };
+      dispatch({type: 'ALERT', alert});
+      console.warn(alert);
+    });
+  }
 }
 
 export function logout() {
-  token.onConnect()
-  .then(() => {
-    token.del('token')
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_LOGOUT'});
+    token.onConnect()
     .then(() => {
-      this._get();
-      this.trigger({authenticated: false, user: {}, action: 'logout'});
+      token.del('token')
+      .then(() => {
+        this._get();
+        dispatch({type: 'RECEIVE_LOGOUT'});
+      });
     });
-  });
+  }
 }
 
 export function orgs() {
-  account.orgs()
-  .then(data => {
-    this.trigger({orgs: data});
-  })
-  .catch(code => {
-    this.trigger({code: code});
-    let alert = {
-      action: 'organizations',
-      color: 'yellow',
-      code: code,
-      msg: 'Organizations could not be loaded'
-    };
-    this.trigger({alert: alert});
-    console.warn(alert);
-  });
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_SESSION_ORGS'});
+    account.orgs()
+    .then(data => {
+      dispatch({type: 'RECEIVE_SESSION_ORGS', data});
+    })
+    .catch(code => {
+      let alert = {
+        action: 'organizations',
+        color: 'yellow',
+        code: code,
+        msg: 'Organizations could not be loaded'
+      };
+      dispatch({type: 'ALERT', alert});
+      console.warn(alert);
+    });
+  }
 }

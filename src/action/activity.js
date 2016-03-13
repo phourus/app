@@ -2,36 +2,40 @@
 import account from '../api/account'
 
 export function notifications() {
-   account.notifications({})
-   .then(data => {
-     this.trigger({notifications: data});
-   })
-   .catch(code => {
-     let alert = {
-       action: 'notifications',
-       color: 'yellow',
-       code: code,
-       msg: 'Notifications could not be loaded'
-     };
-     this.trigger({alert: alert});
-     console.warn(alert);
-   });
+  return (dispatch) => {
+     dispatch({type: 'REQUEST_NOTIFICATIONS'});
+     account.notifications({})
+     .then(data => {
+       dispatch({type: 'RECEIVE_NOTIFICATIONS', data});
+     })
+     .catch(code => {
+       let alert = {
+         action: 'notifications',
+         color: 'yellow',
+         code: code,
+         msg: 'Notifications could not be loaded'
+       };
+       dispatch({type: 'ALERT', alert});
+     });
+  }
 }
 
 export function history() {
-  account.history({})
-  .then(data => {
-    this.trigger({history: data});
-  })
-  .catch(code => {
-    this.trigger({code: code});
-    let alert = {
-      action: 'history',
-      color: 'yellow',
-      code: code,
-      msg: 'History could not be loaded'
-    };
-    this.trigger({alert: alert});
-    console.warn(alert);
-  });
+  return (dispatch) => {
+    dispatch({type: 'REQUEST_HISTORY'});
+    account.history({})
+    .then(data => {
+      dispatch({type: 'RECEIVE_HISTORY', data});
+    })
+    .catch(code => {
+      let alert = {
+        action: 'history',
+        color: 'yellow',
+        code: code,
+        msg: 'History could not be loaded'
+      };
+      dispatch({type: 'ALERT', alert});
+      console.warn(alert);
+    });
+  }
 }

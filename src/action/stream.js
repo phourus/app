@@ -35,7 +35,7 @@ export function collection() {
       this.posts.unshift(this.single);
       this.single = null;
     }
-    this.trigger({posts: this.posts, total: data.count, params: this.params, scroll: this.scroll});
+    dispatch({posts: this.posts, total: data.count, params: this.params, scroll: this.scroll});
   })
   .catch(code => {
     if (code != 200) {
@@ -45,7 +45,7 @@ export function collection() {
          code: code,
          msg: 'Posts could not be loaded'
        };
-       this.trigger({alert: alert});
+       dispatch({alert: alert});
        console.warn(alert);
     }
   });
@@ -54,7 +54,7 @@ export function collection() {
 export function select(id) {
   this.selected = id;
   this.scroll = false;
-  this.trigger({selected: this.selected, scroll: this.scroll});
+  dispatch({selected: this.selected, scroll: this.scroll});
 }
 
 export function single(id) {
@@ -75,7 +75,7 @@ export function single(id) {
          code: code,
          msg: 'Post could not be loaded'
        };
-       this.trigger({alert: alert});
+       dispatch({alert: alert});
        console.warn(alert);
     }
   });
@@ -170,13 +170,13 @@ export function context(type, id) {
     id: id,
     profile: {}
   };
-  this.trigger({context: this.params.context});
+  dispatch({context: this.params.context});
   this.posts = [];
   // create
   if (type === 'create') {
     let model = {id: 'create', title: '', content: '', user: {}};
     this.posts = [model];
-    this.trigger({posts: this.posts, total: this.posts.length, params: this.params, scroll: this.scroll});
+    dispatch({posts: this.posts, total: this.posts.length, params: this.params, scroll: this.scroll});
     return;
   }
   // no context
@@ -193,7 +193,7 @@ export function context(type, id) {
   // me
   if (type === 'me') {
     //this.params.context.profile = data;
-    this.trigger({context: this.params.context});
+    dispatch({context: this.params.context});
     this._collection();
     return;
   }
@@ -206,7 +206,7 @@ export function context(type, id) {
     .then(data => {
       this.params.context.profile = data;
       this.params.context.id = data.id;
-      this.trigger({context: this.params.context});
+      dispatch({context: this.params.context});
       this._collection();
     })
     .catch(code => {
@@ -217,7 +217,7 @@ export function context(type, id) {
            code: code,
            msg: 'Could not load posts for this profile'
          };
-         this.trigger({alert: alert});
+         dispatch({alert: alert});
          console.warn(alert);
       }
     });
@@ -250,7 +250,7 @@ export function save(postId, folderId) {
       code: code,
       msg: 'Could not save to folder'
     };
-    this.trigger({alert: alert});
+    dispatch({alert: alert});
     console.warn(alert);
   });
 }
