@@ -24,7 +24,7 @@ module.exports = React.createClass({
         </head>
         <body className="body">
           <div id="app">
-            <RoutingContext {...this.props} />
+            {/*<RoutingContext {...this.props} />*/}
           </div>
           <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
           <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>

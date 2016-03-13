@@ -1,6 +1,8 @@
 "use strict";
 let React = require('react');
 
+import { connect } from 'react-redux'
+
 let { Link } = require('react-router');
 var ga = require('./analytics');
 var Initializer = ga.Initializer;
@@ -72,6 +74,7 @@ let App = React.createClass({
     });
     Actions.get();
     this._route(this.props);
+    this.props.dispatch({type: 'READY'})
   },
   componentWillUnmount: function () {
     this.unsubscribe();
@@ -266,4 +269,13 @@ let Helper = React.createClass({
   }
 });
 
-module.exports = DragDropContext(HTML5Backend)(App);
+function mapStateToProps(state) {
+  const { tutorial } = state
+
+  return {
+    tutorial
+  }
+}
+
+const dnd = DragDropContext(HTML5Backend)(App);
+module.exports = connect(mapStateToProps)(dnd);
