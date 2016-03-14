@@ -1,14 +1,10 @@
 "use strict";
-const initialState = {
-  test: 'init'
-}
+const initialState = {}
 
 export default function tutorial(state = initialState, action = {}) {
   switch (action.type) {
     case 'READY':
-      return {
-        test: 'changed'
-      }
+      return state
     case 'RESET':
       return state
     default:
