@@ -1,6 +1,7 @@
 "use strict";
 const initialState = {
-  test: 'init'
+  notifications: [],
+  history: []
 }
 
 export default function tutorial(state = initialState, action = {}) {

@@ -1,5 +1,7 @@
 "use strict";
-const initialState = {}
+const initialState = {
+  list: []
+}
 
 export default function util(state = initialState, action = {}) {
   switch (action.type) {

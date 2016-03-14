@@ -1,5 +1,8 @@
 "use strict";
-const initialState = {}
+const initialState = {
+  changes: {},
+  single: {}
+}
 
 export default function tutorial(state = initialState, action = {}) {
   switch (action.type) {

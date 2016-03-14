@@ -1,6 +1,6 @@
 "use strict";
 const initialState = {
-  test: 'init'
+  session: {}
 }
 
 export default function tutorial(state = initialState, action = {}) {

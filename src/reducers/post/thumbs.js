@@ -1,5 +1,7 @@
 "use strict";
-const initialState = {}
+const initialState = {
+  post: {}
+}
 
 export default function util(state = initialState, action = {}) {
   switch (action.type) {
@@ -17,7 +19,7 @@ export default function util(state = initialState, action = {}) {
       return state
     case 'REQUEST_THUMB_REMOVE':
       return state
-    case 'RECEIVE_THUMB_REMOVE'
+    case 'RECEIVE_THUMB_REMOVE':
       return state
     default:
       return state

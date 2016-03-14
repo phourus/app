@@ -1,6 +1,9 @@
 "use strict";
 const initialState = {
-  test: 'init'
+  changes: {},
+  single: {},
+  list: [],
+  lookup: []
 }
 
 export default function tutorial(state = initialState, action = {}) {
