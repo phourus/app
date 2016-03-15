@@ -98,7 +98,7 @@ export function limit(limit) {
 
 export function sortBy(sortBy) {
   return (dispatch) => {
-    dispatch({type: 'STREAM_SORTBY', soryBy});
+    dispatch({type: 'STREAM_SORTBY', sortBy});
   }
 }
 

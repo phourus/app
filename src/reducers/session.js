@@ -3,7 +3,7 @@ const initialState = {
   session: {}
 }
 
-export default function tutorial(state = initialState, action = {}) {
+export default function session(state = initialState, action = {}) {
   switch (action.type) {
     case 'REQUEST_REGISTER':
       return state

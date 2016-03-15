@@ -1,12 +1,18 @@
 "use strict";
 const initialState = {
-  single: ''
+  id: '',
+  content: ''
 }
 
-export default function tutorial(state = initialState, action = {}) {
+export default function pages(state = initialState, action = {}) {
   switch (action.type) {
     case 'RECEIVE_PAGE':
-      return state
+      return update(state, {
+        $set: {
+          id: action.id,
+          content: action.content
+        }
+      })
     default:
       return state
   }

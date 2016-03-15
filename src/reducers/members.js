@@ -1,18 +1,33 @@
 "use strict";
+import update from 'react-addons-update'
 const initialState = {
   list: []
 }
 
-export default function tutorial(state = initialState, action = {}) {
+export default function members(state = initialState, action = {}) {
   switch (action.type) {
     case 'REQUEST_MEMBERS':
-      return state
+      return update(state, {
+        $set: { ready: false }
+      })
     case 'RECEIVE_MEMBERS':
-      return state
+      return update(state, {
+        $set: {
+          ready: true,
+          list: action.data
+        }
+      })
     case 'REQUEST_MEMBERSHIP':
-      return state
+      return update(state, {
+        $set: { ready: false }
+      })
     case 'RECEIVE_MEMBERSHIP':
-      return state
+      return update(state, {
+        $set: {
+          ready: true,
+          data: action.data
+        }
+      })
     default:
       return state
   }

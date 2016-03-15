@@ -3,7 +3,7 @@ const initialState = {
   list: []
 }
 
-export default function util(state = initialState, action = {}) {
+export default function links(state = initialState, action = {}) {
   switch (action.type) {
     case 'REQUEST_LINK_ADD':
       return state

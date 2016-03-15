@@ -4,8 +4,8 @@ import pages from '../rest/pages'
 export function get(page) {
   return (dispatch) => {
     pages.get(page)
-    .then(data => {
-      dispatch({type: 'RECEIVE_PAGE', page: data, id: page});
+    .then(content => {
+      dispatch({type: 'RECEIVE_PAGE', content, id: page});
     })
     .catch(code => {
       if (code != 200) {

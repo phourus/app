@@ -1,4 +1,5 @@
 "use strict";
+import update from 'react-addons-update'
 const initialState = {
   ready: false,
   reset: false
@@ -7,7 +8,9 @@ const initialState = {
 export default function tutorial(state = initialState, action = {}) {
   switch (action.type) {
     case 'READY':
-      return state
+      return update(state, {
+        ready: true
+      })
     case 'RESET':
       return state
     default:

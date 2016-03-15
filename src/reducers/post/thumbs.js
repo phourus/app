@@ -3,7 +3,7 @@ const initialState = {
   post: {}
 }
 
-export default function util(state = initialState, action = {}) {
+export default function thumbs(state = initialState, action = {}) {
   switch (action.type) {
     case 'REQUEST_THUMB_POST':
       return state

@@ -1,19 +1,34 @@
 "use strict";
+import update from 'react-addons-update'
 const initialState = {
   notifications: [],
   history: []
 }
 
-export default function tutorial(state = initialState, action = {}) {
+export default function activity(state = initialState, action = {}) {
   switch (action.type) {
     case 'REQUEST_NOTIFICATIONS':
-      return state
+      return update(state, {
+        $set: { ready: false }
+      })
     case 'RECEIVE_NOTIFICATIONS':
-      return state
+      return update(state, {
+        $set: {
+          ready: true,
+          notifications: action.data
+        }
+      })
     case 'REQUEST_HISTORY':
-      return state
+      return update(state, {
+        $set: { ready: false }
+      })
     case 'RECEIVE_HISTORY':
-      return state
+      return update(state, {
+        $set: {
+          ready: true,
+          history: action.data
+        }
+      })
     default:
       return state
   }

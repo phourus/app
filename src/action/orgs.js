@@ -3,9 +3,7 @@ import orgs from '../api/orgs'
 
 export function change(key, value) {
   return (dispatch, getState) => {
-    let changes = getState.changes;
-    changes[key] = value;
-    dispatch({type: 'CHANGE_ORG', changes});
+    dispatch({type: 'CHANGE_ORG', key, value});
   }
 }
 
@@ -31,7 +29,7 @@ export function create(shortname) {
 
 export function single(id) {
   return (dispatch) => {
-    dispatch({type: 'REQUEST_SINGLE_ORG', data})
+    dispatch({type: 'REQUEST_SINGLE_ORG'})
     orgs.single(id)
     .then(data => {
       dispatch({type: 'RECEIVE_SINGLE_ORG', data});

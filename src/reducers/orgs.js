@@ -1,4 +1,5 @@
 "use strict";
+import update from 'react-addons-update'
 const initialState = {
   changes: {},
   single: {},
@@ -6,26 +7,58 @@ const initialState = {
   lookup: []
 }
 
-export default function tutorial(state = initialState, action = {}) {
+export default function orgs(state = initialState, action = {}) {
   switch (action.type) {
     case 'CHANGE_ORG':
-      return state
+      let changes = state.changes
+      changes[action.key] = action.value
+      return update(state, {
+        $set: { changes }
+      })
     case 'REQUEST_CREATE_ORG':
-      return state
+      return update(state, {
+        $set: { ready: false }
+      })
     case 'RECEIVE_CREATE_ORG':
-      return state
+      return update(state, {
+        $set: {
+          ready: true,
+          data: action.data
+        }
+      })
     case 'REQUEST_SINGLE_ORG':
-      return state
+      return update(state, {
+        $set: { ready: false }
+      })
     case 'RECEIVE_SINGLE_ORG':
-      return state
+      return update(state, {
+        $set: {
+          ready: true,
+          single: action.data
+        }
+      })
     case 'REQUEST_SAVE_ORG':
-      return state
+      return update(state, {
+        $set: { ready: false }
+      })
     case 'RECEIVE_SAVE_ORG':
-      return state
+      return update(state, {
+        $set: {
+          ready: true,
+          data: action.data
+        }
+      })
     case 'REQUEST_LOOKUP_ORGS':
-      return state
+      return update(state, {
+        $set: { ready: false }
+      })
     case 'RECEIVE_LOOKUP_ORGS':
-      return state
+      return update(state, {
+        $set: {
+          ready: true,
+          lookup: action.data
+        }
+      })
     default:
       return state
   }
