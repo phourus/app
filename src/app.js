@@ -8,6 +8,7 @@ var Initializer = ga.Initializer;
 let Header = require('./react/header');
 let Profile = require('./react/profile');
 let Tutorial = require('./react/tutorial');
+let Menu = require('./react/menu');
 
 let Actions = require('./actions/session');
 let Store = require('./stores/session');
@@ -99,6 +100,7 @@ let App = React.createClass({
         {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
         <div className="spacer"></div>
         <Profile />
+        <Menu />
         <div>
           <div id="content">
             {React.cloneElement(this.props.children, {})}

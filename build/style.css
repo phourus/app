@@ -4427,6 +4427,34 @@ div.spacer {
   cursor: pointer;
   background-color: #217dbb;
 }
+.menu {
+  width: 50px;
+  position: fixed;
+  background-color: #333;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+.menu.hide {
+  width: 0px;
+  display: none;
+}
+.menu ul {
+  margin: 0;
+  padding: 0;
+}
+.menu ul li {
+  list-style: none;
+  text-align: center;
+  margin-top: 20px;
+}
+.menu ul li i {
+  color: #fff;
+  font-size: 1.5em;
+}
+.menu ul li i:hover {
+  color: #aaa;
+}
 .profile {
   padding: 10px 0;
   margin-bottom: 20px;
