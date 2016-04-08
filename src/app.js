@@ -81,6 +81,7 @@ let App = React.createClass({
     this._route(nextProps);
   },
   render: function () {
+    let classType = "product";
     let className = "main";
     let route = this.state.route;
     let root = route.root;
@@ -92,31 +93,43 @@ let App = React.createClass({
         className += " visible";
       }
     }
+    if (['contact', 'pricing', 'about', 'docs'].indexOf(root) > -1) {
+      classType = "static";
+    }
+    if (root === 'home') {
+      classType = "home";
+    }
+    if (!root && !route.subdomain) {
+      classType = "home";
+    }
     return  (
-      <div id="app">
-        <Tutorial />
-        <Initializer />
-        <Header tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
-        {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
-        <div className="spacer"></div>
-        <Profile />
+      <div id="app" className={classType}>
         <Menu />
-        <div>
-          <div id="content">
-            {React.cloneElement(this.props.children, {})}
+        <div className="container">
+          <Tutorial />
+          <Initializer />
+          <Header tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
+          {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
+          <div className="spacer"></div>
+          <Profile />
+
+          <div>
+            <div id="content">
+              {React.cloneElement(this.props.children, {})}
+            </div>
           </div>
+          <Helper />
+          <footer className="footer">
+            <strong>1-844-PHOURUS</strong><br />
+            <span className="muted">(1-844-746-8787)</span><br />
+            <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
+            <span>© 2015 Phourus Inc. All Rights Reserved.</span><br />
+            <span className="muted">1411 7th St. #305, Santa Monica, CA 90401</span><br />
+            <Link to="/terms" className="muted">Terms</Link> |
+            <Link to="/privacy" className="muted">Privacy</Link>
+            <br clear="all" />
+          </footer>
         </div>
-        <Helper />
-        <footer className="footer">
-          <strong>1-844-PHOURUS</strong><br />
-          <span className="muted">(1-844-746-8787)</span><br />
-          <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
-          <span>© 2015 Phourus Inc. All Rights Reserved.</span><br />
-          <span className="muted">1411 7th St. #305, Santa Monica, CA 90401</span><br />
-          <Link to="/terms" className="muted">Terms</Link> |
-          <Link to="/privacy" className="muted">Privacy</Link>
-          <br clear="all" />
-        </footer>
       </div>
     );
   },

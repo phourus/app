@@ -4087,7 +4087,7 @@ header {
   width: 100%;
   height: 50px;
   position: fixed;
-  background-color: #f7f7f7;
+  background-color: #eee;
   opacity: 1;
   z-index: 999;
 }
@@ -4428,15 +4428,12 @@ div.spacer {
   background-color: #217dbb;
 }
 .menu {
-  width: 50px;
+  width: 5%;
   position: fixed;
   background-color: #333;
   left: 0;
   top: 0;
   height: 100%;
-}
-.menu.hide {
-  width: 0px;
   display: none;
 }
 .menu ul {
@@ -4635,6 +4632,23 @@ body {
   line-height: 25px;
   letter-spacing: 0px;
   position: relative;
+}
+body #app {
+  width: 100%;
+}
+body #app .container {
+  width: 100%;
+  margin: 0px;
+}
+body #app.product header {
+  width: 95%;
+}
+body #app.product .menu {
+  display: block;
+}
+body #app.product .container {
+  width: 95%;
+  margin-left: 5%;
 }
 div.spacer {
   height: 50px;
