@@ -3784,7 +3784,8 @@ div.posts .postItem {
   width: 98%;
   margin: 1%;
   padding: 1%;
-  background-color: #f7f7f7;
+  background-color: #fafafa;
+  border: solid 1px #ccc;
   box-sizing: border-box;
   text-align: left;
 }
@@ -3836,7 +3837,6 @@ div.posts .postItem {
     -moz-transition: opacity 0.5s ease-in-out;
     -webkit-transition: opacity 0.5s ease-in-out;
     position: relative;
-    margin: 5px;
     -webkit-box-flex: 0;
     -webkit-flex: 0 1 auto;
     -ms-flex: 0 1 auto;
@@ -4038,11 +4038,12 @@ div.posts .postItem {
   border: none;
 }
 .footer {
-  color: #444;
+  color: #eee;
   text-align: center;
   font-size: 0.8em;
   line-height: 20px;
   padding: 20px 0px 10px 0px;
+  background-color: #000;
 }
 .footer span.muted {
   color: #777;
@@ -4087,7 +4088,8 @@ header {
   width: 100%;
   height: 50px;
   position: fixed;
-  background-color: #eee;
+  background-color: #fff;
+  border-bottom: solid 1px #eee;
   opacity: 1;
   z-index: 999;
 }
@@ -4435,6 +4437,7 @@ div.spacer {
   top: 0;
   height: 100%;
   display: none;
+  z-index: 9999;
 }
 .menu ul {
   margin: 0;
@@ -4622,8 +4625,6 @@ div.spacer {
 /** COLORS **/
 /** BODY **/
 body {
-  background-color: #EDEDED;
-  background-image: url('/assets/bg.jpg');
   margin: 0px;
   padding: 0px;
   color: #333;
