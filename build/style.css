@@ -4110,6 +4110,19 @@ header .brand a {
 header .brand a:hover {
   background-image: url('/assets/logos/dark/hover.png');
 }
+header .mylinks {
+  font-size: 0.9em;
+  display: inline-block;
+  height: 100%;
+  padding-top: 20px;
+}
+header .mylinks a {
+  padding-top: 20px;
+  margin-left: 10px;
+}
+header.home {
+  border-bottom: none;
+}
 header.home .brand a {
   background-image: url('/assets/logos/light/normal.png');
 }
@@ -4429,31 +4442,44 @@ div.spacer {
   cursor: pointer;
   background-color: #217dbb;
 }
-.menu {
-  width: 5%;
+#app > .menu {
+  width: 100%;
   position: fixed;
   background-color: #333;
   left: 0;
-  top: 0;
-  height: 100%;
+  bottom: 0;
+  height: 40px;
   display: none;
   z-index: 9999;
 }
-.menu ul {
+#app > .menu ul {
   margin: 0;
   padding: 0;
-}
-.menu ul li {
-  list-style: none;
   text-align: center;
-  margin-top: 20px;
 }
-.menu ul li i {
+#app > .menu ul li {
+  list-style: none;
+  margin-top: 10px;
+  display: inline-block;
+  margin-right: 20px;
+}
+#app > .menu ul li i {
   color: #fff;
   font-size: 1.5em;
 }
-.menu ul li i:hover {
+#app > .menu ul li i:hover {
   color: #aaa;
+}
+@media (min-width: 500px) {
+  #app > .menu {
+    width: 5%;
+    top: 0;
+    height: 100%;
+  }
+  #app > .menu li {
+    padding-top: 20px;
+    display: block;
+  }
 }
 .profile {
   padding: 10px 0;

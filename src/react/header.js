@@ -84,6 +84,17 @@ let Static = React.createClass({
 });
 
 let Private = React.createClass({
+  render: function () {
+    return (
+      <span className="mylinks">
+        <Link to="me">My Posts</Link>
+        <Link to="account">My Account</Link>
+      </span>
+    );
+  }
+});
+
+let _Private = React.createClass({
   mixins: [History],
   contextTypes: {
     session: React.PropTypes.object,
