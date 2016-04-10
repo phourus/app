@@ -1,17 +1,23 @@
+"use strict";
 let React = require('react');
 
-module.exports = React.createClass({
+let Integrate = React.createClass({
   render: function () {
     return (
-      <div className="ideas">
-        <h2>Find Great Ideas</h2>
-        <div className="slides"></div>
-        <h4>The Sticky Note</h4>
-        <p>Did you know that the sticky note came from a scientist who made a
-        semi-sticky adhesive that didn't know what to do with it? With some
-        discussion and collaboration, this mistake became a $3 billion branch of 3M</p>
-        <a href="">Next: American Airlines &raquo;</a>
+      <div className="integrate">
+        <h2 className="heading">Integrate</h2>
+        <p>work with the tools you're already using</p>
+        <div className="squeeze">
+          <i className="fa fa-facebook" />
+          <i className="fa fa-google" />
+          <i className="fa fa-twitter" />
+          <i className="fa fa-linkedin" />
+          <i className="fa fa-slack" />          
+          <i className="fa fa-dropbox" />
+        </div>
       </div>
-    )
+    );
   }
-})
+});
+
+module.exports = Integrate;

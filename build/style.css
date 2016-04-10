@@ -1590,57 +1590,6 @@ div.alerts button {
     background-size: 2000px 1000px;
   }
 }
-#content .landing .benefits {
-  width: 80%;
-  margin: auto;
-}
-#content .landing .benefits .subtitle {
-  font-size: 2em;
-  font-style: italic;
-  color: #777;
-  margin-bottom: 60px;
-}
-#content .landing .benefits div.left,
-#content .landing .benefits div.right {
-  font-size: 2em;
-  box-sizing: border-box;
-  padding: 20px;
-}
-#content .landing .benefits div > div {
-  clear: both;
-  padding: 20px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-#content .landing .benefits div > div span.title {
-  font-size: 2em;
-  line-height: 1em;
-  font-weight: bold;
-  text-align: left;
-}
-#content .landing .benefits div > div p {
-  font-size: 1.1em;
-}
-#content .landing .benefits div > div p.usage {
-  font-style: italic;
-  font-size: 0.9em;
-  display: none;
-}
-#content .landing .benefits div > div i {
-  font-size: 3em;
-  width: 100px;
-}
-@media (min-width: 500px) {
-  #content .landing .benefits div.left {
-    float: left;
-  }
-  #content .landing .benefits div.right {
-    float: right;
-  }
-  #content .landing .benefits div > div {
-    text-align: left;
-  }
-}
 #content .landing .example {
   display: none;
   padding: 20px 0;
@@ -1795,57 +1744,6 @@ div.features div.squeeze > div.video {
   }
   div.features div.squeeze > div.video {
     text-align: center;
-  }
-}
-.fa-facebook {
-  color: #3b5998;
-}
-.fa-google {
-  color: #dc4e41;
-}
-.fa-twitter {
-  color: #55acee;
-}
-.fa-linkedin {
-  color: #0077b5;
-}
-.fa-dropbox {
-  color: #007ee5;
-}
-.fa-rss {
-  color: #f26522;
-}
-.fa-slack {
-  color: #4D394B;
-}
-.fa-envelope {
-  color: #ccc;
-}
-#content .landing .integrate {
-  padding-bottom: 60px;
-  width: 100%;
-}
-#content .landing .integrate > p {
-  color: #555;
-  margin-bottom: 60px;
-}
-#content .landing .integrate .heading {
-  color: #333;
-}
-#content .landing .integrate i {
-  width: 16.66666667%;
-  display: inline-block;
-  vertical-align: top;
-  font-size: 2em;
-}
-@media (min-width: 500px) {
-  #content .landing .integrate i {
-    font-size: 3em;
-  }
-}
-@media (min-width: 800px) {
-  #content .landing .integrate i {
-    font-size: 4em;
   }
 }
 #content .landing .slider {
@@ -3190,6 +3088,108 @@ div.post .tags {
 #content > div.post .edit textarea {
   min-height: 300px;
   width: 100%;
+}
+#content .product .features {
+  width: 80%;
+  margin: auto;
+}
+#content .product .features .subtitle {
+  font-size: 2em;
+  font-style: italic;
+  color: #777;
+  margin-bottom: 60px;
+}
+#content .product .features div.left,
+#content .product .features div.right {
+  font-size: 2em;
+  box-sizing: border-box;
+  padding: 20px;
+}
+#content .product .features div > div {
+  clear: both;
+  padding: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+#content .product .features div > div span.title {
+  font-size: 2em;
+  line-height: 1em;
+  font-weight: bold;
+  text-align: left;
+}
+#content .product .features div > div p {
+  font-size: 1.1em;
+}
+#content .product .features div > div p.usage {
+  font-style: italic;
+  font-size: 0.9em;
+  display: none;
+}
+#content .product .features div > div i {
+  font-size: 3em;
+  width: 100px;
+}
+@media (min-width: 500px) {
+  #content .product .features div.left {
+    float: left;
+  }
+  #content .product .features div.right {
+    float: right;
+  }
+  #content .product .features div > div {
+    text-align: left;
+  }
+}
+.fa-facebook {
+  color: #3b5998;
+}
+.fa-google {
+  color: #dc4e41;
+}
+.fa-twitter {
+  color: #55acee;
+}
+.fa-linkedin {
+  color: #0077b5;
+}
+.fa-dropbox {
+  color: #007ee5;
+}
+.fa-rss {
+  color: #f26522;
+}
+.fa-slack {
+  color: #4D394B;
+}
+.fa-envelope {
+  color: #ccc;
+}
+#content .product .integrate {
+  padding-bottom: 60px;
+  width: 100%;
+}
+#content .product .integrate > p {
+  color: #555;
+  margin-bottom: 60px;
+}
+#content .product .integrate .heading {
+  color: #333;
+}
+#content .product .integrate i {
+  width: 16.66666667%;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 2em;
+}
+@media (min-width: 500px) {
+  #content .product .integrate i {
+    font-size: 3em;
+  }
+}
+@media (min-width: 800px) {
+  #content .product .integrate i {
+    font-size: 4em;
+  }
 }
 #content .about {
   margin: 0;

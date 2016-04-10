@@ -3,14 +3,12 @@ let React = require('react');
 module.exports = React.createClass({
   render: function () {
     return (
-      <div className="ideas">
-        <h2>Find Great Ideas</h2>
-        <div className="slides"></div>
-        <h4>The Sticky Note</h4>
-        <p>Did you know that the sticky note came from a scientist who made a
-        semi-sticky adhesive that didn't know what to do with it? With some
-        discussion and collaboration, this mistake became a $3 billion branch of 3M</p>
-        <a href="">Next: American Airlines &raquo;</a>
+      <div className="contribute">
+        <h2>Make your mark and contribute your story</h2>
+        <p>Get to know the people you work with and see how they contribute.
+        Influence metrics help you stick out of the crowd and quickly find
+        content deemed valuable by your peers</p>
+        <button className="button blue">Start your story</button>
       </div>
     )
   }
