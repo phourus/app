@@ -8,6 +8,7 @@ module.exports = React.createClass({
         <p>Get to know the people you work with and see how they contribute.
         Influence metrics help you stick out of the crowd and quickly find
         content deemed valuable by your peers</p>
+        <img src="/assets/product/contribute.png" />
         <button className="button blue">Start your story</button>
       </div>
     )

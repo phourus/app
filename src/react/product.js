@@ -11,9 +11,13 @@ module.exports = React.createClass({
     return (
       <div className="product">
         <Contribute />
+        <div className="spacer" />
         <Thoughts />
+        <div className="spacer" />
         <Recognition />
+        <div className="spacer" />
         <Features />
+        <div className="spacer" />
         <Integrate />
       </div>
     );

@@ -6,6 +6,7 @@ module.exports = React.createClass({
       <div className="recognition">
         <h2>Get recognized, Track progress</h2>
         <p>like, comment, share and view team posts</p>
+        <img src="/assets/product/recognition.png" />
       </div>
     )
   }

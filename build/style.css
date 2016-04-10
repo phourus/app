@@ -1658,30 +1658,30 @@ div.alerts button {
 #content .landing .explore > p {
   color: #555;
 }
-div.features {
+#content .landingggg div.features {
   background-color: #eee;
 }
-div.features img {
+#content .landingggg div.features img {
   margin: 0;
   padding: 0;
   width: 100%;
 }
-div.features div.squeeze {
+#content .landingggg div.features div.squeeze {
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
   text-align: center;
   margin: 40px auto;
 }
-div.features div.squeeze:before,
-div.features div.squeeze:after {
+#content .landingggg div.features div.squeeze:before,
+#content .landingggg div.features div.squeeze:after {
   content: "";
   display: table;
 }
-div.features div.squeeze:after {
+#content .landingggg div.features div.squeeze:after {
   clear: both;
 }
-div.features div.squeeze > div {
+#content .landingggg div.features div.squeeze > div {
   width: 100%;
   display: inline-block;
   vertical-align: top;
@@ -1690,7 +1690,7 @@ div.features div.squeeze > div {
   padding: 20px;
   max-width: 900px;
 }
-div.features div.squeeze > div > div {
+#content .landingggg div.features div.squeeze > div > div {
   text-align: left;
   clear: right;
   min-height: 2em;
@@ -1699,28 +1699,28 @@ div.features div.squeeze > div > div {
   margin-bottom: 1em;
   font-size: 1em;
 }
-div.features div.squeeze > div > div i {
+#content .landingggg div.features div.squeeze > div > div i {
   font-size: 1.5em;
   width: 40px;
 }
-div.features div.squeeze > div.video {
+#content .landingggg div.features div.squeeze > div.video {
   text-align: center;
 }
 @media (min-width: 800px) {
-  div.features div.squeeze {
+  #content .landingggg div.features div.squeeze {
     max-width: 80%;
     width: 100%;
     margin: 0 auto;
   }
-  div.features div.squeeze:before,
-  div.features div.squeeze:after {
+  #content .landingggg div.features div.squeeze:before,
+  #content .landingggg div.features div.squeeze:after {
     content: "";
     display: table;
   }
-  div.features div.squeeze:after {
+  #content .landingggg div.features div.squeeze:after {
     clear: both;
   }
-  div.features div.squeeze > div {
+  #content .landingggg div.features div.squeeze > div {
     width: 50%;
     display: inline-block;
     vertical-align: top;
@@ -1729,7 +1729,7 @@ div.features div.squeeze > div.video {
     padding: 20px;
     max-width: 900px;
   }
-  div.features div.squeeze > div > div {
+  #content .landingggg div.features div.squeeze > div > div {
     text-align: left;
     clear: right;
     min-height: 2em;
@@ -1738,11 +1738,11 @@ div.features div.squeeze > div.video {
     margin-bottom: 1em;
     font-size: 1em;
   }
-  div.features div.squeeze > div > div i {
+  #content .landingggg div.features div.squeeze > div > div i {
     font-size: 1.5em;
     width: 40px;
   }
-  div.features div.squeeze > div.video {
+  #content .landingggg div.features div.squeeze > div.video {
     text-align: center;
   }
 }
@@ -3090,7 +3090,6 @@ div.post .tags {
   width: 100%;
 }
 #content .product .features {
-  width: 80%;
   margin: auto;
 }
 #content .product .features .subtitle {
@@ -3189,6 +3188,43 @@ div.post .tags {
 @media (min-width: 800px) {
   #content .product .integrate i {
     font-size: 4em;
+  }
+}
+.product .spacer {
+  clear: both;
+  height: 20px;
+}
+.product img {
+  width: 100%;
+}
+.product .thoughts img {
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
+.product .thoughts img.post {
+  float: left;
+  width: 50%;
+}
+.product .recognition,
+.product .integrate {
+  text-align: center;
+}
+.product .recognition img,
+.product .integrate img {
+  float: none;
+}
+@media (min-width: 500px) {
+  .product .spacer {
+    height: 40px;
+  }
+  .product .contribute p {
+    width: 45%;
+    float: left;
+  }
+  .product img {
+    width: 50%;
+    float: right;
   }
 }
 #content .about {
