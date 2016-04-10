@@ -27,7 +27,7 @@ module.exports = React.createClass({
   },
   render: function () {
     return (
-      <div>
+      <div className="auth">
         <Login show={this.state.login} showForgot={this._showForgot} />
         <Signup show={this.state.signup} showLogin={this._showLogin} />
         <Forgot show={this.state.forgot} showLogin={this._showLogin} showReset={this._showReset} />

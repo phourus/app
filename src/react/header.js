@@ -21,7 +21,7 @@ module.exports = React.createClass({
     let session = this.context.session;
     let route = this.context.route;
     let r = route.root;
-    if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
+    if (['product', 'pricing', 'help'].indexOf(r) > -1) {
       return <Static />
     }
     if (r === 'home') {
@@ -174,10 +174,9 @@ let Nav = React.createClass({
     return (
       <nav className={this.props.classType}>
         <ul>
-          <li><Link to="/about">About</Link></li>
+          <li><Link to="/product">Product</Link></li>
           <li><Link to="/pricing">Pricing</Link></li>
-          <li><Link to="/docs">Docs</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/help">Help</Link></li>
         </ul>
       </nav>
     );

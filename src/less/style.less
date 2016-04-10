@@ -43,8 +43,9 @@
 @red-dark: darken(@red, 10%);
 @grey-dark: #444;
 
-@font-serif: 'rokkitt', @palatino;
+//@font-serif: 'rokkitt', @palatino;
 @font-sans: 'open sans', @arial;
+@font-serif: @font-sans;
 @font-mono: @mono;
 
 // Other greys: 444, 777, AAA, BBB, DDD
@@ -114,21 +115,22 @@ h2 {
   font-family: @font-sans;
   font-size: 1.5em;
   line-height: 1em;
+  letter-spacing: 2px;
   font-weight: normal;
   color: @theme-dark;
 }
 
 h3 {
   font-family: @font-serif;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 1.5em;
   color: @theme-light;
 }
 
 h4 {
   font-size: 1em;
-  font-weight: bold;
-  color: @grey-dark;
+  font-weight: normal;
+  color: #777;
 }
 
 /* LINKS */

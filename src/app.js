@@ -93,7 +93,7 @@ let App = React.createClass({
         className += " visible";
       }
     }
-    if (['contact', 'pricing', 'about', 'docs'].indexOf(root) > -1) {
+    if (['product', 'pricing', 'help'].indexOf(root) > -1) {
       classType = "static";
     }
     if (root === 'home') {
