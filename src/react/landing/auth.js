@@ -1,11 +1,10 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
+import React from 'react';
+import Router from 'react-router';
 
-let Login = require('../auth/login');
-let Signup = require('../auth/signup');
-let Forgot = require('../auth/forgot');
-let Reset = require('../auth/reset');
+import Login from '../../containers/AuthLogin';
+import Signup from '../../containers/AuthSignup';
+import Forgot from '../../containers/AuthForgot';
+import Reset from '../../containers/AuthReset';
 
 module.exports = React.createClass({
   contextTypes: {

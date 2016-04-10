@@ -1,68 +1,71 @@
-'use strict';
-let React = require('react');
-let { Route, IndexRoute } = require('react-router');
+import React from 'react';
+import { Route, IndexRoute } from 'react-router';
 
-let App = require('./app');
-let Stream = require('./react/stream');
-let Post = require('./react/post');
-let Account = require('./react/account');
-let Activity = require('./react/activity');
-let Admin = require('./react/admin');
-let Product = require('./react/product');
-let Pricing = require('./react/static/pricing');
-let Docs = require('./react/static/docs');
-let Help = require('./react/static/help');
-let Terms = require('./react/static/terms');
-let Privacy = require('./react/static/privacy');
+import Product from './react/product';
+import Help from './react/static/help';
 
-let Individuals = require('./react/individuals');
-let Business = require('./react/organizations');
-let Education = require('./react/organizations');
-let Government = require('./react/organizations');
-let Nonprofit = require('./react/organizations');
+import App from './app';
+import StreamHomePage from './containers/StreamHomePage';
+import PostHomePage from './containers/PostHomePage';
+import AccountHomePage from './components/AccountHomePage';
+import ActivityHomePage from './containers/ActivityHomePage';
+import AdminHomePage from './containers/AdminHomePage';
+import AboutHomePage from './containers/AboutHomePage';
+import PricingHomePage from './containers/PricingHomePage';
+import DocsHomePage from './containers/DocsHomePage';
+import ContactHomePage from './containers/ContactHomePage';
+import TermsHomePage from './components/TermsHomePage';
+import PrivacyHomePage from './components/PrivacyHomePage';
+import IndividualsHomePage from './containers/IndividualsHomePage';
+import OrganizationsHomePage from './react/organizations';
 
-let Billing = require('./react/admin/billing');
-let Details = require('./react/admin/details');
-let Members = require('./react/admin/members');
-let Teams = require('./react/admin/teams');
+import AdminBillingHomePage from './components/AdminBillingHomePage';
+import AdminDetailsHomePage from './containers/AdminDetailsHomePage';
+import AdminMembersHomePage from './containers/AdminMembersHomePage';
+import AdminTeamsHomePage from './components/AdminTeamsHomePage';
 
-let Index = Stream;
+let Index = StreamHomePage;
 
 if (typeof document !== 'undefined') {
-  let subdomain = window.location.hostname;
-  let parts = subdomain.split('.');
-  if (['phourus', 'www', 'us-west-2'].indexOf(parts[0]) > -1) {
-    Index = Business;
-  }
+    let subdomain = window.location.hostname;
+    let parts = subdomain.split('.');
+    if (['phourus', 'www', 'us-west-2'].indexOf(parts[0]) > -1) {
+        Index = OrganizationsHomePage;
+    }
 }
 
 module.exports = (
-  <Route component={App} path="/">
-    <IndexRoute component={Index}/>
-    <Route path="stream" component={Stream} />
-    <Route path="home" component={Business} />
-    <Route path="product" component={Product} />
-    <Route path="pricing" component={Pricing} />
-    <Route path="terms" component={Terms} />
-    <Route path="privacy" component={Privacy} />
-    <Route path="account" component={Account} />
-    <Route path="me" component={Stream} />
-    <Route path="create" component={Post} />
-    <Route path="activity" component={Activity} />
-    <Route path="notifications" component={Activity} />
-    <Route path="history" component={Activity} />
-    <Route path="help" component={Help}>
-      <Route path=":id" component={Help} />
+    <Route component={App} path="/">
+        <IndexRoute component={Index}/>
+        <Route path="stream" component={StreamHomePage} />
+        <Route path="home" component={OrganizationsHomePage} />
+        <Route path="product" component={Product} />
+        <Route path="about" component={AboutHomePage} />
+        <Route path="pricing" component={PricingHomePage} />
+        <Route path="contact" component={ContactHomePage} />
+        <Route path="terms" component={TermsHomePage} />
+        <Route path="privacy" component={PrivacyHomePage} />
+        <Route path="account" component={AccountHomePage} />
+        <Route path="me" component={StreamHomePage} />
+        <Route path="create" component={PostHomePage} />
+        <Route path="activity" component={ActivityHomePage} />
+        <Route path="notifications" component={ActivityHomePage} />
+        <Route path="history" component={ActivityHomePage} />
+        <Route path="help" component={Help}>
+          <Route path=":id" component={Help} />
+        </Route>
+        <Route path="docs" component={DocsHomePage}>
+            <Route path=":id" component={DocsHomePage} />
+        </Route>
+        <Route path="admin" component={AdminHomePage}>
+            <Route path="details" component={AdminDetailsHomePage} />
+            <Route path="members" component={AdminMembersHomePage} />
+            <Route path="teams" component={AdminTeamsHomePage} />
+            <Route path="billing" component={AdminBillingHomePage} />
+        </Route>
+        <Route path=":user/:post" component={PostHomePage}>
+            <Route path="edit" component={PostHomePage} />
+        </Route>
+        <Route path=":user" component={StreamHomePage} />
     </Route>
-    <Route path="admin" component={Admin}>
-      <Route path="details" component={Details} />
-      <Route path="members" component={Members} />
-      <Route path="teams" component={Teams} />
-      <Route path="billing" component={Billing} />
-    </Route>
-    <Route path=":user/:post" component={Post}>
-      <Route path="edit" component={Post} />
-    </Route>
-    <Route path=":user" component={Stream} />
-  </Route>
 );

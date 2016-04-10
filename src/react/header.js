@@ -10,7 +10,7 @@ let util = require('../util');
 let Actions = require('../actions/session');
 let Store = require('../stores/session');
 
-let Search = require('./stream/search');
+let Search = require('../containers/StreamSearch');
 
 module.exports = React.createClass({
   contextTypes: {
