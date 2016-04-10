@@ -3405,55 +3405,57 @@ div.post .tags {
     vertical-align: middle;
   }
 }
-#content .contact {
+#content .help {
   margin: 20px 0 0 0;
   padding: 0;
   width: 100%;
   max-width: 100%;
 }
-#content .contact .description {
+#content .help .faq {
   width: 100%;
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
   padding: 20px 40px 0 40px;
   color: #444;
-  vertical-align: middle;
   text-align: center;
 }
-#content .contact .help {
+#content .help .faq input {
+  width: 100%;
+  max-width: 100%;
+}
+#content .help .contact {
   width: 100%;
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
   padding-left: 10px;
   text-align: center;
-  vertical-align: middle;
 }
-#content .contact .help button.button {
-  margin: auto;
-}
-#content .contact .form {
+#content .help .contact .form {
   margin: 10px;
 }
-#content .contact .form textarea {
-  width: 100%;
+#content .help .contact .form label {
+  text-align: left;
 }
-#content .contact .form button {
-  float: right;
+#content .help .contact .form textarea {
+  width: 100%;
+  height: 100px;
+}
+#content .help .contact button.button {
+  margin: auto;
 }
 @media (min-width: 800px) {
-  #content .contact .description {
+  #content .help .faq {
     width: 75%;
     display: inline-block;
     vertical-align: top;
     box-sizing: border-box;
     padding: 20px 40px 0 40px;
     color: #444;
-    vertical-align: middle;
     text-align: left;
   }
-  #content .contact .help {
+  #content .help .contact {
     width: 25%;
     display: inline-block;
     vertical-align: top;
@@ -3461,15 +3463,14 @@ div.post .tags {
     border-left: solid 1px #eee;
     padding-left: 10px;
     text-align: center;
-    vertical-align: middle;
   }
-  #content .contact .form {
+  #content .help .contact .form {
     margin: 40px;
   }
-  #content .contact .form textarea {
+  #content .help .contact .form textarea {
     width: 75%;
   }
-  #content .contact .form button {
+  #content .help .contact .form button {
     margin-right: 25%;
   }
 }
@@ -3478,9 +3479,6 @@ div.post .tags {
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  border-left: none;
-  border-right: none;
-  min-height: 1200px;
 }
 #content .docs:before,
 #content .docs:after {
@@ -3497,33 +3495,43 @@ div.post .tags {
 }
 #content .docs .menu {
   display: block;
-  position: absolute;
-  background-color: #fff;
   box-sizing: border-box;
-  text-align: right;
-  border-right: solid 1px #ddd;
-  padding-right: 10px;
-  margin-top: 20px;
-  width: 200px;
 }
 #content .docs .menu.hide {
   display: none;
 }
-#content .docs .menu ul {
+#content .docs .menu > ul {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
-#content .docs .menu ul i {
-  color: #ddd;
-  margin-left: 10px;
+#content .docs .menu > ul i {
+  color: #ccc;
 }
-#content .docs .menu ul li {
+#content .docs .menu > ul > li {
   list-style: none;
+  border: solid 1px #ccc;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: #fafafa;
+  width: 100%;
+  margin: 10px 0 0 0;
+  display: block;
+  padding: 10px;
+  color: #888;
+  height: 200px;
 }
-#content .docs .menu ul li ul {
+#content .docs .menu > ul > li > ul {
+  margin: 0;
+  padding: 0;
   padding-bottom: 20px;
 }
-#content .docs .menu ul li ul li a {
+#content .docs .menu > ul > li > ul > li {
+  list-style: none;
+  border: none;
+  width: 100%;
+}
+#content .docs .menu > ul > li > ul > li a {
   text-decoration: underline;
   font-size: 0.9em;
 }
@@ -3544,31 +3552,18 @@ div.post .tags {
   #content .docs .toggle {
     display: none;
   }
-  #content .docs .menu {
-    position: static;
-    width: 25%;
-    display: inline-block;
+  #content .docs .menu > ul > li {
+    width: 50%;
+    margin: 0 0 10px 0;
     vertical-align: top;
+    display: inline-block;
+  }
+  #content .docs .menu > ul > li:nth-child(odd) {
+    width: 48%;
+    margin: 0 2% 10px 0;
   }
   #content .docs .menu.hide {
     display: inline-block;
-  }
-  #content .docs .page {
-    width: 75%;
-    display: inline-block;
-    vertical-align: top;
-  }
-}
-@media (min-width: 1100px) {
-  #content .docs .menu {
-    width: 16.66666667%;
-    display: inline-block;
-    vertical-align: top;
-  }
-  #content .docs .page {
-    width: 83.33333333%;
-    display: inline-block;
-    vertical-align: top;
   }
 }
 #content .pricing {
@@ -4031,12 +4026,10 @@ div.posts .postItem {
   clear: both;
 }
 #content > div {
-  margin: 20px auto 0 auto;
-  width: 94%;
+  margin: 10px auto 0 auto;
+  width: 96%;
   max-width: 1200px;
-  background-color: white;
-  border: solid 1px #DDD;
-  padding: 3%;
+  padding: 2%;
 }
 #content > div.stream {
   margin: 20px 0 0 0;
@@ -4705,6 +4698,7 @@ h1 {
   font-weight: normal;
   line-height: 1em;
   color: #333;
+  margin-top: 0px;
 }
 h2 {
   font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;

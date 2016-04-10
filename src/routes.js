@@ -11,7 +11,7 @@ let Admin = require('./react/admin');
 let Product = require('./react/static/about');
 let Pricing = require('./react/static/pricing');
 let Docs = require('./react/static/docs');
-let Help = require('./react/static/contact');
+let Help = require('./react/static/help');
 let Terms = require('./react/static/terms');
 let Privacy = require('./react/static/privacy');
 
