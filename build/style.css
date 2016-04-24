@@ -1851,6 +1851,20 @@ div.alerts button {
   margin: 20px 10px;
   padding: 10px 0;
 }
+#content .landing .ideasTitle {
+  font-size: 3.5em;
+  margin-right: 400px;
+  width: 500px;
+}
+#content .landing img.ameriLogo,
+#content .landing img.amazLogo,
+#content .landing img.lionLogo {
+  height: 100px;
+  width: 100px;
+}
+#content .landing section.ideaLogos {
+  width: 300px;
+}
 #content .landing div.squeeze {
   max-width: 100%;
   width: 100%;
@@ -4095,6 +4109,24 @@ header.home {
   background: transparent;
   position: absolute;
 }
+#navItem {
+  display: table;
+  height: 87px;
+  width: 100%;
+}
+#navItem li {
+  display: table-cell;
+  height: 87px;
+  width: 16.666666667%;
+  /* (100 / numItems)% */
+  line-height: 87px;
+  text-align: center;
+  white-space: nowrap;
+  color: white;
+}
+​ button.button.signUpHome {
+  border: 1px solid white;
+}
 header nav.home > ul > li,
 nav.static > ul > li {
   display: inline-block;
@@ -4111,7 +4143,11 @@ header nav.home > ul > li > a:hover,
 nav.static > ul > li > a:hover {
   background-color: #fff;
   opacity: 0.5;
-  color: #333;
+  color: blue;
+}
+header nav.home > ul > li:nth-child(odd),
+nav.static > ul > li:nth-child(odd) {
+  margin-right: 10px;
 }
 header nav.static > ul > li > a {
   color: #333;
@@ -4296,7 +4332,7 @@ header nav > ul > li .fa {
   margin-bottom: 12px;
 }
 header nav > ul > li a {
-  color: #555;
+  color: #fff;
   text-align: center;
   font-size: 0.6em;
 }

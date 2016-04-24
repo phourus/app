@@ -3,6 +3,27 @@ header.home {
 	position: absolute;
 }
 
+#navItem {
+
+    display: table;
+    height: 87px;
+    width: 100%;
+}
+
+#navItem li {
+    display: table-cell;
+    height: 87px;
+    width: 16.666666667%;  /* (100 / numItems)% */
+    line-height: 87px;
+    text-align: center;
+    white-space: nowrap;
+	color: white
+}​
+
+button.button.signUpHome {
+	border: 1px solid white;
+}
+
 header nav.home, nav.static {
 
 	 > ul > li {
@@ -18,9 +39,13 @@ header nav.home, nav.static {
 			&:hover {
 				background-color: #fff;
 				opacity: 0.5;
-				color: #333;
+				color: blue;
 			}
 		}
+	}
+
+	> ul > li:nth-child(odd) {
+		margin-right: 10px;
 	}
 }
 
@@ -238,7 +263,7 @@ header {
 				}
 
 				a {
-					color: #555;
+					color: #fff;
 					text-align: center;
 					font-size: 0.6em;
 

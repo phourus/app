@@ -172,14 +172,20 @@ let _Private = React.createClass({
 let Nav = React.createClass({
   render: function () {
     return (
-      <nav className={this.props.classType}>
-        <ul>
-          <li><Link to="/product">Product</Link></li>
-          <li><Link to="/pricing">Pricing</Link></li>
-          <li><a href="//phourusinc.phourus.com">Blog</a></li>
-          <li><Link to="/help">Help</Link></li>
-        </ul>
-      </nav>
+        <div>
+            <nav className={this.props.classType}>
+              <ul id="navItem">
+                <li><Link to="/product">Product</Link></li>
+                <li><Link to="/pricing">Pricing</Link></li>
+                <li><a href="//phourusinc.phourus.com">Blog</a></li>
+                <li><Link to="/help">Help</Link></li>
+                <button className="button signUpHome">Sign Up Now</button>
+                </ul>
+
+            </nav>
+
+        </div>
+
     );
   }
 });

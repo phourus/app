@@ -51,7 +51,6 @@ let Slider = React.createClass({
         <div className="title">Every company has a story</div>
         <p>Make sure you're on the same page</p>
         <div className="actions">
-          <button className="button green" onClick={this.props.showSignup}>Sign Up Now</button>
           <button className="button blue" onClick={this.props.more}>Learn More</button>
         </div>
       </div>

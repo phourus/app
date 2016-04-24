@@ -1,10 +1,10 @@
 var config = require("../config").get('db');
 var Sequelize = require('sequelize');
-var db = config.name;
-var username = config.user;
-var password = config.pass;
+var db = 'staging';
+var username = 'phourus';
+var password = 'o5F2jJZHmAIr';
 var config = {
-    host: config.host,
+    host: 'staging.c27rpgejeaxu.us-west-2.rds.amazonaws.com',
     dialect: 'mariadb'
 };
 
