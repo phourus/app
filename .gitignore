@@ -1,2 +1,10 @@
-coverage/
 api/tests
+
+# Don't check auto-generated stuff into git
+coverage
+node_modules
+
+# Cruft
+.DS_Store
+npm-debug.log
+.idea

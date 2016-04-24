@@ -6,7 +6,7 @@ let Emblem = require('./landing/emblem');
 let Convert = require('./landing/convert');
 let Explore = require('./landing/explore');
 let Features = require('./landing/features');
-let Integrate = require('./landing/integrate');
+let Integrate = require('./product/integrate');
 let Video = require('./landing/video');
 
 let Landing = React.createClass({

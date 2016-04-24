@@ -1,0 +1,62 @@
+@import 'product/contribute.less';
+@import 'product/thoughts.less';
+@import 'product/recognize.less';
+@import 'product/features.less';
+@import 'product/integrate.less';
+
+.product {
+
+  .spacer {
+    clear: both;
+    height: 20px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .thoughts {
+
+    img {
+      width: 50%;
+      margin: 0;
+      padding: 0;
+    }
+
+    img.post {
+      float: left;
+      width: 50%;
+    }
+  }
+
+  .recognition, .integrate {
+    text-align: center;
+
+    img {
+      float: none;
+    }
+  }
+}
+
+@media (min-width: 500px) {
+
+  .product {
+
+    .spacer {
+      height: 40px;
+    }
+    
+    .contribute {
+
+      p {
+        width: 45%;
+        float: left;
+      }
+    }
+
+    img {
+      width: 50%;
+      float: right;
+    }
+  }
+}

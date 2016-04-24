@@ -1,0 +1,46 @@
+#app > .menu {
+  width: 100%;
+  position: fixed;
+  background-color: #333;
+  left: 0;
+  bottom: 0;
+  height: 40px;
+  display: none;
+  z-index: 9999;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    li {
+      list-style: none;
+      margin-top: 10px;
+      display: inline-block;
+      margin-right: 20px;
+
+      i {
+        color: #fff;
+        font-size: 1.5em;
+
+        &:hover {
+          color: #aaa;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) {
+
+  #app > .menu {
+    width: 5%;
+    top: 0;
+    height: 100%;
+
+    li {
+      padding-top: 20px;
+      display: block;
+    }
+  }
+}

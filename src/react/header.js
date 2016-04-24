@@ -10,7 +10,7 @@ let util = require('../util');
 let Actions = require('../actions/session');
 let Store = require('../stores/session');
 
-let Search = require('./stream/search');
+let Search = require('../containers/StreamSearch');
 
 module.exports = React.createClass({
   contextTypes: {
@@ -21,7 +21,7 @@ module.exports = React.createClass({
     let session = this.context.session;
     let route = this.context.route;
     let r = route.root;
-    if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
+    if (['product', 'pricing', 'help'].indexOf(r) > -1) {
       return <Static />
     }
     if (r === 'home') {
@@ -84,6 +84,17 @@ let Static = React.createClass({
 });
 
 let Private = React.createClass({
+  render: function () {
+    return (
+      <span className="mylinks">
+        <Link to="me">My Posts</Link>
+        <Link to="account">My Account</Link>
+      </span>
+    );
+  }
+});
+
+let _Private = React.createClass({
   mixins: [History],
   contextTypes: {
     session: React.PropTypes.object,
@@ -161,14 +172,20 @@ let Private = React.createClass({
 let Nav = React.createClass({
   render: function () {
     return (
-      <nav className={this.props.classType}>
-        <ul>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/pricing">Pricing</Link></li>
-          <li><Link to="/docs">Docs</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-        </ul>
-      </nav>
+        <div>
+            <nav className={this.props.classType}>
+              <ul id="navItem">
+                <li><Link to="/product">Product</Link></li>
+                <li><Link to="/pricing">Pricing</Link></li>
+                <li><a href="//phourusinc.phourus.com">Blog</a></li>
+                <li><Link to="/help">Help</Link></li>
+                <button className="button signUpHome">Sign Up Now</button>
+                </ul>
+
+            </nav>
+
+        </div>
+
     );
   }
 });

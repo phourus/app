@@ -36,9 +36,6 @@ module.exports = React.createClass({
       <div className="docs">
         <i className="fa fa-bars toggle" onClick={this._toggle} />
         <Menu menu={this.state.menu} />
-        <div key={this.state.id} className="page">
-          <ReactMarkdown source={this.state.page} />
-        </div>
       </div>
     );
   },
@@ -53,6 +50,16 @@ module.exports = React.createClass({
   },
   _toggle: function () {
     this.setState({menu: !this.state.menu});
+  }
+});
+
+let Popup = React.createClass({
+  render: function () {
+    return (
+      <div key={this.state.id} className="page">
+        <ReactMarkdown source={this.state.page} />
+      </div>
+    );
   }
 });
 
