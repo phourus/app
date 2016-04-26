@@ -1593,73 +1593,71 @@ div.alerts button {
     background-size: 2000px 1000px;
   }
 }
-#content .landing .example {
-  display: none;
-  padding: 20px 0;
-  background-color: #5faee3;
-  color: #fff;
-}
-#content .landing .example .squeeze {
-  max-width: 80%;
+.information .stat {
   width: 100%;
-  margin: 0 auto;
 }
-#content .landing .example .squeeze:before,
-#content .landing .example .squeeze:after {
-  content: "";
-  display: table;
+@media (min-width: 500px) {
+  .information .stat {
+    width: 30%;
+    display: inline-block;
+  }
 }
-#content .landing .example .squeeze:after {
-  clear: both;
-}
-#content .landing .example .squeeze > div.right div.quote {
-  text-align: right;
-}
-#content .landing .example .squeeze > div {
-  width: 33.33333333%;
-  display: inline-block;
-  vertical-align: top;
-}
-#content .landing .example .squeeze > div div.quote {
-  text-align: left;
-  margin-bottom: 100px;
-}
-#content .landing .example .squeeze > div div.quote img {
-  width: 100px;
-  display: inline-block;
-  vertical-align: middle;
-}
-#content .landing .example .squeeze > div div.quote div.employee {
-  display: inline-block;
-  vertical-align: middle;
-  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;
-}
-#content .landing .example .squeeze > div div.quote div.employee strong {
-  font-size: 1.1em;
-  color: #f7f7f7;
-}
-#content .landing .example .squeeze > div div.quote p {
-  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;
-  clear: both;
+.engagement .gradient {
+  display: none;
   text-align: center;
-  font-style: italic;
-  font-size: 0.9em;
+  margin: auto;
 }
-#content .landing .example .squeeze .image img {
-  max-height: 500px;
+.engagement .gradient img {
+  width: 100%;
+}
+.engagement .pyramid {
+  width: 90%;
+  margin: auto;
+}
+.engagement .pyramid img {
+  width: 100%;
+}
+.engagement ul.quotes {
   margin: 0;
   padding: 0;
 }
-@media (min-width: 1000px) {
-  #content .landing .example {
+.engagement ul.quotes li {
+  list-style: none;
+  margin-bottom: 20px;
+}
+.engagement .result i {
+  color: #5faee3;
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+.engagement .result span {
+  font-size: 1.5em;
+}
+@media (min-width: 500px) {
+  .engagement .gradient {
     display: block;
+    width: 90%;
+  }
+  .engagement .pyramid {
+    width: 60%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .engagement ul.quotes {
+    display: inline-block;
+    width: 40%;
+    vertical-align: middle;
+  }
+  .engagement ul.quotes li {
+    font-size: 1.2em;
+    margin-bottom: 40px;
   }
 }
-#content .landing .explore {
-  padding-bottom: 40px;
-}
-#content .landing .explore > p {
-  color: #555;
+@media (min-width: 800px) {
+  .engagement .result {
+    display: inline-block;
+    width: 20%;
+  }
 }
 #content .landingggg div.features {
   background-color: #eee;

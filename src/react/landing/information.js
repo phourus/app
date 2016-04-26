@@ -9,7 +9,7 @@ module.exports = React.createClass({
           return on investment. How often is your team looking for information
           they can't find and recreating documents that already exist? According
           to the following statistics, on average knowledge workers lose:</p>
-        <a href="">How inefficient is your knowledge management? &raquo;</a>
+        <a href="">How inefficient is your knowledge management? &raquo;</a><br /><br />
         <div className="stat">
           <img src="/assets/landing/searching.png" />
           <h3>3.7 hours lost per week</h3>
