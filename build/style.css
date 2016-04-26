@@ -874,7 +874,6 @@ div.alerts button {
   float: right;
 }
 .forgot {
-  background-color: #eee;
   padding-top: 5px;
   font-size: 0.9em;
 }
@@ -896,7 +895,6 @@ div.alerts button {
   display: block;
 }
 .login {
-  background-color: #eee;
   padding-top: 5px;
   font-size: 0.9em;
 }
@@ -918,7 +916,6 @@ div.alerts button {
   display: block;
 }
 .reset {
-  background-color: #eee;
   padding-top: 5px;
   font-size: 0.9em;
 }
@@ -940,7 +937,6 @@ div.alerts button {
   width: 60%;
 }
 #content .landing .signup {
-  background-color: #efefef;
   padding-bottom: 20px;
   font-size: 0.9em;
 }
@@ -1506,6 +1502,13 @@ div.alerts button {
   background-size: 700px 350px;
   background-position: bottom;
 }
+#content .landing .banner .auth {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
 #content .landing .banner .actions {
   position: absolute;
   bottom: 10px;
@@ -1543,7 +1546,7 @@ div.alerts button {
 #content .landing .banner p {
   position: absolute;
   left: 10%;
-  top: 40%;
+  top: 50%;
   color: #fff;
   font-size: 1em;
   opacity: 0.8;
@@ -1564,7 +1567,7 @@ div.alerts button {
 }
 @media (min-width: 800px) {
   #content .landing .banner {
-    height: 400px;
+    height: 500px;
     background-size: 1200px 600px;
   }
   #content .landing .banner .title {
@@ -1581,7 +1584,7 @@ div.alerts button {
 }
 @media (min-width: 1200px) {
   #content .landing .banner {
-    height: 500px;
+    height: 600px;
     background-size: 1600px 800px;
   }
 }
@@ -4098,7 +4101,6 @@ header.home {
 header nav.home > ul > li,
 nav.static > ul > li {
   display: inline-block;
-  width: initial;
 }
 header nav.home > ul > li > a,
 nav.static > ul > li > a {
@@ -4131,15 +4133,15 @@ header {
   z-index: 999;
 }
 header .brand {
-  width: 40%;
+  width: 30%;
   float: left;
 }
 header .brand a {
   display: block;
-  margin: 6px 0px 0px 0px;
+  margin: 14px 0px 0px 0px;
   padding: 0px;
-  width: 150px;
-  height: 50px;
+  width: 90px;
+  height: 30px;
   background-repeat: no-repeat;
   background-size: 100%;
   background-image: url('/assets/logos/dark/normal.png');
@@ -4167,7 +4169,7 @@ header.home .brand a:hover {
   background-image: url('/assets/logos/light/hover.png');
 }
 header .keywords {
-  top: 40px;
+  top: -30px;
   height: 40px;
   border: solid 1px #eee;
   position: relative;
@@ -4179,7 +4181,7 @@ header .keywords input {
   position: absolute;
   max-width: none;
   box-sizing: border-box;
-  background-color: transparent;
+  background-color: #fff;
   border: none;
   margin: 0px;
   padding: 4px;
@@ -4219,7 +4221,7 @@ header .keywords button.button span {
   display: none;
 }
 header nav {
-  width: 60%;
+  width: 70%;
   float: right;
   text-align: right;
 }
@@ -4232,7 +4234,7 @@ header nav > ul > li {
   display: inline-block;
   text-align: center;
   position: relative;
-  width: 60px;
+  text-transform: uppercase;
 }
 header nav > ul > li > div {
   display: none;
@@ -4367,18 +4369,16 @@ div.spacer {
     height: 60px;
   }
   header .brand a {
+    margin-top: 9px;
     width: 180px;
     height: 60px;
-  }
-  header .keywords {
-    top: 50px;
   }
   header .keywords button span {
     display: inline;
     font-size: 0.8em;
   }
   header nav > ul > li {
-    width: 60px;
+    width: 80px;
   }
   header nav > ul > li > div {
     display: none;
@@ -4407,7 +4407,7 @@ div.spacer {
     top: 0px;
   }
   header nav {
-    width: 25%;
+    width: 50%;
   }
   div.spacer {
     height: 60px !important;
