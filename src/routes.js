@@ -11,7 +11,7 @@ import AccountHomePage from './components/AccountHomePage';
 import ActivityHomePage from './containers/ActivityHomePage';
 import AdminHomePage from './containers/AdminHomePage';
 import AboutHomePage from './containers/AboutHomePage';
-import PricingHomePage from './containers/PricingHomePage';
+import PricingHomePage from './react/static/pricing';
 import DocsHomePage from './containers/DocsHomePage';
 import ContactHomePage from './containers/ContactHomePage';
 import TermsHomePage from './components/TermsHomePage';

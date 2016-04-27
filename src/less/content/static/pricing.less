@@ -1,204 +1,70 @@
-#content .pricing {
-  margin: 0;
+#content > div.pricing {
   padding: 0;
+  margin: 0;
   width: 100%;
-  max-width: 100%;
 
-  .options {
-    .Row(100%);
-    padding: 0 20px 0 20px;
+  .slider {
+    width: 90%;
 
-
-    .user, .organization {
-
-      .currency {
-        font-size: 2em;
-      }
-
-      .amount {
-        font-family: @font-serif;
-        font-size: 8em;
-        text-align: center;
-      }
-
-      .per {
-        font-size: 1em;
-        text-align: center;
-      }
-
-      .period {
-        font-size: 2em;
-      }
-
-      button {
-        margin: auto;
-      }
-
-      p {
-        font-size: 0.8em;
-      }
-
-      .asterisk {
-        font-size: 0.7em;
-      }
-
-      table {
-        border: solid 1px #ccc;
-        width: 100%;
-        background-color: #f7f7f7;
-
-        th {
-          font-weight: normal;
-          font-size: 0.9em;
-          text-transform: uppercase;
-          text-align: left;
-          border-bottom: solid 4px #ccc;
-        }
-
-        tr {
-          margin-bottom: 10px;
-
-          td {
-            letter-spacing: 1px;
-            font-size: 0.8em;
-            border-bottom: solid 1px #ddd;
-          }
-        }
-        .users {
-          font-size: 1.2em;
-        }
-      }
-    }
-
-    .user {
-      text-align: center;
-
-      .title {
-        text-align: left;
-      }
-    }
-
-    .or {
-      display: none;
-    }
-
-  }
-
-  .screenshots {
-
-    .title {
-      text-align: center;
-    }
-
-    > div {
-      border-bottom: solid 1px #eee;
-      width: 80%;
-      margin: 60px auto;
-      padding-bottom: 60px;
-    }
     img {
-      border: solid 1px #ddd;
-      float: right;
-      max-width: 60%;
-
-      &.left {
-        float: left;
-      }
+      width: 100%;
     }
   }
 
-  .integrations {
-    text-align: center;
-    padding-bottom: 40px;
-    .Row(100%);
-
-    i {
-      .Cols(2);
-      font-size: 2em;
-      color: @theme-dark;
-    }
-  }
-
-  .contact {
-    background-color: @theme-dark;
+  .team {
+    background-color: #4D4D4D;
+    min-height: 400px;
     color: #fff;
+    margin-top: 100px;
 
-    > div {
-      .Cols(12);
-      text-align: center;
-      color: #eee;
-      padding-bottom: 40px;
+    .photos {
 
-      i {
-        color: @theme-light;
-        font-size: 4em;
-        text-align: center;
+      img {
+        width: 100px;
+        display: block;
       }
     }
   }
 }
 
 @media (min-width: 500px) {
-  #content .pricing {
 
-    .contact {
+  #content > div.pricing {
 
-      > div {
-        .Cols(3);
-      }
-    }
-  }
-}
+    .team {
 
-@media (min-width: 800px) {
-
-  #content .pricing {
-
-    .options {
-      .Row(80%);
-      background-color: #eee;
-
-      .user {
-        .Cols(3);
-
-        .title {
-
-        }
-      }
-
-      .or {
-        .Cols(1);
-        padding: 60px 0;
+      .photos {
+        width: 80%;
+        margin: auto;
+        position: relative;
+        top: -60px;
         text-align: center;
 
-        .vertical {
-          border-right: solid 1px #999;
-          height: 200px;
-          width: 1px;
-          margin: auto;
-        }
+        img {
+          display: inline-block;
+          border: solid 20px transparent;
+          cursor: pointer;
+          width: 80px;
 
-        .text {
-          font-size: 2em;
-          font-weight: bold;
-          font-family: @font-serif;
-          text-transform: uppercase;
-          text-align: center;
+          &:hover {
+            border-color: #4d4d4d;
+          }
         }
       }
 
-      .organization {
-        .Cols(8);
-      }
-    }
+      .quote {
+        width: 80%;
+        margin: auto;
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        font-style: italic;
 
-    .integrations {
-      .Row(80%);
-
-      i {
-        .Cols(2);
-        font-size: 3em;
-        color: @theme-dark;
+        .signature {
+          font-style: normal;
+          text-align: right;
+          font-size: 0.9em;
+          margin-top: 40px;
+        }
       }
     }
   }
