@@ -4,10 +4,7 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="features">
-        <div><br /><br /></div>
-        <h2 className="heading">Master Communication & Collaboration</h2>
-        <h3 className="subtitle">Take control of the most important part of your business</h3>
-        <div className="squeeze">
+        <div className="list">
           <div>
             <div className="left">
               <i className="fa fa-lightbulb-o blue" />
@@ -40,6 +37,9 @@ module.exports = React.createClass({
             <p>Each employee of a business has his or her own idea of what your company is and where is it going. The vision and mission of a business should be an ongoing evolution involving employees and customers alike.</p>
             <p className="usage">Use Beliefs and Quotes to better define your mission and objective, while also engaging employees and acknowledging their contribution to the vision of your business.</p>
           </div>
+        </div>
+        <div className="post">
+          <img src="/assets/product/post.png" />
         </div>
       </div>
     )
