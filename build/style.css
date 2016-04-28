@@ -3596,9 +3596,12 @@ div.post .tags {
   clear: both;
 }
 #content .docs .page {
-  box-sizing: border-box;
   padding: 10px;
-  left: 200px;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  font-style: oblique;
+  border-left: solid 2px #5faee3;
+  color: #444;
 }
 #content .docs .menu {
   display: block;

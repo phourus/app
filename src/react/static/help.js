@@ -14,7 +14,7 @@ module.exports = React.createClass({
         <div className="faq">
           <h1>Help & Docs</h1>
           <input type="text" placeholder="what can we help you with?" />
-          <Docs />
+          <Docs {...this.props} />
         </div>
         <div className="contact">
           <h2>Contact us</h2>
