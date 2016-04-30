@@ -3106,18 +3106,43 @@ div.post .tags {
     padding: 0;
   }
 }
-.thoughts .slides img {
-  max-width: 120px;
+.thoughts .slides ul {
+  margin: 0;
+  padding: 0;
+}
+.thoughts .slides ul li {
+  list-style: none;
+  display: inline-block;
+  font-size: 4em;
+  color: #ccc;
+}
+.thoughts .slides ul li.active {
+  color: #aaa;
+}
+.thoughts .slides ul li:hover {
+  color: #eee;
+  cursor: pointer;
+}
+.thoughts .slides ul li:before {
+  content: '\2022';
+  margin-right: 10px;
+}
+.thoughts .slide {
+  display: inline-block;
+  vertical-align: top;
+}
+.thoughts .slide .posts img {
+  width: 100%;
+  max-width: 300px;
 }
 .thoughts .stream {
   display: none;
 }
-.thoughts .posts img {
-  width: 100%;
-  max-width: 300px;
-}
 @media (min-width: 500px) {
-  .thoughts .posts {
+  .thoughts .slide {
+    width: 50%;
+  }
+  .thoughts .slide .posts {
     display: inline-block;
     width: 50%;
   }
