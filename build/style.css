@@ -3697,6 +3697,17 @@ div.post .tags {
   margin: auto;
   padding-top: 20px;
 }
+#content > div.pricing .separator {
+  margin: 0px 10px 0px 10px;
+  display: inline-block;
+  color: #666;
+}
+#content > div.pricing a {
+  letter-spacing: 2px;
+}
+#content > div.pricing a.selected {
+  color: #aaa;
+}
 #content > div.pricing .slider {
   width: 90%;
 }
@@ -3720,35 +3731,48 @@ div.post .tags {
   width: 100px;
   display: block;
 }
+#content > div.pricing .team .quote {
+  width: 80%;
+  margin: auto;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  font-style: italic;
+  line-height: 2em;
+}
+#content > div.pricing .team .quote .signature {
+  font-style: normal;
+  text-align: right;
+  font-size: 0.9em;
+  margin-top: 40px;
+}
+#content > div.pricing .team .quote .signature .name {
+  color: #eee;
+  line-height: 1em;
+}
+#content > div.pricing .team .quote .signature .position {
+  font-size: 0.8em;
+  color: #ccc;
+}
 @media (min-width: 500px) {
   #content > div.pricing .team .photos {
     width: 80%;
     margin: auto;
     position: relative;
-    top: -60px;
+    top: -50px;
     text-align: center;
   }
   #content > div.pricing .team .photos img {
     display: inline-block;
-    border: solid 20px transparent;
     cursor: pointer;
     width: 80px;
+    opacity: 0.8;
+    margin-right: 20px;
+  }
+  #content > div.pricing .team .photos img.selected {
+    opacity: 1;
   }
   #content > div.pricing .team .photos img:hover {
-    border-color: #4d4d4d;
-  }
-  #content > div.pricing .team .quote {
-    width: 80%;
-    margin: auto;
-    font-size: 1.1em;
-    letter-spacing: 1px;
-    font-style: italic;
-  }
-  #content > div.pricing .team .quote .signature {
-    font-style: normal;
-    text-align: right;
-    font-size: 0.9em;
-    margin-top: 40px;
+    opacity: 1;
   }
 }
 @media (min-width: 800px) {
