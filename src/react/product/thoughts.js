@@ -15,6 +15,22 @@ export default class Thoughts extends React.Component {
     }
   }
 
+  componentDidMount() {
+      this.timeout = setInterval(() => {
+        let index = this.state.slide
+        if (index < 3) {
+          index++
+        } else {
+          index = 0
+        }
+        this.setState({slide: index})
+      }, 3000)
+  }
+
+  componentWillUmount() {
+    clearInterval(this.timeout)
+  }
+
   render() {
     let { slide } = this.state
     let selected = slides[slide]

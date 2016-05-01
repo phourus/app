@@ -3171,14 +3171,6 @@ div.post .tags {
   color: #777;
   margin-bottom: 60px;
 }
-#content .product .features div.left,
-#content .pricing .features div.left,
-#content .product .features div.right,
-#content .pricing .features div.right {
-  font-size: 2em;
-  box-sizing: border-box;
-  padding: 0px;
-}
 #content .product .features .post img,
 #content .pricing .features .post img {
   display: none;
@@ -3189,6 +3181,14 @@ div.post .tags {
   padding: 20px;
   margin-bottom: 0px;
   text-align: left;
+}
+#content .product .features div > div.selected,
+#content .pricing .features div > div.selected {
+  border-left: solid 1px #5faee3;
+}
+#content .product .features div > div.selected span.title,
+#content .pricing .features div > div.selected span.title {
+  color: #5faee3;
 }
 #content .product .features div > div span.title,
 #content .pricing .features div > div span.title {
@@ -3206,21 +3206,7 @@ div.post .tags {
   font-size: 0.9em;
   display: none;
 }
-#content .product .features div > div i,
-#content .pricing .features div > div i {
-  display: none;
-  font-size: 2em;
-  width: 0px;
-}
 @media (min-width: 500px) {
-  #content .product .features div.left,
-  #content .pricing .features div.left {
-    float: left;
-  }
-  #content .product .features div.right,
-  #content .pricing .features div.right {
-    float: right;
-  }
   #content .product .features div > div,
   #content .pricing .features div > div {
     text-align: left;
