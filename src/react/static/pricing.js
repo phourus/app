@@ -7,12 +7,15 @@ export default class Pricing extends React.Component {
 
     return (
       <div className="pricing">
-        <h1>Pricing Options</h1>
-        <div className="slider">
-          <img src="/assets/slider.png" />
+        <div className="squeeze">
+          <h2>Pricing Options</h2>
+          <a href="">Monthly</a> | <a href="">Annual</a>
+          <div className="slider">
+            <img src="/assets/slider.png" />
+          </div>
+          <Features />
+          <h2 className="title">A Message from the Team</h2>
         </div>
-        <a href="">Monthly</a> | <a href="">Annual</a>
-        <Features />
         <Team />
       </div>
     )

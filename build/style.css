@@ -3692,10 +3692,22 @@ div.post .tags {
   margin: 0;
   width: 100%;
 }
+#content > div.pricing .squeeze {
+  width: 90%;
+  margin: auto;
+  padding-top: 20px;
+}
 #content > div.pricing .slider {
   width: 90%;
 }
 #content > div.pricing .slider img {
+  width: 100%;
+}
+#content > div.pricing .features {
+  display: none;
+}
+#content > div.pricing .title {
+  text-align: center;
   width: 100%;
 }
 #content > div.pricing .team {
@@ -3737,6 +3749,11 @@ div.post .tags {
     text-align: right;
     font-size: 0.9em;
     margin-top: 40px;
+  }
+}
+@media (min-width: 800px) {
+  #content > div.pricing .features {
+    display: block;
   }
 }
 div.posts .postItem {
@@ -4650,7 +4667,8 @@ h1 {
   font-size: 3em;
   font-weight: normal;
   line-height: 1em;
-  color: #333;
+  color: #444;
+  letter-spacing: 1px;
   margin-top: 0px;
 }
 h2 {

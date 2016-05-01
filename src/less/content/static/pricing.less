@@ -3,12 +3,27 @@
   margin: 0;
   width: 100%;
 
+  .squeeze {
+    width: 90%;
+    margin: auto;
+    padding-top: 20px;
+  }
+
   .slider {
     width: 90%;
 
     img {
       width: 100%;
     }
+  }
+
+  .features {
+    display: none;
+  }
+
+  .title {
+    text-align: center;
+    width: 100%;
   }
 
   .team {
@@ -66,6 +81,15 @@
           margin-top: 40px;
         }
       }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  #content > div.pricing {
+
+    .features {
+      display: block;
     }
   }
 }
