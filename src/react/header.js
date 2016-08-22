@@ -10,7 +10,7 @@ let util = require('../util');
 let Actions = require('../actions/session');
 let Store = require('../stores/session');
 
-let Search = require('../containers/StreamSearch');
+let Search = require('./stream/search');
 
 module.exports = React.createClass({
   contextTypes: {
@@ -21,7 +21,7 @@ module.exports = React.createClass({
     let session = this.context.session;
     let route = this.context.route;
     let r = route.root;
-    if (['product', 'pricing', 'help'].indexOf(r) > -1) {
+    if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
       return <Static />
     }
     if (r === 'home') {

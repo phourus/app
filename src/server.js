@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 var ReactRouter = require('react-router');
-var RoutingContext = ReactRouter.RouterContext;
+var RoutingContext = ReactRouter.RoutingContext;
 
 module.exports = React.createClass({
   render: function () {
