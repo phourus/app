@@ -1,10 +1,10 @@
 let React = require('react');
 
-let Contribute = require('./product/contribute');
-let Thoughts = require('./product/thoughts');
-let Recognition = require('./product/recognition');
-let Features = require('./product/features');
-let Integrate = require('./product/integrate');
+let Contribute = require('./contribute');
+let Thoughts = require('./thoughts');
+let Recognition = require('./recognition');
+let Features = require('./features');
+let Integrate = require('./integrate');
 
 module.exports = React.createClass({
   render: function () {

@@ -3,8 +3,8 @@ let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
 
-let Notifications = require('./activity/notifications');
-let History = require('./activity/history');
+let Notifications = require('./notifications');
+let History = require('./history');
 
 module.exports = React.createClass({
   contextTypes: {

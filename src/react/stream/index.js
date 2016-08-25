@@ -2,15 +2,15 @@
 let React = require('react');
 let Router = require('react-router');
 
-let Store = require('../stores/stream');
-let Actions = require('../actions/stream');
+let Store = require('../../stores/stream');
+let Actions = require('../../actions/stream');
 
 let Scroll = require('react-infinite-scroll')(React);
 
-let Posts = require('./stream/posts');
-let Organizations = require('./stream/organizations');
-let Loader = require('./shared/loader');
-let Sidebar = require('./stream/sidebar');
+let Posts = require('./posts');
+let Organizations = require('./organizations');
+let Loader = require('../shared/loader');
+let Sidebar = require('./sidebar');
 
 let Stream = React.createClass({
 	contextTypes: {

@@ -1,7 +1,7 @@
 'use strict';
 let React = require('react');
 
-let Tabs = require('./admin/tabs');
+let Tabs = require('./tabs');
 
 module.exports = React.createClass({
   contextTypes: {

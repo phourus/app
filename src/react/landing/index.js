@@ -2,11 +2,11 @@
 let React = require('react');
 let { History } = require('react-router');
 
-let Auth = require('./landing/auth');
-let Ideas = require('./landing/ideas');
-let Information = require('./landing/information');
-let Engagement = require('./landing/engagement');
-let Feedback = require('./landing/feedback');
+let Auth = require('./auth');
+let Ideas = require('./ideas');
+let Information = require('./information');
+let Engagement = require('./engagement');
+let Feedback = require('./feedback');
 
 let Landing = React.createClass({
   render: function () {

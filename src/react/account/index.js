@@ -1,8 +1,8 @@
 "use strict";
 let React = require('react');
 
-let Info = require('./account/info');
-let Orgs = require('./account/organizations');
+let Info = require('./info');
+let Orgs = require('./organizations');
 
 module.exports = React.createClass({
   render: function () {
