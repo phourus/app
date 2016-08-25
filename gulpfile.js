@@ -17,7 +17,7 @@ process.env.NODE_ENV = 'production';
 gulp.task('javascript', function() {
 
   var bundler = browserify({
-    entries: ['./src/browser.js'],
+    entries: ['./src/react/browser.js'],
     debug: true
   })
   .transform(babelify)

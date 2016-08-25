@@ -1,6 +1,6 @@
 "use strict";
 let token = require('./token');
-let Actions = require('./actions/session');
+let Actions = require('../actions/session');
 let t = '';
 if (token.onConnect) {
   token.onConnect()

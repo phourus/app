@@ -4,7 +4,7 @@ let Router = require('react-router');
 let { Link } = Router;
 let moment = require('moment');
 
-let util = require('../../util');
+let util = require('../../lib/util');
 
 let Pic = require('../shared/pic');
 let Poll = require('./poll');

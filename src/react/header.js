@@ -3,9 +3,9 @@ let React = require('react');
 
 let Router = require('react-router');
 let { Link, History } = Router;
-let ga = require('../analytics');
+let ga = require('../lib/analytics');
 
-let util = require('../util');
+let util = require('../lib/util');
 
 let Actions = require('../actions/session');
 let Store = require('../stores/session');

@@ -1,6 +1,6 @@
 "use strict";
 let React = require('react');
-let ga = require('../../analytics');
+let ga = require('../../lib/analytics');
 
 let Store = require('../../stores/users');
 let Actions = require('../../actions/profile').User;

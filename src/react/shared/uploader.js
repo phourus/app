@@ -6,8 +6,8 @@ let { RouteHandler, Link } = Router;
 let AccountActions = require('../../actions/profile').User;
 let OrgActions = require('../../actions/profile').Org;
 
-let ImageUploader = require('../../pic');
-let Token = require('../../token');
+let ImageUploader = require('../../lib/pic');
+let Token = require('../../lib/token');
 
 module.exports = React.createClass({
   contextTypes: {

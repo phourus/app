@@ -5,7 +5,7 @@ let PostActions = require('../../actions/post');
 let StreamActions = require('../../actions/stream');
 
 let Meta = require('./meta');
-let tax = require('../../taxonomy');
+let tax = require('../../lib/taxonomy');
 
 let icons = {
 	blog: "laptop",

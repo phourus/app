@@ -3,7 +3,7 @@ let React = require('react');
 
 let Actions = require('../../actions/post');
 
-let tax = require('../../taxonomy');
+let tax = require('../../lib/taxonomy');
 
 let Meta = React.createClass({
 	contextTypes: {

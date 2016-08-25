@@ -2,8 +2,8 @@
 let Reflux = require('reflux');
 let moment = require('moment');
 
-let token = require('../token');
-let ga = require('../analytics');
+let token = require('../lib/token');
+let ga = require('../lib/analytics');
 
 let Actions = require('../actions/session');
 

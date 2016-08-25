@@ -5,7 +5,7 @@ let Select = require('react-select');
 let Router = require('react-router');
 let { Link, History } = Router;
 
-let util = require('../../util');
+let util = require('../../lib/util');
 
 let Store = require('../../stores/orgs');
 let Actions = require('../../actions/profile').Org;

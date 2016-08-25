@@ -2,7 +2,7 @@
 let React = require('react');
 
 let { Link } = require('react-router');
-var ga = require('./analytics');
+var ga = require('./lib/analytics');
 var Initializer = ga.Initializer;
 
 let Header = require('./react/header');

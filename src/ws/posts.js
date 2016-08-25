@@ -1,5 +1,5 @@
 let config = require('../../config').get("socket");
-let token = require('../token');
+let token = require('../lib/token');
 let socket = require('socket.io-client')(`${config.url}:${config.port}/posts`, {query: 'token=' + token.get()});
 
 socket.single = function (id) {

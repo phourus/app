@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 
-let ga = require('../../analytics');
+let ga = require('../../lib/analytics');
 
 module.exports = React.createClass({
   getInitialState: function () {

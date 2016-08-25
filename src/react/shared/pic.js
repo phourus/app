@@ -3,7 +3,7 @@ let React = require('react');
 let Router = require('react-router');
 let { Link } = Router;
 
-let util = require('../../util');
+let util = require('../../lib/util');
 
 module.exports = React.createClass({
   getDefaultProps: function () {

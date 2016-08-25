@@ -1,5 +1,5 @@
 let config = require('../../config').get("socket");
-let token = require('../token');
+let token = require('../lib/token');
 let socket = require('socket.io-client')(`${config.url}:${config.port}/tags`, {query: 'token=' + token.get()});
 
 socket.collection = function (params) {

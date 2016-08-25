@@ -1,8 +1,8 @@
 "use strict";
 let React = require('react');
-let ga = require('../../analytics');
+let ga = require('../../lib/analytics');
 
-let util = require('../../util');
+let util = require('../../lib/util');
 
 let Router = require('react-router');
 let { History, Link } = Router;

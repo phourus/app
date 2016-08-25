@@ -4,8 +4,8 @@ let Router = require('react-router');
 let { History } = Router;
 let numeral = require('numeral');
 
-let Influence = require('../../influence');
-let Popularity = require('../../popularity');
+let Influence = require('./influence');
+let Popularity = require('../../lib/popularity');
 let Thumbs = require('./thumbs');
 
 let thousands = "0,0";

@@ -3,7 +3,7 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 let moment = require('moment');
-let ga = require('../../analytics');
+let ga = require('../../lib/analytics');
 
 let Actions = require('../../actions/post/comments');
 let Store = require('../../stores/post/comments');

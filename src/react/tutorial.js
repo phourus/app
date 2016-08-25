@@ -1,8 +1,8 @@
 "use strict";
 let React = require('react');
-var ga = require('../analytics');
+var ga = require('../lib/analytics');
 
-let Steps = require('../steps');
+let Steps = require('../lib/steps');
 let Store = require('../stores/tutorial');
 let Actions = require('../actions/tutorial');
 let localStorage;

@@ -1,7 +1,7 @@
 "use strict";
 let React = require('react');
 let Router = require('react-router');
-let ga = require('../../analytics');
+let ga = require('../../lib/analytics');
 
 let Store = require('../../stores/post/thumbs');
 let Actions = require('../../actions/post/thumbs');

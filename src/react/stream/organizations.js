@@ -3,7 +3,7 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 
-let util = require('../../util');
+let util = require('../../lib/util');
 
 let Pic = require('../shared/pic');
 

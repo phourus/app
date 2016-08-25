@@ -4,7 +4,7 @@ let Router = require('react-router');
 let { History, Link } = Router;
 let Actions = require('../../actions/auth');
 let Store = require('../../stores/auth');
-let ga = require('../../analytics');
+let ga = require('../../lib/analytics');
 
 module.exports = React.createClass({
   getDefaultProps: function () {

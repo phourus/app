@@ -1,6 +1,6 @@
 "use strict";
 let React = require('react');
-let ga = require('../../analytics');
+let ga = require('../../lib/analytics');
 
 let Video = React.createClass({
   componentDidMount: function () {

@@ -10,7 +10,7 @@ var match = Router.match;
 
 var api = require('./api/rest');
 var routes = require('./src/routes');
-var server = require('./src/server');
+var server = require('./src/react/server');
 
 var phourus = express();
 

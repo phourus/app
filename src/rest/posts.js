@@ -1,7 +1,7 @@
 let w = require('window-or-global');
-var http = require('../xhr')(w);
+var http = require('../lib/xhr')(w);
 var base = '/rest/posts/';
-var settings = require('../settings');
+var settings = require('../lib/settings');
 
 module.exports = {
   single: function (id) {
