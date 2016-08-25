@@ -3,28 +3,28 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 
-let Actions = require('../actions/post');
-let Store = require('../stores/post');
+let Actions = require('../../actions/post');
+let Store = require('../../stores/post');
 
-let TutorialActions = require('../actions/tutorial');
+let TutorialActions = require('../../actions/tutorial');
 
-let ActionsView = require('./post/actions');
-let Comments = require('./post/comments');
-let Content = require('./post/content');
-let Details = require('./post/details');
-let Links = require('./post/links');
-let Poll = require('./post/poll');
-let Privacy = require('./post/privacy');
-let Profile = require('./profile');
-let Share = require('./post/share');
-let Stats = require('./post/stats');
-let Tags = require('./post/tags');
-let Thumbs = require('./post/thumbs');
-let Title = require('./post/title');
-let Type = require('./post/type');
+let ActionsView = require('./actions');
+let Comments = require('./comments');
+let Content = require('./content');
+let Details = require('./details');
+let Links = require('./links');
+let Poll = require('./poll');
+let Privacy = require('./privacy');
+let Profile = require('../profile');
+let Share = require('./share');
+let Stats = require('./stats');
+let Tags = require('./tags');
+let Thumbs = require('./thumbs');
+let Title = require('./title');
+let Type = require('./type');
 
-let Drag = require('./post/drag');
-let Loader = require('./shared/loader');
+let Drag = require('./drag');
+let Loader = require('../shared/loader');
 
 let Post = React.createClass({
 	mixins: [History],
