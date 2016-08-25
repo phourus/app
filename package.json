@@ -67,15 +67,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "jest",
     "build": "./node_modules/gulp/bin/gulp.js"
-  },
-  "jest": {
-    "testDirectoryName": "tests",
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "collectCoverage": true,
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
-    ]
   }
 }
