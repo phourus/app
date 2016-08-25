@@ -3,7 +3,7 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 
-let Form = require('../../containers/ContactForm');
+let Form = require('./form');
 let Docs = require('./docs');
 
 module.exports = React.createClass({
