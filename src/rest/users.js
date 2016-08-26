@@ -1,5 +1,5 @@
 let w = require('window-or-global');
-var http = require('../lib/xhr')(w);
+var http = require('../lib/xhr');
 var base = '/rest/users/';
 var settings = require('../lib/settings');
 

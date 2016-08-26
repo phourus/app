@@ -1,5 +1,5 @@
 let w = require('window-or-global');
-var http = require('../lib/xhr')(w);
+var http = require('../lib/xhr');
 var base = '/rest/thumbs/';
 var settings = require('../lib/settings');
 
@@ -17,6 +17,6 @@ module.exports = {
     return http.put(base + id, model, settings());
   },
   remove: function (id) {
-    return http.delete(base + id, settings());
+    return http.del(base + id, settings());
   },
 };

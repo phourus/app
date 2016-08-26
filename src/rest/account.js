@@ -1,5 +1,5 @@
 let w = require('window-or-global');
-var http = require('../lib/xhr')(w);
+var http = require('../lib/xhr');
 var base = '/rest/account/';
 var settings = require('../lib/settings');
 
@@ -14,7 +14,7 @@ module.exports = {
     return http.put(base + 'password', model, settings());
   },
   deactivate: function () {
-    return http.delete(base, settings());
+    return http.del(base, settings());
   },
   notifications: function() {
     return http.get(base + 'notifications', settings());
