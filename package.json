@@ -49,7 +49,6 @@
     "reflux": "^0.2.6",
     "sendgrid": "^1.9.2",
     "sequelize": "2.0.3",
-    "socket.io-client": "^1.2.1",
     "system": "^0.1.0",
     "window-or-global": "^1.0.1"
   },
