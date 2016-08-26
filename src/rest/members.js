@@ -1,7 +1,5 @@
-let w = require('window-or-global');
 var http = require('../lib/xhr');
 var base = '/rest/members/';
-var settings = require('../lib/settings');
 
 module.exports = {
   collection: function (params) {
@@ -12,37 +10,37 @@ module.exports = {
     if (params.userId) {
       query = '?userId=' + params.userId;
     }
-    return http.get(base + query, settings());
+    return http.get(base + query);
   },
   request: function (orgId) {
     var model = {
       orgId: orgId
     };
-    return http.post(base, model, settings());
+    return http.post(base, model);
   },
   approve: function (id) {
     var model = {
       approved: 1
     };
-    return http.put(base + id, model, settings());
+    return http.put(base + id, model);
   },
   admin: function (id) {
     var model = {
       approved: 1,
       admin: 1
     };
-    return http.put(base + id, model, settings());
+    return http.put(base + id, model);
   },
   revoke: function (id) {
     var model = {
       admin: 0
     };
-    return http.put(base + id, model, settings());
+    return http.put(base + id, model);
   },
   deny: function (id) {
-    return http.del(base + id, settings());
+    return http.del(base + id);
   },
   remove: function (orgId) {
-    return http.del(base + orgId, settings());
+    return http.del(base + orgId);
   }
 };

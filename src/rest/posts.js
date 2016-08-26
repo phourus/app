@@ -1,35 +1,32 @@
-let w = require('window-or-global');
 var http = require('../lib/xhr');
 var base = '/rest/posts/';
-var settings = require('../lib/settings');
 
 module.exports = {
   single: function (id) {
-    return http.get(base + id, settings());
+    return http.get(base + id);
   },
   collection: function (params) {
-    var _settings = settings();
-    _settings.query = params;
+    var query = params;
     params.contextId = params.context.id;
     params.contextType = params.context.type;
-    return http.get(base, _settings);
+    return http.get(base);
   },
   add: function (model) {
-    return http.post(base, model, settings());
+    return http.post(base, model);
   },
   save: function (id, model) {
-    return http.put(base + id, model, settings());
+    return http.put(base + id, model);
   },
   remove: function(id) {
-    return http.del(base + id, settings());
+    return http.del(base + id);
   },
   account: function () {
-    return http.get(base, settings());
+    return http.get(base);
   },
   poll: function(id) {
-    return http.get(base + id + '/poll', settings());
+    return http.get(base + id + '/poll');
   },
   vote: function (id, option) {
-    return http.post(base + id + '/vote', {option: option}, settings());
+    return http.post(base + id + '/vote', {option: option});
   }
 };

@@ -1,7 +1,5 @@
-let w = require('window-or-global');
 var http = require('../lib/xhr');
 var base = '/rest/comments/';
-var settings = require('../lib/settings');
 
 module.exports = {
   collection: function (params) {
@@ -12,15 +10,15 @@ module.exports = {
     if (params.userId) {
       query += 'userId=' + params.userId;
     }
-    return http.get(base + '?' + query, settings());
+    return http.get(base + '?' + query);
   },
   add: function (model) {
-    return http.post(base, model, settings());
+    return http.post(base, model);
   },
   save: function (id, model) {
-    return http.put(base + id, model, settings());
+    return http.put(base + id, model);
   },
   remove: function(id) {
-    return http.del(base + id, settings());
+    return http.del(base + id);
   }
 };

@@ -1,20 +1,18 @@
-let w = require('window-or-global');
 var http = require('../lib/xhr');
 var base = '/rest/orgs/';
-var settings = require('../lib/settings');
 
 module.exports = {
   single: function (id) {
-    return http.get(base + id, settings());
+    return http.get(base + id);
   },
   lookup: function (name) {
-    return http.get(base + 'lookup/?name=' + name, settings());
+    return http.get(base + 'lookup/?name=' + name);
   },
   add: function (shortname) {
     let model = {shortname: shortname};
-    return http.post(base, model, settings());
+    return http.post(base, model);
   },
   save: function (id, model) {
-    return http.put(base + id, model, settings());
+    return http.put(base + id, model);
   }
 };

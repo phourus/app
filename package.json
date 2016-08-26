@@ -50,6 +50,7 @@
     "sendgrid": "^1.9.2",
     "sequelize": "2.0.3",
     "system": "^0.1.0",
+    "universal-fetch": "0.0.1",
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {

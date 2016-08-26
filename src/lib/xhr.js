@@ -1,23 +1,51 @@
-export function get(url, settings) {
+import fetch from 'universal-fetch'
+import headers from './headers'
+
+export function get(url, override) {
   return new Promise((resolve, reject) => {
-    resolve({})
+    fetch(url, {
+      headers: Object.assign(headers, override)
+    })
+    .then((response) => {
+      resolve(response.json())
+    })
   })
 }
 
-export function post(url, model, settings) {
+export function post(url, body, override) {
   return new Promise((resolve, reject) => {
-    resolve({})
+    fetch(url, {
+      method: "POST",
+      headers: Object.assign(headers, override),
+      body
+    })
+    .then((response) => {
+      resolve(response.json())
+    })
   })
 }
 
-export function put(url, model, settings) {
+export function put(url, body, override) {
   return new Promise((resolve, reject) => {
-    resolve({})
+    fetch(url, {
+      method: "PUT",
+      headers: Object.assign(headers, override),
+      body
+    })
+    .then((response) => {
+      resolve(response.json())
+    })
   })
 }
 
-export function del(url, settings) {
+export function del(url, override) {
   return new Promise((resolve, reject) => {
-    resolve({})
+    fetch(url, {
+      method: "DELETE",
+      headers: Object.assign(header, override)
+    })
+    .then((response) => {
+      resolve(response.json())
+    })
   })
 }

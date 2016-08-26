@@ -1,6 +1,5 @@
 "use strict";
 let token = require('./token');
-let Actions = require('../actions/session');
 let t = '';
 if (token.onConnect) {
   token.onConnect()
@@ -14,9 +13,6 @@ if (token.onConnect) {
 
 module.exports = function () {
   return {
-    headers: {
-      "Authorization": t
-    },
-    promise: true
+    "Authorization": t
   };
 };

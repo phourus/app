@@ -1,53 +1,54 @@
-let w = require('window-or-global');
 var http = require('../lib/xhr');
 var base = '/rest/account/';
-var settings = require('../lib/settings');
 
 module.exports = {
   get: function () {
-    return http.get(base, settings());
+    return http.get(base);
   },
   edit: function (model) {
-    return http.put(base, model, settings());
+    return http.put(base, model);
   },
   password: function (model) {
-    return http.put(base + 'password', model, settings());
+    return http.put(base + 'password', model);
   },
   deactivate: function () {
-    return http.del(base, settings());
+    return http.del(base);
   },
   notifications: function() {
-    return http.get(base + 'notifications', settings());
+    return http.get(base + 'notifications');
   },
   history: function () {
-    return http.get(base + 'history', settings());
+    return http.get(base + 'history');
   },
   orgs: function () {
-    return http.get(base + 'orgs', settings());
+    return http.get(base + 'orgs');
   },
   login: function (email, password) {
-    var _settings = settings();
-    _settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
-    return http.post(base + 'login', {}, _settings);
+    var headers = {
+      Authorization: "Basic " + new Buffer(email + ':' + password).toString('base64')
+    }
+    return http.post(base + 'login', {}, headers);
   },
   register: function (email, password, username) {
-    var _settings = settings();
-    _settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
-    return http.post(base + 'register', {username: username}, _settings);
+    var headers = {
+      Authorization: "Basic " + new Buffer(email + ':' + password).toString('base64')
+    }
+    return http.post(base + 'register', {username: username}, headers);
   },
   forgot: function (email) {
-    return http.post('/rest/passwords/forgot', {email: email}, settings());
+    return http.post('/rest/passwords/forgot', {email: email});
   },
   reset: function (email, password, token, userId) {
-    var _settings = settings();
-    _settings.headers.Authorization = "Basic " + new Buffer(email + ':' + password).toString('base64');
+    var headers = {
+      Authorization: "Basic " + new Buffer(email + ':' + password).toString('base64')
+    }
     var model = {
       token: token,
       userId: userId
     };
-    return http.post('/rest/passwords/reset', model, _settings);
+    return http.post('/rest/passwords/reset', model, headers);
   },
   contact: function (email, message) {
-    return http.post(base + 'contact', {email: email, message: message}, settings());
+    return http.post(base + 'contact', {email: email, message: message});
   }
 };
