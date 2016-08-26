@@ -25,9 +25,19 @@ module.exports = {
         include: path.join(__dirname, 'src')
       },
       {
-        test: /\.(less|css)$/,
-        loaders: ['style?sourcemap!css?modules&importLoaders=localIdentName=[name]__[local]___[hash:base64:5]!less'],
-        include: path.join(__dirname, 'src')
+        test: /\.less$/,
+        loaders: ['style?sourcemap', 'css', 'less'],
+        include: path.join(__dirname, 'src/less')
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style?sourcemap', 'css'],
+        include: path.join(__dirname, 'src/less')
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style?sourcemap', 'css?modules&importLoaders=localIdentName=[name]__[local]___[hash:base64:5]'],
+        include: path.join(__dirname, 'src/css')
       }
     ]
   }
