@@ -5,6 +5,7 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: [
+    'babel-polyfill',
     // 'webpack-dev-server/client?http://localhost:3000',
     // 'webpack/hot/only-dev-server',
     './src/react/browser'

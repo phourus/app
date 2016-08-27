@@ -3,6 +3,8 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 
+import { connect } from 'react-redux'
+
 let Actions = require('../../actions/post');
 let Store = require('../../stores/post');
 
@@ -257,4 +259,8 @@ Post.Item = React.createClass({
 	}
 });
 
-module.exports = Post;
+function mapStateToProps(state) {
+	return {}
+}
+
+module.exports = connect(mapStateToProps)(Post);

@@ -10,8 +10,11 @@ import { Router, browserHistory } from 'react-router'
 //   ga('send', 'pageview', loc.pathname);
 // });
 
+import { Provider } from 'react-redux'
+import store from './store'
+
 import routes from '../routes'
 let el = document.getElementById("app");
 
 //history={browserHistory}
-render(<Router routes={routes} />, el);
+render(<Provider store={store}><Router routes={routes} /></Provider>, el);
