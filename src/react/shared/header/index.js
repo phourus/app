@@ -12,6 +12,8 @@ let Store = require('../../../stores/session');
 
 let Search = require('../../stream/search');
 
+import styles from './styles.less'
+
 module.exports = React.createClass({
   contextTypes: {
     session: React.PropTypes.object,

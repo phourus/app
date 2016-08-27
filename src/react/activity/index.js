@@ -6,6 +6,8 @@ let { Link } = Router;
 let Notifications = require('./notifications');
 let History = require('./history');
 
+import styles from './styles.less'
+
 module.exports = React.createClass({
   contextTypes: {
     session: React.PropTypes.object

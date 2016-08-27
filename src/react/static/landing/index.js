@@ -3,10 +3,12 @@ let React = require('react');
 let { History } = require('react-router');
 
 let Auth = require('./auth');
-let Ideas = require('./ideas');
+import Ideas from './ideas'
 let Information = require('./information');
 let Engagement = require('./engagement');
 let Feedback = require('./feedback');
+
+import styles from './styles.less'
 
 let Landing = React.createClass({
   render: function () {

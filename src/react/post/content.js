@@ -1,7 +1,8 @@
 "use strict";
 let React = require('react');
 let RTE = require('react-quill');
-let ReactMarkdown = require('react-markdown');
+//let ReactMarkdown = require('react-markdown');
+//<ReactMarkdown source={this.props.post.content} />
 
 let Actions = require('../../actions/post');
 
@@ -21,7 +22,7 @@ module.exports = React.createClass({
 		if (!this.props.post.rich) {
 			return type === 'edit' && this.props.owner || type === 'create'
 			? <textarea onChange={this._content} value={this.props.post.content} />
-			: <div className="content"><ReactMarkdown source={this.props.post.content} /></div>;
+		: <div className="content">{this.props.post.content}</div>;
 		}
 		return type === 'edit' && this.props.owner || type === 'create'
 		? <TextEditor post={this.props.post} />

@@ -11,7 +11,7 @@ let Actions = require('../../actions/session');
 let Store = require('../../stores/session');
 
 let Loader = require('../shared/loader');
-let Alert = require('../shared/alert');
+let Alert = require('../shared/alerts');
 
 module.exports = React.createClass({
   mixins: [History],

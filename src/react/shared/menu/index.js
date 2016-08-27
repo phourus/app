@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+import styles from './styles.less'
+
 export default class Menu extends React.Component {
 
   render() {

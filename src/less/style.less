@@ -1,54 +1,5 @@
-@import '../../node_modules/react-select/less/default.less';
+@import 'theme.less';
 @import 'sub/grid.less';
-@import 'sub/mixins.less';
-@import 'sub/filter.less';
-@import 'sub/fonts.less';
-@import 'sub/forms.less';
-@import 'sub/buttons.less';
-@import 'sub/charts.less';
-
-@import 'sub/alerts.less';
-@import 'sub/content.less';
-@import 'sub/footer.less';
-@import 'sub/header.less';
-@import 'sub/helper.less';
-@import 'sub/menu.less';
-@import 'sub/profile.less';
-@import 'sub/sidebar.less';
-
-/** COLORS **/
-@background: #EDEDED;
-@theme: #333;
-@theme-dark: #222;
-@theme-light: #444;
-@off-white: #fafafa;
-@form-border: #E4E5E6;
-@form-background: #F6F7F9;
-
-@gold: #ECB010;
-@blue: #3498DB;
-@green: #8ABF00;
-@red: #ED0303;
-@grey: #DDD;
-
-@gold-light: lighten(@gold, 10%);
-@blue-light: lighten(@blue, 10%);
-@green-light: lighten(@green, 5%);
-@red-light: lighten(@red, 10%);
-@grey-light: #eee;
-
-@gold-dark: darken(@gold, 10%);
-@blue-dark: darken(@blue, 10%);
-@green-dark: darken(@green, 10%);
-@red-dark: darken(@red, 10%);
-@grey-dark: #444;
-
-//@font-serif: 'rokkitt', @palatino;
-@font-sans: 'open sans', @arial;
-@font-serif: @font-sans;
-@font-mono: @mono;
-
-// Other greys: 444, 777, AAA, BBB, DDD
 
 /** BODY **/
 body {
@@ -85,6 +36,29 @@ body {
       }
     }
   }
+}
+
+/** CONTENT **/
+.main {
+  .Row(100%);
+}
+
+#content {
+
+    > div {
+      margin: 10px auto 0 auto;
+      width: 96%;
+      max-width: 1200px;
+      padding: 2%;
+    }
+
+    > div.stream {
+      margin: 20px 0 0 0;
+      padding: 0;
+      width: 100%;
+      background: transparent;
+      border: none;
+    }
 }
 
 div.spacer {

@@ -6,7 +6,8 @@ var ga = require('./lib/analytics');
 var Initializer = ga.Initializer;
 
 let Header = require('./react/shared/header');
-let Menu = require('./react/shared/menu');
+import Footer from './react/shared/footer'
+import Menu from './react/shared/menu'
 let Profile = require('./react/shared/profile');
 let Tutorial = require('./react/shared/tutorial');
 
@@ -17,6 +18,14 @@ let TutorialActions = require('./actions/tutorial');
 
 let HTML5Backend = require('react-dnd-html5-backend');
 let { DragDropContext } = require('react-dnd');
+
+import styles from './less/style.less'
+import formStyles from './less/sub/forms.less'
+import buttonStyles from './less/sub/buttons.less'
+import chartStyles from './less/sub/charts.less'
+
+import helperStyles from './less/sub/helper.less'
+import sidebarStyles from './less/sub/sidebar.less'
 
 let App = React.createClass({
   childContextTypes: {
@@ -89,11 +98,12 @@ let App = React.createClass({
     if (!root && !route.subdomain) {
       classType = "home";
     }
+    // <Tutorial />
     return  (
       <div id="app" className={classType}>
         <Menu />
         <div className="container">
-          <Tutorial />
+
           <Initializer />
           <Header tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
           {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
@@ -105,16 +115,7 @@ let App = React.createClass({
             </div>
           </div>
           <Helper />
-          <footer className="footer">
-            <strong>1-844-PHOURUS</strong><br />
-            <span className="muted">(1-844-746-8787)</span><br />
-            <a href="mailto:info@phourus.com&Subject=">info@phourus.com</a><br /><br />
-            <span>© 2015 Phourus Inc. All Rights Reserved.</span><br />
-            <span className="muted">1411 7th St. #305, Santa Monica, CA 90401</span><br />
-            <Link to="/terms" className="muted">Terms</Link> |
-            <Link to="/privacy" className="muted">Privacy</Link>
-            <br clear="all" />
-          </footer>
+          <Footer />
         </div>
       </div>
     );

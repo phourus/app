@@ -7,7 +7,7 @@ let App = require('./app');
 // Static
 let Landing = require('./react/static/landing');
 let Product = require('./react/static/product');
-let Pricing = require('./react/static/pricing');
+import Pricing from './react/static/pricing'
 let Help = require('./react/static/help');
 let Terms = require('./react/static/terms');
 let Privacy = require('./react/static/privacy');

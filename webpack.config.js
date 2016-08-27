@@ -7,7 +7,7 @@ module.exports = {
   entry: [
     // 'webpack-dev-server/client?http://localhost:3000',
     // 'webpack/hot/only-dev-server',
-    './src/app'
+    './src/react/browser'
   ],
   output: {
     path: path.join(__dirname, 'build'),
@@ -27,12 +27,12 @@ module.exports = {
       {
         test: /\.less$/,
         loaders: ['style?sourcemap', 'css', 'less'],
-        include: path.join(__dirname, 'src/less')
+        include: path.join(__dirname, 'src/')
       },
       {
         test: /\.css$/,
         loaders: ['style?sourcemap', 'css'],
-        include: path.join(__dirname, 'src/less')
+        include: path.join(__dirname, 'src/')
       },
       {
         test: /\.css$/,

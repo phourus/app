@@ -15,6 +15,8 @@ let PostActions = require('../../../actions/post');
 let Pic = require('../pic');
 let Uploader = require('../uploader');
 
+import styles from './styles.less'
+
 module.exports = React.createClass({
 	mixins: [History],
 	contextTypes: {

@@ -14,7 +14,7 @@ let ProfileActions = require('../../actions/profile').Orgs;
 let ProfileStore = require('../../stores/orgs');
 
 let MemberActions = require('../../actions/members');
-let Alert = require('../shared/alert');
+let Alert = require('../shared/alerts');
 
 let emailReg = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 let usernameReg = /^([a-z]|[A-Z]|[0-9]|-){2,20}$/;

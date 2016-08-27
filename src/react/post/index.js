@@ -26,6 +26,8 @@ let Type = require('./type');
 let Drag = require('./drag');
 let Loader = require('../shared/loader');
 
+import styles from './styles.less'
+
 let Post = React.createClass({
 	mixins: [History],
 	contextTypes: {

@@ -1,5 +1,7 @@
 import React from 'react'
-import Features from './product/features'
+import Features from '../product/features'
+
+import styles from './styles.less'
 
 const employees = [
   {

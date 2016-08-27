@@ -1,5 +1,5 @@
 "use strict";
-let React = require('react');
+import React from 'react'
 
 let View404 = React.createClass({
     render: function () {

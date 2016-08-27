@@ -6,12 +6,14 @@ let { Link, History } = Router;
 let Form = require('./form');
 let Docs = require('./docs');
 
+import styles from './styles.less'
+
 module.exports = React.createClass({
   mixins: [History],
   render: function () {
     return (
-      <div className="help">
-        <div className="faq">
+      <div className={styles.container}>
+        <div className={styles.faq}>
           <h1>Help & Docs</h1>
           <input type="text" placeholder="what can we help you with?" />
           <Docs {...this.props} />

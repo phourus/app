@@ -7,6 +7,8 @@ let Store = require('../../../stores/tutorial');
 let Actions = require('../../../actions/tutorial');
 let localStorage;
 
+//import styles from './node_modules/react-joyride/lib/styles/react-joyride.css'
+
 let Joyride = React.createClass({
   render: function () {
     return false;

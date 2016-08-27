@@ -2,7 +2,8 @@
 let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
-let ReactMarkdown = require('react-markdown');
+//let ReactMarkdown = require('react-markdown');
+//<ReactMarkdown source={this.props.page} />
 
 let Actions = require('../../../actions/pages');
 let Store = require('../../../stores/pages');
@@ -60,7 +61,7 @@ let Popup = React.createClass({
   render: function () {
     return (
       <div key={this.props.id} className="page">
-        <ReactMarkdown source={this.props.page} />
+        {this.props.page}
       </div>
     );
   }

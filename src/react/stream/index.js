@@ -12,6 +12,8 @@ let Organizations = require('./organizations');
 let Loader = require('../shared/loader');
 let Sidebar = require('./sidebar');
 
+import styles from './styles.less'
+console.log('styles', styles)
 let Stream = React.createClass({
 	contextTypes: {
 		route: React.PropTypes.object
