@@ -3,17 +3,17 @@ let React = require('react');
 let Router = require('react-router');
 let { Link, History } = Router;
 
-let UserStore = require('../stores/users');
-let UserActions = require('../actions/profile').User;
+let UserStore = require('../../../stores/users');
+let UserActions = require('../../../actions/profile').User;
 
-let OrgStore = require('../stores/orgs');
-let OrgActions = require('../actions/profile').Org;
+let OrgStore = require('../../../stores/orgs');
+let OrgActions = require('../../../actions/profile').Org;
 
-let PostStore = require('../stores/post');
-let PostActions = require('../actions/post');
+let PostStore = require('../../../stores/post');
+let PostActions = require('../../../actions/post');
 
-let Pic = require('./shared/pic');
-let Uploader = require('./shared/uploader');
+let Pic = require('../pic');
+let Uploader = require('../uploader');
 
 module.exports = React.createClass({
 	mixins: [History],

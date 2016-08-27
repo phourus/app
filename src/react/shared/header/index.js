@@ -3,14 +3,14 @@ let React = require('react');
 
 let Router = require('react-router');
 let { Link, History } = Router;
-let ga = require('../lib/analytics');
+let ga = require('../../../lib/analytics');
 
-let util = require('../lib/util');
+let util = require('../../../lib/util');
 
-let Actions = require('../actions/session');
-let Store = require('../stores/session');
+let Actions = require('../../../actions/session');
+let Store = require('../../../stores/session');
 
-let Search = require('./stream/search');
+let Search = require('../../stream/search');
 
 module.exports = React.createClass({
   contextTypes: {

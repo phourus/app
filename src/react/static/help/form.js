@@ -1,8 +1,8 @@
 "use strict";
 let React = require('react');
 
-let Actions = require('../../actions/util');
-let Store = require('../../stores/util');
+let Actions = require('../../../actions/util');
+let Store = require('../../../stores/util');
 
 module.exports = React.createClass({
   contextTypes: {

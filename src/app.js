@@ -5,10 +5,10 @@ let { Link } = require('react-router');
 var ga = require('./lib/analytics');
 var Initializer = ga.Initializer;
 
-let Header = require('./react/header');
-let Menu = require('./react/menu');
-let Profile = require('./react/profile');
-let Tutorial = require('./react/tutorial');
+let Header = require('./react/shared/header');
+let Menu = require('./react/shared/menu');
+let Profile = require('./react/shared/profile');
+let Tutorial = require('./react/shared/tutorial');
 
 let Actions = require('./actions/session');
 let Store = require('./stores/session');

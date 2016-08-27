@@ -4,8 +4,8 @@ let Router = require('react-router');
 let { Link, History } = Router;
 let ReactMarkdown = require('react-markdown');
 
-let Actions = require('../../actions/pages');
-let Store = require('../../stores/pages');
+let Actions = require('../../../actions/pages');
+let Store = require('../../../stores/pages');
 
 const DEFAULT_PAGE = 'create-account';
 

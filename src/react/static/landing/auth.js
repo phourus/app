@@ -2,10 +2,10 @@
 let React = require('react');
 let Router = require('react-router');
 
-let Login = require('../auth/login');
-let Signup = require('../auth/signup');
-let Forgot = require('../auth/forgot');
-let Reset = require('../auth/reset');
+let Login = require('../../auth/login');
+let Signup = require('../../auth/signup');
+let Forgot = require('../../auth/forgot');
+let Reset = require('../../auth/reset');
 
 module.exports = React.createClass({
   contextTypes: {

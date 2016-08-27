@@ -1,10 +1,10 @@
 "use strict";
 let React = require('react');
-var ga = require('../lib/analytics');
+var ga = require('../../../lib/analytics');
 
-let Steps = require('../lib/steps');
-let Store = require('../stores/tutorial');
-let Actions = require('../actions/tutorial');
+let Steps = require('./steps');
+let Store = require('../../../stores/tutorial');
+let Actions = require('../../../actions/tutorial');
 let localStorage;
 
 let Joyride = React.createClass({
