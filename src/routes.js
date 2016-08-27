@@ -14,7 +14,7 @@ let Privacy = require('./react/static/privacy');
 
 // Product
 let Stream = require('./react/stream');
-let Post = require('./react/post');
+import Post from './react/post'
 let Account = require('./react/account');
 let Activity = require('./react/activity');
 

@@ -6,7 +6,7 @@ let { Link } = Router;
 let TutorialActions = require('../../actions/tutorial');
 
 let Loader = require('../shared/loader');
-let Post = require('../post');
+import Post from '../post/item'
 
 module.exports = React.createClass({
 	contextTypes: {
@@ -40,7 +40,7 @@ module.exports = React.createClass({
 					 if (item.user.locations && item.user.locations.length > 0) {
 							 location = item.user.locations[0];
 					 }
-					 return <Post.Item key={item.id} post={item} user={item.user} owner={owner} location={location} scroll={this.props.scroll} />;
+					 return <Post key={item.id} post={item} user={item.user} owner={owner} location={location} scroll={this.props.scroll} />;
 				})}
 			</div>
 		);
