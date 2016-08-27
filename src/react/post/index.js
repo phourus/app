@@ -1,32 +1,28 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
-
+import React from 'react'
+import { Link, History } from 'react-router'
 import { connect } from 'react-redux'
 
-let Actions = require('../../actions/post');
-let Store = require('../../stores/post');
+import Actions from '../../actions/post'
+import Store from '../../stores/post'
 
-let TutorialActions = require('../../actions/tutorial');
+import TutorialActions from '../../actions/tutorial'
+import Profile from '../shared/profile'
+import Loader from '../shared/loader'
 
-let ActionsView = require('./actions');
-let Comments = require('./comments');
-let Content = require('./content');
-let Details = require('./details');
-let Links = require('./links');
-let Poll = require('./poll');
-let Privacy = require('./privacy');
-let Profile = require('../shared/profile');
-let Share = require('./share');
-let Stats = require('./stats');
-let Tags = require('./tags');
-let Thumbs = require('./thumbs');
-let Title = require('./title');
-let Type = require('./type');
-
-let Drag = require('./drag');
-let Loader = require('../shared/loader');
+import ActionsView from './components/actions'
+import Comments from './components/comments'
+import Content from './components/content'
+import Details from './components/details'
+import Links from './components/links'
+import Poll from './components/poll'
+import Privacy from './components/privacy'
+import Share from './components/share'
+import Stats from './components/stats'
+import Tags from './components/tags'
+import Thumbs from './components/thumbs'
+import Title from './components/title'
+import Type from './components/type'
+import Drag from './components/drag'
 
 import styles from './styles.less'
 
@@ -160,7 +156,7 @@ let Create = React.createClass({
 		if (!session.authenticated) {
 			return (<div className="create 401">
 				<h2>You need to login first to create posts</h2>
-				<p>Please log in or create an account if you'd like create a post.</p>
+				<p>Please log in or create an account if you would like to create a post.</p>
 			</div>);
 		}
 

@@ -1,9 +1,8 @@
-"use strict";
-let React = require('react');
+import React from 'react'
 
-let Actions = require('../../actions/post');
+import Actions from '../../../actions/post'
 
-let tax = require('../../lib/taxonomy');
+import tax from '../../../lib/taxonomy'
 
 let Meta = React.createClass({
 	contextTypes: {

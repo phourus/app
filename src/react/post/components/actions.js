@@ -1,12 +1,10 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
+import React from 'react'
+import Router, { Link, History } from 'react-router'
 
-let Actions = require('../../actions/post');
-let Store = require('../../stores/post');
+import Actions from '../../../actions/post'
+import Store from '../../../stores/post'
 
-module.exports = React.createClass({
+export default React.createClass({
   mixins: [History],
   contextTypes: {
     route: React.PropTypes.object

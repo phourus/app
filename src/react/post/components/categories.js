@@ -1,9 +1,8 @@
-"use strict";
-let React = require('react');
+import React from 'react'
 
-let Actions = require('../../actions/post');
+import Actions from '../../../actions/post'
 
-let tax = require('../../lib/taxonomy');
+import tax from '../../../lib/taxonomy'
 
 let Categories = React.createClass({
 	contextTypes: {
@@ -61,4 +60,4 @@ let Categories = React.createClass({
 	}
 });
 
-module.exports = Categories;
+export default Categories

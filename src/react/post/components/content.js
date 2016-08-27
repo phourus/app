@@ -1,10 +1,9 @@
-"use strict";
-let React = require('react');
-let RTE = require('react-quill');
-//let ReactMarkdown = require('react-markdown');
+import React from 'react'
+import RTE from 'react-quill'
+//import ReactMarkdown from 'react-markdown'
 //<ReactMarkdown source={this.props.post.content} />
 
-let Actions = require('../../actions/post');
+import Actions from '../../../actions/post'
 
 module.exports = React.createClass({
 	contextTypes: {

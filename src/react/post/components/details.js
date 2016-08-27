@@ -1,13 +1,11 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
-let { Link } = Router;
-let moment = require('moment');
+import React from 'react'
+import Router, { Link } from 'react-router'
+import moment from 'moment'
 
-let util = require('../../lib/util');
+import util from '../../../lib/util'
 
-let Pic = require('../shared/pic');
-let Poll = require('./poll');
+import Pic from '../../shared/pic'
+import Poll from './poll'
 
 module.exports = React.createClass({
 	getDefaultProps: function () {

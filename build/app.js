@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "cccca9cd2555ea6db2bb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5d945e60d9aef9dba655"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -75734,54 +75734,107 @@
 /* 1045 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
+	var _react = __webpack_require__(330);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(489);
+	
 	var _reactRedux = __webpack_require__(552);
 	
-	var _styles = __webpack_require__(1046);
+	var _post = __webpack_require__(774);
+	
+	var _post2 = _interopRequireDefault(_post);
+	
+	var _post3 = __webpack_require__(773);
+	
+	var _post4 = _interopRequireDefault(_post3);
+	
+	var _tutorial = __webpack_require__(783);
+	
+	var _tutorial2 = _interopRequireDefault(_tutorial);
+	
+	var _profile = __webpack_require__(763);
+	
+	var _profile2 = _interopRequireDefault(_profile);
+	
+	var _loader = __webpack_require__(1007);
+	
+	var _loader2 = _interopRequireDefault(_loader);
+	
+	var _actions = __webpack_require__(1046);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _comments = __webpack_require__(1047);
+	
+	var _comments2 = _interopRequireDefault(_comments);
+	
+	var _content = __webpack_require__(1052);
+	
+	var _content2 = _interopRequireDefault(_content);
+	
+	var _details = __webpack_require__(1059);
+	
+	var _details2 = _interopRequireDefault(_details);
+	
+	var _links = __webpack_require__(1061);
+	
+	var _links2 = _interopRequireDefault(_links);
+	
+	var _poll = __webpack_require__(1060);
+	
+	var _poll2 = _interopRequireDefault(_poll);
+	
+	var _privacy = __webpack_require__(1066);
+	
+	var _privacy2 = _interopRequireDefault(_privacy);
+	
+	var _share = __webpack_require__(1078);
+	
+	var _share2 = _interopRequireDefault(_share);
+	
+	var _stats = __webpack_require__(1079);
+	
+	var _stats2 = _interopRequireDefault(_stats);
+	
+	var _tags = __webpack_require__(1088);
+	
+	var _tags2 = _interopRequireDefault(_tags);
+	
+	var _thumbs = __webpack_require__(1083);
+	
+	var _thumbs2 = _interopRequireDefault(_thumbs);
+	
+	var _title = __webpack_require__(1093);
+	
+	var _title2 = _interopRequireDefault(_title);
+	
+	var _type = __webpack_require__(1094);
+	
+	var _type2 = _interopRequireDefault(_type);
+	
+	var _drag = __webpack_require__(1097);
+	
+	var _drag2 = _interopRequireDefault(_drag);
+	
+	var _styles = __webpack_require__(1098);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var React = __webpack_require__(330);
-	var Router = __webpack_require__(489);
-	var Link = Router.Link;
-	var History = Router.History;
-	
-	
-	var Actions = __webpack_require__(774);
-	var Store = __webpack_require__(773);
-	
-	var TutorialActions = __webpack_require__(783);
-	
-	var ActionsView = __webpack_require__(1048);
-	var Comments = __webpack_require__(1049);
-	var Content = __webpack_require__(1054);
-	var Details = __webpack_require__(1061);
-	var Links = __webpack_require__(1063);
-	var Poll = __webpack_require__(1062);
-	var Privacy = __webpack_require__(1068);
-	var Profile = __webpack_require__(763);
-	var Share = __webpack_require__(1080);
-	var Stats = __webpack_require__(1081);
-	var Tags = __webpack_require__(1090);
-	var Thumbs = __webpack_require__(1085);
-	var Title = __webpack_require__(1095);
-	var Type = __webpack_require__(1096);
-	
-	var Drag = __webpack_require__(1099);
-	var Loader = __webpack_require__(1007);
-	
-	var Post = React.createClass({
+	var Post = _react2.default.createClass({
 		displayName: 'Post',
 	
-		mixins: [History],
+		mixins: [_reactRouter.History],
 		contextTypes: {
-			session: React.PropTypes.object,
-			route: React.PropTypes.object
+			session: _react2.default.PropTypes.object,
+			route: _react2.default.PropTypes.object
 		},
 		getInitialState: function getInitialState() {
 			return {
@@ -75811,7 +75864,7 @@
 		componentDidMount: function componentDidMount() {
 			var _this = this;
 	
-			this.unsubscribe = Store.listen(function (data) {
+			this.unsubscribe = _post4.default.listen(function (data) {
 				if (!_this.state.ready) {
 					_this.setState({ ready: true });
 				}
@@ -75861,18 +75914,18 @@
 			var type = this.context.route.type;
 			var owner = this._owner();
 			if (!this.state.ready) {
-				return React.createElement(
+				return _react2.default.createElement(
 					'div',
 					{ className: 'post' },
-					React.createElement(Loader, null)
+					_react2.default.createElement(_loader2.default, null)
 				);
 			}
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'post' },
-				type === 'create' ? React.createElement(Create, _extends({}, this.state, { owner: owner })) : false,
-				type === 'edit' ? React.createElement(Edit, _extends({}, this.state, { owner: owner })) : false,
-				type === 'post' ? React.createElement(Single, _extends({}, this.state, { owner: owner })) : false
+				type === 'create' ? _react2.default.createElement(Create, _extends({}, this.state, { owner: owner })) : false,
+				type === 'edit' ? _react2.default.createElement(Edit, _extends({}, this.state, { owner: owner })) : false,
+				type === 'post' ? _react2.default.createElement(Single, _extends({}, this.state, { owner: owner })) : false
 			);
 		},
 		_context: function _context(route) {
@@ -75880,10 +75933,10 @@
 			var id = route.id;
 			var type = route.type;
 			if (type === 'edit' || type === 'post') {
-				Actions.single(id);
+				_post2.default.single(id);
 			}
 			if (type === 'create') {
-				Actions.single('create');
+				_post2.default.single('create');
 			}
 			this.setState({ ready: false });
 		},
@@ -75899,57 +75952,57 @@
 		}
 	});
 	
-	var Create = React.createClass({
+	var Create = _react2.default.createClass({
 		displayName: 'Create',
 	
 		contextTypes: {
-			session: React.PropTypes.object
+			session: _react2.default.PropTypes.object
 		},
 		componentDidUpdate: function componentDidUpdate() {
-			TutorialActions.ready(true);
+			_tutorial2.default.ready(true);
 		},
 		render: function render() {
 			var session = this.context.session;
 	
 			// 401
 			if (!session.authenticated) {
-				return React.createElement(
+				return _react2.default.createElement(
 					'div',
 					{ className: 'create 401' },
-					React.createElement(
+					_react2.default.createElement(
 						'h2',
 						null,
 						'You need to login first to create posts'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'p',
 						null,
-						'Please log in or create an account if you\'d like create a post.'
+						'Please log in or create an account if you would like to create a post.'
 					)
 				);
 			}
 	
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'create' },
-				React.createElement('div', { className: 'toolbar' }),
-				React.createElement(ActionsView, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Type, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Title, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Content, { post: this.props.post, owner: this.props.owner })
+				_react2.default.createElement('div', { className: 'toolbar' }),
+				_react2.default.createElement(_actions2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_type2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_title2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_content2.default, { post: this.props.post, owner: this.props.owner })
 			);
 		}
 	});
 	
-	var Edit = React.createClass({
+	var Edit = _react2.default.createClass({
 		displayName: 'Edit',
 	
 		contextTypes: {
-			session: React.PropTypes.object
+			session: _react2.default.PropTypes.object
 		},
 		componentDidUpdate: function componentDidUpdate() {
 			if (this.props.owner) {
-				TutorialActions.ready(true);
+				_tutorial2.default.ready(true);
 			}
 		},
 		render: function render() {
@@ -75957,15 +76010,15 @@
 	
 			// 401
 			if (!session.authenticated) {
-				return React.createElement(
+				return _react2.default.createElement(
 					'div',
 					{ className: 'edit 401' },
-					React.createElement(
+					_react2.default.createElement(
 						'h2',
 						null,
 						'You need to login first to edit posts'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'p',
 						null,
 						'If you are the author or collaborator for this post, please make sure you are logged in.'
@@ -75975,15 +76028,15 @@
 	
 			// 403
 			if (!this.props.owner) {
-				return React.createElement(
+				return _react2.default.createElement(
 					'div',
 					{ className: 'edit 403' },
-					React.createElement(
+					_react2.default.createElement(
 						'h2',
 						null,
 						'You are not authorized to edit this post'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'p',
 						null,
 						'You must be the author or a collaborator to edit this post.'
@@ -75991,61 +76044,61 @@
 				);
 			}
 	
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'edit' },
-				React.createElement('div', { className: 'toolbar' }),
-				React.createElement(ActionsView, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Type, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Title, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Content, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Privacy, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Tags, { post: this.props.post, owner: this.props.owner, tag: this.props.tag }),
-				React.createElement(Links, { post: this.props.post, owner: this.props.owner })
+				_react2.default.createElement('div', { className: 'toolbar' }),
+				_react2.default.createElement(_actions2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_type2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_title2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_content2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_privacy2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_tags2.default, { post: this.props.post, owner: this.props.owner, tag: this.props.tag }),
+				_react2.default.createElement(_links2.default, { post: this.props.post, owner: this.props.owner })
 			);
 		}
 	});
 	
-	var Single = React.createClass({
+	var Single = _react2.default.createClass({
 		displayName: 'Single',
 	
 		componentDidMount: function componentDidMount() {
-			TutorialActions.ready(true);
+			_tutorial2.default.ready(true);
 		},
 		render: function render() {
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'single' },
-				React.createElement(ActionsView, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Type, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Privacy, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Title, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Tags, { post: this.props.post, owner: this.props.owner, tag: this.props.tag }),
-				React.createElement(Content, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Share, { post: this.props.post }),
-				React.createElement(Profile, { postMode: true }),
-				React.createElement(Stats, { post: this.props.post }),
-				React.createElement(Links, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Comments, { post: this.props.post })
+				_react2.default.createElement(_actions2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_type2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_privacy2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_title2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_tags2.default, { post: this.props.post, owner: this.props.owner, tag: this.props.tag }),
+				_react2.default.createElement(_content2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_share2.default, { post: this.props.post }),
+				_react2.default.createElement(_profile2.default, { postMode: true }),
+				_react2.default.createElement(_stats2.default, { post: this.props.post }),
+				_react2.default.createElement(_links2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_comments2.default, { post: this.props.post })
 			);
 		}
 	});
 	
-	Post.Item = React.createClass({
+	Post.Item = _react2.default.createClass({
 		displayName: 'Item',
 	
 		render: function render() {
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'postItem', id: 'post' + this.props.post.id },
-				React.createElement(Drag, { id: this.props.post.id }),
-				React.createElement(ActionsView, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Type, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Privacy, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Title, { post: this.props.post, owner: this.props.owner }),
-				React.createElement(Details, { post: this.props.post, owner: this.props.owner, user: this.props.user, location: this.props.location }),
-				React.createElement(Tags, { post: this.props.post, owner: this.props.owner, tag: this.props.tag }),
-				React.createElement(Stats, { post: this.props.post })
+				_react2.default.createElement(_drag2.default, { id: this.props.post.id }),
+				_react2.default.createElement(_actions2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_type2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_privacy2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_title2.default, { post: this.props.post, owner: this.props.owner }),
+				_react2.default.createElement(_details2.default, { post: this.props.post, owner: this.props.owner, user: this.props.user, location: this.props.location }),
+				_react2.default.createElement(_tags2.default, { post: this.props.post, owner: this.props.owner, tag: this.props.tag }),
+				_react2.default.createElement(_stats2.default, { post: this.props.post })
 			);
 		}
 	});
@@ -76060,63 +76113,36 @@
 /* 1046 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
+	'use strict';
 	
-	// load the styles
-	var content = __webpack_require__(1047);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(596)(content, {"sourcemap":true});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(true) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept(1047, function() {
-				var newContent = __webpack_require__(1047);
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 1047 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(595)();
-	// imports
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
+	var _react = __webpack_require__(330);
 	
-	// module
-	exports.push([module.id, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\n.actions {\n  float: right;\n}\n.actions button.save,\n.actions button.delete,\n.actions button.myposts,\n.actions button.rich {\n  height: 30px;\n  font-size: 0.8em;\n  width: 140px;\n  margin: 0;\n  padding: 4px;\n  display: inline-block;\n  margin-right: 10px;\n  height: 33px;\n  margin: 4px;\n  box-sizing: border-box;\n}\n.actions button.myposts {\n  width: 160px;\n}\n.actions button.rich {\n  width: 200px;\n}\n.actions button.close {\n  background: transparent;\n  background-color: #555;\n  border: none;\n  color: #fff;\n  float: right;\n  padding: 8px;\n  font-size: 1em;\n  margin-left: 10px;\n}\n.actions button.close:hover {\n  color: #f2c13d;\n  cursor: pointer;\n}\n.actions > a.edit {\n  display: block;\n  font-size: 0.6em;\n  float: right;\n  color: #777;\n  text-align: right;\n}\n.actions > a.edit:hover {\n  color: #5faee3;\n}\n.actions > a.edit i {\n  font-size: 1.5em;\n}\n.categories {\n  font-size: 0.8em;\n  text-transform: uppercase;\n  margin-bottom: 20px;\n}\n.categories select {\n  width: 40%;\n  margin-right: 20px;\n  max-width: 160px;\n  display: inline-block;\n}\n.collaborators {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  position: absolute;\n  bottom: 80px;\n}\ndiv.post .collaborators {\n  position: static;\n  margin-bottom: 20px;\n  border-bottom: solid 1px #eee;\n}\n.collaborator {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  font-size: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  color: #999;\n  margin-left: 4px;\n  display: inline-block;\n  margin-bottom: 4px;\n}\n.collaborator a {\n  color: #ccc;\n}\n.collaborator a:hover {\n  border-color: #5faee3;\n  color: #5faee3;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.collaborator a.remove {\n  border: none;\n  background: transparent;\n  display: inline-block;\n  font-size: 1em;\n  color: inherit;\n  margin-left: 10px;\n}\n.collaborator a.remove:hover {\n  color: #fc2727;\n  text-decoration: none;\n  cursor: pointer;\n}\n.collaboratorField {\n  position: relative;\n  display: inline-block;\n  margin-left: 10px;\n}\n.collaboratorField input {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  height: 40px;\n  font-size: 1.1em;\n  color: #333;\n  margin-left: 4px;\n  display: inline-block;\n}\n.collaboratorField button {\n  width: 60px;\n  height: 38px;\n  position: absolute;\n  -webkit-border-radius: 0 15px 15px 0;\n  -moz-border-radius: 0 15px 15px 0;\n  border-radius: 0 15px 15px 0;\n  font-size: 0.5em;\n  border: none;\n  background-color: #217dbb;\n  cursor: pointer;\n  color: #eee;\n  top: 1px;\n  right: 15px;\n}\n.collaboratorField button:hover {\n  background-color: #5faee3;\n}\n.comments .comment {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  font-size: 0.9em;\n  border-bottom: solid 1px #E4E5E6;\n  margin-bottom: 20px;\n}\n.comments .comment:before,\n.comments .comment:after {\n  content: \"\";\n  display: table;\n}\n.comments .comment:after {\n  clear: both;\n}\n.comments .comment .pic {\n  width: 16.66666667%;\n  display: inline-block;\n  vertical-align: top;\n}\n.comments .comment .pic a img {\n  width: 80%;\n}\n.comments .comment .content {\n  width: 83.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.comments .comment .content .date {\n  color: #aaa;\n  font-size: 1em;\n  font-style: italic;\n}\n.comments .create {\n  max-width: 96%;\n  width: 100%;\n  margin: 0 auto;\n  padding: 2%;\n  color: #eee;\n}\n.comments .create:before,\n.comments .create:after {\n  content: \"\";\n  display: table;\n}\n.comments .create:after {\n  clear: both;\n}\n.comments .create .pic {\n  width: 0%;\n  display: none;\n  vertical-align: top;\n}\n.comments .create .pic img {\n  margin: 0;\n  padding: 0;\n  width: 80%;\n}\n.comments .create textarea {\n  display: inline-block;\n  border: none;\n  height: 120px;\n  width: 100%;\n  background-color: #eee;\n}\n.comments .create button.button {\n  margin: 0;\n  padding: 0;\n}\n.details {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  padding: 10px;\n  box-sizing: border-box;\n}\n.details:before,\n.details:after {\n  content: \"\";\n  display: table;\n}\n.details:after {\n  clear: both;\n}\n.details .extra {\n  height: 220px;\n  overflow: hidden;\n  margin: 20px 0;\n}\n.details .extra.excerpt {\n  font-size: 0.9em;\n  font-style: italic;\n  color: #333;\n}\n.details .extra.excerpt > div {\n  max-height: 120px;\n  overflow: hidden;\n}\n.details .extra.event {\n  text-align: center;\n}\n.details .extra.event i {\n  margin-top: 10px;\n  font-size: 6em;\n}\n.details .extra.event .when {\n  font-size: 1.5em;\n  margin: 16px 0;\n}\n.details .extra.event .location {\n  font-weight: bold;\n}\n.details .pic {\n  width: 25%;\n  display: inline-block;\n  vertical-align: top;\n}\n.details .pic img {\n  width: 100%;\n  margin: 0%;\n  padding: 2%;\n  box-sizing: border-box;\n}\n.details .basic {\n  width: 75%;\n  display: inline-block;\n  vertical-align: top;\n  font-size: 0.9em;\n  line-height: 1.1em;\n}\n.details .basic .created {\n  font-size: 0.8em;\n  color: #bbb;\n}\n@media (min-width: 1000px) {\n  .details .pic {\n    width: 25%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .details .basic {\n    width: 75%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n@media (min-width: 1400px) {\n  .details .pic {\n    width: 16.66666667%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .details .basic {\n    width: 58.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\ndiv.post .interact {\n  position: static;\n  margin: 0 0 20px 0;\n  padding: 10px 0;\n}\n.interact {\n  border-top: solid 1px #eee;\n  border-bottom: solid 1px #eee;\n}\n.interact > div {\n  display: inline-block;\n  vertical-align: bottom;\n}\n.interact:hover {\n  cursor: pointer;\n}\n.interact .influence,\n.interact .popularity {\n  width: 60px;\n}\n.interact .popularity > div {\n  width: 60px;\n}\n.interact .stats {\n  width: 110px;\n  padding-bottom: 6px;\n}\n.interact i {\n  font-size: 1.5em;\n}\n@media (min-width: 1000px) {\n  div.posts .interact {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    border-top: dotted 3px #eee;\n    background: transparent;\n    max-width: 100%;\n    width: 100%;\n    margin: 0 auto;\n    text-align: left;\n  }\n  div.posts .interact:before,\n  div.posts .interact:after {\n    content: \"\";\n    display: table;\n  }\n  div.posts .interact:after {\n    clear: both;\n  }\n  div.posts .interact .influence {\n    display: inline-block;\n  }\n}\n.links {\n  width: 38%;\n  margin: 1%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #fff;\n  min-height: 300px;\n  padding: 20px;\n  box-sizing: border-box;\n}\n.links .fields {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #f7f7f7;\n  box-sizing: border-box;\n  padding: 20px;\n}\n.links .fields textarea {\n  border: solid 1px #DDD;\n  height: 160px;\n}\n.links .fields button {\n  width: 200px;\n  font-size: 2em;\n}\n.links .list {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div {\n  padding: 0 2%;\n  width: 100%;\n  box-sizing: border-box;\n  border-bottom: solid 1px rgba(95, 174, 227, 0.3);\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n}\n.links .list > div > div {\n  width: 91.66666667%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div > div.icon {\n  width: 8.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div > div.icon i {\n  font-size: 2em;\n  display: block;\n}\n.links .list > div > div.icon a.edit {\n  font-size: 1em;\n  display: block;\n  text-align: left;\n}\n.links .list > div a {\n  font-size: 1em;\n  line-height: 1em;\n  text-decoration: underline;\n}\n.links .list > div p {\n  font-size: 0.8em;\n  font-style: italic;\n  margin: 5px 0 0 0;\n  padding: 0;\n  line-height: 1.5em;\n}\n.links .list > div button.remove {\n  float: right;\n  border: none;\n  background: transparent;\n  cursor: pointer;\n}\n.links .list > div button.remove:hover {\n  color: #fc2727;\n}\n.privacy {\n  background-color: #fff;\n  box-sizing: border-box;\n  padding: 20px;\n  min-height: 300px;\n  width: 28%;\n  display: inline-block;\n  vertical-align: top;\n  margin: 1%;\n}\n.privacy input[type=radio] {\n  width: 20px;\n  display: inline;\n}\n.privacy label {\n  display: inline;\n}\n.privacy > div div.contexts,\n.privacy > div button {\n  display: inline-block;\n  vertical-align: middle;\n}\n.privacyToggle {\n  display: inline-block;\n  margin-left: 10px;\n  font-size: 0.9em;\n  color: #3498DB;\n}\n.privacyToggle:hover {\n  cursor: pointer;\n  color: #f2c13d;\n}\n.postItem .share div.toggle {\n  font-size: 0.9em;\n  padding: 10px;\n  color: #444;\n}\n.postItem .share div.toggle:hover {\n  color: #3498DB;\n  cursor: pointer;\n}\n.postItem .share div.toggle i.fa-share {\n  font-size: 2em;\n  margin-right: 10px;\n}\n.postItem .share ul {\n  margin: 0;\n  padding: 0;\n}\n.postItem .share ul li {\n  display: inline-block;\n  margin-right: 10px;\n  padding: 10px;\n}\n.postItem .share ul li:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\n.postItem .share ul li > i {\n  font-size: 1.5em;\n}\n.postItem .share ul li i.fa-close {\n  color: #ED0303;\n}\n.stats {\n  color: #999;\n  font-size: 0.8em;\n  text-align: left;\n  clear: right;\n}\n.stats div {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: center;\n  font-size: 10px;\n  color: #777;\n}\n.stats div strong {\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  font-size: 1.8em;\n}\n.tags {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  position: absolute;\n  bottom: 80px;\n  background-color: #fff;\n}\ndiv.post .tags {\n  position: static;\n  margin-bottom: 20px;\n  border-bottom: solid 1px #eee;\n}\n.edit .tags {\n  width: 24%;\n  margin: 1%;\n  padding: 20px;\n  box-sizing: border-box;\n  min-height: 300px;\n  display: inline-block;\n  vertical-align: top;\n}\n.tag {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  font-size: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  color: #999;\n  margin-left: 4px;\n  display: inline-block;\n  margin-bottom: 4px;\n}\n.tag a {\n  color: #555;\n}\n.tag a:hover {\n  border-color: #5faee3;\n  color: #5faee3;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.tag a.remove {\n  border: none;\n  background: transparent;\n  display: inline-block;\n  font-size: 1em;\n  color: inherit;\n  margin-left: 10px;\n}\n.tag a.remove:hover {\n  color: #fc2727;\n  text-decoration: none;\n  cursor: pointer;\n}\n.tagField {\n  position: relative;\n  display: inline-block;\n  margin-left: 10px;\n}\n.tagField input {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  height: 40px;\n  font-size: 1.1em;\n  color: #333;\n  margin-left: 4px;\n  display: inline-block;\n}\n.tagField button {\n  width: 60px;\n  height: 38px;\n  position: absolute;\n  -webkit-border-radius: 0 15px 15px 0;\n  -moz-border-radius: 0 15px 15px 0;\n  border-radius: 0 15px 15px 0;\n  font-size: 0.5em;\n  border: none;\n  background-color: #217dbb;\n  cursor: pointer;\n  color: #eee;\n  top: 1px;\n  right: 15px;\n}\n.tagField button:hover {\n  background-color: #5faee3;\n}\n.thumb button.button {\n  font-size: 0.7em;\n  height: 40px;\n  width: 120px;\n  display: inline-block;\n}\n.thumb button.button.up,\n.thumb button.button.down {\n  color: #333;\n}\n.thumb button.button:hover.up {\n  color: #9cd900;\n}\n.thumb button.button:hover.down {\n  color: #fc2727;\n}\n.thumb button.button.selected {\n  box-sizing: border-box;\n}\n.thumb button.button.selected.up {\n  color: #8ABF00;\n}\n.thumb button.button.selected.down {\n  color: #ED0303;\n}\n.thumb button.button i {\n  font-size: 3em;\n  opacity: 0.5;\n  float: left;\n}\n.thumb button.button .total {\n  font-size: 1.5em;\n  opacity: 0.9;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  display: block;\n  margin: 12px 2px 0 10px;\n  text-align: left;\n}\n.type {\n  font-size: 0.8em;\n  text-transform: capitalize;\n  -webkit-border-radius: 6px;\n  -moz-border-radius: 6px;\n  border-radius: 6px;\n  color: white;\n  padding: 4px;\n  text-align: center;\n  width: 100px;\n  background-color: #333;\n  margin: 4px 0;\n  cursor: pointer;\n  border: solid 1px transparent;\n}\n.type.blog,\n.type.event {\n  background-color: #8ABF00;\n  color: #fff;\n}\n.type.blog.inverted,\n.type.event.inverted {\n  background-color: #fafafa;\n  border: solid 1px #9cd900;\n  color: #9cd900;\n}\n.type.blog:hover,\n.type.event:hover {\n  background-color: #658c00;\n  color: #eee;\n}\n.type.subject,\n.type.question {\n  background-color: #3498DB;\n  color: #fff;\n}\n.type.subject.inverted,\n.type.question.inverted {\n  background-color: #fafafa;\n  border: solid 1px #5faee3;\n  color: #5faee3;\n}\n.type.subject:hover,\n.type.question:hover {\n  background-color: #217dbb;\n  color: #eee;\n}\n.type.debate,\n.type.poll {\n  background-color: #ED0303;\n  color: #fff;\n}\n.type.debate.inverted,\n.type.poll.inverted {\n  background-color: #fafafa;\n  border: solid 1px #fc2727;\n  color: #fc2727;\n}\n.type.debate:hover,\n.type.poll:hover {\n  background-color: #bb0202;\n  color: #eee;\n}\n.type.quote,\n.type.belief {\n  background-color: #ECB010;\n  color: #fff;\n}\n.type.quote.inverted,\n.type.belief.inverted {\n  background-color: #fafafa;\n  border: solid 1px #f2c13d;\n  color: #f2c13d;\n}\n.type.quote:hover,\n.type.belief:hover {\n  background-color: #bc8c0d;\n  color: #eee;\n}\n.selector {\n  position: absolute;\n  z-index: 99999;\n}\n#content > div.post {\n  margin: auto;\n  margin-top: 20px;\n  min-height: 600px;\n  background: transparent;\n  border: none;\n  /** HANDLE **/\n  /** TITLE **/\n  /** EDITOR **/\n}\n#content > div.post .edit,\n#content > div.post .create {\n  background: transparent;\n}\n#content > div.post .edit .toolbar,\n#content > div.post .create .toolbar {\n  background-color: #fff;\n  border-top: solid 1px #ddd;\n  border-bottom: solid 1px #ddd;\n  position: fixed;\n  top: 60px;\n  height: 40px;\n  width: 100%;\n  left: 0;\n}\n#content > div.post .edit .actions,\n#content > div.post .create .actions {\n  position: fixed;\n  top: 60px;\n  right: 0;\n}\n#content > div.post .single {\n  width: 96%;\n  padding: 2%;\n  margin: 0;\n  background-color: #fff;\n}\n#content > div.post .single .title {\n  font-size: 2em;\n}\n#content > div.post ul {\n  margin: 20px 0 0 0;\n  padding: 0;\n}\n#content > div.post ul li {\n  list-style: none;\n  font-size: 0.8em;\n  color: #444;\n  margin: 0;\n  padding: 0;\n  line-height: 1.4;\n}\n#content > div.post .handle {\n  float: right;\n  cursor: pointer;\n  color: #aaa;\n}\n#content > div.post .handle:hover {\n  color: #888;\n}\n#content > div.post .handle.dragging {\n  color: #8ABF00;\n}\n#content > div.post input.title {\n  width: 100%;\n  max-width: 100%;\n  min-width: 100%;\n}\n#content > div.post input.title.editing:hover,\n#content > div.post input.title.editing:focus {\n  border: solid 1px #3498DB;\n  background-color: #fdfdfd;\n}\n#content > div.post .title {\n  font-size: 1.5em;\n  line-height: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  font-weight: bold;\n  color: #1e2f40;\n  outline: none;\n  margin: 10px 0;\n  padding: 5px;\n}\n#content > div.post .title a {\n  color: #444;\n}\n#content > div.post .title a:hover {\n  color: #ECB010;\n}\n#content > div.post .rte {\n  margin-bottom: 40px;\n  padding-bottom: 20px;\n}\n#content > div.post .ql-editor,\n#content > div.post .ql-container {\n  height: initial;\n  min-height: initial;\n}\n#content > div.post div.ql-toolbar {\n  position: fixed;\n  top: 60px;\n  opacity: 1;\n}\n#content > div.post .quill-contents {\n  background-color: #fff;\n  border: solid 1px #ddd;\n}\n#content > div.post .quill-contents:hover,\n#content > div.post .quill-contents:focus {\n  border-color: #3498DB;\n}\n#content > div.post .ql-container {\n  position: static;\n  z-index: -1;\n}\n#content > div.post .content {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  overflow: hidden;\n}\n#content > div.post .content:before,\n#content > div.post .content:after {\n  content: \"\";\n  display: table;\n}\n#content > div.post .content:after {\n  clear: both;\n}\n#content > div.post .create textarea,\n#content > div.post .edit textarea {\n  min-height: 300px;\n  width: 100%;\n}\n", ""]);
+	var _react2 = _interopRequireDefault(_react);
 	
-	// exports
-
-
-/***/ },
-/* 1048 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
+	var _reactRouter = __webpack_require__(489);
 	
-	var React = __webpack_require__(330);
-	var Router = __webpack_require__(489);
-	var Link = Router.Link;
-	var History = Router.History;
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
 	
+	var _post2 = __webpack_require__(774);
 	
-	var Actions = __webpack_require__(774);
-	var Store = __webpack_require__(773);
+	var _post3 = _interopRequireDefault(_post2);
 	
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	var _post4 = __webpack_require__(773);
 	
-	  mixins: [History],
+	var _post5 = _interopRequireDefault(_post4);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'actions',
+	
+	  mixins: [_reactRouter.History],
 	  contextTypes: {
-	    route: React.PropTypes.object
+	    route: _react2.default.PropTypes.object
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -76128,13 +76154,13 @@
 	    };
 	  },
 	  render: function render() {
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'actions' },
-	      React.createElement(Close, { back: this._back }),
-	      React.createElement(Edit, { owner: this.props.owner, post: this.props.post }),
-	      React.createElement(Create, { back: this._back, post: this.props.post }),
-	      React.createElement(Controls, { owner: this.props.owner, post: this.props.post, myposts: this._myposts })
+	      _react2.default.createElement(Close, { back: this._back }),
+	      _react2.default.createElement(Edit, { owner: this.props.owner, post: this.props.post }),
+	      _react2.default.createElement(Create, { back: this._back, post: this.props.post }),
+	      _react2.default.createElement(Controls, { owner: this.props.owner, post: this.props.post, myposts: this._myposts })
 	    );
 	  },
 	  _back: function _back() {
@@ -76151,45 +76177,46 @@
 	  }
 	});
 	
-	var Rich = React.createClass({
+	
+	var Rich = _react2.default.createClass({
 	  displayName: 'Rich',
 	
 	  render: function render() {
-	    return this.props.post.rich ? false : React.createElement(
+	    return this.props.post.rich ? false : _react2.default.createElement(
 	      'button',
 	      { className: 'button gold rich', onClick: this._rich },
-	      React.createElement('i', { className: 'fa fa-font' }),
+	      _react2.default.createElement('i', { className: 'fa fa-font' }),
 	      ' Enable Rich Text'
 	    );
 	  },
 	  _rich: function _rich() {
-	    Actions.change('rich', 1);
+	    _post3.default.change('rich', 1);
 	  }
 	});
 	
-	var Close = React.createClass({
+	var Close = _react2.default.createClass({
 	  displayName: 'Close',
 	
 	  contextTypes: {
-	    route: React.PropTypes.object
+	    route: _react2.default.PropTypes.object
 	  },
 	  render: function render() {
 	    if (this.context.route.type !== 'post') {
 	      return false;
 	    }
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'button',
 	      { className: 'close', onClick: this.props.back },
-	      React.createElement('i', { className: 'fa fa-remove' })
+	      _react2.default.createElement('i', { className: 'fa fa-remove' })
 	    );
 	  }
 	});
 	
-	var Edit = React.createClass({
+	var Edit = _react2.default.createClass({
 	  displayName: 'Edit',
 	
 	  contextTypes: {
-	    route: React.PropTypes.object
+	    route: _react2.default.PropTypes.object
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -76208,21 +76235,21 @@
 	    if (post.user && post.user.username) {
 	      username = post.user.username;
 	    }
-	    return React.createElement(
-	      Link,
+	    return _react2.default.createElement(
+	      _reactRouter.Link,
 	      { to: '/' + username + '/' + post.slug + '/edit', className: 'edit' },
-	      React.createElement('i', { className: 'fa fa-pencil' }),
-	      React.createElement('br', null),
+	      _react2.default.createElement('i', { className: 'fa fa-pencil' }),
+	      _react2.default.createElement('br', null),
 	      'Edit'
 	    );
 	  }
 	});
 	
-	var Create = React.createClass({
+	var Create = _react2.default.createClass({
 	  displayName: 'Create',
 	
 	  contextTypes: {
-	    route: React.PropTypes.object
+	    route: _react2.default.PropTypes.object
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -76233,34 +76260,34 @@
 	    if (this.context.route.type !== 'create') {
 	      return false;
 	    }
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      React.createElement(Rich, { owner: this.props.owner, post: this.props.post }),
-	      React.createElement(
+	      _react2.default.createElement(Rich, { owner: this.props.owner, post: this.props.post }),
+	      _react2.default.createElement(
 	        'button',
 	        { className: 'button green save', onClick: this._post, disabled: this.props.saving },
-	        React.createElement('i', { className: 'fa fa-save' }),
+	        _react2.default.createElement('i', { className: 'fa fa-save' }),
 	        ' Post'
 	      ),
-	      React.createElement(
+	      _react2.default.createElement(
 	        'button',
 	        { className: 'button red delete inverted', onClick: this.props.back },
-	        React.createElement('i', { className: 'fa fa-close' }),
+	        _react2.default.createElement('i', { className: 'fa fa-close' }),
 	        ' Cancel'
 	      )
 	    );
 	  },
 	  _post: function _post() {
-	    Actions.add();
+	    _post3.default.add();
 	  }
 	});
 	
-	var Controls = React.createClass({
+	var Controls = _react2.default.createClass({
 	  displayName: 'Controls',
 	
 	  contextTypes: {
-	    route: React.PropTypes.object
+	    route: _react2.default.PropTypes.object
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
@@ -76282,52 +76309,52 @@
 	      return false;
 	    }
 	    if (this.state.confirmTrash) {
-	      return React.createElement(
+	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        React.createElement(
+	        _react2.default.createElement(
 	          'button',
 	          { className: 'button red delete', onClick: this._confirm, disabled: this.props.saving },
-	          React.createElement('i', { className: 'fa fa-trash' }),
+	          _react2.default.createElement('i', { className: 'fa fa-trash' }),
 	          ' Confirm Delete'
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'button',
 	          { className: 'button red delete inverted', onClick: this._cancel },
-	          React.createElement('i', { className: 'fa fa-remove' }),
+	          _react2.default.createElement('i', { className: 'fa fa-remove' }),
 	          ' Cancel Delete'
 	        )
 	      );
 	    }
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      React.createElement(Rich, { owner: this.props.owner, post: this.props.post }),
-	      React.createElement(
+	      _react2.default.createElement(Rich, { owner: this.props.owner, post: this.props.post }),
+	      _react2.default.createElement(
 	        'button',
 	        { className: 'button green save', onClick: this._update, disabled: this.props.saving },
-	        React.createElement('i', { className: 'fa fa-save' }),
+	        _react2.default.createElement('i', { className: 'fa fa-save' }),
 	        ' ',
 	        this.props.saving ? 'Saving' : 'Save Changes'
 	      ),
-	      React.createElement(
+	      _react2.default.createElement(
 	        'button',
 	        { className: 'button red delete inverted', onClick: this._trash },
-	        React.createElement('i', { className: 'fa fa-trash' }),
+	        _react2.default.createElement('i', { className: 'fa fa-trash' }),
 	        ' Delete'
 	      ),
-	      React.createElement(
+	      _react2.default.createElement(
 	        'button',
 	        { className: 'button blue myposts inverted', onClick: this.props.myposts },
-	        React.createElement('i', { className: 'fa fa-arrow-left' }),
+	        _react2.default.createElement('i', { className: 'fa fa-arrow-left' }),
 	        ' Back to My Posts'
 	      )
 	    );
 	  },
 	  _update: function _update() {
-	    Store.post.id = this.props.post.id;
+	    _post5.default.post.id = this.props.post.id;
 	    this.setState({ saving: true });
-	    Actions.save();
+	    _post3.default.save();
 	  },
 	  _trash: function _trash() {
 	    this.setState({ confirmTrash: true });
@@ -76336,35 +76363,52 @@
 	    this.setState({ confirmTrash: false });
 	  },
 	  _confirm: function _confirm() {
-	    Store.post.id = this.props.post.id;
-	    Actions.trash();
+	    _post5.default.post.id = this.props.post.id;
+	    _post3.default.trash();
 	  }
 	});
 
 /***/ },
-/* 1049 */
+/* 1047 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
-	var Router = __webpack_require__(489);
-	var Link = Router.Link;
-	var History = Router.History;
+	var _react = __webpack_require__(330);
 	
-	var moment = __webpack_require__(643);
-	var ga = __webpack_require__(487);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var Actions = __webpack_require__(1050);
-	var Store = __webpack_require__(1051);
+	var _reactRouter = __webpack_require__(489);
 	
-	var Pic = __webpack_require__(777);
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
 	
-	var Comments = React.createClass({
+	var _moment = __webpack_require__(643);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _analytics = __webpack_require__(487);
+	
+	var _analytics2 = _interopRequireDefault(_analytics);
+	
+	var _comments = __webpack_require__(1048);
+	
+	var _comments2 = _interopRequireDefault(_comments);
+	
+	var _comments3 = __webpack_require__(1049);
+	
+	var _comments4 = _interopRequireDefault(_comments3);
+	
+	var _pic = __webpack_require__(777);
+	
+	var _pic2 = _interopRequireDefault(_pic);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Comments = _react2.default.createClass({
 	  displayName: 'Comments',
 	
 	  contextTypes: {
-	    session: React.PropTypes.object
+	    session: _react2.default.PropTypes.object
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
@@ -76376,7 +76420,7 @@
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	
-	    this.unsubscribe = Store.listen(function (data) {
+	    this.unsubscribe = _comments4.default.listen(function (data) {
 	      if (_this.state.ready === false) {
 	        data.ready = true;
 	      }
@@ -76393,11 +76437,11 @@
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
 	    if (newProps.post && newProps.post.id) {
-	      Actions.collection({ postId: newProps.post.id });
+	      _comments2.default.collection({ postId: newProps.post.id });
 	    }
 	  },
 	  render: function render() {
-	    var create = React.createElement(
+	    var create = _react2.default.createElement(
 	      'h3',
 	      null,
 	      'You must be logged-in to comment'
@@ -76412,10 +76456,10 @@
 	    if (data && this.state.ready === true) {
 	      if (data.length > 0) {
 	        comments = data.map(function (item, i) {
-	          return React.createElement(Comments.Comment, { key: item.id, comment: item, user: item.user });
+	          return _react2.default.createElement(Comments.Comment, { key: item.id, comment: item, user: item.user });
 	        });
 	      } else {
-	        comments = React.createElement(
+	        comments = _react2.default.createElement(
 	          'h3',
 	          null,
 	          'This post does not have any comments. Be the first!'
@@ -76425,13 +76469,13 @@
 	      //comments = <Loader />
 	    }
 	    if (session.authenticated) {
-	      create = React.createElement(Comments.Create, { post: this.props.post });
+	      create = _react2.default.createElement(Comments.Create, { post: this.props.post });
 	    }
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'comments' },
 	      create,
-	      React.createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { className: 'list' },
 	        comments
@@ -76440,7 +76484,7 @@
 	  }
 	});
 	
-	Comments.Create = React.createClass({
+	Comments.Create = _react2.default.createClass({
 	  displayName: 'Create',
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -76454,23 +76498,23 @@
 	    };
 	  },
 	  render: function render() {
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'create' },
-	      React.createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { className: 'pic' },
-	        React.createElement(
-	          Link,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
 	          { to: '/account' },
-	          React.createElement('img', { src: "/assets/avatars/1.jpg" })
+	          _react2.default.createElement('img', { src: "/assets/avatars/1.jpg" })
 	        )
 	      ),
-	      React.createElement('textarea', { ref: 'comment', placeholder: 'Enter your comment here', value: this.state.content, onChange: this._content }),
-	      React.createElement(
+	      _react2.default.createElement('textarea', { ref: 'comment', placeholder: 'Enter your comment here', value: this.state.content, onChange: this._content }),
+	      _react2.default.createElement(
 	        'button',
 	        { className: 'button green add', onClick: this._add },
-	        React.createElement('i', { className: 'fa fa-comment' }),
+	        _react2.default.createElement('i', { className: 'fa fa-comment' }),
 	        ' Post Comment'
 	      )
 	    );
@@ -76479,9 +76523,9 @@
 	    var model = {};
 	    model.content = this.state.content;
 	    model.postId = this.props.post.id;
-	    Actions.add(model);
+	    _comments2.default.add(model);
 	    this.setState({ content: "" });
-	    ga('send', 'event', 'engagement', 'comment');
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'comment');
 	  },
 	  _content: function _content(e) {
 	    var value = e.currentTarget.value;
@@ -76489,10 +76533,10 @@
 	  }
 	});
 	
-	Comments.Comment = React.createClass({
+	Comments.Comment = _react2.default.createClass({
 	  displayName: 'Comment',
 	
-	  mixins: [History],
+	  mixins: [_reactRouter.History],
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      comment: {},
@@ -76524,32 +76568,32 @@
 	    </Link>
 	     }
 	    */
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'comment', id: this.props.comment.id },
-	      React.createElement(Pic, { id: user.id, img: user.img, name: user.username, type: 'user' }),
-	      React.createElement(
+	      _react2.default.createElement(_pic2.default, { id: user.id, img: user.img, name: user.username, type: 'user' }),
+	      _react2.default.createElement(
 	        'div',
 	        { className: 'content' },
-	        React.createElement(
-	          Link,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
 	          { to: '/' + this.props.user.username, className: 'username' },
 	          this.props.user.first,
 	          ' ',
 	          this.props.user.last
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'p',
 	          null,
 	          this.props.comment.content
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'span',
 	          { className: 'date' },
-	          moment(this.props.comment.createdAt).fromNow()
+	          (0, _moment2.default)(this.props.comment.createdAt).fromNow()
 	        )
 	      ),
-	      React.createElement('div', { className: 'actions' })
+	      _react2.default.createElement('div', { className: 'actions' })
 	    );
 	  }
 	});
@@ -76557,7 +76601,7 @@
 	module.exports = Comments;
 
 /***/ },
-/* 1050 */
+/* 1048 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -76572,16 +76616,16 @@
 	};
 
 /***/ },
-/* 1051 */
+/* 1049 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var Reflux = __webpack_require__(622);
 	
-	var Actions = __webpack_require__(1050);
+	var Actions = __webpack_require__(1048);
 	
-	var comments = __webpack_require__(1052);
+	var comments = __webpack_require__(1050);
 	
 	module.exports = Reflux.createStore({
 	  init: function init() {
@@ -76658,13 +76702,13 @@
 	});
 
 /***/ },
-/* 1052 */
+/* 1050 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var type = 'sockets';
-	var comments = __webpack_require__(1053);
+	var comments = __webpack_require__(1051);
 	
 	module.exports = {
 	  collection: comments.collection,
@@ -76674,7 +76718,7 @@
 	};
 
 /***/ },
-/* 1053 */
+/* 1051 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76705,23 +76749,30 @@
 	};
 
 /***/ },
-/* 1054 */
+/* 1052 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
-	var RTE = __webpack_require__(1055);
-	//let ReactMarkdown = require('react-markdown');
-	//<ReactMarkdown source={this.props.post.content} />
+	var _react = __webpack_require__(330);
 	
-	var Actions = __webpack_require__(774);
+	var _react2 = _interopRequireDefault(_react);
 	
-	module.exports = React.createClass({
+	var _reactQuill = __webpack_require__(1053);
+	
+	var _reactQuill2 = _interopRequireDefault(_reactQuill);
+	
+	var _post = __webpack_require__(774);
+	
+	var _post2 = _interopRequireDefault(_post);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	module.exports = _react2.default.createClass({
 		displayName: 'exports',
 	
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		getDefaultProps: function getDefaultProps() {
 			return {
@@ -76733,20 +76784,22 @@
 			var route = this.context.route;
 			var type = route.type;
 			if (!this.props.post.rich) {
-				return type === 'edit' && this.props.owner || type === 'create' ? React.createElement('textarea', { onChange: this._content, value: this.props.post.content }) : React.createElement(
+				return type === 'edit' && this.props.owner || type === 'create' ? _react2.default.createElement('textarea', { onChange: this._content, value: this.props.post.content }) : _react2.default.createElement(
 					'div',
 					{ className: 'content' },
 					this.props.post.content
 				);
 			}
-			return type === 'edit' && this.props.owner || type === 'create' ? React.createElement(TextEditor, { post: this.props.post }) : React.createElement('div', { className: 'content', dangerouslySetInnerHTML: { __html: this.props.post.content } });
+			return type === 'edit' && this.props.owner || type === 'create' ? _react2.default.createElement(TextEditor, { post: this.props.post }) : _react2.default.createElement('div', { className: 'content', dangerouslySetInnerHTML: { __html: this.props.post.content } });
 		},
 		_content: function _content(e) {
-			Actions.change('content', e.currentTarget.value);
+			_post2.default.change('content', e.currentTarget.value);
 		}
 	});
+	//import ReactMarkdown from 'react-markdown'
+	//<ReactMarkdown source={this.props.post.content} />
 	
-	var TextEditor = React.createClass({
+	var TextEditor = _react2.default.createClass({
 		displayName: 'TextEditor',
 	
 		render: function render() {
@@ -76754,39 +76807,39 @@
 				return false;
 			}
 			var content = this.props.post.content || "Enter content here";
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'rte' },
-				React.createElement(RTE, { ref: 'content', value: content, onChange: this._content, theme: 'snow' })
+				_react2.default.createElement(_reactQuill2.default, { ref: 'content', value: content, onChange: this._content, theme: 'snow' })
 			);
 		},
 		_content: function _content(value) {
-			Actions.change('content', value);
+			_post2.default.change('content', value);
 		}
 	});
 
 /***/ },
-/* 1055 */
+/* 1053 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
 	React-Quill v0.3.0
 	https://github.com/zenoamaro/react-quill
 	*/
-	module.exports = __webpack_require__(1056);
-	module.exports.Mixin = __webpack_require__(1058);
-	module.exports.Toolbar = __webpack_require__(1057);
+	module.exports = __webpack_require__(1054);
+	module.exports.Mixin = __webpack_require__(1056);
+	module.exports.Toolbar = __webpack_require__(1055);
 
 
 /***/ },
-/* 1056 */
+/* 1054 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(330),
-		QuillToolbar = __webpack_require__(1057),
-		QuillMixin = __webpack_require__(1058),
+		QuillToolbar = __webpack_require__(1055),
+		QuillMixin = __webpack_require__(1056),
 		T = React.PropTypes;
 	
 	// Support React 0.11 and 0.12
@@ -77084,7 +77137,7 @@
 
 
 /***/ },
-/* 1057 */
+/* 1055 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77245,12 +77298,12 @@
 	QuillToolbar.defaultColors = defaultColors;
 
 /***/ },
-/* 1058 */
+/* 1056 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Quill = __webpack_require__(1059);
+	var Quill = __webpack_require__(1057);
 	
 	var QuillMixin = {
 	
@@ -77314,14 +77367,14 @@
 
 
 /***/ },
-/* 1059 */
+/* 1057 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1060);
+	module.exports = __webpack_require__(1058);
 
 
 /***/ },
-/* 1060 */
+/* 1058 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var require;/* WEBPACK VAR INJECTION */(function(global) {/*! Quill Editor v0.20.1
@@ -88076,23 +88129,38 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 1061 */
+/* 1059 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
-	var Router = __webpack_require__(489);
-	var Link = Router.Link;
+	var _react = __webpack_require__(330);
 	
-	var moment = __webpack_require__(643);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var util = __webpack_require__(619);
+	var _reactRouter = __webpack_require__(489);
 	
-	var Pic = __webpack_require__(777);
-	var Poll = __webpack_require__(1062);
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
 	
-	module.exports = React.createClass({
+	var _moment = __webpack_require__(643);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _util = __webpack_require__(619);
+	
+	var _util2 = _interopRequireDefault(_util);
+	
+	var _pic = __webpack_require__(777);
+	
+	var _pic2 = _interopRequireDefault(_pic);
+	
+	var _poll = __webpack_require__(1060);
+	
+	var _poll2 = _interopRequireDefault(_poll);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	module.exports = _react2.default.createClass({
 		displayName: 'exports',
 	
 		getDefaultProps: function getDefaultProps() {
@@ -88123,33 +88191,33 @@
 			if (this.props.post.org && this.props.post.org.id && this.props.post.org.id != 0) {
 				org = this.props.post.org;
 				profileName = org.shortname;
-				link = util.createOrgLink(profileName);
+				link = _util2.default.createOrgLink(profileName);
 				context = 'org';
 			}
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'details' },
-				React.createElement(Pic, { id: context === 'org' ? org.shortname : this.props.user.username, img: context === 'org' ? org.img : this.props.user.img, type: context, name: profileName }),
-				React.createElement(
+				_react2.default.createElement(_pic2.default, { id: context === 'org' ? org.shortname : this.props.user.username, img: context === 'org' ? org.img : this.props.user.img, type: context, name: profileName }),
+				_react2.default.createElement(
 					'div',
 					{ className: 'basic' },
-					context === 'org' ? React.createElement(
+					context === 'org' ? _react2.default.createElement(
 						'div',
 						null,
-						React.createElement(
+						_react2.default.createElement(
 							'a',
 							{ href: link },
 							org.name
 						),
-						React.createElement('br', null),
-						React.createElement('br', null)
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('br', null)
 					) : false,
-					React.createElement(
+					_react2.default.createElement(
 						'span',
 						null,
 						'By ',
-						React.createElement(
-							Link,
+						_react2.default.createElement(
+							_reactRouter.Link,
 							{ to: '/' + this.props.user.username },
 							this.props.user.first,
 							' ',
@@ -88158,7 +88226,7 @@
 						)
 					),
 					'•',
-					React.createElement(
+					_react2.default.createElement(
 						'span',
 						{ className: 'location' },
 						' ',
@@ -88166,40 +88234,40 @@
 						', ',
 						this.props.location.state
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'div',
 						{ className: 'created' },
-						moment(this.props.post.createdAt).fromNow()
+						(0, _moment2.default)(this.props.post.createdAt).fromNow()
 					)
 				),
-				React.createElement(Extra, { post: this.props.post })
+				_react2.default.createElement(Extra, { post: this.props.post })
 			);
 		}
 	});
 	
-	var Extra = React.createClass({
+	var Extra = _react2.default.createClass({
 		displayName: 'Extra',
 	
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		render: function render() {
 			return false;
 			var type = this.props.post.type;
 	
 			if (type === 'poll') {
-				return React.createElement(Poll, this.props);
+				return _react2.default.createElement(_poll2.default, this.props);
 			} else if (type === 'event') {
-				return React.createElement(
+				return _react2.default.createElement(
 					'div',
 					{ className: 'extra event' },
-					React.createElement('i', { className: 'fa fa-calendar' }),
-					this.props.post.when && moment(this.props.post.when).format() !== 'Invalid date' ? React.createElement(
+					_react2.default.createElement('i', { className: 'fa fa-calendar' }),
+					this.props.post.when && (0, _moment2.default)(this.props.post.when).format() !== 'Invalid date' ? _react2.default.createElement(
 						'div',
 						{ className: 'when' },
-						moment(this.props.post.when).format('MMMM Do @ h:mm a')
+						(0, _moment2.default)(this.props.post.when).format('MMMM Do @ h:mm a')
 					) : false,
-					this.props.post.location ? React.createElement(
+					this.props.post.location ? _react2.default.createElement(
 						'div',
 						{ className: 'location' },
 						this.props.post.location
@@ -88210,10 +88278,10 @@
 				if (this.props.post && this.props.post.content) {
 					excerpt = this.props.post.content.replace(/(<([^>]+)>)/ig, "");
 				}
-				return React.createElement(
+				return _react2.default.createElement(
 					'div',
 					{ className: 'extra excerpt' },
-					React.createElement(
+					_react2.default.createElement(
 						'div',
 						null,
 						excerpt
@@ -88226,17 +88294,30 @@
 	});
 
 /***/ },
-/* 1062 */
+/* 1060 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	var Actions = __webpack_require__(774);
-	var Store = __webpack_require__(773);
+	var _react = __webpack_require__(330);
 	
-	var Poll = React.createClass({
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _post = __webpack_require__(774);
+	
+	var _post2 = _interopRequireDefault(_post);
+	
+	var _post3 = __webpack_require__(773);
+	
+	var _post4 = _interopRequireDefault(_post3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Poll = _react2.default.createClass({
 	  displayName: 'Poll',
 	
 	  getInitialState: function getInitialState() {
@@ -88254,12 +88335,12 @@
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	
-	    this.unsubscribe = Store.listen(function (data) {
+	    this.unsubscribe = _post4.default.listen(function (data) {
 	      if (data.votes && data.postId === _this.props.post.id) {
 	        _this.setState({ votes: data.votes });
 	      }
 	    });
-	    Actions.poll(this.props.post.id);
+	    _post2.default.poll(this.props.post.id);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    this.unsubscribe();
@@ -88270,17 +88351,17 @@
 	    setTimeout(function () {
 	      _this2._draw();
 	    }, 1);
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'extra poll' },
-	      React.createElement('div', { id: "poll" + this.props.post.id })
+	      _react2.default.createElement('div', { id: "poll" + this.props.post.id })
 	    );
 	  },
 	  _vote: function _vote(option) {
 	    if (this.state.selected === option) {
-	      Actions.vote(this.props.post.id, null);
+	      _post2.default.vote(this.props.post.id, null);
 	    } else {
-	      Actions.vote(this.props.post.id, option);
+	      _post2.default.vote(this.props.post.id, option);
 	    }
 	  },
 	  _draw: function _draw() {
@@ -88369,34 +88450,43 @@
 	  }
 	});
 	
-	module.exports = Poll;
+	exports.default = Poll;
 
 /***/ },
-/* 1063 */
+/* 1061 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var React = __webpack_require__(330);
+	var _react = __webpack_require__(330);
 	
-	var Actions = __webpack_require__(1064);
-	var Store = __webpack_require__(1065);
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _links = __webpack_require__(1062);
+	
+	var _links2 = _interopRequireDefault(_links);
+	
+	var _links3 = __webpack_require__(1063);
+	
+	var _links4 = _interopRequireDefault(_links3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// Isomorphic support?
-	//let File = require('react-dropzone-component');
+	//let File from 'react-dropzone-component');
 	
-	//let AWS = require('aws-sdk');
+	//let AWS from 'aws-sdk');
 	// AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});
 	// let S3 = AWS.S3;
 	// let s3 = new S3();
 	
-	var Links = React.createClass({
+	var Links = _react2.default.createClass({
 		displayName: 'Links',
 	
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		getDefaultProps: function getDefaultProps() {
 			return {
@@ -88414,7 +88504,7 @@
 		componentDidMount: function componentDidMount() {
 			var _this = this;
 	
-			this.unsubscribe = Store.listen(function (data) {
+			this.unsubscribe = _links4.default.listen(function (data) {
 				var links = _this.state.post.links;
 				if (data.added) {
 					links.push(data.added);
@@ -88450,21 +88540,21 @@
 		render: function render() {
 			var route = this.context.route;
 			var type = route.type;
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'links' },
-				type === 'edit' ? React.createElement(
+				type === 'edit' ? _react2.default.createElement(
 					'h2',
 					null,
 					'Links & Attachments'
 				) : false,
-				type === 'edit' && this.props.owner && this.state.mode !== 'edit' && this.state.mode !== 'add' ? React.createElement(
+				type === 'edit' && this.props.owner && this.state.mode !== 'edit' && this.state.mode !== 'add' ? _react2.default.createElement(
 					'button',
 					{ className: 'green button', onClick: this._add },
 					'Add Link'
 				) : false,
-				type === 'edit' && this.props.owner && (this.state.mode === 'edit' || this.state.mode === 'add') ? React.createElement(Links.Edit, _extends({}, this.state, { edit: this._edit, hide: this._hide })) : false,
-				React.createElement(Links.List, _extends({}, this.state, { owner: this.props.owner, edit: this._edit }))
+				type === 'edit' && this.props.owner && (this.state.mode === 'edit' || this.state.mode === 'add') ? _react2.default.createElement(Links.Edit, _extends({}, this.state, { edit: this._edit, hide: this._hide })) : false,
+				_react2.default.createElement(Links.List, _extends({}, this.state, { owner: this.props.owner, edit: this._edit }))
 			);
 		},
 		_add: function _add() {
@@ -88481,20 +88571,20 @@
 		}
 	});
 	
-	Links.List = React.createClass({
+	Links.List = _react2.default.createClass({
 		displayName: 'List',
 	
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		render: function render() {
 			var _this2 = this;
 	
 			var links = this.props.post.links || [];
 			if (links.length < 1) {
-				return React.createElement('div', { className: 'list' });
+				return _react2.default.createElement('div', { className: 'list' });
 			}
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'list' },
 				links.map(function (item, index) {
@@ -88504,46 +88594,46 @@
 						icon = 'fa fa-file' + _this2._icon(ext) + '-o';
 					}
 	
-					return React.createElement(
+					return _react2.default.createElement(
 						'div',
 						{ className: 'link', key: item.id },
-						React.createElement(
+						_react2.default.createElement(
 							'div',
 							{ className: 'icon' },
-							React.createElement('i', { className: icon }),
-							_this2.context.route.type === 'edit' && _this2.props.owner ? React.createElement(
+							_react2.default.createElement('i', { className: icon }),
+							_this2.context.route.type === 'edit' && _this2.props.owner ? _react2.default.createElement(
 								'a',
 								{ id: index, href: 'javascript:void(0)', className: 'edit', onClick: _this2.props.edit },
 								'Edit'
 							) : false
 						),
-						React.createElement(
+						_react2.default.createElement(
 							'div',
 							null,
-							_this2.context.route.type === 'edit' && _this2.props.owner ? React.createElement(
+							_this2.context.route.type === 'edit' && _this2.props.owner ? _react2.default.createElement(
 								'button',
 								{ id: item.id, className: 'remove', onClick: _this2._remove },
 								'X'
 							) : false,
-							React.createElement(
+							_react2.default.createElement(
 								'a',
 								{ href: item.url, target: '_blank' },
 								item.title
 							),
-							React.createElement(
+							_react2.default.createElement(
 								'p',
 								null,
 								item.caption
 							)
 						),
-						React.createElement('div', { style: { clear: 'both' } })
+						_react2.default.createElement('div', { style: { clear: 'both' } })
 					);
 				})
 			);
 		},
 		_remove: function _remove(e) {
 			var id = e.currentTarget.id;
-			Actions.remove(id);
+			_links2.default.remove(id);
 		},
 		_icon: function _icon(ext) {
 			var out = '';
@@ -88568,7 +88658,7 @@
 		}
 	});
 	
-	Links.Edit = React.createClass({
+	Links.Edit = _react2.default.createClass({
 		displayName: 'Edit',
 	
 		getDefaultProps: function getDefaultProps() {
@@ -88588,7 +88678,7 @@
 		componentDidMount: function componentDidMount() {
 			var _this3 = this;
 	
-			this.unsubscribe = Store.listen(function (data) {
+			this.unsubscribe = _links4.default.listen(function (data) {
 				_this3.setState(data);
 			});
 			this.setState(this.props);
@@ -88602,13 +88692,13 @@
 			}
 		},
 		render: function render() {
-			var button = React.createElement(
+			var button = _react2.default.createElement(
 				'button',
 				{ onClick: this._add, className: 'button green small add' },
 				'Add Link'
 			);
 			if (this.state.mode === 'edit') {
-				button = React.createElement(
+				button = _react2.default.createElement(
 					'button',
 					{ onClick: this._save, className: 'button green small edit' },
 					'Save Changes'
@@ -88621,36 +88711,36 @@
 			};
 			// <Links.Upload />
 			// <button className="button blue"><i className="fa fa-dropbox" /> DropBox</button>
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'fields' },
-				React.createElement(
+				_react2.default.createElement(
 					'label',
 					null,
 					'Link Title:',
-					React.createElement('br', null),
-					React.createElement('input', { type: 'text', onChange: this._changeTitle, value: this.state.title, placeholder: 'enter title' })
+					_react2.default.createElement('br', null),
+					_react2.default.createElement('input', { type: 'text', onChange: this._changeTitle, value: this.state.title, placeholder: 'enter title' })
 				),
-				React.createElement(
+				_react2.default.createElement(
 					'label',
 					{ className: 'upload' },
 					'Link URL/Upload:',
-					React.createElement('input', { type: 'text', onChange: this._changeURL, value: this.state.url, placeholder: 'enter URL or upload' })
+					_react2.default.createElement('input', { type: 'text', onChange: this._changeURL, value: this.state.url, placeholder: 'enter URL or upload' })
 				),
-				React.createElement(
+				_react2.default.createElement(
 					'label',
 					null,
 					'Caption:',
-					React.createElement('textarea', { type: 'text', onChange: this._changeCaption, placeholder: 'enter short description', value: this.state.caption })
+					_react2.default.createElement('textarea', { type: 'text', onChange: this._changeCaption, placeholder: 'enter short description', value: this.state.caption })
 				),
-				this.state.code ? React.createElement(
+				this.state.code ? _react2.default.createElement(
 					'div',
 					{ className: 'message red', onClick: this._clear },
 					'There was an error ',
 					errors[this.state.action]
 				) : false,
 				button,
-				React.createElement(
+				_react2.default.createElement(
 					'button',
 					{ className: 'button red', onClick: this.props.hide },
 					'Cancel'
@@ -88663,7 +88753,7 @@
 			model.url = this.state.url;
 			model.caption = this.state.caption;
 			model.postId = this.props.post.id;
-			Actions.add(model);
+			_links2.default.add(model);
 			this._clear();
 		},
 		_save: function _save() {
@@ -88671,7 +88761,7 @@
 			link.title = this.state.title;
 			link.url = this.state.url;
 			link.caption = this.state.caption;
-			Actions.save(this.state.id, link);
+			_links2.default.save(this.state.id, link);
 			this._clear();
 		},
 		_changeTitle: function _changeTitle(e) {
@@ -88692,11 +88782,11 @@
 		}
 	});
 	
-	Links.Upload = React.createClass({
+	Links.Upload = _react2.default.createClass({
 		displayName: 'Upload',
 	
 		render: function render() {
-			return React.createElement(
+			return _react2.default.createElement(
 				File,
 				{ className: 'button blue', config: this.config, eventHandlers: this.handlers },
 				'Click or drag files here'
@@ -88756,7 +88846,7 @@
 	module.exports = Links;
 
 /***/ },
-/* 1064 */
+/* 1062 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -88770,16 +88860,16 @@
 	};
 
 /***/ },
-/* 1065 */
+/* 1063 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var Reflux = __webpack_require__(622);
 	
-	var Actions = __webpack_require__(1064);
+	var Actions = __webpack_require__(1062);
 	
-	var links = __webpack_require__(1066);
+	var links = __webpack_require__(1064);
 	
 	module.exports = Reflux.createStore({
 	  init: function init() {
@@ -88841,13 +88931,13 @@
 	});
 
 /***/ },
-/* 1066 */
+/* 1064 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var type = 'sockets';
-	var links = __webpack_require__(1067);
+	var links = __webpack_require__(1065);
 	
 	module.exports = {
 	  collection: links.collection,
@@ -88857,7 +88947,7 @@
 	};
 
 /***/ },
-/* 1067 */
+/* 1065 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88881,30 +88971,48 @@
 	};
 
 /***/ },
-/* 1068 */
+/* 1066 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var React = __webpack_require__(330);
-	var Router = __webpack_require__(489);
-	var History = Router.History;
+	var _react = __webpack_require__(330);
 	
+	var _react2 = _interopRequireDefault(_react);
 	
-	var Store = __webpack_require__(1069);
-	var Actions = __webpack_require__(1070);
+	var _reactRouter = __webpack_require__(489);
 	
-	var PostActions = __webpack_require__(774);
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
 	
-	var Select = __webpack_require__(1073);
+	var _collaborators = __webpack_require__(1067);
 	
-	module.exports = React.createClass({
-		displayName: 'exports',
+	var _collaborators2 = _interopRequireDefault(_collaborators);
+	
+	var _collaborators3 = __webpack_require__(1068);
+	
+	var _collaborators4 = _interopRequireDefault(_collaborators3);
+	
+	var _post = __webpack_require__(774);
+	
+	var _post2 = _interopRequireDefault(_post);
+	
+	var _reactSelect = __webpack_require__(1071);
+	
+	var _reactSelect2 = _interopRequireDefault(_reactSelect);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+		displayName: 'privacy',
 	
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		getDefaultProps: function getDefaultProps() {
 			return {
@@ -88932,56 +89040,56 @@
 			};
 			classes[privacy] = "button blue";
 			if (this.context.route.type !== 'edit') {
-				return React.createElement('i', { className: icons[privacy] });
+				return _react2.default.createElement('i', { className: icons[privacy] });
 			}
 	
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'privacy' },
-				this.props.owner && this.context.route.type === 'edit' && this.state.privacy ? React.createElement(
+				this.props.owner && this.context.route.type === 'edit' && this.state.privacy ? _react2.default.createElement(
 					'div',
 					null,
-					React.createElement(
+					_react2.default.createElement(
 						'h2',
 						null,
 						'Privacy',
-						this.props.owner && this.context.route.type === 'IGNORE' ? React.createElement(
+						this.props.owner && this.context.route.type === 'IGNORE' ? _react2.default.createElement(
 							'div',
 							{ className: 'privacyToggle', onClick: this._privacy },
-							React.createElement('i', { className: icons[privacy] }),
+							_react2.default.createElement('i', { className: icons[privacy] }),
 							' ',
-							React.createElement(
+							_react2.default.createElement(
 								'span',
 								{ style: { textDecoration: 'underline' } },
 								this.props.post.privacy
 							)
 						) : false
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'div',
 						null,
-						React.createElement(Contexts, this.props),
-						React.createElement('input', { type: 'radio', onClick: this._private, checked: privacy === 'private' }),
-						React.createElement(
+						_react2.default.createElement(Contexts, this.props),
+						_react2.default.createElement('input', { type: 'radio', onClick: this._private, checked: privacy === 'private' }),
+						_react2.default.createElement(
 							'label',
 							null,
 							'Private'
 						),
-						React.createElement('br', null),
-						React.createElement('input', { type: 'radio', onClick: this._public, checked: privacy === 'public' }),
-						React.createElement(
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'radio', onClick: this._public, checked: privacy === 'public' }),
+						_react2.default.createElement(
 							'label',
 							null,
 							'Public'
 						),
-						React.createElement('br', null),
-						React.createElement('input', { type: 'radio', onClick: this._members, checked: privacy === 'members' }),
-						React.createElement(
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('input', { type: 'radio', onClick: this._members, checked: privacy === 'members' }),
+						_react2.default.createElement(
 							'label',
 							null,
 							'Internal'
 						),
-						this.props.post.orgId && this.props.post.orgId !== 'null' ? React.createElement(Collaborators, _extends({}, this.props, { s: true })) : false
+						this.props.post.orgId && this.props.post.orgId !== 'null' ? _react2.default.createElement(Collaborators, _extends({}, this.props, { s: true })) : false
 					)
 				) : false
 			);
@@ -88990,33 +89098,34 @@
 			this.setState({ privacy: !this.state.privacy });
 		},
 		_private: function _private(e) {
-			PostActions.change('privacy', 'private');
+			_post2.default.change('privacy', 'private');
 		},
 		_members: function _members(e) {
-			PostActions.change('privacy', 'members');
+			_post2.default.change('privacy', 'members');
 		},
 		_public: function _public(e) {
-			PostActions.change('privacy', 'public');
+			_post2.default.change('privacy', 'public');
 		}
 	});
 	
-	var Contexts = React.createClass({
+	
+	var Contexts = _react2.default.createClass({
 		displayName: 'Contexts',
 	
-		mixins: [History],
+		mixins: [_reactRouter.History],
 		contextTypes: {
-			session: React.PropTypes.object
+			session: _react2.default.PropTypes.object
 		},
 		render: function render() {
 			var session = this.context.session;
 			var orgs = session.orgs || [];
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'contexts' },
-				React.createElement(
+				_react2.default.createElement(
 					'select',
 					{ onChange: this._select, value: this.props.post.orgId },
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'null' },
 						'Post on my behalf'
@@ -89025,7 +89134,7 @@
 						if (item.approved !== true) {
 							return false;
 						}
-						return React.createElement(
+						return _react2.default.createElement(
 							'option',
 							{ value: item.org.id },
 							item.org.name
@@ -89035,11 +89144,11 @@
 			);
 		},
 		_select: function _select(e) {
-			PostActions.change('orgId', e.currentTarget.value);
+			_post2.default.change('orgId', e.currentTarget.value);
 		}
 	});
 	
-	var Collaborators = React.createClass({
+	var Collaborators = _react2.default.createClass({
 		displayName: 'Collaborators',
 	
 		getDefaultProps: function getDefaultProps() {
@@ -89056,15 +89165,15 @@
 		componentDidMount: function componentDidMount() {
 			var _this = this;
 	
-			this.unsubscribe = Store.listen(function (data) {
+			this.unsubscribe = _collaborators2.default.listen(function (data) {
 				_this.setState(data);
 			});
-			Actions.collection(this.props.post.id);
-			Actions.lookup(this.props.post.orgId);
+			_collaborators4.default.collection(this.props.post.id);
+			_collaborators4.default.lookup(this.props.post.orgId);
 		},
 		componentWillReceiveProps: function componentWillReceiveProps(updated) {
 			if (updated.post && updated.post.orgId) {
-				Actions.lookup(updated.post.orgId);
+				_collaborators4.default.lookup(updated.post.orgId);
 			}
 		},
 		componentWillUnmount: function componentWillUnmount() {
@@ -89073,16 +89182,16 @@
 		render: function render() {
 			var lookup = this._lookup();
 			var list = this._values();
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'collaborators' },
-				React.createElement(
+				_react2.default.createElement(
 					'strong',
 					null,
 					'Collaborators'
 				),
-				React.createElement('br', null),
-				React.createElement(Select, {
+				_react2.default.createElement('br', null),
+				_react2.default.createElement(_reactSelect2.default, {
 					allowCreate: false,
 					delimiter: '|',
 					value: list,
@@ -89112,10 +89221,10 @@
 				} else {
 					return;
 				}
-				Actions.add(model);
+				_collaborators4.default.add(model);
 			}
 			if (diff.action === 'remove') {
-				Actions.remove(diff.type, diff.id);
+				_collaborators4.default.remove(diff.type, diff.id);
 			}
 		},
 		_diff: function _diff(updated, current) {
@@ -89181,16 +89290,16 @@
 	});
 
 /***/ },
-/* 1069 */
+/* 1067 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var Reflux = __webpack_require__(622);
 	
-	var Actions = __webpack_require__(1070);
+	var Actions = __webpack_require__(1068);
 	
-	var collaborators = __webpack_require__(1071);
+	var collaborators = __webpack_require__(1069);
 	
 	module.exports = Reflux.createStore({
 	  init: function init() {
@@ -89270,7 +89379,7 @@
 	});
 
 /***/ },
-/* 1070 */
+/* 1068 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -89285,12 +89394,12 @@
 	};
 
 /***/ },
-/* 1071 */
+/* 1069 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var collaborators = __webpack_require__(1072);
+	var collaborators = __webpack_require__(1070);
 	
 	module.exports = {
 	  collection: collaborators.collection,
@@ -89300,7 +89409,7 @@
 	};
 
 /***/ },
-/* 1072 */
+/* 1070 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89324,7 +89433,7 @@
 	};
 
 /***/ },
-/* 1073 */
+/* 1071 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89345,27 +89454,27 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactInputAutosize = __webpack_require__(1074);
+	var _reactInputAutosize = __webpack_require__(1072);
 	
 	var _reactInputAutosize2 = _interopRequireDefault(_reactInputAutosize);
 	
-	var _classnames = __webpack_require__(1075);
+	var _classnames = __webpack_require__(1073);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _utilsStripDiacritics = __webpack_require__(1076);
+	var _utilsStripDiacritics = __webpack_require__(1074);
 	
 	var _utilsStripDiacritics2 = _interopRequireDefault(_utilsStripDiacritics);
 	
-	var _Async = __webpack_require__(1077);
+	var _Async = __webpack_require__(1075);
 	
 	var _Async2 = _interopRequireDefault(_Async);
 	
-	var _Option = __webpack_require__(1078);
+	var _Option = __webpack_require__(1076);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _Value = __webpack_require__(1079);
+	var _Value = __webpack_require__(1077);
 	
 	var _Value2 = _interopRequireDefault(_Value);
 	
@@ -90178,7 +90287,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 1074 */
+/* 1072 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90309,7 +90418,7 @@
 	module.exports = AutosizeInput;
 
 /***/ },
-/* 1075 */
+/* 1073 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -90363,7 +90472,7 @@
 
 
 /***/ },
-/* 1076 */
+/* 1074 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -90378,7 +90487,7 @@
 	};
 
 /***/ },
-/* 1077 */
+/* 1075 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90391,11 +90500,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Select = __webpack_require__(1073);
+	var _Select = __webpack_require__(1071);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
-	var _utilsStripDiacritics = __webpack_require__(1076);
+	var _utilsStripDiacritics = __webpack_require__(1074);
 	
 	var _utilsStripDiacritics2 = _interopRequireDefault(_utilsStripDiacritics);
 	
@@ -90551,7 +90660,7 @@
 	module.exports = Async;
 
 /***/ },
-/* 1078 */
+/* 1076 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90562,7 +90671,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(1075);
+	var _classnames = __webpack_require__(1073);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -90660,7 +90769,7 @@
 	module.exports = Option;
 
 /***/ },
-/* 1079 */
+/* 1077 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90671,7 +90780,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(1075);
+	var _classnames = __webpack_require__(1073);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -90769,17 +90878,27 @@
 	module.exports = Value;
 
 /***/ },
-/* 1080 */
+/* 1078 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	var ga = __webpack_require__(487);
+	var _react = __webpack_require__(330);
 	
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _analytics = __webpack_require__(487);
+	
+	var _analytics2 = _interopRequireDefault(_analytics);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'share',
 	
 	  getInitialState: function getInitialState() {
 	    return {
@@ -90787,16 +90906,16 @@
 	    };
 	  },
 	  render: function render() {
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'share' },
-	      this.state.visible ? false : React.createElement(
+	      this.state.visible ? false : _react2.default.createElement(
 	        'div',
 	        { className: 'toggle', onClick: this._toggle },
-	        React.createElement('i', { className: 'fa fa-share' }),
+	        _react2.default.createElement('i', { className: 'fa fa-share' }),
 	        'Share'
 	      ),
-	      this.state.visible ? React.createElement(Share, { toggle: this._toggle, post: this.props.post }) : false
+	      this.state.visible ? _react2.default.createElement(Share, { toggle: this._toggle, post: this.props.post }) : false
 	    );
 	  },
 	  _toggle: function _toggle() {
@@ -90804,7 +90923,8 @@
 	  }
 	});
 	
-	var Share = React.createClass({
+	
+	var Share = _react2.default.createClass({
 	  displayName: 'Share',
 	
 	  getInitialState: function getInitialState() {
@@ -90816,49 +90936,49 @@
 	  },
 	  render: function render() {
 	    //<li onClick={this._cancel}><i className="fa fa-close" /> Cancel</li>
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'ul',
 	      null,
-	      React.createElement(
+	      _react2.default.createElement(
 	        'li',
 	        { onClick: this._facebook },
-	        React.createElement('i', { className: 'fa fa-facebook' }),
+	        _react2.default.createElement('i', { className: 'fa fa-facebook' }),
 	        ' Facebook'
 	      ),
-	      React.createElement(
+	      _react2.default.createElement(
 	        'li',
 	        { onClick: this._twitter },
-	        React.createElement('i', { className: 'fa fa-twitter' }),
+	        _react2.default.createElement('i', { className: 'fa fa-twitter' }),
 	        ' Twitter'
 	      ),
-	      React.createElement(
+	      _react2.default.createElement(
 	        'li',
 	        { onClick: this._linkedin },
-	        React.createElement('i', { className: 'fa fa-linkedin' }),
+	        _react2.default.createElement('i', { className: 'fa fa-linkedin' }),
 	        ' LinkedIn'
 	      ),
-	      React.createElement(
+	      _react2.default.createElement(
 	        'li',
 	        { onClick: this._google },
-	        React.createElement('i', { className: 'fa fa-google' }),
+	        _react2.default.createElement('i', { className: 'fa fa-google' }),
 	        ' Google +'
 	      ),
-	      React.createElement(
+	      _react2.default.createElement(
 	        'li',
 	        { onClick: this._slack },
-	        React.createElement('i', { className: 'fa fa-slack' }),
+	        _react2.default.createElement('i', { className: 'fa fa-slack' }),
 	        ' Slack'
 	      ),
-	      React.createElement(
+	      _react2.default.createElement(
 	        'li',
 	        { onClick: this._email },
-	        React.createElement('i', { className: 'fa fa-envelope' }),
+	        _react2.default.createElement('i', { className: 'fa fa-envelope' }),
 	        ' Email'
 	      )
 	    );
 	  },
 	  _cancel: function _cancel() {
-	    ga('send', 'event', 'engagement', 'share', 'cancel');
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'share', 'cancel');
 	    this.props.toggle();
 	  },
 	  _facebook: function _facebook() {
@@ -90871,7 +90991,7 @@
 	    };
 	    this.setState({ selected: 'facebook' });
 	    this._open(url, params);
-	    ga('send', 'event', 'engagement', 'share', 'facebook');
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'share', 'facebook');
 	  },
 	  _twitter: function _twitter() {
 	    var url = "https://twitter.com/intent/tweet";
@@ -90888,7 +91008,7 @@
 	    };
 	    this.setState({ selected: 'twitter' });
 	    this._open(url, params);
-	    ga('send', 'event', 'engagement', 'share', 'twitter');
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'share', 'twitter');
 	  },
 	  _linkedin: function _linkedin() {
 	    var url = "https://www.linkedin.com/shareArticle";
@@ -90901,7 +91021,7 @@
 	    };
 	    this.setState({ selected: 'linkedin' });
 	    this._open(url, params);
-	    ga('send', 'event', 'engagement', 'share', 'linkedin');
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'share', 'linkedin');
 	  },
 	  _google: function _google() {
 	    var url = "https://plus.google.com/share";
@@ -90910,16 +91030,16 @@
 	    };
 	    this.setState({ selected: 'google' });
 	    this._open(url, params);
-	    ga('send', 'event', 'engagement', 'share', 'google');
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'share', 'google');
 	  },
 	  _slack: function _slack() {
 	    this.setState({ selected: 'slack' });
-	    ga('send', 'event', 'engagement', 'share', 'slack');
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'share', 'slack');
 	  },
 	  _email: function _email() {
 	    var body = "The following post has been shared with you from Phourus.com: \r\n \r\n '" + this.props.post.title + "' \r\n \r\n " + (this.state.base + '/' + this.props.post.user.username + '/' + this.props.post.slug);
 	    this.setState({ selected: 'email' });
-	    ga('send', 'event', 'engagement', 'share', 'email');
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'share', 'email');
 	    window.location.href = encodeURI('mailto:recipient@yourfriend.com?Subject=Somebody shared a Post from Phourus.com with you&body=' + body);
 	  },
 	  _open: function _open(url, params) {
@@ -90962,30 +91082,46 @@
 	// });
 
 /***/ },
-/* 1081 */
+/* 1079 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
-	var Router = __webpack_require__(489);
-	var History = Router.History;
+	var _react = __webpack_require__(330);
 	
-	var numeral = __webpack_require__(1082);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var Influence = __webpack_require__(1083);
-	var Popularity = __webpack_require__(1084);
-	var Thumbs = __webpack_require__(1085);
+	var _reactRouter = __webpack_require__(489);
+	
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+	
+	var _numeral = __webpack_require__(1080);
+	
+	var _numeral2 = _interopRequireDefault(_numeral);
+	
+	var _influence = __webpack_require__(1081);
+	
+	var _influence2 = _interopRequireDefault(_influence);
+	
+	var _popularity2 = __webpack_require__(1082);
+	
+	var _popularity3 = _interopRequireDefault(_popularity2);
+	
+	var _thumbs = __webpack_require__(1083);
+	
+	var _thumbs2 = _interopRequireDefault(_thumbs);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var thousands = "0,0";
-	var en = numeral.language('en');
+	var en = _numeral2.default.language('en');
 	
-	module.exports = React.createClass({
+	module.exports = _react2.default.createClass({
 		displayName: 'exports',
 	
-		mixins: [History],
+		mixins: [_reactRouter.History],
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		getDefaultProps: function getDefaultProps() {
 			return {
@@ -90999,60 +91135,60 @@
 			this._popularity(data);
 		},
 		render: function render() {
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'interact', onClick: this._single },
-				this.context.route.type === 'post' ? React.createElement(Thumbs, { post: this.props.post }) : false,
-				React.createElement(Influence, { influence: this.props.post.influence }),
-				React.createElement(
+				this.context.route.type === 'post' ? _react2.default.createElement(_thumbs2.default, { post: this.props.post }) : false,
+				_react2.default.createElement(_influence2.default, { influence: this.props.post.influence }),
+				_react2.default.createElement(
 					'div',
 					{ className: 'popularity' },
-					React.createElement(
+					_react2.default.createElement(
 						'div',
 						null,
-						React.createElement('canvas', { id: 'popularity' + this.props.post.id }),
-						React.createElement(
+						_react2.default.createElement('canvas', { id: 'popularity' + this.props.post.id }),
+						_react2.default.createElement(
 							'div',
 							null,
 							'Popularity'
 						)
 					)
 				),
-				React.createElement(
+				_react2.default.createElement(
 					'div',
 					{ className: 'stats' },
-					React.createElement(
+					_react2.default.createElement(
 						'div',
 						null,
-						React.createElement(
+						_react2.default.createElement(
 							'strong',
 							null,
-							numeral(this.props.post.totalViews).format('0a')
+							(0, _numeral2.default)(this.props.post.totalViews).format('0a')
 						),
-						React.createElement('br', null),
-						React.createElement('i', { className: 'fa fa-eye' })
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('i', { className: 'fa fa-eye' })
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'div',
 						null,
-						React.createElement(
+						_react2.default.createElement(
 							'strong',
 							null,
-							numeral(this.props.post.totalComments).format('0a')
+							(0, _numeral2.default)(this.props.post.totalComments).format('0a')
 						),
-						React.createElement('br', null),
-						React.createElement('i', { className: 'fa fa-comment' })
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('i', { className: 'fa fa-comment' })
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'div',
 						null,
-						React.createElement(
+						_react2.default.createElement(
 							'strong',
 							null,
-							numeral(this.props.post.totalThumbs).format('0a')
+							(0, _numeral2.default)(this.props.post.totalThumbs).format('0a')
 						),
-						React.createElement('br', null),
-						React.createElement('i', { className: 'fa fa-thumbs-up' })
+						_react2.default.createElement('br', null),
+						_react2.default.createElement('i', { className: 'fa fa-thumbs-up' })
 					)
 				)
 			);
@@ -91063,7 +91199,7 @@
 				// has not yet been rendered.
 				setTimeout(function () {
 					var element = document.getElementById('popularity' + data.post.id);
-					var popularity = new Popularity(element, data.post.popularity || 100);
+					var popularity = new _popularity3.default(element, data.post.popularity || 100);
 				}, 1);
 			}
 		},
@@ -91078,7 +91214,7 @@
 	});
 
 /***/ },
-/* 1082 */
+/* 1080 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -91763,39 +91899,45 @@
 
 
 /***/ },
-/* 1083 */
+/* 1081 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var React = __webpack_require__(330);
-	
-	var Influence = React.createClass({
-	  displayName: "Influence",
-	
-	  render: function render() {
-	    var range = Math.ceil(this.props.influence / 10);
-	    return React.createElement(
-	      "div",
-	      { className: "influence influence" + range },
-	      React.createElement(
-	        "div",
-	        { className: "score" },
-	        this.props.influence
-	      ),
-	      React.createElement(
-	        "div",
-	        null,
-	        "Influence"
-	      )
-	    );
-	  }
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 	
-	module.exports = Influence;
+	var _react = __webpack_require__(330);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Influence = function Influence(_ref) {
+	  var influence = _ref.influence;
+	
+	  var range = Math.ceil(influence / 10);
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "influence influence" + range },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "score" },
+	      influence
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      null,
+	      "Influence"
+	    )
+	  );
+	};
+	
+	exports.default = Influence;
 
 /***/ },
-/* 1084 */
+/* 1082 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -91837,23 +91979,42 @@
 	};
 
 /***/ },
-/* 1085 */
+/* 1083 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
-	var Router = __webpack_require__(489);
-	var ga = __webpack_require__(487);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
-	var Store = __webpack_require__(1086);
-	var Actions = __webpack_require__(1087);
+	var _react = __webpack_require__(330);
 	
-	var Thumbs = React.createClass({
-	  displayName: 'Thumbs',
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(489);
+	
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+	
+	var _analytics = __webpack_require__(487);
+	
+	var _analytics2 = _interopRequireDefault(_analytics);
+	
+	var _thumbs = __webpack_require__(1084);
+	
+	var _thumbs2 = _interopRequireDefault(_thumbs);
+	
+	var _thumbs3 = __webpack_require__(1085);
+	
+	var _thumbs4 = _interopRequireDefault(_thumbs3);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'thumbs',
 	
 	  contextTypes: {
-	    route: React.PropTypes.object
+	    route: _react2.default.PropTypes.object
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -91870,10 +92031,10 @@
 	    var _this = this;
 	
 	    var params = this.context.route.params;
-	    this.unsubscribe = Store.listen(function (data) {
+	    this.unsubscribe = _thumbs2.default.listen(function (data) {
 	      _this.setState(data);
 	    });
-	    Actions.post(params.id);
+	    _thumbs4.default.post(params.id);
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    this.unsubscribe();
@@ -91887,29 +92048,29 @@
 	      classDislike += ' selected';
 	    }
 	    // <p>You have decided you {current} this post. Click the button below to change your mind.</p>
-	    return React.createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: 'thumb' },
-	      React.createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { className: 'buttons' },
-	        React.createElement(
+	        _react2.default.createElement(
 	          'button',
 	          { className: classLike, onClick: this.state.positive === true ? this._remove : this._like },
-	          React.createElement('i', { className: 'fa fa-angle-up' }),
+	          _react2.default.createElement('i', { className: 'fa fa-angle-up' }),
 	          ' ',
-	          React.createElement(
+	          _react2.default.createElement(
 	            'span',
 	            { className: 'total' },
 	            ' Like'
 	          )
 	        ),
-	        React.createElement(
+	        _react2.default.createElement(
 	          'button',
 	          { className: classDislike, onClick: this.state.positive === false ? this._remove : this._dislike },
-	          React.createElement('i', { className: 'fa fa-angle-down' }),
+	          _react2.default.createElement('i', { className: 'fa fa-angle-down' }),
 	          ' ',
-	          React.createElement(
+	          _react2.default.createElement(
 	            'span',
 	            { className: 'total' },
 	            ' Dislike'
@@ -91923,12 +92084,12 @@
 	      positive: 1
 	    };
 	    if (this.state.id) {
-	      Actions.save(this.state.id, model);
-	      ga('send', 'event', 'engagement', 'changevote');
+	      _thumbs4.default.save(this.state.id, model);
+	      (0, _analytics2.default)('send', 'event', 'engagement', 'changevote');
 	    } else {
 	      model.postId = this.props.post.id;
-	      Actions.add(model);
-	      ga('send', 'event', 'engagement', 'upvote');
+	      _thumbs4.default.add(model);
+	      (0, _analytics2.default)('send', 'event', 'engagement', 'upvote');
 	    }
 	  },
 	  _dislike: function _dislike() {
@@ -91936,33 +92097,31 @@
 	      positive: 0
 	    };
 	    if (this.state.id) {
-	      Actions.save(this.state.id, model);
-	      ga('send', 'event', 'engagement', 'changevote');
+	      _thumbs4.default.save(this.state.id, model);
+	      (0, _analytics2.default)('send', 'event', 'engagement', 'changevote');
 	    } else {
 	      model.postId = this.props.post.id;
-	      Actions.add(model);
-	      ga('send', 'event', 'engagement', 'downvote');
+	      _thumbs4.default.add(model);
+	      (0, _analytics2.default)('send', 'event', 'engagement', 'downvote');
 	    }
 	  },
 	  _remove: function _remove() {
-	    Actions.remove(this.state.id);
-	    ga('send', 'event', 'engagement', 'unvote');
+	    _thumbs4.default.remove(this.state.id);
+	    (0, _analytics2.default)('send', 'event', 'engagement', 'unvote');
 	  }
 	});
-	
-	module.exports = Thumbs;
 
 /***/ },
-/* 1086 */
+/* 1084 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var Reflux = __webpack_require__(622);
 	
-	var Actions = __webpack_require__(1087);
+	var Actions = __webpack_require__(1085);
 	
-	var thumbs = __webpack_require__(1088);
+	var thumbs = __webpack_require__(1086);
 	
 	module.exports = Reflux.createStore({
 	  postId: null,
@@ -92043,7 +92202,7 @@
 	});
 
 /***/ },
-/* 1087 */
+/* 1085 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92058,13 +92217,13 @@
 	};
 
 /***/ },
-/* 1088 */
+/* 1086 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var type = 'sockets';
-	var thumbs = __webpack_require__(1089);
+	var thumbs = __webpack_require__(1087);
 	
 	module.exports = {
 	  post: thumbs.post,
@@ -92074,7 +92233,7 @@
 	};
 
 /***/ },
-/* 1089 */
+/* 1087 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92101,22 +92260,38 @@
 	};
 
 /***/ },
-/* 1090 */
+/* 1088 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	
-	var Actions = __webpack_require__(1091);
-	var Store = __webpack_require__(1092);
-	var StreamActions = __webpack_require__(762);
+	var _react = __webpack_require__(330);
 	
-	var Tags = React.createClass({
-		displayName: 'Tags',
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _tags = __webpack_require__(1089);
+	
+	var _tags2 = _interopRequireDefault(_tags);
+	
+	var _tags3 = __webpack_require__(1090);
+	
+	var _tags4 = _interopRequireDefault(_tags3);
+	
+	var _stream = __webpack_require__(762);
+	
+	var _stream2 = _interopRequireDefault(_stream);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+		displayName: 'tags',
 	
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		getDefaultProps: function getDefaultProps() {
 			return {
@@ -92139,7 +92314,7 @@
 		componentDidMount: function componentDidMount() {
 			var _this = this;
 	
-			this.unsubscribe = Store.listen(function (data) {
+			this.unsubscribe = _tags4.default.listen(function (data) {
 				var tags = _this.state.post.tags;
 				if (data.added) {
 					tags.push(data.added);
@@ -92170,36 +92345,36 @@
 			var tags = this.state.post.tags || [];
 			var route = this.context.route;
 			var type = route.type;
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'tags' },
-				type === 'edit' && this.props.owner ? React.createElement(
+				type === 'edit' && this.props.owner ? _react2.default.createElement(
 					'h2',
 					null,
 					'Edit Tags'
 				) : false,
-				React.createElement('i', { className: 'fa fa-tag' }),
+				_react2.default.createElement('i', { className: 'fa fa-tag' }),
 				tags.map(function (item, index) {
-					return React.createElement(
+					return _react2.default.createElement(
 						'span',
 						{ className: 'tag', key: index },
-						React.createElement(
+						_react2.default.createElement(
 							'a',
 							{ id: item.tag, href: 'javascript:void(0)', onClick: _this2._tag },
 							item.tag
 						),
-						type === 'edit' && _this2.props.owner ? React.createElement(
+						type === 'edit' && _this2.props.owner ? _react2.default.createElement(
 							'a',
 							{ href: 'javascript:void(0)', id: item.id, className: 'remove', onClick: _this2._remove },
 							'x'
 						) : false
 					);
 				}),
-				type === 'edit' && this.props.owner ? React.createElement(
+				type === 'edit' && this.props.owner ? _react2.default.createElement(
 					'div',
 					{ className: 'tagField' },
-					React.createElement('input', { placeholder: 'add tags here', onChange: this._change, type: 'text', value: this.state.tag }),
-					React.createElement(
+					_react2.default.createElement('input', { placeholder: 'add tags here', onChange: this._change, type: 'text', value: this.state.tag }),
+					_react2.default.createElement(
 						'button',
 						{ ref: 'add', onClick: this._add },
 						'Add Tag'
@@ -92216,24 +92391,22 @@
 			if (this.state.tag.length > 1 && this.props.post.id) {
 				model.tag = this.state.tag;
 				model.postId = this.props.post.id;
-				Actions.add(model);
+				_tags2.default.add(model);
 				this.setState({ tag: "" });
 			}
 		},
 		_remove: function _remove(e) {
 			var id = e.currentTarget.id;
-			Actions.remove(id);
+			_tags2.default.remove(id);
 		},
 		_tag: function _tag(e) {
 			var id = e.currentTarget.id;
-			StreamActions.search(id);
+			_stream2.default.search(id);
 		}
 	});
-	
-	module.exports = Tags;
 
 /***/ },
-/* 1091 */
+/* 1089 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92246,16 +92419,16 @@
 	};
 
 /***/ },
-/* 1092 */
+/* 1090 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	var Reflux = __webpack_require__(622);
 	
-	var Actions = __webpack_require__(1091);
+	var Actions = __webpack_require__(1089);
 	
-	var tags = __webpack_require__(1093);
+	var tags = __webpack_require__(1091);
 	
 	module.exports = Reflux.createStore({
 	  init: function init() {
@@ -92297,13 +92470,13 @@
 	});
 
 /***/ },
-/* 1093 */
+/* 1091 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var type = 'sockets';
-	var tags = __webpack_require__(1094);
+	var tags = __webpack_require__(1092);
 	
 	module.exports = {
 	  collection: tags.collection,
@@ -92312,7 +92485,7 @@
 	};
 
 /***/ },
-/* 1094 */
+/* 1092 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92333,23 +92506,34 @@
 	};
 
 /***/ },
-/* 1095 */
+/* 1093 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
-	var Router = __webpack_require__(489);
-	var Link = Router.Link;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
+	var _react = __webpack_require__(330);
 	
-	var Actions = __webpack_require__(774);
+	var _react2 = _interopRequireDefault(_react);
 	
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	var _reactRouter = __webpack_require__(489);
+	
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+	
+	var _post = __webpack_require__(774);
+	
+	var _post2 = _interopRequireDefault(_post);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'title',
 	
 	  contextTypes: {
-	    route: React.PropTypes.object
+	    route: _react2.default.PropTypes.object
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -92368,36 +92552,54 @@
 	    if (post.user && post.user.username) {
 	      username = post.user.username;
 	    }
-	    return this.context.route.type === 'create' || this.context.route.type === 'edit' && this.props.owner ? React.createElement('input', { className: 'title editing', onChange: this._title, defaultValue: post.title }) : React.createElement(
+	    return this.context.route.type === 'create' || this.context.route.type === 'edit' && this.props.owner ? _react2.default.createElement('input', { className: 'title editing', onChange: this._title, defaultValue: post.title }) : _react2.default.createElement(
 	      'h2',
 	      { className: 'title' },
-	      React.createElement(
-	        Link,
+	      _react2.default.createElement(
+	        _reactRouter.Link,
 	        { to: '/' + username + '/' + post.slug },
 	        post.title
 	      )
 	    );
 	  },
 	  _title: function _title(e) {
-	    Actions.change('title', e.currentTarget.value);
+	    _post2.default.change('title', e.currentTarget.value);
 	  }
 	});
 
 /***/ },
-/* 1096 */
+/* 1094 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var React = __webpack_require__(330);
+	var _react = __webpack_require__(330);
 	
-	var PostActions = __webpack_require__(774);
-	var StreamActions = __webpack_require__(762);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var Meta = __webpack_require__(1097);
-	var tax = __webpack_require__(1098);
+	var _post = __webpack_require__(774);
+	
+	var _post2 = _interopRequireDefault(_post);
+	
+	var _stream = __webpack_require__(762);
+	
+	var _stream2 = _interopRequireDefault(_stream);
+	
+	var _meta = __webpack_require__(1095);
+	
+	var _meta2 = _interopRequireDefault(_meta);
+	
+	var _taxonomy = __webpack_require__(1096);
+	
+	var _taxonomy2 = _interopRequireDefault(_taxonomy);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var icons = {
 		blog: "laptop",
@@ -92421,11 +92623,11 @@
 		belief: "Tell us more about your Belief on something dear to you"
 	};
 	
-	module.exports = React.createClass({
-		displayName: 'exports',
+	exports.default = _react2.default.createClass({
+		displayName: 'type',
 	
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		getInitialState: function getInitialState() {
 			return {
@@ -92446,24 +92648,24 @@
 		render: function render() {
 			var type = this.props.post.type || "blog";
 			var classes = {};
-			for (var i in Object.keys(tax)) {
-				var key = Object.keys(tax)[i];
+			for (var i in Object.keys(_taxonomy2.default)) {
+				var key = Object.keys(_taxonomy2.default)[i];
 				classes[key] = key;
 				if (type === key) {
 					classes[key] += ' selected';
 				}
 			}
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				null,
-				React.createElement(
+				_react2.default.createElement(
 					'div',
 					{ id: this.props.post.type, className: 'type ' + this.props.post.type + ' ' + (this.state.select ? 'inverted' : ''), onClick: this._select },
-					React.createElement('i', { className: "fa fa-" + (icons[this.props.post.type] ? icons[this.props.post.type] : 'file') }),
+					_react2.default.createElement('i', { className: "fa fa-" + (icons[this.props.post.type] ? icons[this.props.post.type] : 'file') }),
 					" ",
 					this.props.post.type
 				),
-				this.state.select ? React.createElement(Selector, { post: this.props.post, type: this._type, owner: this.props.owner }) : false
+				this.state.select ? _react2.default.createElement(Selector, { post: this.props.post, type: this._type, owner: this.props.owner }) : false
 			);
 		},
 		_select: function _select(e) {
@@ -92473,7 +92675,7 @@
 				this.setState({ select: !this.state.select });
 			}
 			if (type !== 'post' && type !== 'edit' && type !== 'create') {
-				StreamActions.type(e.currentTarget.id);
+				_stream2.default.type(e.currentTarget.id);
 			}
 		},
 		_hideSelector: function _hideSelector() {
@@ -92481,187 +92683,196 @@
 		}
 	});
 	
-	var Selector = React.createClass({
+	
+	var Selector = _react2.default.createClass({
 		displayName: 'Selector',
 	
 		render: function render() {
 			var _this = this;
 	
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				{ className: 'selector' },
 				['blog', 'event', 'subject', 'question', 'debate', 'poll', 'quote', 'belief'].map(function (item) {
-					return React.createElement(
+					return _react2.default.createElement(
 						'div',
 						{ className: item + " type", onClick: _this._select.bind(_this, item) },
-						React.createElement('i', { className: "fa fa-" + icons[item] }),
+						_react2.default.createElement('i', { className: "fa fa-" + icons[item] }),
 						' ',
 						item,
-						item === 0 ? React.createElement(
+						item === 0 ? _react2.default.createElement(
 							'div',
 							{ className: '' },
-							React.createElement(
+							_react2.default.createElement(
 								'p',
 								null,
 								descriptions[item]
 							),
-							React.createElement(Meta, _extends({}, _this.props, { owner: _this.props.owner }))
+							_react2.default.createElement(_meta2.default, _extends({}, _this.props, { owner: _this.props.owner }))
 						) : false
 					);
 				})
 			);
 		},
 		_select: function _select(type) {
-			PostActions.change('type', type);
+			_post2.default.change('type', type);
 		}
 	});
 
 /***/ },
-/* 1097 */
+/* 1095 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
+	var _react = __webpack_require__(330);
 	
-	var Actions = __webpack_require__(774);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var tax = __webpack_require__(1098);
+	var _post = __webpack_require__(774);
 	
-	var Meta = React.createClass({
+	var _post2 = _interopRequireDefault(_post);
+	
+	var _taxonomy = __webpack_require__(1096);
+	
+	var _taxonomy2 = _interopRequireDefault(_taxonomy);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Meta = _react2.default.createClass({
 		displayName: 'Meta',
 	
 		contextTypes: {
-			route: React.PropTypes.object
+			route: _react2.default.PropTypes.object
 		},
 		render: function render() {
 			var route = this.context.route;
 			var type = this.props.post.type;
 			var classes = {};
-			for (var i in Object.keys(tax)) {
-				var key = Object.keys(tax)[i].slice(0, -1);
+			for (var i in Object.keys(_taxonomy2.default)) {
+				var key = Object.keys(_taxonomy2.default)[i].slice(0, -1);
 				classes[key] = key;
 				if (type === key) {
 					classes[key] += ' selected';
 				}
 			}
-			var positive = React.createElement(
+			var positive = _react2.default.createElement(
 				'label',
 				null,
 				'Positive:',
-				route.type === 'edit' && this.props.owner ? React.createElement('input', { ref: 'positive', type: 'checkbox', checked: this.props.post.positive ? true : false, onChange: this._positive }) : React.createElement(
+				route.type === 'edit' && this.props.owner ? _react2.default.createElement('input', { ref: 'positive', type: 'checkbox', checked: this.props.post.positive ? true : false, onChange: this._positive }) : _react2.default.createElement(
 					'strong',
 					null,
 					this.props.post.positive
 				)
 			);
-			var when = React.createElement(
+			var when = _react2.default.createElement(
 				'label',
 				null,
 				'When:',
-				route.type === 'edit' && this.props.owner ? React.createElement('input', { value: this.props.post.when, onChange: this._when }) : React.createElement(
+				route.type === 'edit' && this.props.owner ? _react2.default.createElement('input', { value: this.props.post.when, onChange: this._when }) : _react2.default.createElement(
 					'strong',
 					null,
 					this.props.post.when
 				)
 			);
-			var location = React.createElement(
+			var location = _react2.default.createElement(
 				'label',
 				null,
 				'Location:',
-				route.type === 'edit' && this.props.owner ? React.createElement('input', { value: this.props.post.location, onChange: this._location }) : React.createElement(
+				route.type === 'edit' && this.props.owner ? _react2.default.createElement('input', { value: this.props.post.location, onChange: this._location }) : _react2.default.createElement(
 					'strong',
 					null,
 					this.props.post.location
 				)
 			);
-			var poll = React.createElement(
+			var poll = _react2.default.createElement(
 				'label',
 				null,
 				'Poll Options:',
-				route.type === 'edit' && this.props.owner ? React.createElement('input', { value: this.props.post.poll, onChange: this._poll }) : false
+				route.type === 'edit' && this.props.owner ? _react2.default.createElement('input', { value: this.props.post.poll, onChange: this._poll }) : false
 			);
-			var difficulty = React.createElement(
+			var difficulty = _react2.default.createElement(
 				'label',
 				null,
 				'Difficulty:',
-				route.type === 'edit' && this.props.owner ? React.createElement(
+				route.type === 'edit' && this.props.owner ? _react2.default.createElement(
 					'select',
 					{ ref: 'difficulty', value: this.props.post.difficulty, onChange: this._difficulty },
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'easy' },
 						'Easy'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'medium' },
 						'Medium'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'hard' },
 						'Hard'
 					)
-				) : React.createElement(
+				) : _react2.default.createElement(
 					'strong',
 					null,
 					this.props.post.difficulty
 				)
 			);
-			var scope = React.createElement(
+			var scope = _react2.default.createElement(
 				'label',
 				null,
 				'Scope:',
-				route.type === 'edit' && this.props.owner ? React.createElement(
+				route.type === 'edit' && this.props.owner ? _react2.default.createElement(
 					'select',
 					{ ref: 'scope', value: this.props.post.scope, onChange: this._scope },
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'local' },
 						'Local'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'county' },
 						'County'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'state' },
 						'State'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'national' },
 						'National'
 					),
-					React.createElement(
+					_react2.default.createElement(
 						'option',
 						{ value: 'international' },
 						'International'
 					)
-				) : React.createElement(
+				) : _react2.default.createElement(
 					'strong',
 					null,
 					this.props.post.scope
 				)
 			);
-			var zip = React.createElement(
+			var zip = _react2.default.createElement(
 				'label',
 				null,
 				'Zip:',
-				route.type === 'edit' && this.props.owner ? React.createElement('input', { ref: 'zip', value: this.props.post.zip, onChange: this._zip }) : React.createElement(
+				route.type === 'edit' && this.props.owner ? _react2.default.createElement('input', { ref: 'zip', value: this.props.post.zip, onChange: this._zip }) : _react2.default.createElement(
 					'strong',
 					null,
 					this.props.post.zip
 				)
 			);
-			var author = React.createElement(
+			var author = _react2.default.createElement(
 				'label',
 				null,
 				'Source/Author:',
-				route.type === 'edit' && this.props.owner ? React.createElement('input', { ref: 'author', value: this.props.post.author, onChange: this._author }) : React.createElement(
+				route.type === 'edit' && this.props.owner ? _react2.default.createElement('input', { ref: 'author', value: this.props.post.author, onChange: this._author }) : _react2.default.createElement(
 					'strong',
 					null,
 					this.props.post.author
@@ -92678,7 +92889,7 @@
 				belief: []
 			};
 			var data = fields[type] || [];
-			return React.createElement(
+			return _react2.default.createElement(
 				'div',
 				null,
 				data.map(function (item) {
@@ -92688,42 +92899,42 @@
 		},
 		_positive: function _positive(e) {
 			var value = e.currentTarget.checked;
-			Actions.change('positive', value);
+			_post2.default.change('positive', value);
 		},
 		_when: function _when(e) {
 			var value = e.currentTarget.value;
-			Actions.change('when', value);
+			_post2.default.change('when', value);
 		},
 		_location: function _location(e) {
 			var value = e.currentTarget.value;
-			Actions.change('location', value);
+			_post2.default.change('location', value);
 		},
 		_poll: function _poll(e) {
 			var value = e.currentTarget.value;
-			Actions.change('poll', value);
+			_post2.default.change('poll', value);
 		},
 		_difficulty: function _difficulty(e) {
 			var value = e.currentTarget.value;
-			Actions.change('difficulty', value);
+			_post2.default.change('difficulty', value);
 		},
 		_scope: function _scope(e) {
 			var value = e.currentTarget.value;
-			Actions.change('scope', value);
+			_post2.default.change('scope', value);
 		},
 		_zip: function _zip(e) {
 			var value = e.currentTarget.value;
-			Actions.change('zip', value);
+			_post2.default.change('zip', value);
 		},
 		_author: function _author(e) {
 			var value = e.currentTarget.value;
-			Actions.change('author', value);
+			_post2.default.change('author', value);
 		}
 	});
 	
 	module.exports = Meta;
 
 /***/ },
-/* 1098 */
+/* 1096 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -92826,17 +93037,18 @@
 	};
 
 /***/ },
-/* 1099 */
+/* 1097 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
-	var React = __webpack_require__(330);
+	var _react = __webpack_require__(330);
 	
-	var _require = __webpack_require__(885);
+	var _react2 = _interopRequireDefault(_react);
 	
-	var DragSource = _require.DragSource;
+	var _reactDnd = __webpack_require__(885);
 	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var target = {
 		beginDrag: function beginDrag(props) {
@@ -92853,7 +93065,7 @@
 		};
 	};
 	
-	var Drag = React.createClass({
+	var Drag = _react2.default.createClass({
 		displayName: 'Drag',
 	
 		render: function render() {
@@ -92865,15 +93077,55 @@
 				className.push('dragging');
 			}
 	
-			return connectDragSource(React.createElement(
+			return connectDragSource(_react2.default.createElement(
 				'div',
 				{ className: className.join(' ') },
-				React.createElement('i', { className: 'fa fa-th' })
+				_react2.default.createElement('i', { className: 'fa fa-th' })
 			));
 		}
 	});
 	
-	module.exports = DragSource('posts', target, collect)(Drag);
+	module.exports = (0, _reactDnd.DragSource)('posts', target, collect)(Drag);
+
+/***/ },
+/* 1098 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(1099);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(596)(content, {"sourcemap":true});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(1099, function() {
+				var newContent = __webpack_require__(1099);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 1099 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(595)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\n.actions {\n  float: right;\n}\n.actions button.save,\n.actions button.delete,\n.actions button.myposts,\n.actions button.rich {\n  height: 30px;\n  font-size: 0.8em;\n  width: 140px;\n  margin: 0;\n  padding: 4px;\n  display: inline-block;\n  margin-right: 10px;\n  height: 33px;\n  margin: 4px;\n  box-sizing: border-box;\n}\n.actions button.myposts {\n  width: 160px;\n}\n.actions button.rich {\n  width: 200px;\n}\n.actions button.close {\n  background: transparent;\n  background-color: #555;\n  border: none;\n  color: #fff;\n  float: right;\n  padding: 8px;\n  font-size: 1em;\n  margin-left: 10px;\n}\n.actions button.close:hover {\n  color: #f2c13d;\n  cursor: pointer;\n}\n.actions > a.edit {\n  display: block;\n  font-size: 0.6em;\n  float: right;\n  color: #777;\n  text-align: right;\n}\n.actions > a.edit:hover {\n  color: #5faee3;\n}\n.actions > a.edit i {\n  font-size: 1.5em;\n}\n.categories {\n  font-size: 0.8em;\n  text-transform: uppercase;\n  margin-bottom: 20px;\n}\n.categories select {\n  width: 40%;\n  margin-right: 20px;\n  max-width: 160px;\n  display: inline-block;\n}\n.collaborators {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  position: absolute;\n  bottom: 80px;\n}\ndiv.post .collaborators {\n  position: static;\n  margin-bottom: 20px;\n  border-bottom: solid 1px #eee;\n}\n.collaborator {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  font-size: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  color: #999;\n  margin-left: 4px;\n  display: inline-block;\n  margin-bottom: 4px;\n}\n.collaborator a {\n  color: #ccc;\n}\n.collaborator a:hover {\n  border-color: #5faee3;\n  color: #5faee3;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.collaborator a.remove {\n  border: none;\n  background: transparent;\n  display: inline-block;\n  font-size: 1em;\n  color: inherit;\n  margin-left: 10px;\n}\n.collaborator a.remove:hover {\n  color: #fc2727;\n  text-decoration: none;\n  cursor: pointer;\n}\n.collaboratorField {\n  position: relative;\n  display: inline-block;\n  margin-left: 10px;\n}\n.collaboratorField input {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  height: 40px;\n  font-size: 1.1em;\n  color: #333;\n  margin-left: 4px;\n  display: inline-block;\n}\n.collaboratorField button {\n  width: 60px;\n  height: 38px;\n  position: absolute;\n  -webkit-border-radius: 0 15px 15px 0;\n  -moz-border-radius: 0 15px 15px 0;\n  border-radius: 0 15px 15px 0;\n  font-size: 0.5em;\n  border: none;\n  background-color: #217dbb;\n  cursor: pointer;\n  color: #eee;\n  top: 1px;\n  right: 15px;\n}\n.collaboratorField button:hover {\n  background-color: #5faee3;\n}\n.comments .comment {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  font-size: 0.9em;\n  border-bottom: solid 1px #E4E5E6;\n  margin-bottom: 20px;\n}\n.comments .comment:before,\n.comments .comment:after {\n  content: \"\";\n  display: table;\n}\n.comments .comment:after {\n  clear: both;\n}\n.comments .comment .pic {\n  width: 16.66666667%;\n  display: inline-block;\n  vertical-align: top;\n}\n.comments .comment .pic a img {\n  width: 80%;\n}\n.comments .comment .content {\n  width: 83.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.comments .comment .content .date {\n  color: #aaa;\n  font-size: 1em;\n  font-style: italic;\n}\n.comments .create {\n  max-width: 96%;\n  width: 100%;\n  margin: 0 auto;\n  padding: 2%;\n  color: #eee;\n}\n.comments .create:before,\n.comments .create:after {\n  content: \"\";\n  display: table;\n}\n.comments .create:after {\n  clear: both;\n}\n.comments .create .pic {\n  width: 0%;\n  display: none;\n  vertical-align: top;\n}\n.comments .create .pic img {\n  margin: 0;\n  padding: 0;\n  width: 80%;\n}\n.comments .create textarea {\n  display: inline-block;\n  border: none;\n  height: 120px;\n  width: 100%;\n  background-color: #eee;\n}\n.comments .create button.button {\n  margin: 0;\n  padding: 0;\n}\n.details {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  padding: 10px;\n  box-sizing: border-box;\n}\n.details:before,\n.details:after {\n  content: \"\";\n  display: table;\n}\n.details:after {\n  clear: both;\n}\n.details .extra {\n  height: 220px;\n  overflow: hidden;\n  margin: 20px 0;\n}\n.details .extra.excerpt {\n  font-size: 0.9em;\n  font-style: italic;\n  color: #333;\n}\n.details .extra.excerpt > div {\n  max-height: 120px;\n  overflow: hidden;\n}\n.details .extra.event {\n  text-align: center;\n}\n.details .extra.event i {\n  margin-top: 10px;\n  font-size: 6em;\n}\n.details .extra.event .when {\n  font-size: 1.5em;\n  margin: 16px 0;\n}\n.details .extra.event .location {\n  font-weight: bold;\n}\n.details .pic {\n  width: 25%;\n  display: inline-block;\n  vertical-align: top;\n}\n.details .pic img {\n  width: 100%;\n  margin: 0%;\n  padding: 2%;\n  box-sizing: border-box;\n}\n.details .basic {\n  width: 75%;\n  display: inline-block;\n  vertical-align: top;\n  font-size: 0.9em;\n  line-height: 1.1em;\n}\n.details .basic .created {\n  font-size: 0.8em;\n  color: #bbb;\n}\n@media (min-width: 1000px) {\n  .details .pic {\n    width: 25%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .details .basic {\n    width: 75%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n@media (min-width: 1400px) {\n  .details .pic {\n    width: 16.66666667%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .details .basic {\n    width: 58.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\ndiv.post .interact {\n  position: static;\n  margin: 0 0 20px 0;\n  padding: 10px 0;\n}\n.interact {\n  border-top: solid 1px #eee;\n  border-bottom: solid 1px #eee;\n}\n.interact > div {\n  display: inline-block;\n  vertical-align: bottom;\n}\n.interact:hover {\n  cursor: pointer;\n}\n.interact .influence,\n.interact .popularity {\n  width: 60px;\n}\n.interact .popularity > div {\n  width: 60px;\n}\n.interact .stats {\n  width: 110px;\n  padding-bottom: 6px;\n}\n.interact i {\n  font-size: 1.5em;\n}\n@media (min-width: 1000px) {\n  div.posts .interact {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    border-top: dotted 3px #eee;\n    background: transparent;\n    max-width: 100%;\n    width: 100%;\n    margin: 0 auto;\n    text-align: left;\n  }\n  div.posts .interact:before,\n  div.posts .interact:after {\n    content: \"\";\n    display: table;\n  }\n  div.posts .interact:after {\n    clear: both;\n  }\n  div.posts .interact .influence {\n    display: inline-block;\n  }\n}\n.links {\n  width: 38%;\n  margin: 1%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #fff;\n  min-height: 300px;\n  padding: 20px;\n  box-sizing: border-box;\n}\n.links .fields {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #f7f7f7;\n  box-sizing: border-box;\n  padding: 20px;\n}\n.links .fields textarea {\n  border: solid 1px #DDD;\n  height: 160px;\n}\n.links .fields button {\n  width: 200px;\n  font-size: 2em;\n}\n.links .list {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div {\n  padding: 0 2%;\n  width: 100%;\n  box-sizing: border-box;\n  border-bottom: solid 1px rgba(95, 174, 227, 0.3);\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n}\n.links .list > div > div {\n  width: 91.66666667%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div > div.icon {\n  width: 8.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div > div.icon i {\n  font-size: 2em;\n  display: block;\n}\n.links .list > div > div.icon a.edit {\n  font-size: 1em;\n  display: block;\n  text-align: left;\n}\n.links .list > div a {\n  font-size: 1em;\n  line-height: 1em;\n  text-decoration: underline;\n}\n.links .list > div p {\n  font-size: 0.8em;\n  font-style: italic;\n  margin: 5px 0 0 0;\n  padding: 0;\n  line-height: 1.5em;\n}\n.links .list > div button.remove {\n  float: right;\n  border: none;\n  background: transparent;\n  cursor: pointer;\n}\n.links .list > div button.remove:hover {\n  color: #fc2727;\n}\n.privacy {\n  background-color: #fff;\n  box-sizing: border-box;\n  padding: 20px;\n  min-height: 300px;\n  width: 28%;\n  display: inline-block;\n  vertical-align: top;\n  margin: 1%;\n}\n.privacy input[type=radio] {\n  width: 20px;\n  display: inline;\n}\n.privacy label {\n  display: inline;\n}\n.privacy > div div.contexts,\n.privacy > div button {\n  display: inline-block;\n  vertical-align: middle;\n}\n.privacyToggle {\n  display: inline-block;\n  margin-left: 10px;\n  font-size: 0.9em;\n  color: #3498DB;\n}\n.privacyToggle:hover {\n  cursor: pointer;\n  color: #f2c13d;\n}\n.postItem .share div.toggle {\n  font-size: 0.9em;\n  padding: 10px;\n  color: #444;\n}\n.postItem .share div.toggle:hover {\n  color: #3498DB;\n  cursor: pointer;\n}\n.postItem .share div.toggle i.fa-share {\n  font-size: 2em;\n  margin-right: 10px;\n}\n.postItem .share ul {\n  margin: 0;\n  padding: 0;\n}\n.postItem .share ul li {\n  display: inline-block;\n  margin-right: 10px;\n  padding: 10px;\n}\n.postItem .share ul li:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\n.postItem .share ul li > i {\n  font-size: 1.5em;\n}\n.postItem .share ul li i.fa-close {\n  color: #ED0303;\n}\n.stats {\n  color: #999;\n  font-size: 0.8em;\n  text-align: left;\n  clear: right;\n}\n.stats div {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: center;\n  font-size: 10px;\n  color: #777;\n}\n.stats div strong {\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  font-size: 1.8em;\n}\n.tags {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  position: absolute;\n  bottom: 80px;\n  background-color: #fff;\n}\ndiv.post .tags {\n  position: static;\n  margin-bottom: 20px;\n  border-bottom: solid 1px #eee;\n}\n.edit .tags {\n  width: 24%;\n  margin: 1%;\n  padding: 20px;\n  box-sizing: border-box;\n  min-height: 300px;\n  display: inline-block;\n  vertical-align: top;\n}\n.tag {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  font-size: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  color: #999;\n  margin-left: 4px;\n  display: inline-block;\n  margin-bottom: 4px;\n}\n.tag a {\n  color: #555;\n}\n.tag a:hover {\n  border-color: #5faee3;\n  color: #5faee3;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.tag a.remove {\n  border: none;\n  background: transparent;\n  display: inline-block;\n  font-size: 1em;\n  color: inherit;\n  margin-left: 10px;\n}\n.tag a.remove:hover {\n  color: #fc2727;\n  text-decoration: none;\n  cursor: pointer;\n}\n.tagField {\n  position: relative;\n  display: inline-block;\n  margin-left: 10px;\n}\n.tagField input {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  height: 40px;\n  font-size: 1.1em;\n  color: #333;\n  margin-left: 4px;\n  display: inline-block;\n}\n.tagField button {\n  width: 60px;\n  height: 38px;\n  position: absolute;\n  -webkit-border-radius: 0 15px 15px 0;\n  -moz-border-radius: 0 15px 15px 0;\n  border-radius: 0 15px 15px 0;\n  font-size: 0.5em;\n  border: none;\n  background-color: #217dbb;\n  cursor: pointer;\n  color: #eee;\n  top: 1px;\n  right: 15px;\n}\n.tagField button:hover {\n  background-color: #5faee3;\n}\n.thumb button.button {\n  font-size: 0.7em;\n  height: 40px;\n  width: 120px;\n  display: inline-block;\n}\n.thumb button.button.up,\n.thumb button.button.down {\n  color: #333;\n}\n.thumb button.button:hover.up {\n  color: #9cd900;\n}\n.thumb button.button:hover.down {\n  color: #fc2727;\n}\n.thumb button.button.selected {\n  box-sizing: border-box;\n}\n.thumb button.button.selected.up {\n  color: #8ABF00;\n}\n.thumb button.button.selected.down {\n  color: #ED0303;\n}\n.thumb button.button i {\n  font-size: 3em;\n  opacity: 0.5;\n  float: left;\n}\n.thumb button.button .total {\n  font-size: 1.5em;\n  opacity: 0.9;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  display: block;\n  margin: 12px 2px 0 10px;\n  text-align: left;\n}\n.type {\n  font-size: 0.8em;\n  text-transform: capitalize;\n  -webkit-border-radius: 6px;\n  -moz-border-radius: 6px;\n  border-radius: 6px;\n  color: white;\n  padding: 4px;\n  text-align: center;\n  width: 100px;\n  background-color: #333;\n  margin: 4px 0;\n  cursor: pointer;\n  border: solid 1px transparent;\n}\n.type.blog,\n.type.event {\n  background-color: #8ABF00;\n  color: #fff;\n}\n.type.blog.inverted,\n.type.event.inverted {\n  background-color: #fafafa;\n  border: solid 1px #9cd900;\n  color: #9cd900;\n}\n.type.blog:hover,\n.type.event:hover {\n  background-color: #658c00;\n  color: #eee;\n}\n.type.subject,\n.type.question {\n  background-color: #3498DB;\n  color: #fff;\n}\n.type.subject.inverted,\n.type.question.inverted {\n  background-color: #fafafa;\n  border: solid 1px #5faee3;\n  color: #5faee3;\n}\n.type.subject:hover,\n.type.question:hover {\n  background-color: #217dbb;\n  color: #eee;\n}\n.type.debate,\n.type.poll {\n  background-color: #ED0303;\n  color: #fff;\n}\n.type.debate.inverted,\n.type.poll.inverted {\n  background-color: #fafafa;\n  border: solid 1px #fc2727;\n  color: #fc2727;\n}\n.type.debate:hover,\n.type.poll:hover {\n  background-color: #bb0202;\n  color: #eee;\n}\n.type.quote,\n.type.belief {\n  background-color: #ECB010;\n  color: #fff;\n}\n.type.quote.inverted,\n.type.belief.inverted {\n  background-color: #fafafa;\n  border: solid 1px #f2c13d;\n  color: #f2c13d;\n}\n.type.quote:hover,\n.type.belief:hover {\n  background-color: #bc8c0d;\n  color: #eee;\n}\n.selector {\n  position: absolute;\n  z-index: 99999;\n}\n#content > div.post {\n  margin: auto;\n  margin-top: 20px;\n  min-height: 600px;\n  background: transparent;\n  border: none;\n  /** HANDLE **/\n  /** TITLE **/\n  /** EDITOR **/\n}\n#content > div.post .edit,\n#content > div.post .create {\n  background: transparent;\n}\n#content > div.post .edit .toolbar,\n#content > div.post .create .toolbar {\n  background-color: #fff;\n  border-top: solid 1px #ddd;\n  border-bottom: solid 1px #ddd;\n  position: fixed;\n  top: 60px;\n  height: 40px;\n  width: 100%;\n  left: 0;\n}\n#content > div.post .edit .actions,\n#content > div.post .create .actions {\n  position: fixed;\n  top: 60px;\n  right: 0;\n}\n#content > div.post .single {\n  width: 96%;\n  padding: 2%;\n  margin: 0;\n  background-color: #fff;\n}\n#content > div.post .single .title {\n  font-size: 2em;\n}\n#content > div.post ul {\n  margin: 20px 0 0 0;\n  padding: 0;\n}\n#content > div.post ul li {\n  list-style: none;\n  font-size: 0.8em;\n  color: #444;\n  margin: 0;\n  padding: 0;\n  line-height: 1.4;\n}\n#content > div.post .handle {\n  float: right;\n  cursor: pointer;\n  color: #aaa;\n}\n#content > div.post .handle:hover {\n  color: #888;\n}\n#content > div.post .handle.dragging {\n  color: #8ABF00;\n}\n#content > div.post input.title {\n  width: 100%;\n  max-width: 100%;\n  min-width: 100%;\n}\n#content > div.post input.title.editing:hover,\n#content > div.post input.title.editing:focus {\n  border: solid 1px #3498DB;\n  background-color: #fdfdfd;\n}\n#content > div.post .title {\n  font-size: 1.5em;\n  line-height: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  font-weight: bold;\n  color: #1e2f40;\n  outline: none;\n  margin: 10px 0;\n  padding: 5px;\n}\n#content > div.post .title a {\n  color: #444;\n}\n#content > div.post .title a:hover {\n  color: #ECB010;\n}\n#content > div.post .rte {\n  margin-bottom: 40px;\n  padding-bottom: 20px;\n}\n#content > div.post .ql-editor,\n#content > div.post .ql-container {\n  height: initial;\n  min-height: initial;\n}\n#content > div.post div.ql-toolbar {\n  position: fixed;\n  top: 60px;\n  opacity: 1;\n}\n#content > div.post .quill-contents {\n  background-color: #fff;\n  border: solid 1px #ddd;\n}\n#content > div.post .quill-contents:hover,\n#content > div.post .quill-contents:focus {\n  border-color: #3498DB;\n}\n#content > div.post .ql-container {\n  position: static;\n  z-index: -1;\n}\n#content > div.post .content {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  overflow: hidden;\n}\n#content > div.post .content:before,\n#content > div.post .content:after {\n  content: \"\";\n  display: table;\n}\n#content > div.post .content:after {\n  clear: both;\n}\n#content > div.post .create textarea,\n#content > div.post .edit textarea {\n  min-height: 300px;\n  width: 100%;\n}\n", ""]);
+	
+	// exports
+
 
 /***/ },
 /* 1100 */
@@ -93451,7 +93703,7 @@
 	"use strict";
 	
 	var React = __webpack_require__(330);
-	var Select = __webpack_require__(1073);
+	var Select = __webpack_require__(1071);
 	
 	var Router = __webpack_require__(489);
 	var Link = Router.Link;

@@ -1,13 +1,12 @@
-"use strict";
-let React = require('react');
+import React from 'react'
 
-let PostActions = require('../../actions/post');
-let StreamActions = require('../../actions/stream');
+import PostActions from '../../../actions/post'
+import StreamActions from '../../../actions/stream'
 
-let Meta = require('./meta');
-let tax = require('../../lib/taxonomy');
+import Meta from './meta'
+import tax from '../../../lib/taxonomy'
 
-let icons = {
+const icons = {
 	blog: "laptop",
 	event: "calendar",
 	subject: "info",
@@ -16,9 +15,9 @@ let icons = {
 	poll: "bar-chart",
 	quote: "quote-right",
 	belief: "flag"
-};
+}
 
-let descriptions = {
+const descriptions = {
 	blog: "General Post type, start here if you dont know what to choose",
 	event: "Virtual or real-world event",
 	subject: "Share your knowledge or expertise with the community on a variety of Subjects",
@@ -27,9 +26,9 @@ let descriptions = {
 	poll: "Get the discussion started with a local, county, state or national-level Debate",
 	quote: "Has someone else already described how you feel? Post their Quote here",
 	belief: "Tell us more about your Belief on something dear to you"
-};
+}
 
-module.exports = React.createClass({
+export default React.createClass({
 	contextTypes: {
 		route: React.PropTypes.object
 	},

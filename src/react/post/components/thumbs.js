@@ -1,12 +1,11 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
-let ga = require('../../lib/analytics');
+import React from 'react'
+import Router from 'react-router'
+import ga from '../../../lib/analytics'
 
-let Store = require('../../stores/post/thumbs');
-let Actions = require('../../actions/post/thumbs');
+import Store from '../../../stores/post/thumbs'
+import Actions from '../../../actions/post/thumbs'
 
-let Thumbs = React.createClass({
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },
@@ -80,5 +79,3 @@ let Thumbs = React.createClass({
      ga('send', 'event', 'engagement', 'unvote');
 	 }
 });
-
-module.exports = Thumbs;

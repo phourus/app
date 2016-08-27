@@ -1,6 +1,5 @@
-"use strict";
-let React = require('react');
-let { DragSource } = require('react-dnd');
+import React from 'react'
+import { DragSource } from 'react-dnd'
 
 let target = {
 	beginDrag: function (props) {

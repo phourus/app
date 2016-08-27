@@ -1,14 +1,12 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
-let moment = require('moment');
-let ga = require('../../lib/analytics');
+import React from 'react'
+import Router, { Link, History } from 'react-router'
+import moment from 'moment'
+import ga from '../../../lib/analytics'
 
-let Actions = require('../../actions/post/comments');
-let Store = require('../../stores/post/comments');
+import Actions from '../../../actions/post/comments'
+import Store from '../../../stores/post/comments'
 
-let Pic = require('../shared/pic');
+import Pic from '../../shared/pic'
 
 let Comments = React.createClass({
   contextTypes: {

@@ -1,17 +1,14 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
-let { History } = Router;
+import React from 'react'
+import Router, { History } from 'react-router'
 
+import Store from '../../../stores/post/collaborators'
+import Actions from '../../../actions/post/collaborators'
 
-let Store = require('../../stores/post/collaborators');
-let Actions = require('../../actions/post/collaborators');
+import PostActions from '../../../actions/post'
 
-let PostActions = require('../../actions/post');
+import Select from 'react-select'
 
-let Select = require('react-select');
-
-module.exports = React.createClass({
+export default React.createClass({
 	contextTypes: {
 		route: React.PropTypes.object
 	},

@@ -1,13 +1,12 @@
-"use strict";
-let React = require('react');
+import React from 'react'
 
-let Actions = require('../../actions/post/links');
-let Store = require('../../stores/post/links');
+import Actions from '../../../actions/post/links'
+import Store from '../../../stores/post/links'
 
 // Isomorphic support?
-//let File = require('react-dropzone-component');
+//let File from 'react-dropzone-component');
 
-//let AWS = require('aws-sdk');
+//let AWS from 'aws-sdk');
 // AWS.config.update({accessKeyId: 'AKIAJJA4YUWAJE5AUIQQ', secretAccessKey: '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'});
 // let S3 = AWS.S3;
 // let s3 = new S3();

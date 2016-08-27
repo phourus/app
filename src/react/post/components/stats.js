@@ -1,15 +1,13 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
-let { History } = Router;
-let numeral = require('numeral');
+import React from 'react'
+import Router, { History } from 'react-router'
+import numeral from 'numeral'
 
-let Influence = require('./influence');
-let Popularity = require('../../lib/popularity');
-let Thumbs = require('./thumbs');
+import Influence from './influence'
+import Popularity from '../../../lib/popularity'
+import Thumbs from './thumbs'
 
-let thousands = "0,0";
-let en = numeral.language('en');
+const thousands = "0,0"
+const en = numeral.language('en')
 
 module.exports = React.createClass({
 	mixins: [History],

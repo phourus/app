@@ -1,9 +1,8 @@
-"use strict";
-let React = require('react');
+import React from 'react'
 
-let ga = require('../../lib/analytics');
+import ga from '../../../lib/analytics'
 
-module.exports = React.createClass({
+export default React.createClass({
   getInitialState: function () {
     return {
       visible: true

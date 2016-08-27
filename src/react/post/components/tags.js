@@ -1,11 +1,10 @@
-"use strict";
-let React = require('react');
+import React from 'react'
 
-let Actions = require('../../actions/post/tags');
-let Store = require('../../stores/post/tags');
-let StreamActions = require('../../actions/stream');
+import Actions from '../../../actions/post/tags'
+import Store from '../../../stores/post/tags'
+import StreamActions from '../../../actions/stream'
 
-let Tags = React.createClass({
+export default React.createClass({
 	contextTypes: {
 		route: React.PropTypes.object
 	},
@@ -104,5 +103,3 @@ let Tags = React.createClass({
 		StreamActions.search(id);
 	}
 });
-
-module.exports = Tags;

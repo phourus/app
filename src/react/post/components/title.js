@@ -1,11 +1,9 @@
-"use strict";
-let React = require('react');
-let Router = require('react-router');
-let { Link } = Router;
+import React from 'react'
+import Router, { Link } from 'react-router'
 
-let Actions = require('../../actions/post');
+import Actions from '../../../actions/post'
 
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

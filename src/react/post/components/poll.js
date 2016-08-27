@@ -1,10 +1,9 @@
-"use strict";
-let React = require('react');
+import React from 'react'
 
-let Actions = require('../../actions/post');
-let Store = require('../../stores/post');
+import Actions from '../../../actions/post'
+import Store from '../../../stores/post'
 
-let Poll = React.createClass({
+const Poll = React.createClass({
   getInitialState: function () {
     return {
       votes: {}
@@ -129,4 +128,4 @@ let Poll = React.createClass({
   }
 });
 
-module.exports = Poll;
+export default Poll
