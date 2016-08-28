@@ -2,60 +2,44 @@ import React from 'react'
 
 import ga from '../../../lib/analytics'
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
-      visible: true
-    };
-  },
-  render: function () {
+export default class Share extends React.Component {
+
+  render() {
     return (
       <div className="share">
-        {this.state.visible
+        {this.props.visible
           ? false
           : <div className="toggle" onClick={this._toggle}>
             <i className="fa fa-share" />
             Share
           </div>
         }
-        {this.state.visible
-          ? <Share toggle={this._toggle} post={this.props.post} />
+        {this.props.visible
+          ? <List
+              toggle={this._toggle}
+              facebook={this._facebook}
+              twitter={this._twitter}
+              linkedin={this._linkedin}
+              google={this._google}
+              slack={this._slack}
+              email={this._email}
+            />
           : false
         }
       </div>
-    );
-  },
-  _toggle: function () {
-    this.setState({visible: !this.state.visible});
+    )
   }
-});
 
-let Share = React.createClass({
-  getInitialState: function () {
-    return {
-      selected: '',
-      base: 'https://phourus.com',
-      popup: 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600'
-    };
-  },
-  render: function () {
-    //<li onClick={this._cancel}><i className="fa fa-close" /> Cancel</li>
-    return (
-      <ul>
-        <li onClick={this._facebook}><i className="fa fa-facebook" /> Facebook</li>
-        <li onClick={this._twitter}><i className="fa fa-twitter" /> Twitter</li>
-        <li onClick={this._linkedin}><i className="fa fa-linkedin" /> LinkedIn</li>
-        <li onClick={this._google}><i className="fa fa-google" /> Google +</li>
-        <li onClick={this._slack}><i className="fa fa-slack" /> Slack</li>
-        <li onClick={this._email}><i className="fa fa-envelope" /> Email</li>
-      </ul>
-    );
-  },
-  _cancel: function () {
+  _toggle() {
+    //this.setState({visible: !this.state.visible});
+  }
+
+  _cancel() {
     ga('send', 'event', 'engagement', 'share', 'cancel');
     this.props.toggle();
-  },
-  _facebook: function () {
+  }
+
+  _facebook() {
     let url = "https://www.facebook.com/dialog/share";
     let params = {
       app_id: 1663090460638387,
@@ -66,8 +50,9 @@ let Share = React.createClass({
     this.setState({selected: 'facebook'});
     this._open(url, params);
     ga('send', 'event', 'engagement', 'share', 'facebook');
-  },
-  _twitter: function () {
+  }
+
+  _twitter() {
     let url = "https://twitter.com/intent/tweet";
     let tags = "";
     if (this.props.post && this.props.post.tags) {
@@ -84,8 +69,9 @@ let Share = React.createClass({
     this.setState({selected: 'twitter'});
     this._open(url, params);
     ga('send', 'event', 'engagement', 'share', 'twitter');
-  },
-  _linkedin: function () {
+  }
+
+  _linkedin() {
     let url = "https://www.linkedin.com/shareArticle";
     let params = {
       mini: true,
@@ -97,8 +83,9 @@ let Share = React.createClass({
     this.setState({selected: 'linkedin'});
     this._open(url, params);
     ga('send', 'event', 'engagement', 'share', 'linkedin');
-  },
-  _google: function () {
+  }
+
+  _google() {
     let url = "https://plus.google.com/share";
     let params = {
       url: `${this.state.base}/${this.props.post.user.username}/${this.props.post.slug}`
@@ -106,25 +93,43 @@ let Share = React.createClass({
     this.setState({selected: 'google'});
     this._open(url, params);
     ga('send', 'event', 'engagement', 'share', 'google');
-  },
-  _slack: function () {
+  }
+
+  _slack() {
     this.setState({selected: 'slack'});
     ga('send', 'event', 'engagement', 'share', 'slack');
-  },
-  _email: function () {
+  }
+
+  _email() {
     let body = "The following post has been shared with you from Phourus.com: \r\n \r\n '" + this.props.post.title + "' \r\n \r\n " + `${this.state.base}/${this.props.post.user.username}/${this.props.post.slug}`;
     this.setState({selected: 'email'});
     ga('send', 'event', 'engagement', 'share', 'email');
     window.location.href = encodeURI('mailto:recipient@yourfriend.com?Subject=Somebody shared a Post from Phourus.com with you&body=' + body);
-  },
-  _open: function (url, params) {
+  }
+
+  _open(url, params) {
     let query = "";
     Object.keys(params).forEach((key) => {
       query += key + "=" + params[key] + "&";
     });
     window.open(url + '?' + encodeURI(query.slice(0, -1)), '', this.state.popup);
   }
-});
+}
+
+const List = ({facebook, twitter, linkedin, google, slack, email}) => {
+
+    //<li onClick={this._cancel}><i className="fa fa-close" /> Cancel</li>
+    return (
+      <ul>
+        <li onClick={facebook}><i className="fa fa-facebook" /> Facebook</li>
+        <li onClick={twitter}><i className="fa fa-twitter" /> Twitter</li>
+        <li onClick={linkedin}><i className="fa fa-linkedin" /> LinkedIn</li>
+        <li onClick={google}><i className="fa fa-google" /> Google +</li>
+        <li onClick={slack}><i className="fa fa-slack" /> Slack</li>
+        <li onClick={email}><i className="fa fa-envelope" /> Email</li>
+      </ul>
+    )
+}
 
 // let Facebook = React.createClass({
 //   componentDidMount: function () {

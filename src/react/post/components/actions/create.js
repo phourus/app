@@ -4,7 +4,7 @@ import Rich from './rich'
 
 export default ({route, post, owner, saving, create, back, rich}) => {
   if (route.type !== 'create') {
-    return false
+    return <span></span>
   }
   return (
     <div>

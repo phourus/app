@@ -1,12 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 export default ({route, post, owner}) => {
   let username = 'post'
   if (!owner) {
-    return false
+    return <span></span>
   }
   if (route.type === 'edit' || route.type === 'create') {
-    return false
+    return <span></span>
   }
   if (post.user && post.user.username) {
     username = post.user.username;

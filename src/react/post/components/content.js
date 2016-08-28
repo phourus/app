@@ -3,48 +3,39 @@ import RTE from 'react-quill'
 //import ReactMarkdown from 'react-markdown'
 //<ReactMarkdown source={this.props.post.content} />
 
-import Actions from '../../../actions/post'
+export default class Content extends React.Component {
 
-module.exports = React.createClass({
-	contextTypes: {
-		route: React.PropTypes.object
-	},
-	getDefaultProps: function () {
-		return {
-			post: {},
-			owner: false
-		}
-	},
-	render: function () {
-		let route = this.context.route;
-		let type = route.type;
+	render() {
+		let route = this.props.route
+		let type = route.type
 		if (!this.props.post.rich) {
 			return type === 'edit' && this.props.owner || type === 'create'
 			? <textarea onChange={this._content} value={this.props.post.content} />
-		: <div className="content">{this.props.post.content}</div>;
+			: <div className="content">{this.props.post.content}</div>
 		}
 		return type === 'edit' && this.props.owner || type === 'create'
-		? <TextEditor post={this.props.post} />
-		: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>;
-	},
-	_content: function (e) {
-		Actions.change('content', e.currentTarget.value);
+		? <TextEditor post={this.props.post} rich={this._rich} />
+		: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>
 	}
-});
 
-let TextEditor = React.createClass({
-	render: function () {
-		if (!this.props.post.hasOwnProperty('content')) {
-			return false;
-		}
-		let content = this.props.post.content || "Enter content here";
-		return (
-			<div className="rte">
-				<RTE ref="content" value={content} onChange={this._content} theme="snow" />
-			</div>
-		);
-	},
-	_content: function (value) {
-		Actions.change('content', value);
+	_content(e) {
+		//Actions.change('content', e.currentTarget.value);
 	}
-});
+
+	_rich(value) {
+		//Actions.change('content', value);
+	}
+}
+
+const TextEditor = ({post, rich}) => {
+	if (!post.hasOwnProperty('content')) {
+		return <span></span>
+	}
+
+	let content = post.content || "Enter content here"
+	return (
+		<div className="rte">
+			<RTE value={content} onChange={rich} theme="snow" />
+		</div>
+	)
+}

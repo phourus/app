@@ -23,17 +23,17 @@ export default class Single extends React.Component {
 	render() {
 		return (
 			<div className="single">
-				<ActionsView post={this.props.post} owner={this.props.owner} />
-				<Type post={this.props.post} owner={this.props.owner} />
-				<Privacy post={this.props.post} owner={this.props.owner} />
-				<Title post={this.props.post} owner={this.props.owner} />
-				<Tags post={this.props.post} owner={this.props.owner} tag={this.props.tag} />
-				<Content post={this.props.post} owner={this.props.owner} />
-				<Share post={this.props.post} />
+				<ActionsView {...this.props} />
+				<Type {...this.props} />
+				<Privacy {...this.props} />
+				<Title {...this.props} />
+				<Tags {...this.props} />
+				<Content {...this.props} />
+				<Share {...this.props}  />
 				<Profile postMode={true} />
-				<Stats post={this.props.post} />
-				<Links post={this.props.post} owner={this.props.owner} />
-				<Comments post={this.props.post} />
+				<Stats {...this.props} />
+				<Links {...this.props} />
+				<Comments {...this.props} />
 			</div>
 		)
 	}

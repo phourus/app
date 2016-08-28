@@ -10,7 +10,7 @@ export default ({content, change, add}) => {
           <img src={"/assets/avatars/1.jpg"} />
         </Link>
       </div>
-      <textarea ref="comment" placeholder="Enter your comment here" value={content} onChange={change} />
+      <textarea placeholder="Enter your comment here" value={content} onChange={change} />
       <button className="button green add" onClick={add}>
         <i className="fa fa-comment" /> Post Comment
       </button>

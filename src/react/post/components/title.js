@@ -1,34 +1,22 @@
 import React from 'react'
 import Router, { Link } from 'react-router'
 
-import Actions from '../../../actions/post'
+export default class Title extends React.Component {
 
-export default React.createClass({
-  contextTypes: {
-    route: React.PropTypes.object
-  },
-  getDefaultProps: function () {
-    return {
-      post: {
-        id: 0
-      },
-      user: {
-        id: 0
-      },
-      owner: false
-    };
-  },
-  render: function () {
+  render() {
     let username = 'post';
-    let post = this.props.post;
+    let { route, post, owner } = this.props
     if (post.user && post.user.username) {
-      username = post.user.username;
+      username = post.user.username
     }
-    return this.context.route.type === 'create' || this.context.route.type === 'edit' && this.props.owner
-    ? <input className="title editing" onChange={this._title} defaultValue={post.title} />
-    : <h2 className="title"><Link to={`/${username}/${post.slug}`}>{post.title}</Link></h2>;
-  },
-  _title: function (e) {
-    Actions.change('title', e.currentTarget.value);
+    return (
+      route.type === 'create' || route.type === 'edit' && owner
+        ? <input className="title editing" onChange={this._title} defaultValue={post.title} />
+        : <h2 className="title"><Link to={`/${username}/${post.slug}`}>{post.title}</Link></h2>
+    )
   }
-});
+
+  _title(e) {
+    //Actions.change('title', e.currentTarget.value);
+  }
+}

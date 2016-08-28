@@ -1,18 +1,14 @@
 import React from 'react'
 
-import Actions from '../../../actions/post'
-
 import tax from '../../../lib/taxonomy'
 
-let Categories = React.createClass({
-	contextTypes: {
-		route: React.PropTypes.object
-	},
-	render: function () {
-		let type = tax[this.props.post.type] || {};
-		if (this.props.owner && this.context.route.type === 'edit') {
-			let cats = type.category || [];
-			let subs = type[this.props.post.category] || false;
+export default class Categories extends React.Component {
+
+	render() {
+		let type = tax[this.props.post.type] || {}
+		if (this.props.owner && this.props.route.type === 'edit') {
+			let cats = type.category || []
+			let subs = type[this.props.post.category] || false
 			return (
 				<div className="categories">
 					<strong>Post Categories</strong><br />
@@ -33,7 +29,7 @@ let Categories = React.createClass({
 						: false
 					}
 				</div>
-			);
+			)
 		}
 		return (
 			<div className="categories">
@@ -50,14 +46,16 @@ let Categories = React.createClass({
 					: false
 				}
 			</div>
-		);
-	},
-	_category: function (e) {
-		Actions.change('category', e.currentTarget.value);
-	},
-	_subcategory: function (e) {
-		Actions.change('subcategory', e.currentTarget.value);
+		)
 	}
-});
+
+	_category(e) {
+		//Actions.change('category', e.currentTarget.value);
+	}
+
+	_subcategory(e) {
+		//Actions.change('subcategory', e.currentTarget.value);
+	}
+}
 
 export default Categories

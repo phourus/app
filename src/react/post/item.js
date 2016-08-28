@@ -13,7 +13,7 @@ export default (props) => {
 	return (
 		<div className="postItem" id={`post${props.post.id}`}>
 			<Drag id={props.post.id} />
-			<ActionsView post={props.post} owner={props.owner} />
+			<ActionsView route={this.props.route} post={props.post} owner={props.owner} />
 			<Type post={props.post} owner={props.owner} />
 			<Privacy post={props.post} owner={props.owner} />
 			<Title post={props.post} owner={props.owner} />

@@ -1,37 +1,32 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-let target = {
-	beginDrag: function (props) {
+const target = {
+	beginDrag: (props) => {
 		return {
 			id: props.id
-		};
+		}
 	}
-};
+}
 
-let collect = function (connect, monitor) {
+const collect = (connect, monitor) => {
   return {
 		connectDragSource: connect.dragSource(),
  	 	isDragging: monitor.isDragging()
-  };
+  }
 }
 
-let Drag = React.createClass({
-	render: function () {
-		var className = ['handle'];
-		var id = this.props.id;
-		var isDragging = this.props.isDragging;
-		var connectDragSource = this.props.connectDragSource;
-		if (isDragging) {
-			className.push('dragging')
-		}
-
-		return connectDragSource(
-			<div className={className.join(' ')}>
-				<i className="fa fa-th" />
-			</div>
-		);
+const Drag = ({id, isDragging, connectDragSource}) => {
+	var className = ['handle']
+	if (isDragging) {
+		className.push('dragging')
 	}
-});
 
-module.exports = DragSource('posts', target, collect)(Drag);
+	return connectDragSource(
+		<div className={className.join(' ')}>
+			<i className="fa fa-th" />
+		</div>
+	);
+}
+
+export default DragSource('posts', target, collect)(Drag)

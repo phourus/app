@@ -2,7 +2,7 @@ import React from 'react'
 
 export default ({route, back}) => {
   if (route.type !== 'post') {
-    return false
+    return <span></span>
   }
   return (
     <button className="close" onClick={back}>

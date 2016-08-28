@@ -1,5 +1,5 @@
 import React from 'react'
-import Router, { History } from 'react-router'
+import Router from 'react-router'
 import numeral from 'numeral'
 
 import Influence from './influence'
@@ -9,26 +9,20 @@ import Thumbs from './thumbs'
 const thousands = "0,0"
 const en = numeral.language('en')
 
-module.exports = React.createClass({
-	mixins: [History],
-	contextTypes: {
-		route: React.PropTypes.object
-	},
-	getDefaultProps: function () {
-		return {
-			post: {}
-		};
-	},
-	componentDidMount: function () {
-		this._popularity(this.props);
-	},
-	componentWillReceiveProps: function (data) {
-		this._popularity(data);
-	},
-	render: function () {
+export default class Stats extends React.Component {
+
+	componentDidMount() {
+		this._popularity(this.props)
+	}
+
+	componentWillReceiveProps(data) {
+		this._popularity(data)
+	}
+
+	render() {
 		return (
 			<div className="interact" onClick={this._single}>
-				{this.context.route.type === 'post' ? <Thumbs post={this.props.post} /> : false}
+				{this.props.route.type === 'post' ? <Thumbs post={this.props.post} /> : false}
 				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
 					<div>
@@ -42,24 +36,26 @@ module.exports = React.createClass({
 					<div><strong>{numeral(this.props.post.totalThumbs).format('0a')}</strong><br /><i className="fa fa-thumbs-up" /></div>
 				</div>
 			</div>
-		);
-	},
-	_popularity: function (data) {
+		)
+	}
+
+	_popularity(data) {
 		if (data.post && data.post.id > 0) {
 			// when _popularity is called by componentWillReceiveProps, element
 			// has not yet been rendered.
 			setTimeout(() => {
-				let element = document.getElementById(`popularity${data.post.id}`);
-				let popularity = new Popularity(element, data.post.popularity || 100);
-			}, 1);
+				let element = document.getElementById(`popularity${data.post.id}`)
+				let popularity = new Popularity(element, data.post.popularity || 100)
+			}, 1)
 		}
-	},
-	_single: function () {
-		let username = '';
-		let user = this.props.post.user;
-		if (user && user.username) {
-			username = user.username;
-		}
-		this.history.pushState(null, `/${username}/${this.props.post.slug}`);
 	}
-});
+
+	_single() {
+		let username = ''
+		let user = this.props.post.user
+		if (user && user.username) {
+			username = user.username
+		}
+		this.history.pushState(null, `/${username}/${this.props.post.slug}`)
+	}
+}

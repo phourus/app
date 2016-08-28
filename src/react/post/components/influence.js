@@ -7,7 +7,7 @@ const Influence = ({influence}) => {
       <div className="score">{influence}</div>
       <div>Influence</div>
     </div>
-  );
+  )
 }
 
 export default Influence

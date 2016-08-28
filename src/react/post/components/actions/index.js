@@ -9,7 +9,7 @@ import Controls from './controls'
 export default class Actions extends React.Component {
 
   render() {
-    const { route, owner, post, confirmTrash } = this.props
+    const { route, owner, post, saving, confirmTrash } = this.props
 
     return (
       <div className="actions">

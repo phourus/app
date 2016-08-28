@@ -6,5 +6,5 @@ export default ({post, rich}) => {
         <i className="fa fa-font" /> Enable Rich Text
       </button>)
     }
-    return false
+    return <span></span>
 }

@@ -4,10 +4,10 @@ import Rich from './rich'
 
 export default ({route, post, owner, saving, confirmTrash, confirm, cancel, trash, update, rich, myposts}) => {
   if (!owner) {
-    return false
+    return <span></span>
   }
   if (route.type !== 'edit') {
-    return false
+    return <span></span>
   }
   if (confirmTrash) {
     return (
