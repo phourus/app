@@ -1,31 +1,21 @@
-import { call, put, take, spawn } from 'redux-saga/effects'
+import { spawn } from 'redux-saga/effects'
 
-import posts from '../../../rest/posts'
+import collaborators from './sagas/collaborators'
+import comments from './sagas/comments'
+import folders from './sagas/folders'
+import links from './sagas/links'
+import posts from './sagas/posts'
+import tags from './sagas/tags'
+import thumbs from './sagas/thumbs'
 
 export default function* post() {
   yield [
-    spawn(single),
-    spawn(create),
-    spawn(save),
-    spawn(trash)
+    spawn(collaborators),
+    spawn(comments),
+    spawn(folders),
+    spawn(links),
+    spawn(posts),
+    spawn(tags),
+    spawn(thumbs)
   ]
-}
-
-function* single() {
-  const action = yield take('POST_SINGLE')
-  yield put({type: 'REQUEST_POST_SINGLE'})
-  const post = yield call(posts.single, action.id)
-  yield put({type: 'RECEIVE_POST_SINGLE', id: action.id, post})
-}
-
-function* create() {
-  const action = yield take('POST_CREATE')
-}
-
-function* save() {
-  const action = yield take('POST_SAVE')
-}
-
-function* trash() {
-  const action = yield take('POST_TRASH')
 }
