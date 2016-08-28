@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "92db0dd39b0f705ca106"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "949d6b7f2f85aeef8958"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -39508,7 +39508,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [init].map(regeneratorRuntime.mark);
+	var _marked = [init, collection, add, save, remove].map(regeneratorRuntime.mark);
 	
 	function init() {
 	  return regeneratorRuntime.wrap(function init$(_context) {
@@ -39516,7 +39516,7 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return [];
+	          return [(0, _effects.spawn)(collection), (0, _effects.spawn)(add), (0, _effects.spawn)(save), (0, _effects.spawn)(remove)];
 	
 	        case 2:
 	        case 'end':
@@ -39524,6 +39524,234 @@
 	      }
 	    }
 	  }, _marked[0], this);
+	}
+	
+	function collection() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function collection$(_context2) {
+	    while (1) {
+	      switch (_context2.prev = _context2.next) {
+	        case 0:
+	          if (false) {
+	            _context2.next = 21;
+	            break;
+	          }
+	
+	          _context2.next = 3;
+	          return (0, _effects.take)('COMMENTS_LIST');
+	
+	        case 3:
+	          action = _context2.sent;
+	          _context2.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_COMMENTS_LIST' });
+	
+	        case 6:
+	          _context2.prev = 6;
+	          _context2.next = 9;
+	          return (0, _effects.call)(_comments2.default.collection, action.params);
+	
+	        case 9:
+	          data = _context2.sent;
+	          _context2.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_COMMENTS_LIST', params: params, data: data });
+	
+	        case 12:
+	          _context2.next = 19;
+	          break;
+	
+	        case 14:
+	          _context2.prev = 14;
+	          _context2.t0 = _context2['catch'](6);
+	          alert = {
+	            action: 'collection',
+	            color: 'yellow',
+	            code: _context2.t0,
+	            msg: 'Comments could not be loaded'
+	          };
+	          _context2.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context2.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context2.stop();
+	      }
+	    }
+	  }, _marked[1], this, [[6, 14]]);
+	}
+	
+	function add() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function add$(_context3) {
+	    while (1) {
+	      switch (_context3.prev = _context3.next) {
+	        case 0:
+	          if (false) {
+	            _context3.next = 21;
+	            break;
+	          }
+	
+	          _context3.next = 3;
+	          return (0, _effects.take)('COMMENT_ADD');
+	
+	        case 3:
+	          action = _context3.sent;
+	          _context3.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_COMMENT_ADD' });
+	
+	        case 6:
+	          _context3.prev = 6;
+	          _context3.next = 9;
+	          return (0, _effects.call)(_comments2.default.add, action.model);
+	
+	        case 9:
+	          data = _context3.sent;
+	          _context3.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_COMMENT_ADD', data: data });
+	
+	        case 12:
+	          _context3.next = 19;
+	          break;
+	
+	        case 14:
+	          _context3.prev = 14;
+	          _context3.t0 = _context3['catch'](6);
+	          alert = {
+	            action: 'add',
+	            color: 'red',
+	            code: _context3.t0,
+	            msg: 'Comment could not be created'
+	          };
+	          _context3.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context3.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context3.stop();
+	      }
+	    }
+	  }, _marked[2], this, [[6, 14]]);
+	}
+	
+	function save() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function save$(_context4) {
+	    while (1) {
+	      switch (_context4.prev = _context4.next) {
+	        case 0:
+	          if (false) {
+	            _context4.next = 21;
+	            break;
+	          }
+	
+	          _context4.next = 3;
+	          return (0, _effects.take)('COMMENT_SAVE');
+	
+	        case 3:
+	          action = _context4.sent;
+	          _context4.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_COMMENT_SAVE' });
+	
+	        case 6:
+	          _context4.prev = 6;
+	          _context4.next = 9;
+	          return (0, _effects.call)(_comments2.default.save, action.id, action.model);
+	
+	        case 9:
+	          data = _context4.sent;
+	          _context4.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_COMMENT_SAVE', data: data });
+	
+	        case 12:
+	          _context4.next = 19;
+	          break;
+	
+	        case 14:
+	          _context4.prev = 14;
+	          _context4.t0 = _context4['catch'](6);
+	          alert = {
+	            action: 'save',
+	            color: 'red',
+	            code: _context4.t0,
+	            msg: 'Comment could not be updated'
+	          };
+	          _context4.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context4.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context4.stop();
+	      }
+	    }
+	  }, _marked[3], this, [[6, 14]]);
+	}
+	
+	function remove() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function remove$(_context5) {
+	    while (1) {
+	      switch (_context5.prev = _context5.next) {
+	        case 0:
+	          if (false) {
+	            _context5.next = 21;
+	            break;
+	          }
+	
+	          _context5.next = 3;
+	          return (0, _effects.take)('COMMENT_REMOVE');
+	
+	        case 3:
+	          action = _context5.sent;
+	          _context5.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_COMMENT_REMOVE' });
+	
+	        case 6:
+	          _context5.prev = 6;
+	          _context5.next = 9;
+	          return (0, _effects.call)(_comments2.default.remove, action.id);
+	
+	        case 9:
+	          data = _context5.sent;
+	          _context5.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_COMMENT_REMOVE', id: id });
+	
+	        case 12:
+	          _context5.next = 19;
+	          break;
+	
+	        case 14:
+	          _context5.prev = 14;
+	          _context5.t0 = _context5['catch'](6);
+	          alert = {
+	            action: 'remove',
+	            color: 'red',
+	            code: _context5.t0,
+	            msg: 'Comment could not be removed'
+	          };
+	          _context5.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context5.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context5.stop();
+	      }
+	    }
+	  }, _marked[4], this, [[6, 14]]);
 	}
 
 /***/ },
@@ -39576,7 +39804,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [init].map(regeneratorRuntime.mark);
+	var _marked = [init, collection, add, remove].map(regeneratorRuntime.mark);
 	
 	function init() {
 	  return regeneratorRuntime.wrap(function init$(_context) {
@@ -39584,7 +39812,7 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return [];
+	          return [(0, _effects.spawn)(collection), (0, _effects.spawn)(add), (0, _effects.spawn)(remove)];
 	
 	        case 2:
 	        case 'end':
@@ -39592,6 +39820,177 @@
 	      }
 	    }
 	  }, _marked[0], this);
+	}
+	
+	function collection() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function collection$(_context2) {
+	    while (1) {
+	      switch (_context2.prev = _context2.next) {
+	        case 0:
+	          if (false) {
+	            _context2.next = 21;
+	            break;
+	          }
+	
+	          _context2.next = 3;
+	          return (0, _effects.take)('FOLDERS_LIST');
+	
+	        case 3:
+	          action = _context2.sent;
+	          _context2.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_FOLDERS_LIST' });
+	
+	        case 6:
+	          _context2.prev = 6;
+	          _context2.next = 9;
+	          return (0, _effects.call)(_folders2.default.collection, {});
+	
+	        case 9:
+	          data = _context2.sent;
+	          _context2.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_FOLDERS_LIST', data: data });
+	
+	        case 12:
+	          _context2.next = 19;
+	          break;
+	
+	        case 14:
+	          _context2.prev = 14;
+	          _context2.t0 = _context2['catch'](6);
+	          alert = {
+	            action: 'collection',
+	            color: 'red',
+	            code: _context2.t0,
+	            msg: 'Folders could not be loaded'
+	          };
+	          _context2.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context2.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context2.stop();
+	      }
+	    }
+	  }, _marked[1], this, [[6, 14]]);
+	}
+	
+	function add() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function add$(_context3) {
+	    while (1) {
+	      switch (_context3.prev = _context3.next) {
+	        case 0:
+	          if (false) {
+	            _context3.next = 21;
+	            break;
+	          }
+	
+	          _context3.next = 3;
+	          return (0, _effects.take)('FOLDERS_ADD');
+	
+	        case 3:
+	          action = _context3.sent;
+	          _context3.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_FOLDER_ADD' });
+	
+	        case 6:
+	          _context3.prev = 6;
+	          _context3.next = 9;
+	          return (0, _effects.call)(_folders2.default.add, model);
+	
+	        case 9:
+	          data = _context3.sent;
+	          _context3.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_FOLDER_ADD', data: data });
+	
+	        case 12:
+	          _context3.next = 19;
+	          break;
+	
+	        case 14:
+	          _context3.prev = 14;
+	          _context3.t0 = _context3['catch'](6);
+	          alert = {
+	            action: 'add',
+	            color: 'red',
+	            code: _context3.t0,
+	            msg: 'Folder could not be created'
+	          };
+	          _context3.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context3.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context3.stop();
+	      }
+	    }
+	  }, _marked[2], this, [[6, 14]]);
+	}
+	
+	function remove() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function remove$(_context4) {
+	    while (1) {
+	      switch (_context4.prev = _context4.next) {
+	        case 0:
+	          if (false) {
+	            _context4.next = 21;
+	            break;
+	          }
+	
+	          _context4.next = 3;
+	          return (0, _effects.take)('FOLDERS_REMOVE');
+	
+	        case 3:
+	          action = _context4.sent;
+	          _context4.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_FOLDER_REMOVE' });
+	
+	        case 6:
+	          _context4.prev = 6;
+	          _context4.next = 9;
+	          return (0, _effects.call)(_folders2.default.remove, id);
+	
+	        case 9:
+	          data = _context4.sent;
+	          _context4.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_FOLDER_REMOVE', id: id });
+	
+	        case 12:
+	          _context4.next = 19;
+	          break;
+	
+	        case 14:
+	          _context4.prev = 14;
+	          _context4.t0 = _context4['catch'](6);
+	          alert = {
+	            action: 'remove',
+	            color: 'red',
+	            code: _context4.t0,
+	            msg: 'Folder could not be removed'
+	          };
+	          _context4.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context4.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context4.stop();
+	      }
+	    }
+	  }, _marked[3], this, [[6, 14]]);
 	}
 
 /***/ },
@@ -39650,7 +40049,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [init].map(regeneratorRuntime.mark);
+	var _marked = [init, add, save, remove].map(regeneratorRuntime.mark);
 	
 	function init() {
 	  return regeneratorRuntime.wrap(function init$(_context) {
@@ -39658,7 +40057,7 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return [];
+	          return [(0, _effects.spawn)(add), (0, _effects.spawn)(save), (0, _effects.spawn)(remove)];
 	
 	        case 2:
 	        case 'end':
@@ -39666,6 +40065,177 @@
 	      }
 	    }
 	  }, _marked[0], this);
+	}
+	
+	function add() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function add$(_context2) {
+	    while (1) {
+	      switch (_context2.prev = _context2.next) {
+	        case 0:
+	          if (false) {
+	            _context2.next = 21;
+	            break;
+	          }
+	
+	          _context2.next = 3;
+	          return (0, _effects.take)('LINK_ADD');
+	
+	        case 3:
+	          action = _context2.sent;
+	          _context2.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_LINK_ADD' });
+	
+	        case 6:
+	          _context2.prev = 6;
+	          _context2.next = 9;
+	          return (0, _effects.call)(_links2.default.add, action.model);
+	
+	        case 9:
+	          data = _context2.sent;
+	          _context2.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_LINK_ADD', data: data });
+	
+	        case 12:
+	          _context2.next = 19;
+	          break;
+	
+	        case 14:
+	          _context2.prev = 14;
+	          _context2.t0 = _context2['catch'](6);
+	          alert = {
+	            action: 'add',
+	            color: 'red',
+	            code: _context2.t0,
+	            msg: 'Link could not be created'
+	          };
+	          _context2.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context2.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context2.stop();
+	      }
+	    }
+	  }, _marked[1], this, [[6, 14]]);
+	}
+	
+	function save() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function save$(_context3) {
+	    while (1) {
+	      switch (_context3.prev = _context3.next) {
+	        case 0:
+	          if (false) {
+	            _context3.next = 21;
+	            break;
+	          }
+	
+	          _context3.next = 3;
+	          return (0, _effects.take)('LINK_SAVE');
+	
+	        case 3:
+	          action = _context3.sent;
+	          _context3.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_LINK_SAVE' });
+	
+	        case 6:
+	          _context3.prev = 6;
+	          _context3.next = 9;
+	          return (0, _effects.call)(_links2.default.save, action.id, action.model);
+	
+	        case 9:
+	          data = _context3.sent;
+	          _context3.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_LINK_SAVE', data: data });
+	
+	        case 12:
+	          _context3.next = 19;
+	          break;
+	
+	        case 14:
+	          _context3.prev = 14;
+	          _context3.t0 = _context3['catch'](6);
+	          alert = {
+	            action: 'save',
+	            color: 'red',
+	            code: _context3.t0,
+	            msg: 'Link could not be saved'
+	          };
+	          _context3.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context3.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context3.stop();
+	      }
+	    }
+	  }, _marked[2], this, [[6, 14]]);
+	}
+	
+	function remove() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function remove$(_context4) {
+	    while (1) {
+	      switch (_context4.prev = _context4.next) {
+	        case 0:
+	          if (false) {
+	            _context4.next = 21;
+	            break;
+	          }
+	
+	          _context4.next = 3;
+	          return (0, _effects.take)('LINK_REMOVE');
+	
+	        case 3:
+	          action = _context4.sent;
+	          _context4.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_LINK_REMOVE' });
+	
+	        case 6:
+	          _context4.prev = 6;
+	          _context4.next = 9;
+	          return (0, _effects.call)(_links2.default.remove, action.id);
+	
+	        case 9:
+	          data = _context4.sent;
+	          _context4.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_LINK_REMOVE', id: id });
+	
+	        case 12:
+	          _context4.next = 19;
+	          break;
+	
+	        case 14:
+	          _context4.prev = 14;
+	          _context4.t0 = _context4['catch'](6);
+	          alert = {
+	            action: 'remove',
+	            color: 'red',
+	            code: _context4.t0,
+	            msg: 'Link could not be removed'
+	          };
+	          _context4.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context4.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context4.stop();
+	      }
+	    }
+	  }, _marked[3], this, [[6, 14]]);
 	}
 
 /***/ },
@@ -39878,7 +40448,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [init].map(regeneratorRuntime.mark);
+	var _marked = [init, add, remove].map(regeneratorRuntime.mark);
 	
 	function init() {
 	  return regeneratorRuntime.wrap(function init$(_context) {
@@ -39886,7 +40456,7 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return [];
+	          return [(0, _effects.spawn)(add), (0, _effects.spawn)(remove)];
 	
 	        case 2:
 	        case 'end':
@@ -39894,6 +40464,120 @@
 	      }
 	    }
 	  }, _marked[0], this);
+	}
+	
+	function add() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function add$(_context2) {
+	    while (1) {
+	      switch (_context2.prev = _context2.next) {
+	        case 0:
+	          if (false) {
+	            _context2.next = 21;
+	            break;
+	          }
+	
+	          _context2.next = 3;
+	          return (0, _effects.take)('TAG_ADD');
+	
+	        case 3:
+	          action = _context2.sent;
+	          _context2.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_TAG_ADD' });
+	
+	        case 6:
+	          _context2.prev = 6;
+	          _context2.next = 9;
+	          return (0, _effects.call)(_tags2.default.add, action.model);
+	
+	        case 9:
+	          data = _context2.sent;
+	          _context2.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_TAG_ADD', data: data });
+	
+	        case 12:
+	          _context2.next = 19;
+	          break;
+	
+	        case 14:
+	          _context2.prev = 14;
+	          _context2.t0 = _context2['catch'](6);
+	          alert = {
+	            action: 'add',
+	            color: 'red',
+	            code: _context2.t0,
+	            msg: 'Tag could not be created'
+	          };
+	          _context2.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context2.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context2.stop();
+	      }
+	    }
+	  }, _marked[1], this, [[6, 14]]);
+	}
+	
+	function remove() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function remove$(_context3) {
+	    while (1) {
+	      switch (_context3.prev = _context3.next) {
+	        case 0:
+	          if (false) {
+	            _context3.next = 21;
+	            break;
+	          }
+	
+	          _context3.next = 3;
+	          return (0, _effects.take)('TAG_REMOVE');
+	
+	        case 3:
+	          action = _context3.sent;
+	          _context3.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_TAG_REMOVE' });
+	
+	        case 6:
+	          _context3.prev = 6;
+	          _context3.next = 9;
+	          return (0, _effects.call)(_tags2.default.remove, action.id);
+	
+	        case 9:
+	          data = _context3.sent;
+	          _context3.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_TAG_REMOVE', id: id });
+	
+	        case 12:
+	          _context3.next = 19;
+	          break;
+	
+	        case 14:
+	          _context3.prev = 14;
+	          _context3.t0 = _context3['catch'](6);
+	          alert = {
+	            action: 'remove',
+	            color: 'red',
+	            code: _context3.t0,
+	            msg: 'Tag could not be removed'
+	          };
+	          _context3.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context3.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context3.stop();
+	      }
+	    }
+	  }, _marked[2], this, [[6, 14]]);
 	}
 
 /***/ },
@@ -39936,7 +40620,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var _marked = [init].map(regeneratorRuntime.mark);
+	var _marked = [init, post, add, save, remove].map(regeneratorRuntime.mark);
 	
 	function init() {
 	  return regeneratorRuntime.wrap(function init$(_context) {
@@ -39944,7 +40628,7 @@
 	      switch (_context.prev = _context.next) {
 	        case 0:
 	          _context.next = 2;
-	          return [];
+	          return [(0, _effects.spawn)(post), (0, _effects.spawn)(add), (0, _effects.spawn)(save), (0, _effects.spawn)(remove)];
 	
 	        case 2:
 	        case 'end':
@@ -39952,6 +40636,234 @@
 	      }
 	    }
 	  }, _marked[0], this);
+	}
+	
+	function post() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function post$(_context2) {
+	    while (1) {
+	      switch (_context2.prev = _context2.next) {
+	        case 0:
+	          if (false) {
+	            _context2.next = 21;
+	            break;
+	          }
+	
+	          _context2.next = 3;
+	          return (0, _effects.take)('THUMB_POST');
+	
+	        case 3:
+	          action = _context2.sent;
+	          _context2.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_THUMB_POST' });
+	
+	        case 6:
+	          _context2.prev = 6;
+	          _context2.next = 9;
+	          return (0, _effects.call)(_thumbs2.default.post, action.id);
+	
+	        case 9:
+	          data = _context2.sent;
+	          _context2.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_THUMB_POST', data: data, id: id });
+	
+	        case 12:
+	          _context2.next = 19;
+	          break;
+	
+	        case 14:
+	          _context2.prev = 14;
+	          _context2.t0 = _context2['catch'](6);
+	          alert = {
+	            action: 'load',
+	            color: 'red',
+	            code: _context2.t0,
+	            msg: 'Thumbs could not be loaded'
+	          };
+	          _context2.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context2.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context2.stop();
+	      }
+	    }
+	  }, _marked[1], this, [[6, 14]]);
+	}
+	
+	function add() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function add$(_context3) {
+	    while (1) {
+	      switch (_context3.prev = _context3.next) {
+	        case 0:
+	          if (false) {
+	            _context3.next = 21;
+	            break;
+	          }
+	
+	          _context3.next = 3;
+	          return (0, _effects.take)('THUMB_ADD');
+	
+	        case 3:
+	          action = _context3.sent;
+	          _context3.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_THUMB_ADD' });
+	
+	        case 6:
+	          _context3.prev = 6;
+	          _context3.next = 9;
+	          return (0, _effects.call)(_thumbs2.default.add, action.model);
+	
+	        case 9:
+	          data = _context3.sent;
+	          _context3.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_THUMB_ADD', data: data });
+	
+	        case 12:
+	          _context3.next = 19;
+	          break;
+	
+	        case 14:
+	          _context3.prev = 14;
+	          _context3.t0 = _context3['catch'](6);
+	          alert = {
+	            action: 'add',
+	            color: 'red',
+	            code: _context3.t0,
+	            msg: 'Thumb could not be added'
+	          };
+	          _context3.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context3.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context3.stop();
+	      }
+	    }
+	  }, _marked[2], this, [[6, 14]]);
+	}
+	
+	function save() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function save$(_context4) {
+	    while (1) {
+	      switch (_context4.prev = _context4.next) {
+	        case 0:
+	          if (false) {
+	            _context4.next = 21;
+	            break;
+	          }
+	
+	          _context4.next = 3;
+	          return (0, _effects.take)('THUMB_SAVE');
+	
+	        case 3:
+	          action = _context4.sent;
+	          _context4.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_THUMB_SAVE' });
+	
+	        case 6:
+	          _context4.prev = 6;
+	          _context4.next = 9;
+	          return (0, _effects.call)(_thumbs2.default.save, action.id, action.model);
+	
+	        case 9:
+	          data = _context4.sent;
+	          _context4.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_THUMB_SAVE', data: data });
+	
+	        case 12:
+	          _context4.next = 19;
+	          break;
+	
+	        case 14:
+	          _context4.prev = 14;
+	          _context4.t0 = _context4['catch'](6);
+	          alert = {
+	            action: 'save',
+	            color: 'red',
+	            code: _context4.t0,
+	            msg: 'Thumb could not be saved'
+	          };
+	          _context4.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context4.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context4.stop();
+	      }
+	    }
+	  }, _marked[3], this, [[6, 14]]);
+	}
+	
+	function remove() {
+	  var action, data, alert;
+	  return regeneratorRuntime.wrap(function remove$(_context5) {
+	    while (1) {
+	      switch (_context5.prev = _context5.next) {
+	        case 0:
+	          if (false) {
+	            _context5.next = 21;
+	            break;
+	          }
+	
+	          _context5.next = 3;
+	          return (0, _effects.take)('THUMB_REMOVE');
+	
+	        case 3:
+	          action = _context5.sent;
+	          _context5.next = 6;
+	          return (0, _effects.put)({ type: 'REQUEST_THUMB_REMOVE' });
+	
+	        case 6:
+	          _context5.prev = 6;
+	          _context5.next = 9;
+	          return (0, _effects.call)(_thumbs2.default.remove, action.id);
+	
+	        case 9:
+	          data = _context5.sent;
+	          _context5.next = 12;
+	          return (0, _effects.put)({ type: 'RECEIVE_THUMB_REMOVE', data: data, id: id });
+	
+	        case 12:
+	          _context5.next = 19;
+	          break;
+	
+	        case 14:
+	          _context5.prev = 14;
+	          _context5.t0 = _context5['catch'](6);
+	          alert = {
+	            action: 'remove',
+	            color: 'red',
+	            code: _context5.t0,
+	            msg: 'Thumb could not be removed'
+	          };
+	          _context5.next = 19;
+	          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+	
+	        case 19:
+	          _context5.next = 0;
+	          break;
+	
+	        case 21:
+	        case 'end':
+	          return _context5.stop();
+	      }
+	    }
+	  }, _marked[4], this, [[6, 14]]);
 	}
 
 /***/ },
@@ -92993,7 +93905,6 @@
 	var Loader = __webpack_require__(670);
 	var Sidebar = __webpack_require__(1113);
 	
-	console.log('styles', _styles2.default);
 	var Stream = React.createClass({
 		displayName: 'Stream',
 	
