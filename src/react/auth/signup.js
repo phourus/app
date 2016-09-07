@@ -4,9 +4,7 @@ import util from '../../lib/util';
 import { Link } from 'react-router';
 
 import Actions from '../../actions/session';
-import Store from '../../stores/session';
 import {Orgs as ProfileActions} from '../../actions/profile';
-import ProfileStore from '../../stores/orgs';
 import MemberActions from '../../actions/members';
 import Alert from '../shared/alerts';
 
@@ -38,25 +36,21 @@ export default React.createClass({
     };
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen(data => {
-      if (data.action === 'login' && data.code === 200) {
-        let url = util.createHomeURL();
-        let route = this.context.route;
-        if (!route.subdomain) {
-          url = url + '/stream';
-        }
-        window.location = url;
-      }
-    });
-    this.unsubscribeProfile = ProfileStore.listen(data => {
-      if (data.org) {
-        this.setState({org: data.org, step: 2});
-      }
-    });
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
-    this.unsubscribeProfile();
+    // this.unsubscribe = Store.listen(data => {
+    //   if (data.action === 'login' && data.code === 200) {
+    //     let url = util.createHomeURL();
+    //     let route = this.context.route;
+    //     if (!route.subdomain) {
+    //       url = url + '/stream';
+    //     }
+    //     window.location = url;
+    //   }
+    // });
+    // this.unsubscribeProfile = ProfileStore.listen(data => {
+    //   if (data.org) {
+    //     this.setState({org: data.org, step: 2});
+    //   }
+    // });
   },
   componentDidUpdate: function () {
     if (this.state.loaded === false) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import Router from 'react-router';
-import Store from '../../stores/stream';
 import Actions from '../../actions/stream';
 import Post from '../post';
 
@@ -23,9 +22,9 @@ let Explorer = React.createClass({
     };
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen((data) => {
-      this.setState(data);
-    });
+    // this.unsubscribe = Store.listen((data) => {
+    //   this.setState(data);
+    // });
     Actions.collection();
   },
   render: function () {

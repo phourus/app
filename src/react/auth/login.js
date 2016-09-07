@@ -4,7 +4,6 @@ import util from '../../lib/util';
 import { Link } from 'react-router';
 
 import Actions from '../../actions/session';
-import Store from '../../stores/session';
 import Loader from '../shared/loader';
 import Alert from '../shared/alerts';
 
@@ -25,25 +24,22 @@ export default React.createClass({
     };
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen(data => {
-      if (data.code === 200 && this.state.clicked === true) {
-        data.clicked = false;
-        let url = util.createHomeURL();
-        let route = this.context.route;
-        if (!route.subdomain) {
-          url = url + '/stream';
-        }
-        window.location = url;
-      }
-      if (!data.alert) {
-        data.alert = null;
-      }
-      data.ready = true;
-      this.setState(data);
-    });
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
+    // this.unsubscribe = Store.listen(data => {
+    //   if (data.code === 200 && this.state.clicked === true) {
+    //     data.clicked = false;
+    //     let url = util.createHomeURL();
+    //     let route = this.context.route;
+    //     if (!route.subdomain) {
+    //       url = url + '/stream';
+    //     }
+    //     window.location = url;
+    //   }
+    //   if (!data.alert) {
+    //     data.alert = null;
+    //   }
+    //   data.ready = true;
+    //   this.setState(data);
+    // });
   },
   render: function () {
     let session = this.context.session;

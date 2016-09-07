@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import UserStore from '../../../stores/users';
 import {User as UserActions} from '../../../actions/profile';
-import OrgStore from '../../../stores/orgs';
 import {Org as OrgActions} from '../../../actions/profile';
-import PostStore from '../../../stores/post';
 import PostActions from '../../../actions/post';
 import Pic from '../pic';
 import Uploader from '../uploader';
@@ -23,33 +20,28 @@ export default React.createClass({
     };
   },
 	componentDidMount: function () {
-		this.unsubscribeUser = UserStore.listen((data) => {
-			if (data.user) {
-				this.setState({profile: data.user});
-			}
-		});
-		this.unsubscribeOrg = OrgStore.listen((data) => {
-			if (data.lookup) {
-				this.setState({lookup: data.lookup});
-			}
-			if (data.org) {
-				this.setState({profile: data.org});
-			}
-		});
-		this.unsubscribePosts = PostStore.listen((data) => {
-			let post = data.post || {};
-			if (post.org) {
-				this.setState({profile: post.org, type: 'org'});
-			} else if (post.user) {
-				this.setState({profile: post.user, type: 'user'});
-			}
-		});
+		// this.unsubscribeUser = UserStore.listen((data) => {
+		// 	if (data.user) {
+		// 		this.setState({profile: data.user});
+		// 	}
+		// });
+		// this.unsubscribeOrg = OrgStore.listen((data) => {
+		// 	if (data.lookup) {
+		// 		this.setState({lookup: data.lookup});
+		// 	}
+		// 	if (data.org) {
+		// 		this.setState({profile: data.org});
+		// 	}
+		// });
+		// this.unsubscribePosts = PostStore.listen((data) => {
+		// 	let post = data.post || {};
+		// 	if (post.org) {
+		// 		this.setState({profile: post.org, type: 'org'});
+		// 	} else if (post.user) {
+		// 		this.setState({profile: post.user, type: 'user'});
+		// 	}
+		// });
 		this._load(this.context.route);
-	},
-	componentWillUnmount: function () {
-		this.unsubscribeUser();
-		this.unsubscribeOrg();
-		this.unsubscribePosts();
 	},
 	componentWillReceiveProps: function (nextProps, nextContext) {
 		if (nextContext.route) {

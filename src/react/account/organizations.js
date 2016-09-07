@@ -3,7 +3,6 @@ import Select from 'react-select';
 import { Link } from 'react-router';
 
 import util from '../../lib/util';
-import Store from '../../stores/orgs';
 import {Org as Actions} from '../../actions/profile';
 import MemberActions from '../../actions/members';
 
@@ -55,15 +54,12 @@ let Search = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen((data) => {
-      if (data.lookup) {
-        this.setState({lookup: data.lookup});
-      }
-    });
+    // this.unsubscribe = Store.listen((data) => {
+    //   if (data.lookup) {
+    //     this.setState({lookup: data.lookup});
+    //   }
+    // });
     Actions.lookup('');
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
   },
   render: function () {
     let lookup = this._lookup();

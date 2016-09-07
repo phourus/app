@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import ga from '../../../lib/analytics';
 import util from '../../../lib/util';
 import Actions from '../../../actions/session';
-import Store from '../../../stores/session';
 import Search from '../../stream/search';
 
 import styles from './styles.less'

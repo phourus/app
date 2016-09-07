@@ -2,8 +2,6 @@ import React from 'react';
 
 import {Org as OrgActions} from '../../actions/profile';
 import MemberActions from '../../actions/members';
-import OrgStore from '../../stores/orgs';
-import MemberStore from '../../stores/members';
 
 export default React.createClass({
     contextTypes: {
@@ -17,14 +15,14 @@ export default React.createClass({
     },
     componentDidMount: function () {
       let session = this.context.route;
-      this.unsubscribeOrgs = OrgStore.listen(data => {
-        if (data.org) {
-          this.setState({org: data.org});
-        }
-      });
-      this.unsubscribeMembers = MemberStore.listen(data => {
-        this.setState({members: data});
-      });
+      // this.unsubscribeOrgs = OrgStore.listen(data => {
+      //   if (data.org) {
+      //     this.setState({org: data.org});
+      //   }
+      // });
+      // this.unsubscribeMembers = MemberStore.listen(data => {
+      //   this.setState({members: data});
+      // });
       if (session.id) {
         OrgActions.single(session.id);
         MemberActions.collection(session.id);

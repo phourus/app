@@ -1,6 +1,5 @@
 import React from 'react';
 import Actions from '../../actions/members';
-import Store from '../../stores/members';
 import Pic from '../shared/pic';
 
 export default React.createClass({
@@ -14,13 +13,10 @@ export default React.createClass({
   },
   componentDidMount: function () {
     let route = this.context.route;
-    this.unsubscribe = Store.listen(data => {
-      this.setState({members: data});
-    });
+    // this.unsubscribe = Store.listen(data => {
+    //   this.setState({members: data});
+    // });
     Actions.collection(route.id);
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
   },
   render: function () {
     return (

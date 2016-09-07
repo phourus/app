@@ -1,6 +1,5 @@
 import React from 'react';
 import ga from '../../lib/analytics';
-import Store from '../../stores/users';
 import {User as Actions} from '../../actions/profile';
 import TutorialActions from '../../actions/tutorial';
 
@@ -15,18 +14,15 @@ export default React.createClass({
     };
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen((data) => {
-      if (data.user) {
-        this.setState({user: data.user});
-      }
-      if (data.changes) {
-        this.setState({changes: data.changes});
-      }
-    });
+    // this.unsubscribe = Store.listen((data) => {
+    //   if (data.user) {
+    //     this.setState({user: data.user});
+    //   }
+    //   if (data.changes) {
+    //     this.setState({changes: data.changes});
+    //   }
+    // });
     TutorialActions.ready(true);
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
   },
   render: function () {
     let session = this.context.session;

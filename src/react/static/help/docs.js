@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Actions from '../../../actions/pages';
-import Store from '../../../stores/pages';
 
 const DEFAULT_PAGE = 'create-account';
 
@@ -14,15 +13,12 @@ export default React.createClass({
     };
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen((data) => {
-      if (data.page) {
-        this.setState({page: data.page, menu: false, id: data.id});
-      }
-    });
+    // this.unsubscribe = Store.listen((data) => {
+    //   if (data.page) {
+    //     this.setState({page: data.page, menu: false, id: data.id});
+    //   }
+    // });
     this._route(this.props.params);
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
   },
   componentWillReceiveProps: function (nextProps) {
     if (this.state.id !== nextProps.params.id) {

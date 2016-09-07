@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import Store from '../../stores/activity';
 import Actions from '../../actions/activity';
 
 export default React.createClass({
@@ -11,13 +10,10 @@ export default React.createClass({
     }
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen((data) => {
-      this.setState(data);
-    });
+    // this.unsubscribe = Store.listen((data) => {
+    //   this.setState(data);
+    // });
     Actions.notifications();
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
   },
   render: function () {
     let views = this.state.notifications[0] || [];

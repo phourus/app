@@ -1,7 +1,6 @@
 import React from 'react';
 import Drop from './drop';
 import Actions from '../../actions/post/folders';
-import Store from '../../stores/post/folders';
 import Stream from '../../actions/stream';
 
 export default React.createClass({
@@ -12,13 +11,10 @@ export default React.createClass({
     };
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen((data) => {
-      this.setState(data);
-    });
+    // this.unsubscribe = Store.listen((data) => {
+    //   this.setState(data);
+    // });
     Actions.collection();
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
   },
   render: function () {
     let folders = this.state.folders;

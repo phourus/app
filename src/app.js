@@ -9,7 +9,6 @@ import Menu from './react/shared/menu'
 import Profile from './react/shared/profile';
 import Tutorial from './react/shared/tutorial';
 import Actions from './actions/session';
-import Store from './stores/session';
 import TutorialActions from './actions/tutorial';
 import HTML5Backend from 'react-dnd-html5-backend';
 import {DragDropContext} from 'react-dnd';
@@ -59,15 +58,12 @@ let App = React.createClass({
     };
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen(data => {
-      let session = this.state.session;
-      this.setState({session: session});
-    });
+    // this.unsubscribe = Store.listen(data => {
+    //   let session = this.state.session;
+    //   this.setState({session: session});
+    // });
     Actions.get();
     this._route(this.props);
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
   },
   componentWillReceiveProps: function (nextProps) {
     this._route(nextProps);

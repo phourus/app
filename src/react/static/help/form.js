@@ -1,6 +1,5 @@
 import React from 'react';
 import Actions from '../../../actions/util';
-import Store from '../../../stores/util';
 
 export default React.createClass({
   contextTypes: {
@@ -18,14 +17,11 @@ export default React.createClass({
     if (user && user.email) {
       this.setState({email: user.email});
     }
-    this.unsubscribe = Store.listen((data) => {
-      if (data.code === 200) {
-        this.setState({email: "", message: "", code: 200});
-      }
-    });
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
+    // this.unsubscribe = Store.listen((data) => {
+    //   if (data.code === 200) {
+    //     this.setState({email: "", message: "", code: 200});
+    //   }
+    // });
   },
   render: function () {
     return (

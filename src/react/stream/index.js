@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Store from '../../stores/stream'
 import Actions from '../../actions/stream'
 
 import Infinite from 'react-infinite-scroll'
@@ -34,13 +33,10 @@ let Stream = React.createClass({
 		};
 	},
 	componentDidMount: function () {
-		this.unsubscribe = Store.listen((data) => {
-			this.setState(data);
-		});
+		// this.unsubscribe = Store.listen((data) => {
+		// 	this.setState(data);
+		// });
 		this._load(this.context.route);
-	},
-	componentWillUnmount: function () {
-		this.unsubscribe();
 	},
 	componentWillReceiveProps: function (nextProps, nextContext) {
 		if (nextContext.route) {

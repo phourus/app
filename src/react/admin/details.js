@@ -1,6 +1,5 @@
 import React from 'react';
 import {Org as Actions} from '../../actions/profile';
-import Store from '../../stores/orgs';
 
 export default React.createClass({
   contextTypes: {
@@ -14,20 +13,17 @@ export default React.createClass({
   },
   componentDidMount: function () {
     let route = this.context.route;
-    this.unsubscribe = Store.listen(data => {
-      if (data.org) {
-        this.setState({org: data.org});
-      }
-      if (data.changes) {
-        this.setState({changes: data.changes});
-      }
-    });
+    // this.unsubscribe = Store.listen(data => {
+    //   if (data.org) {
+    //     this.setState({org: data.org});
+    //   }
+    //   if (data.changes) {
+    //     this.setState({changes: data.changes});
+    //   }
+    // });
     if (route.id) {
       Actions.single(route.id);
     }
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
   },
   render: function () {
     let org = this.state.org || {};

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import Actions from '../../actions/auth';
-import Store from '../../stores/auth';
 
 export default React.createClass({
   getInitialState: function () {
@@ -11,12 +10,9 @@ export default React.createClass({
     };
   },
   componentDidMount: function () {
-    this.unsubscribe = Store.listen(data => {
-      this.setState(data);
-    });
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
+    // this.unsubscribe = Store.listen(data => {
+    //   this.setState(data);
+    // });
   },
   render: function () {
     return (

@@ -2,7 +2,6 @@ import React from 'react'
 import ga from '../../../lib/analytics'
 
 import Steps from './steps'
-import Store from '../../../stores/tutorial'
 import Actions from '../../../actions/tutorial'
 let localStorage;
 
@@ -33,17 +32,14 @@ export default React.createClass({
   },
   componentDidMount: function () {
     this._getLocal();
-    this.unsubscribe = Store.listen((data) => {
-      if (data.ready) {
-        this.setState({ready: data.ready});
-      }
-      if (data.reset) {
-        this._resetLocal();
-      }
-    });
-  },
-  componentWillUnmount: function () {
-    this.unsubscribe();
+    // this.unsubscribe = Store.listen((data) => {
+    //   if (data.ready) {
+    //     this.setState({ready: data.ready});
+    //   }
+    //   if (data.reset) {
+    //     this._resetLocal();
+    //   }
+    // });
   },
   componentWillReceiveProps: function (nextProps, nextContext) {
     let route = nextContext.route;
