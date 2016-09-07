@@ -3,7 +3,8 @@ import React from 'react'
 import Store from '../../stores/stream'
 import Actions from '../../actions/stream'
 
-let Scroll = require('react-infinite-scroll')(React);
+import Infinite from 'react-infinite-scroll'
+const Scroll = Infinite(React)
 
 import Posts from './posts'
 import Organizations from './organizations'

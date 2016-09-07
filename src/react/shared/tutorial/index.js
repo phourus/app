@@ -1,9 +1,9 @@
-let React = require('react');
-var ga = require('../../../lib/analytics');
+import React from 'react'
+import ga from '../../../lib/analytics'
 
-let Steps = require('./steps');
-let Store = require('../../../stores/tutorial');
-let Actions = require('../../../actions/tutorial');
+import Steps from './steps'
+import Store from '../../../stores/tutorial'
+import Actions from '../../../actions/tutorial'
 let localStorage;
 
 //import styles from './node_modules/react-joyride/lib/styles/react-joyride.css'
