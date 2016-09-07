@@ -1,5 +1,5 @@
 import http from '../lib/xhr';
-var base = '/rest/account/';
+let base = '/rest/account/';
 
 export default {
   get: function () {
@@ -24,25 +24,25 @@ export default {
     return http.get(base + 'orgs');
   },
   login: function (email, password) {
-    var headers = {
+    let headers = {
       Authorization: "Basic " + new Buffer(email + ':' + password).toString('base64')
-    }
+    };
     return http.post(base + 'login', {}, headers);
   },
   register: function (email, password, username) {
-    var headers = {
+    let headers = {
       Authorization: "Basic " + new Buffer(email + ':' + password).toString('base64')
-    }
+    };
     return http.post(base + 'register', {username: username}, headers);
   },
   forgot: function (email) {
     return http.post('/rest/passwords/forgot', {email: email});
   },
   reset: function (email, password, token, userId) {
-    var headers = {
+    let headers = {
       Authorization: "Basic " + new Buffer(email + ':' + password).toString('base64')
-    }
-    var model = {
+    };
+    let model = {
       token: token,
       userId: userId
     };

@@ -1,5 +1,5 @@
 import http from '../lib/xhr';
-var base = '/rest/thumbs/';
+let base = '/rest/thumbs/';
 
 export default {
   post: function (postId) {

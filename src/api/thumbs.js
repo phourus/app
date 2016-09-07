@@ -1,4 +1,4 @@
-var type = 'sockets';
+let type = 'sockets';
 import thumbs from '../rest/thumbs';
 
 export default {

@@ -75,8 +75,8 @@ export default class Links extends React.Component {
 	}
 
 	_edit(e) {
-		var id = e.currentTarget.id
-		var props = this.props.post.links[id]
+		let id = e.currentTarget.id;
+		let props = this.props.post.links[id];
 		props.mode = 'edit'
 		//this.setState(state)
 	}

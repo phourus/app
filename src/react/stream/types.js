@@ -10,7 +10,7 @@ export default React.createClass({
   },
 	render: function () {
     let exclude = this.props.exclude;
-		var classes = {
+		let classes = {
 			blog: "type blog",
 			event: "type event",
 			subject: "type subject",
@@ -20,8 +20,8 @@ export default React.createClass({
 			belief: "type belief",
 			quote: "type quote"
 		};
-		for (var i = 0; i < exclude.length; i++) {
-			var key = exclude[i];
+		for (let i = 0; i < exclude.length; i++) {
+			let key = exclude[i];
 			classes[key] += " inverted";
 		}
 		return (

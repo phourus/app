@@ -4,7 +4,7 @@ import Actions from '../../actions/stream';
 
 let target = {
   drop: function (props, monitor, component) {
-    var item = monitor.getItem();
+    let item = monitor.getItem();
     Actions.save(item.id, props.item.id);
     return {
       postId: item.id,
@@ -22,11 +22,11 @@ let collect = function (connect, monitor) {
 
 let Drop = React.createClass({
   render: function () {
-      var className = [];
-      var item = this.props.item;
-      var index = this.props.index;
-      var isOver = this.props.isOver;
-      var connectDropTarget = this.props.connectDropTarget;
+      let className = [];
+      let item = this.props.item;
+      let index = this.props.index;
+      let isOver = this.props.isOver;
+      let connectDropTarget = this.props.connectDropTarget;
 
       if (index === this.props.selected) {
         className.push('selected');

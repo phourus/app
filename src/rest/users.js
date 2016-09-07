@@ -1,5 +1,5 @@
 import http from '../lib/xhr';
-var base = '/rest/users/';
+let base = '/rest/users/';
 
 export default {
   single: function (id) {

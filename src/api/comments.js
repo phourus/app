@@ -1,4 +1,4 @@
-var type = 'sockets';
+let type = 'sockets';
 import comments from '../rest/comments';
 
 export default {

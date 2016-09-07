@@ -1,5 +1,5 @@
 import http from '../lib/xhr';
-var base = '/rest/tags/';
+let base = '/rest/tags/';
 
 export default {
   collection: function (params) {

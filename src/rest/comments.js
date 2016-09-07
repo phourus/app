@@ -1,9 +1,9 @@
 import http from '../lib/xhr';
-var base = '/rest/comments/';
+let base = '/rest/comments/';
 
 export default {
   collection: function (params) {
-    var query = "";
+    let query = "";
     if (params.postId) {
       query += 'postId=' + params.postId;
     }

@@ -8,8 +8,8 @@ export default class Meta extends React.Component {
 		let route = this.props.route
 	  let type = this.props.post.type
 	  let classes = {}
-		for (var i in Object.keys(tax)) {
-			var key = Object.keys(tax)[i].slice(0, -1)
+		for (let i in Object.keys(tax)) {
+			let key = Object.keys(tax)[i].slice(0, -1);
 			classes[key] = key
 			if (type === key) {
 				classes[key] += ' selected'
@@ -94,42 +94,42 @@ export default class Meta extends React.Component {
 	}
 
 	_positive(e) {
-		var value = e.currentTarget.checked
+		let value = e.currentTarget.checked;
 		//Actions.change('positive', value)
 	}
 
 	_when(e) {
-		var value = e.currentTarget.value
+		let value = e.currentTarget.value;
 		//Actions.change('when', value)
 	}
 
 	_location(e) {
-		var value = e.currentTarget.value
+		let value = e.currentTarget.value;
 		//Actions.change('location', value)
 	}
 
 	_poll(e) {
-		var value = e.currentTarget.value
+		let value = e.currentTarget.value;
 		//Actions.change('poll', value)
 	}
 
 	_difficulty(e) {
-		var value = e.currentTarget.value
+		let value = e.currentTarget.value;
 		//Actions.change('difficulty', value)
 	}
 
 	_scope(e) {
-		var value = e.currentTarget.value
+		let value = e.currentTarget.value;
 		//Actions.change('scope', value)
 	}
 
 	_zip(e) {
-		var value = e.currentTarget.value
+		let value = e.currentTarget.value;
 		//Actions.change('zip', value)
 	}
 
 	_author(e) {
-		var value = e.currentTarget.value
+		let value = e.currentTarget.value;
 		//Actions.change('author', value)
 	}
 }

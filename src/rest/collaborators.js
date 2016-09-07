@@ -1,5 +1,5 @@
 import http from '../lib/xhr';
-var base = '/rest/collaborators/';
+let base = '/rest/collaborators/';
 
 export default {
   collection: function (postId) {

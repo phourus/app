@@ -2,13 +2,13 @@ export default function (element, popularity) {
   if (!element) {
     return false;
   }
-  var ctx = element.getContext('2d');
-  var circ = Math.PI * 2;
-  var quart = Math.PI / 2;
-  var radius = 50;
-  var posX = 90;
-  var posY = element.height / 2;
-  var end = popularity / 100;
+  let ctx = element.getContext('2d');
+  let circ = Math.PI * 2;
+  let quart = Math.PI / 2;
+  let radius = 50;
+  let posX = 90;
+  let posY = element.height / 2;
+  let end = popularity / 100;
 
   ctx.clearRect(0, 0, element.width, element.height);
 

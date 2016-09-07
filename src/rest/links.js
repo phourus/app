@@ -1,5 +1,5 @@
 import http from '../lib/xhr';
-var base = '/rest/links/';
+let base = '/rest/links/';
 
 export default {
   collection: function (params) {

@@ -1,4 +1,4 @@
-var type = 'sockets';
+let type = 'sockets';
 import links from '../rest/links';
 
 export default {

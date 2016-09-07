@@ -36,8 +36,8 @@ export default class Type extends React.Component {
 	render() {
 	  let type = this.props.post.type || "blog"
 	  let classes = {}
-		for (var i in Object.keys(tax)) {
-			var key = Object.keys(tax)[i]
+		for (let i in Object.keys(tax)) {
+			let key = Object.keys(tax)[i];
 			classes[key] = key
 			if (type === key) {
 				classes[key] += ' selected'

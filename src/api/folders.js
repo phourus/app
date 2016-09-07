@@ -1,4 +1,4 @@
-var type = 'sockets';
+let type = 'sockets';
 import folders from '../rest/folders';
 
 export default {

@@ -1,9 +1,9 @@
 import http from '../lib/xhr';
-var base = '/rest/members/';
+let base = '/rest/members/';
 
 export default {
   collection: function (params) {
-    var query = '';
+    let query = '';
     if (params.orgId) {
       query = '?orgId=' + params.orgId;
     }
@@ -13,26 +13,26 @@ export default {
     return http.get(base + query);
   },
   request: function (orgId) {
-    var model = {
+    let model = {
       orgId: orgId
     };
     return http.post(base, model);
   },
   approve: function (id) {
-    var model = {
+    let model = {
       approved: 1
     };
     return http.put(base + id, model);
   },
   admin: function (id) {
-    var model = {
+    let model = {
       approved: 1,
       admin: 1
     };
     return http.put(base + id, model);
   },
   revoke: function (id) {
-    var model = {
+    let model = {
       admin: 0
     };
     return http.put(base + id, model);

@@ -41,7 +41,7 @@ let Slider = React.createClass({
     // }, this.state.interval);
   },
   render: function () {
-    var classes = ['', '', '', '', ''];
+    let classes = ['', '', '', '', ''];
     classes[this.state.slide] = 'selected';
     return (
       <div className="banner">

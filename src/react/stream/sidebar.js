@@ -21,7 +21,7 @@ export default React.createClass({
     this.unsubscribe();
   },
   render: function () {
-    var folders = this.state.folders;
+    let folders = this.state.folders;
     if (folders[0] && folders[0].id !== 0) {
       folders.unshift({id: 0, name: 'All Posts'});
     }

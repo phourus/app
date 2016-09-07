@@ -65,7 +65,7 @@ export default React.createClass({
   },
   render: function () {
     let steps = ["", "", ""];
-    for (var i = 0; i < this.props.step + 1; i++) {
+    for (let i = 0; i < this.props.step + 1; i++) {
       steps[i] = "complete";
     }
     //steps[this.state.step] = "selected";
@@ -177,23 +177,23 @@ export default React.createClass({
     );
   },
   _email: function (e) {
-    var value = e.currentTarget.value;
+    let value = e.currentTarget.value;
     this.setState({email: value});
   },
   _password: function (e) {
-    var value = e.currentTarget.value;
+    let value = e.currentTarget.value;
     this.setState({password: value});
   },
   _confirm: function (e) {
-    var value = e.currentTarget.value;
+    let value = e.currentTarget.value;
     this.setState({confirm: value});
   },
   _username: function (e) {
-    var value = e.currentTarget.value;
+    let value = e.currentTarget.value;
     this.setState({username: value});
   },
   _organization: function (e) {
-    var value = e.currentTarget.value;
+    let value = e.currentTarget.value;
     this.setState({organization: value});
   },
   _signup: function () {

@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f7a88384ee96711bb8f0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a357b1db0f865368c905"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -61032,11 +61032,25 @@
 	        var un_y = 1.0 - y;
 	        return f00 * un_x * un_y + f10 * x * un_y + f01 * un_x * y + f11 * x * y;
 	    }
-	    var i, j;
-	    var iyv, iy0, iy1, ixv, ix0, ix1;
-	    var idxD, idxS00, idxS10, idxS01, idxS11;
-	    var dx, dy;
-	    var r, g, b, a;
+	    var i = void 0,
+	        j = void 0;
+	    var iyv = void 0,
+	        iy0 = void 0,
+	        iy1 = void 0,
+	        ixv = void 0,
+	        ix0 = void 0,
+	        ix1 = void 0;
+	    var idxD = void 0,
+	        idxS00 = void 0,
+	        idxS10 = void 0,
+	        idxS01 = void 0,
+	        idxS11 = void 0;
+	    var dx = void 0,
+	        dy = void 0;
+	    var r = void 0,
+	        g = void 0,
+	        b = void 0,
+	        a = void 0;
 	    for (i = 0; i < destCanvasData.height; ++i) {
 	        iyv = i / scale;
 	        iy0 = Math.floor(iyv);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import ga from './lib/analytics';
-var Initializer = ga.Initializer;
+let Initializer = ga.Initializer;
 
 import Header from './react/shared/header';
 import Footer from './react/shared/footer'

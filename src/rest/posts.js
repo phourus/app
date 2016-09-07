@@ -1,12 +1,12 @@
 import http from '../lib/xhr';
-var base = '/rest/posts/';
+let base = '/rest/posts/';
 
 export default {
   single: function (id) {
     return http.get(base + id);
   },
   collection: function (params) {
-    var query = params;
+    let query = params;
     params.contextId = params.context.id;
     params.contextType = params.context.type;
     return http.get(base);

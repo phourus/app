@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactRouter from 'react-router';
-var RoutingContext = ReactRouter.RoutingContext;
+let RoutingContext = ReactRouter.RoutingContext;
 
 export default React.createClass({
   render: function () {

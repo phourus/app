@@ -1,4 +1,4 @@
-var type = 'sockets';
+let type = 'sockets';
 import users from '../rest/users';
 
 export default {

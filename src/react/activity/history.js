@@ -26,7 +26,7 @@ export default React.createClass({
 
     views = views.map(function (item) {
       // <img src={"/assets/avatars/1.jpg"} />
-      var user = item.user || {};
+      let user = item.user || {};
       return (<li key={item.id}>
         <i className="fa fa-eye" />
         You viewed <a href={"/user/"}>{user.username + "'s"}</a> profile

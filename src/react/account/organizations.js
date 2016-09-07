@@ -141,7 +141,7 @@ let List = React.createClass({
     return (
       <div className="list">
         {orgs.map((item) => {
-          var admin = false;
+          let admin = false;
           let link = util.createOrgLink(item.org.shortname);
 
           if (item.admin === true && item.approved) {
@@ -174,7 +174,7 @@ let List = React.createClass({
     window.location = util.createOrgLink(id) + '/admin/details';
   },
   _remove: function (e) {
-    var id = e.currentTarget.id;
+    let id = e.currentTarget.id;
     MemberActions.remove(id);
   }
 });

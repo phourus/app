@@ -35,9 +35,9 @@ export default React.createClass({
     );
   },
   _upload: function (e) {
-    var id = this.state.id;
+    let id = this.state.id;
     this.uploader.click();
-    var options = {
+    let options = {
       inputElement: this.uploader,
       onProgress: function (event) {
         // event.done, event.total

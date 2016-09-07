@@ -1,4 +1,4 @@
-var type = 'sockets';
+let type = 'sockets';
 import tags from '../rest/tags';
 
 export default {

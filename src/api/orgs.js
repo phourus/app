@@ -1,4 +1,4 @@
-var type = 'sockets';
+let type = 'sockets';
 import orgs from '../rest/orgs';
 
 export default {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-var Emblem = React.createClass({
+let Emblem = React.createClass({
   getDefaultProps: function () {
     return {
       slide: 0,

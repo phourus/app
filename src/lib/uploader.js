@@ -3,16 +3,16 @@
  *
  * @author Ross Turner (https://github.com/zsinj)
  */
-var ImageUploader = function(config) {
+let ImageUploader = function(config) {
     if (!config || (!config.inputElement) || (!config.inputElement.getAttribute) || config.inputElement.getAttribute('type') !== 'file') {
         throw new Error('Config object passed to ImageUploader constructor must include "inputElement" set to be an element of type="file"');
     }
     this.setConfig(config);
 
-    var This = this;
+    let This = this;
     this.config.inputElement.addEventListener('change', function(event) {
-        var fileArray = [];
-        var cursor = 0;
+        let fileArray = [];
+        let cursor = 0;
         for (; cursor < This.config.inputElement.files.length; ++cursor) {
             fileArray.push(This.config.inputElement.files[cursor]);
         }
@@ -35,9 +35,9 @@ var ImageUploader = function(config) {
 };
 
 ImageUploader.prototype.handleFileList = function(fileArray) {
-    var This = this;
+    let This = this;
     if (fileArray.length > 1) {
-        var file = fileArray.shift();
+        let file = fileArray.shift();
         this.handleFileSelection(file, function() {
             This.handleFileList(fileArray);
         });
@@ -51,10 +51,10 @@ ImageUploader.prototype.handleFileList = function(fileArray) {
 };
 
 ImageUploader.prototype.handleFileSelection = function(file, completionCallback) {
-    var img = document.createElement('img');
+    let img = document.createElement('img');
     this.currentFile = file;
-    var reader = new FileReader();
-    var This = this;
+    let reader = new FileReader();
+    let This = this;
     reader.onload = function(e) {
         img.src = e.target.result;
 
@@ -67,7 +67,7 @@ ImageUploader.prototype.handleFileSelection = function(file, completionCallback)
 };
 
 ImageUploader.prototype.scaleImage = function(img, completionCallback) {
-    var canvas = document.createElement('canvas');
+    let canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
     canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -80,14 +80,14 @@ ImageUploader.prototype.scaleImage = function(img, completionCallback) {
         canvas = this.scaleCanvasWithAlgorithm(canvas);
     }
 
-    var imageData = canvas.toDataURL('image/png', this.config.quality);
+    let imageData = canvas.toDataURL('image/png', this.config.quality);
     this.performUpload(imageData, completionCallback);
 };
 
 ImageUploader.prototype.performUpload = function(imageData, completionCallback) {
-    var xhr = new XMLHttpRequest();
-    var This = this;
-    var uploadInProgress = true;
+    let xhr = new XMLHttpRequest();
+    let This = this;
+    let uploadInProgress = true;
     xhr.onload = function(e) {
         uploadInProgress = false;
         This.uploadComplete(e, completionCallback);
@@ -117,7 +117,7 @@ ImageUploader.prototype.performUpload = function(imageData, completionCallback) 
     }
 
     if (this.config.debug) {
-        var resizedImage = document.createElement('img');
+        let resizedImage = document.createElement('img');
         this.config.workspace.appendChild(document.createElement('br'));
         this.config.workspace.appendChild(resizedImage);
 
@@ -144,15 +144,15 @@ ImageUploader.prototype.progressUpdate = function(itemDone, itemTotal) {
 };
 
 ImageUploader.prototype.scaleCanvasWithAlgorithm = function(canvas) {
-    var scaledCanvas = document.createElement('canvas');
+    let scaledCanvas = document.createElement('canvas');
 
-    var scale = this.config.maxWidth / canvas.width;
+    let scale = this.config.maxWidth / canvas.width;
 
     scaledCanvas.width = canvas.width * scale;
     scaledCanvas.height = canvas.height * scale;
 
-    var srcImgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
-    var destImgData = scaledCanvas.getContext('2d').createImageData(scaledCanvas.width, scaledCanvas.height);
+    let srcImgData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+    let destImgData = scaledCanvas.getContext('2d').createImageData(scaledCanvas.width, scaledCanvas.height);
 
     this.applyBilinearInterpolation(srcImgData, destImgData, scale);
 
@@ -162,7 +162,7 @@ ImageUploader.prototype.scaleCanvasWithAlgorithm = function(canvas) {
 };
 
 ImageUploader.prototype.getHalfScaleCanvas = function(canvas) {
-    var halfCanvas = document.createElement('canvas');
+    let halfCanvas = document.createElement('canvas');
     halfCanvas.width = canvas.width / 2;
     halfCanvas.height = canvas.height / 2;
 
@@ -173,15 +173,15 @@ ImageUploader.prototype.getHalfScaleCanvas = function(canvas) {
 
 ImageUploader.prototype.applyBilinearInterpolation = function(srcCanvasData, destCanvasData, scale) {
     function inner(f00, f10, f01, f11, x, y) {
-        var un_x = 1.0 - x;
-        var un_y = 1.0 - y;
+        let un_x = 1.0 - x;
+        let un_y = 1.0 - y;
         return (f00 * un_x * un_y + f10 * x * un_y + f01 * un_x * y + f11 * x * y);
     }
-    var i, j;
-    var iyv, iy0, iy1, ixv, ix0, ix1;
-    var idxD, idxS00, idxS10, idxS01, idxS11;
-    var dx, dy;
-    var r, g, b, a;
+    let i, j;
+    let iyv, iy0, iy1, ixv, ix0, ix1;
+    let idxD, idxS00, idxS10, idxS01, idxS11;
+    let dx, dy;
+    let r, g, b, a;
     for (i = 0; i < destCanvasData.height; ++i) {
         iyv = i / scale;
         iy0 = Math.floor(iyv);

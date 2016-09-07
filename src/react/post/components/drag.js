@@ -17,7 +17,7 @@ const collect = (connect, monitor) => {
 }
 
 const Drag = ({id, isDragging, connectDragSource}) => {
-	var className = ['handle']
+	let className = ['handle'];
 	if (isDragging) {
 		className.push('dragging')
 	}

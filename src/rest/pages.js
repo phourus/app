@@ -1,5 +1,5 @@
 import http from '../lib/xhr';
-var base = '/rest/pages/';
+let base = '/rest/pages/';
 
 export default {
   get: function (page) {
