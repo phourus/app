@@ -1,11 +1,10 @@
-let React = require('react');
-let Router = require('react-router');
-let { History, Link } = Router;
-let Actions = require('../../actions/auth');
-let Store = require('../../stores/auth');
-let ga = require('../../lib/analytics');
+import React from 'react';
+import { Link } from 'react-router';
+import Actions from '../../actions/auth';
+import Store from '../../stores/auth';
+import ga from '../../lib/analytics';
 
-module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps: function () {
     return {
       show: false

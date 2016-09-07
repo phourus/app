@@ -1,15 +1,11 @@
-let React = require('react');
-let Router = require('react-router');
-let { History } = Router;
+import React from 'react';
 
-let OrgActions = require('../../actions/profile').Org;
-let MemberActions = require('../../actions/members');
+import {Org as OrgActions} from '../../actions/profile';
+import MemberActions from '../../actions/members';
+import OrgStore from '../../stores/orgs';
+import MemberStore from '../../stores/members';
 
-let OrgStore = require('../../stores/orgs');
-let MemberStore = require('../../stores/members');
-
-module.exports = React.createClass({
-    mixins: [History],
+export default React.createClass({
     contextTypes: {
       route: React.PropTypes.object
     },

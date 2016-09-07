@@ -1,5 +1,5 @@
-let React = require('react');
-let ga = require('../../lib/analytics');
+import React from 'react';
+import ga from '../../lib/analytics';
 
 let Video = React.createClass({
   componentDidMount: function () {
@@ -23,4 +23,4 @@ let Video = React.createClass({
   }
 });
 
-module.exports = Video;
+export default Video;

@@ -1,6 +1,6 @@
-var members = require('../rest/members');
+import members from '../rest/members';
 
-module.exports = {
+export default {
   collection: members.collection,
   request: members.request,
   approve: members.approve,

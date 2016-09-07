@@ -1,13 +1,12 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
-let Notifications = require('./notifications');
-let History = require('./history');
+import Notifications from './notifications';
+import History from './history';
 
 import styles from './styles.less'
 
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     session: React.PropTypes.object
   },

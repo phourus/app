@@ -1,11 +1,9 @@
-let React = require('react');
-let { History } = require('react-router');
-
-let Auth = require('./auth');
+import React from 'react';
+import Auth from './auth';
 import Ideas from './ideas'
-let Information = require('./information');
-let Engagement = require('./engagement');
-let Feedback = require('./feedback');
+import Information from './information';
+import Engagement from './engagement';
+import Feedback from './feedback';
 
 import styles from './styles.less'
 
@@ -30,7 +28,6 @@ let Landing = React.createClass({
 });
 
 let Slider = React.createClass({
-  mixins: [History],
   getInitialState: function () {
     return {
       slide: 0,
@@ -91,4 +88,4 @@ let Slider = React.createClass({
   }
 });
 
-module.exports = Landing;
+export default Landing;

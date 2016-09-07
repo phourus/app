@@ -1,7 +1,7 @@
 var type = 'sockets';
-var links = require('../rest/links');
+import links from '../rest/links';
 
-module.exports = {
+export default {
   collection: links.collection,
   add: links.add,
   save: links.save,

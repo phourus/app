@@ -1,15 +1,14 @@
-let React = require('react');
-let Router = require('react-router');
+import React from 'react'
 
-let Store = require('../../stores/stream');
-let Actions = require('../../actions/stream');
+import Store from '../../stores/stream'
+import Actions from '../../actions/stream'
 
 let Scroll = require('react-infinite-scroll')(React);
 
-let Posts = require('./posts');
-let Organizations = require('./organizations');
-let Loader = require('../shared/loader');
-let Sidebar = require('./sidebar');
+import Posts from './posts'
+import Organizations from './organizations'
+import Loader from '../shared/loader'
+import Sidebar from './sidebar'
 
 import styles from './styles.less'
 
@@ -82,4 +81,4 @@ let Stream = React.createClass({
   }
 });
 
-module.exports = Stream;
+export default Stream;

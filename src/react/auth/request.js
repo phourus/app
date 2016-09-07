@@ -1,10 +1,10 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link } = Router;
-let Actions = require('../../actions/auth');
-let Store = require('../../stores/auth');
+import React from 'react';
+import { Link } from 'react-router';
 
-module.exports = React.createClass({
+import Actions from '../../actions/auth';
+import Store from '../../stores/auth';
+
+export default React.createClass({
   getInitialState: function () {
     return {
       email: ""

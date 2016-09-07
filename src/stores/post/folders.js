@@ -1,10 +1,8 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
+import Actions from '../../actions/post/folders';
+import folders from '../../api/folders';
 
-let Actions = require('../../actions/post/folders');
-
-let folders = require('../../api/folders');
-
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);
     this.listenTo(Actions.add, this._add);

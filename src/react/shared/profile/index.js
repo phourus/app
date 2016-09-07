@@ -1,23 +1,18 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
-let UserStore = require('../../../stores/users');
-let UserActions = require('../../../actions/profile').User;
-
-let OrgStore = require('../../../stores/orgs');
-let OrgActions = require('../../../actions/profile').Org;
-
-let PostStore = require('../../../stores/post');
-let PostActions = require('../../../actions/post');
-
-let Pic = require('../pic');
-let Uploader = require('../uploader');
+import UserStore from '../../../stores/users';
+import {User as UserActions} from '../../../actions/profile';
+import OrgStore from '../../../stores/orgs';
+import {Org as OrgActions} from '../../../actions/profile';
+import PostStore from '../../../stores/post';
+import PostActions from '../../../actions/post';
+import Pic from '../pic';
+import Uploader from '../uploader';
 
 import styles from './styles.less'
 
-module.exports = React.createClass({
-	mixins: [History],
+export default React.createClass({
 	contextTypes: {
 		session: React.PropTypes.object,
 		route: React.PropTypes.object

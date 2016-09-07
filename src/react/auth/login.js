@@ -1,19 +1,14 @@
-let React = require('react');
-let ga = require('../../lib/analytics');
+import React from 'react';
+import ga from '../../lib/analytics';
+import util from '../../lib/util';
+import { Link } from 'react-router';
 
-let util = require('../../lib/util');
+import Actions from '../../actions/session';
+import Store from '../../stores/session';
+import Loader from '../shared/loader';
+import Alert from '../shared/alerts';
 
-let Router = require('react-router');
-let { History, Link } = Router;
-
-let Actions = require('../../actions/session');
-let Store = require('../../stores/session');
-
-let Loader = require('../shared/loader');
-let Alert = require('../shared/alerts');
-
-module.exports = React.createClass({
-  mixins: [History],
+export default React.createClass({
   contextTypes: {
     session: React.PropTypes.object,
     route: React.PropTypes.object

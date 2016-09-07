@@ -240,7 +240,7 @@ filters.groups = {
     // focus
 };
 
-module.exports = {
+export default {
     blog: blog,
     event: event,
     subject: subject,

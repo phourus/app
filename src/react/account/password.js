@@ -1,4 +1,4 @@
-let React = require('react');
+import React from 'react';
 
 Account.Password = React.createClass({
   getInitialState: function () {

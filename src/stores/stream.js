@@ -1,11 +1,9 @@
-let Reflux = require('reflux');
-
-let Actions = require('../actions/stream');
-
-let folders = require('../api/folders');
-let posts = require('../api/posts');
-let users = require('../api/users');
-let orgs = require('../api/orgs');
+import Reflux from 'reflux';
+import Actions from '../actions/stream';
+import folders from '../api/folders';
+import posts from '../api/posts';
+import users from '../api/users';
+import orgs from '../api/orgs';
 
 let Stream = Reflux.createStore({
   posts: null,
@@ -261,4 +259,4 @@ let Stream = Reflux.createStore({
   }
 });
 
-module.exports = Stream;
+export default Stream;

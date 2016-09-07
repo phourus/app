@@ -8,7 +8,7 @@ import Integrate from './integrate'
 
 import styles from './styles.less'
 
-module.exports = React.createClass({
+export default React.createClass({
   render: function () {
     return (
       <div className="product">

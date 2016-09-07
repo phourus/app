@@ -1,9 +1,8 @@
-let React = require('react');
-let Router = require('react-router');
-
-let Store = require('../../stores/stream');
-let Actions = require('../../actions/stream');
-let Post = require('../post');
+import React from 'react';
+import Router from 'react-router';
+import Store from '../../stores/stream';
+import Actions from '../../actions/stream';
+import Post from '../post';
 
 let Explore = React.createClass({
   render: function () {
@@ -53,4 +52,4 @@ let Explorer = React.createClass({
   }
 });
 
-module.exports = Explore;
+export default Explore;

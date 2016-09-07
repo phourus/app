@@ -1,13 +1,10 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
-let util = require('../../lib/util');
+import util from '../../lib/util';
+import Pic from '../shared/pic';
 
-let Pic = require('../shared/pic');
-
-module.exports = React.createClass({
-	mixins: [History],
+export default React.createClass({
 	contextTypes: {
 		session: React.PropTypes.object,
 		route: React.PropTypes.object

@@ -1,6 +1,6 @@
-var collaborators = require('../rest/collaborators');
+import collaborators from '../rest/collaborators';
 
-module.exports = {
+export default {
   collection: collaborators.collection,
   add: collaborators.add,
   remove: collaborators.remove,

@@ -1,9 +1,8 @@
-let React = require('react');
-let ga = require('../../lib/analytics');
+import React from 'react';
+import ga from '../../lib/analytics';
+import Actions from '../../actions/stream';
 
-let Actions = require('../../actions/stream');
-
-module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps: function () {
     return {
       exclude: []

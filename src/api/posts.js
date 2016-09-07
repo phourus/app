@@ -1,7 +1,7 @@
 var type = 'sockets';
-var posts = require('../rest/posts');
+import posts from '../rest/posts';
 
-module.exports = {
+export default {
   single: posts.single,
   collection: posts.collection,
   add: posts.add,

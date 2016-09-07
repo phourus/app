@@ -1,5 +1,5 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
 
-module.exports = {
+export default {
   get: Reflux.createAction()
-}
+};

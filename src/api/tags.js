@@ -1,7 +1,7 @@
 var type = 'sockets';
-var tags = require('../rest/tags');
+import tags from '../rest/tags';
 
-module.exports = {
+export default {
   collection: tags.collection,
   add: tags.add,
   remove: tags.remove

@@ -1,11 +1,10 @@
-let React = require('react');
-
-let Info = require('./info');
-let Orgs = require('./organizations');
+import React from 'react';
+import Info from './info';
+import Orgs from './organizations';
 
 import styles from './styles.less'
 
-module.exports = React.createClass({
+export default React.createClass({
   render: function () {
     return (
       <div className="account">

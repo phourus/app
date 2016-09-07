@@ -1,7 +1,7 @@
 var type = 'sockets';
-var comments = require('../rest/comments');
+import comments from '../rest/comments';
 
-module.exports = {
+export default {
   collection: comments.collection,
   add: comments.add,
   save: comments.save,

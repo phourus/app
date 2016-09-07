@@ -1,10 +1,9 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
-let util = require('../../lib/util');
+import util from '../../lib/util';
 
-module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps: function () {
     return {
       id: 0,

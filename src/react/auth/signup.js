@@ -1,26 +1,20 @@
-let React = require('react');
-let ga = require('../../lib/analytics');
+import React from 'react';
+import ga from '../../lib/analytics';
+import util from '../../lib/util';
+import { Link } from 'react-router';
 
-let util = require('../../lib/util');
-
-let Router = require('react-router');
-let { Link, History } = Router;
-
-let Actions = require('../../actions/session');
-let Store = require('../../stores/session');
-
-let ProfileActions = require('../../actions/profile').Orgs;
-let ProfileStore = require('../../stores/orgs');
-
-let MemberActions = require('../../actions/members');
-let Alert = require('../shared/alerts');
+import Actions from '../../actions/session';
+import Store from '../../stores/session';
+import {Orgs as ProfileActions} from '../../actions/profile';
+import ProfileStore from '../../stores/orgs';
+import MemberActions from '../../actions/members';
+import Alert from '../shared/alerts';
 
 let emailReg = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 let usernameReg = /^([a-z]|[A-Z]|[0-9]|-){2,20}$/;
 let passwordReg = /^(.){6,20}$/;
 
-module.exports = React.createClass({
-  mixins: [History],
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

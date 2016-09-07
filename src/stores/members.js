@@ -1,10 +1,8 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
+import Actions from '../actions/members';
+import members from '../api/members';
 
-let Actions = require('../actions/members');
-
-let members = require('../api/members');
-
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);
     this.listenTo(Actions.request, this._request);
@@ -156,4 +154,4 @@ module.exports = Reflux.createStore({
       console.warn(alert);
     });
   }
-})
+});

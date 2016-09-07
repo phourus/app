@@ -1,10 +1,9 @@
-let React = require('react');
-let ga = require('../../lib/analytics');
+import React from 'react';
+import ga from '../../lib/analytics';
+import Actions from '../../actions/auth';
+import Store from '../../stores/auth';
 
-let Actions = require('../../actions/auth');
-let Store = require('../../stores/auth');
-
-module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps: function () {
     return {
       show: false

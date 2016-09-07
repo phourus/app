@@ -1,6 +1,6 @@
-let React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
+export default React.createClass({
   propTypes: {
     color: React.PropTypes.string,
     msg: React.PropTypes.string,

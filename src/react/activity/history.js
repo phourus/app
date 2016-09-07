@@ -1,10 +1,9 @@
-let React = require('react');
-let moment = require('moment');
+import React from 'react';
+import moment from 'moment';
+import Store from '../../stores/activity';
+import Actions from '../../actions/activity';
 
-let Store = require('../../stores/activity');
-let Actions = require('../../actions/activity');
-
-module.exports = React.createClass({
+export default React.createClass({
   getInitialState: function () {
     return {
       mode: 'comments',

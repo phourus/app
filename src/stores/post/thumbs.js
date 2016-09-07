@@ -1,10 +1,8 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
+import Actions from '../../actions/post/thumbs';
+import thumbs from '../../api/thumbs';
 
-let Actions = require('../../actions/post/thumbs');
-
-let thumbs = require('../../api/thumbs');
-
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   postId: null,
   init: function () {
     // Thumbs.post responsible for retrieving user + post value

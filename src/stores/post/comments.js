@@ -1,10 +1,8 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
+import Actions from '../../actions/post/comments';
+import comments from '../../api/comments';
 
-let Actions = require('../../actions/post/comments');
-
-let comments = require('../../api/comments');
-
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.listenTo(Actions.collection, this._collection);
     this.listenTo(Actions.add, this._add);

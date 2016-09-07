@@ -1,13 +1,11 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
-let TutorialActions = require('../../actions/tutorial');
-
-let Loader = require('../shared/loader');
+import TutorialActions from '../../actions/tutorial';
+import Loader from '../shared/loader';
 import Post from '../post/item'
 
-module.exports = React.createClass({
+export default React.createClass({
 	contextTypes: {
 		session: React.PropTypes.object,
 		route: React.PropTypes.object

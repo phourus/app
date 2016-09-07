@@ -1,10 +1,9 @@
-let React = require('react');
-
-let Tabs = require('./tabs');
+import React from 'react';
+import Tabs from './tabs';
 
 import styles from './styles.less'
 
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

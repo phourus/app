@@ -1,8 +1,7 @@
-let React = require('react');
+import React from 'react';
+import Actions from '../../actions/stream';
 
-let Actions = require('../../actions/stream');
-
-module.exports = React.createClass({
+export default React.createClass({
   getDefaultProps: function () {
     return {
       sortBy: 'influence',

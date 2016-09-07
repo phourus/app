@@ -1,9 +1,8 @@
-let React = require('react');
+import React from 'react';
+import Actions from '../../../actions/util';
+import Store from '../../../stores/util';
 
-let Actions = require('../../../actions/util');
-let Store = require('../../../stores/util');
-
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     session: React.PropTypes.object
   },

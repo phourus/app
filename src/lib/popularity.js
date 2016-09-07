@@ -1,4 +1,4 @@
-module.exports = function (element, popularity) {
+export default function (element, popularity) {
   if (!element) {
     return false;
   }

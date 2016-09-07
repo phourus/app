@@ -1,7 +1,7 @@
-var http = require('../lib/xhr');
+import http from '../lib/xhr';
 var base = '/rest/account/';
 
-module.exports = {
+export default {
   get: function () {
     return http.get(base);
   },

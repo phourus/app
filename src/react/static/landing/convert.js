@@ -1,8 +1,7 @@
-let React = require('react');
-let { Link, History } = require('react-router');
+import React from 'react';
+import { Link } from 'react-router';
 
 let Convert = React.createClass({
-  mixins: [History],
   render: function () {
     return (
       <div className="convert">
@@ -19,4 +18,4 @@ let Convert = React.createClass({
   }
 });
 
-module.exports = Convert;
+export default Convert;

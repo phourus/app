@@ -10,4 +10,4 @@ let View404 = React.createClass({
     }
 });
 
-module.exports = View404;
+export default View404;

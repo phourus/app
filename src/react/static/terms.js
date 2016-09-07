@@ -1,4 +1,4 @@
-let React = require('react');
+import React from 'react';
 
 let Terms = React.createClass({
   render: function () {
@@ -142,4 +142,4 @@ let Terms = React.createClass({
   }
 });
 
-module.exports = Terms;
+export default Terms;

@@ -1,10 +1,8 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
+import Actions from '../../actions/post/tags';
+import tags from '../../api/tags';
 
-let Actions = require('../../actions/post/tags');
-
-let tags = require('../../api/tags');
-
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.listenTo(Actions.add, this._add);
     this.listenTo(Actions.remove, this._remove);

@@ -19,7 +19,7 @@ if (typeof window === 'object') {
   localStorage = window.localStorage;
 }
 
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

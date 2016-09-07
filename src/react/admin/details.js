@@ -1,9 +1,8 @@
-let React = require('react');
+import React from 'react';
+import {Org as Actions} from '../../actions/profile';
+import Store from '../../stores/orgs';
 
-let Actions = require('../../actions/profile').Org;
-let Store = require('../../stores/orgs');
-
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

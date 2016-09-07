@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 var Emblem = React.createClass({
   getDefaultProps: function () {
@@ -43,4 +43,4 @@ var Emblem = React.createClass({
   },
 });
 
-module.exports = Emblem;
+export default Emblem;

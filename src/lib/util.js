@@ -1,7 +1,7 @@
-let w = require('window-or-global');
+import w from 'window-or-global';
 let location = w.location;
 
-module.exports = {
+export default {
   getEnv: function () {
     let env = 'dev';
     if (location.hostname.match(/phourus\.com^/)) {

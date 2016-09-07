@@ -1,19 +1,14 @@
-let React = require('react');
-
-let Router = require('react-router');
-let { Link, History } = Router;
-let ga = require('../../../lib/analytics');
-
-let util = require('../../../lib/util');
-
-let Actions = require('../../../actions/session');
-let Store = require('../../../stores/session');
-
-let Search = require('../../stream/search');
+import React from 'react';
+import { Link } from 'react-router';
+import ga from '../../../lib/analytics';
+import util from '../../../lib/util';
+import Actions from '../../../actions/session';
+import Store from '../../../stores/session';
+import Search from '../../stream/search';
 
 import styles from './styles.less'
 
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     session: React.PropTypes.object,
     route: React.PropTypes.object

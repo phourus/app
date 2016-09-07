@@ -1,4 +1,4 @@
-let React = require('react');
+import React from 'react';
 
 let Integrate = React.createClass({
   render: function () {
@@ -12,4 +12,4 @@ let Integrate = React.createClass({
   }
 });
 
-module.exports = Integrate;
+export default Integrate;

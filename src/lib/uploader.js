@@ -235,4 +235,4 @@ ImageUploader.prototype.setConfig = function(customConfig) {
     }
 };
 
-module.exports = ImageUploader;
+export default ImageUploader;

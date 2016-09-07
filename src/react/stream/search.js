@@ -1,13 +1,9 @@
-let React = require('react');
-let ga = require('../../lib/analytics');
+import React from 'react';
+import ga from '../../lib/analytics';
 
-let Router = require('react-router');
-let { History } = Router;
+import Actions from '../../actions/stream';
 
-let Actions = require('../../actions/stream');
-
-module.exports = React.createClass({
-  mixins: [History],
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

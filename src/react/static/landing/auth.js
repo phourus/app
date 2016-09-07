@@ -1,12 +1,11 @@
-let React = require('react');
-let Router = require('react-router');
+import React from 'react';
+import Router from 'react-router';
+import Login from '../../auth/login';
+import Signup from '../../auth/signup';
+import Forgot from '../../auth/forgot';
+import Reset from '../../auth/reset';
 
-let Login = require('../../auth/login');
-let Signup = require('../../auth/signup');
-let Forgot = require('../../auth/forgot');
-let Reset = require('../../auth/reset');
-
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

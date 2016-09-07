@@ -1,11 +1,12 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
 
-let Actions = require('../actions/profile').User;
+import Profile from '../actions/profile'
+let Actions = Profile.User
 
-let users = require('../api/users');
-let account = require('../api/account');
+import users from '../api/users';
+import account from '../api/account';
 
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   changes: [],
   init: function () {
     this.listenTo(Actions.change, this._change);

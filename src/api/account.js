@@ -1,7 +1,7 @@
 var type = 'sockets';
-var account = require('../rest/account');
+import account from '../rest/account';
 
-module.exports = {
+export default {
   get: account.get,
   edit: account.edit,
   password: account.password,

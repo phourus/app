@@ -1,14 +1,12 @@
-let React = require('react');
-let Router = require('react-router');
-let { RouteHandler, Link } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
-let AccountActions = require('../../actions/profile').User;
-let OrgActions = require('../../actions/profile').Org;
+import {User as AccountActions} from '../../actions/profile';
+import {Org as OrgActions} from '../../actions/profile';
+import ImageUploader from '../../lib/uploader';
+import Token from '../../lib/token';
 
-let ImageUploader = require('../../lib/uploader');
-let Token = require('../../lib/token');
-
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

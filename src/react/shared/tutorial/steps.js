@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   navigation: [
     {
       title: 'Navigation: Phourus Logo',

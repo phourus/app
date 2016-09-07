@@ -1,11 +1,10 @@
-let React = require('react');
-let Drop = require('./drop');
+import React from 'react';
+import Drop from './drop';
+import Actions from '../../actions/post/folders';
+import Store from '../../stores/post/folders';
+import Stream from '../../actions/stream';
 
-let Actions = require('../../actions/post/folders');
-let Store = require('../../stores/post/folders');
-let Stream = require('../../actions/stream');
-
-module.exports = React.createClass({
+export default React.createClass({
   getInitialState: function () {
     return {
       folders: [],

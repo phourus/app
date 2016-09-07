@@ -1,10 +1,11 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
 
-let Actions = require('../actions/profile').Org;
+import Profile from '../actions/profile'
+let Actions = Profile.Org
 
-let orgs = require('../api/orgs');
+import orgs from '../api/orgs';
 
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.listenTo(Actions.change, this._change);
     this.listenTo(Actions.create, this._create);

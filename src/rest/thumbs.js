@@ -1,7 +1,7 @@
-var http = require('../lib/xhr');
+import http from '../lib/xhr';
 var base = '/rest/thumbs/';
 
-module.exports = {
+export default {
   post: function (postId) {
     return http.get(base + 'post/' + postId);
   },

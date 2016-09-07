@@ -1,6 +1,6 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
 
-module.exports = {
+export default {
   history: Reflux.createAction(),
   notifications: Reflux.createAction()
 };

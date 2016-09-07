@@ -1,22 +1,18 @@
-let React = require('react');
-
-let { Link } = require('react-router');
-var ga = require('./lib/analytics');
+import React from 'react';
+import {Link} from 'react-router';
+import ga from './lib/analytics';
 var Initializer = ga.Initializer;
 
-let Header = require('./react/shared/header');
+import Header from './react/shared/header';
 import Footer from './react/shared/footer'
 import Menu from './react/shared/menu'
-let Profile = require('./react/shared/profile');
-let Tutorial = require('./react/shared/tutorial');
-
-let Actions = require('./actions/session');
-let Store = require('./stores/session');
-
-let TutorialActions = require('./actions/tutorial');
-
-let HTML5Backend = require('react-dnd-html5-backend');
-let { DragDropContext } = require('react-dnd');
+import Profile from './react/shared/profile';
+import Tutorial from './react/shared/tutorial';
+import Actions from './actions/session';
+import Store from './stores/session';
+import TutorialActions from './actions/tutorial';
+import HTML5Backend from 'react-dnd-html5-backend';
+import {DragDropContext} from 'react-dnd';
 
 import styles from './less/style.less'
 import formStyles from './less/sub/forms.less'
@@ -266,4 +262,4 @@ let Helper = React.createClass({
   }
 });
 
-module.exports = DragDropContext(HTML5Backend)(App);
+export default DragDropContext(HTML5Backend)(App);

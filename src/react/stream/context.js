@@ -1,11 +1,9 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
-let Actions = require('../../actions/stream');
+import Actions from '../../actions/stream';
 
-module.exports = React.createClass({
-	mixins: [History],
+export default React.createClass({
 	render: function () {
 		let classes = {
 			phourus: "fa fa-flag",

@@ -1,7 +1,7 @@
 var type = 'sockets';
-var thumbs = require('../rest/thumbs');
+import thumbs from '../rest/thumbs';
 
-module.exports = {
+export default {
   post: thumbs.post,
   add: thumbs.add,
   save: thumbs.save,

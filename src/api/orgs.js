@@ -1,7 +1,7 @@
 var type = 'sockets';
-var orgs = require('../rest/orgs');
+import orgs from '../rest/orgs';
 
-module.exports = {
+export default {
   single: orgs.single,
   lookup: orgs.lookup,
   add: orgs.add,

@@ -1,8 +1,8 @@
-let React = require('react');
-var ReactRouter = require('react-router');
+import React from 'react';
+import ReactRouter from 'react-router';
 var RoutingContext = ReactRouter.RoutingContext;
 
-module.exports = React.createClass({
+export default React.createClass({
   render: function () {
     return (
       <html lang="en">
@@ -28,4 +28,4 @@ module.exports = React.createClass({
       </html>
     );
   }
-})
+});

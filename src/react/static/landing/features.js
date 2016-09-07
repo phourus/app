@@ -1,5 +1,5 @@
-let React = require('react');
-let Video = require('./video');
+import React from 'react';
+import Video from './video';
 
 let Features = React.createClass({
   render: function () {
@@ -33,4 +33,4 @@ let Features = React.createClass({
   }
 });
 
-module.exports = Features;
+export default Features;

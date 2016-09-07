@@ -1,11 +1,9 @@
-let React = require('react');
+import React from 'react';
+import Actions from '../../actions/members';
+import Store from '../../stores/members';
+import Pic from '../shared/pic';
 
-let Actions = require('../../actions/members');
-let Store = require('../../stores/members');
-
-let Pic = require('../shared/pic');
-
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     route: React.PropTypes.object
   },

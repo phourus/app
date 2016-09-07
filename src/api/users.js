@@ -1,6 +1,6 @@
 var type = 'sockets';
-var users = require('../rest/users');
+import users from '../rest/users';
 
-module.exports = {
+export default {
   single: users.single,
 };

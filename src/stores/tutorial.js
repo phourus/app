@@ -1,7 +1,7 @@
-let Reflux = require('reflux');
-let Actions = require('../actions/tutorial');
+import Reflux from 'reflux';
+import Actions from '../actions/tutorial';
 
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.listenTo(Actions.ready, this._ready);
     this.listenTo(Actions.reset, this._reset);

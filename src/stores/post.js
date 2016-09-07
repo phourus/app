@@ -1,9 +1,8 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
+import Actions from '../actions/post';
+import posts from '../api/posts';
 
-let Actions = require('../actions/post');
-let posts = require('../api/posts');
-
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.post = {};
     this.changes = {};

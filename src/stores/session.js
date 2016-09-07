@@ -1,12 +1,9 @@
-let Reflux = require('reflux');
-let moment = require('moment');
-
-let token = require('../lib/token');
-let ga = require('../lib/analytics');
-
-let Actions = require('../actions/session');
-
-let account = require('../api/account');
+import Reflux from 'reflux';
+import moment from 'moment';
+import token from '../lib/token';
+import ga from '../lib/analytics';
+import Actions from '../actions/session';
+import account from '../api/account';
 
 // ms * sec * min * hours * days;
 const TTL = 1000 * 60 * 60 * 24 * 30;
@@ -22,7 +19,7 @@ let gaDimensions = function (user) {
   ga('set', 'dimension7', user.state);
 };
 
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.listenTo(Actions.register, this._register);
     this.listenTo(Actions.get, this._get);

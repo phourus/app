@@ -1,4 +1,4 @@
-let React = require('react');
+import React from 'react';
 
 let Privacy = React.createClass({
   render: function () {
@@ -119,4 +119,4 @@ let Privacy = React.createClass({
   }
 });
 
-module.exports = Privacy;
+export default Privacy;

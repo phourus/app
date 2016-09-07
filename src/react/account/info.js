@@ -1,12 +1,10 @@
-let React = require('react');
-let ga = require('../../lib/analytics');
+import React from 'react';
+import ga from '../../lib/analytics';
+import Store from '../../stores/users';
+import {User as Actions} from '../../actions/profile';
+import TutorialActions from '../../actions/tutorial';
 
-let Store = require('../../stores/users');
-let Actions = require('../../actions/profile').User;
-
-let TutorialActions = require('../../actions/tutorial');
-
-module.exports = React.createClass({
+export default React.createClass({
   contextTypes: {
     session: React.PropTypes.object
   },

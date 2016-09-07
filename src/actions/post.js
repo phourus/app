@@ -1,6 +1,6 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
 
-module.exports = {
+export default {
   single: Reflux.createAction(),
   refresh: Reflux.createAction(),
   change: Reflux.createAction(),

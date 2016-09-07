@@ -1,7 +1,6 @@
-let React = require('react');
-let DropTarget = require('react-dnd').DropTarget;
-
-let Actions = require('../../actions/stream')
+import React from 'react';
+import {DropTarget} from 'react-dnd';
+import Actions from '../../actions/stream';
 
 let target = {
   drop: function (props, monitor, component) {
@@ -54,4 +53,4 @@ let Drop = React.createClass({
     }
 });
 
-module.exports = DropTarget('posts', target, collect)(Drop);
+export default DropTarget('posts', target, collect)(Drop);

@@ -1,16 +1,11 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
-//let ReactMarkdown = require('react-markdown');
-//<ReactMarkdown source={this.props.page} />
-
-let Actions = require('../../../actions/pages');
-let Store = require('../../../stores/pages');
+import React from 'react';
+import { Link } from 'react-router';
+import Actions from '../../../actions/pages';
+import Store from '../../../stores/pages';
 
 const DEFAULT_PAGE = 'create-account';
 
-module.exports = React.createClass({
-  mixins: [History],
+export default React.createClass({
   getInitialState: function () {
     return {
       id: "",

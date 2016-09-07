@@ -1,4 +1,4 @@
-let token = require('./token');
+import token from './token';
 let t = '';
 if (token.onConnect) {
   token.onConnect()
@@ -10,8 +10,8 @@ if (token.onConnect) {
   });
 }
 
-module.exports = function () {
+export default function () {
   return {
     "Authorization": t
   };
-};
+}

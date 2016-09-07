@@ -1,7 +1,7 @@
 var type = 'sockets';
-var folders = require('../rest/folders');
+import folders from '../rest/folders';
 
-module.exports = {
+export default {
   collection: folders.collection,
   add: folders.add,
   save: folders.save,

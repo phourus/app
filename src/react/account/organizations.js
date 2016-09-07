@@ -1,17 +1,13 @@
-let React = require('react');
-let Select = require('react-select');
+import React from 'react';
+import Select from 'react-select';
+import { Link } from 'react-router';
 
-let Router = require('react-router');
-let { Link, History } = Router;
+import util from '../../lib/util';
+import Store from '../../stores/orgs';
+import {Org as Actions} from '../../actions/profile';
+import MemberActions from '../../actions/members';
 
-let util = require('../../lib/util');
-
-let Store = require('../../stores/orgs');
-let Actions = require('../../actions/profile').Org;
-
-let MemberActions = require('../../actions/members');
-
-module.exports = React.createClass({
+export default React.createClass({
   render: function () {
     return (
       <div className="orgs">
@@ -136,7 +132,6 @@ let Search = React.createClass({
 });
 
 let List = React.createClass({
-  mixins: [History],
   contextTypes: {
     session: React.PropTypes.object
   },

@@ -1,10 +1,8 @@
-let Reflux = require('reflux');
+import Reflux from 'reflux';
+import Actions from '../actions/auth';
+import account from '../api/account';
 
-let Actions = require('../actions/auth');
-
-let account = require('../api/account');
-
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
   init: function () {
     this.listenTo(Actions.request, this._request);
     this.listenTo(Actions.forgot, this._forgot);

@@ -1,14 +1,12 @@
-let React = require('react');
-let Router = require('react-router');
-let { Link, History } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
-let Form = require('./form');
-let Docs = require('./docs');
+import Form from './form';
+import Docs from './docs';
 
 import styles from './styles.less'
 
-module.exports = React.createClass({
-  mixins: [History],
+export default React.createClass({
   render: function () {
     return (
       <div className={styles.container}>

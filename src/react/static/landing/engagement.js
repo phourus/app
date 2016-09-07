@@ -1,6 +1,6 @@
-let React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
+export default React.createClass({
   render: function () {
     return (
       <div className="engagement">
@@ -46,4 +46,4 @@ module.exports = React.createClass({
       </div>
     )
   }
-})
+});

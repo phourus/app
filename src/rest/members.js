@@ -1,7 +1,7 @@
-var http = require('../lib/xhr');
+import http from '../lib/xhr';
 var base = '/rest/members/';
 
-module.exports = {
+export default {
   collection: function (params) {
     var query = '';
     if (params.orgId) {

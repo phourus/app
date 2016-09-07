@@ -1,3 +1,3 @@
-var ga = require('react-google-analytics');
+import ga from 'react-google-analytics';
 ga('create', 'UA-35065742-1', 'auto');
-module.exports = ga;
+export default ga;
