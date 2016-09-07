@@ -1,4 +1,3 @@
-"use strict";
 let React = require('react');
 
 module.exports = React.createClass({

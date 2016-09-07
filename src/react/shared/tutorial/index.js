@@ -1,4 +1,3 @@
-"use strict";
 let React = require('react');
 var ga = require('../../../lib/analytics');
 

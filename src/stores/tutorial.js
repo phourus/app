@@ -1,4 +1,3 @@
-"use strict";
 let Reflux = require('reflux');
 let Actions = require('../actions/tutorial');
 

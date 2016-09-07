@@ -1,4 +1,3 @@
-'use strict';
 let React = require('react');
 let { Route, IndexRoute } = require('react-router');
 

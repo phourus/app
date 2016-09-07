@@ -1,4 +1,3 @@
-"use strict";
 let React = require('react');
 
 let Privacy = React.createClass({

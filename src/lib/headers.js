@@ -1,4 +1,3 @@
-"use strict";
 let token = require('./token');
 let t = '';
 if (token.onConnect) {

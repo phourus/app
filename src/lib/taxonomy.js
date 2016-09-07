@@ -1,4 +1,3 @@
-"use strict";
 let blog = {};
 let event = {};
 let subject = {};

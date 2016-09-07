@@ -1,4 +1,3 @@
-"use strict";
 let React = require('react');
 var ReactRouter = require('react-router');
 var RoutingContext = ReactRouter.RoutingContext;

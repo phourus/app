@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "949d6b7f2f85aeef8958"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "70b06466a2869829f0ca"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8731,7 +8731,7 @@
 /* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _react = __webpack_require__(330);
 	
@@ -38690,7 +38690,7 @@
 /* 599 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var token = __webpack_require__(600);
 	var t = '';
@@ -38712,7 +38712,7 @@
 /* 600 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var storage = {};
 	if (typeof document !== 'undefined') {
@@ -41911,7 +41911,7 @@
 /* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -43571,7 +43571,7 @@
 /* 646 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _styles = __webpack_require__(647);
 	
@@ -43847,7 +43847,7 @@
 /* 649 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -43936,7 +43936,7 @@
 /* 650 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -46088,7 +46088,7 @@
 /* 659 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -46252,7 +46252,7 @@
 /* 662 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -46419,7 +46419,7 @@
 /* 663 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -46572,7 +46572,7 @@
 /* 668 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 	
@@ -77719,7 +77719,7 @@
 /* 820 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _footer = __webpack_require__(821);
 	
@@ -78596,7 +78596,7 @@
 /* 839 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _styles = __webpack_require__(840);
 	
@@ -78895,7 +78895,7 @@
 /* 842 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -78911,7 +78911,7 @@
 /* 843 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	var moment = __webpack_require__(680);
@@ -79040,7 +79040,7 @@
 /* 844 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var ga = __webpack_require__(487);
@@ -79095,7 +79095,7 @@
 /* 845 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -79124,7 +79124,7 @@
 /* 846 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 	
@@ -79480,7 +79480,7 @@
 /* 848 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	var Actions = __webpack_require__(625);
@@ -90169,7 +90169,7 @@
 /* 1066 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _ideas = __webpack_require__(1067);
 	
@@ -90485,7 +90485,7 @@
 /* 1070 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var Router = __webpack_require__(489);
@@ -90549,7 +90549,7 @@
 /* 1071 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var ga = __webpack_require__(487);
@@ -90756,7 +90756,7 @@
 /* 1073 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var ga = __webpack_require__(487);
@@ -91176,7 +91176,7 @@
 /* 1074 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -91194,7 +91194,7 @@
 /* 1075 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var ga = __webpack_require__(487);
@@ -91280,7 +91280,7 @@
 /* 1076 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -91295,7 +91295,7 @@
 /* 1077 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -91391,7 +91391,7 @@
 /* 1078 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var Router = __webpack_require__(489);
@@ -92082,7 +92082,7 @@
 /* 1089 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _styles = __webpack_require__(1090);
 	
@@ -92201,7 +92201,7 @@
 /* 1092 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	
@@ -92281,7 +92281,7 @@
 /* 1093 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -92293,7 +92293,7 @@
 /* 1094 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -92333,7 +92333,7 @@
 /* 1095 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var Router = __webpack_require__(489);
@@ -92726,7 +92726,7 @@
 /* 1096 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -92738,7 +92738,7 @@
 /* 1097 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	var Actions = __webpack_require__(1096);
@@ -93882,7 +93882,7 @@
 /* 1101 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
@@ -94050,7 +94050,7 @@
 /* 1104 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -94406,7 +94406,7 @@
 /* 1107 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _item = __webpack_require__(1108);
 	
@@ -94910,7 +94910,7 @@
 /* 1112 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var Router = __webpack_require__(489);
@@ -94978,7 +94978,7 @@
 /* 1113 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var Drop = __webpack_require__(1114);
@@ -95142,7 +95142,7 @@
 /* 1115 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -95157,7 +95157,7 @@
 /* 1116 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -95227,7 +95227,7 @@
 /* 1117 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _styles = __webpack_require__(1118);
 	
@@ -95302,7 +95302,7 @@
 /* 1120 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var ga = __webpack_require__(487);
@@ -95479,7 +95479,7 @@
 /* 1121 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var Select = __webpack_require__(797);
@@ -95723,7 +95723,7 @@
 /* 1122 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var _styles = __webpack_require__(1123);
 	
@@ -95854,7 +95854,7 @@
 /* 1125 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var moment = __webpack_require__(680);
@@ -96032,7 +96032,7 @@
 /* 1126 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -96084,7 +96084,7 @@
 /* 1127 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -96097,7 +96097,7 @@
 /* 1128 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(330);
 	var moment = __webpack_require__(680);
@@ -96513,7 +96513,7 @@
 /* 1133 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var Reflux = __webpack_require__(626);
 	
@@ -96750,30 +96750,30 @@
 /* 1136 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var React = __webpack_require__(330);
 	
 	module.exports = React.createClass({
-	  displayName: 'exports',
+	  displayName: "exports",
 	
 	  render: function render() {
 	    return React.createElement(
-	      'div',
+	      "div",
 	      null,
 	      React.createElement(
-	        'h2',
+	        "h2",
 	        null,
-	        'Coming Soon'
+	        "Coming Soon"
 	      ),
 	      React.createElement(
-	        'p',
+	        "p",
 	        null,
-	        'Would you like to create smaller groups within your Organization? Teams can help you do just that! ',
+	        "Would you like to create smaller groups within your Organization? Teams can help you do just that! ",
 	        React.createElement(
-	          'a',
-	          { href: 'mailto:info@phourus.com&Subject=Teams' },
-	          'Contact us for more information.'
+	          "a",
+	          { href: "mailto:info@phourus.com&Subject=Teams" },
+	          "Contact us for more information."
 	        )
 	      )
 	    );
@@ -97084,30 +97084,30 @@
 /* 1139 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var React = __webpack_require__(330);
 	
 	module.exports = React.createClass({
-	  displayName: 'exports',
+	  displayName: "exports",
 	
 	  render: function render() {
 	    return React.createElement(
-	      'div',
+	      "div",
 	      null,
 	      React.createElement(
-	        'h2',
+	        "h2",
 	        null,
-	        'Coming Soon'
+	        "Coming Soon"
 	      ),
 	      React.createElement(
-	        'p',
+	        "p",
 	        null,
-	        'Would you like to create smaller groups within your Organization? Teams can help you do just that! ',
+	        "Would you like to create smaller groups within your Organization? Teams can help you do just that! ",
 	        React.createElement(
-	          'a',
-	          { href: 'mailto:info@phourus.com&Subject=Teams' },
-	          'Contact us for more information.'
+	          "a",
+	          { href: "mailto:info@phourus.com&Subject=Teams" },
+	          "Contact us for more information."
 	        )
 	      )
 	    );

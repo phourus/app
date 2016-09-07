@@ -1,4 +1,3 @@
-"use strict";
 let storage = {};
 if (typeof document !== 'undefined') {
   let Client = require('cross-storage').CrossStorageClient;

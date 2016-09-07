@@ -1,4 +1,3 @@
-"use strict";
 let React = require('react');
 let Router = require('react-router');
 let { History, Link } = Router;
