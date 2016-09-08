@@ -1,24 +1,17 @@
-import React from 'react';
-import moment from 'moment';
-import Actions from '../../actions/activity';
+import React from 'react'
+import moment from 'moment'
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
-      notifications: [],
-      mode: 'comments'
-    }
-  },
-  componentDidMount: function () {
-    // this.unsubscribe = Store.listen((data) => {
-    //   this.setState(data);
-    // });
-    Actions.notifications();
-  },
-  render: function () {
-    let views = this.state.notifications[0] || [];
-    let comments = this.state.notifications[1] || [];
-    let thumbs = this.state.notifications[2] || [];
+export default class Notifications extends React.Component {
+
+  componentDidMount() {
+    this.props.actions.notifications()
+  }
+
+  render() {
+    let views = this.props.notifications[0] || []
+    let comments = this.props.notifications[1] || []
+    let thumbs = this.props.notifications[2] || []
+
     views = views.map(function (item) {
       //<img src={`/assets/avatars/${item.viewer.img}.jpg`} />
       return (<li key={item.id}>
@@ -26,7 +19,7 @@ export default React.createClass({
         <a href={`/user/${item.viewer.id}`}>{item.viewer.username}</a> viewed your profile
         <span className="date"> {moment(item.createdAt).fromNow()}</span>
       </li>)
-    });
+    })
     comments = comments.map(function (item) {
       //<img src={`/assets/avatars/${item.user.img}.jpg`} />
       return (
@@ -36,8 +29,8 @@ export default React.createClass({
           <a href={`/post/${item.post.id}`}>{` \"${item.post.title}\"`}</a>
           <span className="date"> {moment(item.createdAt).fromNow()}</span>
         </li>
-      );
-    });
+      )
+    })
     thumbs = thumbs.map(function (item) {
       // <img src={`/assets/avatars/${item.user.img}.jpg`} />
       return (
@@ -47,27 +40,30 @@ export default React.createClass({
           <a href={`/post/${item.post.id}`}>{` \"${item.post.title}\"`}</a>
           <span className="date"> {moment(item.createdAt).fromNow()}</span>
         </li>
-      );
-    });
+      )
+    })
     return (<div className={this.props.selected === 'history' ? "notifications" : "notifications selected"}>
       <h3>Notifications</h3>
       <div className="tabs">
-        <div onMouseOver={this._comments}><div>{comments.length}</div>Comments</div>
-        <div onMouseOver={this._thumbs}><div>{thumbs.length}</div>Thumbs</div>
-        <div onMouseOver={this._views}><div>{views.length}</div>Views</div>
+        <div onMouseOver={this._comments.bind(this)}><div>{comments.length}</div>Comments</div>
+        <div onMouseOver={this._thumbs.bind(this)}><div>{thumbs.length}</div>Thumbs</div>
+        <div onMouseOver={this._views.bind(this)}><div>{views.length}</div>Views</div>
       </div>
-      {this.state.mode === 'comments' ? <ul>{comments}</ul> : false}
-      {this.state.mode === 'thumbs' ? <ul>{thumbs}</ul> : false}
-      {this.state.mode === 'views' ? <ul>{views}</ul> : false}
-    </div>);
-  },
-  _comments: function () {
-    this.setState({mode: 'comments'});
-  },
-  _thumbs: function () {
-    this.setState({mode: 'thumbs'});
-  },
-  _views: function () {
-    this.setState({mode: 'views'});
+      {this.props.mode === 'comments' ? <ul>{comments}</ul> : false}
+      {this.props.mode === 'thumbs' ? <ul>{thumbs}</ul> : false}
+      {this.props.mode === 'views' ? <ul>{views}</ul> : false}
+    </div>)
   }
-});
+
+  _comments() {
+    //this.setState({mode: 'comments'});
+  }
+
+  _thumbs() {
+    //this.setState({mode: 'thumbs'});
+  }
+
+  _views() {
+    //this.setState({mode: 'views'});
+  }
+}

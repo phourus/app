@@ -1,25 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import ga from '../../lib/analytics';
 import util from '../../lib/util';
 import { Link } from 'react-router';
 
-import Actions from '../../actions/session';
 import Loader from '../shared/loader';
 import Alert from '../shared/alerts';
 
-export default React.createClass({
-  getDefaultProps: function () {
-    return {
-      clicked: true,
-      show: false
-    };
-  },
-  getInitialState: function () {
-    return {
-      ready: true
-    };
-  },
-  componentDidMount: function () {
+class Login extends React.Component {
+
+  componentDidMount() {
     // this.unsubscribe = Store.listen(data => {
     //   if (data.code === 200 && this.state.clicked === true) {
     //     data.clicked = false;
@@ -36,14 +26,15 @@ export default React.createClass({
     //   data.ready = true;
     //   this.setState(data);
     // });
-  },
-  render: function () {
+  }
+
+  render() {
     let session = this.props.session;
     let user = session.user;
     if (!this.props.show) {
       return false;
     }
-    if (!this.state.ready) {
+    if (!this.props.ready) {
       return <Loader />
     }
     if (session.authenticated) {
@@ -78,26 +69,39 @@ export default React.createClass({
         <a href="javascript:void(0)" className="forgotLink" onClick={this.props.showForgot}>Forgot your login information? Click here</a>
       </div>
     );
-  },
-  _login: function () {
+  }
+
+  _login() {
     let username = this.refs.username.getDOMNode().value;
     let password = this.refs.password.getDOMNode().value;
     this._clear();
     this.setState({clicked: true, ready: false});
-    Actions.login(username, password);
+    this.props.actions.login(username, password);
     ga('send', 'event', 'account', 'login');
-  },
-  _request: function () {
+  }
+
+  _request() {
     //this._clear();
     this.history.pushState(null, "/request");
-  },
-  _clear: function () {
+  }
+
+  _clear() {
     this.setState({code: null});
-  },
-  _posts: function () {
+  }
+
+  _posts() {
     this.history.pushState(null, "/stream");
-  },
-  _account: function () {
+  }
+
+  _account() {
     this.history.pushState(null, "/account");
   }
-});
+}
+
+const mapState = (state) => {
+  return {
+    session: {}
+  }
+}
+
+export default connect(mapState)(Login)

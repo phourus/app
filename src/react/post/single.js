@@ -1,6 +1,5 @@
 import React from 'react'
 
-import TutorialActions from '../../actions/tutorial'
 import Profile from '../shared/profile'
 
 import ActionsView from './components/actions'
@@ -17,7 +16,7 @@ import Type from './components/type'
 export default class Single extends React.Component {
 
 	componentDidMount() {
-		TutorialActions.ready(true)
+		//TutorialActions.ready(true)
 	}
 
 	render() {

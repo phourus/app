@@ -46,8 +46,8 @@ export function type(selected) {
   return {type: 'STREAM_TYPE', selected}
 }
 
-export function context(type, id) {
-  return {type: 'STREAM_CONTEXT', type, id}
+export function context(contextType, id) {
+  return {type: 'STREAM_CONTEXT', contextType, id}
 }
 
 export function folder(id) {

@@ -1,21 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { Link } from 'react-router';
 
-import {User as UserActions} from '../../../actions/profile';
-import {Org as OrgActions} from '../../../actions/profile';
-import PostActions from '../../../actions/post';
 import Pic from '../pic';
 import Uploader from '../uploader';
 
 import styles from './styles.less'
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
-			profile: null
-    };
-  },
-	componentDidMount: function () {
+class Profile extends React.Component {
+
+	componentDidMount() {
 		// this.unsubscribeUser = UserStore.listen((data) => {
 		// 	if (data.user) {
 		// 		this.setState({profile: data.user});
@@ -38,14 +32,16 @@ export default React.createClass({
 		// 	}
 		// });
 		this._load(this.props.route);
-	},
-	componentWillReceiveProps: function (nextProps) {
+	}
+
+	componentWillReceiveProps(nextProps) {
 		if (nextProps.route) {
-			this._load(nextProps.route);
+			this._load(nextProps.route)
 		}
-	},
-	render: function () {
-		let profile = this.state.profile || {};
+	}
+
+	render() {
+		let profile = this.props.profile || {};
 		let address = profile.address || {};
 		let root = this.props.route.root;
 		let type = this.props.route.type;
@@ -85,17 +81,19 @@ export default React.createClass({
 				</div>
 			</div>
 		);
-	},
-	_back: function () {
+	}
+
+	_back() {
 		this.history.pushState(null, "/stream");
-	},
-	_load: function (route) {
+	}
+
+	_load(route) {
 		let root = route.root;
 		let type = route.type;
 		let id = route.id;
 		// ADMIN
 		if (root === 'admin' && id > 0) {
-			OrgActions.single(id);
+			//OrgActions.single(id);
 		}
 		// ACCOUNT
 		if (root === 'account' || root === 'activity' || type === 'me') {
@@ -105,14 +103,14 @@ export default React.createClass({
 		// STREAM
 		if (root === 'stream') {
 			if (type === 'user') {
-				UserActions.single(id);
+				//UserActions.single(id);
 			}
 			if (type === 'org') {
-				OrgActions.single(id);
+				//OrgActions.single(id);
 			}
 		}
 	}
-});
+}
 
 let Basic = React.createClass({
   render: function () {
@@ -129,3 +127,12 @@ let Basic = React.createClass({
     );
   }
 });
+
+const mapState = (state) => {
+  return {
+    route: {},
+    profile: {}
+  }
+}
+
+export default connect(mapState)(Profile)

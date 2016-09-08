@@ -1,21 +1,14 @@
-import React from 'react';
-import Actions from '../../actions/members';
-import Pic from '../shared/pic';
+import React from 'react'
+import Pic from '../shared/pic'
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
-      members: []
-    };
-  },
-  componentDidMount: function () {
-    let route = this.props.route;
-    // this.unsubscribe = Store.listen(data => {
-    //   this.setState({members: data});
-    // });
-    Actions.collection(route.id);
-  },
-  render: function () {
+export default class Members extends React.Component {
+
+  componentDidMount() {
+    let route = this.props.route
+    this.props.actions.collection(route.id)
+  }
+
+  render() {
     return (
       <div className="members">
         <h2>Manage Users</h2>
@@ -39,21 +32,25 @@ export default React.createClass({
                 }
               </div>
             </div>
-          );
+          )
         })}
       </div>
-    );
-  },
-  _approve: function (e) {
-    Actions.approve(e.currentTarget.id);
-  },
-  _admin: function (e) {
-    Actions.admin(e.currentTarget.id);
-  },
-  _revoke: function (e) {
-    Actions.revoke(e.currentTarget.id);
-  },
-  _deny: function (e) {
-    Actions.deny(e.currentTarget.id);
+    )
   }
-});
+
+  _approve(e) {
+    this.props.actions.approve(e.currentTarget.id)
+  }
+
+  _admin(e) {
+    this.props.actions.admin(e.currentTarget.id)
+  }
+
+  _revoke(e) {
+    this.props.actions.revoke(e.currentTarget.id)
+  }
+
+  _deny(e) {
+    this.props.actions.deny(e.currentTarget.id)
+  }
+}

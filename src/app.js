@@ -8,8 +8,6 @@ import Footer from './react/shared/footer'
 import Menu from './react/shared/menu'
 import Profile from './react/shared/profile';
 import Tutorial from './react/shared/tutorial';
-import Actions from './actions/session';
-import TutorialActions from './actions/tutorial';
 import HTML5Backend from 'react-dnd-html5-backend';
 import {DragDropContext} from 'react-dnd';
 
@@ -22,16 +20,6 @@ import helperStyles from './less/sub/helper.less'
 import sidebarStyles from './less/sub/sidebar.less'
 
 let App = React.createClass({
-  childContextTypes: {
-    session: React.PropTypes.object,
-    route: React.PropTypes.object
-  },
-  getChildContext: function () {
-    return {
-      session: this.state.session,
-      route: this.state.route
-    };
-  },
   getInitialState: function () {
     return {
       sidebarVisible: false,
@@ -62,7 +50,7 @@ let App = React.createClass({
     //   let session = this.state.session;
     //   this.setState({session: session});
     // });
-    Actions.get();
+    //this.props.actions.session.get()
     this._route(this.props);
   },
   componentWillReceiveProps: function (nextProps) {
@@ -251,7 +239,7 @@ let Helper = React.createClass({
   },
   _tutorial: function () {
     ga('send', 'event', 'helper', 'tutorial');
-    TutorialActions.reset();
+    //TutorialActions.reset();
   },
   _chat: function () {
     ga('send', 'event', 'helper', 'chat');

@@ -1,51 +1,55 @@
-import React from 'react';
-import { Link } from 'react-router';
-import Actions from '../../../actions/pages';
+import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { page } from '../redux/actions'
 
 const DEFAULT_PAGE = 'create-account';
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
-      id: "",
-      menu: true,
-      page: ""
-    };
-  },
-  componentDidMount: function () {
+class Docs extends React.Component {
+
+  componentDidMount() {
     // this.unsubscribe = Store.listen((data) => {
     //   if (data.page) {
     //     this.setState({page: data.page, menu: false, id: data.id});
     //   }
     // });
-    this._route(this.props.params);
-  },
-  componentWillReceiveProps: function (nextProps) {
-    if (this.state.id !== nextProps.params.id) {
-      this._route(nextProps.params);
+    this._route(this.props.params)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.id !== nextProps.params.id) {
+      this._route(nextProps.params)
     }
-  },
-  render: function () {
+  }
+
+  render() {
     return (
       <div className="docs">
-        <i className="fa fa-bars toggle" onClick={this._toggle} />
-        <Popup id={this.state.id} page={this.state.page} close={this._close} />
-        <Menu menu={this.state.menu} />
+        <i className="fa fa-bars toggle" onClick={this._toggle.bind(this)} />
+        <Popup id={this.props.id} page={this.props.page} close={this._close.bind(this)} />
+        <Menu menu={this.props.menu} />
       </div>
-    );
-  },
-  _route: function (params) {
-    let page = '';
-    if (params && params.id) {
-      Actions.get(params.id);
-    } else {
-      Actions.get(DEFAULT_PAGE);
-    }
-  },
-  _toggle: function () {
-    this.setState({menu: !this.state.menu});
+    )
   }
-});
+
+  _route(params) {
+    let page = ''
+    if (params && params.id) {
+      this.props.actions.page(params.id)
+    } else {
+      this.props.actions.page(DEFAULT_PAGE)
+    }
+  }
+
+  _toggle() {
+    //this.setState({menu: !this.state.menu})
+  }
+
+  _close() {
+
+  }
+}
 
 let Popup = React.createClass({
   render: function () {
@@ -124,3 +128,13 @@ let Menu = React.createClass({
     );
   }
 });
+
+const mapState = (state) => {
+  return {}
+}
+
+const mapDispatch = (dispatch) => {
+  return { actions: bindActionCreators({ page }, dispatch) }
+}
+
+export default connect(mapState, mapDispatch)(Docs)

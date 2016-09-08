@@ -172,4 +172,4 @@ const mapDispatch = (dispatch) => {
   return { actions: bindActionCreators(actions, dispatch) }
 }
 
-export default connect(mapState, mapDispatch)(Account)
+export default connect(mapState, mapDispatch)(Tutorial)

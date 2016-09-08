@@ -53,7 +53,7 @@ export default class Features extends React.Component {
         <div className="list">
           {slides.map((item, index) => {
             return (
-              <div className={index === this.state.selected ? "selected" : ""}>
+              <div key={index} className={index === this.state.selected ? "selected" : ""}>
                 <span className="title">{item.title}</span>
                 <p>{item.text}</p>
                 <p className="usage">{item.usage}</p>

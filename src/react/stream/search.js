@@ -1,33 +1,30 @@
-import React from 'react';
-import ga from '../../lib/analytics';
+import React from 'react'
+import ga from '../../lib/analytics'
 
-import Actions from '../../actions/stream';
+export default class Search extends React.Component {
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
-      search: ""
-    };
-  },
-	render: function () {
+	render() {
 		return (
   		<div className="keywords">
-  			<input className="term" type="text" placeholder="Search for" value={this.state.search} onChange={this._change} />
-  			<button className="button blue" onClick={this._search}><i className="fa fa-search" /> Search</button>
+  			<input className="term" type="text" placeholder="Search for" value={this.props.search} onChange={this._change.bind(this)} />
+  			<button className="button blue" onClick={this._search.bind(this)}><i className="fa fa-search" /> Search</button>
   		</div>
-		);
-	},
-  _change: function (e) {
-    this.setState({search: e.currentTarget.value});
-  },
-	_search: function () {
-		Actions.search(this.state.search);
-    this._redirect();
-	},
-  _redirect: function () {
+		)
+	}
+
+  _change(e) {
+    //this.setState({search: e.currentTarget.value});
+  }
+
+	_search() {
+		this.props.actions.search(this.props.search)
+    this._redirect()
+	}
+
+  _redirect() {
     // let route = this.props.route;
     // if (route.root !== 'stream') {
     //   this.history.pushState(null, '/stream');
     // }
   }
-});
+}

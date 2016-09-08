@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Actions from '../../actions/auth';
 import ga from '../../lib/analytics';
 
 export default React.createClass({
@@ -55,7 +54,7 @@ export default React.createClass({
   _reset: function () {
     let query = this.props.location.query;
     if (this.state.password === this.state.confirm && query.token) {
-      Actions.reset(this.state.email, this.state.password, query.token, query.userId);
+      this.props.actions.reset(this.state.email, this.state.password, query.token, query.userId);
       ga('send', 'event', 'account', 'reset');
     }
   },

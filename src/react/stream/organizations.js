@@ -1,20 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react'
+import { Link } from 'react-router'
 
-import util from '../../lib/util';
-import Pic from '../shared/pic';
+import util from '../../lib/util'
+import Pic from '../shared/pic'
 
-export default React.createClass({
-	render: function () {
-		let session = this.props.session;
-		let orgs = session.orgs || [];
-		let membership = orgs;
+export default class Organizations extends React.Component {
+
+	render() {
+		let session = this.props.session
+		let orgs = session.orgs || []
+		let membership = orgs
 		let selected = orgs.filter((org) => {
 			if (org.orgId.toString() === this.props.route.id) {
-				return true;
+				return true
 			}
-			return false;
-		});
+			return false
+		})
+
 		return (
 			<div className="organizations">
 				<h1>My Organizations</h1>
@@ -26,13 +28,14 @@ export default React.createClass({
 								<div className="name">{org.name}</div>
 								<Pic id={org.id} img={org.img} name={org.shortname} type="org" />
 							</div>
-						);
+						)
 					})}
 				</div>
 			</div>
-		);
-	},
-	_select: function (e) {
-		window.location = util.createOrgLink(e.currentTarget.id);
+		)
 	}
-});
+
+	_select(e) {
+		window.location = util.createOrgLink(e.currentTarget.id)
+	}
+}

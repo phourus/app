@@ -1,29 +1,20 @@
-import React from 'react';
-import Drop from './drop';
-import Actions from '../../actions/post/folders';
-import Stream from '../../actions/stream';
+import React from 'react'
+import Drop from './drop'
 
-export default React.createClass({
-  getInitialState: function () {
-    return {
-      folders: [],
-      selected: 0
-    };
-  },
-  componentDidMount: function () {
-    // this.unsubscribe = Store.listen((data) => {
-    //   this.setState(data);
-    // });
-    Actions.collection();
-  },
-  render: function () {
-    let folders = this.state.folders;
+export default class Sidebar extends React.Component {
+
+  componentDidMount() {
+    this.props.actions.collection()
+  }
+
+  render() {
+    let folders = this.props.folders
     if (folders[0] && folders[0].id !== 0) {
-      folders.unshift({id: 0, name: 'All Posts'});
+      folders.unshift({id: 0, name: 'All Posts'})
     }
 
     if (!this.props.sidebarVisible) {
-      return false;
+      return false
     }
     return (
       <div id="sidebar">
@@ -31,17 +22,18 @@ export default React.createClass({
         <ul>
           {folders.map((item, index) => {
             return (
-              <Drop key={item.id} item={item} index={index} select={this._select} selected={this.state.selected} />
-            );
+              <Drop key={item.id} item={item} index={index} select={this._select.bind(this)} selected={this.props.selected} />
+            )
           })}
         </ul>
       </div>
-    );
-  },
-  _select: function (e) {
-    let id = e.currentTarget.id;
-    id = id.replace('id', '');
-    Stream.folder(id);
-    this.setState({selected: parseInt(id)});
+    )
   }
-});
+
+  _select(e) {
+    let id = e.currentTarget.id
+    id = id.replace('id', '')
+    this.props.actions.folder(id)
+    //this.setState({selected: parseInt(id)})
+  }
+}

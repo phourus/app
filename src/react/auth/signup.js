@@ -3,9 +3,6 @@ import ga from '../../lib/analytics';
 import util from '../../lib/util';
 import { Link } from 'react-router';
 
-import Actions from '../../actions/session';
-import {Orgs as ProfileActions} from '../../actions/profile';
-import MemberActions from '../../actions/members';
 import Alert from '../shared/alerts';
 
 let emailReg = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -68,7 +65,7 @@ export default React.createClass({
         <div className="squeeze">
           <div className="instructions">
             <p className={steps[0]}>To start using Phourus, you will want to create a personal account. Once you have a personal account, you can create or join existing organization accounts.</p>
-            <p className={steps[1]}>Although Phourus can be used strictly as an individual, the real benefit comes from using it within an organization. If your organization already has a Phourus account, or you'd like to create one, simply type your organization name into the organization field in the signup form.</p>
+            <p className={steps[1]}>Although Phourus can be used strictly as an individual, the real benefit comes from using it within an organization. If your organization already has a Phourus account, or you would like to create one, simply type your organization name into the organization field in the signup form.</p>
             <p className={steps[2]}>Your account has been created, welcome to Phourus! You will receive an email confirmation, and can <a>edit your account here</a>.</p>
           </div>
           {this.state.step === 0
@@ -190,18 +187,18 @@ export default React.createClass({
   _signup: function () {
     let invalid = this._validate();
     if (!Object.keys(invalid).length) {
-      Actions.register(this.state.email, this.state.password, this.state.username);
+      //Actions.register(this.state.email, this.state.password, this.state.username);
       ga('send', 'event', 'account', 'signup');
     }
     this.setState({invalid: invalid});
   },
   _organizations: function (e) {
     if (this.state.user && this.state.user.id) {
-      ProfileActions.create(this.state.organization);
+      //ProfileActions.create(this.state.organization);
     }
   },
   _join: function (orgId) {
-    MemberActions.request(orgId);
+    //MemberActions.request(orgId);
   },
   _skip: function () {
     this.setState({step: 2});

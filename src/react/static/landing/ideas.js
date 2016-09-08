@@ -68,7 +68,7 @@ export default class Ideas extends React.Component {
         <div className="slides">
           <ul>
             {slides.map((item, index) => {
-              return <li onClick={this.select.bind(this, index)}><img src={`/assets/landing/${item.img}.jpg`} /></li>
+              return <li key={item.img} onClick={this.select.bind(this, index)}><img src={`/assets/landing/${item.img}.jpg`} /></li>
             })}
           </ul>
         </div>

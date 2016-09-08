@@ -1,40 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import {Org as OrgActions} from '../../actions/profile';
-import MemberActions from '../../actions/members';
+export default class Tabs extends React.Component {
 
-export default React.createClass({
-    getInitialState: function () {
-      return {
-        org: {},
-        members: []
-      };
-    },
-    componentDidMount: function () {
+    componentDidMount() {
       let session = this.props.route;
-      // this.unsubscribeOrgs = OrgStore.listen(data => {
-      //   if (data.org) {
-      //     this.setState({org: data.org});
-      //   }
-      // });
-      // this.unsubscribeMembers = MemberStore.listen(data => {
-      //   this.setState({members: data});
-      // });
       if (session.id) {
-        OrgActions.single(session.id);
-        MemberActions.collection(session.id);
+        //OrgActions.single(session.id);
+        //MemberActions.collection(session.id);
       }
-    },
-    componentWillUnmount: function () {
-      this.unsubscribeOrgs();
-      this.unsubscribeMembers();
-    },
-    render: function () {
-      let route = this.props.route;
-      let view = route.type;
+    }
 
-      let details = this._details();
-      let users = this._users();
+    render() {
+      let route = this.props.route
+      let view = route.type
+
+      let details = this._details()
+      let users = this._users()
+
       return (
         <div className="tabs">
           <div onClick={this._select.bind(this, 'details')} className={'details' === view ? 'selected' : ''}>
@@ -55,34 +37,37 @@ export default React.createClass({
           </div>
         </div>
       )
-    },
-    _select: function (tab) {
-      let route = this.props.route;
-      let id = route.id;
+    }
+
+    _select(tab) {
+      let route = this.props.route
+      let id = route.id
       if (id) {
-        this.history.pushState(null, `/admin/${tab}`);
+        this.history.pushState(null, `/admin/${tab}`)
       }
-    },
-    _details: function () {
+    }
+
+    _details() {
       // swap 'name' with 'category' when categories are determined
       let notNull = ['name', 'email', 'phone', 'fax', 'website', 'people', 'video', 'channel', 'contact', 'about'].filter((key) => {
-        if (this.state.org[key]) {
-          return true;
+        if (this.props.org[key]) {
+          return true
         }
-        return false;
+        return false
       });
-      return notNull.length * 10;
-    },
-    _users: function () {
-      let approved = this.state.members.filter((obj) => {
+      return notNull.length * 10
+    }
+
+    _users() {
+      let approved = this.props.members.filter((obj) => {
         if (obj.approved) {
-          return true;
+          return true
         }
-        return false;
-      });
+        return false
+      })
       return  {
         approved: approved.length,
-        pending: (this.state.members.length - approved.length)
-      };
+        pending: (this.props.members.length - approved.length)
+      }
     }
-});
+}

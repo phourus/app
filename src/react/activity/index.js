@@ -6,15 +6,10 @@ import { Link } from 'react-router'
 import Notifications from './notifications'
 import History from './history'
 
+import * as actions from './redux/actions'
 import styles from './styles.less'
 
 class Activity extends React.Component {
-
-  getInitialState() {
-    return {
-      selected: "notifications"
-    }
-  }
 
   componentDidMount() {
     this._route()
@@ -32,13 +27,14 @@ class Activity extends React.Component {
 				<p>Please login if you would like to see your account activity.</p>
 			</div>)
     }
+
     return (
       <div className="activity">
         <div className="toggle">
           <h3><Link to="/notifications">Notifications</Link> | <Link to="/history">History</Link></h3>
         </div>
-        <Notifications selected={this.state.selected} />
-        <History selected={this.state.selected} />
+        <Notifications {...this.props} />
+        <History {...this.props} />
       </div>
     )
   }
@@ -46,15 +42,23 @@ class Activity extends React.Component {
   _route() {
     let route = this.props.routes
     if (route[1].name === 'history') {
-      this.setState({selected: 'history'})
+      //this.setState({selected: 'history'})
     } else {
-      this.setState({selected: 'notifications'})
+      //this.setState({selected: 'notifications'})
     }
   }
 }
 
 const mapState = (state) => {
-  return {}
+  return {
+    routes: [{name: ''}, {name: 'notifications'}],
+    session: {
+      authenticated: true
+    },
+    selected: 'notifications',
+    notifications: [],
+    history: []
+  }
 }
 
 const mapDispatch = (dispatch) => {

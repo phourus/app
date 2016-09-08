@@ -1,17 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { Link } from 'react-router';
 import ga from '../../../lib/analytics';
 import util from '../../../lib/util';
-import Actions from '../../../actions/session';
 import Search from '../../stream/search';
 
 import styles from './styles.less'
 
-export default React.createClass({
-  render: function () {
-    let session = this.props.session;
-    let route = this.props.route;
-    let r = route.root;
+class Header extends React.Component {
+  render() {
+    let session = this.props.session
+    let route = this.props.route
+    let r = route.root
     if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
       return <Static />
     }
@@ -44,9 +44,9 @@ export default React.createClass({
         </div>
         <Search />
       </header>
-    );
+    )
   }
-});
+}
 
 let Home = React.createClass({
   render: function () {
@@ -150,7 +150,7 @@ let Private = React.createClass({
 //     );
 //   },
 //   _logout: function () {
-//     Actions.logout();
+//     this.props.actions.session.logout()
 //     ga('send', 'event', 'account', 'logout');
 //   }
 // });
@@ -169,3 +169,12 @@ let Nav = React.createClass({
     );
   }
 });
+
+const mapState = (state) => {
+  return {
+    session: {},
+    route: {}
+  }
+}
+
+export default connect(mapState)(Header)

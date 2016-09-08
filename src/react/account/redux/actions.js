@@ -13,3 +13,7 @@ export function save() {
 export function deactivate() {
   return {type: 'ACCOUNT_DEACTIVATE'}
 }
+
+export function lookup() {
+  return {type: 'ACCOUNT_LOOKUP'}
+}

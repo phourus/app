@@ -1,6 +1,5 @@
 import React from 'react';
 import ga from '../../lib/analytics';
-import Actions from '../../actions/auth';
 
 export default React.createClass({
   getDefaultProps: function () {
@@ -41,7 +40,7 @@ export default React.createClass({
   },
   _email: function (e) { this.setState({email: e.currentTarget.value }); this._clear(); },
   _forgot: function () {
-    Actions.forgot(this.state.email)
+    this.props.actions.forgot(this.state.email)
     this.setState({email: "", code: null});
     ga('send', 'event', 'account', 'forgot');
   },

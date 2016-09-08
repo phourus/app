@@ -1,7 +1,4 @@
 import React from 'react'
-
-import TutorialActions from '../../actions/tutorial'
-
 import ActionsView from './components/actions'
 import Content from './components/content'
 import Title from './components/title'
@@ -10,7 +7,7 @@ import Type from './components/type'
 export default class Create extends React.Component {
 
 	componentDidUpdate() {
-		TutorialActions.ready(true)
+		//TutorialActions.ready(true)
 	}
 
 	render() {

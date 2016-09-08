@@ -1,26 +1,31 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Tabs from './tabs';
+import Tabs from './tabs'
 
+import * as actions from './redux/actions'
 import styles from './styles.less'
 
 class Admin extends React.Component {
 
   render() {
-    let route = this.props.route
-
+    // {React.cloneElement(this.props.children, this.props)}
     return (
       <div className="admin">
-        <Tabs {...this.state} />
-        {React.cloneElement(this.props.children, route)}
+        <Tabs {...this.props} />
+        
       </div>
     )
   }
 }
 
 const mapState = (state) => {
-  return {}
+  return {
+    session: {},
+    route: {},
+    org: {},
+    members: []
+  }
 }
 
 const mapDispatch = (dispatch) => {

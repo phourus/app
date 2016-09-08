@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import {User as AccountActions} from '../../actions/profile';
-import {Org as OrgActions} from '../../actions/profile';
 import ImageUploader from '../../lib/uploader';
 import Token from '../../lib/token';
 
@@ -55,12 +53,12 @@ export default React.createClass({
       }
       options.uploadUrl = '/rest/orgs/' + id + '/pic';
       options.onComplete = function (event) {
-        OrgActions.single(id);
+        //OrgActions.single(id);
       };
     } else {
       options.uploadUrl = '/rest/account/pic';
       options.onComplete = function (event) {
-        AccountActions.get();
+        //AccountActions.get();
       };
     }
 

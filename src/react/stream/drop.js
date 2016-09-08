@@ -1,56 +1,54 @@
-import React from 'react';
-import {DropTarget} from 'react-dnd';
-import Actions from '../../actions/stream';
+import React from 'react'
+import {DropTarget} from 'react-dnd'
 
 let target = {
-  drop: function (props, monitor, component) {
-    let item = monitor.getItem();
-    Actions.save(item.id, props.item.id);
+  drop(props, monitor, component) {
+    let item = monitor.getItem()
+    this.props.actions.save(item.id, props.item.id)
     return {
       postId: item.id,
       folderId: props.item.id
-    };
+    }
   }
-};
+}
 
 let collect = function (connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-  };
+  }
 }
 
-let Drop = React.createClass({
-  render: function () {
-      let className = [];
-      let item = this.props.item;
-      let index = this.props.index;
-      let isOver = this.props.isOver;
-      let connectDropTarget = this.props.connectDropTarget;
+const Drop = (props) => {
+  let className = []
+  let item = props.item
+  let index = props.index
+  let isOver = props.isOver
+  let connectDropTarget = props.connectDropTarget
 
-      if (index === this.props.selected) {
-        className.push('selected');
+  if (index === props.selected) {
+    className.push('selected')
+  }
+  if (isOver) {
+    className.push('over')
+  }
+
+  return connectDropTarget(
+    <li key={item.name} className={className.join(' ')}>
+      <a id={'id' + item.id} href="javascript:void(0)" onClick={props.select}>
+        <span className="title">{item.name}</span><br />
+      </a>
+      {index === props.selected && 0
+        ? <ul>
+          <li>Social Media</li>
+          <li>Search Engine Management</li>
+          <li>Direct</li>
+          <li><input /><button>Add subfolder</button></li>
+          </ul>
+        : false
       }
-      if (isOver) {
-        className.push('over');
-      }
+    </li>
+  )
+}
 
-      return connectDropTarget(
-        <li key={item.name} className={className.join(' ')}>
-          <a id={'id' + item.id} href="javascript:void(0)" onClick={this.props.select}>
-            <span className="title">{item.name}</span><br />
-          </a>
-          {index === this.props.selected && 0
-            ? <ul>
-              <li>Social Media</li>
-              <li>Search Engine Management</li>
-              <li>Direct</li>
-              <li><input /><button>Add subfolder</button></li>
-              </ul>
-            : false
-          }
-        </li>);
-    }
-});
-
-export default DropTarget('posts', target, collect)(Drop);
+export default DropTarget('posts', target, collect)(Drop)

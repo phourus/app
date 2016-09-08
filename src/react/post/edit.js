@@ -1,7 +1,5 @@
 import React from 'react'
 
-import TutorialActions from '../../actions/tutorial'
-
 import ActionsView from './components/actions'
 import Content from './components/content'
 import Links from './components/links'
@@ -14,7 +12,7 @@ export default class Edit extends React.Component {
 
 	componentDidUpdate() {
 		if (this.props.owner) {
-			TutorialActions.ready(true)
+			//TutorialActions.ready(true)
 		}
 	}
 
