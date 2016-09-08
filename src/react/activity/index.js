@@ -50,14 +50,19 @@ class Activity extends React.Component {
 }
 
 const mapState = (state) => {
+  const {
+    selected,
+    notifications,
+    history
+  } = state.activity
+
   return {
     routes: [{name: ''}, {name: 'notifications'}],
-    session: {
-      authenticated: true
-    },
-    selected: 'notifications',
-    notifications: [],
-    history: []
+    route: state.route,
+    session: state.session,
+    selected,
+    notifications,
+    history
   }
 }
 

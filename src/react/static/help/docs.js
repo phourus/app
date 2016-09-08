@@ -130,7 +130,13 @@ let Menu = React.createClass({
 });
 
 const mapState = (state) => {
-  return {}
+  const {
+    page
+  } = state.static
+
+  return {
+    page
+  }
 }
 
 const mapDispatch = (dispatch) => {

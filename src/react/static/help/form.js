@@ -46,8 +46,13 @@ class Form extends React.Component {
 }
 
 const mapState = (state) => {
+  const {
+    contact
+  } = state.static
+
   return {
-    session: {}
+    session: state.session,
+    contact
   }
 }
 

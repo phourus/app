@@ -63,9 +63,22 @@ class Stream extends React.Component {
 }
 
 const mapState = (state) => {
+	const {
+		sidebarVisible,
+		posts,
+		total,
+		params,
+		folders
+	} = state.stream
+
   return {
-		folders: [],
-		posts: []
+		route: state.route,
+		session: state.session,
+		sidebarVisible,
+		posts,
+		total,
+		params,
+		folders
 	}
 }
 

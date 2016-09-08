@@ -1,5 +1,5 @@
 import update from 'react-addons-update'
-const initialState = {
+const initState = {
   post: {},
   changes: {},
   poll: {},
@@ -20,7 +20,7 @@ const initialState = {
 
 }
 
-export default function post(state = initialState, action = {}) {
+export default (state = initState, action = {}) => {
   switch (action.type) {
     case 'REQUEST_POST_SINGLE':
       return update(state, {

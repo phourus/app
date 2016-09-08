@@ -13,18 +13,23 @@ class Admin extends React.Component {
     return (
       <div className="admin">
         <Tabs {...this.props} />
-        
+
       </div>
     )
   }
 }
 
 const mapState = (state) => {
+  const {
+    org,
+    members
+  } = state.admin
+
   return {
-    session: {},
-    route: {},
-    org: {},
-    members: []
+    route: state.route,
+    session: state.session,
+    org,
+    members
   }
 }
 
