@@ -1,9 +1,20 @@
-let type = 'sockets';
-import thumbs from '../rest/thumbs';
+import http from '../lib/xhr';
+let base = '/rest/thumbs/';
 
 export default {
-  post: thumbs.post,
-  add: thumbs.add,
-  save: thumbs.save,
-  remove: thumbs.remove
+  post: function (postId) {
+    return http.get(base + 'post/' + postId);
+  },
+  user: function () {
+    return http.get(base + 'user/');
+  },
+  add: function (model) {
+    return http.post(base, model);
+  },
+  save: function (id, model) {
+    return http.put(base + id, model);
+  },
+  remove: function (id) {
+    return http.del(base + id);
+  },
 };

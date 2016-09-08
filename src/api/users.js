@@ -1,6 +1,8 @@
-let type = 'sockets';
-import users from '../rest/users';
+import http from '../lib/xhr';
+let base = '/rest/users/';
 
 export default {
-  single: users.single,
+  single: function (id) {
+    return http.get(base + id);
+  }
 };

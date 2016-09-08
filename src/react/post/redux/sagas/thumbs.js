@@ -1,6 +1,6 @@
 import { call, put, take, spawn } from 'redux-saga/effects'
 
-import thumbs from '../../../../rest/thumbs'
+import thumbs from '../../../../api/thumbs'
 
 export default function* init() {
   yield [

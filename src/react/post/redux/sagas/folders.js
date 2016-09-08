@@ -1,6 +1,6 @@
 import { call, put, take, spawn } from 'redux-saga/effects'
 
-import folders from '../../../../rest/folders'
+import folders from '../../../../api/folders'
 
 export default function* init() {
   yield [

@@ -1,6 +1,6 @@
 import { call, put, take, spawn } from 'redux-saga/effects'
 
-import posts from '../../../../rest/posts'
+import posts from '../../../../api/posts'
 
 export default function* post() {
   yield [

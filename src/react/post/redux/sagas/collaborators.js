@@ -1,6 +1,6 @@
 import { call, put, take, spawn } from 'redux-saga/effects'
 
-import collaborators from '../../../../rest/collaborators'
+import collaborators from '../../../../api/collaborators'
 
 export default function* init() {
   yield [

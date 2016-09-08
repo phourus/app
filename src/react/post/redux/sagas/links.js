@@ -1,6 +1,6 @@
 import { call, put, take, spawn } from 'redux-saga/effects'
 
-import links from '../../../../rest/links'
+import links from '../../../../api/links'
 
 export default function* init() {
   yield [

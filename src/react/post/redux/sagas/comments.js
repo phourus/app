@@ -1,6 +1,6 @@
 import { call, put, take, spawn } from 'redux-saga/effects'
 
-import comments from '../../../../rest/comments'
+import comments from '../../../../api/comments'
 
 export default function* init() {
   yield [

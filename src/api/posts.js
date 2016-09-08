@@ -1,14 +1,32 @@
-let type = 'sockets';
-import posts from '../rest/posts';
+import http from '../lib/xhr';
+let base = '/rest/posts/';
 
 export default {
-  single: posts.single,
-  collection: posts.collection,
-  add: posts.add,
-  save: posts.save,
-  remove: posts.remove,
-  account: posts.account,
-  poll: posts.poll,
-  vote: posts.vote,
-  folder: posts.folder
+  single: function (id) {
+    return http.get(base + id);
+  },
+  collection: function (params) {
+    let query = params;
+    params.contextId = params.context.id;
+    params.contextType = params.context.type;
+    return http.get(base);
+  },
+  add: function (model) {
+    return http.post(base, model);
+  },
+  save: function (id, model) {
+    return http.put(base + id, model);
+  },
+  remove: function(id) {
+    return http.del(base + id);
+  },
+  account: function () {
+    return http.get(base);
+  },
+  poll: function(id) {
+    return http.get(base + id + '/poll');
+  },
+  vote: function (id, option) {
+    return http.post(base + id + '/vote', {option: option});
+  }
 };

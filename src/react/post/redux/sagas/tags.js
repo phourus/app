@@ -1,6 +1,6 @@
 import { call, put, take, spawn } from 'redux-saga/effects'
 
-import tags from '../../../../rest/tags'
+import tags from '../../../../api/tags'
 
 export default function* init() {
   yield [
