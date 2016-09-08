@@ -6,9 +6,6 @@ import Forgot from '../../auth/forgot';
 import Reset from '../../auth/reset';
 
 export default React.createClass({
-  contextTypes: {
-    route: React.PropTypes.object
-  },
   getInitialState: function () {
     return {
       login: true,
@@ -34,7 +31,7 @@ export default React.createClass({
     );
   },
   _context: function () {
-    let query = this.context.route.query;
+    let query = this.props.route.query;
     if (query && query.reset && query.token) {
       this._showReset();
     }

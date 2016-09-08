@@ -3,16 +3,13 @@ import Actions from '../../actions/members';
 import Pic from '../shared/pic';
 
 export default React.createClass({
-  contextTypes: {
-    route: React.PropTypes.object
-  },
   getInitialState: function () {
     return {
       members: []
     };
   },
   componentDidMount: function () {
-    let route = this.context.route;
+    let route = this.props.route;
     // this.unsubscribe = Store.listen(data => {
     //   this.setState({members: data});
     // });

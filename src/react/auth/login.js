@@ -8,10 +8,6 @@ import Loader from '../shared/loader';
 import Alert from '../shared/alerts';
 
 export default React.createClass({
-  contextTypes: {
-    session: React.PropTypes.object,
-    route: React.PropTypes.object
-  },
   getDefaultProps: function () {
     return {
       clicked: true,
@@ -28,7 +24,7 @@ export default React.createClass({
     //   if (data.code === 200 && this.state.clicked === true) {
     //     data.clicked = false;
     //     let url = util.createHomeURL();
-    //     let route = this.context.route;
+    //     let route = this.props.route;
     //     if (!route.subdomain) {
     //       url = url + '/stream';
     //     }
@@ -42,7 +38,7 @@ export default React.createClass({
     // });
   },
   render: function () {
-    let session = this.context.session;
+    let session = this.props.session;
     let user = session.user;
     if (!this.props.show) {
       return false;

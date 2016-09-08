@@ -2,6 +2,10 @@ export function single(id) {
   return {type: 'POST_SINGLE', id}
 }
 
+export function change(key, value) {
+  return {type: 'POST_CHANGE', key, value}
+}
+
 export function create(id) {
   return {type: 'POST_CREATE', id}
 }
@@ -20,4 +24,12 @@ export function cancel() {
 
 export function trash(id) {
   return {type: 'POST_TRASH', id}
+}
+
+export function poll() {
+  return {type: 'POST_POLL'}
+}
+
+export function vote() {
+  return {type: 'POST_VOTE'}
 }

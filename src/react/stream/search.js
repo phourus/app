@@ -4,9 +4,6 @@ import ga from '../../lib/analytics';
 import Actions from '../../actions/stream';
 
 export default React.createClass({
-  contextTypes: {
-    route: React.PropTypes.object
-  },
   getInitialState: function () {
     return {
       search: ""
@@ -28,7 +25,7 @@ export default React.createClass({
     this._redirect();
 	},
   _redirect: function () {
-    // let route = this.context.route;
+    // let route = this.props.route;
     // if (route.root !== 'stream') {
     //   this.history.pushState(null, '/stream');
     // }

@@ -10,10 +10,6 @@ import Uploader from '../uploader';
 import styles from './styles.less'
 
 export default React.createClass({
-	contextTypes: {
-		session: React.PropTypes.object,
-		route: React.PropTypes.object
-	},
   getInitialState: function () {
     return {
 			profile: null
@@ -41,18 +37,18 @@ export default React.createClass({
 		// 		this.setState({profile: post.user, type: 'user'});
 		// 	}
 		// });
-		this._load(this.context.route);
+		this._load(this.props.route);
 	},
-	componentWillReceiveProps: function (nextProps, nextContext) {
-		if (nextContext.route) {
-			this._load(nextContext.route);
+	componentWillReceiveProps: function (nextProps) {
+		if (nextProps.route) {
+			this._load(nextProps.route);
 		}
 	},
 	render: function () {
 		let profile = this.state.profile || {};
 		let address = profile.address || {};
-		let root = this.context.route.root;
-		let type = this.context.route.type;
+		let root = this.props.route.root;
+		let type = this.props.route.type;
 		let name = '';
 		// stream, account, activity, admin
 		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
@@ -103,7 +99,7 @@ export default React.createClass({
 		}
 		// ACCOUNT
 		if (root === 'account' || root === 'activity' || type === 'me') {
-			let session = this.context.session;
+			let session = this.props.session;
 			return this.setState({profile: session.user});
 		}
 		// STREAM

@@ -1,33 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Link } from 'react-router'
 
-import Notifications from './notifications';
-import History from './history';
+import Notifications from './notifications'
+import History from './history'
 
 import styles from './styles.less'
 
-export default React.createClass({
-  contextTypes: {
-    session: React.PropTypes.object
-  },
-  getInitialState: function () {
+class Activity extends React.Component {
+
+  getInitialState() {
     return {
       selected: "notifications"
     }
-  },
-  componentDidMount: function () {
-    this._route();
-  },
-  componentWillReceiveProps: function () {
-    this._route();
-  },
-  render: function () {
-    let session = this.context.session;
+  }
+
+  componentDidMount() {
+    this._route()
+  }
+
+  componentWillReceiveProps() {
+    this._route()
+  }
+
+  render() {
+    let session = this.props.session
     if (!session.authenticated) {
       return (<div className="activity 401">
 				<h2>You need to login first to view activity</h2>
-				<p>Please login if you'd like to see your account activity.</p>
-			</div>);
+				<p>Please login if you would like to see your account activity.</p>
+			</div>)
     }
     return (
       <div className="activity">
@@ -37,14 +40,25 @@ export default React.createClass({
         <Notifications selected={this.state.selected} />
         <History selected={this.state.selected} />
       </div>
-    );
-  },
-  _route: function () {
-    let route = this.props.routes;
+    )
+  }
+
+  _route() {
+    let route = this.props.routes
     if (route[1].name === 'history') {
-      this.setState({selected: 'history'});
+      this.setState({selected: 'history'})
     } else {
-      this.setState({selected: 'notifications'});
+      this.setState({selected: 'notifications'})
     }
   }
-});
+}
+
+const mapState = (state) => {
+  return {}
+}
+
+const mapDispatch = (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+}
+
+export default connect(mapState, mapDispatch)(Activity)

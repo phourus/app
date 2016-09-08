@@ -1,7 +1,6 @@
 import React from 'react'
-
-import Actions from '../../actions/stream'
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Infinite from 'react-infinite-scroll'
 const Scroll = Infinite(React)
 
@@ -10,12 +9,11 @@ import Organizations from './organizations'
 import Loader from '../shared/loader'
 import Sidebar from './sidebar'
 
+import actions from './redux/actions'
 import styles from './styles.less'
 
-let Stream = React.createClass({
-	contextTypes: {
-		route: React.PropTypes.object
-	},
+class Stream extends React.Component {
+
 	getInitialState: function () {
 		return {
 			sidebarVisible: false,
@@ -31,20 +29,23 @@ let Stream = React.createClass({
 				total: 0
 			}
 		};
-	},
+	}
+
 	componentDidMount: function () {
 		// this.unsubscribe = Store.listen((data) => {
 		// 	this.setState(data);
 		// });
-		this._load(this.context.route);
-	},
-	componentWillReceiveProps: function (nextProps, nextContext) {
-		if (nextContext.route) {
-			this._load(nextContext.route);
+		this._load(this.props.route);
+	}
+
+	componentWillReceiveProps: function (nextProps) {
+		if (nextProps.route) {
+			this._load(nextProps.route);
 		}
-	},
-	render: function () {
-		let route = this.context.route;
+	}
+
+	render() {
+		let route = this.props.route;
 		let type = route.type;
 		let id = route.id;
 		let visible = 'fa fa-minus-square-o';
@@ -66,16 +67,27 @@ let Stream = React.createClass({
 				</Scroll>
 			</div>
 		);
-	},
-	_load: function (route) {
+	}
+
+	_load(route) {
 		Actions.context(route.type, route.id);
-	},
-	_more: function () {
+	}
+
+	_more() {
 		Actions.more();
-	},
-  _sidebar: function () {
+	}
+
+  _sidebar() {
     this.setState({sidebarVisible: !this.state.sidebarVisible});
   }
-});
+}
 
-export default Stream;
+const mapState = (state) => {
+  return {}
+}
+
+const mapDispatch = (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+}
+
+export default connect(mapState, mapDispatch)(Stream)

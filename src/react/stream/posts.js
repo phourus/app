@@ -6,10 +6,6 @@ import Loader from '../shared/loader';
 import Post from '../post/item'
 
 export default React.createClass({
-	contextTypes: {
-		session: React.PropTypes.object,
-		route: React.PropTypes.object
-	},
 	getDefaultProps: function () {
 		return {
 			posts: []
@@ -22,7 +18,7 @@ export default React.createClass({
 		}
 	},
 	render: function () {
-		let route = this.context.route;
+		let route = this.props.route;
 		if (this.props.posts === null) {
 			return <Loader />
 		}
@@ -43,7 +39,7 @@ export default React.createClass({
 		);
 	},
 	_owner: function (post) {
-		let session = this.context.session;
+		let session = this.props.session;
 		let user = session.user;
 		if (!session.authenticated || !user.id) {
 			return false;

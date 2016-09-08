@@ -13,9 +13,6 @@ let usernameReg = /^([a-z]|[A-Z]|[0-9]|-){2,20}$/;
 let passwordReg = /^(.){6,20}$/;
 
 export default React.createClass({
-  contextTypes: {
-    route: React.PropTypes.object
-  },
   getDefaultProps: function () {
     return {
       show: false
@@ -39,7 +36,7 @@ export default React.createClass({
     // this.unsubscribe = Store.listen(data => {
     //   if (data.action === 'login' && data.code === 200) {
     //     let url = util.createHomeURL();
-    //     let route = this.context.route;
+    //     let route = this.props.route;
     //     if (!route.subdomain) {
     //       url = url + '/stream';
     //     }

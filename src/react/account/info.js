@@ -4,9 +4,6 @@ import {User as Actions} from '../../actions/profile';
 import TutorialActions from '../../actions/tutorial';
 
 export default React.createClass({
-  contextTypes: {
-    session: React.PropTypes.object
-  },
   getInitialState: function () {
     return {
       user: {},
@@ -25,7 +22,7 @@ export default React.createClass({
     TutorialActions.ready(true);
   },
   render: function () {
-    let session = this.context.session;
+    let session = this.props.session;
     let account = session.user;
     Object.keys(this.state.changes).forEach((key) => {
       account[key] = this.state.changes[key];

@@ -4,9 +4,6 @@ import {Org as OrgActions} from '../../actions/profile';
 import MemberActions from '../../actions/members';
 
 export default React.createClass({
-    contextTypes: {
-      route: React.PropTypes.object
-    },
     getInitialState: function () {
       return {
         org: {},
@@ -14,7 +11,7 @@ export default React.createClass({
       };
     },
     componentDidMount: function () {
-      let session = this.context.route;
+      let session = this.props.route;
       // this.unsubscribeOrgs = OrgStore.listen(data => {
       //   if (data.org) {
       //     this.setState({org: data.org});
@@ -33,7 +30,7 @@ export default React.createClass({
       this.unsubscribeMembers();
     },
     render: function () {
-      let route = this.context.route;
+      let route = this.props.route;
       let view = route.type;
 
       let details = this._details();
@@ -60,7 +57,7 @@ export default React.createClass({
       )
     },
     _select: function (tab) {
-      let route = this.context.route;
+      let route = this.props.route;
       let id = route.id;
       if (id) {
         this.history.pushState(null, `/admin/${tab}`);

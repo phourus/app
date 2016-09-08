@@ -2,9 +2,6 @@ import React from 'react';
 import Actions from '../../../actions/util';
 
 export default React.createClass({
-  contextTypes: {
-    session: React.PropTypes.object
-  },
   getInitialState: function () {
     return {
       email: "",
@@ -12,7 +9,7 @@ export default React.createClass({
     };
   },
   componentDidMount: function () {
-    let session = this.context.session;
+    let session = this.props.session;
     let user = session.user;
     if (user && user.email) {
       this.setState({email: user.email});

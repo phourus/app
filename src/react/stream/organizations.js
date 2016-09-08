@@ -5,16 +5,12 @@ import util from '../../lib/util';
 import Pic from '../shared/pic';
 
 export default React.createClass({
-	contextTypes: {
-		session: React.PropTypes.object,
-		route: React.PropTypes.object
-	},
 	render: function () {
-		let session = this.context.session;
+		let session = this.props.session;
 		let orgs = session.orgs || [];
 		let membership = orgs;
 		let selected = orgs.filter((org) => {
-			if (org.orgId.toString() === this.context.route.id) {
+			if (org.orgId.toString() === this.props.route.id) {
 				return true;
 			}
 			return false;

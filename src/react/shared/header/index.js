@@ -8,13 +8,9 @@ import Search from '../../stream/search';
 import styles from './styles.less'
 
 export default React.createClass({
-  contextTypes: {
-    session: React.PropTypes.object,
-    route: React.PropTypes.object
-  },
   render: function () {
-    let session = this.context.session;
-    let route = this.context.route;
+    let session = this.props.session;
+    let route = this.props.route;
     let r = route.root;
     if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
       return <Static />
@@ -90,11 +86,6 @@ let Private = React.createClass({
 });
 
 // let _Private = React.createClass({
-//   mixins: [History],
-//   contextTypes: {
-//     session: React.PropTypes.object,
-//     route: React.PropTypes.route
-//   },
 //   componentDidMount: function () {
 //     this.unsubscribe = Store.listen(data => {
 //       if (data.action === 'logout') {
@@ -108,9 +99,9 @@ let Private = React.createClass({
 //     this.unsubscribe();
 //   },
 //   render: function () {
-//     let session = this.context.session;
+//     let session = this.props.session;
 //     let orgs = session.orgs;
-//     let route = this.context.route;
+//     let route = this.props.route;
 //
 //     return (
 //       <nav className="nav">

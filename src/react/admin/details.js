@@ -2,9 +2,6 @@ import React from 'react';
 import {Org as Actions} from '../../actions/profile';
 
 export default React.createClass({
-  contextTypes: {
-    route: React.PropTypes.object
-  },
   getInitialState: function () {
     return {
       org: {},
@@ -12,7 +9,7 @@ export default React.createClass({
     };
   },
   componentDidMount: function () {
-    let route = this.context.route;
+    let route = this.props.route;
     // this.unsubscribe = Store.listen(data => {
     //   if (data.org) {
     //     this.setState({org: data.org});

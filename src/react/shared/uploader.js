@@ -7,9 +7,6 @@ import ImageUploader from '../../lib/uploader';
 import Token from '../../lib/token';
 
 export default React.createClass({
-  contextTypes: {
-    route: React.PropTypes.object
-  },
   getInitialState: function () {
     return {
       img: '/assets/avatars/default.jpg',
@@ -51,8 +48,8 @@ export default React.createClass({
       debug : true
     };
 
-    if (this.context.route.root === 'admin') {
-      let id = this.context.route.id;
+    if (this.props.route.root === 'admin') {
+      let id = this.props.route.id;
       if (!id) {
         return;
       }

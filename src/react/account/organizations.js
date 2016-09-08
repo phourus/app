@@ -128,11 +128,8 @@ let Search = React.createClass({
 });
 
 let List = React.createClass({
-  contextTypes: {
-    session: React.PropTypes.object
-  },
   render: function () {
-    let session = this.context.session;
+    let session = this.props.session;
     let orgs = session.orgs;
     return (
       <div className="list">

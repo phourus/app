@@ -1,36 +1,38 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import ga from '../../../lib/analytics'
 
 import Steps from './steps'
-import Actions from '../../../actions/tutorial'
+import actions from './redux/actions'
+
 let localStorage;
 
 //import styles from './node_modules/react-joyride/lib/styles/react-joyride.css'
 
-let Joyride = React.createClass({
-  render: function () {
-    return false;
+class Joyride extends React.Component {
+  render() {
+    return false
   }
-});
-
-if (typeof window === 'object') {
-  Joyride = require('react-joyride');
-  localStorage = window.localStorage;
 }
 
-export default React.createClass({
-  contextTypes: {
-    route: React.PropTypes.object
-  },
-  getInitialState: function () {
+if (typeof window === 'object') {
+  Joyride = require('react-joyride')
+  localStorage = window.localStorage
+}
+
+class Tutorial extends React.Component {
+
+  getInitialState() {
     return {
       active: true,
       module: 'navigation',
       ready: false,
       complete: [],
     };
-  },
-  componentDidMount: function () {
+  }
+
+  componentDidMount() {
     this._getLocal();
     // this.unsubscribe = Store.listen((data) => {
     //   if (data.ready) {
@@ -40,19 +42,22 @@ export default React.createClass({
     //     this._resetLocal();
     //   }
     // });
-  },
-  componentWillReceiveProps: function (nextProps, nextContext) {
-    let route = nextContext.route;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let route = nextProps.route;
     if (route) {
       let current = this._current(route);
       this.setState({module: current, ready: false});
     }
-  },
-  shouldComponentUpdate: function () {
-    let current = this._current(this.context.route);
+  }
+
+  shouldComponentUpdate() {
+    let current = this._current(this.props.route);
     return this.state.module === current;
-  },
-  componentDidUpdate: function () {
+  }
+
+  componentDidUpdate() {
     let incomplete = this.state.complete.indexOf(this.state.module) === -1;
 
     if (this.state.ready && incomplete) {
@@ -63,8 +68,9 @@ export default React.createClass({
         console.warn(e);
       }
     }
-  },
-  render: function () {
+  }
+
+  render() {
     let module = this.state.module;
     let steps = Steps[module];
     if (!steps || !this._exists()) {
@@ -77,8 +83,9 @@ export default React.createClass({
         locale={{last: 'Finish', next: 'Next', skip: 'Skip', back: 'Back'}} />
     );
     return false;
-  },
-  _exists: function () {
+  }
+
+  _exists() {
     let mod = this.state.module;
     let steps = Steps[mod];
     if (!steps || !steps[0] || !steps[0].selector) {
@@ -89,8 +96,9 @@ export default React.createClass({
       return document.querySelector(selector);
     }
     return false;
-  },
-  _current: function (nextRoute) {
+  }
+
+  _current(nextRoute) {
     let modules = ['account', 'stream', 'post', 'create', 'edit'];
     let route = nextRoute;
     let root = route.root;
@@ -104,8 +112,9 @@ export default React.createClass({
     } else {
       return false;
     }
-  },
-  _stepCallback: function (step, close) {
+  }
+
+  _stepCallback(step, close) {
     let module = this.state.module;
     let index = 0;
     let progress = this.refs.joyride.getProgress();
@@ -116,8 +125,9 @@ export default React.createClass({
     if (step.cb && typeof step.cb === 'function') {
       step.cb.apply(this);
     }
-  },
-  _completeCallback: function (step, skip) {
+  }
+
+  _completeCallback(step, skip) {
     let action = skip ? 'skip' : 'complete';
     let module = this.state.module;
     let copy = this.state.complete;
@@ -127,15 +137,17 @@ export default React.createClass({
     this._setLocal(copy);
     this.setState({module: false, ready: false, complete: copy});
     ga('send', 'event', 'tutorial', action, module);
-  },
-  _setLocal: function (completeArray) {
+  }
+
+  _setLocal(completeArray) {
     try {
       localStorage.setItem('complete', JSON.stringify(completeArray));
     } catch (e) {
       console.warn('localStorage not supported');
     }
-  },
-  _getLocal: function () {
+  }
+
+  _getLocal() {
     try {
       let complete = localStorage.getItem('complete');
       if (complete) {
@@ -144,9 +156,20 @@ export default React.createClass({
     } catch (e) {
       console.warn('localStorage not supported');
     }
-  },
-  _resetLocal: function () {
+  }
+
+  _resetLocal() {
     this._setLocal([]);
     this.setState({module: 'navigation', ready: true, complete: []});
-  },
-});
+  }
+}
+
+const mapState = (state) => {
+  return {}
+}
+
+const mapDispatch = (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+}
+
+export default connect(mapState, mapDispatch)(Account)
