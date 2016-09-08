@@ -3,6 +3,8 @@ const initState = {
   sidebarVisible: false,
   posts: null,
   total: 0,
+  selected: 0,
+  scroll: false,
   params: {
     exclude: [],
     search: '',
@@ -10,7 +12,11 @@ const initState = {
     direction: 'DESC',
     page: 1,
     limit: 10,
-    total: 0
+    folder: 0,
+    context: {
+      type: '',
+      id: null
+    }
   },
   folders: []
 }

@@ -15,6 +15,7 @@ import styles from './styles.less'
 class Stream extends React.Component {
 
 	componentDidMount() {
+		this.props.actions.collection()
 		this._load(this.props.route)
 	}
 
@@ -43,7 +44,7 @@ class Stream extends React.Component {
 				<div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
 				<Sidebar folders={this.props.folders} actions={this.props.actions} sidebar={this._sidebar.bind(this)} sidebarVisible={this.props.sidebarVisible} />
 				<Scroll pageStart={0} loadMore={this._more.bind(this)} hasMore={hasMore} loader={<Loader />}>
-					<Posts {...this.props} sidebarVisible={this.props.sidebarVisible} />
+					<Posts {...this.props} />
 				</Scroll>
 			</div>
 		)
@@ -67,6 +68,8 @@ const mapState = (state) => {
 		sidebarVisible,
 		posts,
 		total,
+		selected,
+		scroll,
 		params,
 		folders
 	} = state.stream
@@ -77,6 +80,8 @@ const mapState = (state) => {
 		sidebarVisible,
 		posts,
 		total,
+		selected,
+		scroll,
 		params,
 		folders
 	}
