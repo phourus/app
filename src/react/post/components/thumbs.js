@@ -5,7 +5,7 @@ import ga from '../../../lib/analytics'
 export default class Thumbs extends React.Component {
 
    componentDidMount() {
-    //  let params = this.props.route.params;
+    //  let params = this.props.url.params;
     //  this.unsubscribe = Store.listen((data) => {
 		// 	 this.setState(data);
     //  });

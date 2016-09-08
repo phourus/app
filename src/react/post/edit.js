@@ -38,7 +38,7 @@ export default class Edit extends React.Component {
 		return (
 			<div className="edit">
 				<div className="toolbar"></div>
-				<ActionsView route={this.props.route} post={this.props.post} owner={this.props.owner} />
+				<ActionsView url={this.props.url} post={this.props.post} owner={this.props.owner} />
 				<Type post={this.props.post} owner={this.props.owner} />
 				<Title post={this.props.post} owner={this.props.owner} />
 				<Content post={this.props.post} owner={this.props.owner} />

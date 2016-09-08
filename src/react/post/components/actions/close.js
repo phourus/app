@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default ({route, back}) => {
-  if (route.type !== 'post') {
+export default ({url, back}) => {
+  if (url.type !== 'post') {
     return <span></span>
   }
   return (

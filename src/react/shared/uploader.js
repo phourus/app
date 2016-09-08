@@ -46,8 +46,8 @@ export default React.createClass({
       debug : true
     };
 
-    if (this.props.route.root === 'admin') {
-      let id = this.props.route.id;
+    if (this.props.url.root === 'admin') {
+      let id = this.props.url.id;
       if (!id) {
         return;
       }

@@ -28,7 +28,7 @@ class Auth extends React.Component {
   }
 
   _context() {
-    let query = this.props.route.query;
+    let query = this.props.url.query;
     if (query && query.reset && query.token) {
       this._showReset();
     }
@@ -51,9 +51,9 @@ class Auth extends React.Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = (state, props) => {
   return {
-    route: {}
+    url: props.url
   }
 }
 

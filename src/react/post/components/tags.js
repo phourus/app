@@ -29,8 +29,8 @@ export default class Tags extends React.Component {
 
 	render() {
     let tags = this.props.post.tags || []
-		let route = this.props.route
-		let type = route.type
+		const url = this.props.url
+		const type = url.type
 
 		return (
       <div className="tags">

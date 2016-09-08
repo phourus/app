@@ -3,9 +3,9 @@ import React from 'react'
 export default class Details extends React.Component {
 
   componentDidMount() {
-    let route = this.props.route
-    if (route.id) {
-      this.props.actions.single(route.id)
+    const url = this.props.url
+    if (url.id) {
+      this.props.actions.single(url.id)
     }
   }
 

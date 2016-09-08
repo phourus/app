@@ -3,7 +3,7 @@ import React from 'react'
 export default class Tabs extends React.Component {
 
     componentDidMount() {
-      let session = this.props.route;
+      let session = this.props.session
       if (session.id) {
         //OrgActions.single(session.id);
         //MemberActions.collection(session.id);
@@ -11,8 +11,8 @@ export default class Tabs extends React.Component {
     }
 
     render() {
-      let route = this.props.route
-      let view = route.type
+      let url = this.props.url
+      let view = url.type
 
       let details = this._details()
       let users = this._users()
@@ -40,8 +40,8 @@ export default class Tabs extends React.Component {
     }
 
     _select(tab) {
-      let route = this.props.route
-      let id = route.id
+      let url = this.props.url
+      let id = url.id
       if (id) {
         this.history.pushState(null, `/admin/${tab}`)
       }

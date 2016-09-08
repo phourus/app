@@ -58,7 +58,7 @@ const Extra = (props) => {
 			{props.post.when && moment(props.post.when).format() !== 'Invalid date' ? <div className="when">{moment(props.post.when).format('MMMM Do @ h:mm a')}</div> : false}
 			{props.post.location ? <div className="location">{props.post.location}</div> : false}
 		</div>)
-	} else if (props.route.type !== 'post' && props.route.type !== 'edit') {
+	} else if (props.url.type !== 'post' && props.url.type !== 'edit') {
 		let excerpt = ""
 		if (props.post && props.post.content) {
 			excerpt = props.post.content.replace(/(<([^>]+)>)/ig, "")

@@ -45,15 +45,15 @@ class Tutorial extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let route = nextProps.route;
-    if (route) {
-      let current = this._current(route);
+    const url = nextProps.url
+    if (url) {
+      let current = this._current(url);
       this.setState({module: current, ready: false});
     }
   }
 
   shouldComponentUpdate() {
-    let current = this._current(this.props.route);
+    let current = this._current(this.props.url);
     return this.state.module === current;
   }
 
@@ -100,9 +100,9 @@ class Tutorial extends React.Component {
 
   _current(nextRoute) {
     let modules = ['account', 'stream', 'post', 'create', 'edit'];
-    let route = nextRoute;
-    let root = route.root;
-    let type = route.type;
+    let url = nextRoute;
+    let root = url.root;
+    let type = url.type;
     let mod = root;
     if (root === 'stream' && ['post', 'create', 'edit'].indexOf(type) > -1) {
       mod = type;

@@ -21,13 +21,13 @@ export default (props) => {
 					<div className="link" key={item.id}>
 						<div className="icon">
 							<i className={icon} />
-							{props.route.type === 'edit' && props.owner
+							{props.url.type === 'edit' && props.owner
 								? <a id={index} href="javascript:void(0)" className="edit" onClick={props.edit}>Edit</a>
 								: false
 							}
 						</div>
 						<div>
-							{props.route.type === 'edit' && props.owner
+							{props.url.type === 'edit' && props.owner
 								? <button id={item.id} className="remove" onClick={this.props.remove}>X</button>
 								: false
 							}

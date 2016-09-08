@@ -4,8 +4,8 @@ import Pic from '../shared/pic'
 export default class Members extends React.Component {
 
   componentDidMount() {
-    let route = this.props.route
-    this.props.actions.collection(route.id)
+    const url = this.props.url
+    this.props.actions.collection(url.id)
   }
 
   render() {

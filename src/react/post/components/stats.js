@@ -22,7 +22,7 @@ export default class Stats extends React.Component {
 	render() {
 		return (
 			<div className="interact" onClick={this._single}>
-				{this.props.route.type === 'post' ? <Thumbs post={this.props.post} /> : false}
+				{this.props.url.type === 'post' ? <Thumbs post={this.props.post} /> : false}
 				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
 					<div>

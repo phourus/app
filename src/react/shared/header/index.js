@@ -10,15 +10,15 @@ import styles from './styles.less'
 class Header extends React.Component {
   render() {
     let session = this.props.session
-    let route = this.props.route
-    let r = route.root
+    const url = this.props.url
+    const r = url.root
     if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
       return <Static />
     }
     if (r === 'home') {
       return <Home />
     }
-    if (!r && !route.subdomain) {
+    if (!r && !url.subdomain) {
       return <Home />
     }
     return  (
@@ -37,7 +37,7 @@ class Header extends React.Component {
           : <Private />
         }
         <div className="brand">
-          {route.subdomain
+          {url.subdomain
             ? <a href={util.createHomeURL()}></a>
             : <Link to="/"></Link>
           }
@@ -101,13 +101,13 @@ let Private = React.createClass({
 //   render: function () {
 //     let session = this.props.session;
 //     let orgs = session.orgs;
-//     let route = this.props.route;
+//     let url = this.props.url;
 //
 //     return (
 //       <nav className="nav">
 //           <ul>
 //             <li className="posts">
-//               <Link to={route.subdomain ? "/" : "/stream"} >
+//               <Link to={url.subdomain ? "/" : "/stream"} >
 //                 <i className="fa fa-file" />
 //                 Posts
 //               </Link>
@@ -170,10 +170,10 @@ let Nav = React.createClass({
   }
 });
 
-const mapState = (state) => {
+const mapState = (state, props) => {
   return {
-    session: {},
-    route: {}
+    url: props.url,
+    session: state.session
   }
 }
 

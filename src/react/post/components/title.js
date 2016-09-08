@@ -5,12 +5,12 @@ export default class Title extends React.Component {
 
   render() {
     let username = 'post';
-    let { route, post, owner } = this.props
+    let { url, post, owner } = this.props
     if (post.user && post.user.username) {
       username = post.user.username
     }
     return (
-      route.type === 'create' || route.type === 'edit' && owner
+      url.type === 'create' || url.type === 'edit' && owner
         ? <input className="title editing" onChange={this._title} defaultValue={post.title} />
         : <h2 className="title"><Link to={`/${username}/${post.slug}`}>{post.title}</Link></h2>
     )

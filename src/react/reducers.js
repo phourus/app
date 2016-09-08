@@ -6,5 +6,3 @@ export {session} from './auth/redux/reducer'
 export {default as post} from './post/redux/reducer'
 export {default as static} from './static/redux/reducer'
 export {default as stream} from './stream/redux/reducer'
-
-export {default as route} from './route'

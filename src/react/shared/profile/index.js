@@ -31,20 +31,20 @@ class Profile extends React.Component {
 		// 		this.setState({profile: post.user, type: 'user'});
 		// 	}
 		// });
-		this._load(this.props.route);
+		this._load(this.props.url)
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.route) {
-			this._load(nextProps.route)
+		if (nextProps.url) {
+			this._load(nextProps.url)
 		}
 	}
 
 	render() {
 		let profile = this.props.profile || {};
 		let address = profile.address || {};
-		let root = this.props.route.root;
-		let type = this.props.route.type;
+		let root = this.props.url.root;
+		let type = this.props.url.type;
 		let name = '';
 		// stream, account, activity, admin
 		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
@@ -87,10 +87,9 @@ class Profile extends React.Component {
 		this.history.pushState(null, "/stream");
 	}
 
-	_load(route) {
-		let root = route.root;
-		let type = route.type;
-		let id = route.id;
+	_load(url) {
+		const { root, type, id } = url
+
 		// ADMIN
 		if (root === 'admin' && id > 0) {
 			//OrgActions.single(id);
@@ -128,9 +127,9 @@ let Basic = React.createClass({
   }
 });
 
-const mapState = (state) => {
+const mapState = (state, props) => {
   return {
-    route: {},
+    url: props.url,
     profile: {}
   }
 }

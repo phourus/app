@@ -20,16 +20,16 @@ export default class Privacy extends React.Component {
 			public: "button blue inverted"
 		}
 		classes[privacy] = "button blue"
-		if (this.props.route.type !== 'edit') {
+		if (this.props.url.type !== 'edit') {
 			return <i className={icons[privacy]} />
 		}
 
 		return (
 			<div className="privacy">
-				{this.props.owner && this.props.route.type === 'edit' && this.state.privacy
+				{this.props.owner && this.props.url.type === 'edit' && this.state.privacy
 					? <div>
 							<h2>Privacy
-								{this.props.owner && this.props.route.type === 'IGNORE'
+								{this.props.owner && this.props.url.type === 'IGNORE'
 									? <div className="privacyToggle" onClick={this._privacy}><i className={icons[privacy]} /> <span style={{textDecoration: 'underline'}}>{this.props.post.privacy}</span></div>
 									: false
 								}

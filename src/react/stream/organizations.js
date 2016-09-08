@@ -11,7 +11,7 @@ export default class Organizations extends React.Component {
 		let orgs = session.orgs || []
 		let membership = orgs
 		let selected = orgs.filter((org) => {
-			if (org.orgId.toString() === this.props.route.id) {
+			if (org.orgId.toString() === this.props.url.id) {
 				return true
 			}
 			return false

@@ -16,19 +16,19 @@ class Stream extends React.Component {
 
 	componentDidMount() {
 		this.props.actions.collection()
-		this._load(this.props.route)
+		this._load(this.props.url)
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.route) {
-			this._load(nextProps.route)
+		if (nextProps.url) {
+			this._load(nextProps.url)
 		}
 	}
 
 	render() {
-		let route = this.props.route
-		let type = route.type
-		let id = route.id
+		const url = this.props.url
+		let type = url.type
+		let id = url.id
 		let visible = 'fa fa-minus-square-o'
 		let hidden = 'fa fa-plus-square-o'
 		let hasMore = (this.props.posts && this.props.posts.length < this.props.total && type !== 'post' && type !== 'edit')
@@ -50,8 +50,8 @@ class Stream extends React.Component {
 		)
 	}
 
-	_load(route) {
-		this.props.actions.context(route.type, route.id)
+	_load(url) {
+		this.props.actions.context(url.type, url.id)
 	}
 
 	_more() {
@@ -63,7 +63,7 @@ class Stream extends React.Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = (state, props) => {
 	const {
 		sidebarVisible,
 		posts,
@@ -75,7 +75,7 @@ const mapState = (state) => {
 	} = state.stream
 
   return {
-		route: state.route,
+		url: props.url,
 		session: state.session,
 		sidebarVisible,
 		posts,

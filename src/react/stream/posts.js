@@ -13,7 +13,7 @@ export default class Posts extends React.Component {
 	}
 
 	render() {
-		let route = this.props.route
+		const url = this.props.url
 		if (this.props.posts === null) {
 			return <Loader />
 		}

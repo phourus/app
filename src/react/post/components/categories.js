@@ -6,7 +6,7 @@ export default class Categories extends React.Component {
 
 	render() {
 		let type = tax[this.props.post.type] || {}
-		if (this.props.owner && this.props.route.type === 'edit') {
+		if (this.props.owner && this.props.url.type === 'edit') {
 			let cats = type.category || []
 			let subs = type[this.props.post.category] || false
 			return (

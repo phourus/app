@@ -19,14 +19,14 @@ class Admin extends React.Component {
   }
 }
 
-const mapState = (state) => {
+const mapState = (state, props) => {
   const {
     org,
     members
   } = state.admin
 
   return {
-    route: state.route,
+    url: props.url,
     session: state.session,
     org,
     members

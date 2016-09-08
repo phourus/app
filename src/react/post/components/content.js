@@ -6,8 +6,8 @@ import RTE from 'react-quill'
 export default class Content extends React.Component {
 
 	render() {
-		let route = this.props.route
-		let type = route.type
+		const url = this.props.url
+		const type = url.type
 		if (!this.props.post.rich) {
 			return type === 'edit' && this.props.owner || type === 'create'
 			? <textarea onChange={this._content} value={this.props.post.content} />

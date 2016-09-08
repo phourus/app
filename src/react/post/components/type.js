@@ -56,8 +56,8 @@ export default class Type extends React.Component {
 	}
 
 	_select(e) {
-		let route = this.props.route
-		let type = route.type
+		const url = this.props.url
+		const type = url.type
 		if (type === 'create' || type === 'edit' && this.props.owner) {
 			//this.setState({select: !this.props.select})
 		}

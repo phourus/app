@@ -20,14 +20,12 @@ class Account extends React.Component {
 }
 
 const mapState = (state) => {
-  console.log(state)
   const {
     changes,
     lookup
   } = state.account
 
   return {
-    route: state.route,
     session: state.session,
     changes,
     lookup,

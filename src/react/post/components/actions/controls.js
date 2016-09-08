@@ -2,11 +2,11 @@ import React from 'react'
 
 import Rich from './rich'
 
-export default ({route, post, owner, saving, confirmTrash, confirm, cancel, trash, update, rich, myposts}) => {
+export default ({url, post, owner, saving, confirmTrash, confirm, cancel, trash, update, rich, myposts}) => {
   if (!owner) {
     return <span></span>
   }
-  if (route.type !== 'edit') {
+  if (url.type !== 'edit') {
     return <span></span>
   }
   if (confirmTrash) {

@@ -47,8 +47,8 @@ export default class Links extends React.Component {
 	}
 
 	render() {
-		let route = this.props.route
-		let type = route.type
+		const url = this.props.url
+		const type = url.type
 
 		return (
 			<div className="links">

@@ -7,11 +7,16 @@ export default (state = initState, action = {}) => {
   return state
 }
 
-
 const initSession = {
-  user: {},
-  orgs: [],
-  authenticated: true
+  authenticated: true,
+  user: {
+    SESSION_ADMIN: [],
+    SESSION_ORGANIZATIONS: [],
+    SESSION_POSTS: [],
+    SESSION_TEAMS: [],
+    SESSION_USER: 0
+  },
+  orgs: []
 }
 
 export function session(state = initSession, action = {}) {

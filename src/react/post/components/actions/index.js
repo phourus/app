@@ -9,14 +9,14 @@ import Controls from './controls'
 export default class Actions extends React.Component {
 
   render() {
-    const { route, owner, post, saving, confirmTrash } = this.props
+    const { url, owner, post, saving, confirmTrash } = this.props
 
     return (
       <div className="actions">
-        <Close route={route} back={this._back} />
-        <Edit route={route} post={post} owner={owner} />
+        <Close url={url} back={this._back} />
+        <Edit url={url} post={post} owner={owner} />
         <Create
-          route={route}
+          url={url}
           post={post}
           owner={owner}
           saving={saving}
@@ -25,7 +25,7 @@ export default class Actions extends React.Component {
           rich={this._rich}
         />
         <Controls
-          route={route}
+          url={url}
           post={post}
           owner={owner}
           saving={saving}
@@ -67,7 +67,7 @@ export default class Actions extends React.Component {
 
   _back() {
     // if (!this.history.goBack()) {
-    //   if (this.props.route.type === 'edit') {
+    //   if (this.props.url.type === 'edit') {
     //     this.history.pushState(null, "/me");
     //   } else {
     //     this.history.pushState(null, "/stream");

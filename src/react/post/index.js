@@ -15,7 +15,7 @@ import styles from './styles.less'
 class Post extends React.Component {
 
 	componentDidUpdate() {
-		let type = this.props.route.type
+		let type = this.props.url.type
 		if ((type === 'post' || type === 'edit') && this.props.scroll === false) {
 			// let element = this.getDOMNode()
 			// let y = element.offsetTop - element.scrollTop + element.clientTop - 80
@@ -56,21 +56,21 @@ class Post extends React.Component {
 		// 	});
 		// 	//this.setState({post: current})
 		// }
-		// this._context(this.props.route)
+		// this._context(this.props.url)
 	}
 
 	componentWillMount() {
-		this._context(this.props.route)
+		this._context(this.props.url)
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.route) {
-			this._context(nextProps.route)
+		if (nextProps.url) {
+			this._context(nextProps.url)
 		}
 	}
 
 	render() {
-		const { type } = this.props.route
+		const { type } = this.props.url
 		const { owner } = this.props
 		if (!this.props.ready) {
 			return (
@@ -86,10 +86,10 @@ class Post extends React.Component {
 		)
 	}
 
-	_context(route) {
-		let params = route.params
-		let id = route.id
-		let type = route.type
+	_context(url) {
+		let params = url.params
+		let id = url.id
+		let type = url.type
 		if (type === 'edit' || type === 'post') {
 			this.props.dispatch(this.props.actions.single(id))
 		}
@@ -110,7 +110,7 @@ function mapStateToProps(state) {
 			}
 		},
 		owner: true,
-		route: {
+		url: {
 			id: 'nobhuwe',
 			type: 'post'
 		}

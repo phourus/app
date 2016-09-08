@@ -1,15 +1,17 @@
-import React from 'react';
-import {Link} from 'react-router';
-import ga from './lib/analytics';
-let Initializer = ga.Initializer;
+import React from 'react'
+import {Link} from 'react-router'
+import ga from './lib/analytics'
+let Initializer = ga.Initializer
 
-import Header from './react/shared/header';
+import Header from './react/shared/header'
 import Footer from './react/shared/footer'
 import Menu from './react/shared/menu'
-import Profile from './react/shared/profile';
-import Tutorial from './react/shared/tutorial';
-import HTML5Backend from 'react-dnd-html5-backend';
-import {DragDropContext} from 'react-dnd';
+import Profile from './react/shared/profile'
+import Tutorial from './react/shared/tutorial'
+import Helper from './react/shared/helper'
+import HTML5Backend from 'react-dnd-html5-backend'
+import {DragDropContext} from 'react-dnd'
+import processURL from './react/url'
 
 import styles from './less/style.less'
 import formStyles from './less/sub/forms.less'
@@ -19,23 +21,14 @@ import chartStyles from './less/sub/charts.less'
 import helperStyles from './less/sub/helper.less'
 import sidebarStyles from './less/sub/sidebar.less'
 
-let App = React.createClass({
-  getInitialState: function () {
-    return {
+class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
       sidebarVisible: false,
       tint: null,
-      session: {
-        authenticated: false,
-        user: {
-          SESSION_ADMIN: [],
-          SESSION_ORGANIZATIONS: [],
-          SESSION_POSTS: [],
-          SESSION_TEAMS: [],
-          SESSION_USER: 0
-        },
-        orgs: []
-      },
-      route: {
+      url: {
         route: [],
         params: {},
         query: {},
@@ -43,207 +36,74 @@ let App = React.createClass({
         id: '',
         type: ''
       }
-    };
-  },
-  componentDidMount: function () {
-    // this.unsubscribe = Store.listen(data => {
-    //   let session = this.state.session;
-    //   this.setState({session: session});
-    // });
-    //this.props.actions.session.get()
-    this._route(this.props);
-  },
-  componentWillReceiveProps: function (nextProps) {
-    this._route(nextProps);
-  },
-  render: function () {
-    let classType = "product";
-    let className = "main";
-    let route = this.state.route;
-    let root = route.root;
+    }
+  }
+
+  componentDidMount() {
+    this._url(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._url(nextProps)
+  }
+
+  render() {
+    let classType = "product"
+    let className = "main"
+    const url = this.state.url
+    const root = url.root
 
     if (root === 'stream') {
-        className += " sidebar";
+        className += " sidebar"
     }
     if (this.state.sidebarVisible) {
-      className += " visible";
+      className += " visible"
     }
     if (['product', 'pricing', 'help'].indexOf(root) > -1) {
-      classType = "static";
+      classType = "static"
     }
     if (root === 'home') {
-      classType = "home";
+      classType = "home"
     }
-    if (!root && !route.subdomain) {
-      classType = "home";
+    if (!root && !url.subdomain) {
+      classType = "home"
     }
     // <Tutorial />
+
     return  (
       <div id="app" className={classType}>
         <Menu />
         <div className="container">
 
           <Initializer />
-          <Header tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
+          <Header url={url} tintOn={this._tintOn} tintOff={this._tintOff} tint={this.state.tint} />
           {this.state.tint ? <div className="tint" onClick={this._tintOff}></div> : false}
           <div className="spacer"></div>
-          <Profile />
+          <Profile url={url} />
           <div>
             <div id="content">
-              {React.cloneElement(this.props.children, {})}
+              {React.cloneElement(this.props.children, { url })}
             </div>
           </div>
           <Helper />
           <Footer />
         </div>
       </div>
-    );
-  },
-  _tintOn: function () {
-    this.setState({tint: true});
-  },
-  _tintOff: function () {
-    this.setState({tint: null});
-  },
-  _route: function (nextProps) {
-    let context = {
-      root: '',
-      id: '',
-      type: '',
-    };
-    let parts = location.hostname.split('.');
-    if (['phourus', 'www', 'phourus-staging'].indexOf(parts[0]) === -1) {
-      context.subdomain = parts[0];
-    }
-    context.route = nextProps.routes || [];
-    context.params = nextProps.params || {};
-    context.query = this.props.location.query || {};
-
-    // index, stream, home?,
-    // account, me, create,
-    // activity, notifications, history
-    // admin,
-    // :user/:post -> edit, :user
-    let route = context.route;
-    switch (route[1].path) {
-      case 'stream':
-        context.root = 'stream',
-        context.type = '';
-        context.id = 0;
-      break;
-      case 'account':
-        context.root = 'account';
-        context.type = 'account';
-        context.id = 0;
-      break;
-      case 'me':
-        context.root = 'stream';
-        context.type = 'me';
-        context.id = 0;
-      break;
-      case 'create':
-        context.root = 'create';
-        context.type = 'create';
-        context.id = 0;
-      break;
-      case 'activity':
-        context.root = 'activity';
-        context.type = 'activity';
-        context.id = 0;
-      break;
-      case 'notifications':
-        context.root = 'activity';
-        context.type = 'activity';
-        context.id = 0;
-      break;
-      case 'history':
-        context.root = 'activity';
-        context.type = 'activity';
-        context.id = 0;
-      break;
-      case 'admin':
-        context.root = 'admin';
-        context.type = 'admin';
-        context.id = context.subdomain;
-        if (route[2] && route[2].path) {
-          context.type = route[2].path;
-        }
-      break;
-      case ':user/:post':
-        context.root = 'post';
-        context.type = 'post';
-        context.id = context.params.post;
-
-        if (route[2] && route[2].path === 'edit') {
-          context.type = 'edit';
-        }
-      break;
-      case ':user':
-        context.root = 'stream';
-        context.type = 'user';
-        context.id = context.params.user;
-      break;
-      default:
-        context.root = route[1] ? route[1].path : '';
-        context.type = route[2] ? route[2].path : '';
-      break;
-    }
-
-    this.setState({route: context});
+    )
   }
-});
 
-let Helper = React.createClass({
-  getInitialState: function () {
-    return {
-      active: false
-    };
-  },
-  render: function () {
-    let className = this.state.active ? "helper active" : "helper";
-    return (
-      <div className={className}>
-        <div className="popout">
-          <div className="title">
-            <span>Help</span>
-            <i className="fa fa-close" onClick={this._inactive} />
-          </div>
-          <div>
-            <ul>
-              <li><Link to="/about">About Us</Link></li>
-              <li><a href="javascript:void(0)" onClick={this._tutorial}>Tutorial</a></li>
-              <li><Link to="/docs">Documentation</Link></li>
-              <li><Link to="/contact">Contact Us</Link></li>
-            </ul>
-          </div>
-          <div>
-            <strong>1-844-PHOURUS</strong><br />
-            <div>(1-844-746-8787)</div>
-            <a href="mailto:info@phourus.com?Subject=Help">info@phourus.com</a>
-            <button className="blue button" onClick={this._chat}><i className="fa fa-comment" /> Chat with us</button>
-          </div>
-        </div>
-        <div className="icon" onClick={this._active}>
-          <i className="fa fa-question" />
-        </div>
-      </div>
-    );
-  },
-  _active: function () {
-    ga('send', 'event', 'helper', 'show');
-    this.setState({active: true});
-  },
-  _inactive: function () {
-    ga('send', 'event', 'helper', 'hide');
-    this.setState({active: false});
-  },
-  _tutorial: function () {
-    ga('send', 'event', 'helper', 'tutorial');
-    //TutorialActions.reset();
-  },
-  _chat: function () {
-    ga('send', 'event', 'helper', 'chat');
+  _tintOn() {
+    this.setState({tint: true})
   }
-});
 
-export default DragDropContext(HTML5Backend)(App);
+  _tintOff() {
+    this.setState({tint: null})
+  }
+
+  _url(nextProps) {
+    const url = processURL(nextProps)
+    this.setState({ url })
+  }
+}
+
+export default DragDropContext(HTML5Backend)(App)

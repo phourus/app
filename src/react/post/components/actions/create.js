@@ -2,8 +2,8 @@ import React from 'react'
 
 import Rich from './rich'
 
-export default ({route, post, owner, saving, create, back, rich}) => {
-  if (route.type !== 'create') {
+export default ({url, post, owner, saving, create, back, rich}) => {
+  if (url.type !== 'create') {
     return <span></span>
   }
   return (

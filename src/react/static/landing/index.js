@@ -11,7 +11,7 @@ let Landing = React.createClass({
   render: function () {
     return (
       <div className="landing">
-        <Slider more={this._more} showSignup={this._signup} />
+        <Slider more={this._more} showSignup={this._signup} url={this.props.url} />
         <Ideas />
         <Information />
         <Engagement />
@@ -47,7 +47,7 @@ let Slider = React.createClass({
       <div className="banner">
         <div className="title">Every company has a story</div>
         <p>Make sure you're on the same page</p>
-        <Auth ref="auth" />
+        <Auth ref="auth" url={this.props.url} />
       </div>
     );
   },
