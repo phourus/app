@@ -1,6 +1,4 @@
-"use strict";
 var config = require("./config");
-var babel = require('babel/register');
 var fs = require('fs');
 var express = require('express');
 var React = require('react');

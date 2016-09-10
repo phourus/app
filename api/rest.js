@@ -1,4 +1,3 @@
-require("babel/register");
 var express = require('express');
 var body = require('body-parser');
 var rest = express();
