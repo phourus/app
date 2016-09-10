@@ -23,12 +23,12 @@ export default class Posts extends React.Component {
 		return (
 			<div className={this.props.sidebarVisible ? "posts sidebar" : "posts"}>
 				{this.props.posts.map((item, i) => {
-					 let owner = this._owner(item);
-					 let location = {};
-					 if (item.user.locations && item.user.locations.length > 0) {
-							 location = item.user.locations[0];
-					 }
-					 return <Post key={item.id} post={item} user={item.user} owner={owner} location={location} scroll={this.props.scroll} />
+					let owner = this._owner(item);
+					let location = {};
+					if (item.user.locations && item.user.locations.length > 0) {
+						location = item.user.locations[0];
+					}
+					return <Post key={item.id} url={this.props.url} post={item} user={item.user} owner={owner} location={location} scroll={this.props.scroll} />
 				})}
 			</div>
 		)

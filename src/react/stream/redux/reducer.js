@@ -1,5 +1,6 @@
 import update from 'react-addons-update'
 const initState = {
+  ready: false,
   sidebarVisible: false,
   posts: null,
   total: 0,
@@ -22,5 +23,22 @@ const initState = {
 }
 
 export default (state = initState, action = {}) => {
-  return state
+
+  switch(action.type) {
+    case 'REQUEST_STREAM_COLLECTION':
+      return update(state, {
+        ready: {$set: false}
+      })
+      break
+    case 'RECEIVE_STREAM_COLLECTION':
+      return update(state, {
+        ready: {$set: true},
+        posts: {$set: action.posts},
+        total: {$set: action.total}
+      })
+      break
+    default:
+      return state
+      break
+  }
 }

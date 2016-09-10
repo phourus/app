@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "92c0526b004e5c708aa1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8e40243c398dc7d59b1d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -21791,7 +21791,7 @@ var Stats = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: 'interact', onClick: this._single },
+				{ className: 'interact', onClick: this._single.bind(this) },
 				this.props.url.type === 'post' ? _react2.default.createElement(_thumbs2.default, { post: this.props.post }) : false,
 				_react2.default.createElement(_influence2.default, { influence: this.props.post.influence }),
 				_react2.default.createElement(
@@ -21867,7 +21867,7 @@ var Stats = function (_React$Component) {
 			if (user && user.username) {
 				username = user.username;
 			}
-			this.history.pushState(null, '/' + username + '/' + this.props.post.slug);
+			this.props.history.pushState(null, '/' + username + '/' + this.props.post.slug);
 		}
 	}]);
 
@@ -47407,13 +47407,13 @@ exports.default = function (props) {
 		'div',
 		{ className: 'postItem', id: 'post' + props.post.id },
 		_react2.default.createElement(_drag2.default, { id: props.post.id }),
-		_react2.default.createElement(_actions2.default, { url: undefined.props.url, post: props.post, owner: props.owner }),
-		_react2.default.createElement(_type2.default, { post: props.post, owner: props.owner }),
-		_react2.default.createElement(_privacy2.default, { post: props.post, owner: props.owner }),
-		_react2.default.createElement(_title2.default, { post: props.post, owner: props.owner }),
+		_react2.default.createElement(_actions2.default, { url: props.url, post: props.post, owner: props.owner }),
+		_react2.default.createElement(_type2.default, { url: props.url, post: props.post, owner: props.owner }),
+		_react2.default.createElement(_privacy2.default, { url: props.url, post: props.post, owner: props.owner }),
+		_react2.default.createElement(_title2.default, { url: props.url, post: props.post, owner: props.owner }),
 		_react2.default.createElement(_details2.default, { post: props.post, owner: props.owner, user: props.user, location: props.location }),
-		_react2.default.createElement(_tags2.default, { post: props.post, owner: props.owner, tag: props.tag }),
-		_react2.default.createElement(_stats2.default, { post: props.post })
+		_react2.default.createElement(_tags2.default, { url: props.url, post: props.post, owner: props.owner, tag: props.tag }),
+		_react2.default.createElement(_stats2.default, { url: props.url, post: props.post })
 	);
 };
 
@@ -54088,7 +54088,7 @@ var Posts = function (_React$Component) {
 					if (item.user.locations && item.user.locations.length > 0) {
 						location = item.user.locations[0];
 					}
-					return _react2.default.createElement(_item2.default, { key: item.id, post: item, user: item.user, owner: owner, location: location, scroll: _this2.props.scroll });
+					return _react2.default.createElement(_item2.default, { key: item.id, url: _this2.props.url, post: item, user: item.user, owner: owner, location: location, scroll: _this2.props.scroll });
 				})
 			);
 		}
@@ -54216,6 +54216,7 @@ var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initState = {
+  ready: false,
   sidebarVisible: false,
   posts: null,
   total: 0,
@@ -54241,7 +54242,24 @@ exports.default = function () {
   var state = arguments.length <= 0 || arguments[0] === undefined ? initState : arguments[0];
   var action = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-  return state;
+
+  switch (action.type) {
+    case 'REQUEST_STREAM_COLLECTION':
+      return (0, _reactAddonsUpdate2.default)(state, {
+        ready: { $set: false }
+      });
+      break;
+    case 'RECEIVE_STREAM_COLLECTION':
+      return (0, _reactAddonsUpdate2.default)(state, {
+        ready: { $set: true },
+        posts: { $set: action.posts },
+        total: { $set: action.total }
+      });
+      break;
+    default:
+      return state;
+      break;
+  }
 };
 
 /***/ },

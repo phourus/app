@@ -21,7 +21,7 @@ export default class Stats extends React.Component {
 
 	render() {
 		return (
-			<div className="interact" onClick={this._single}>
+			<div className="interact" onClick={this._single.bind(this)}>
 				{this.props.url.type === 'post' ? <Thumbs post={this.props.post} /> : false}
 				<Influence influence={this.props.post.influence}/>
 				<div className="popularity">
@@ -56,6 +56,6 @@ export default class Stats extends React.Component {
 		if (user && user.username) {
 			username = user.username
 		}
-		this.history.pushState(null, `/${username}/${this.props.post.slug}`)
+		this.props.history.pushState(null, `/${username}/${this.props.post.slug}`)
 	}
 }
