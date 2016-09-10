@@ -43,8 +43,8 @@ class Profile extends React.Component {
 	render() {
 		let profile = this.props.profile || {};
 		let address = profile.address || {};
-		let root = this.props.url.root;
-		let type = this.props.url.type;
+		const { url } = this.props
+		const { root, type } = url
 		let name = '';
 		// stream, account, activity, admin
 		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
@@ -67,7 +67,7 @@ class Profile extends React.Component {
 			<div className="profile">
 				{root === 'account' || root === 'admin'
 					? <Uploader img={profile.img} />
-					: <Pic id={profile.id} img={profile.img} type={this.state.type} name={this.state.type === 'org' ? profile.shortname : profile.username} />
+				: <Pic id={profile.id} img={profile.img} type={profile.type} name={profile.type === 'org' ? profile.shortname : profile.username} />
 				}
 				<div className="basic">
 					<h1 className="name">{name}</h1>
@@ -97,7 +97,8 @@ class Profile extends React.Component {
 		// ACCOUNT
 		if (root === 'account' || root === 'activity' || type === 'me') {
 			let session = this.props.session;
-			return this.setState({profile: session.user});
+			return
+			//return this.setState({profile: session.user});
 		}
 		// STREAM
 		if (root === 'stream') {

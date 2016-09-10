@@ -3,7 +3,6 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 import * as actions from './redux/actions'
-import Profile from '../shared/profile'
 import Loader from '../shared/loader'
 
 import Single from './single'

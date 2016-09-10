@@ -29,7 +29,7 @@ export default class Single extends React.Component {
 				<Tags {...this.props} />
 				<Content {...this.props} />
 				<Share {...this.props}  />
-				<Profile postMode={true} />
+				<Profile {...this.props} postMode={true} />
 				<Stats {...this.props} />
 				<Links {...this.props} />
 				<Comments {...this.props} />
