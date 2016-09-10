@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Infinite from 'react-infinite-scroll'
-const Scroll = Infinite(React)
+import Scroll from 'react-infinite-scroller'
 
 import Posts from './posts'
 import Organizations from './organizations'
