@@ -14,7 +14,7 @@ export default function(props) {
       <span className="muted">1411 7th St. #305, Santa Monica, CA 90401</span><br />
       <Link to="/terms" className="muted">Terms</Link> |
       <Link to="/privacy" className="muted">Privacy</Link>
-      <br clear="all" />
+      <br style={{clear: "all"}}  />
     </footer>
   )
 }

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "91646710f0c3787e840b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "92c0526b004e5c708aa1"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -13128,7 +13128,7 @@ exports.default = _react2.default.createClass({
       { className: "loader" },
       _react2.default.createElement(
         "svg",
-        { width: this.props.width, version: "1.1", id: "Logo", x: "0px", y: "0px", viewBox: "20 114 560 560", "enable-background": "new 20 114 560 560" },
+        { width: this.props.width, version: "1.1", id: "Logo", x: "0px", y: "0px", viewBox: "20 114 560 560", enableBackground: "new 20 114 560 560" },
         _react2.default.createElement(
           "g",
           null,
@@ -21303,9 +21303,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/folders/';
 
@@ -21318,22 +21318,22 @@ exports.default = {
     if (params.userId) {
       query += 'userId=' + params.userId;
     }
-    return _xhr2.default.get(base + '?' + query);
+    return http.get(base + '?' + query);
   },
   add: function add(model) {
-    return _xhr2.default.post(base, model);
+    return http.post(base, model);
   },
   save: function save(id, model) {
-    return _xhr2.default.put(base + id, model);
+    return http.put(base + id, model);
   },
   remove: function remove(id) {
-    return _xhr2.default.del(base + id);
+    return http.del(base + id);
   },
   folder: function folder(id, folderId, remove) {
     if (remove) {
-      return _xhr2.default.del(base + folderId + '/' + id);
+      return http.del(base + folderId + '/' + id);
     }
-    return _xhr2.default.post(base + folderId + '/' + id);
+    return http.post(base + folderId + '/' + id);
   }
 };
 
@@ -21350,39 +21350,39 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/posts/';
 
 exports.default = {
   single: function single(id) {
-    return _xhr2.default.get(base + id);
+    return http.get(base + id);
   },
   collection: function collection(params) {
     var query = params;
     params.contextId = params.context.id;
     params.contextType = params.context.type;
-    return _xhr2.default.get(base);
+    return http.get(base);
   },
   add: function add(model) {
-    return _xhr2.default.post(base, model);
+    return http.post(base, model);
   },
   save: function save(id, model) {
-    return _xhr2.default.put(base + id, model);
+    return http.put(base + id, model);
   },
   remove: function remove(id) {
-    return _xhr2.default.del(base + id);
+    return http.del(base + id);
   },
   account: function account() {
-    return _xhr2.default.get(base);
+    return http.get(base);
   },
   poll: function poll(id) {
-    return _xhr2.default.get(base + id + '/poll');
+    return http.get(base + id + '/poll');
   },
   vote: function vote(id, option) {
-    return _xhr2.default.post(base + id + '/vote', { option: option });
+    return http.post(base + id + '/vote', { option: option });
   }
 };
 
@@ -41149,24 +41149,24 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/collaborators/';
 
 exports.default = {
   collection: function collection(postId) {
-    return _xhr2.default.get(base + postId);
+    return http.get(base + postId);
   },
   add: function add(model) {
-    return _xhr2.default.post(base, model);
+    return http.post(base, model);
   },
   remove: function remove(type, id) {
-    return _xhr2.default.del(base + type + '/' + id);
+    return http.del(base + type + '/' + id);
   },
   lookup: function lookup(orgId) {
-    return _xhr2.default.get(base + 'lookup/' + orgId);
+    return http.get(base + 'lookup/' + orgId);
   }
 };
 
@@ -41183,9 +41183,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/comments/';
 
@@ -41198,16 +41198,16 @@ exports.default = {
     if (params.userId) {
       query += 'userId=' + params.userId;
     }
-    return _xhr2.default.get(base + '?' + query);
+    return http.get(base + '?' + query);
   },
   add: function add(model) {
-    return _xhr2.default.post(base, model);
+    return http.post(base, model);
   },
   save: function save(id, model) {
-    return _xhr2.default.put(base + id, model);
+    return http.put(base + id, model);
   },
   remove: function remove(id) {
-    return _xhr2.default.del(base + id);
+    return http.del(base + id);
   }
 };
 
@@ -41224,24 +41224,24 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/links/';
 
 exports.default = {
   collection: function collection(params) {
-    return _xhr2.default.get(base);
+    return http.get(base);
   },
   add: function add(model) {
-    return _xhr2.default.post(base, model);
+    return http.post(base, model);
   },
   save: function save(id, model) {
-    return _xhr2.default.put(base + id, model);
+    return http.put(base + id, model);
   },
   remove: function remove(id) {
-    return _xhr2.default.del(base + id);
+    return http.del(base + id);
   }
 };
 
@@ -41258,25 +41258,25 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/orgs/';
 
 exports.default = {
   single: function single(id) {
-    return _xhr2.default.get(base + id);
+    return http.get(base + id);
   },
   lookup: function lookup(name) {
-    return _xhr2.default.get(base + 'lookup/?name=' + name);
+    return http.get(base + 'lookup/?name=' + name);
   },
   add: function add(shortname) {
     var model = { shortname: shortname };
-    return _xhr2.default.post(base, model);
+    return http.post(base, model);
   },
   save: function save(id, model) {
-    return _xhr2.default.put(base + id, model);
+    return http.put(base + id, model);
   }
 };
 
@@ -41293,21 +41293,21 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/tags/';
 
 exports.default = {
   collection: function collection(params) {
-    return _xhr2.default.get(base);
+    return http.get(base);
   },
   add: function add(model) {
-    return _xhr2.default.post(base, model);
+    return http.post(base, model);
   },
   remove: function remove(id) {
-    return _xhr2.default.del(base + id);
+    return http.del(base + id);
   }
 };
 
@@ -41324,27 +41324,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/thumbs/';
 
 exports.default = {
   post: function post(postId) {
-    return _xhr2.default.get(base + 'post/' + postId);
+    return http.get(base + 'post/' + postId);
   },
   user: function user() {
-    return _xhr2.default.get(base + 'user/');
+    return http.get(base + 'user/');
   },
   add: function add(model) {
-    return _xhr2.default.post(base, model);
+    return http.post(base, model);
   },
   save: function save(id, model) {
-    return _xhr2.default.put(base + id, model);
+    return http.put(base + id, model);
   },
   remove: function remove(id) {
-    return _xhr2.default.del(base + id);
+    return http.del(base + id);
   }
 };
 
@@ -41361,15 +41361,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _xhr = __webpack_require__(49);
 
-var _xhr2 = _interopRequireDefault(_xhr);
+var http = _interopRequireWildcard(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var base = '/rest/users/';
 
 exports.default = {
   single: function single(id) {
-    return _xhr2.default.get(base + id);
+    return http.get(base + id);
   }
 };
 
@@ -49443,7 +49443,7 @@ exports.default = function (props) {
       { to: '/privacy', className: 'muted' },
       'Privacy'
     ),
-    _react2.default.createElement('br', { clear: 'all' })
+    _react2.default.createElement('br', { style: { clear: "all" } })
   );
 };
 
@@ -54307,7 +54307,7 @@ function collection() {
       switch (_context2.prev = _context2.next) {
         case 0:
           if (false) {
-            _context2.next = 23;
+            _context2.next = 22;
             break;
           }
 
@@ -54326,32 +54326,19 @@ function collection() {
 
         case 9:
           data = _context2.sent;
-
-          console.log(data);
-          // concat?
-          // if (this.posts) {
-          //   this.posts = this.posts.concat(data.rows);
-          // } else {
-          //   this.posts = data.rows;
-          // }
-          // if (this.single) {
-          //   this.posts.unshift(this.single);
-          //   this.single = null;
-          // }
-          // this.trigger({posts: this.posts, total: data.count, params: this.params, scroll: this.scroll});
-          _context2.next = 13;
+          _context2.next = 12;
           return (0, _effects.put)({ type: 'RECEIVE_STREAM_COLLECTION', posts: data.rows, total: data.count });
 
-        case 13:
-          _context2.next = 21;
+        case 12:
+          _context2.next = 20;
           break;
 
-        case 15:
-          _context2.prev = 15;
+        case 14:
+          _context2.prev = 14;
           _context2.t0 = _context2['catch'](6);
 
           if (!(_context2.t0 != 200)) {
-            _context2.next = 21;
+            _context2.next = 20;
             break;
           }
 
@@ -54361,19 +54348,19 @@ function collection() {
             code: _context2.t0,
             msg: 'Posts could not be loaded'
           };
-          _context2.next = 21;
+          _context2.next = 20;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 21:
+        case 20:
           _context2.next = 0;
           break;
 
-        case 23:
+        case 22:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this, [[6, 15]]);
+  }, _marked[1], this, [[6, 14]]);
 }
 
 function select(id) {

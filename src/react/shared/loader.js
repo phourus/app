@@ -30,7 +30,7 @@ export default React.createClass({
     let o = [opacity, opacity, opacity, opacity];
     o[this.state.slide] = 1;
     return (<div className="loader">
-      <svg width={this.props.width} version="1.1" id="Logo" x="0px" y="0px" viewBox="20 114 560 560" enable-background="new 20 114 560 560">
+      <svg width={this.props.width} version="1.1" id="Logo" x="0px" y="0px" viewBox="20 114 560 560" enableBackground="new 20 114 560 560">
         <g>
         	<g>
         		<path fill="#ED0303" opacity={o[2]} d="M170.3,506.2c6.1-63.2,56.1-112.2,119.3-119.3c-4.1-58.1-52-104-111.2-104c-61.2,0-111.2,50-111.2,111.2

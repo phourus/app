@@ -33,9 +33,7 @@ function* collection() {
     yield put({type: 'REQUEST_STREAM_COLLECTION'})
     try {
       //const params = yield select()
-      //console.log(params)
       const data = yield call(posts.collection, {context:{}})
-      console.log(data)
       // concat?
       // if (this.posts) {
       //   this.posts = this.posts.concat(data.rows);

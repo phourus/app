@@ -1,4 +1,4 @@
-import http from '../lib/xhr';
+import * as http from '../lib/xhr'
 let base = '/rest/pages/';
 
 export default {
