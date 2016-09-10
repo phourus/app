@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "17e6d85e2afeaaca7b53"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "35ca0e5b17660ec8c9d8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -53625,7 +53625,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var sagaMiddleware = (0, _reduxSaga2.default)();
 
-var store = (0, _redux.createStore)((0, _redux.combineReducers)(reducers), {}, (0, _redux.applyMiddleware)(sagaMiddleware));
+var store = (0, _redux.createStore)((0, _redux.combineReducers)(reducers), {}, (0, _redux.compose)((0, _redux.applyMiddleware)(sagaMiddleware), window.devToolsExtension ? window.devToolsExtension() : function (f) {
+  return f;
+}));
 sagaMiddleware.run(_sagas2.default);
 
 exports.default = store;
