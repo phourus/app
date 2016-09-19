@@ -12,7 +12,7 @@ class Header extends React.Component {
     let session = this.props.session
     const url = this.props.url
     const r = url.root
-    if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
+    if (['product', 'pricing', 'help'].indexOf(r) > -1) {
       return <Static />
     }
     if (r === 'home') {

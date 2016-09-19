@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8aecaed2e1fafe0430dd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a5fc090b1b60f8138a2c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -49521,7 +49521,7 @@ var Header = function (_React$Component) {
       var session = this.props.session;
       var url = this.props.url;
       var r = url.root;
-      if (['contact', 'pricing', 'about', 'docs'].indexOf(r) > -1) {
+      if (['product', 'pricing', 'help'].indexOf(r) > -1) {
         return _react2.default.createElement(Static, null);
       }
       if (r === 'home') {
