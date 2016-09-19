@@ -2,10 +2,6 @@ export function change(key, value) {
   return {type: 'ACCOUNT_CHANGE', key, value}
 }
 
-export function single(id) {
-  return {type: 'ACCOUNT_SINGLE', id}
-}
-
 export function save() {
   return {type: 'ACCOUNT_SAVE'}
 }
