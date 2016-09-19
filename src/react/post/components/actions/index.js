@@ -68,14 +68,14 @@ export default class Actions extends React.Component {
   _back() {
     // if (!this.history.goBack()) {
     //   if (this.props.url.type === 'edit') {
-    //     this.history.pushState(null, "/me");
+    //     this.props.history.push("/me");
     //   } else {
-    //     this.history.pushState(null, "/stream");
+    //     this.props.history.push("/stream");
     //   }
     // }
   }
 
   _myposts() {
-    // this.history.pushState(null, "/me");
+    // this.props.history.push("/me");
   }
 }

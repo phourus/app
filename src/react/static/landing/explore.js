@@ -47,7 +47,7 @@ let Explorer = React.createClass({
     );
   },
   _more: function () {
-    this.history.pushState(null, '/stream');
+    this.props.history.push('/stream');
   }
 });
 

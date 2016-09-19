@@ -45,6 +45,7 @@ export default (<Route component={App} path="/">
     <Route path=":id" component={Help} />
   </Route>
   <Route path="admin" component={Admin}>
+    <IndexRoute component={Details} />
     <Route path="details" component={Details} />
     <Route path="members" component={Members} />
     <Route path="teams" component={Teams} />

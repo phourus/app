@@ -42,9 +42,9 @@ export default class Tabs extends React.Component {
     _select(tab) {
       let url = this.props.url
       let id = url.id
-      if (id) {
-        this.history.pushState(null, `/admin/${tab}`)
-      }
+      //if (id) {
+        this.props.history.push(`/admin/${tab}`)
+      //}
     }
 
     _details() {

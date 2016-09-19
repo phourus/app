@@ -204,7 +204,7 @@ export default React.createClass({
     this.setState({step: 2});
   },
   _account: function (e) {
-    this.history.pushState(null, "/account");
+    this.props.history.push("/account");
   },
   _clear: function () {
     this.setState({code: null});

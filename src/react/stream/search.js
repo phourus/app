@@ -24,7 +24,7 @@ export default class Search extends React.Component {
   _redirect() {
     // let url = this.props.url;
     // if (url.root !== 'stream') {
-    //   this.history.pushState(null, '/stream');
+    //   this.props.history.push('/stream');
     // }
   }
 }

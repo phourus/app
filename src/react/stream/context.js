@@ -27,15 +27,15 @@ export default class Context extends React.Component {
 	}
 
 	_phourus() {
-		this.history.pushState(null, "/stream");
+		this.props.history.push("/stream");
 	}
 
 	_organizations() {
-		this.history.pushState(null, "/stream");
+		this.props.history.push("/stream");
 	}
 
 	_users() {
-		this.history.pushState(null, "/stream");
+		this.props.history.push("/stream");
 	}
 }
 

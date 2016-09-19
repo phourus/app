@@ -84,7 +84,7 @@ class Profile extends React.Component {
 	}
 
 	_back() {
-		this.history.pushState(null, "/stream");
+		this.props.history.push("/stream");
 	}
 
 	_load(url) {

@@ -82,7 +82,7 @@ class Login extends React.Component {
 
   _request() {
     //this._clear();
-    this.history.pushState(null, "/request");
+    this.props.history.push("/request");
   }
 
   _clear() {
@@ -90,11 +90,11 @@ class Login extends React.Component {
   }
 
   _posts() {
-    this.history.pushState(null, "/stream");
+    this.props.history.push("/stream");
   }
 
   _account() {
-    this.history.pushState(null, "/account");
+    this.props.history.push("/account");
   }
 }
 

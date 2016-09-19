@@ -56,6 +56,6 @@ export default class Stats extends React.Component {
 		if (user && user.username) {
 			username = user.username
 		}
-		this.props.history.pushState(null, `/${username}/${this.props.post.slug}`)
+		this.props.history.push(`/${username}/${this.props.post.slug}`)
 	}
 }

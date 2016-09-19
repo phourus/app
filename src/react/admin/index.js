@@ -9,11 +9,11 @@ import styles from './styles.less'
 class Admin extends React.Component {
 
   render() {
-    // {React.cloneElement(this.props.children, this.props)}
+    const Children = React.cloneElement(this.props.children, this.props)
     return (
       <div className="admin">
         <Tabs {...this.props} />
-
+        {Children}
       </div>
     )
   }

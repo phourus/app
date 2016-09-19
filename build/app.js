@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f2a4a1a5b5c391dd9d1a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0c139883a35ed8d3105c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -12831,16 +12831,16 @@ var Actions = function (_React$Component) {
     value: function _back() {
       // if (!this.history.goBack()) {
       //   if (this.props.url.type === 'edit') {
-      //     this.history.pushState(null, "/me");
+      //     this.props.history.push("/me");
       //   } else {
-      //     this.history.pushState(null, "/stream");
+      //     this.props.history.push("/stream");
       //   }
       // }
     }
   }, {
     key: '_myposts',
     value: function _myposts() {
-      // this.history.pushState(null, "/me");
+      // this.props.history.push("/me");
     }
   }]);
 
@@ -21617,7 +21617,7 @@ var Stats = function (_React$Component) {
 			if (user && user.username) {
 				username = user.username;
 			}
-			this.props.history.pushState(null, '/' + username + '/' + this.props.post.slug);
+			this.props.history.push('/' + username + '/' + this.props.post.slug);
 		}
 	}]);
 
@@ -21845,7 +21845,7 @@ var Profile = function (_React$Component) {
 	}, {
 		key: '_back',
 		value: function _back() {
-			this.history.pushState(null, "/stream");
+			this.props.history.push("/stream");
 		}
 	}, {
 		key: '_load',
@@ -43632,11 +43632,12 @@ var Admin = function (_React$Component) {
   _createClass(Admin, [{
     key: 'render',
     value: function render() {
-      // {React.cloneElement(this.props.children, this.props)}
+      var Children = _react2.default.cloneElement(this.props.children, this.props);
       return _react2.default.createElement(
         'div',
         { className: 'admin' },
-        _react2.default.createElement(_tabs2.default, this.props)
+        _react2.default.createElement(_tabs2.default, this.props),
+        Children
       );
     }
   }]);
@@ -43993,9 +43994,9 @@ var Tabs = function (_React$Component) {
     value: function _select(tab) {
       var url = this.props.url;
       var id = url.id;
-      if (id) {
-        this.history.pushState(null, '/admin/' + tab);
-      }
+      //if (id) {
+      this.props.history.push('/admin/' + tab);
+      //}
     }
   }, {
     key: '_details',
@@ -44353,7 +44354,7 @@ var Login = function (_React$Component) {
     key: '_request',
     value: function _request() {
       //this._clear();
-      this.history.pushState(null, "/request");
+      this.props.history.push("/request");
     }
   }, {
     key: '_clear',
@@ -44363,12 +44364,12 @@ var Login = function (_React$Component) {
   }, {
     key: '_posts',
     value: function _posts() {
-      this.history.pushState(null, "/stream");
+      this.props.history.push("/stream");
     }
   }, {
     key: '_account',
     value: function _account() {
-      this.history.pushState(null, "/account");
+      this.props.history.push("/account");
     }
   }]);
 
@@ -44868,7 +44869,7 @@ exports.default = _react2.default.createClass({
     this.setState({ step: 2 });
   },
   _account: function _account(e) {
-    this.history.pushState(null, "/account");
+    this.props.history.push("/account");
   },
   _clear: function _clear() {
     this.setState({ code: null });
@@ -47252,7 +47253,7 @@ var Post = function (_React$Component) {
 			// }
 			// if (data.hasOwnProperty('saving')) {
 			// 	if (data.saving === false) {
-			// 		this.history.pushState(null, "/me")
+			// 		this.props.history.push("/me")
 			// 	}
 			// 	//this.setState({saving: data.saving, types: false})
 			// }
@@ -47262,7 +47263,7 @@ var Post = function (_React$Component) {
 			// 	if (session.user && session.user.username) {
 			// 		username = session.user.username
 			// 	}
-			// 	this.history.pushState(null, `/${username}/${data.post.slug}/edit`)
+			// 	this.props.history.push(`/${username}/${data.post.slug}/edit`)
 			// }
 			// if (data.post) {
 			// 	document.title = data.post.title
@@ -47270,7 +47271,7 @@ var Post = function (_React$Component) {
 			// 	//this.setState({post: data.post})
 			// }
 			// if (data.deleted) {
-			// 	this.history.pushState(null, "/me")
+			// 	this.props.history.push("/me")
 			// }
 			// if (data.changes) {
 			// 	let current = this.props.post
@@ -51234,7 +51235,7 @@ exports.default = _react2.default.createClass({
     );
   },
   _docs: function _docs() {
-    this.history.pushState(null, "/docs");
+    this.props.history.push("/docs");
   }
 });
 
@@ -54649,7 +54650,7 @@ var Search = function (_React$Component) {
     value: function _redirect() {
       // let url = this.props.url;
       // if (url.root !== 'stream') {
-      //   this.history.pushState(null, '/stream');
+      //   this.props.history.push('/stream');
       // }
     }
   }]);
@@ -54964,6 +54965,7 @@ exports.default = _react2.default.createElement(
   _react2.default.createElement(
     _reactRouter.Route,
     { path: 'admin', component: _admin2.default },
+    _react2.default.createElement(_reactRouter.IndexRoute, { component: _details2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'details', component: _details2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'members', component: _members2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'teams', component: _teams2.default }),

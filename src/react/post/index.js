@@ -28,7 +28,7 @@ class Post extends React.Component {
 		// }
 		// if (data.hasOwnProperty('saving')) {
 		// 	if (data.saving === false) {
-		// 		this.history.pushState(null, "/me")
+		// 		this.props.history.push("/me")
 		// 	}
 		// 	//this.setState({saving: data.saving, types: false})
 		// }
@@ -38,7 +38,7 @@ class Post extends React.Component {
 		// 	if (session.user && session.user.username) {
 		// 		username = session.user.username
 		// 	}
-		// 	this.history.pushState(null, `/${username}/${data.post.slug}/edit`)
+		// 	this.props.history.push(`/${username}/${data.post.slug}/edit`)
 		// }
 		// if (data.post) {
 		// 	document.title = data.post.title
@@ -46,7 +46,7 @@ class Post extends React.Component {
 		// 	//this.setState({post: data.post})
 		// }
 		// if (data.deleted) {
-		// 	this.history.pushState(null, "/me")
+		// 	this.props.history.push("/me")
 		// }
 		// if (data.changes) {
 		// 	let current = this.props.post

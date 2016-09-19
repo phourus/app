@@ -14,7 +14,7 @@ let Convert = React.createClass({
     );
   },
   _register: function () {
-    this.history.pushState(null, "/account");
+    this.props.history.push("/account");
   }
 });
 

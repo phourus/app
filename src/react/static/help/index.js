@@ -29,6 +29,6 @@ export default React.createClass({
     );
   },
   _docs: function () {
-    this.history.pushState(null, "/docs");
+    this.props.history.push("/docs");
   }
 });
