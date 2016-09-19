@@ -91,7 +91,7 @@ class Team extends React.Component {
       }, 4000)
   }
 
-  componentWillUmount() {
+  componentWillUnmount() {
     clearInterval(this.timeout)
   }
 

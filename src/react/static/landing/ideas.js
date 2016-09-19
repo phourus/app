@@ -55,7 +55,7 @@ export default class Ideas extends React.Component {
       }, 6000)
   }
 
-  componentWillUmount() {
+  componentWillUnmount() {
     clearInterval(this.timeout)
   }
 

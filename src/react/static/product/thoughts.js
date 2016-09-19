@@ -27,7 +27,7 @@ export default class Thoughts extends React.Component {
       }, 3000)
   }
 
-  componentWillUmount() {
+  componentWillUnmount() {
     clearInterval(this.timeout)
   }
 

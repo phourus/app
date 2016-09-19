@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0c139883a35ed8d3105c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8aecaed2e1fafe0430dd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -22014,8 +22014,8 @@ var Features = function (_React$Component) {
       }, 3000);
     }
   }, {
-    key: 'componentWillUmount',
-    value: function componentWillUmount() {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
       clearInterval(this.timeout);
     }
   }, {
@@ -51230,7 +51230,7 @@ exports.default = _react2.default.createClass({
           'info@phourus.com'
         )
       ),
-      _react2.default.createElement('br', { clear: 'right' }),
+      _react2.default.createElement('br', { style: { clear: "right" } }),
       _react2.default.createElement('br', null)
     );
   },
@@ -51636,8 +51636,8 @@ var Ideas = function (_React$Component) {
       }, 6000);
     }
   }, {
-    key: 'componentWillUmount',
-    value: function componentWillUmount() {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
       clearInterval(this.timeout);
     }
   }, {
@@ -52092,8 +52092,8 @@ var Team = function (_React$Component2) {
       }, 4000);
     }
   }, {
-    key: 'componentWillUmount',
-    value: function componentWillUmount() {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
       clearInterval(this.timeout);
     }
   }, {
@@ -52984,8 +52984,8 @@ var Thoughts = function (_React$Component) {
       }, 3000);
     }
   }, {
-    key: 'componentWillUmount',
-    value: function componentWillUmount() {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
       clearInterval(this.timeout);
     }
   }, {

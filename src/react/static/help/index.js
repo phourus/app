@@ -23,7 +23,7 @@ export default React.createClass({
           <p>1-844-PHOURUS</p>
           <a href='mailto:info@phourus.com?Subject=Support'>info@phourus.com</a>
         </div>
-        <br clear="right" />
+        <br style={{clear: "right"}} />
         <br />
       </div>
     );
