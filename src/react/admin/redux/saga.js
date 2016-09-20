@@ -40,22 +40,23 @@ function* create(shortname) {
 }
 
 function* single(id) {
-  // orgs.single(id)
-  //   .then(data => {
-  //     this.trigger({org: data});
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //       let alert = {
-  //         action: 'load',
-  //         color: 'red',
-  //         code: code,
-  //         msg: 'Organization could not be loaded'
-  //       };
-  //       this.trigger({alert: alert});
-  //       console.warn(alert);
-  //     }
-  //   });
+  while (true) {
+    const action = yield take('ADMIN_SINGLE')
+    try {
+      const data = yield call(orgs.single, action.id)
+      yield put({type: 'RECEIVE_ADMIN_SINGLE', org: data})
+    } catch(code) {
+      if (code != 200) {
+        const alert = {
+          action: 'load',
+          color: 'red',
+          code,
+          msg: 'Organization could not be loaded'
+        };
+        yield put({type: 'ALERT', alert})
+      }
+    }
+  }
 }
 
 function* save() {

@@ -13,7 +13,6 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 import routes from '../routes'
-let el = document.getElementById("app");
+const el = document.getElementById("app")
 
-//
-render(<Provider store={store}><Router history={browserHistory} routes={routes} /></Provider>, el);
+render(<Provider store={store}><Router history={browserHistory} routes={routes} /></Provider>, el)

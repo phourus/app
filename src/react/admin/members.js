@@ -1,18 +1,22 @@
 import React from 'react'
 import Pic from '../shared/pic'
 
+import * as actions from './redux/actions/members'
+
 export default class Members extends React.Component {
 
   componentDidMount() {
-    const url = this.props.url
-    this.props.actions.collection(url.id)
+    const { org } = this.props
+    this.props.dispatch(actions.collection(org.id))
   }
 
   render() {
+    const { members } = this.props
+
     return (
       <div className="members">
         <h2>Manage Users</h2>
-        {this.state.members.map(member => {
+        {members.map(member => {
           return (
             <div>
               <Pic img={member.img} id={member.id} type="user" name={member.username} />
@@ -39,18 +43,18 @@ export default class Members extends React.Component {
   }
 
   _approve(e) {
-    this.props.actions.approve(e.currentTarget.id)
+    this.props.dispatch(actions.approve(e.currentTarget.id))
   }
 
   _admin(e) {
-    this.props.actions.admin(e.currentTarget.id)
+    this.props.dispatch(actions.admin(e.currentTarget.id))
   }
 
   _revoke(e) {
-    this.props.actions.revoke(e.currentTarget.id)
+    this.props.dispatch(actions.revoke(e.currentTarget.id))
   }
 
   _deny(e) {
-    this.props.actions.deny(e.currentTarget.id)
+    this.props.dispatch(actions.deny(e.currentTarget.id))
   }
 }

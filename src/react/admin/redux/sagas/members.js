@@ -4,37 +4,34 @@ import members from '../../../../api/members'
 
 export default function* init() {
   yield [
-    yield(collection),
-    yield(request),
-    yield(approve),
-    yield(admin),
-    yield(revoke),
-    yield(deny),
-    yield(remove)
+    spawn(collection),
+    spawn(request),
+    spawn(approve),
+    spawn(admin),
+    spawn(revoke),
+    spawn(deny),
+    spawn(remove)
   ]
 }
 
-function* collection(id) {
-  // let params = {
-  //   orgId: id
-  // };
-  // this.orgId = id;
-  // members.collection(params)
-  //   .then(data => {
-  //     this.trigger(data);
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //        let alert = {
-  //          action: 'load',
-  //          color: 'red',
-  //          code: code,
-  //          msg: 'Members could not be loaded'
-  //        };
-  //        this.trigger({alert: alert});
-  //        console.warn(alert);
-  //     }
-  //   });
+function* collection() {
+  while (true) {
+    const action = yield take('MEMBERS_COLLECTION')
+    try {
+      const data = yield call(members.collection, {orgId: action.id})
+      yield put({type: 'RECEIVE_MEMBERS_COLLECTION', members: data})
+    } catch(code) {
+      if (code != 200) {
+         const alert = {
+           action: 'load',
+           color: 'red',
+           code,
+           msg: 'Members could not be loaded'
+         }
+         yield put({type: 'ALERT', alert})
+      }
+    }
+  }
 }
 
 function* request(orgId) {

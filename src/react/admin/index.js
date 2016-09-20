@@ -22,6 +22,7 @@ class Admin extends React.Component {
 const mapState = (state, props) => {
   const {
     org,
+    changes,
     members
   } = state.admin
 
@@ -29,12 +30,13 @@ const mapState = (state, props) => {
     url: props.url,
     session: state.session,
     org,
+    changes,
     members
   }
 }
 
 const mapDispatch = (dispatch) => {
-  return { actions: bindActionCreators(actions, dispatch) }
+  return { actions: bindActionCreators(actions, dispatch), dispatch }
 }
 
 export default connect(mapState, mapDispatch)(Admin)
