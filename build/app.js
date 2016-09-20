@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a661230d093c6ec53bc9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4c823dde72ccbe865bfd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -46367,7 +46367,7 @@ var _orgs2 = _interopRequireDefault(_orgs);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _marked = [init, change, create, single, save, lookup, deactivate].map(regeneratorRuntime.mark);
+var _marked = [init, create, single, save, lookup, deactivate].map(regeneratorRuntime.mark);
 
 function init() {
   return regeneratorRuntime.wrap(function init$(_context) {
@@ -46375,7 +46375,7 @@ function init() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return [(0, _effects.spawn)(change), (0, _effects.spawn)(create), (0, _effects.spawn)(single), (0, _effects.spawn)(save), (0, _effects.spawn)(lookup), (0, _effects.spawn)(deactivate), (0, _effects.spawn)(_members2.default)];
+          return [(0, _effects.spawn)(create), (0, _effects.spawn)(single), (0, _effects.spawn)(save), (0, _effects.spawn)(lookup), (0, _effects.spawn)(deactivate), (0, _effects.spawn)(_members2.default)];
 
         case 2:
         case 'end':
@@ -46385,33 +46385,125 @@ function init() {
   }, _marked[0], this);
 }
 
-function change(key, value) {
-  return regeneratorRuntime.wrap(function change$(_context2) {
+function create(shortname) {
+  var action, data, alert;
+  return regeneratorRuntime.wrap(function create$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
+          if (false) {
+            _context2.next = 21;
+            break;
+          }
+
+          _context2.next = 3;
+          return (0, _effects.take)('ADMIN_CREATE');
+
+        case 3:
+          action = _context2.sent;
+          _context2.prev = 4;
+          _context2.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_ADMIN_CREATE' });
+
+        case 7:
+          _context2.next = 9;
+          return (0, _effects.call)(_orgs2.default.add, action.shortname);
+
+        case 9:
+          data = _context2.sent;
+          _context2.next = 12;
+          return (0, _effects.put)({ type: 'RECEIVE_ADMIN_CREATE', org: data });
+
+        case 12:
+          _context2.next = 19;
+          break;
+
+        case 14:
+          _context2.prev = 14;
+          _context2.t0 = _context2['catch'](4);
+          alert = {
+            action: 'organization',
+            color: 'red',
+            code: _context2.t0,
+            msg: 'Organization could not be created'
+          };
+          _context2.next = 19;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 19:
+          _context2.next = 0;
+          break;
+
+        case 21:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this);
-}
-
-function create(shortname) {
-  return regeneratorRuntime.wrap(function create$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-        case 'end':
-          return _context3.stop();
-      }
-    }
-  }, _marked[2], this);
+  }, _marked[1], this, [[4, 14]]);
 }
 
 function single(id) {
   var action, data, alert;
-  return regeneratorRuntime.wrap(function single$(_context4) {
+  return regeneratorRuntime.wrap(function single$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          if (false) {
+            _context3.next = 20;
+            break;
+          }
+
+          _context3.next = 3;
+          return (0, _effects.take)('ADMIN_SINGLE');
+
+        case 3:
+          action = _context3.sent;
+          _context3.prev = 4;
+          _context3.next = 7;
+          return (0, _effects.call)(_orgs2.default.single, action.id);
+
+        case 7:
+          data = _context3.sent;
+          _context3.next = 10;
+          return (0, _effects.put)({ type: 'RECEIVE_ADMIN_SINGLE', org: data });
+
+        case 10:
+          _context3.next = 18;
+          break;
+
+        case 12:
+          _context3.prev = 12;
+          _context3.t0 = _context3['catch'](4);
+
+          if (!(_context3.t0 != 200)) {
+            _context3.next = 18;
+            break;
+          }
+
+          alert = {
+            action: 'load',
+            color: 'red',
+            code: _context3.t0,
+            msg: 'Organization could not be loaded'
+          };
+          _context3.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context3.next = 0;
+          break;
+
+        case 20:
+        case 'end':
+          return _context3.stop();
+      }
+    }
+  }, _marked[2], this, [[4, 12]]);
+}
+
+function save() {
+  var action, alert;
+  return regeneratorRuntime.wrap(function save$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
@@ -46421,37 +46513,34 @@ function single(id) {
           }
 
           _context4.next = 3;
-          return (0, _effects.take)('ADMIN_SINGLE');
+          return (0, _effects.take)('ADMIN_SAVE');
 
         case 3:
           action = _context4.sent;
           _context4.prev = 4;
           _context4.next = 7;
-          return (0, _effects.call)(_orgs2.default.single, action.id);
+          return (0, _effects.put)({ type: 'REQUEST_ADMIN_SAVE' });
 
         case 7:
-          data = _context4.sent;
-          _context4.next = 10;
-          return (0, _effects.put)({ type: 'RECEIVE_ADMIN_SINGLE', org: data });
+          _context4.next = 9;
+          return (0, _effects.call)(_orgs2.default.save, action.orgId, action.changes);
 
-        case 10:
+        case 9:
+          _context4.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_ADMIN_SAVE' });
+
+        case 11:
           _context4.next = 18;
           break;
 
-        case 12:
-          _context4.prev = 12;
+        case 13:
+          _context4.prev = 13;
           _context4.t0 = _context4['catch'](4);
-
-          if (!(_context4.t0 != 200)) {
-            _context4.next = 18;
-            break;
-          }
-
           alert = {
-            action: 'load',
+            action: 'save',
             color: 'red',
             code: _context4.t0,
-            msg: 'Organization could not be loaded'
+            msg: 'Organization details could not be saved'
           };
           _context4.next = 18;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
@@ -46465,43 +46554,136 @@ function single(id) {
           return _context4.stop();
       }
     }
-  }, _marked[3], this, [[4, 12]]);
+  }, _marked[3], this, [[4, 13]]);
 }
 
-function save() {
-  return regeneratorRuntime.wrap(function save$(_context5) {
+function lookup(name) {
+  var action, data, alert;
+  return regeneratorRuntime.wrap(function lookup$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
+          if (false) {
+            _context5.next = 21;
+            break;
+          }
+
+          _context5.next = 3;
+          return (0, _effects.take)('ADMIN_LOOKUP');
+
+        case 3:
+          action = _context5.sent;
+          _context5.prev = 4;
+          _context5.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_ADMIN_LOOKUP' });
+
+        case 7:
+          _context5.next = 9;
+          return (0, _effects.call)(_orgs2.default.lookup, action.name);
+
+        case 9:
+          data = _context5.sent;
+          _context5.next = 12;
+          return (0, _effects.put)({ type: 'RECEIVE_ADMIN_LOOKUP', lookup: data });
+
+        case 12:
+          _context5.next = 19;
+          break;
+
+        case 14:
+          _context5.prev = 14;
+          _context5.t0 = _context5['catch'](4);
+          alert = {
+            action: 'lookup',
+            color: 'yellow',
+            code: _context5.t0,
+            msg: 'Organizations lookup could not be loaded'
+          };
+          _context5.next = 19;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 19:
+          _context5.next = 0;
+          break;
+
+        case 21:
         case 'end':
           return _context5.stop();
       }
     }
-  }, _marked[4], this);
+  }, _marked[4], this, [[4, 14]]);
 }
 
-function lookup(name) {
-  return regeneratorRuntime.wrap(function lookup$(_context6) {
+function deactivate() {
+  var action, data, alert;
+  return regeneratorRuntime.wrap(function deactivate$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
+          if (false) {
+            _context6.next = 24;
+            break;
+          }
+
+          _context6.next = 3;
+          return (0, _effects.take)('ADMIN_DEACTIVATE');
+
+        case 3:
+          action = _context6.sent;
+          _context6.prev = 4;
+          _context6.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_ADMIN_DEACTIVATE' });
+
+        case 7:
+          _context6.next = 9;
+          return (0, _effects.call)(_orgs2.default.deactivate);
+
+        case 9:
+          data = _context6.sent;
+
+          if (!(data == 202)) {
+            _context6.next = 13;
+            break;
+          }
+
+          _context6.next = 13;
+          return (0, _effects.put)({ type: 'ALERT', alert: {
+              action: 'deactivate',
+              color: 'green',
+              code: code,
+              msg: 'Account deactivated'
+            } });
+
+        case 13:
+          _context6.next = 15;
+          return (0, _effects.put)({ type: 'RECEIVE_ADMIN_DEACTIVATE' });
+
+        case 15:
+          _context6.next = 22;
+          break;
+
+        case 17:
+          _context6.prev = 17;
+          _context6.t0 = _context6['catch'](4);
+          alert = {
+            action: 'deactivate',
+            color: 'red',
+            code: _context6.t0,
+            msg: 'Account could not be deactivated'
+          };
+          _context6.next = 22;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 22:
+          _context6.next = 0;
+          break;
+
+        case 24:
         case 'end':
           return _context6.stop();
       }
     }
-  }, _marked[5], this);
-}
-
-function deactivate() {
-  return regeneratorRuntime.wrap(function deactivate$(_context7) {
-    while (1) {
-      switch (_context7.prev = _context7.next) {
-        case 0:
-        case 'end':
-          return _context7.stop();
-      }
-    }
-  }, _marked[6], this);
+  }, _marked[5], this, [[4, 17]]);
 }
 
 /***/ },
@@ -46601,76 +46783,340 @@ function collection() {
   }, _marked[1], this, [[4, 12]]);
 }
 
-function request(orgId) {
+function request() {
+  var action, alert;
   return regeneratorRuntime.wrap(function request$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
+          if (false) {
+            _context3.next = 20;
+            break;
+          }
+
+          _context3.next = 3;
+          return (0, _effects.take)('MEMBERS_REQUEST');
+
+        case 3:
+          action = _context3.sent;
+          _context3.prev = 4;
+          _context3.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_MEMBERS_REQUEST' });
+
+        case 7:
+          _context3.next = 9;
+          return (0, _effects.call)(_members2.default.request, action.orgId);
+
+        case 9:
+          _context3.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_MEMBERS_REQUEST' });
+
+        case 11:
+          _context3.next = 18;
+          break;
+
+        case 13:
+          _context3.prev = 13;
+          _context3.t0 = _context3['catch'](4);
+          alert = {
+            action: 'request',
+            color: 'red',
+            code: _context3.t0,
+            msg: 'Organization access could not be requested'
+          };
+          _context3.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context3.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context3.stop();
       }
     }
-  }, _marked[2], this);
+  }, _marked[2], this, [[4, 13]]);
 }
 
-function approve(id) {
+function approve() {
+  var action, alert;
   return regeneratorRuntime.wrap(function approve$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
+          if (false) {
+            _context4.next = 20;
+            break;
+          }
+
+          _context4.next = 3;
+          return (0, _effects.take)('MEMBERS_APPROVE');
+
+        case 3:
+          action = _context4.sent;
+          _context4.prev = 4;
+          _context4.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_MEMBERS_APPROVE' });
+
+        case 7:
+          _context4.next = 9;
+          return (0, _effects.call)(_members2.default.approve, action.id);
+
+        case 9:
+          _context4.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_MEMBERS_APPROVE' });
+
+        case 11:
+          _context4.next = 18;
+          break;
+
+        case 13:
+          _context4.prev = 13;
+          _context4.t0 = _context4['catch'](4);
+          alert = {
+            action: 'approve',
+            color: 'red',
+            code: _context4.t0,
+            msg: 'Membership could not be granted'
+          };
+          _context4.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context4.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context4.stop();
       }
     }
-  }, _marked[3], this);
+  }, _marked[3], this, [[4, 13]]);
 }
 
-function admin(id) {
+function admin() {
+  var action, alert;
   return regeneratorRuntime.wrap(function admin$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
+          if (false) {
+            _context5.next = 20;
+            break;
+          }
+
+          _context5.next = 3;
+          return (0, _effects.take)('MEMBERS_ADMIN');
+
+        case 3:
+          action = _context5.sent;
+          _context5.prev = 4;
+          _context5.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_MEMBERS_ADMIN' });
+
+        case 7:
+          _context5.next = 9;
+          return (0, _effects.call)(_members2.default.admin, action.id);
+
+        case 9:
+          _context5.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_MEMBERS_ADMIN' });
+
+        case 11:
+          _context5.next = 18;
+          break;
+
+        case 13:
+          _context5.prev = 13;
+          _context5.t0 = _context5['catch'](4);
+          alert = {
+            action: 'grant',
+            color: 'red',
+            code: _context5.t0,
+            msg: 'Admin privileges could not be granted'
+          };
+          _context5.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context5.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context5.stop();
       }
     }
-  }, _marked[4], this);
+  }, _marked[4], this, [[4, 13]]);
 }
 
-function revoke(id) {
+function revoke() {
+  var action, alert;
   return regeneratorRuntime.wrap(function revoke$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
+          if (false) {
+            _context6.next = 20;
+            break;
+          }
+
+          _context6.next = 3;
+          return (0, _effects.take)('MEMBERS_REVOKE');
+
+        case 3:
+          action = _context6.sent;
+          _context6.prev = 4;
+          _context6.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_MEMBERS_REVOKE' });
+
+        case 7:
+          _context6.next = 9;
+          return (0, _effects.call)(_members2.default.revoke, action.id);
+
+        case 9:
+          _context6.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_MEMBERS_REVOKE' });
+
+        case 11:
+          _context6.next = 18;
+          break;
+
+        case 13:
+          _context6.prev = 13;
+          _context6.t0 = _context6['catch'](4);
+          alert = {
+            action: 'revoke',
+            color: 'red',
+            code: _context6.t0,
+            msg: 'Admin privileges could not be revoked'
+          };
+          _context6.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context6.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context6.stop();
       }
     }
-  }, _marked[5], this);
+  }, _marked[5], this, [[4, 13]]);
 }
 
-function deny(id) {
+function deny() {
+  var action, alert;
   return regeneratorRuntime.wrap(function deny$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
+          if (false) {
+            _context7.next = 20;
+            break;
+          }
+
+          _context7.next = 3;
+          return (0, _effects.take)('MEMBERS_DENY');
+
+        case 3:
+          action = _context7.sent;
+          _context7.prev = 4;
+          _context7.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_MEMBERS_DENY' });
+
+        case 7:
+          _context7.next = 9;
+          return (0, _effects.call)(_members2.default.deny, action.id);
+
+        case 9:
+          _context7.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_MEMBERS_DENY' });
+
+        case 11:
+          _context7.next = 18;
+          break;
+
+        case 13:
+          _context7.prev = 13;
+          _context7.t0 = _context7['catch'](4);
+          alert = {
+            action: 'deny',
+            color: 'red',
+            code: _context7.t0,
+            msg: 'Member could not be denied'
+          };
+          _context7.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context7.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context7.stop();
       }
     }
-  }, _marked[6], this);
+  }, _marked[6], this, [[4, 13]]);
 }
 
-function remove(orgId) {
+function remove() {
+  var action, alert;
   return regeneratorRuntime.wrap(function remove$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
         case 0:
+          if (false) {
+            _context8.next = 20;
+            break;
+          }
+
+          _context8.next = 3;
+          return (0, _effects.take)('MEMBERS_REMOVE');
+
+        case 3:
+          action = _context8.sent;
+          _context8.prev = 4;
+          _context8.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_MEMBERS_REMOVE' });
+
+        case 7:
+          _context8.next = 9;
+          return (0, _effects.call)(_members2.default.remove, action.orgId);
+
+        case 9:
+          _context8.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_MEMBERS_REMOVE' });
+
+        case 11:
+          _context8.next = 18;
+          break;
+
+        case 13:
+          _context8.prev = 13;
+          _context8.t0 = _context8['catch'](4);
+          alert = {
+            action: 'remove',
+            color: 'red',
+            code: _context8.t0,
+            msg: 'Organization could not be removed'
+          };
+          _context8.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context8.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context8.stop();
       }
     }
-  }, _marked[7], this);
+  }, _marked[7], this, [[4, 13]]);
 }
 
 /***/ },
@@ -47484,63 +47930,294 @@ function init() {
 }
 
 function request(email) {
+  var action, _password, alert;
+
   return regeneratorRuntime.wrap(function request$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
+          if (false) {
+            _context2.next = 23;
+            break;
+          }
+
+          _context2.next = 3;
+          return (0, _effects.take)('AUTH_REGISTER');
+
+        case 3:
+          action = _context2.sent;
+          _context2.prev = 4;
+          _password = Math.random().toString(36).slice(2);
+          _context2.next = 8;
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_REGISTER' });
+
+        case 8:
+          _context2.next = 10;
+          return (0, _effects.call)(_account2.default.register, action.email, action.password);
+
+        case 10:
+          _context2.next = 12;
+          return (0, _effects.put)({ type: 'ALERT', alert: {
+              action: 'request',
+              color: 'green',
+              code: 202,
+              msg: 'Request complete'
+            } });
+
+        case 12:
+          _context2.next = 14;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_REGISTER' });
+
+        case 14:
+          _context2.next = 21;
+          break;
+
+        case 16:
+          _context2.prev = 16;
+          _context2.t0 = _context2['catch'](4);
+          alert = {
+            action: 'request',
+            color: 'red',
+            code: _context2.t0,
+            msg: 'Request unsuccessful'
+          };
+          _context2.next = 21;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 21:
+          _context2.next = 0;
+          break;
+
+        case 23:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this);
+  }, _marked[1], this, [[4, 16]]);
 }
 
 function forgot(email) {
+  var action, alert;
   return regeneratorRuntime.wrap(function forgot$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
+          if (false) {
+            _context3.next = 20;
+            break;
+          }
+
+          _context3.next = 3;
+          return (0, _effects.take)('AUTH_FORGOT');
+
+        case 3:
+          action = _context3.sent;
+          _context3.prev = 4;
+          _context3.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_FORGOT' });
+
+        case 7:
+          _context3.next = 9;
+          return (0, _effects.call)(_account2.default.forgot, action.email);
+
+        case 9:
+          _context3.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_FORGOT' });
+
+        case 11:
+          _context3.next = 18;
+          break;
+
+        case 13:
+          _context3.prev = 13;
+          _context3.t0 = _context3['catch'](4);
+          alert = {
+            action: 'forgot',
+            color: 'red',
+            code: _context3.t0,
+            msg: 'Password reset link could not be sent'
+          };
+          _context3.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context3.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context3.stop();
       }
     }
-  }, _marked[2], this);
+  }, _marked[2], this, [[4, 13]]);
 }
 
 function reset(email, password, token, userId) {
+  var action, alert;
   return regeneratorRuntime.wrap(function reset$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
+          if (false) {
+            _context4.next = 20;
+            break;
+          }
+
+          _context4.next = 3;
+          return (0, _effects.take)('AUTH_RESET');
+
+        case 3:
+          action = _context4.sent;
+          _context4.prev = 4;
+          _context4.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_RESET' });
+
+        case 7:
+          _context4.next = 9;
+          return (0, _effects.call)(_account2.default.reset, action.email, action.password, action.token, action.userId);
+
+        case 9:
+          _context4.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_RESET' });
+
+        case 11:
+          _context4.next = 18;
+          break;
+
+        case 13:
+          _context4.prev = 13;
+          _context4.t0 = _context4['catch'](4);
+          alert = {
+            action: 'reset',
+            color: 'red',
+            code: _context4.t0,
+            msg: 'Password reset link could not be sent'
+          };
+          _context4.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context4.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context4.stop();
       }
     }
-  }, _marked[3], this);
+  }, _marked[3], this, [[4, 13]]);
 }
 
 function password(current, updated) {
+  var action, alert;
   return regeneratorRuntime.wrap(function password$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
+          if (false) {
+            _context5.next = 20;
+            break;
+          }
+
+          _context5.next = 3;
+          return (0, _effects.take)('AUTH_PASSWORD');
+
+        case 3:
+          action = _context5.sent;
+          _context5.prev = 4;
+          _context5.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_PASSWORD' });
+
+        case 7:
+          _context5.next = 9;
+          return (0, _effects.call)(_account2.default.password, action.current, action.updated);
+
+        case 9:
+          _context5.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_PASSWORD' });
+
+        case 11:
+          _context5.next = 18;
+          break;
+
+        case 13:
+          _context5.prev = 13;
+          _context5.t0 = _context5['catch'](4);
+          alert = {
+            action: 'password',
+            color: 'red',
+            code: _context5.t0,
+            msg: 'Password could not be updated'
+          };
+          _context5.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context5.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context5.stop();
       }
     }
-  }, _marked[4], this);
+  }, _marked[4], this, [[4, 13]]);
 }
 
 function register(email, password, username) {
+  var action, alert;
   return regeneratorRuntime.wrap(function register$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
+          if (false) {
+            _context6.next = 20;
+            break;
+          }
+
+          _context6.next = 3;
+          return (0, _effects.take)('AUTH_REGISTER');
+
+        case 3:
+          action = _context6.sent;
+          _context6.prev = 4;
+          _context6.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_REGISTER' });
+
+        case 7:
+          _context6.next = 9;
+          return (0, _effects.call)(_account2.default.register, action.email, action.password, action.username);
+
+        case 9:
+          _context6.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_REGISTER' });
+
+        case 11:
+          _context6.next = 18;
+          break;
+
+        case 13:
+          _context6.prev = 13;
+          _context6.t0 = _context6['catch'](4);
+          alert = {
+            action: 'register',
+            color: 'red',
+            code: _context6.t0,
+            msg: 'Registration unsuccessful'
+          };
+          _context6.next = 18;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 18:
+          _context6.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context6.stop();
       }
     }
-  }, _marked[5], this);
+  }, _marked[5], this, [[4, 13]]);
 }
 
 function get() {
@@ -56371,27 +57048,125 @@ function init() {
 }
 
 function contact(email, message) {
+  var action, alert;
   return regeneratorRuntime.wrap(function contact$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
+          if (false) {
+            _context2.next = 22;
+            break;
+          }
+
+          _context2.next = 3;
+          return (0, _effects.take)('CONTACT_SUBMIT');
+
+        case 3:
+          action = _context2.sent;
+          _context2.prev = 4;
+          _context2.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_CONTACT_SUBMIT' });
+
+        case 7:
+          _context2.next = 9;
+          return (0, _effects.call)(_account2.default.contact, action.email, action.message);
+
+        case 9:
+          _context2.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_CONTACT_SUBMIT' });
+
+        case 11:
+          _context2.next = 13;
+          return (0, _effects.put)({ type: 'ALERT', alert: {
+              action: 'contact',
+              color: 'green',
+              code: 200,
+              msg: 'Message sent'
+            } });
+
+        case 13:
+          _context2.next = 20;
+          break;
+
+        case 15:
+          _context2.prev = 15;
+          _context2.t0 = _context2['catch'](4);
+          alert = {
+            action: 'contact',
+            color: 'red',
+            code: _context2.t0,
+            msg: 'Message could not be sent'
+          };
+          _context2.next = 20;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 20:
+          _context2.next = 0;
+          break;
+
+        case 22:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this);
+  }, _marked[1], this, [[4, 15]]);
 }
 
 function page(id) {
+  var action, data, alert;
   return regeneratorRuntime.wrap(function page$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
+          if (false) {
+            _context3.next = 21;
+            break;
+          }
+
+          _context3.next = 3;
+          return (0, _effects.take)('PAGE_GET');
+
+        case 3:
+          action = _context3.sent;
+          _context3.prev = 4;
+          _context3.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_PAGE_GET' });
+
+        case 7:
+          _context3.next = 9;
+          return (0, _effects.call)(_pages2.default.get, action.page);
+
+        case 9:
+          data = _context3.sent;
+          _context3.next = 12;
+          return (0, _effects.put)({ type: 'RECEIVE_PAGE_GET', page: data, id: action.page });
+
+        case 12:
+          _context3.next = 19;
+          break;
+
+        case 14:
+          _context3.prev = 14;
+          _context3.t0 = _context3['catch'](4);
+          alert = {
+            action: 'load',
+            color: 'yellow',
+            code: _context3.t0,
+            msg: 'Page could not be loaded'
+          };
+          _context3.next = 19;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 19:
+          _context3.next = 0;
+          break;
+
+        case 21:
         case 'end':
           return _context3.stop();
       }
     }
-  }, _marked[2], this);
+  }, _marked[2], this, [[4, 14]]);
 }
 
 /***/ },

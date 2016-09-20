@@ -6,7 +6,6 @@ import orgs from '../../../api/orgs'
 
 export default function* init() {
   yield [
-    spawn(change),
     spawn(create),
     spawn(single),
     spawn(save),
@@ -16,27 +15,23 @@ export default function* init() {
   ]
 }
 
-function* change(key, value) {
-  // this.changes[key] = value;
-  // this.trigger({changes: this.changes});
-}
-
 function* create(shortname) {
-  // orgs.add(shortname)
-  // .then(data => {
-  //   this.trigger({org: data});
-  // })
-  // .catch(code => {
-  //   this.trigger({code: code});
-  //   let alert = {
-  //     action: 'organization',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Organization could not be created'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  while (true) {
+    const action = yield take('ADMIN_CREATE')
+    try {
+      yield put({type: 'REQUEST_ADMIN_CREATE'})
+      const data = yield call(orgs.add, action.shortname)
+      yield put({type: 'RECEIVE_ADMIN_CREATE', org: data})
+    } catch (code) {
+      const alert = {
+        action: 'organization',
+        color: 'red',
+        code,
+        msg: 'Organization could not be created'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* single(id) {
@@ -60,65 +55,67 @@ function* single(id) {
 }
 
 function* save() {
-  // orgs.save(this.org.id, this.changes)
-  //   .then(data => {
-  //     this._single(id);
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //        let alert = {
-  //          action: 'save',
-  //          color: 'red',
-  //          code: code,
-  //          msg: 'Organization details could not be saved'
-  //        };
-  //        this.trigger({alert: alert});
-  //        console.warn(alert);
-  //     }
-  //   });
+  while (true) {
+    const action = yield take('ADMIN_SAVE')
+    try {
+      yield put({type: 'REQUEST_ADMIN_SAVE'})
+      yield call(orgs.save, action.orgId, action.changes)
+      yield put({type: 'RECEIVE_ADMIN_SAVE'})
+    } catch (code) {
+      const alert = {
+        action: 'save',
+        color: 'red',
+        code,
+        msg: 'Organization details could not be saved'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* lookup(name) {
-  // orgs.lookup(name)
-  // .then(data => {
-  //   this.trigger({lookup: data});
-  // })
-  // .catch(code => {
-  //   this.trigger({code: code});
-  //   let alert = {
-  //     action: 'lookup',
-  //     color: 'yellow',
-  //     code: code,
-  //     msg: 'Organizations lookup could not be loaded'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  while (true) {
+    const action = yield take('ADMIN_LOOKUP')
+    try {
+      yield put({type: 'REQUEST_ADMIN_LOOKUP'})
+      const data = yield call(orgs.lookup, action.name)
+      yield put({type: 'RECEIVE_ADMIN_LOOKUP', lookup: data})
+    } catch (code) {
+      const alert = {
+        action: 'lookup',
+        color: 'yellow',
+        code,
+        msg: 'Organizations lookup could not be loaded'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
+
 }
 
 function* deactivate() {
-  // orgs.deactivate
-  // .then(code => {
-  //   if (code == 202) {
-  //     msg('green', 'Account deactivated', code);
-  //     let alert = {
-  //       action: 'deactivate',
-  //       color: 'green',
-  //       code: code,
-  //       msg: 'Account deactivated'
-  //     };
-  //     this.trigger({alert: alert});
-  //   }
-  // })
-  // .catch(code => {
-  //   this.trigger({code: code});
-  //   let alert = {
-  //     action: 'deactivate',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Account could not be deactivated'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  while (true) {
+    const action = yield take('ADMIN_DEACTIVATE')
+    try {
+      yield put({type: 'REQUEST_ADMIN_DEACTIVATE'})
+      const data = yield call(orgs.deactivate)
+      if (data == 202) {
+        yield put({type: 'ALERT', alert: {
+          action: 'deactivate',
+          color: 'green',
+          code: code,
+          msg: 'Account deactivated'
+        }})
+      }
+      yield put({type: 'RECEIVE_ADMIN_DEACTIVATE'})
+    } catch (code) {
+      const alert = {
+        action: 'deactivate',
+        color: 'red',
+        code,
+        msg: 'Account could not be deactivated'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }

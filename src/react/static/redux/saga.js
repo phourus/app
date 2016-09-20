@@ -11,45 +11,45 @@ export default function* init() {
 }
 
 function* contact(email, message) {
-  //   account.contact(email, message)
-  //   .then(data => {
-  //     let alert = {
-  //       action: 'contact',
-  //       color: 'green',
-  //       code: 200,
-  //       msg: 'Message sent'
-  //     };
-  //     this.trigger({alert: alert});
-  //   })
-  //   .catch(code => {
-  //     let alert = {
-  //       action: 'contact',
-  //       color: 'red',
-  //       code: code,
-  //       msg: 'Message could not be sent'
-  //     };
-  //     this.trigger({alert: alert});
-  //     console.warn(alert);
-  //   });
-  // }
+  while (true) {
+    const action = yield take('CONTACT_SUBMIT')
+    try {
+      yield put({type: 'REQUEST_CONTACT_SUBMIT'})
+      yield call(account.contact, action.email, action.message)
+      yield put({type: 'RECEIVE_CONTACT_SUBMIT'})
+      yield put({type: 'ALERT', alert: {
+        action: 'contact',
+        color: 'green',
+        code: 200,
+        msg: 'Message sent'
+      }})
+    } catch (code) {
+      const alert = {
+        action: 'contact',
+        color: 'red',
+        code,
+        msg: 'Message could not be sent'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* page(id) {
-  //   pages.get(page)
-  //   .then(data => {
-  //     this.trigger({page: data, id: page});
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //       let alert = {
-  //         action: 'load',
-  //         color: 'yellow',
-  //         code: code,
-  //         msg: 'Page could not be loaded'
-  //       };
-  //       this.trigger({alert: alert});
-  //       console.warn(alert);
-  //     }
-  //   });
-  // }
+  while (true) {
+    const action = yield take('PAGE_GET')
+    try {
+      yield put({type: 'REQUEST_PAGE_GET'})
+      const data = yield call(pages.get, action.page)
+      yield put({type: 'RECEIVE_PAGE_GET', page: data, id: action.page})
+    } catch (code) {
+      const alert = {
+        action: 'load',
+        color: 'yellow',
+        code,
+        msg: 'Page could not be loaded'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }

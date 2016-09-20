@@ -36,101 +36,105 @@ export default function* init() {
 
 
 function* request(email) {
-  // let password = Math.random().toString(36).slice(2);
-  // account.register(email, password)
-  // .then((data) => {
-  //   let alert = {
-  //     action: 'request',
-  //     color: 'green',
-  //     code: 202,
-  //     msg: 'Request complete'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // })
-  // .catch((code) => {
-  //   this.trigger({code: code});
-  //   let alert = {
-  //     action: 'request',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Request unsuccessful'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  while (true) {
+    const action = yield take('AUTH_REGISTER')
+    try {
+      const password = Math.random().toString(36).slice(2)
+      yield put({type: 'REQUEST_AUTH_REGISTER'})
+      yield call(account.register, action.email, action.password)
+      yield put({type: 'ALERT', alert: {
+        action: 'request',
+        color: 'green',
+        code: 202,
+        msg: 'Request complete'
+      }})
+      yield put({type: 'RECEIVE_AUTH_REGISTER'})
+    } catch (code) {
+      const alert = {
+        action: 'request',
+        color: 'red',
+        code,
+        msg: 'Request unsuccessful'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* forgot(email) {
-  // account.forgot(email)
-  // .then(data => {
-  //   this.trigger({code: 200, action: 'forgot'});
-  // })
-  // .catch(code => {
-  //   this.trigger({code: code, action: 'forgot'});
-  //   let alert = {
-  //     action: 'forgot',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Password reset link could not be sent'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  while (true) {
+    const action = yield take('AUTH_FORGOT')
+    try {
+      yield put({type: 'REQUEST_AUTH_FORGOT'})
+      yield call(account.forgot, action.email)
+      yield put({type: 'RECEIVE_AUTH_FORGOT'})
+    } catch (code) {
+      const alert = {
+        action: 'forgot',
+        color: 'red',
+        code,
+        msg: 'Password reset link could not be sent'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* reset(email, password, token, userId) {
-  // account.reset(email, password, token, userId)
-  // .then(data => {
-  //   this.trigger({code: 200, action: 'reset'});
-  // })
-  // .catch(code => {
-  //   this.trigger({code: code, action: 'reset'});
-  //   let alert = {
-  //     action: 'reset',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Password reset link could not be sent'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  while (true) {
+    const action = yield take('AUTH_RESET')
+    try {
+      yield put({type: 'REQUEST_AUTH_RESET'})
+      yield call(account.reset, action.email, action.password, action.token, action.userId)
+      yield put({type: 'RECEIVE_AUTH_RESET'})
+    } catch (code) {
+      const alert = {
+        action: 'reset',
+        color: 'red',
+        code,
+        msg: 'Password reset link could not be sent'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* password(current, updated) {
-  // account.password(current, updated)
-  // .then(data => {
-  //   this.trigger({action: 'password'});
-  // })
-  // .catch(code => {
-  //   let alert = {
-  //     action: 'password',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Password could not be updated'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  while (true) {
+    const action = yield take('AUTH_PASSWORD')
+    try {
+      yield put({type: 'REQUEST_AUTH_PASSWORD'})
+      yield call(account.password, action.current, action.updated)
+      yield put({type: 'RECEIVE_AUTH_PASSWORD'})
+    } catch (code) {
+      const alert = {
+        action: 'password',
+        color: 'red',
+        code,
+        msg: 'Password could not be updated'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* register(email, password, username) {
-  // account.register(email, password, username)
-  // .then((data) => {
-  //   this._login(email, password);
-  //   this.trigger({action: 'register'});
-  // })
-  // .catch((code) => {
-  //   this.trigger({code: code, action: 'register'});
-  //   let alert = {
-  //     action: 'register',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Registration unsuccessful'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  while (true) {
+    const action = yield take('AUTH_REGISTER')
+    try {
+      yield put({type: 'REQUEST_AUTH_REGISTER'})
+      yield call(account.register, action.email, action.password, action.username)
+      yield put({type: 'RECEIVE_AUTH_REGISTER'})
+    } catch (code) {
+      const alert = {
+        action: 'register',
+        color: 'red',
+        code,
+        msg: 'Registration unsuccessful'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* get() {

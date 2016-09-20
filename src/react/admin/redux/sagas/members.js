@@ -34,128 +34,116 @@ function* collection() {
   }
 }
 
-function* request(orgId) {
-  // members.request(orgId)
-  //   .then(data => {
-  //     this.trigger(data);
-  //     // this.trigger({request: data});
-  //     // this._orgs();
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //        let alert = {
-  //          action: 'request',
-  //          color: 'red',
-  //          code: code,
-  //          msg: 'Request could not be sent'
-  //        };
-  //        this.trigger({alert: alert});
-  //        console.warn(alert);
-  //     }
-  //
-  //     // this.trigger({code: code});
-  //     // let alert = {
-  //     //   action: 'join',
-  //     //   color: 'red',
-  //     //   code: code,
-  //     //   msg: 'Organization access could not be requested'
-  //     // };
-  //     // this.trigger({alert: alert});
-  //     // console.warn(alert);
-  //   });
+function* request() {
+  while (true) {
+    const action = yield take('MEMBERS_REQUEST')
+    try {
+      yield put({type: 'REQUEST_MEMBERS_REQUEST'})
+      yield call(members.request, action.orgId)
+      yield put({type: 'RECEIVE_MEMBERS_REQUEST'})
+    } catch (code) {
+      const alert = {
+        action: 'request',
+        color: 'red',
+        code,
+        msg: 'Organization access could not be requested'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
-function* approve(id) {
-  // members.approve(id)
-  //   .then(data => {
-  //     this._collection(this.orgId);
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //      let alert = {
-  //        action: 'approve',
-  //        color: 'red',
-  //        code: code,
-  //        msg: 'Membership could not be granted'
-  //      };
-  //      this.trigger({alert: alert});
-  //      console.warn(alert);
-  //     }
-  //   });
+function* approve() {
+  while (true) {
+    const action = yield take('MEMBERS_APPROVE')
+    try {
+      yield put({type: 'REQUEST_MEMBERS_APPROVE'})
+      yield call(members.approve, action.id)
+      yield put({type: 'RECEIVE_MEMBERS_APPROVE'})
+    } catch (code) {
+      const alert = {
+        action: 'approve',
+        color: 'red',
+        code,
+        msg: 'Membership could not be granted'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
-function* admin(id) {
-  // members.admin(id)
-  //   .then(data => {
-  //     this._collection(this.orgId);
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //       let alert = {
-  //         action: 'grant',
-  //         color: 'red',
-  //         code: code,
-  //         msg: 'Admin privileges could not be granted'
-  //       };
-  //       this.trigger({alert: alert});
-  //       console.warn(alert);
-  //     }
-  //   });
+function* admin() {
+  while (true) {
+    const action = yield take('MEMBERS_ADMIN')
+    try {
+      yield put({type: 'REQUEST_MEMBERS_ADMIN'})
+      yield call(members.admin, action.id)
+      yield put({type: 'RECEIVE_MEMBERS_ADMIN'})
+    } catch (code) {
+      const alert = {
+        action: 'grant',
+        color: 'red',
+        code,
+        msg: 'Admin privileges could not be granted'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
-function* revoke(id) {
-  // members.revoke(id)
-  //   .then(data => {
-  //     this._collection(this.orgId);
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //       let alert = {
-  //         action: 'revoke',
-  //         color: 'red',
-  //         code: code,
-  //         msg: 'Admin privileges could not be revoked'
-  //       };
-  //       this.trigger({alert: alert});
-  //       console.warn(alert);
-  //     }
-  //   });
+function* revoke() {
+  while (true) {
+    const action = yield take('MEMBERS_REVOKE')
+    try {
+      yield put({type: 'REQUEST_MEMBERS_REVOKE'})
+      yield call(members.revoke, action.id)
+      yield put({type: 'RECEIVE_MEMBERS_REVOKE'})
+    } catch (code) {
+      const alert = {
+        action: 'revoke',
+        color: 'red',
+        code,
+        msg: 'Admin privileges could not be revoked'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
-function* deny(id) {
-  // members.deny(id)
-  //   .then(data => {
-  //     this._collection(this.orgId);
-  //   })
-  //   .catch(code => {
-  //     if (code != 200) {
-  //       let alert = {
-  //         action: 'deny',
-  //         color: 'red',
-  //         code: code,
-  //         msg: 'Member could not be denied'
-  //       };
-  //       this.trigger({alert: alert});
-  //       console.warn(alert);
-  //     }
-  //   });
+function* deny() {
+  while (true) {
+    const action = yield take('MEMBERS_DENY')
+    try {
+      yield put({type: 'REQUEST_MEMBERS_DENY'})
+      yield call(members.deny, action.id)
+      yield put({type: 'RECEIVE_MEMBERS_DENY'})
+    } catch (code) {
+      const alert = {
+        action: 'deny',
+        color: 'red',
+        code,
+        msg: 'Member could not be denied'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
-function* remove(orgId) {
-  // members.remove(orgId)
-  // .then(data => {
-  //   this.trigger({remove: data});
-  //   this._orgs();
-  // })
-  // .catch(code => {
-  //   this.trigger({code: code});
-  //   let alert = {
-  //     action: 'remove',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Organization could not be removed'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+function* remove() {
+  while (true) {
+    const action = yield take('MEMBERS_REMOVE')
+    try {
+      yield put({type: 'REQUEST_MEMBERS_REMOVE'})
+      yield call(members.remove, action.orgId)
+      yield put({type: 'RECEIVE_MEMBERS_REMOVE'})
+    } catch (code) {
+      const alert = {
+        action: 'remove',
+        color: 'red',
+        code,
+        msg: 'Organization could not be removed'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
