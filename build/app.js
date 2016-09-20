@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "eb0094862ae109128d75"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f0d218a3d6ada797f490"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -12855,16 +12855,16 @@ var Actions = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'actions' },
-        _react2.default.createElement(_close2.default, { url: url, back: this._back }),
+        _react2.default.createElement(_close2.default, { url: url, back: this._back.bind(this) }),
         _react2.default.createElement(_edit2.default, { url: url, post: post, owner: owner }),
         _react2.default.createElement(_create3.default, {
           url: url,
           post: post,
           owner: owner,
           saving: saving,
-          create: this._create,
-          back: this._back,
-          rich: this._rich
+          create: this._create.bind(this),
+          back: this._back.bind(this),
+          rich: this._rich.bind(this)
         }),
         _react2.default.createElement(_controls2.default, {
           url: url,
@@ -12872,12 +12872,12 @@ var Actions = function (_React$Component) {
           owner: owner,
           saving: saving,
           confirmTrash: confirmTrash,
-          confirm: this._confirm,
-          cancel: this._cancel,
-          trash: this._trash,
-          update: this._update,
-          rich: this._rich,
-          myposts: this._myposts
+          confirm: this._confirm.bind(this),
+          cancel: this._cancel.bind(this),
+          trash: this._trash.bind(this),
+          update: this._update.bind(this),
+          rich: this._rich.bind(this),
+          myposts: this._myposts.bind(this)
         })
       );
     }
@@ -12902,8 +12902,8 @@ var Actions = function (_React$Component) {
       this.props.actions.cancel();
     }
   }, {
-    key: '_confirm',
-    value: function _confirm() {
+    key: '_trash',
+    value: function _trash() {
       this.props.actions.trash();
     }
   }, {
@@ -12914,18 +12914,18 @@ var Actions = function (_React$Component) {
   }, {
     key: '_back',
     value: function _back() {
-      // if (!this.history.goBack()) {
-      //   if (this.props.url.type === 'edit') {
-      //     this.props.history.push("/me");
-      //   } else {
-      //     this.props.history.push("/stream");
-      //   }
-      // }
+      if (!this.props.history.goBack()) {
+        if (this.props.url.type === 'edit') {
+          this.props.history.push("/me");
+        } else {
+          this.props.history.push("/stream");
+        }
+      }
     }
   }, {
     key: '_myposts',
     value: function _myposts() {
-      // this.props.history.push("/me");
+      this.props.history.push("/me");
     }
   }]);
 
@@ -21470,7 +21470,7 @@ exports.default = function (_ref) {
   if (post.rich) {
     return _react2.default.createElement(
       "button",
-      { className: "button gold rich", onClick: rich },
+      { className: "button gold rich", onClick: rich.bind(undefined) },
       _react2.default.createElement("i", { className: "fa fa-font" }),
       " Enable Rich Text"
     );
@@ -49019,7 +49019,7 @@ exports.default = function (_ref) {
   }
   return _react2.default.createElement(
     'button',
-    { className: 'close', onClick: back },
+    { className: 'close', onClick: back.bind(undefined) },
     _react2.default.createElement('i', { className: 'fa fa-remove' })
   );
 };
@@ -49070,13 +49070,13 @@ exports.default = function (_ref) {
       null,
       _react2.default.createElement(
         'button',
-        { className: 'button red delete', onClick: confirm, disabled: saving },
+        { className: 'button red delete', onClick: confirm.bind(undefined), disabled: saving },
         _react2.default.createElement('i', { className: 'fa fa-trash' }),
         ' Confirm Delete'
       ),
       _react2.default.createElement(
         'button',
-        { className: 'button red delete inverted', onClick: cancel },
+        { className: 'button red delete inverted', onClick: cancel.bind(undefined) },
         _react2.default.createElement('i', { className: 'fa fa-remove' }),
         ' Cancel Delete'
       )
@@ -49088,20 +49088,20 @@ exports.default = function (_ref) {
     _react2.default.createElement(_rich2.default, { post: post, rich: rich }),
     _react2.default.createElement(
       'button',
-      { className: 'button green save', onClick: update, disabled: saving },
+      { className: 'button green save', onClick: update.bind(undefined), disabled: saving },
       _react2.default.createElement('i', { className: 'fa fa-save' }),
       ' ',
       saving ? 'Saving' : 'Save Changes'
     ),
     _react2.default.createElement(
       'button',
-      { className: 'button red delete inverted', onClick: trash },
+      { className: 'button red delete inverted', onClick: trash.bind(undefined) },
       _react2.default.createElement('i', { className: 'fa fa-trash' }),
       ' Delete'
     ),
     _react2.default.createElement(
       'button',
-      { className: 'button blue myposts inverted', onClick: myposts },
+      { className: 'button blue myposts inverted', onClick: myposts.bind(undefined) },
       _react2.default.createElement('i', { className: 'fa fa-arrow-left' }),
       ' Back to My Posts'
     )
@@ -49147,13 +49147,13 @@ exports.default = function (_ref) {
     _react2.default.createElement(_rich2.default, { post: post, rich: rich }),
     _react2.default.createElement(
       'button',
-      { className: 'button green save', onClick: create, disabled: saving },
+      { className: 'button green save', onClick: create.bind(undefined), disabled: saving },
       _react2.default.createElement('i', { className: 'fa fa-save' }),
       ' Post'
     ),
     _react2.default.createElement(
       'button',
-      { className: 'button red delete inverted', onClick: back },
+      { className: 'button red delete inverted', onClick: back.bind(undefined) },
       _react2.default.createElement('i', { className: 'fa fa-close' }),
       ' Cancel'
     )

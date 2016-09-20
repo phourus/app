@@ -13,16 +13,16 @@ export default class Actions extends React.Component {
 
     return (
       <div className="actions">
-        <Close url={url} back={this._back} />
+        <Close url={url} back={this._back.bind(this)} />
         <Edit url={url} post={post} owner={owner} />
         <Create
           url={url}
           post={post}
           owner={owner}
           saving={saving}
-          create={this._create}
-          back={this._back}
-          rich={this._rich}
+          create={this._create.bind(this)}
+          back={this._back.bind(this)}
+          rich={this._rich.bind(this)}
         />
         <Controls
           url={url}
@@ -30,12 +30,12 @@ export default class Actions extends React.Component {
           owner={owner}
           saving={saving}
           confirmTrash={confirmTrash}
-          confirm={this._confirm}
-          cancel={this._cancel}
-          trash={this._trash}
-          update={this._update}
-          rich={this._rich}
-          myposts={this._myposts}
+          confirm={this._confirm.bind(this)}
+          cancel={this._cancel.bind(this)}
+          trash={this._trash.bind(this)}
+          update={this._update.bind(this)}
+          rich={this._rich.bind(this)}
+          myposts={this._myposts.bind(this)}
         />
       </div>
     )
@@ -57,7 +57,7 @@ export default class Actions extends React.Component {
     this.props.actions.cancel()
   }
 
-  _confirm() {
+  _trash() {
     this.props.actions.trash()
   }
 
@@ -66,16 +66,16 @@ export default class Actions extends React.Component {
   }
 
   _back() {
-    // if (!this.history.goBack()) {
-    //   if (this.props.url.type === 'edit') {
-    //     this.props.history.push("/me");
-    //   } else {
-    //     this.props.history.push("/stream");
-    //   }
-    // }
+    if (!this.props.history.goBack()) {
+      if (this.props.url.type === 'edit') {
+        this.props.history.push("/me")
+      } else {
+        this.props.history.push("/stream")
+      }
+    }
   }
 
   _myposts() {
-    // this.props.history.push("/me");
+    this.props.history.push("/me")
   }
 }

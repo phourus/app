@@ -9,10 +9,10 @@ export default ({url, post, owner, saving, create, back, rich}) => {
   return (
     <div>
       <Rich post={post} rich={rich} />
-      <button className="button green save" onClick={create} disabled={saving}>
+      <button className="button green save" onClick={create.bind(this)} disabled={saving}>
         <i className="fa fa-save" /> Post
       </button>
-      <button className="button red delete inverted" onClick={back}>
+      <button className="button red delete inverted" onClick={back.bind(this)}>
         <i className="fa fa-close" /> Cancel
       </button>
     </div>

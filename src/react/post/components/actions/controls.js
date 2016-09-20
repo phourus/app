@@ -12,10 +12,10 @@ export default ({url, post, owner, saving, confirmTrash, confirm, cancel, trash,
   if (confirmTrash) {
     return (
       <div>
-        <button className="button red delete" onClick={confirm} disabled={saving}>
+        <button className="button red delete" onClick={confirm.bind(this)} disabled={saving}>
           <i className="fa fa-trash" /> Confirm Delete
         </button>
-        <button className="button red delete inverted" onClick={cancel}>
+        <button className="button red delete inverted" onClick={cancel.bind(this)}>
           <i className="fa fa-remove" /> Cancel Delete
         </button>
       </div>
@@ -24,13 +24,13 @@ export default ({url, post, owner, saving, confirmTrash, confirm, cancel, trash,
   return (
     <div>
       <Rich post={post} rich={rich} />
-      <button className="button green save" onClick={update} disabled={saving}>
+      <button className="button green save" onClick={update.bind(this)} disabled={saving}>
         <i className="fa fa-save" /> {saving ? 'Saving' : 'Save Changes'}
       </button>
-      <button className="button red delete inverted" onClick={trash}>
+      <button className="button red delete inverted" onClick={trash.bind(this)}>
         <i className="fa fa-trash" /> Delete
       </button>
-      <button className="button blue myposts inverted" onClick={myposts}>
+      <button className="button blue myposts inverted" onClick={myposts.bind(this)}>
         <i className="fa fa-arrow-left" /> Back to My Posts
       </button>
     </div>

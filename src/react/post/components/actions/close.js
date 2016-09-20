@@ -5,7 +5,7 @@ export default ({url, back}) => {
     return <span></span>
   }
   return (
-    <button className="close" onClick={back}>
+    <button className="close" onClick={back.bind(this)}>
       <i className="fa fa-remove" />
     </button>
   )

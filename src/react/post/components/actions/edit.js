@@ -10,7 +10,7 @@ export default ({url, post, owner}) => {
     return <span></span>
   }
   if (post.user && post.user.username) {
-    username = post.user.username;
+    username = post.user.username
   }
   return (
     <Link to={`/${username}/${post.slug}/edit`} className="edit">
