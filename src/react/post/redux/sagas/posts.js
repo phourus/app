@@ -33,15 +33,21 @@ function* single() {
 }
 
 function* create() {
-  const action = yield take('POST_CREATE')
+  while (true) {
+    const action = yield take('POST_CREATE')
+  }
 }
 
 function* save() {
-  const action = yield take('POST_SAVE')
+  while (true) {
+    const action = yield take('POST_SAVE')
+  }
 }
 
 function* trash() {
-  const action = yield take('POST_TRASH')
+  while (true) {
+    const action = yield take('POST_TRASH')
+  }
 }
 
 const CREATE_CONTENT = `# Creating a Post

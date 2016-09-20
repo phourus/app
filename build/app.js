@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f0d218a3d6ada797f490"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3fce66cf41fb30ef0252"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -49070,7 +49070,7 @@ exports.default = function (_ref) {
       null,
       _react2.default.createElement(
         'button',
-        { className: 'button red delete', onClick: confirm.bind(undefined), disabled: saving },
+        { className: 'button red delete', onClick: trash.bind(undefined), disabled: saving },
         _react2.default.createElement('i', { className: 'fa fa-trash' }),
         ' Confirm Delete'
       ),
@@ -49095,7 +49095,7 @@ exports.default = function (_ref) {
     ),
     _react2.default.createElement(
       'button',
-      { className: 'button red delete inverted', onClick: trash.bind(undefined) },
+      { className: 'button red delete inverted', onClick: confirm.bind(undefined) },
       _react2.default.createElement('i', { className: 'fa fa-trash' }),
       ' Delete'
     ),
@@ -51454,7 +51454,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.single = single;
 exports.change = change;
 exports.create = create;
-exports.edit = edit;
+exports.save = save;
 exports.confirm = confirm;
 exports.cancel = cancel;
 exports.trash = trash;
@@ -51472,8 +51472,8 @@ function create(id) {
   return { type: 'POST_CREATE', id: id };
 }
 
-function edit(id) {
-  return { type: 'POST_EDIT', id: id };
+function save(id) {
+  return { type: 'POST_SAVE', id: id };
 }
 
 function confirm() {
@@ -51589,6 +51589,20 @@ exports.default = function () {
         changes[action.key] = action.value;
         return (0, _reactAddonsUpdate2.default)(state, {
           $set: { changes: changes }
+        });
+      }
+      break;
+    case 'TRASH_CONFIRM':
+      {
+        return (0, _reactAddonsUpdate2.default)(state, {
+          confirmTrash: { $set: true }
+        });
+      }
+      break;
+    case 'TRASH_CANCEL':
+      {
+        return (0, _reactAddonsUpdate2.default)(state, {
+          confirmTrash: { $set: false }
         });
       }
       break;
@@ -52741,13 +52755,20 @@ function create() {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.next = 2;
+          if (false) {
+            _context3.next = 6;
+            break;
+          }
+
+          _context3.next = 3;
           return (0, _effects.take)('POST_CREATE');
 
-        case 2:
-          action = _context3.sent;
-
         case 3:
+          action = _context3.sent;
+          _context3.next = 0;
+          break;
+
+        case 6:
         case 'end':
           return _context3.stop();
       }
@@ -52761,13 +52782,20 @@ function save() {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          _context4.next = 2;
+          if (false) {
+            _context4.next = 6;
+            break;
+          }
+
+          _context4.next = 3;
           return (0, _effects.take)('POST_SAVE');
 
-        case 2:
-          action = _context4.sent;
-
         case 3:
+          action = _context4.sent;
+          _context4.next = 0;
+          break;
+
+        case 6:
         case 'end':
           return _context4.stop();
       }
@@ -52781,13 +52809,20 @@ function trash() {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
+          if (false) {
+            _context5.next = 6;
+            break;
+          }
+
+          _context5.next = 3;
           return (0, _effects.take)('POST_TRASH');
 
-        case 2:
-          action = _context5.sent;
-
         case 3:
+          action = _context5.sent;
+          _context5.next = 0;
+          break;
+
+        case 6:
         case 'end':
           return _context5.stop();
       }

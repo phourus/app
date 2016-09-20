@@ -74,6 +74,18 @@ export default (state = initState, action = {}) => {
       })
     }
       break
+    case 'TRASH_CONFIRM': {
+      return update(state, {
+        confirmTrash: {$set: true}
+      })
+    }
+      break
+    case 'TRASH_CANCEL': {
+      return update(state, {
+        confirmTrash: {$set: false}
+      })
+    }
+      break
     case 'REQUEST_POLL':
       return update(state, {
         $set: { ready: false }

@@ -10,8 +10,8 @@ export function create(id) {
   return {type: 'POST_CREATE', id}
 }
 
-export function edit(id) {
-  return {type: 'POST_EDIT', id}
+export function save(id) {
+  return {type: 'POST_SAVE', id}
 }
 
 export function confirm() {
