@@ -7,7 +7,6 @@ const initState = {
   ready: true,
   scroll: false,
   confirmTrash: false,
-  owner: false,
   location: {},
   saving: false,
   post: {
@@ -24,46 +23,44 @@ export default (state = initState, action = {}) => {
   switch (action.type) {
     case 'REQUEST_POST_SINGLE':
       return update(state, {
-        $set: { ready: false }
+        ready: { $set: false }
       })
       break
     case 'RECEIVE_POST_SINGLE':
       return update(state, {
-        $set: {
-          ready: true,
-          post: action.post,
-          changes: {}
-        }
+        ready: {$set: true},
+        post: {$set: action.post},
+        changes: {$set: {}}
       })
       break
     case 'REQUEST_POST_CREATE':
       return update(state, {
-        $set: { ready: false }
+        ready: { $set: false }
       })
       break
     case 'RECEIVE_POST_CREATE':
       return update(state, {
-        $set: { ready: true }
+        ready: { $set: true }
       })
       break
     case 'REQUEST_POST_SAVE':
       return update(state, {
-        $set: { ready: false }
+        ready: { $set: false }
       })
       break
     case 'RECEIVE_POST_SAVE':
       return update(state, {
-        $set: { ready: true }
+        ready: { $set: true }
       })
       break
     case 'REQUEST_POST_TRASH':
       return update(state, {
-        $set: { ready: false }
+        ready: { $set: false }
       })
       break
     case 'RECEIVE_POST_TRASH':
       return update(state, {
-        $set: { ready: true }
+        ready: { $set: true }
       })
       break
     case 'POST_CHANGE':
@@ -87,22 +84,22 @@ export default (state = initState, action = {}) => {
       break
     case 'REQUEST_POLL':
       return update(state, {
-        $set: { ready: false }
+        ready: { $set: false }
       })
       break
     case 'RECEIVE_POLL':
       return update(state, {
-        $set: { ready: true }
+        ready: { $set: true }
       })
       break
     case 'REQUEST_VOTE':
       return update(state, {
-        $set: { ready: false }
+        ready: { $set: false }
       })
       break
     case 'RECEIVE_VOTE':
       return update(state, {
-        $set: { ready: true }
+        ready: { $set: true }
       })
       break
     default:

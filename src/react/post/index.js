@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 import * as actions from './redux/actions'
+import * as selectors from './redux/selectors'
 import Loader from '../shared/loader'
 
 import Single from './single'
@@ -100,12 +101,14 @@ class Post extends React.Component {
 }
 
 const mapState = (state, props) => {
-	const { session, post } = state
+	const { session } = state
+	let { post } = state
+	post.post = Object.assign({}, post.post, post.changes)
 
 	return Object.assign({}, {
 		url: props.url,
 		session,
-		owner: true
+		owner: selectors.owner(state),
 	}, post)
 }
 
