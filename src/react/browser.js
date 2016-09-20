@@ -15,5 +15,5 @@ import store from './store'
 import routes from '../routes'
 let el = document.getElementById("app");
 
-//history={browserHistory}
-render(<Provider store={store}><Router routes={routes} /></Provider>, el);
+//
+render(<Provider store={store}><Router history={browserHistory} routes={routes} /></Provider>, el);

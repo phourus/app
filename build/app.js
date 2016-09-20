@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "c33263aed42ab96c2e37"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f811f1c217a23cefff1f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -42818,7 +42818,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var el = document.getElementById("app");
 
-//history={browserHistory}
+//
 
 // let createBrowserHistory = require('history/lib/createBrowserHistory');
 // let history = createBrowserHistory();
@@ -42829,7 +42829,7 @@ var el = document.getElementById("app");
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
   { store: _store2.default },
-  _react2.default.createElement(_reactRouter.Router, { routes: _routes2.default })
+  _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.browserHistory, routes: _routes2.default })
 ), el);
 
 /***/ },

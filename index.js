@@ -1,26 +1,30 @@
-var config = require("./config");
-var fs = require('fs');
-var express = require('express');
-var React = require('react');
-var ReactDOM = require('react-dom/server');
-var Router = require('react-router');
-var match = Router.match;
+import config from "./config"
+import fs from 'fs'
+import express from 'express'
+import React from 'react'
+import ReactDOM from 'react-dom/server'
+import Router, { match } from 'react-router'
 
-var api = require('./api/rest');
-// var routes = require('./src/routes');
-// var server = require('./src/react/server');
+import api from './api/rest'
+// import routes from './src/routes'
+// import server from './src/react/server'
 
-var phourus = express();
+const phourus = express()
 
 process.on('uncaughtException', function (err) {
-  console.log("---UNCAUGHT EXCEPTION---");
-  console.error(err);
-});
+  console.log("---UNCAUGHT EXCEPTION---")
+  console.error(err)
+})
 
-phourus.use(express.static(__dirname));
-phourus.use('/rest', api);
+phourus.use(express.static(__dirname))
+phourus.use('/rest', api)
 
-// phourus.get('*', renderServer);
+phourus.get('*', renderIndex)
+
+function renderIndex (req, res) {
+  res.sendfile(__dirname + '/index.html')
+}
+// phourus.get('*', renderServer)
 //
 // function renderServer (req, res) {
 //   match({ routes: routes, location: req.url }, function (error, redirectLocation, renderProps) {
@@ -29,14 +33,14 @@ phourus.use('/rest', api);
 //     } else if (redirectLocation) {
 //       //res.redirect(302, redirectLocation.pathname + redirectLocation.search)
 //     } else if (renderProps) {
-//       var el = React.createElement(server, renderProps);
-//       res.status(200).send(ReactDOM.renderToString(el));
+//       const el = React.createElement(server, renderProps)
+//       res.status(200).send(ReactDOM.renderToString(el))
 //     } else {
 //       //res.status(404).send('Not found')
 //     }
-//   });
+//   })
 // }
 
-phourus.listen(config.get('port'), function(){
-    console.log('server started');
-});
+phourus.listen(config.get('port'), () => {
+    console.log('server started')
+})
