@@ -27,7 +27,7 @@ export function get() {
 }
 
 export function login(email, password) {
-  return {type: 'AUTH_LOGIN', email, password}
+  return {type: 'SESSION_LOGIN', email, password}
 }
 
 export function logout() {

@@ -2,6 +2,7 @@ import {CrossStorageClient as Client} from 'cross-storage'
 
 let get = (key) => {}
 let set = (key, value) => {}
+let del = (key) => {}
 
 if (typeof document !== 'undefined') {
   let storage = {}
@@ -46,11 +47,27 @@ if (typeof document !== 'undefined') {
           })
         })
       }
+
+      del = (key) => {
+        return new Promise((resolve, reject) => {
+          storage.onConnect()
+          .then(() => {
+            storage.del(key)
+            .then(() => {
+              resolve(true)
+            })
+          })
+          .catch((err) => {
+            reject(err)
+          })
+        })
+      }
     }
   }
 }
 
 export default {
   get,
-  set
+  set,
+  del
 }

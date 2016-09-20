@@ -1,16 +1,18 @@
-import React from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router';
-import ga from '../../../lib/analytics';
-import util from '../../../lib/util';
-import Search from '../../stream/search';
+import { Link } from 'react-router'
+import ga from '../../../lib/analytics'
+import util from '../../../lib/util'
+import Search from '../../stream/search'
+import Home from './home'
+import Static from './static'
+import Private from './private'
 
 import styles from './styles.less'
 
 class Header extends React.Component {
   render() {
-    let session = this.props.session
-    const url = this.props.url
+    const { url, session } = this.props
     const r = url.root
     if (['product', 'pricing', 'help'].indexOf(r) > -1) {
       return <Static />
@@ -34,7 +36,7 @@ class Header extends React.Component {
                   </li>
                 </ul>
               </nav>
-          : <Private />
+          : <Private logout={this._logout.bind(this)} />
         }
         <div className="brand">
           {url.subdomain
@@ -46,129 +48,11 @@ class Header extends React.Component {
       </header>
     )
   }
+
+  _logout() {
+    this.props.dispatch({type: 'SESSION_LOGOUT'})
+  }
 }
-
-let Home = React.createClass({
-  render: function () {
-    return (
-      <header className="header home">
-        <div className="brand">
-          <Link to="/home"></Link>
-        </div>
-        <Nav classType="home" />
-      </header>
-    );
-  }
-});
-
-let Static = React.createClass({
-  render: function () {
-    return (
-      <header className="header">
-        <div className="brand">
-          <Link to="/home"></Link>
-        </div>
-        <Nav classType="static" />
-      </header>
-    );
-  }
-});
-
-let Private = React.createClass({
-  render: function () {
-    return (
-      <span className="mylinks">
-        <Link to="me">My Posts</Link>
-        <Link to="account">My Account</Link>
-      </span>
-    );
-  }
-});
-
-// let _Private = React.createClass({
-//   componentDidMount: function () {
-//     this.unsubscribe = Store.listen(data => {
-//       if (data.action === 'logout') {
-//         let url = util.createHomeURL();
-//         window.location = url;
-//       }
-//       this.setState(data);
-//     });
-//   },
-//   componentWillUnmount: function () {
-//     this.unsubscribe();
-//   },
-//   render: function () {
-//     let session = this.props.session;
-//     let orgs = session.orgs;
-//     let url = this.props.url;
-//
-//     return (
-//       <nav className="nav">
-//           <ul>
-//             <li className="posts">
-//               <Link to={url.subdomain ? "/" : "/stream"} >
-//                 <i className="fa fa-file" />
-//                 Posts
-//               </Link>
-//             </li>
-//             <li className="me">
-//               <Link to="/activity" className="me">
-//                 <i className="fa fa-user" />
-//                 <span className="notifications"></span>
-//                 Me
-//               </Link>
-//               <div>
-//                 <ul>
-//                   {orgs.map((org) => {
-//                     let link = '';
-//                     if (org.org && org.org.shortname) {
-//                       link = util.createOrgLink(org.org.shortname);
-//                     }
-//                     if (!org.approved) {
-//                       return false;
-//                     }
-//                     return <li key={org.org.id}><a href={link}>{org.org.shortname || org.org.name} <i className="fa fa-users" /></a></li>
-//                   })}
-//                 </ul>
-//                 <ul>
-//                   <li><Link to="/me">My Posts <i className="fa fa-edit" /></Link></li>
-//                   <li><Link to="/activity">My Activity <i className="fa fa-bell" /></Link></li>
-//                   <li><Link to="/account">My Account <i className="fa fa-user" /></Link></li>
-//                   <li><a href="javascript:void(0)" onClick={this._logout}>Logout <i className="fa fa-sign-out" /></a></li>
-//                 </ul>
-//               </div>
-//             </li>
-//             <li className="create">
-//               <Link to="/create">
-//                 <i className="fa fa-pencil" />
-//                 Create
-//               </Link>
-//             </li>
-//           </ul>
-//         </nav>
-//     );
-//   },
-//   _logout: function () {
-//     this.props.actions.session.logout()
-//     ga('send', 'event', 'account', 'logout');
-//   }
-// });
-
-let Nav = React.createClass({
-  render: function () {
-    return (
-      <nav className={this.props.classType}>
-        <ul>
-          <li><Link to="/product">Product</Link></li>
-          <li><Link to="/pricing">Pricing</Link></li>
-          <li><a href="//phourusinc.phourus.com">Blog</a></li>
-          <li><Link to="/help">Help</Link></li>
-        </ul>
-      </nav>
-    );
-  }
-});
 
 const mapState = (state, props) => {
   return {

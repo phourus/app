@@ -159,9 +159,9 @@ function* get() {
 
 function* login() {
   while (true) {
-    const action = yield take('AUTH_LOGIN')
+    const action = yield take('SESSION_LOGIN')
     try {
-      yield put({type: 'REQUEST_AUTH_LOGIN'})
+      yield put({type: 'REQUEST_SESSION_LOGIN'})
       const data = yield call(account.login, action.email, action.password)
       yield call(storage.set, 'token', data, TTL)
       yield put({type: 'SESSION_GET'})
@@ -178,14 +178,20 @@ function* login() {
 }
 
 function* logout() {
-  // token.onConnect()
-  // .then(() => {
-  //   token.del('token')
-  //   .then(() => {
-  //     this._get();
-  //     this.trigger({authenticated: false, user: {}, action: 'logout'});
-  //   });
-  // });
+  while (true) {
+    yield take('SESSION_LOGOUT')
+    try {
+      yield call(storage.del('token'))
+    } catch(code) {
+      const alert = {
+        action: 'logout',
+        color: 'red',
+        code,
+        msg: 'Logout unsuccessful'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* orgs() {

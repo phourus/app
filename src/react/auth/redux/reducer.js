@@ -16,6 +16,11 @@ const initState = {
 export default (state = initState, action = {}) => {
 
   switch(action.type) {
+    case 'ALERT':
+      return update(state, {
+        ready: {$set: true}
+      })
+      break
     case 'AUTH_MODE':
       return update(state, {
         mode: {$set: action.mode}
@@ -28,6 +33,13 @@ export default (state = initState, action = {}) => {
         user: {$set: action.session}
       })
       break
+    case 'SESSION_LOGOUT':
+      return update(state, {
+        ready: {$set: true},
+        authenticated: {$set: false},
+        user: {$set: initState.user},
+        orgs: {$set: []}
+      })
     default:
       return state
       break
