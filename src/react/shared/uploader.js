@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import ImageUploader from '../../lib/uploader';
-import Token from '../../lib/token';
+import storage from '../../lib/storage';
 
 export default React.createClass({
   getInitialState: function () {
@@ -62,16 +62,13 @@ export default React.createClass({
       };
     }
 
-    Token.onConnect()
-    .then(() => {
-      Token.get('token')
-      .then((data) => {
-        options.headers = {
-          "Authorization": data
-        };
-        new ImageUploader(options);
-      });
-    });
+    storage.get('token')
+    .then((token) => {
+      options.headers = {
+        "Authorization": token
+      };
+      new ImageUploader(options)
+    })
   },
   _default: function () {
     this.setState({img: this.state.default});

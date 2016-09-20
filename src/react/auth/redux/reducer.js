@@ -1,14 +1,8 @@
 import update from 'react-addons-update'
 const initState = {
-
-}
-
-export default (state = initState, action = {}) => {
-  return state
-}
-
-const initSession = {
-  authenticated: true,
+  ready: false,
+  mode: 'login',
+  authenticated: false,
   user: {
     SESSION_ADMIN: [],
     SESSION_ORGANIZATIONS: [],
@@ -19,6 +13,23 @@ const initSession = {
   orgs: []
 }
 
-export function session(state = initSession, action = {}) {
-  return state
+export default (state = initState, action = {}) => {
+
+  switch(action.type) {
+    case 'AUTH_MODE':
+      return update(state, {
+        mode: {$set: action.mode}
+      })
+      break
+    case 'RECEIVE_SESSION_GET':
+      return update(state, {
+        ready: {$set: true},
+        authenticated: {$set: true},
+        user: {$set: action.session}
+      })
+      break
+    default:
+      return state
+      break
+  }
 }

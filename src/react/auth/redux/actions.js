@@ -1,3 +1,7 @@
+export function mode(id) {
+  return {type: 'AUTH_MODE', mode: id}
+}
+
 export function request(email) {
   return {type: 'AUTH_REQUEST', email}
 }

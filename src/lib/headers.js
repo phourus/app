@@ -1,17 +1,14 @@
-import token from './token';
-let t = '';
-if (token.onConnect) {
-  token.onConnect()
-  .then(() => {
-    token.get('token')
-    .then((data) => {
-      t = data;
-    });
-  });
-}
+import storage from './storage'
 
-export default function () {
+let token = ''
+
+storage.get('token')
+.then((data) => {
+  token = data
+})
+
+export default () => {
   return {
-    "Authorization": t
-  };
+    "Authorization": token
+  }
 }

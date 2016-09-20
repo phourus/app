@@ -1,5 +1,5 @@
 import React from 'react';
-import Auth from './auth';
+import Auth from '../../auth';
 import Ideas from './ideas'
 import Information from './information';
 import Engagement from './engagement';
@@ -11,7 +11,7 @@ let Landing = React.createClass({
   render: function () {
     return (
       <div className="landing">
-        <Slider more={this._more} showSignup={this._signup} url={this.props.url} />
+        <Slider {...this.props} more={this._more} showSignup={this._signup} />
         <Ideas />
         <Information />
         <Engagement />
@@ -47,7 +47,7 @@ let Slider = React.createClass({
       <div className="banner">
         <div className="title">Every company has a story</div>
         <p>Make sure you're on the same page</p>
-        <Auth ref="auth" url={this.props.url} />
+        <Auth {...this.props} ref="auth" />
       </div>
     );
   },

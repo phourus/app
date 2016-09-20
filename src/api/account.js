@@ -27,7 +27,7 @@ export default {
     let headers = {
       Authorization: "Basic " + new Buffer(email + ':' + password).toString('base64')
     };
-    return http.post(base + 'login', {}, headers);
+    return http.token(base + 'login', {}, headers);
   },
   register: function (email, password, username) {
     let headers = {

@@ -1,7 +1,7 @@
 import { call, put, take, spawn } from 'redux-saga/effects'
 
 import moment from 'moment'
-import token from '../../../lib/token'
+import storage from '../../../lib/storage'
 import ga from '../../../lib/analytics'
 
 // ms * sec * min * hours * days;
@@ -33,6 +33,7 @@ export default function* init() {
     spawn(orgs)
   ]
 }
+
 
 function* request(email) {
   // let password = Math.random().toString(36).slice(2);
@@ -133,53 +134,47 @@ function* register(email, password, username) {
 }
 
 function* get() {
-  // token.onConnect()
-  // .then(() => {
-  //   token.get('token')
-  //   .then((data) => {
-  //     account.get()
-  //     .then(data => {
-  //       this._orgs();
-  //       this.trigger({authenticated: true, user: data, action: 'get'});
-  //       gaDimensions(data);
-  //     })
-  //     .catch(code => {
-  //       if (code !== 401) {
-  //         let alert = {
-  //           action: 'get',
-  //           color: 'yellow',
-  //           code: code,
-  //           msg: 'Account could not be loaded'
-  //         };
-  //         this.trigger({alert: alert});
-  //       }
-  //     });
-  //   });
-  // });
+  while (true) {
+    yield put({type: 'REQUEST_SESSION_GET'})
+    try {
+      const token = yield call(storage.get, 'token')
+      const session = yield call(account.get)
+      yield call(orgs)
+      yield put({type: 'RECEIVE_SESSION_GET', session})
+      gaDimensions(user)
+    } catch(code) {
+      if (code !== 401) {
+        const alert = {
+          action: 'get',
+          color: 'yellow',
+          code,
+          msg: 'Account could not be loaded'
+        }
+        yield put({type: 'ALERT', alert})
+      }
+    }
+    yield take('SESSION_GET')
+  }
 }
 
-function* login(email, password) {
-  // account.login(email, password)
-  // .then((data) => {
-  //   token.onConnect()
-  //   .then(() => {
-  //     token.set('token', data, TTL)
-  //     .then(() => {
-  //       this.trigger({code: 200, action: 'login'});
-  //     });
-  //   })
-  // })
-  // .catch((code) => {
-  //   this.trigger({code: code, action: 'login'});
-  //   let alert = {
-  //     action: 'login',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Login unsuccessful'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+function* login() {
+  while (true) {
+    const action = yield take('AUTH_LOGIN')
+    try {
+      yield put({type: 'REQUEST_AUTH_LOGIN'})
+      const data = yield call(account.login, action.email, action.password)
+      yield call(storage.set, 'token', data, TTL)
+      yield put({type: 'SESSION_GET'})
+    } catch(code) {
+      const alert = {
+        action: 'login',
+        color: 'red',
+        code: code,
+        msg: 'Login unsuccessful'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
 
 function* logout() {
