@@ -66,13 +66,12 @@ export default (state = initState, action = {}) => {
         $set: { ready: true }
       })
       break
-    case 'CHANGE_POST': {
-      let changes = state.changes
-      changes[action.key] = action.value
+    case 'POST_CHANGE':
       return update(state, {
-        $set: { changes }
+        changes: {
+          [action.key]: {$set: action.value}
+        }
       })
-    }
       break
     case 'TRASH_CONFIRM': {
       return update(state, {

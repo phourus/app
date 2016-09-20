@@ -1,6 +1,7 @@
-import { call, put, take, spawn } from 'redux-saga/effects'
+import { call, put, take, spawn, select } from 'redux-saga/effects'
 
 import posts from '../../../../api/posts'
+import * as selectors from '../selectors'
 
 export default function* post() {
   yield [
@@ -27,7 +28,13 @@ function* single() {
         yield put({type: 'RECEIVE_POST_SINGLE', id: action.id, post})
       }
     } catch (code) {
-
+      const alert = {
+        action: 'single',
+        color: 'red',
+        code,
+        msg: 'Post could not be loaded'
+      }
+      yield put({type: 'ALERT', alert})
     }
   }
 }
@@ -35,18 +42,73 @@ function* single() {
 function* create() {
   while (true) {
     const action = yield take('POST_CREATE')
+    let alert = {
+      action: 'create',
+      color: 'green',
+      code: 201,
+      msg: 'Post created successfully'
+    }
+    try {
+      const changes = yield select(selectors.changes)
+      yield call(posts.add, changes)
+    } catch (code) {
+      alert = {
+        action: 'create',
+        color: 'red',
+        code,
+        msg: 'Post could not be created'
+      }
+    }
+    yield put({type: 'ALERT', alert})
   }
 }
 
 function* save() {
   while (true) {
     const action = yield take('POST_SAVE')
+    let alert = {
+      action: 'save',
+      color: 'green',
+      code: 204,
+      msg: 'Post saved successfully'
+    }
+    try {
+      const id = yield select(selectors.id)
+      const changes = yield select(selectors.changes)
+      yield call(posts.save, id, changes)
+    } catch (code) {
+      alert = {
+        action: 'save',
+        color: 'red',
+        code,
+        msg: 'Post could not be saved'
+      }
+    }
+    yield put({type: 'ALERT', alert})
   }
 }
 
 function* trash() {
   while (true) {
     const action = yield take('POST_TRASH')
+    let alert = {
+      action: 'delete',
+      color: 'green',
+      code: 202,
+      msg: 'Post deleted successfully'
+    }
+    try {
+      const id = yield select(selectors.id)
+      yield call(posts.remove, id)
+    } catch (code) {
+      alert = {
+        action: 'delete',
+        color: 'red',
+        code,
+        msg: 'Post could not be deleted'
+      }
+    }
+    yield put({type: 'ALERT', alert})
   }
 }
 

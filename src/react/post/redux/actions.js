@@ -6,12 +6,12 @@ export function change(key, value) {
   return {type: 'POST_CHANGE', key, value}
 }
 
-export function create(id) {
-  return {type: 'POST_CREATE', id}
+export function create() {
+  return {type: 'POST_CREATE'}
 }
 
-export function save(id) {
-  return {type: 'POST_SAVE', id}
+export function save() {
+  return {type: 'POST_SAVE'}
 }
 
 export function confirm() {
@@ -22,8 +22,8 @@ export function cancel() {
   return {type: 'TRASH_CANCEL'}
 }
 
-export function trash(id) {
-  return {type: 'POST_TRASH', id}
+export function trash() {
+  return {type: 'POST_TRASH'}
 }
 
 export function poll() {

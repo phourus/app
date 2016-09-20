@@ -10,20 +10,20 @@ export default class Content extends React.Component {
 		const type = url.type
 		if (!this.props.post.rich) {
 			return type === 'edit' && this.props.owner || type === 'create'
-			? <textarea onChange={this._content} value={this.props.post.content} />
+			? <textarea onChange={this._content.bind(this)} value={this.props.post.content} />
 			: <div className="content">{this.props.post.content}</div>
 		}
 		return type === 'edit' && this.props.owner || type === 'create'
-		? <TextEditor post={this.props.post} rich={this._rich} />
+		? <TextEditor post={this.props.post} rich={this._rich.bind(this)} />
 		: <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.content}}></div>
 	}
 
 	_content(e) {
-		//Actions.change('content', e.currentTarget.value);
+		this.props.actions.change('content', e.currentTarget.value)
 	}
 
 	_rich(value) {
-		//Actions.change('content', value);
+		this.props.actions.change('content', value)
 	}
 }
 
@@ -35,7 +35,7 @@ const TextEditor = ({post, rich}) => {
 	let content = post.content || "Enter content here"
 	return (
 		<div className="rte">
-			<RTE value={content} onChange={rich} theme="snow" />
+			<RTE value={content} onChange={rich.bind(this)} theme="snow" />
 		</div>
 	)
 }
