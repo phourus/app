@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9d288a9e505efe85aa19"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "043ce937a227c3aa3656"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -45003,18 +45003,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var History = function (_React$Component) {
   _inherits(History, _React$Component);
 
-  function History() {
+  function History(props) {
     _classCallCheck(this, History);
 
-    return _possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (History.__proto__ || Object.getPrototypeOf(History)).call(this, props));
+
+    _this.state = {
+      mode: 'views'
+    };
+    return _this;
   }
 
   _createClass(History, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.actions.history();
-    }
-  }, {
     key: 'render',
     value: function render() {
       var views = this.props.history[0] || [];
@@ -45112,7 +45112,7 @@ var History = function (_React$Component) {
           { className: 'tabs' },
           _react2.default.createElement(
             'div',
-            { onMouseOver: this._comments },
+            { onMouseOver: this._comments.bind(this) },
             _react2.default.createElement(
               'div',
               null,
@@ -45122,7 +45122,7 @@ var History = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { onMouseOver: this._thumbs },
+            { onMouseOver: this._thumbs.bind(this) },
             _react2.default.createElement(
               'div',
               null,
@@ -45132,7 +45132,7 @@ var History = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { onMouseOver: this._views },
+            { onMouseOver: this._views.bind(this) },
             _react2.default.createElement(
               'div',
               null,
@@ -45141,17 +45141,17 @@ var History = function (_React$Component) {
             'Views'
           )
         ),
-        this.props.mode === 'comments' ? _react2.default.createElement(
+        this.state.mode === 'comments' ? _react2.default.createElement(
           'ul',
           null,
           comments
         ) : false,
-        this.props.mode === 'thumbs' ? _react2.default.createElement(
+        this.state.mode === 'thumbs' ? _react2.default.createElement(
           'ul',
           null,
           thumbs
         ) : false,
-        this.props.mode === 'views' ? _react2.default.createElement(
+        this.state.mode === 'views' ? _react2.default.createElement(
           'ul',
           null,
           views
@@ -45161,17 +45161,17 @@ var History = function (_React$Component) {
   }, {
     key: '_comments',
     value: function _comments() {
-      //this.setState({mode: 'comments'})
+      this.setState({ mode: 'comments' });
     }
   }, {
     key: '_thumbs',
     value: function _thumbs() {
-      //this.setState({mode: 'thumbs'});
+      this.setState({ mode: 'thumbs' });
     }
   }, {
     key: '_views',
     value: function _views() {
-      //this.setState({mode: 'views'});
+      this.setState({ mode: 'views' });
     }
   }]);
 
@@ -45190,6 +45190,8 @@ exports.default = History;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -45239,19 +45241,14 @@ var Activity = function (_React$Component) {
   }
 
   _createClass(Activity, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this._route();
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps() {
-      this._route();
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var session = this.props.session;
+      var _props = this.props;
+      var routes = _props.routes;
+      var session = _props.session;
+
+      var selected = routes[1].name === 'history' ? 'history' : 'notifications';
+
       if (!session.authenticated) {
         return _react2.default.createElement(
           'div',
@@ -45291,19 +45288,9 @@ var Activity = function (_React$Component) {
             )
           )
         ),
-        _react2.default.createElement(_notifications2.default, this.props),
-        _react2.default.createElement(_history2.default, this.props)
+        _react2.default.createElement(_notifications2.default, _extends({}, this.props, { selected: selected })),
+        _react2.default.createElement(_history2.default, _extends({}, this.props, { selected: selected }))
       );
-    }
-  }, {
-    key: '_route',
-    value: function _route() {
-      var route = this.props.routes;
-      if (route[1].name === 'history') {
-        //this.setState({selected: 'history'})
-      } else {
-          //this.setState({selected: 'notifications'})
-        }
     }
   }]);
 
@@ -45312,7 +45299,6 @@ var Activity = function (_React$Component) {
 
 var mapState = function mapState(state, props) {
   var _state$activity = state.activity;
-  var selected = _state$activity.selected;
   var notifications = _state$activity.notifications;
   var history = _state$activity.history;
 
@@ -45320,7 +45306,6 @@ var mapState = function mapState(state, props) {
   return {
     routes: props.routes,
     session: state.session,
-    selected: selected,
     notifications: notifications,
     history: history
   };
@@ -45364,18 +45349,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Notifications = function (_React$Component) {
   _inherits(Notifications, _React$Component);
 
-  function Notifications() {
+  function Notifications(props) {
     _classCallCheck(this, Notifications);
 
-    return _possibleConstructorReturn(this, (Notifications.__proto__ || Object.getPrototypeOf(Notifications)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Notifications.__proto__ || Object.getPrototypeOf(Notifications)).call(this, props));
+
+    _this.state = {
+      mode: 'views'
+    };
+    return _this;
   }
 
   _createClass(Notifications, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.actions.notifications();
-    }
-  }, {
     key: 'render',
     value: function render() {
       var views = this.props.notifications[0] || [];
@@ -45496,17 +45481,17 @@ var Notifications = function (_React$Component) {
             'Views'
           )
         ),
-        this.props.mode === 'comments' ? _react2.default.createElement(
+        this.state.mode === 'comments' ? _react2.default.createElement(
           'ul',
           null,
           comments
         ) : false,
-        this.props.mode === 'thumbs' ? _react2.default.createElement(
+        this.state.mode === 'thumbs' ? _react2.default.createElement(
           'ul',
           null,
           thumbs
         ) : false,
-        this.props.mode === 'views' ? _react2.default.createElement(
+        this.state.mode === 'views' ? _react2.default.createElement(
           'ul',
           null,
           views
@@ -45516,17 +45501,17 @@ var Notifications = function (_React$Component) {
   }, {
     key: '_comments',
     value: function _comments() {
-      //this.setState({mode: 'comments'});
+      this.setState({ mode: 'comments' });
     }
   }, {
     key: '_thumbs',
     value: function _thumbs() {
-      //this.setState({mode: 'thumbs'});
+      this.setState({ mode: 'thumbs' });
     }
   }, {
     key: '_views',
     value: function _views() {
-      //this.setState({mode: 'views'});
+      this.setState({ mode: 'views' });
     }
   }]);
 
@@ -45540,20 +45525,7 @@ exports.default = Notifications;
 /***/ function(module, exports) {
 
 "use strict";
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.notifications = notifications;
-exports.history = history;
-function notifications() {
-  return { type: 'ACTIVITY_NOTIFICATIONS' };
-}
-
-function history() {
-  return { type: 'ACTIVITY_HISTORY' };
-}
+"use strict";
 
 /***/ },
 /* 498 */
@@ -45573,7 +45545,6 @@ var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initState = {
-  selected: 'notifications',
   notifications: [],
   history: []
 };
@@ -45582,7 +45553,21 @@ exports.default = function () {
   var state = arguments.length <= 0 || arguments[0] === undefined ? initState : arguments[0];
   var action = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-  return state;
+  switch (action.type) {
+    case 'ACTIVITY_NOTIFICATIONS':
+      return (0, _reactAddonsUpdate2.default)(state, {
+        notifications: { $set: action.notifications }
+      });
+      break;
+    case 'ACTIVITY_HISTORY':
+      return (0, _reactAddonsUpdate2.default)(state, {
+        history: { $set: action.history }
+      });
+      break;
+    default:
+      return state;
+      break;
+  }
 };
 
 /***/ },
@@ -45613,9 +45598,13 @@ function init() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return [(0, _effects.spawn)(notifications), (0, _effects.spawn)(history)];
+          return (0, _effects.take)('RECEIVE_SESSION_GET');
 
         case 2:
+          _context.next = 4;
+          return [(0, _effects.spawn)(notifications), (0, _effects.spawn)(history)];
+
+        case 4:
         case 'end':
           return _context.stop();
       }
@@ -45624,27 +45613,81 @@ function init() {
 }
 
 function notifications() {
+  var data, alert;
   return regeneratorRuntime.wrap(function notifications$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
+          _context2.prev = 0;
+          _context2.next = 3;
+          return (0, _effects.call)(_account2.default.notifications, {});
+
+        case 3:
+          data = _context2.sent;
+          _context2.next = 6;
+          return (0, _effects.put)({ type: 'ACTIVITY_NOTIFICATIONS', notifications: data });
+
+        case 6:
+          _context2.next = 13;
+          break;
+
+        case 8:
+          _context2.prev = 8;
+          _context2.t0 = _context2['catch'](0);
+          alert = {
+            action: 'notifications',
+            color: 'yellow',
+            code: _context2.t0,
+            msg: 'Notifications could not be loaded'
+          };
+          _context2.next = 13;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 13:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this);
+  }, _marked[1], this, [[0, 8]]);
 }
 
 function history() {
+  var data, alert;
   return regeneratorRuntime.wrap(function history$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
+          _context3.prev = 0;
+          _context3.next = 3;
+          return (0, _effects.call)(_account2.default.history, {});
+
+        case 3:
+          data = _context3.sent;
+          _context3.next = 6;
+          return (0, _effects.put)({ type: 'ACTIVITY_HISTORY', history: data });
+
+        case 6:
+          _context3.next = 13;
+          break;
+
+        case 8:
+          _context3.prev = 8;
+          _context3.t0 = _context3['catch'](0);
+          alert = {
+            action: 'history',
+            color: 'yellow',
+            code: _context3.t0,
+            msg: 'History could not be loaded'
+          };
+          _context3.next = 13;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 13:
         case 'end':
           return _context3.stop();
       }
     }
-  }, _marked[2], this);
+  }, _marked[2], this, [[0, 8]]);
 }
 
 /***/ },

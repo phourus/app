@@ -3,6 +3,7 @@ import { call, put, take, spawn } from 'redux-saga/effects'
 import account from '../../../api/account'
 
 export default function* init() {
+  yield take('RECEIVE_SESSION_GET')
   yield [
     spawn(notifications),
     spawn(history)
@@ -10,36 +11,31 @@ export default function* init() {
 }
 
 function* notifications() {
-  //  account.notifications({})
-  //  .then(data => {
-  //    this.trigger({notifications: data});
-  //  })
-  //  .catch(code => {
-  //    let alert = {
-  //      action: 'notifications',
-  //      color: 'yellow',
-  //      code: code,
-  //      msg: 'Notifications could not be loaded'
-  //    };
-  //    this.trigger({alert: alert});
-  //    console.warn(alert);
-  //  });
+  try {
+    const data = yield call(account.notifications, {})
+    yield put({type: 'ACTIVITY_NOTIFICATIONS', notifications: data})
+  } catch(code) {
+    const alert = {
+      action: 'notifications',
+      color: 'yellow',
+      code,
+      msg: 'Notifications could not be loaded'
+    }
+    yield put({type: 'ALERT', alert})
+  }
 }
 
 function* history() {
-  // account.history({})
-  // .then(data => {
-  //   this.trigger({history: data});
-  // })
-  // .catch(code => {
-  //   this.trigger({code: code});
-  //   let alert = {
-  //     action: 'history',
-  //     color: 'yellow',
-  //     code: code,
-  //     msg: 'History could not be loaded'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  try {
+    const data = yield call(account.history, {})
+    yield put({type: 'ACTIVITY_HISTORY', history: data})
+  } catch(code) {
+    const alert = {
+      action: 'history',
+      color: 'yellow',
+      code,
+      msg: 'History could not be loaded'
+    }
+    yield put({type: 'ALERT', alert})
+  }
 }

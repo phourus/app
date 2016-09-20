@@ -3,8 +3,11 @@ import moment from 'moment'
 
 export default class Notifications extends React.Component {
 
-  componentDidMount() {
-    this.props.actions.notifications()
+  constructor(props) {
+    super(props)
+    this.state = {
+      mode: 'views'
+    }
   }
 
   render() {
@@ -49,21 +52,21 @@ export default class Notifications extends React.Component {
         <div onMouseOver={this._thumbs.bind(this)}><div>{thumbs.length}</div>Thumbs</div>
         <div onMouseOver={this._views.bind(this)}><div>{views.length}</div>Views</div>
       </div>
-      {this.props.mode === 'comments' ? <ul>{comments}</ul> : false}
-      {this.props.mode === 'thumbs' ? <ul>{thumbs}</ul> : false}
-      {this.props.mode === 'views' ? <ul>{views}</ul> : false}
+      {this.state.mode === 'comments' ? <ul>{comments}</ul> : false}
+      {this.state.mode === 'thumbs' ? <ul>{thumbs}</ul> : false}
+      {this.state.mode === 'views' ? <ul>{views}</ul> : false}
     </div>)
   }
 
   _comments() {
-    //this.setState({mode: 'comments'});
+    this.setState({mode: 'comments'});
   }
 
   _thumbs() {
-    //this.setState({mode: 'thumbs'});
+    this.setState({mode: 'thumbs'});
   }
 
   _views() {
-    //this.setState({mode: 'views'});
+    this.setState({mode: 'views'});
   }
 }

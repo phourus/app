@@ -11,16 +11,10 @@ import styles from './styles.less'
 
 class Activity extends React.Component {
 
-  componentDidMount() {
-    this._route()
-  }
-
-  componentWillReceiveProps() {
-    this._route()
-  }
-
   render() {
-    let session = this.props.session
+    const { routes, session } = this.props
+    const selected = routes[1].name === 'history' ? 'history' : 'notifications'
+
     if (!session.authenticated) {
       return (<div className="activity 401">
 				<h2>You need to login first to view activity</h2>
@@ -33,25 +27,15 @@ class Activity extends React.Component {
         <div className="toggle">
           <h3><Link to="/notifications">Notifications</Link> | <Link to="/history">History</Link></h3>
         </div>
-        <Notifications {...this.props} />
-        <History {...this.props} />
+        <Notifications {...this.props} selected={selected} />
+        <History {...this.props} selected={selected} />
       </div>
     )
-  }
-
-  _route() {
-    let route = this.props.routes
-    if (route[1].name === 'history') {
-      //this.setState({selected: 'history'})
-    } else {
-      //this.setState({selected: 'notifications'})
-    }
   }
 }
 
 const mapState = (state, props) => {
   const {
-    selected,
     notifications,
     history
   } = state.activity
@@ -59,7 +43,6 @@ const mapState = (state, props) => {
   return {
     routes: props.routes,
     session: state.session,
-    selected,
     notifications,
     history
   }
