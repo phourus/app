@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4c823dde72ccbe865bfd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "998bc0f860e4068a4809"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -53692,12 +53692,12 @@ exports.default = function (_ref) {
     { className: 'mylinks' },
     _react2.default.createElement(
       _reactRouter.Link,
-      { to: 'me' },
+      { to: '/me' },
       'My Posts'
     ),
     _react2.default.createElement(
       _reactRouter.Link,
-      { to: 'account' },
+      { to: '/account' },
       'My Account'
     ),
     _react2.default.createElement(
@@ -53971,7 +53971,7 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: 'stream' },
+              { to: '/stream' },
               _react2.default.createElement('i', { className: 'fa fa-home' })
             )
           ),
@@ -53980,7 +53980,7 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: 'create' },
+              { to: '/create' },
               _react2.default.createElement('i', { className: 'fa fa-pencil' })
             )
           ),
@@ -53989,7 +53989,7 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: 'activity' },
+              { to: '/activity' },
               _react2.default.createElement('i', { className: 'fa fa-line-chart' })
             )
           ),
