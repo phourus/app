@@ -31,7 +31,8 @@ export default (state = initState, action = {}) => {
       return update(state, {
         $set: {
           ready: true,
-          post: action.post
+          post: action.post,
+          changes: {}
         }
       })
       break

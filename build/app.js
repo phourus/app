@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8be37cd415d500135b8d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "eb0094862ae109128d75"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -51316,7 +51316,7 @@ var Post = function (_React$Component) {
 	}, {
 		key: 'componentWillReceiveProps',
 		value: function componentWillReceiveProps(nextProps) {
-			if (nextProps.url) {
+			if (nextProps.url !== this.props.url) {
 				this._context(nextProps.url);
 			}
 		}
@@ -51548,7 +51548,8 @@ exports.default = function () {
       return (0, _reactAddonsUpdate2.default)(state, {
         $set: {
           ready: true,
-          post: action.post
+          post: action.post,
+          changes: {}
         }
       });
       break;
@@ -52675,7 +52676,7 @@ function single() {
       switch (_context2.prev = _context2.next) {
         case 0:
           if (false) {
-            _context2.next = 18;
+            _context2.next = 23;
             break;
           }
 
@@ -52689,32 +52690,49 @@ function single() {
           return (0, _effects.put)({ type: 'REQUEST_POST_SINGLE' });
 
         case 7:
-          _context2.next = 9;
-          return (0, _effects.call)(_posts2.default.single, action.id);
+          if (!(action.id === 'create')) {
+            _context2.next = 12;
+            break;
+          }
 
-        case 9:
-          _post = _context2.sent;
-          _context2.next = 12;
-          return (0, _effects.put)({ type: 'RECEIVE_POST_SINGLE', id: action.id, post: _post });
+          _context2.next = 10;
+          return (0, _effects.put)({ type: 'RECEIVE_POST_SINGLE', id: action.id, post: {
+              type: 'blog',
+              title: 'Enter your post title here',
+              content: CREATE_CONTENT
+            } });
 
-        case 12:
-          _context2.next = 16;
+        case 10:
+          _context2.next = 17;
           break;
 
+        case 12:
+          _context2.next = 14;
+          return (0, _effects.call)(_posts2.default.single, action.id);
+
         case 14:
-          _context2.prev = 14;
+          _post = _context2.sent;
+          _context2.next = 17;
+          return (0, _effects.put)({ type: 'RECEIVE_POST_SINGLE', id: action.id, post: _post });
+
+        case 17:
+          _context2.next = 21;
+          break;
+
+        case 19:
+          _context2.prev = 19;
           _context2.t0 = _context2['catch'](1);
 
-        case 16:
+        case 21:
           _context2.next = 0;
           break;
 
-        case 18:
+        case 23:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this, [[1, 14]]);
+  }, _marked[1], this, [[1, 19]]);
 }
 
 function create() {
@@ -52776,6 +52794,9 @@ function trash() {
     }
   }, _marked[4], this);
 }
+
+var CREATE_CONTENT = '# Creating a Post\n\nTo create a post on Phourus, you can quickly clear or replace the text in this box, and use the formatting toolbar above. When you are finished, click \'Post\' to publish your post. If you wish not to save your work, then just click cancel instead.\n\nThere are 4 different categories of posts on Phourus, each color coded:\n\n* General information - Green [Blogs, Ideas]\n* Educational - Blue [Subjects, Questions]\n* Divisionary - Red [Debates, Polls]\n* Cultural - Gold [Opinions, Quotes]\n\n## Research\nWhenever research is being done, Phourus should come to mind. The ideal place to store, find and centralize research done in a variety of departments.\n\n* Market analysis\n* Data-driven conclusions\n* Engineering research\n* Competitor research\n* Doctorate/Post-Grad Thesis\n* Theoretical research\n* Medical information\n\n## Training\nHaving a go-to source for new employees to go for a variety of information such as:\n\n* Company policy\n* Product or service information\n* Latest research or findings\n* Company vision or mission\n* Training resource\n* Question about company or product\n* Budget or financial information\n* Product specs\n* Support material\n\n## Public\nWith advanced post permissions you can create posts to interact with the public such as:\n\n* Poll most important product features\n* Educate consumers, prospects or customers\n* Report news to customers, investors or shareholders\n* Discuss company direction\n\n## Feedback\nInternal and external feedback is imperative to an organization:\n\n* Business strategy or overall vision\n* The good, bad or ugly\n* Internal poll for a challenging decision\n* Cross-department collaboration\n* Management feedback\n* Debate purchasing decisions\n\n## Ideas\nIdeas for new products, campaigns, strategies are j\n\n* Idea for product or service\n* Improve internal operations\n* New procedure idea\n* Marketing campaign idea\n* Customer ideas\n\n## Vision\nIdeas, opinions and inspiration serve as important keys to success:\n\n* Goal for the organization or team\n* Personal opinion\n* Inspirational quote\n* Sales pitch tip\n* Marketing or sales strategy\n* Poor experience';
+//const CreateContent = `<div><span style="font-size: 32px;">Creating a Post</span></div><div><br></div><div>To create a post on Phourus, you can quickly clear or replace the text in this box, and use the formatting toolbar above. When you are finished, click 'Post' to publish your post. If you wish not to save your work, then just click cancel instead. </div><div><br></div><div><i>There are 4 different categories of posts on Phourus, each color coded:</i></div><div><br></div><ol><li><b>General information</b> - Green [Blogs, Ideas]</li><li><b>Educational</b> - Blue [Subjects, Questions]</li><li><b>Divisionary</b> - Red [Debates, Polls]</li><li><b>Cultural</b> - Gold [Opinions, Quotes] </li></ol><div><br></div><div><i><u><b>Research</b></u></i></div><div>Whenever research is being done, Phourus should come to mind. The ideal place to store, find and centralize research done in a variety of departments.</div><div><br></div><div>- Market analysis</div><div>- Data-driven conclusions</div><div>- Engineering research</div><div>- Competitor research</div><div>- Doctorate/Post-Grad Thesis</div><div>- Theoretical research</div><div>- Medical information</div><div><br></div><div><u style="background-color: inherit;"><i><b>Training</b></i></u></div><div>Having a go-to source for new employees to go for a variety of information such as:</div><div><br></div><div>- Company policy</div><div>- Product or service information</div><div>- Latest research or findings</div><div>- Company vision or mission</div><div>- Training resource</div><div>- Question about company or product</div><div>- Budget or financial information</div><div>- Product specs</div><div>- Support material</div><div><br></div><div><u style="background-color: inherit;"><i><b>Public</b></i></u></div><div>With advanced post permissions you can create posts to interact with the public such as:</div><div><br></div><div>- Poll most important product features</div><div>- Educate consumers, prospects or customers</div><div>- Report news to customers, investors or shareholders</div><div>- Discuss company direction</div><div><br></div><div><u style="background-color: inherit;"><i><b>Feedback</b></i></u></div><div>Internal and external feedback is imperative to an organization:</div><div><br></div><div>- Business strategy or overall vision</div><div>- The good, bad or ugly</div><div>- Internal poll for a challenging decision</div><div>- Cross-department collaboration</div><div>- Management feedback</div><div>- Debate purchasing decisions</div><div><br></div><div><i><u><b>Ideas</b></u></i></div><div>Ideas for new products, campaigns, strategies are j</div><div><br></div><div>- Idea for product or service</div><div>- Improve internal operations</div><div>- New procedure idea</div><div>- Marketing campaign idea</div><div>- Customer ideas</div><div><br></div><div><i><u><b>Vision</b></u></i></div><div>Ideas, opinions and inspiration serve as important keys to success:</div><div><br></div><div>- Goal for the organization or team</div><div>- Personal opinion&nbsp;</div><div>- Inspirational quote</div><div>- Sales pitch tip</div><div>- Marketing or sales strategy</div><div>- Poor experience</div><div><br></div><div><br></div><div><br></div>`;
 
 /***/ },
 /* 549 */

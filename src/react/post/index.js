@@ -64,7 +64,7 @@ class Post extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.url) {
+		if (nextProps.url !== this.props.url) {
 			this._context(nextProps.url)
 		}
 	}
