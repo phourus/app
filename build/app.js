@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "043ce937a227c3aa3656"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c33263aed42ab96c2e37"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -44526,7 +44526,7 @@ var List = function (_React$Component) {
           }
           return _react2.default.createElement(
             'div',
-            { className: 'org' },
+            { className: 'org', key: item.id },
             admin,
             _react2.default.createElement('br', null),
             _react2.default.createElement(
@@ -47265,6 +47265,11 @@ exports.default = function () {
         user: { $set: action.session }
       });
       break;
+    case 'RECEIVE_SESSION_ORGS':
+      return (0, _reactAddonsUpdate2.default)(state, {
+        orgs: { $set: action.orgs }
+      });
+      break;
     case 'SESSION_LOGOUT':
       return (0, _reactAddonsUpdate2.default)(state, {
         ready: { $set: true },
@@ -47583,15 +47588,52 @@ function logout() {
 }
 
 function orgs() {
+  var data, alert;
   return regeneratorRuntime.wrap(function orgs$(_context10) {
     while (1) {
       switch (_context10.prev = _context10.next) {
         case 0:
+          _context10.next = 2;
+          return (0, _effects.put)({ type: 'REQUEST_SESSION_ORGS' });
+
+        case 2:
+          _context10.prev = 2;
+          _context10.next = 5;
+          return (0, _effects.call)(_account2.default.orgs);
+
+        case 5:
+          data = _context10.sent;
+          _context10.next = 8;
+          return (0, _effects.put)({ type: 'RECEIVE_SESSION_ORGS', orgs: data });
+
+        case 8:
+          _context10.next = 16;
+          break;
+
+        case 10:
+          _context10.prev = 10;
+          _context10.t0 = _context10['catch'](2);
+
+          if (!(_context10.t0 !== 401)) {
+            _context10.next = 16;
+            break;
+          }
+
+          alert = {
+            action: 'organizations',
+            color: 'yellow',
+            code: _context10.t0,
+            msg: 'Organizations could not be loaded'
+          };
+          _context10.next = 16;
+          return (0, _effects.put)({ type: 'ALERT', alert: alert });
+
+        case 16:
         case 'end':
           return _context10.stop();
       }
     }
-  }, _marked[9], this);
+  }, _marked[9], this, [[2, 10]]);
 }
 
 /***/ },

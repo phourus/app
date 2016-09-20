@@ -17,7 +17,7 @@ export default class List extends React.Component {
             admin = <button id={item.org.shortname} className="button blue" onClick={this._edit}>Admin</button>
           }
           return (
-            <div className="org">
+            <div className="org" key={item.id}>
               {admin}<br />
             <a href={link}>{item.org.name || item.org.shortname}</a><br />
               {item.approved

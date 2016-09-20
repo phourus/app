@@ -33,6 +33,11 @@ export default (state = initState, action = {}) => {
         user: {$set: action.session}
       })
       break
+    case 'RECEIVE_SESSION_ORGS':
+      return update(state, {
+        orgs: {$set: action.orgs}
+      })
+      break
     case 'SESSION_LOGOUT':
       return update(state, {
         ready: {$set: true},

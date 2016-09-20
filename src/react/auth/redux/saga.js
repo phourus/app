@@ -195,19 +195,19 @@ function* logout() {
 }
 
 function* orgs() {
-  // account.orgs()
-  // .then(data => {
-  //   this.trigger({orgs: data});
-  // })
-  // .catch(code => {
-  //   this.trigger({code: code});
-  //   let alert = {
-  //     action: 'organizations',
-  //     color: 'yellow',
-  //     code: code,
-  //     msg: 'Organizations could not be loaded'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
+  yield put({type: 'REQUEST_SESSION_ORGS'})
+  try {
+    const data = yield call(account.orgs)
+    yield put({type: 'RECEIVE_SESSION_ORGS', orgs: data})
+  } catch(code) {
+    if (code !== 401) {
+      const alert = {
+        action: 'organizations',
+        color: 'yellow',
+        code,
+        msg: 'Organizations could not be loaded'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
 }
