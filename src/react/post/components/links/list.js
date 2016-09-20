@@ -28,7 +28,7 @@ export default (props) => {
 						</div>
 						<div>
 							{props.url.type === 'edit' && props.owner
-								? <button id={item.id} className="remove" onClick={this.props.remove}>X</button>
+								? <button id={item.id} className="remove" onClick={props.remove.bind(this)}>X</button>
 								: false
 							}
 							<a href={item.url} target="_blank">{item.title}</a>

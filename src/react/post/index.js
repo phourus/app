@@ -1,4 +1,5 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
@@ -90,30 +91,26 @@ class Post extends React.Component {
 		let id = url.id
 		let type = url.type
 		if (type === 'edit' || type === 'post') {
-			this.props.dispatch(this.props.actions.single(id))
+			this.props.actions.single(id)
 		}
 		if (type === 'create') {
-			this.props.dispatch(this.props.actions.single('create'))
+			this.props.actions.single('create')
 		}
 	}
 }
 
-function mapStateToProps(state) {
-	return Object.assign({
-		dispatch: state.dispatch,
-		actions,
-		session: {
-			authenticated: true,
-			user: {
-				id: 4
-			}
-		},
-		owner: true,
-		url: {
-			id: 'nobhuwe',
-			type: 'post'
-		}
-	}, state.post)
+const mapState = (state, props) => {
+	const { session, post } = state
+
+	return Object.assign({}, {
+		url: props.url,
+		session,
+		owner: true
+	}, post)
 }
 
-export default connect(mapStateToProps)(Post)
+const mapDispatch = (dispatch) => {
+  return { actions: bindActionCreators(actions, dispatch) }
+}
+
+export default connect(mapState, mapDispatch)(Post)

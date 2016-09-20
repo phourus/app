@@ -12,10 +12,16 @@ export default function* post() {
 }
 
 function* single() {
-  const action = yield take('POST_SINGLE')
-  yield put({type: 'REQUEST_POST_SINGLE'})
-  const post = yield call(posts.single, action.id)
-  yield put({type: 'RECEIVE_POST_SINGLE', id: action.id, post})
+  while (true) {
+    try {
+      const action = yield take('POST_SINGLE')
+      yield put({type: 'REQUEST_POST_SINGLE'})
+      const post = yield call(posts.single, action.id)
+      yield put({type: 'RECEIVE_POST_SINGLE', id: action.id, post})
+    } catch (code) {
+
+    }
+  }
 }
 
 function* create() {

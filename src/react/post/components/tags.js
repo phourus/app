@@ -49,8 +49,8 @@ export default class Tags extends React.Component {
         })}
 				{type === 'edit' && this.props.owner
 					? <div className="tagField">
-					<input placeholder="add tags here" onChange={this._change} type="text" value={this.state.tag} />
-					<button onClick={this._add}>Add Tag</button>
+					<input ref="tag" placeholder="add tags here" type="text" />
+					<button onClick={this._add.bind(this)}>Add Tag</button>
 				</div>
 					: false
 				}
@@ -65,8 +65,8 @@ export default class Tags extends React.Component {
 
 	_add() {
 		let model = {}
-		if (this.state.tag.length > 1 && this.props.post.id) {
-			model.tag = this.props.tag
+		if (this.refs.tag.length > 1 && this.props.post.id) {
+			model.tag = this.refs.tag.value
 			model.postId = this.props.post.id
 			//Actions.add(model)
 			//this.setState({tag: ""})

@@ -6,6 +6,13 @@ import Contexts from './contexts'
 
 export default class Privacy extends React.Component {
 
+	constructor(props) {
+		super(props)
+		this.state = {
+			privacy: false
+		}
+	}
+
 	render() {
 		let privacy = this.props.post.privacy || 'private'
 		let icons = {
@@ -49,7 +56,7 @@ export default class Privacy extends React.Component {
 	}
 
 	_privacy() {
-		//this.setState({privacy: !this.state.privacy});
+		this.setState({privacy: !this.state.privacy})
 	}
 
 	_private(e) {

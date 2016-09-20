@@ -38,13 +38,13 @@ export default class Edit extends React.Component {
 		return (
 			<div className="edit">
 				<div className="toolbar"></div>
-				<ActionsView url={this.props.url} post={this.props.post} owner={this.props.owner} />
-				<Type post={this.props.post} owner={this.props.owner} />
-				<Title post={this.props.post} owner={this.props.owner} />
-				<Content post={this.props.post} owner={this.props.owner} />
-				<Privacy post={this.props.post} owner={this.props.owner} />
-				<Tags post={this.props.post} owner={this.props.owner} tag={this.props.tag} />
-				<Links post={this.props.post} owner={this.props.owner} />
+				<ActionsView {...this.props} />
+				<Type {...this.props} />
+				<Title {...this.props} />
+				<Content {...this.props} />
+				<Privacy {...this.props} />
+				<Tags {...this.props} />
+				<Links {...this.props} />
 			</div>
 		)
 	}

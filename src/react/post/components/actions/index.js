@@ -42,27 +42,27 @@ export default class Actions extends React.Component {
   }
 
   _create() {
-    this.props.dispatch(this.props.actions.create())
+    this.props.actions.create()
   }
 
   _update() {
-    this.props.dispatch(this.props.actions.save())
+    this.props.actions.save()
   }
 
   _confirm() {
-    this.props.dispatch(this.props.actions.confirm())
+    this.props.actions.confirm()
   }
 
   _cancel() {
-    this.props.dispatch(this.props.actions.cancel())
+    this.props.actions.cancel()
   }
 
   _confirm() {
-    this.props.dispatch(this.props.actions.trash())
+    this.props.actions.trash()
   }
 
   _rich() {
-    this.props.dispatch(this.props.actions.change('rich', 1))
+    this.props.actions.change('rich', 1)
   }
 
   _back() {

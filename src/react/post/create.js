@@ -24,10 +24,10 @@ export default class Create extends React.Component {
 		return (
 			<div className="create">
 				<div className="toolbar"></div>
-				<ActionsView url={this.props.url} post={this.props.post} owner={this.props.owner} />
-				<Type post={this.props.post} owner={this.props.owner} />
-				<Title post={this.props.post} owner={this.props.owner} />
-				<Content post={this.props.post} owner={this.props.owner} />
+				<ActionsView {...this.props} />
+				<Type {...this.props} />
+				<Title {...this.props} />
+				<Content {...this.props} />
 			</div>
 		)
 	}
