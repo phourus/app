@@ -7,7 +7,10 @@ export function get(url, override) {
       headers: Object.assign(headers(), override)
     })
     .then((response) => {
-      resolve(response.json())
+      if (response.status !== 200) {
+        return resolve(response.status)
+      }
+      return resolve(response.json())
     })
   })
 }
@@ -20,7 +23,10 @@ export function post(url, body, override) {
       body
     })
     .then((response) => {
-      resolve(response.json())
+      if (response.status !== 201) {
+        return resolve(response.status)
+      }
+      return resolve(response.json())
     })
   })
 }
@@ -33,7 +39,7 @@ export function token(url, body, override) {
       body
     })
     .then((response) => {
-      resolve(response.text())
+      return resolve(response.text())
     })
   })
 }
@@ -46,7 +52,7 @@ export function put(url, body, override) {
       body
     })
     .then((response) => {
-      resolve(response.json())
+      return resolve(response.status)
     })
   })
 }
@@ -58,7 +64,7 @@ export function del(url, override) {
       headers: Object.assign(headers(), override)
     })
     .then((response) => {
-      resolve(response.json())
+      return resolve(response.status)
     })
   })
 }

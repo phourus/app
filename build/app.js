@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8547390fbd28d90d6a10"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3fc604718d203e81f598"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -6484,7 +6484,10 @@ function get(url, override) {
     (0, _universalFetch2.default)(url, {
       headers: Object.assign((0, _headers2.default)(), override)
     }).then(function (response) {
-      resolve(response.json());
+      if (response.status !== 200) {
+        return resolve(response.status);
+      }
+      return resolve(response.json());
     });
   });
 }
@@ -6496,7 +6499,10 @@ function post(url, body, override) {
       headers: Object.assign((0, _headers2.default)(), override),
       body: body
     }).then(function (response) {
-      resolve(response.json());
+      if (response.status !== 201) {
+        return resolve(response.status);
+      }
+      return resolve(response.json());
     });
   });
 }
@@ -6508,7 +6514,7 @@ function token(url, body, override) {
       headers: Object.assign((0, _headers2.default)(), override),
       body: body
     }).then(function (response) {
-      resolve(response.text());
+      return resolve(response.text());
     });
   });
 }
@@ -6520,7 +6526,7 @@ function put(url, body, override) {
       headers: Object.assign((0, _headers2.default)(), override),
       body: body
     }).then(function (response) {
-      resolve(response.json());
+      return resolve(response.status);
     });
   });
 }
@@ -6531,7 +6537,7 @@ function del(url, override) {
       method: "DELETE",
       headers: Object.assign((0, _headers2.default)(), override)
     }).then(function (response) {
-      resolve(response.json());
+      return resolve(response.status);
     });
   });
 }
