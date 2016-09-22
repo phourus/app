@@ -1,5 +1,7 @@
 import React from 'react'
 
+import styles from './css/features.module.css'
+
 const slides = [
   {
     title: 'Surface Important Content & Ideas',
@@ -49,20 +51,20 @@ export default class Features extends React.Component {
 
   render() {
     return (
-      <div className="features">
-        <div className="list">
+      <div className={styles.features}>
+        <div className={styles.list}>
           {slides.map((item, index) => {
             return (
-              <div key={index} className={index === this.state.selected ? "selected" : ""}>
-                <span className="title">{item.title}</span>
-                <p>{item.text}</p>
-                <p className="usage">{item.usage}</p>
+              <div key={index} className={index === this.state.selected ? styles.slideSelected : styles.slide}>
+                <span className={index === this.state.selected ? styles.titleSelected : styles.title}>{item.title}</span>
+                <p className={styles.text}>{item.text}</p>
+                <p className={styles.usage}>{item.usage}</p>
               </div>
             )
           })}
         </div>
-        <div className="post">
-          <img src="/assets/product/post.png" />
+        <div className={styles.post}>
+          <img src="/assets/product/post.png" className={styles.img} />
         </div>
       </div>
     )

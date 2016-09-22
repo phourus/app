@@ -1,5 +1,7 @@
 import React from 'react'
 
+import styles from './css/thoughts.module.css'
+
 const slides = [
   {text: 'Use Blogs and Ideas to share your general thoughts', img: '/assets/product/post.png'},
   {text: 'Subjects and Questions are for learning and sharing knowledge', img: '/assets/product/post.png'},
@@ -35,23 +37,23 @@ export default class Thoughts extends React.Component {
     let { slide } = this.state
     let selected = slides[slide]
     return (
-      <div className="thoughts">
+      <div className={styles.thoughts}>
         <h2>Stream your thoughts in multiple ways</h2>
-        <div className="slides">
-          <ul>
-            <li onClick={this.select.bind(this, 0)} className={slide === 0 ? 'active' : ''}></li>
-            <li onClick={this.select.bind(this, 1)} className={slide === 1 ? 'active' : ''}></li>
-            <li onClick={this.select.bind(this, 2)} className={slide === 2 ? 'active' : ''}></li>
-            <li onClick={this.select.bind(this, 3)} className={slide === 3 ? 'active' : ''}></li>
+        <div>
+          <ul className={styles.dots}>
+            <li onClick={this.select.bind(this, 0)} className={slide === 0 ? styles.dotActive : styles.dot}></li>
+            <li onClick={this.select.bind(this, 1)} className={slide === 1 ? styles.dotActive : styles.dot}></li>
+            <li onClick={this.select.bind(this, 2)} className={slide === 2 ? styles.dotActive : styles.dot}></li>
+            <li onClick={this.select.bind(this, 3)} className={slide === 3 ? styles.dotActive : styles.dot}></li>
           </ul>
         </div>
-        <div className="slide">
+        <div className={styles.slide}>
           <p>{selected.text}</p>
-          <div className="posts">
+          <div className={styles.posts}>
             <img src={selected.img} />
           </div>
         </div>
-        <div className="stream">
+        <div className={styles.stream}>
           <img src="/assets/product/thoughts.png" />
         </div>
       </div>

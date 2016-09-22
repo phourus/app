@@ -1,0 +1,57 @@
+.dots {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dot {
+  display: inline-block;
+  font-size: 4em;
+  color: #ccc;
+}
+
+.dot:before {
+  content: '\2022';
+  margin-right: 10px;
+}
+
+.dot:hover {
+  color: #eee;
+  cursor: pointer;
+}
+
+.dotActive {
+  composes: dot;
+  color: #aaa;
+}
+
+.slide {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.img {
+  width: 100%;
+  max-width: 300px;
+}
+
+.stream {
+  display: none;
+}
+
+@media (min-width: 500px) {
+
+  .slide {
+    width: 50%;
+  }
+
+  .posts {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .stream {
+    display: inline-block;
+    width: 50%;
+  }
+}

@@ -6,22 +6,20 @@ import Recognition from './recognition'
 import Features from './features'
 import Integrate from './integrate'
 
-import styles from './styles.less'
+import styles from './styles.module.css'
 
-export default React.createClass({
-  render: function () {
-    return (
-      <div className="product">
-        <Contribute />
-        <div className="spacer" />
-        <Thoughts />
-        <div className="spacer" />
-        <Recognition />
-        <div className="spacer" />
-        <Features />
-        <div className="spacer" />
-        <Integrate />
-      </div>
-    );
-  }
-});
+export default () => {
+  return (
+    <div className={styles.product}>
+      <Contribute />
+      <div className={styles.spacer} />
+      <Thoughts />
+      <div className={styles.spacer} />
+      <Recognition />
+      <div className={styles.spacer} />
+      <Features />
+      <div className={styles.spacer} />
+      <Integrate />
+    </div>
+  )
+}

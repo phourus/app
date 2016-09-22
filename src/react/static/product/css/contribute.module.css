@@ -1,0 +1,19 @@
+.img {
+  width: 90%;
+}
+
+@media (min-width: 500px) {
+
+  .content {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .img {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+  }
+}

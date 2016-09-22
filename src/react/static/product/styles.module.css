@@ -1,0 +1,11 @@
+.spacer {
+  clear: both;
+  height: 20px;
+}
+
+@media (min-width: 500px) {
+
+  .spacer {
+    height: 40px;
+  }
+}

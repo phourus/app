@@ -30,15 +30,15 @@ module.exports = {
         loaders: ['style?sourcemap', 'css', 'less'],
         include: path.join(__dirname, 'src/')
       },
+      // {
+      //   test: /\.css$/,
+      //   loaders: ['style?sourcemap', 'css'],
+      //   include: path.join(__dirname, 'src/')
+      // },
       {
-        test: /\.css$/,
-        loaders: ['style?sourcemap', 'css'],
-        include: path.join(__dirname, 'src/')
-      },
-      {
-        test: /\.css$/,
+        test: /\.module.css$/,
         loaders: ['style?sourcemap', 'css?modules&importLoaders=localIdentName=[name]__[local]___[hash:base64:5]'],
-        include: path.join(__dirname, 'src/css')
+        include: path.join(__dirname, 'src/')
       }
     ]
   }
