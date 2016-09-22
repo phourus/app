@@ -1,0 +1,23 @@
+@value theme: '../../../../css/theme.module.css';
+@value blue-light from theme;
+
+.docs {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.page {
+  padding: 10px;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  font-style: oblique;
+  border-left: solid 2px blue-light;
+  color: #444;
+}
+
+@media (min-width: 800px) {
+
+  .toggle {
+    display: none;
+  }
+}

@@ -1,0 +1,68 @@
+.menu {
+  display: block;
+  box-sizing: border-box;
+}
+
+.menuHide {
+  display: none;
+}
+
+.i {
+  color: #ccc;
+}
+
+.section {
+  list-style: none;
+  border: solid 1px #ccc;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: #fafafa;
+  width: 100%;
+  margin: 10px 0 0 0;
+  display: block;
+  padding: 10px;
+  color: #888;
+  height: 200px;
+}
+
+ul#menu {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+ul#menu li > ul {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 20px;
+}
+
+ul#menu li > ul > li {
+  list-style: none;
+  border: none;
+  width: 100%;
+}
+
+ul#menu li > ul > li a {
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+@media (min-width: 800px) {
+
+  .menuHide {
+    display: inline-block;
+  }
+
+  .section {
+    width: 50%;
+    margin: 0 0 10px 0;
+    vertical-align: top;
+    display: inline-block;
+  }
+
+  /*&:nth-child(odd) {
+    width: 48%;
+    margin: 0 2% 10px 0;
+  }*/
+}
