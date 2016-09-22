@@ -1,0 +1,65 @@
+.team {
+  background-color: #4D4D4D;
+  min-height: 400px;
+  color: #fff;
+  margin-top: 100px;
+}
+
+.img {
+  width: 100px;
+  display: block;
+}
+
+.quote {
+  width: 80%;
+  margin: auto;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+  font-style: italic;
+  line-height: 2em;
+}
+
+.signature {
+  font-style: normal;
+  text-align: right;
+  font-size: 0.9em;
+  margin-top: 40px;
+}
+
+.name {
+  color: #eee;
+  line-height: 1em;
+}
+
+.position {
+  font-size: 0.8em;
+  color: #ccc;
+}
+
+@media (min-width: 500px) {
+
+  .photos {
+    width: 80%;
+    margin: auto;
+    position: relative;
+    top: -50px;
+    text-align: center;
+  }
+
+  .img {
+    display: inline-block;
+    cursor: pointer;
+    width: 80px;
+    opacity: 0.8;
+    margin-right: 20px;
+  }
+
+  .img:hover {
+    opacity: 1;
+  }
+
+  .imgSelected {
+    opacity: 1;
+    composes: img;
+  }
+}

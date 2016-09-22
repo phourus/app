@@ -1,0 +1,49 @@
+.pricing {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.squeeze {
+  width: 90%;
+  margin: auto;
+  padding-top: 20px;
+}
+
+.separator {
+  margin: 0px 10px 0px 10px;
+  display: inline-block;
+  color: #666;
+}
+
+.link {
+  letter-spacing: 2px;
+}
+
+.linkSelected {
+  color: #aaa;
+}
+
+.slider {
+  width: 90%;
+}
+
+.slide {
+  width: 100%;
+}
+
+.features {
+  display: none;
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 800px) {
+  .features {
+    display: block;
+  }
+}
