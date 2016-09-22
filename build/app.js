@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9dcc7102ef41cd091380"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a2128a249456bbcd9b4e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -56711,577 +56711,571 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Privacy = _react2.default.createClass({
-  displayName: "Privacy",
-
-  render: function render() {
-    return _react2.default.createElement(
-      "div",
-      { className: "general" },
+exports.default = function () {
+  return _react2.default.createElement(
+    "div",
+    { className: "general" },
+    _react2.default.createElement(
+      "h1",
+      null,
+      "Phourus Privacy Policy"
+    ),
+    _react2.default.createElement(
+      "strong",
+      null,
+      "Updated: August 1, 2015"
+    ),
+    _react2.default.createElement("br", null),
+    _react2.default.createElement(
+      "p",
+      null,
+      "This privacy policy is here to help you understand what information we collect at Phourus, how we use it, and what choices you have. When we talk about Phourus in this policy, we are talking about Phourus, Inc., the company, Phourus, the downloadable application, and the Phourus website at www.phourus.com. Phourus is available for use via a web browser or applications specific to your desktop or mobile device."
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "This policy describes how Phourus treats your information, not how other organizations treat your information. If you are using Phourus in a workplace or on a device or account issued to you by your employer or another organization, that company or organization likely has its own policies regarding storage, access, modification, deletion, and retention of communications and content which may apply to your use of Phourus. Content that would otherwise be considered private to you or to a limited group of people may, in some cases, be accessible by your team owner or administrator. Please check with your employer, team owner or administrator about the policies it has in place regarding your communications and related content on Phourus. More on this below."
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "In this policy we talk about various roles within a Phourus organization and the privileges that come with each. It’s helpful to understand these roles and the relationships between them. Here’s the breakdown: organization owner > organization administrator > organization member. Primary owners have the most control over their organization’s settings on Phourus, followed by team owners and then team administrators. The person who establishes the Phourus organization page is considered the primary owner with the most control over the team (which is why it’s not a good idea for this person to be a contractor or temp employee). Teams can have more than one owner, but only one can be the primary owner. Primary ownership can be transferred to another member after the team is created. All team owners are administrators, and all owners and administrators are also team members."
+    ),
+    _react2.default.createElement(
+      "h3",
+      null,
+      "Information we collect and receive"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "We collect different kinds of information. Some of it is personally identifiable and some is non-identifying or aggregated. Here are the types of information we collect or receive:"
+    ),
+    _react2.default.createElement(
+      "ul",
+      null,
       _react2.default.createElement(
-        "h1",
-        null,
-        "Phourus Privacy Policy"
-      ),
-      _react2.default.createElement(
-        "strong",
-        null,
-        "Updated: August 1, 2015"
-      ),
-      _react2.default.createElement("br", null),
-      _react2.default.createElement(
-        "p",
-        null,
-        "This privacy policy is here to help you understand what information we collect at Phourus, how we use it, and what choices you have. When we talk about Phourus in this policy, we are talking about Phourus, Inc., the company, Phourus, the downloadable application, and the Phourus website at www.phourus.com. Phourus is available for use via a web browser or applications specific to your desktop or mobile device."
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "This policy describes how Phourus treats your information, not how other organizations treat your information. If you are using Phourus in a workplace or on a device or account issued to you by your employer or another organization, that company or organization likely has its own policies regarding storage, access, modification, deletion, and retention of communications and content which may apply to your use of Phourus. Content that would otherwise be considered private to you or to a limited group of people may, in some cases, be accessible by your team owner or administrator. Please check with your employer, team owner or administrator about the policies it has in place regarding your communications and related content on Phourus. More on this below."
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "In this policy we talk about various roles within a Phourus organization and the privileges that come with each. It’s helpful to understand these roles and the relationships between them. Here’s the breakdown: organization owner > organization administrator > organization member. Primary owners have the most control over their organization’s settings on Phourus, followed by team owners and then team administrators. The person who establishes the Phourus organization page is considered the primary owner with the most control over the team (which is why it’s not a good idea for this person to be a contractor or temp employee). Teams can have more than one owner, but only one can be the primary owner. Primary ownership can be transferred to another member after the team is created. All team owners are administrators, and all owners and administrators are also team members."
-      ),
-      _react2.default.createElement(
-        "h3",
-        null,
-        "Information we collect and receive"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "We collect different kinds of information. Some of it is personally identifiable and some is non-identifying or aggregated. Here are the types of information we collect or receive:"
-      ),
-      _react2.default.createElement(
-        "ul",
+        "li",
         null,
         _react2.default.createElement(
-          "li",
+          "strong",
           null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Team information."
-          ),
-          " When you create an organization page or team on Phourus, we collect your email address (as the team owner), your organization's name, Phourus page domain (ex: your-organization-name.phourus.com), your user name that appears in your Phourus page, and password. Optionally, you can provide an email domain to allow people on that domain to sign up for your team without an invitation or individually add email addresses for people you’d like to invite to your team."
+          "Team information."
         ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Account and profile information."
-          ),
-          " The only information we require to create your Phourus account is an email address and password. Optional information you can enter into your profile includes information such as your first and last name, what you do, your Skype username, and your phone number. Any information you add to your profile is visible to other people on your team as described on your profile management page."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Billing information."
-          ),
-          " We collect billing address and credit card information if you purchase a premium version of Phourus. Credit card information is securely passed to our payment processing partner and is not stored at Phourus."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Log data."
-          ),
-          " When you use Phourus, our servers automatically record information, including information that your browser sends whenever you visit a website or your mobile app sends when you’re using it. This log data may include your Internet Protocol address, the address of the web page you visited before coming to Phourus, your browser type and settings, the date and time of your request, information about your browser configuration and plug-ins, language preferences, and cookie data. Log data does not contain message content and is not routinely deleted."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Device information."
-          ),
-          " In addition to log data, we may also collect information about the device you’re using Phourus on, including what type of device it is, what operating system you’re using, device settings, unique device identifiers, and crash data. Whether we collect some or all of this information often depends on what type of device you’re using and its settings."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Geo-location information."
-          ),
-          " Precise GPS from mobile devices is collected only with your permission. WiFi and IP addresses received from your browser or device may be used to determine approximate location."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Phourus usage information."
-          ),
-          " This is information about which organizations, channels, groups, people, features, content, and links you interact with within Phourus and what integrations with related services you use."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Service integrations."
-          ),
-          " If you integrate with a service on Phourus we will connect that service to ours.",
-          _react2.default.createElement(
-            "ul",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "Depending on organization settings, team members may be able to add integrations to a channel, private group, or direct message conversation. Those integrations are viewable and editable by the administrator."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "We do not receive or store your passwords for any of these services."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "You can remove an integration at any time which unbinds that integration on a go-forward basis. That does not, however, delete the content that was received from them and indexed within Phourus. That content must be deleted manually."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Communication content that you send and receive within Phourus."
-          ),
-          " This includes:",
-          _react2.default.createElement(
-            "ul",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "The message content itself. This content can include messages, pictures, files and video among other types of files."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "When messages or files were sent and by whom, when or if they were seen by you, and where you received them (in a channel, private group, or direct message, for example)."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Information from partners or other 3rd parties."
-          ),
-          " Phourus may receive information from partners or others that we could use to make our own information better or more useful. This might be aggregate level information about which IP addresses go with which zip codes or it might be more specific information about how well an online marketing or email campaign performed."
-        )
+        " When you create an organization page or team on Phourus, we collect your email address (as the team owner), your organization's name, Phourus page domain (ex: your-organization-name.phourus.com), your user name that appears in your Phourus page, and password. Optionally, you can provide an email domain to allow people on that domain to sign up for your team without an invitation or individually add email addresses for people you’d like to invite to your team."
       ),
       _react2.default.createElement(
-        "h3",
-        null,
-        "Our Cookie Policy"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "Phourus uses cookies, or similar technologies like single-pixel gifs and web beacons, to record log data. We use both session-based and persistent cookies."
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "Cookies are small text files sent by us to your computer and from your computer to us, each time you visit our website. They are unique to your Phourus account or your browser. Session-based cookies last only while your browser is open and are automatically deleted when you close your browser. Persistent cookies last until you or your browser delete them or until they expire."
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "Some cookies are associated with your Phourus account and personal information in order to remember that you are logged in and which teams you are logged into. Other cookies are not tied to your Phourus account but are unique and allow us to do site analytics and customization, among other things. If you access Phourus through your browser, you can manage your cookie settings there but if you disable all cookies you may not be able to use Phourus."
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "Phourus sets and accesses our own cookies on our company-owned domains. In addition, we use 3rd parties like Google Analytics and Mixpanel for website analytics. You may opt-out of third party cookies from Google Analytics and Mixpanel on their respective websites. We do not currently recognize or respond to browser-initiated Do Not Track signals as there is no consistent industry standard for compliance."
-      ),
-      _react2.default.createElement(
-        "h3",
-        null,
-        "How we use your information"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "We use your information for the following:"
-      ),
-      _react2.default.createElement(
-        "ul",
+        "li",
         null,
         _react2.default.createElement(
-          "li",
+          "strong",
           null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Providing the Phourus service."
-          ),
-          " We use information you provide to authenticate you and deliver message content to you and from you"
+          "Account and profile information."
         ),
+        " The only information we require to create your Phourus account is an email address and password. Optional information you can enter into your profile includes information such as your first and last name, what you do, your Skype username, and your phone number. Any information you add to your profile is visible to other people on your team as described on your profile management page."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
         _react2.default.createElement(
-          "li",
+          "strong",
           null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Understanding and improving our products."
-          ),
-          " To make the product better we have to understand how users are using it. We have a fair bit of data about usage and we intend to use it many different ways to improve our products, including research. This policy is not intended to place any limits on what we do with usage data that is aggregated or de-identified so it is no longer tied to a Phourus user."
+          "Billing information."
         ),
+        " We collect billing address and credit card information if you purchase a premium version of Phourus. Credit card information is securely passed to our payment processing partner and is not stored at Phourus."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
         _react2.default.createElement(
-          "li",
+          "strong",
           null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Investigating and preventing bad stuff from happening."
-          ),
-          " We work hard to keep Phourus secure and to prevent abuse and fraud."
+          "Log data."
         ),
+        " When you use Phourus, our servers automatically record information, including information that your browser sends whenever you visit a website or your mobile app sends when you’re using it. This log data may include your Internet Protocol address, the address of the web page you visited before coming to Phourus, your browser type and settings, the date and time of your request, information about your browser configuration and plug-ins, language preferences, and cookie data. Log data does not contain message content and is not routinely deleted."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
         _react2.default.createElement(
-          "li",
+          "strong",
+          null,
+          "Device information."
+        ),
+        " In addition to log data, we may also collect information about the device you’re using Phourus on, including what type of device it is, what operating system you’re using, device settings, unique device identifiers, and crash data. Whether we collect some or all of this information often depends on what type of device you’re using and its settings."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Geo-location information."
+        ),
+        " Precise GPS from mobile devices is collected only with your permission. WiFi and IP addresses received from your browser or device may be used to determine approximate location."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Phourus usage information."
+        ),
+        " This is information about which organizations, channels, groups, people, features, content, and links you interact with within Phourus and what integrations with related services you use."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Service integrations."
+        ),
+        " If you integrate with a service on Phourus we will connect that service to ours.",
+        _react2.default.createElement(
+          "ul",
           null,
           _react2.default.createElement(
-            "strong",
+            "li",
             null,
-            "Communicating with you"
+            "Depending on organization settings, team members may be able to add integrations to a channel, private group, or direct message conversation. Those integrations are viewable and editable by the administrator."
           ),
           _react2.default.createElement(
-            "ul",
+            "li",
             null,
-            _react2.default.createElement(
-              "li",
-              null,
-              _react2.default.createElement(
-                "strong",
-                null,
-                "Solving your problems and responding to your requests."
-              ),
-              " If you contact us with a problem or question, we will use your information to respond to that request and address your problems or concerns."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              _react2.default.createElement(
-                "strong",
-                null,
-                "In-product communications."
-              ),
-              " We may use the information you provide to contact you through Phourus using in-product messaging tools. For example, if, after, a few weeks of using Phourus we notice that your notification setting is set to notify you of all messages, we may send you a message that suggests you change this in case you are getting too many notifications. This is just one example of how we use information about your usage of the product to make suggestions to you."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              _react2.default.createElement(
-                "strong",
-                null,
-                "Email messages."
-              ),
-              " We may send you service and administrative emails, such as when we notice that you are nearing a message or integration limit. We may also contact you to inform you about changes in our services, or our service offerings. These messages are considered part of the service and you may not opt-out of them. In addition, we sometimes send emails to Phourus users about new product features or other news about Phourus. You can opt-out of these at any time."
-            )
+            "We do not receive or store your passwords for any of these services."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "You can remove an integration at any time which unbinds that integration on a go-forward basis. That does not, however, delete the content that was received from them and indexed within Phourus. That content must be deleted manually."
           )
         )
       ),
       _react2.default.createElement(
-        "h3",
-        null,
-        "Your choices"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "When you use Phourus, you have control over a number of things with respect to your own privacy and choices about how your content is visible to others or not. If you are a Phourus organization owner or administrator, you have additional choices that impact your team’s privacy. Some members will not have access to all of the same choices that their team owner(s) or administrator(s) do. That is because Phourus is set up to be team-oriented, and provides team owners with the maximum ability to control their teams."
-      ),
-      _react2.default.createElement(
-        "h4",
-        null,
-        "Post Retention Settings and Export Options"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "Phourus offers different options for post retention and export to team owners and administrators, depending on the level of service they have signed up for. These service levels are likely to change so please see our pricing page to learn more about which features are associated with which level of service."
-      ),
-      _react2.default.createElement(
-        "ul",
+        "li",
         null,
         _react2.default.createElement(
-          "li",
+          "strong",
           null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "Post Retention Settings"
-          ),
-          _react2.default.createElement(
-            "ul",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "Post retention setting options vary by service level from very general to very specific. The default for all teams, both free and premium, is that posts are retained for as long as the team exists unless they are deleted by the user or administrators, and that users can edit and delete their own posts at any time."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "Premium level teams can modify their team settings to shorten the duration of retention, make very specific retention setting modifications on a per-channel basis, and change settings to store all post edits and to retain posts that users have deleted."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "Please see our FAQ for more specific information about what options exist for different team service levels."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "You can view your team’s message retention settings at any time via Your Team Settings."
-            )
-          )
+          "Communication content that you send and receive within Phourus."
         ),
+        " This includes:",
         _react2.default.createElement(
-          "li",
+          "ul",
           null,
           _react2.default.createElement(
-            "strong",
+            "li",
             null,
-            "Post Exports"
+            "The message content itself. This content can include messages, pictures, files and video among other types of files."
           ),
           _react2.default.createElement(
-            "ul",
+            "li",
             null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "Administrators of all teams, both free and premium, can export their team’s post content that is shared in channels. Post history for private groups and private posts is not included in this."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "Only owners for teams who have signed up for the appropriate level of Phourus service and have enabled Compliance Exports can export their team’s private group messages and direct messages."
-            )
+            "When messages or files were sent and by whom, when or if they were seen by you, and where you received them (in a channel, private group, or direct message, for example)."
           )
         )
       ),
       _react2.default.createElement(
-        "h4",
-        null,
-        "Choices for Team Members"
-      ),
-      _react2.default.createElement(
-        "ul",
+        "li",
         null,
         _react2.default.createElement(
-          "li",
+          "strong",
           null,
-          "If you are a member of a free team, you may deactivate your account. Deactivation of an account disables your access to the Phourus team associated with that account but does not delete your profile or content, which are considered part of your team’s data."
+          "Information from partners or other 3rd parties."
         ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Whether you can delete your message content depends on your settings. In addition, a record of edits and deletions may be retained by your team, depending on the service level of your team and your team’s settings. Please see our FAQ for more detail."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "While you cannot completely delete a profile once it is created, you can update your profile information at any time and modify your email settings. You can also change your user name from time to time."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "When you upload a document or a file on Phourus, you can decide where to share it and with whom. You can also share documents with your entire team, or in private groups. You can also share them externally by creating a public link if you choose. Files are not subject to post retention settings but can be deleted at any time by the person who uploaded the file or by team administrators."
-        )
-      ),
-      _react2.default.createElement(
-        "h4",
-        null,
-        "Choices for Team Owners and Administrators"
-      ),
-      _react2.default.createElement(
-        "ul",
-        null,
-        _react2.default.createElement(
-          "li",
-          null,
-          "Administrators have the ability to manage and change most of the team settings, including post retention settings, and can modify whether or when team members can edit or delete posts. Administrators can also deactivate member accounts for their team."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Only a primary owner can deactivate or delete a team or organization page."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "For more about these privileges, choices, and permissions, see our FAQ."
-        )
-      ),
-      _react2.default.createElement(
-        "h4",
-        null,
-        "Other Choices"
-      ),
-      _react2.default.createElement(
-        "ul",
-        null,
-        _react2.default.createElement(
-          "li",
-          null,
-          "The browser you use may provide you with the ability to control cookies or other types of local data storage."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Your mobile device may provide you with choices around how and whether location or other data is shared with us."
-        )
-      ),
-      _react2.default.createElement(
-        "h4",
-        null,
-        "Sharing and Disclosure"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "There are times when communications and related content and other user information may be shared by Phourus. This section discusses only how Phourus may share user information. Organizations that use Phourus may have their own policies for sharing and disclosure of information they can access through Phourus. Phourus may share information:"
-      ),
-      _react2.default.createElement(
-        "ul",
-        null,
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "With consent, to comply with legal process, or to protect Phourus and our users."
-          ),
-          " When we have your consent or if we believe that disclosure is reasonably necessary to comply with a law, regulation or legal request; to protect the safety, rights, or property of the public, any person, or Phourus; or to detect, prevent, or otherwise address fraud, security or technical issues. If we receive a law enforcement or other third party request for information we will provide prior notice to the subject of the request where we are legally permitted to do so. For more information on Phourus’ policies for responding to requests for user data, please see our User Data Request Policy."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "With third parties and agents."
-          ),
-          " We may employ third party companies or individuals to process personal information on our behalf based on our instructions and in compliance with this Privacy Policy. For example, we may share data with a security consultant to help us get better at preventing unauthorized access or with an email vendor to send messages on our behalf. We may also share data with hosting providers, payment processors, marketing vendors, and other consultants who work on our behalf and under contractual promises of confidentiality."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "About you with your organization or team administrator(s)."
-          ),
-          _react2.default.createElement(
-            "ul",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "We may share your email address and team name with your organization. If the email address under which you've registered your account belongs to or is controlled by an organization (to be clear, we’re not talking about free web-based email providers like Gmail, Hotmail or Yahoo! Mail) we may disclose that email address and associated team names to that organization in order to help it understand who associated with that organization uses Phourus, and to assist the organization with its enterprise accounts. Please do not use a work email address for our services unless you are authorized to do so, and are therefore comfortable with this kind of sharing."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "In addition, there may be times when you contact Phourus to help resolve an issue specific to a team you are a member of. In order to help resolve the issue, we may need to share your concern with your administrator. When possible, we will try to mask or remove any identifying information before sharing these communications."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "In the event of a merger or sale."
-          ),
-          " If we engage in a merger, acquisition, bankruptcy, dissolution, reorganization, or similar transaction or proceeding that involves the transfer of the information described in this Privacy Policy."
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          _react2.default.createElement(
-            "strong",
-            null,
-            "That is aggregated and non-identifiable."
-          ),
-          " We may also share aggregated or non-personally identifiable information with our partners or others for business or research purposes. For example, we may tell a prospective Phourus customer the average number of posts made within a Phourus team in a day or may partner with research firm or academics to explore interesting questions about workplace communications. Again, this policy is not intended to prohibit the disclosure and use of aggregated or de-identified data."
-        )
-      ),
-      _react2.default.createElement(
-        "h4",
-        null,
-        "Security"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "Phourus takes reasonable steps to protect information you provide to us as part of your use of the Phourus service from loss, misuse, and unauthorized access or disclosure. When you enter sensitive information (such as sign-in credentials) we encrypt the transmission of that information using secure socket layer technology (SSL). We follow generally accepted standards to protect the personal data submitted to us, both during transmission and once we receive it. However, no electronic or email transmission or digital storage mechanism is ever fully secure or error free."
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "To learn more about current practices and policies regarding security and confidentiality, please see our Security Practices; we keep that document updated as these practices evolve over time."
-      ),
-      _react2.default.createElement(
-        "h4",
-        null,
-        "Children’s information"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "Phourus is not directed to children under 13. If you learn that a minor child has provided us with personal information without your consent, please contact us."
-      ),
-      _react2.default.createElement(
-        "h4",
-        null,
-        "Changes to this Privacy Policy"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "We may change this policy from time to time, and if we do we’ll post any changes on this page. If you continue to use Phourus after those changes are in effect, you agree to the revised policy. If the changes are material, we may provide more prominent notice or seek your consent to the new policy."
-      ),
-      _react2.default.createElement(
-        "h4",
-        null,
-        "Contacting Phourus"
-      ),
-      _react2.default.createElement(
-        "p",
-        null,
-        "Please also feel free to contact us if you have any questions about Phourus’ Privacy Policy or practices. You may contact us at feedback@phourus.com or at our mailing address below:"
+        " Phourus may receive information from partners or others that we could use to make our own information better or more useful. This might be aggregate level information about which IP addresses go with which zip codes or it might be more specific information about how well an online marketing or email campaign performed."
       )
-    );
-  }
-});
-
-exports.default = Privacy;
+    ),
+    _react2.default.createElement(
+      "h3",
+      null,
+      "Our Cookie Policy"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "Phourus uses cookies, or similar technologies like single-pixel gifs and web beacons, to record log data. We use both session-based and persistent cookies."
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "Cookies are small text files sent by us to your computer and from your computer to us, each time you visit our website. They are unique to your Phourus account or your browser. Session-based cookies last only while your browser is open and are automatically deleted when you close your browser. Persistent cookies last until you or your browser delete them or until they expire."
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "Some cookies are associated with your Phourus account and personal information in order to remember that you are logged in and which teams you are logged into. Other cookies are not tied to your Phourus account but are unique and allow us to do site analytics and customization, among other things. If you access Phourus through your browser, you can manage your cookie settings there but if you disable all cookies you may not be able to use Phourus."
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "Phourus sets and accesses our own cookies on our company-owned domains. In addition, we use 3rd parties like Google Analytics and Mixpanel for website analytics. You may opt-out of third party cookies from Google Analytics and Mixpanel on their respective websites. We do not currently recognize or respond to browser-initiated Do Not Track signals as there is no consistent industry standard for compliance."
+    ),
+    _react2.default.createElement(
+      "h3",
+      null,
+      "How we use your information"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "We use your information for the following:"
+    ),
+    _react2.default.createElement(
+      "ul",
+      null,
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Providing the Phourus service."
+        ),
+        " We use information you provide to authenticate you and deliver message content to you and from you"
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Understanding and improving our products."
+        ),
+        " To make the product better we have to understand how users are using it. We have a fair bit of data about usage and we intend to use it many different ways to improve our products, including research. This policy is not intended to place any limits on what we do with usage data that is aggregated or de-identified so it is no longer tied to a Phourus user."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Investigating and preventing bad stuff from happening."
+        ),
+        " We work hard to keep Phourus secure and to prevent abuse and fraud."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Communicating with you"
+        ),
+        _react2.default.createElement(
+          "ul",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              "strong",
+              null,
+              "Solving your problems and responding to your requests."
+            ),
+            " If you contact us with a problem or question, we will use your information to respond to that request and address your problems or concerns."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              "strong",
+              null,
+              "In-product communications."
+            ),
+            " We may use the information you provide to contact you through Phourus using in-product messaging tools. For example, if, after, a few weeks of using Phourus we notice that your notification setting is set to notify you of all messages, we may send you a message that suggests you change this in case you are getting too many notifications. This is just one example of how we use information about your usage of the product to make suggestions to you."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement(
+              "strong",
+              null,
+              "Email messages."
+            ),
+            " We may send you service and administrative emails, such as when we notice that you are nearing a message or integration limit. We may also contact you to inform you about changes in our services, or our service offerings. These messages are considered part of the service and you may not opt-out of them. In addition, we sometimes send emails to Phourus users about new product features or other news about Phourus. You can opt-out of these at any time."
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "h3",
+      null,
+      "Your choices"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "When you use Phourus, you have control over a number of things with respect to your own privacy and choices about how your content is visible to others or not. If you are a Phourus organization owner or administrator, you have additional choices that impact your team’s privacy. Some members will not have access to all of the same choices that their team owner(s) or administrator(s) do. That is because Phourus is set up to be team-oriented, and provides team owners with the maximum ability to control their teams."
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Post Retention Settings and Export Options"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "Phourus offers different options for post retention and export to team owners and administrators, depending on the level of service they have signed up for. These service levels are likely to change so please see our pricing page to learn more about which features are associated with which level of service."
+    ),
+    _react2.default.createElement(
+      "ul",
+      null,
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Post Retention Settings"
+        ),
+        _react2.default.createElement(
+          "ul",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "Post retention setting options vary by service level from very general to very specific. The default for all teams, both free and premium, is that posts are retained for as long as the team exists unless they are deleted by the user or administrators, and that users can edit and delete their own posts at any time."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "Premium level teams can modify their team settings to shorten the duration of retention, make very specific retention setting modifications on a per-channel basis, and change settings to store all post edits and to retain posts that users have deleted."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "Please see our FAQ for more specific information about what options exist for different team service levels."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "You can view your team’s message retention settings at any time via Your Team Settings."
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "Post Exports"
+        ),
+        _react2.default.createElement(
+          "ul",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "Administrators of all teams, both free and premium, can export their team’s post content that is shared in channels. Post history for private groups and private posts is not included in this."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "Only owners for teams who have signed up for the appropriate level of Phourus service and have enabled Compliance Exports can export their team’s private group messages and direct messages."
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Choices for Team Members"
+    ),
+    _react2.default.createElement(
+      "ul",
+      null,
+      _react2.default.createElement(
+        "li",
+        null,
+        "If you are a member of a free team, you may deactivate your account. Deactivation of an account disables your access to the Phourus team associated with that account but does not delete your profile or content, which are considered part of your team’s data."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Whether you can delete your message content depends on your settings. In addition, a record of edits and deletions may be retained by your team, depending on the service level of your team and your team’s settings. Please see our FAQ for more detail."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "While you cannot completely delete a profile once it is created, you can update your profile information at any time and modify your email settings. You can also change your user name from time to time."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "When you upload a document or a file on Phourus, you can decide where to share it and with whom. You can also share documents with your entire team, or in private groups. You can also share them externally by creating a public link if you choose. Files are not subject to post retention settings but can be deleted at any time by the person who uploaded the file or by team administrators."
+      )
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Choices for Team Owners and Administrators"
+    ),
+    _react2.default.createElement(
+      "ul",
+      null,
+      _react2.default.createElement(
+        "li",
+        null,
+        "Administrators have the ability to manage and change most of the team settings, including post retention settings, and can modify whether or when team members can edit or delete posts. Administrators can also deactivate member accounts for their team."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Only a primary owner can deactivate or delete a team or organization page."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "For more about these privileges, choices, and permissions, see our FAQ."
+      )
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Other Choices"
+    ),
+    _react2.default.createElement(
+      "ul",
+      null,
+      _react2.default.createElement(
+        "li",
+        null,
+        "The browser you use may provide you with the ability to control cookies or other types of local data storage."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Your mobile device may provide you with choices around how and whether location or other data is shared with us."
+      )
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Sharing and Disclosure"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "There are times when communications and related content and other user information may be shared by Phourus. This section discusses only how Phourus may share user information. Organizations that use Phourus may have their own policies for sharing and disclosure of information they can access through Phourus. Phourus may share information:"
+    ),
+    _react2.default.createElement(
+      "ul",
+      null,
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "With consent, to comply with legal process, or to protect Phourus and our users."
+        ),
+        " When we have your consent or if we believe that disclosure is reasonably necessary to comply with a law, regulation or legal request; to protect the safety, rights, or property of the public, any person, or Phourus; or to detect, prevent, or otherwise address fraud, security or technical issues. If we receive a law enforcement or other third party request for information we will provide prior notice to the subject of the request where we are legally permitted to do so. For more information on Phourus’ policies for responding to requests for user data, please see our User Data Request Policy."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "With third parties and agents."
+        ),
+        " We may employ third party companies or individuals to process personal information on our behalf based on our instructions and in compliance with this Privacy Policy. For example, we may share data with a security consultant to help us get better at preventing unauthorized access or with an email vendor to send messages on our behalf. We may also share data with hosting providers, payment processors, marketing vendors, and other consultants who work on our behalf and under contractual promises of confidentiality."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "About you with your organization or team administrator(s)."
+        ),
+        _react2.default.createElement(
+          "ul",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "We may share your email address and team name with your organization. If the email address under which you've registered your account belongs to or is controlled by an organization (to be clear, we’re not talking about free web-based email providers like Gmail, Hotmail or Yahoo! Mail) we may disclose that email address and associated team names to that organization in order to help it understand who associated with that organization uses Phourus, and to assist the organization with its enterprise accounts. Please do not use a work email address for our services unless you are authorized to do so, and are therefore comfortable with this kind of sharing."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "In addition, there may be times when you contact Phourus to help resolve an issue specific to a team you are a member of. In order to help resolve the issue, we may need to share your concern with your administrator. When possible, we will try to mask or remove any identifying information before sharing these communications."
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "In the event of a merger or sale."
+        ),
+        " If we engage in a merger, acquisition, bankruptcy, dissolution, reorganization, or similar transaction or proceeding that involves the transfer of the information described in this Privacy Policy."
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "strong",
+          null,
+          "That is aggregated and non-identifiable."
+        ),
+        " We may also share aggregated or non-personally identifiable information with our partners or others for business or research purposes. For example, we may tell a prospective Phourus customer the average number of posts made within a Phourus team in a day or may partner with research firm or academics to explore interesting questions about workplace communications. Again, this policy is not intended to prohibit the disclosure and use of aggregated or de-identified data."
+      )
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Security"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "Phourus takes reasonable steps to protect information you provide to us as part of your use of the Phourus service from loss, misuse, and unauthorized access or disclosure. When you enter sensitive information (such as sign-in credentials) we encrypt the transmission of that information using secure socket layer technology (SSL). We follow generally accepted standards to protect the personal data submitted to us, both during transmission and once we receive it. However, no electronic or email transmission or digital storage mechanism is ever fully secure or error free."
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "To learn more about current practices and policies regarding security and confidentiality, please see our Security Practices; we keep that document updated as these practices evolve over time."
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Children’s information"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "Phourus is not directed to children under 13. If you learn that a minor child has provided us with personal information without your consent, please contact us."
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Changes to this Privacy Policy"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "We may change this policy from time to time, and if we do we’ll post any changes on this page. If you continue to use Phourus after those changes are in effect, you agree to the revised policy. If the changes are material, we may provide more prominent notice or seek your consent to the new policy."
+    ),
+    _react2.default.createElement(
+      "h4",
+      null,
+      "Contacting Phourus"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      "Please also feel free to contact us if you have any questions about Phourus’ Privacy Policy or practices. You may contact us at feedback@phourus.com or at our mailing address below:"
+    )
+  );
+};
 
 /***/ },
 /* 587 */
@@ -57797,511 +57791,505 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Terms = _react2.default.createClass({
-  displayName: "Terms",
-
-  render: function render() {
-    return _react2.default.createElement(
-      "div",
-      { className: "general" },
+exports.default = function () {
+  return _react2.default.createElement(
+    "div",
+    { className: "general" },
+    _react2.default.createElement(
+      "h1",
+      null,
+      "Terms & Conditions"
+    ),
+    _react2.default.createElement(
+      "strong",
+      null,
+      "Effective: August 1, 2015"
+    ),
+    _react2.default.createElement("br", null),
+    _react2.default.createElement("br", null),
+    _react2.default.createElement(
+      "ol",
+      null,
       _react2.default.createElement(
-        "h1",
+        "li",
         null,
-        "Terms & Conditions"
-      ),
-      _react2.default.createElement(
-        "strong",
-        null,
-        "Effective: August 1, 2015"
-      ),
-      _react2.default.createElement("br", null),
-      _react2.default.createElement("br", null),
-      _react2.default.createElement(
-        "ol",
-        null,
+        "Acceptance of Terms.",
         _react2.default.createElement(
-          "li",
+          "ol",
           null,
-          "Acceptance of Terms.",
           _react2.default.createElement(
-            "ol",
+            "li",
             null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "This Terms of Service document is an agreement you must accept in order to use Phourus’ Service (as defined below). It is applicable to (a) “Owners” -- this includes Primary Owners who initially set up the Service and other Owners that are granted ownership privileges by the Primary Owner; (b) Administrators – those who manage and run a team, channel, or group (“Administrators”) (Owners and Administrators, collectively “Administrative Users”), and to c) Members – users who are invited to join an existing team that has already been created in the Service by an Administrator (“Members”). The terms “you” and “users” encompass all users, including both Administrative Users and Members. This document describes both your rights and your obligations as part of using the Service. It is important that you read it carefully because you will be legally bound to these terms. Phourus, Inc. (“Phourus” “we” “us”) only provides its Service (as defined below) to you subject to this TOS. By accepting this TOS or by accessing or using the Service, you agree to be bound by this TOS (including the Privacy Policy, which is incorporated here by reference)."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "If you are entering into this TOS on behalf of a company or other legal entity, you represent that you have the authority to bind such entity, its Members, its Administrative Users, and its affiliates to this TOS. In that case, the terms “you” or “your” shall also refer to such entity, its Members, its Administrative Users, and its affiliates, as applicable. If you do not have such authority, or if you do not agree with this TOS, you may not use the Service. You acknowledge that this TOS is a contract between you and Phourus, even though it is electronic and is not physically signed by you and Phourus, and it governs your use of the Service."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "If you are accessing the Service in your capacity as a United States government entity, there are special US Government Terms that may apply to you."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "As our business evolves, Phourus may change this TOS. If we make a material change to the TOS, we will provide you with reasonable notice prior to the changes either by emailing the email address associated with your account or by posting a notice on the Site. You can review the most current version of the TOS at any time by visiting this page. The revised terms and conditions will become effective on the date set forth in our notice, and if you use the Service after that date, your use will constitute acceptance of the revised terms and conditions. If any change to this TOS is not acceptable to you, your only remedy is to cancel your account and stop using the Services, which you may do by clicking here or otherwise through the process provided in the Service."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "As part of the registration process, you will identify an Owner’s user name (in the form of an email address) and password for your account. You may use these credentials to invite individuals to become Administrative Users and Members (each with their own password) under your account. The total number of users is limited to the maximum number permitted for your account. You are responsible for maintaining the confidentiality of your login, password, and account and for all activities that occur under your login or account, including the activities of Members."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "All users should be aware that your Administrative Users may have certain rights to access your account and may obtain related information in connection with the Services. The Administrators also set policies regarding your use of various aspects of the Services, including retention settings and the ability to preserve and export all communications in the account. As these rights may vary depending on the account, please see our FAQs for general information about account classifications, and refer to your Administrator if you have questions regarding your particular account such as your account settings. Please also see the Privacy Policy for more information on these topics. Administrators are solely responsible for informing members of the applicable company policies, obtaining any legally required member consent to such policies, and for ensuring that all uses of the Services comply with applicable federal, state and/or international privacy laws, including but not limited to, the Electronic Communications Privacy Act, 18 U.S.C. § 2510 et seq."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "By accessing or using the Services, you affirm that you are at least 18 years of age (or have reached the age of majority if that is not 18 years of age where you live). You represent that you are fully able and competent to enter into and comply with the terms and conditions in this TOS. The Service is not directed to children under 13, so if you are under 13 years of age, you are not permitted to access or use the Services. If we become aware that you are using the Service even though you are under 13, we will deactivate your account."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "If you are a school or teacher in the United States and want your students, who are over 13, to use the Service, including in conjunction with the establishment of a Service account for the school or a group of students at the school, you are responsible for complying with the U.S. Family Educational Rights and Privacy Act (“FERPA”). This means you must notify those students’ parents/guardians of the personally identifiable information you will collect and share with Slack and obtain parental/guardian consent before your students establish accounts or use the Service. When obtaining such consent, you should provide parents/guardians with a copy of our Privacy Policy. You must keep all consents on file and provide them to us if we request them. If you are located outside of the United States, we will rely upon you to obtain any required consent or approval from the parent or guardian of any student covered by similar laws and, as a condition to your and your students’ use of the Service, you will comply with such laws."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Description of Service.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "The “Service(s)” means (a) Phourus’ communication, posting, archiving and search services and related systems and technologies, as well as the website http://phourus.com, and (b) all software (including the Software, as defined below), applications, data, reports, text, images, and other content made available by or on behalf of Phourus through any of the foregoing. The “Service” does not include Your Data (as defined below) or any software application or service that is provided by you or a third party, which you use in connection with the Service, whether or not Phourus designates them as “official integrations” (each a “Non-Phourus Product”). Any modifications and new features added to the Service are also subject to this TOS. Phourus reserves the right to modify or discontinue the Service (or any Service plan) or any feature or functionality thereof at any time without notice to you. All rights, title and interest in and to the Service and its components (including all intellectual property rights) will remain with and belong exclusively to Phourus."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Access and Use of the Service.",
-          _react2.default.createElement(
-            "ol",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "You may access and use the Service only for lawful, authorized purposes and you shall not misuse the Service in any manner (as determined by Phourus in its sole discretion). See Section 6 for specific provisions outlining prohibited uses of the Service. Administrative Users shall be responsible for all actions by Members on their team. You shall comply with any codes of conduct, policies, storage limitations, or other notices Phourus provides you or publishes in connection with the Service from time to time, but if any of those policies materially change the TOS, we will provide you with reasonable notice as provided in Section 1.4 above. You shall promptly notify Phourus if you learn of a security breach related to the Service."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "Any software that may be made available by or on behalf of Phourus in connection with the Service, including Phourus’ mobile and desktop applications, (“Software”) contains proprietary and confidential information that is protected by applicable intellectual property and other laws. Subject to the terms and conditions of this TOS, Phourus only grants you a personal, non-sublicensable and non-exclusive license to use the object code of any Software solely in connection with the Service. Any rights not expressly granted herein are reserved."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "Phourus reserves the right to use your name as a reference for marketing or promotional purposes on the Site and in other communication with existing or potential Phourus customers. For example, we might list your company on one of our webpages under lists of Phourus customers. We don’t want to list customers who don’t want to be listed, so you may send an email to feedback@phourus.com stating that you do not wish to be used as a reference."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "Phourus may make available, in its sole discretion, a Phourus Application Programming Interface and related documentation, data, code, and other materials provided with the API (collectively “API”). You undertake use of the API at your own risk, and such use of this API is governed by this TOS and the Phourus API Terms of Service (“API TOS”) located at https://phourus.com/terms-of-service/api. You hereby agree to be bound by those terms, and acknowledge that violation of Phourus’ TOS or Phourus' API TOS is grounds for termination of Your Account."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Your Data Rights and Related Responsibilities.",
-          _react2.default.createElement(
-            "ol",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "\"Your Data\" means any data and content you upload, post, transmit or otherwise made available via the Services (which may include data you elect to import from Non-Phourus Products you use). \"Your Data\" includes messages you send, files you upload, comments you make on files, profile information and anything else you enter or upload into the Service. Phourus will make commercially reasonable efforts to ensure that all facilities used to store and process Your Data meet a high standard for security."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "In order for us to provide the Service to you, we require that you grant us certain rights with respect to Your Data. For example, we need to be able to transmit, store and copy Your Data in order to display it to you and your teammates, to index it so you are able to search it, to make backups to prevent data loss, and so on. Your acceptance of this TOS gives us the permission to do so and grants us any such rights necessary to provide the service to you, only for the purpose of providing the service (and for no other purpose). This permission includes allowing us to use third-party service providers (such as Amazon Web Services) in the operation and administration of the Service and the rights granted to us are extended to these third parties to the degree necessary in order for the Service to be provided."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "If any users send us any feedback or suggestions regarding the Service, you grant Phourus an unlimited, irrevocable, perpetual, free license to use any such feedback or suggestions for any purpose without any obligation to you."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "You are solely responsible for your conduct (including by and between all users), the content of Your Data, and all communications with others while using the Services. We may choose to review Public Content (as defined below) for compliance with our policies and guidelines, but you acknowledge that Phourus has no obligation to monitor any information on the Services. However, Phourus may remove or disable any Public Content at any time for any reason or for no reason at all. For example, if you upload files that do not belong to you and use the “Get Public Link” feature to make these files available publicly, we can delete those files. We are not responsible for the accuracy, appropriateness, or legality of Your Data or any other information you and your users may be able to access using the Services. The Services provide features that allow you and your users to share Your Data and other materials with others or to make it public. Please consider carefully what you allow to be shared or made public."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Payment",
-          _react2.default.createElement(
-            "ol",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "To the extent you use a Service plan that is made available for a fee, you will be required to select a payment plan and provide Phourus accurate information regarding your credit card or other payment instrument. You will promptly update your account information with any changes in your payment information. You agree to pay Phourus in accordance with the terms set forth on the Site and this TOS, and you authorize Phourus to bill your payment instrument in advance on a periodic basis in accordance with such terms."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "If you dispute any charges you must let Phourus know within sixty (60) days after the date that Phourus invoices you. All amounts paid are non-refundable and we reserve the right to change our prices in the future. If we increase our prices for your Service plan, we will provide notice of the change on the Site and in email to you at least 30 days before the change is to take effect. Your continued use of the Service after the price change goes into effect constitutes your agreement to pay the changed amount. Phourus may choose to bill you through an invoice, in which case, full payment for invoices issued must be received by the date specified in the invoice. Past due fees are subject to a finance charge of 1.5% per month on any outstanding balance, or the maximum permitted by law, whichever is lower, plus all expenses of collection. You shall be responsible for all taxes associated with Services other than U.S. taxes based on Phourus’ net income."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Representations and Warranties.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "You represent and warrant to Phourus that (i) you have full power and authority to enter into this TOS; (ii) you own all Your Data or have obtained all permissions, releases, rights or licenses required to engage in your activities (and allow Phourus to perform its obligations) in connection with the Services without obtaining any further releases or consents; and (iii) Your Data and your other activities in connection with the Service, and Slack’s exercise of all rights and license granted by you herein, do not and will not violate, infringe, or misappropriate any third party’s copyright, trademark, right of privacy or publicity, or other personal or proprietary right, nor does Your Data contain any matter that is defamatory, obscene, unlawful, threatening, abusive, tortious, offensive or harassing."
+            "This Terms of Service document is an agreement you must accept in order to use Phourus’ Service (as defined below). It is applicable to (a) “Owners” -- this includes Primary Owners who initially set up the Service and other Owners that are granted ownership privileges by the Primary Owner; (b) Administrators – those who manage and run a team, channel, or group (“Administrators”) (Owners and Administrators, collectively “Administrative Users”), and to c) Members – users who are invited to join an existing team that has already been created in the Service by an Administrator (“Members”). The terms “you” and “users” encompass all users, including both Administrative Users and Members. This document describes both your rights and your obligations as part of using the Service. It is important that you read it carefully because you will be legally bound to these terms. Phourus, Inc. (“Phourus” “we” “us”) only provides its Service (as defined below) to you subject to this TOS. By accepting this TOS or by accessing or using the Service, you agree to be bound by this TOS (including the Privacy Policy, which is incorporated here by reference)."
           ),
           _react2.default.createElement(
-            "p",
+            "li",
             null,
-            "You also agree not to:"
+            "If you are entering into this TOS on behalf of a company or other legal entity, you represent that you have the authority to bind such entity, its Members, its Administrative Users, and its affiliates to this TOS. In that case, the terms “you” or “your” shall also refer to such entity, its Members, its Administrative Users, and its affiliates, as applicable. If you do not have such authority, or if you do not agree with this TOS, you may not use the Service. You acknowledge that this TOS is a contract between you and Phourus, even though it is electronic and is not physically signed by you and Phourus, and it governs your use of the Service."
           ),
           _react2.default.createElement(
-            "ol",
-            { type: "a" },
-            _react2.default.createElement(
-              "li",
-              null,
-              "upload, post, transmit, or otherwise make available any of Your Data that is unlawful, harmful, threatening, abusive, harassing, tortious, defamatory, vulgar, obscene, libelous, invasive of another's privacy, hateful, or racially, ethnically, or otherwise objectionable;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "use the Service to harm minors in any way;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "impersonate any person or entity, including, but not limited to, a Phourus employee, Administrator, Owner, or other Member, or falsely state or otherwise misrepresent your affiliation with a person or entity;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "manipulate identifiers in order to disguise the origin of any of Your Data;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "upload, post, transmit, or otherwise make available any of Your Data that you do not have a right to make available under any law or under contractual or fiduciary relationships (such as inside information, proprietary and confidential information learned or disclosed as part of employment relationships or under nondisclosure agreements);"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "upload, post, transmit or otherwise make available any of Your Data in a manner that infringes any patent, trademark, trade secret, copyright or other proprietary rights of any party;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "sublicense, resell, rent, lease, transfer or assign (except as permitted in Section 16) the Service or its use, or offer the Service on a time share basis to any third party;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "use the Service to upload, post, transmit, or otherwise make available any unsolicited or unauthorized advertising, promotional materials, \"junk mail,\" \"spam,\" \"chain letters,\" \"pyramid schemes,\" or any other form of solicitation;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "use the Service to upload, post, transmit, or otherwise make available any software viruses or any other computer code, files or programs designed to interrupt, destroy or limit the functionality of any computer software or hardware;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "disrupt the normal flow of dialogue, or otherwise act in a manner that negatively affects other users' ability to engage in real time exchanges using the Service;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "interfere with or disrupt the Service or servers or networks connected to the Service, or disobey any requirements, procedures, policies or regulations of networks connected to the Service, including using any device or software;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "modify, adapt, or hack the Service, including by using any non-public Slack APIs, or otherwise attempt to gain unauthorized access to the Service or its related systems or networks."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "intentionally or unintentionally violate any applicable local, state, national or international law in connection with your use of the Service, including, but not limited to, any data, privacy, or export control laws, or regulations promulgated by the U.S. Securities and Exchange Commission, any rules of any national or other securities exchange, including, without limitation, the New York Stock Exchange, the American Stock Exchange, or the NASDAQ, and any regulations having the force of law;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "use the Service to provide material support or resources (or to conceal or disguise the nature, location, source, or ownership of material support or resources) to any organization(s) designated by the United States government as a foreign terrorist organization pursuant to section 219 of the Immigration and Nationality Act;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "use the Service to \"stalk\" or otherwise harass another; and/or"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "collect or store personal data about other users in connection with any of the prohibited conduct and activities set forth above."
-            )
+            "li",
+            null,
+            "If you are accessing the Service in your capacity as a United States government entity, there are special US Government Terms that may apply to you."
           ),
           _react2.default.createElement(
-            "p",
+            "li",
             null,
-            "You acknowledge that Phourus and its designees shall have the right (but not the obligation) in their sole discretion to pre-screen, refuse, or remove any of Your Data that is available via the Service. For example, we may choose to review publically visible content (“Public Content”) posted using the “Get Public Link” feature or other mechanism for sharing content outside of your non-public channel for compliance with our policies and guidelines. If, for instance, you upload files that do not belong to you and make these files available publicly, we can delete those files. We may also review Your Data transmitted through non-public mechanisms (such as non-public channels within the Service) where we deem appropriate, including for violations of this TOS or in response to a user complaint. Without limiting the foregoing, Phourus and its designees shall have the right to remove any of Your Data that violates the TOS or is otherwise objectionable. You must evaluate, and bear all risks associated with, the use of Your Data, including any reliance on the accuracy, completeness, or usefulness of Your Data."
+            "As our business evolves, Phourus may change this TOS. If we make a material change to the TOS, we will provide you with reasonable notice prior to the changes either by emailing the email address associated with your account or by posting a notice on the Site. You can review the most current version of the TOS at any time by visiting this page. The revised terms and conditions will become effective on the date set forth in our notice, and if you use the Service after that date, your use will constitute acceptance of the revised terms and conditions. If any change to this TOS is not acceptable to you, your only remedy is to cancel your account and stop using the Services, which you may do by clicking here or otherwise through the process provided in the Service."
           ),
           _react2.default.createElement(
-            "p",
+            "li",
             null,
-            "You acknowledge, consent and agree that Phourus may access, preserve and disclose your account information and Your Data if required to do so by law or in a good faith belief that such access preservation or disclosure is reasonably necessary to: (i) comply with legal process; (ii) enforce the TOS; (iii) respond to claims that any of Your Data violates the rights of third parties; (iv) respond to your requests for customer service; or (v) protect the rights, property or personal safety of Phourus, its users and the public."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Term; Termination.",
-          _react2.default.createElement(
-            "ol",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "This TOS will continue in full effect unless and until your account or this TOS is terminated as described herein. Service plans that are paid monthly will automatically renew for additional months, and Service plans that are paid annually will automatically renew for additional years. You have the right to deactivate your account at any time. Only Primary Owners have the ability to deactivate and delete team accounts."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "We reserve the right to deactivate and delete your account (or the access privileges of any Member) and terminate this TOS at any time for any reason, or no reason, with or without notice. Without limiting the foregoing, Phourus may, in its sole discretion, publish policies whereby we delete your account for prolonged inactivity. Upon any termination of this TOS, we will have no obligation to maintain or provide Your Data. If your team’s account is deleted, we will delete or destroy all copies of Your Data in our possession or control, in a reasonably expedient way, unless legally prohibited."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "Please see our Privacy Policy at https://phourus.com/privacy-policy for more information about the choices you have regarding Your Data."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "All accrued rights to payment and the terms of Section 5 and Sections 8 through 20 shall survive termination of this TOS."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Disclaimer of Warranties.",
-          _react2.default.createElement(
-            "ol",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "The Services may be temporarily unavailable for scheduled maintenance or for unscheduled emergency maintenance, or because of other causes beyond our reasonable control, but Slack shall use reasonable efforts to provide advance notice of any material scheduled service disruption. Further, you understand that Your Data may be transmitted or handled in an unencrypted manner if you choose to use unencrypted gateways to connect to the Service. Additionally, while Phourus takes steps to ensure that information provided to its third party vendors and hosting partners is transmitted using reasonable security measures, it does not guarantee that these transmissions will be encrypted. Accordingly, you acknowledge that you bear sole responsibility for adequate security, protection and backup of Your Data. Phourus will have no liability to you for any unauthorized access or use of any of Your Data, or any corruption, deletion, destruction or loss of any of Your Data."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "THE SERVICE AND ALL RELATED COMPONENTS AND INFORMATION ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS WITHOUT ANY WARRANTIES OF ANY KIND, AND PHOURUS EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, TITLE, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. YOU ACKNOWLEDGE THAT PHOURUS DOES NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, TIMELY, SECURE, ERROR-FREE OR VIRUS-FREE, NOR DOES IT MAKE ANY WARRANTY AS TO THE RESULTS THAT MAY BE OBTAINED FROM USE OF THE SERVICES, AND NO INFORMATION, ADVICE OR SERVICES OBTAINED BY YOU FROM PHOURUS OR THROUGH THE SERVICE SHALL CREATE ANY WARRANTY NOT EXPRESSLY STATED IN THIS TOS."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Limitation of Liability.",
-          _react2.default.createElement(
-            "ol",
-            null,
-            _react2.default.createElement(
-              "li",
-              null,
-              "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY (WHETHER IN CONTRACT, TORT, OR OTHERWISE) SHALL PHOURUS BE LIABLE TO YOU OR ANY THIRD PARTY FOR (A) ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST SALES OR BUSINESS, LOST DATA, OR (B) FOR ANY AMOUNT IN THE AGGREGATE IN EXCESS OF THE FEES ACTUALLY PAID BY YOU IN THE SIX (6) MONTHS PRECEDING THE EVENT GIVING RISE TO YOUR CLAIM OR, IF NO FEES APPLY, FIVE HUNDRED ($500) U.S. DOLLARS, OR (C) ANY MATTER BEYOND OUR REASONABLE CONTROL. THE PROVISIONS OF THIS SECTION ALLOCATE THE RISKS UNDER THIS TOS BETWEEN THE PARTIES, AND THE PARTIES HAVE RELIED ON THESE LIMITATIONS IN DETERMINING WHETHER TO ENTER INTO THIS TOS."
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "Some jurisdictions do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply to you. IN THESE JURISDICTIONS, PHOURUS’ LIABILITY WILL BE LIMITED TO THE GREATEST EXTENT PERMITTED BY LAW."
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "STATUTE OF LIMITATIONS.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "Regardless of any statute or law to the contrary or the applicable dispute resolution process, an informal complaint pertaining to any Claim or cause of action arising out of or related to use of the Service or under the TOS must be filed with Phourus within one (1) year after such Claim or cause of action arose or be forever barred. For Claims pursuant to the exceptions identified in Section 10.4, these Claims must be filed with the appropriate court within three (3) years after such claim or cause of action arose or be forever barred."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "NOTICE AND PROCEDURE FOR MAKING CLAIMS OF COPYRIGHT OR INTELLECTUAL PROPERTY INFRINGEMENT",
-          _react2.default.createElement(
-            "p",
-            null,
-            "We respect the intellectual property of others, and we ask our users to do the same. We may, in appropriate circumstances and at its discretion, disable and/or terminate the accounts of users who may be repeat infringers. If you believe that your work has been copied in a way that constitutes copyright infringement, or your intellectual property rights have been otherwise violated, please provide Phourus' Copyright Agent the following information:"
+            "As part of the registration process, you will identify an Owner’s user name (in the form of an email address) and password for your account. You may use these credentials to invite individuals to become Administrative Users and Members (each with their own password) under your account. The total number of users is limited to the maximum number permitted for your account. You are responsible for maintaining the confidentiality of your login, password, and account and for all activities that occur under your login or account, including the activities of Members."
           ),
           _react2.default.createElement(
-            "ol",
-            { type: "a" },
-            _react2.default.createElement(
-              "li",
-              null,
-              "an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright or other intellectual property interest;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "a description of the copyrighted work or other intellectual property that you claim has been infringed;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "a description of where the material that you claim is infringing is located on the site;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "your address, telephone number, and email address;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "a statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law;"
-            ),
-            _react2.default.createElement(
-              "li",
-              null,
-              "a statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright or intellectual property owner or authorized to act on the copyright or intellectual property owner's behalf."
-            )
+            "li",
+            null,
+            "All users should be aware that your Administrative Users may have certain rights to access your account and may obtain related information in connection with the Services. The Administrators also set policies regarding your use of various aspects of the Services, including retention settings and the ability to preserve and export all communications in the account. As these rights may vary depending on the account, please see our FAQs for general information about account classifications, and refer to your Administrator if you have questions regarding your particular account such as your account settings. Please also see the Privacy Policy for more information on these topics. Administrators are solely responsible for informing members of the applicable company policies, obtaining any legally required member consent to such policies, and for ensuring that all uses of the Services comply with applicable federal, state and/or international privacy laws, including but not limited to, the Electronic Communications Privacy Act, 18 U.S.C. § 2510 et seq."
           ),
           _react2.default.createElement(
-            "p",
+            "li",
             null,
-            "Phourus' Agent for Notice of claims of copyright or other intellectual property infringement can be reached as follows:"
+            "By accessing or using the Services, you affirm that you are at least 18 years of age (or have reached the age of majority if that is not 18 years of age where you live). You represent that you are fully able and competent to enter into and comply with the terms and conditions in this TOS. The Service is not directed to children under 13, so if you are under 13 years of age, you are not permitted to access or use the Services. If we become aware that you are using the Service even though you are under 13, we will deactivate your account."
           ),
           _react2.default.createElement(
-            "p",
+            "li",
             null,
-            "By mail:",
-            _react2.default.createElement("br", null),
-            "Copyright Agent",
-            _react2.default.createElement("br", null),
-            "c/o Phourus, Inc.",
-            _react2.default.createElement("br", null),
-            "929 Colorado Ave",
-            _react2.default.createElement("br", null),
-            "Santa Monica, CA 90401",
-            _react2.default.createElement("br", null),
-            _react2.default.createElement("br", null),
-            "By email: feedback@phourus.com"
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Indemnification.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "You shall defend, indemnify, and hold harmless Phourus from and against any claims, actions or demands, including without limitation reasonable legal and accounting fees, arising or resulting from your breach of this TOS, any of Your Data, or your (and your Members’) use or misuse of the Service. Phourus shall provide notice to you of any such claim, suit or demand. Phourus reserves the right to conduct the exclusive defense and control of any matter that is subject to indemnification under this section. In such case, you agree to cooperate with any reasonable requests assisting Phourus’ defense of such matters."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Enforceability.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "If any provision of this TOS is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary so that this TOS will otherwise remain in full force and effect and enforceable."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Integration, Modification, and Authority.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "This TOS is the complete and exclusive statement of the mutual understanding of the parties and supersedes and cancels all previous written and oral agreements, communications and other understandings relating to the subject matter of this TOS. All waivers and modifications to this TOS must be in a writing signed by both parties that expressly by its terms modifies or waives a provision of this TOS, except as otherwise provided herein. No agency, partnership, joint venture, or employment is created as a result of this TOS and you do not have any authority of any kind to bind Phourus in any respect whatsoever."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Assignment.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "You may not assign this TOS without the prior written consent of Phourus, except, if you are a company or other legal entity, you may assign this TOS in connection with a merger, re-organization or acquisition of all or a substantial portion of your assets by another company, but only upon 30-days prior notice to Phourus. Phourus may assign or transfer this TOS, in whole or in part, without restriction."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Notices.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "Except as otherwise set forth herein, all notices under this TOS will be in writing and will be deemed to have been duly given when received, if personally delivered; when receipt is electronically confirmed, if transmitted by facsimile or email; the day after it is sent, if sent for next day delivery by recognized overnight delivery service; and upon receipt, if sent by certified or registered mail, return receipt requested."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Choice of Law and Forum.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "The TOS and the relationship between the parties shall be governed by the laws of the State of California without regard to its conflict of law."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Waiver and Severability of Terms.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "The failure of Phourus to exercise or enforce any right or provision of the TOS shall not constitute a waiver of such right or provision."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "No Right of Survivorship and Non-Transferability.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "If you are a living person, you agree that your account is non-transferable and your rights to the content within your account terminate upon your death, however the content may be thereafter be available and accessible by Administrative Users."
-          )
-        ),
-        _react2.default.createElement(
-          "li",
-          null,
-          "Government Users.",
-          _react2.default.createElement(
-            "p",
-            null,
-            "Nothing herein makes Phourus a government contractor. If you are a government user or otherwise accessing or using the Phourus Service in a government capacity, the Amendment to Phourus TOS for Government Users located at https://phourus.com/terms-of-service/government shall apply to you."
+            "If you are a school or teacher in the United States and want your students, who are over 13, to use the Service, including in conjunction with the establishment of a Service account for the school or a group of students at the school, you are responsible for complying with the U.S. Family Educational Rights and Privacy Act (“FERPA”). This means you must notify those students’ parents/guardians of the personally identifiable information you will collect and share with Slack and obtain parental/guardian consent before your students establish accounts or use the Service. When obtaining such consent, you should provide parents/guardians with a copy of our Privacy Policy. You must keep all consents on file and provide them to us if we request them. If you are located outside of the United States, we will rely upon you to obtain any required consent or approval from the parent or guardian of any student covered by similar laws and, as a condition to your and your students’ use of the Service, you will comply with such laws."
           )
         )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Description of Service.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "The “Service(s)” means (a) Phourus’ communication, posting, archiving and search services and related systems and technologies, as well as the website http://phourus.com, and (b) all software (including the Software, as defined below), applications, data, reports, text, images, and other content made available by or on behalf of Phourus through any of the foregoing. The “Service” does not include Your Data (as defined below) or any software application or service that is provided by you or a third party, which you use in connection with the Service, whether or not Phourus designates them as “official integrations” (each a “Non-Phourus Product”). Any modifications and new features added to the Service are also subject to this TOS. Phourus reserves the right to modify or discontinue the Service (or any Service plan) or any feature or functionality thereof at any time without notice to you. All rights, title and interest in and to the Service and its components (including all intellectual property rights) will remain with and belong exclusively to Phourus."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Access and Use of the Service.",
+        _react2.default.createElement(
+          "ol",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "You may access and use the Service only for lawful, authorized purposes and you shall not misuse the Service in any manner (as determined by Phourus in its sole discretion). See Section 6 for specific provisions outlining prohibited uses of the Service. Administrative Users shall be responsible for all actions by Members on their team. You shall comply with any codes of conduct, policies, storage limitations, or other notices Phourus provides you or publishes in connection with the Service from time to time, but if any of those policies materially change the TOS, we will provide you with reasonable notice as provided in Section 1.4 above. You shall promptly notify Phourus if you learn of a security breach related to the Service."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "Any software that may be made available by or on behalf of Phourus in connection with the Service, including Phourus’ mobile and desktop applications, (“Software”) contains proprietary and confidential information that is protected by applicable intellectual property and other laws. Subject to the terms and conditions of this TOS, Phourus only grants you a personal, non-sublicensable and non-exclusive license to use the object code of any Software solely in connection with the Service. Any rights not expressly granted herein are reserved."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "Phourus reserves the right to use your name as a reference for marketing or promotional purposes on the Site and in other communication with existing or potential Phourus customers. For example, we might list your company on one of our webpages under lists of Phourus customers. We don’t want to list customers who don’t want to be listed, so you may send an email to feedback@phourus.com stating that you do not wish to be used as a reference."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "Phourus may make available, in its sole discretion, a Phourus Application Programming Interface and related documentation, data, code, and other materials provided with the API (collectively “API”). You undertake use of the API at your own risk, and such use of this API is governed by this TOS and the Phourus API Terms of Service (“API TOS”) located at https://phourus.com/terms-of-service/api. You hereby agree to be bound by those terms, and acknowledge that violation of Phourus’ TOS or Phourus' API TOS is grounds for termination of Your Account."
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Your Data Rights and Related Responsibilities.",
+        _react2.default.createElement(
+          "ol",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "\"Your Data\" means any data and content you upload, post, transmit or otherwise made available via the Services (which may include data you elect to import from Non-Phourus Products you use). \"Your Data\" includes messages you send, files you upload, comments you make on files, profile information and anything else you enter or upload into the Service. Phourus will make commercially reasonable efforts to ensure that all facilities used to store and process Your Data meet a high standard for security."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "In order for us to provide the Service to you, we require that you grant us certain rights with respect to Your Data. For example, we need to be able to transmit, store and copy Your Data in order to display it to you and your teammates, to index it so you are able to search it, to make backups to prevent data loss, and so on. Your acceptance of this TOS gives us the permission to do so and grants us any such rights necessary to provide the service to you, only for the purpose of providing the service (and for no other purpose). This permission includes allowing us to use third-party service providers (such as Amazon Web Services) in the operation and administration of the Service and the rights granted to us are extended to these third parties to the degree necessary in order for the Service to be provided."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "If any users send us any feedback or suggestions regarding the Service, you grant Phourus an unlimited, irrevocable, perpetual, free license to use any such feedback or suggestions for any purpose without any obligation to you."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "You are solely responsible for your conduct (including by and between all users), the content of Your Data, and all communications with others while using the Services. We may choose to review Public Content (as defined below) for compliance with our policies and guidelines, but you acknowledge that Phourus has no obligation to monitor any information on the Services. However, Phourus may remove or disable any Public Content at any time for any reason or for no reason at all. For example, if you upload files that do not belong to you and use the “Get Public Link” feature to make these files available publicly, we can delete those files. We are not responsible for the accuracy, appropriateness, or legality of Your Data or any other information you and your users may be able to access using the Services. The Services provide features that allow you and your users to share Your Data and other materials with others or to make it public. Please consider carefully what you allow to be shared or made public."
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Payment",
+        _react2.default.createElement(
+          "ol",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "To the extent you use a Service plan that is made available for a fee, you will be required to select a payment plan and provide Phourus accurate information regarding your credit card or other payment instrument. You will promptly update your account information with any changes in your payment information. You agree to pay Phourus in accordance with the terms set forth on the Site and this TOS, and you authorize Phourus to bill your payment instrument in advance on a periodic basis in accordance with such terms."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "If you dispute any charges you must let Phourus know within sixty (60) days after the date that Phourus invoices you. All amounts paid are non-refundable and we reserve the right to change our prices in the future. If we increase our prices for your Service plan, we will provide notice of the change on the Site and in email to you at least 30 days before the change is to take effect. Your continued use of the Service after the price change goes into effect constitutes your agreement to pay the changed amount. Phourus may choose to bill you through an invoice, in which case, full payment for invoices issued must be received by the date specified in the invoice. Past due fees are subject to a finance charge of 1.5% per month on any outstanding balance, or the maximum permitted by law, whichever is lower, plus all expenses of collection. You shall be responsible for all taxes associated with Services other than U.S. taxes based on Phourus’ net income."
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Representations and Warranties.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "You represent and warrant to Phourus that (i) you have full power and authority to enter into this TOS; (ii) you own all Your Data or have obtained all permissions, releases, rights or licenses required to engage in your activities (and allow Phourus to perform its obligations) in connection with the Services without obtaining any further releases or consents; and (iii) Your Data and your other activities in connection with the Service, and Slack’s exercise of all rights and license granted by you herein, do not and will not violate, infringe, or misappropriate any third party’s copyright, trademark, right of privacy or publicity, or other personal or proprietary right, nor does Your Data contain any matter that is defamatory, obscene, unlawful, threatening, abusive, tortious, offensive or harassing."
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          "You also agree not to:"
+        ),
+        _react2.default.createElement(
+          "ol",
+          { type: "a" },
+          _react2.default.createElement(
+            "li",
+            null,
+            "upload, post, transmit, or otherwise make available any of Your Data that is unlawful, harmful, threatening, abusive, harassing, tortious, defamatory, vulgar, obscene, libelous, invasive of another's privacy, hateful, or racially, ethnically, or otherwise objectionable;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "use the Service to harm minors in any way;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "impersonate any person or entity, including, but not limited to, a Phourus employee, Administrator, Owner, or other Member, or falsely state or otherwise misrepresent your affiliation with a person or entity;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "manipulate identifiers in order to disguise the origin of any of Your Data;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "upload, post, transmit, or otherwise make available any of Your Data that you do not have a right to make available under any law or under contractual or fiduciary relationships (such as inside information, proprietary and confidential information learned or disclosed as part of employment relationships or under nondisclosure agreements);"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "upload, post, transmit or otherwise make available any of Your Data in a manner that infringes any patent, trademark, trade secret, copyright or other proprietary rights of any party;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "sublicense, resell, rent, lease, transfer or assign (except as permitted in Section 16) the Service or its use, or offer the Service on a time share basis to any third party;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "use the Service to upload, post, transmit, or otherwise make available any unsolicited or unauthorized advertising, promotional materials, \"junk mail,\" \"spam,\" \"chain letters,\" \"pyramid schemes,\" or any other form of solicitation;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "use the Service to upload, post, transmit, or otherwise make available any software viruses or any other computer code, files or programs designed to interrupt, destroy or limit the functionality of any computer software or hardware;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "disrupt the normal flow of dialogue, or otherwise act in a manner that negatively affects other users' ability to engage in real time exchanges using the Service;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "interfere with or disrupt the Service or servers or networks connected to the Service, or disobey any requirements, procedures, policies or regulations of networks connected to the Service, including using any device or software;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "modify, adapt, or hack the Service, including by using any non-public Slack APIs, or otherwise attempt to gain unauthorized access to the Service or its related systems or networks."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "intentionally or unintentionally violate any applicable local, state, national or international law in connection with your use of the Service, including, but not limited to, any data, privacy, or export control laws, or regulations promulgated by the U.S. Securities and Exchange Commission, any rules of any national or other securities exchange, including, without limitation, the New York Stock Exchange, the American Stock Exchange, or the NASDAQ, and any regulations having the force of law;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "use the Service to provide material support or resources (or to conceal or disguise the nature, location, source, or ownership of material support or resources) to any organization(s) designated by the United States government as a foreign terrorist organization pursuant to section 219 of the Immigration and Nationality Act;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "use the Service to \"stalk\" or otherwise harass another; and/or"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "collect or store personal data about other users in connection with any of the prohibited conduct and activities set forth above."
+          )
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          "You acknowledge that Phourus and its designees shall have the right (but not the obligation) in their sole discretion to pre-screen, refuse, or remove any of Your Data that is available via the Service. For example, we may choose to review publically visible content (“Public Content”) posted using the “Get Public Link” feature or other mechanism for sharing content outside of your non-public channel for compliance with our policies and guidelines. If, for instance, you upload files that do not belong to you and make these files available publicly, we can delete those files. We may also review Your Data transmitted through non-public mechanisms (such as non-public channels within the Service) where we deem appropriate, including for violations of this TOS or in response to a user complaint. Without limiting the foregoing, Phourus and its designees shall have the right to remove any of Your Data that violates the TOS or is otherwise objectionable. You must evaluate, and bear all risks associated with, the use of Your Data, including any reliance on the accuracy, completeness, or usefulness of Your Data."
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          "You acknowledge, consent and agree that Phourus may access, preserve and disclose your account information and Your Data if required to do so by law or in a good faith belief that such access preservation or disclosure is reasonably necessary to: (i) comply with legal process; (ii) enforce the TOS; (iii) respond to claims that any of Your Data violates the rights of third parties; (iv) respond to your requests for customer service; or (v) protect the rights, property or personal safety of Phourus, its users and the public."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Term; Termination.",
+        _react2.default.createElement(
+          "ol",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "This TOS will continue in full effect unless and until your account or this TOS is terminated as described herein. Service plans that are paid monthly will automatically renew for additional months, and Service plans that are paid annually will automatically renew for additional years. You have the right to deactivate your account at any time. Only Primary Owners have the ability to deactivate and delete team accounts."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "We reserve the right to deactivate and delete your account (or the access privileges of any Member) and terminate this TOS at any time for any reason, or no reason, with or without notice. Without limiting the foregoing, Phourus may, in its sole discretion, publish policies whereby we delete your account for prolonged inactivity. Upon any termination of this TOS, we will have no obligation to maintain or provide Your Data. If your team’s account is deleted, we will delete or destroy all copies of Your Data in our possession or control, in a reasonably expedient way, unless legally prohibited."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "Please see our Privacy Policy at https://phourus.com/privacy-policy for more information about the choices you have regarding Your Data."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "All accrued rights to payment and the terms of Section 5 and Sections 8 through 20 shall survive termination of this TOS."
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Disclaimer of Warranties.",
+        _react2.default.createElement(
+          "ol",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "The Services may be temporarily unavailable for scheduled maintenance or for unscheduled emergency maintenance, or because of other causes beyond our reasonable control, but Slack shall use reasonable efforts to provide advance notice of any material scheduled service disruption. Further, you understand that Your Data may be transmitted or handled in an unencrypted manner if you choose to use unencrypted gateways to connect to the Service. Additionally, while Phourus takes steps to ensure that information provided to its third party vendors and hosting partners is transmitted using reasonable security measures, it does not guarantee that these transmissions will be encrypted. Accordingly, you acknowledge that you bear sole responsibility for adequate security, protection and backup of Your Data. Phourus will have no liability to you for any unauthorized access or use of any of Your Data, or any corruption, deletion, destruction or loss of any of Your Data."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "THE SERVICE AND ALL RELATED COMPONENTS AND INFORMATION ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS WITHOUT ANY WARRANTIES OF ANY KIND, AND PHOURUS EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, TITLE, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. YOU ACKNOWLEDGE THAT PHOURUS DOES NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, TIMELY, SECURE, ERROR-FREE OR VIRUS-FREE, NOR DOES IT MAKE ANY WARRANTY AS TO THE RESULTS THAT MAY BE OBTAINED FROM USE OF THE SERVICES, AND NO INFORMATION, ADVICE OR SERVICES OBTAINED BY YOU FROM PHOURUS OR THROUGH THE SERVICE SHALL CREATE ANY WARRANTY NOT EXPRESSLY STATED IN THIS TOS."
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Limitation of Liability.",
+        _react2.default.createElement(
+          "ol",
+          null,
+          _react2.default.createElement(
+            "li",
+            null,
+            "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY (WHETHER IN CONTRACT, TORT, OR OTHERWISE) SHALL PHOURUS BE LIABLE TO YOU OR ANY THIRD PARTY FOR (A) ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, CONSEQUENTIAL OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST SALES OR BUSINESS, LOST DATA, OR (B) FOR ANY AMOUNT IN THE AGGREGATE IN EXCESS OF THE FEES ACTUALLY PAID BY YOU IN THE SIX (6) MONTHS PRECEDING THE EVENT GIVING RISE TO YOUR CLAIM OR, IF NO FEES APPLY, FIVE HUNDRED ($500) U.S. DOLLARS, OR (C) ANY MATTER BEYOND OUR REASONABLE CONTROL. THE PROVISIONS OF THIS SECTION ALLOCATE THE RISKS UNDER THIS TOS BETWEEN THE PARTIES, AND THE PARTIES HAVE RELIED ON THESE LIMITATIONS IN DETERMINING WHETHER TO ENTER INTO THIS TOS."
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "Some jurisdictions do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply to you. IN THESE JURISDICTIONS, PHOURUS’ LIABILITY WILL BE LIMITED TO THE GREATEST EXTENT PERMITTED BY LAW."
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "STATUTE OF LIMITATIONS.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "Regardless of any statute or law to the contrary or the applicable dispute resolution process, an informal complaint pertaining to any Claim or cause of action arising out of or related to use of the Service or under the TOS must be filed with Phourus within one (1) year after such Claim or cause of action arose or be forever barred. For Claims pursuant to the exceptions identified in Section 10.4, these Claims must be filed with the appropriate court within three (3) years after such claim or cause of action arose or be forever barred."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "NOTICE AND PROCEDURE FOR MAKING CLAIMS OF COPYRIGHT OR INTELLECTUAL PROPERTY INFRINGEMENT",
+        _react2.default.createElement(
+          "p",
+          null,
+          "We respect the intellectual property of others, and we ask our users to do the same. We may, in appropriate circumstances and at its discretion, disable and/or terminate the accounts of users who may be repeat infringers. If you believe that your work has been copied in a way that constitutes copyright infringement, or your intellectual property rights have been otherwise violated, please provide Phourus' Copyright Agent the following information:"
+        ),
+        _react2.default.createElement(
+          "ol",
+          { type: "a" },
+          _react2.default.createElement(
+            "li",
+            null,
+            "an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright or other intellectual property interest;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "a description of the copyrighted work or other intellectual property that you claim has been infringed;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "a description of where the material that you claim is infringing is located on the site;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "your address, telephone number, and email address;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "a statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law;"
+          ),
+          _react2.default.createElement(
+            "li",
+            null,
+            "a statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright or intellectual property owner or authorized to act on the copyright or intellectual property owner's behalf."
+          )
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          "Phourus' Agent for Notice of claims of copyright or other intellectual property infringement can be reached as follows:"
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          "By mail:",
+          _react2.default.createElement("br", null),
+          "Copyright Agent",
+          _react2.default.createElement("br", null),
+          "c/o Phourus, Inc.",
+          _react2.default.createElement("br", null),
+          "929 Colorado Ave",
+          _react2.default.createElement("br", null),
+          "Santa Monica, CA 90401",
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("br", null),
+          "By email: feedback@phourus.com"
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Indemnification.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "You shall defend, indemnify, and hold harmless Phourus from and against any claims, actions or demands, including without limitation reasonable legal and accounting fees, arising or resulting from your breach of this TOS, any of Your Data, or your (and your Members’) use or misuse of the Service. Phourus shall provide notice to you of any such claim, suit or demand. Phourus reserves the right to conduct the exclusive defense and control of any matter that is subject to indemnification under this section. In such case, you agree to cooperate with any reasonable requests assisting Phourus’ defense of such matters."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Enforceability.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "If any provision of this TOS is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary so that this TOS will otherwise remain in full force and effect and enforceable."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Integration, Modification, and Authority.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "This TOS is the complete and exclusive statement of the mutual understanding of the parties and supersedes and cancels all previous written and oral agreements, communications and other understandings relating to the subject matter of this TOS. All waivers and modifications to this TOS must be in a writing signed by both parties that expressly by its terms modifies or waives a provision of this TOS, except as otherwise provided herein. No agency, partnership, joint venture, or employment is created as a result of this TOS and you do not have any authority of any kind to bind Phourus in any respect whatsoever."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Assignment.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "You may not assign this TOS without the prior written consent of Phourus, except, if you are a company or other legal entity, you may assign this TOS in connection with a merger, re-organization or acquisition of all or a substantial portion of your assets by another company, but only upon 30-days prior notice to Phourus. Phourus may assign or transfer this TOS, in whole or in part, without restriction."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Notices.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "Except as otherwise set forth herein, all notices under this TOS will be in writing and will be deemed to have been duly given when received, if personally delivered; when receipt is electronically confirmed, if transmitted by facsimile or email; the day after it is sent, if sent for next day delivery by recognized overnight delivery service; and upon receipt, if sent by certified or registered mail, return receipt requested."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Choice of Law and Forum.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "The TOS and the relationship between the parties shall be governed by the laws of the State of California without regard to its conflict of law."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Waiver and Severability of Terms.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "The failure of Phourus to exercise or enforce any right or provision of the TOS shall not constitute a waiver of such right or provision."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "No Right of Survivorship and Non-Transferability.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "If you are a living person, you agree that your account is non-transferable and your rights to the content within your account terminate upon your death, however the content may be thereafter be available and accessible by Administrative Users."
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        "Government Users.",
+        _react2.default.createElement(
+          "p",
+          null,
+          "Nothing herein makes Phourus a government contractor. If you are a government user or otherwise accessing or using the Phourus Service in a government capacity, the Amendment to Phourus TOS for Government Users located at https://phourus.com/terms-of-service/government shall apply to you."
+        )
       )
-    );
-  }
-});
-
-exports.default = Terms;
+    )
+  );
+};
 
 /***/ },
 /* 595 */
