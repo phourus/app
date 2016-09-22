@@ -64,6 +64,8 @@
     "css-loader": "^0.24.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "postcss-loader": "^0.13.0",
+    "postcss-modules-values": "^1.2.2",
     "style-loader": "^0.13.1",
     "webpack": "^2.1.0-beta.22"
   },

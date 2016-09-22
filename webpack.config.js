@@ -1,6 +1,7 @@
 require('babel-polyfill');
 var path = require('path');
 var webpack = require('webpack');
+var values = require('postcss-modules-values');
 
 module.exports = {
   devtool: 'source-map',
@@ -37,9 +38,12 @@ module.exports = {
       // },
       {
         test: /\.module.css$/,
-        loaders: ['style?sourcemap', 'css?modules&importLoaders=localIdentName=[name]__[local]___[hash:base64:5]'],
+        loaders: ['style?sourcemap', 'css?modules&importLoaders=localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader'],
         include: path.join(__dirname, 'src/')
       }
     ]
-  }
+  },
+  postcss: [
+    values
+  ]
 };

@@ -1,0 +1,52 @@
+/** SANS SERIF **/
+@arial: Arial, Helvetica, Verdana, sans-serif;
+@value arial-black: "Arial Black", Gadget, @arial;
+@value impact: Impact, "Arial Black", Gadget, @arial;
+@value trebuchet: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", @arial;
+@value geneva: Geneva, Tahoma, @arial;
+
+/** SERIF **/
+@value georgia: Georgia, serif;
+@value times: "Times New Roman", Times, serif;
+@value palatino: Palatino, "Palatino Linotype", "Book Antiqua", serif;
+
+/** MONOSPACE **/
+@value mono: "Courier New", Courier, monospace;
+@value monaco: Monaco, "Lucida Console", monospace;
+
+@value century: @trebuchet;
+@value perpetua: @palatino;
+
+/** COLORS **/
+@value background: #EDEDED;
+@value theme: #333;
+@value theme-dark: #222;
+@value theme-light: #444;
+@value off-white: #fafafa;
+@value form-border: #E4E5E6;
+@value form-background: #F6F7F9;
+
+@value gold: #ECB010;
+@value blue: #3498DB;
+@value green: #8ABF00;
+@value red: #ED0303;
+@value grey: #DDD;
+
+@value gold-light: lighten(@gold, 10%);
+@value blue-light: lighten(@blue, 10%);
+@value green-light: lighten(@green, 5%);
+@value red-light: lighten(@red, 10%);
+@value grey-light: #eee;
+
+@value gold-dark: darken(@gold, 10%);
+@value blue-dark: darken(@blue, 10%);
+@value green-dark: darken(@green, 10%);
+@value red-dark: darken(@red, 10%);
+@value grey-dark: #444;
+
+//@value font-serif: 'rokkitt', @palatino;
+@value font-sans: 'open sans', @arial;
+@value font-serif: @font-sans;
+@value font-mono: @mono;
+
+// Other greys: 444, 777, AAA, BBB, DDD
