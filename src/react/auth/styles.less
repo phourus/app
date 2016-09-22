@@ -2,3 +2,55 @@
 @import 'css/login.less';
 @import 'css/reset.less';
 @import 'css/signup.less';
+
+.auth {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.actions {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+
+  button {
+    margin: 4px auto;
+    background-color: transparent;
+    color: #fff;
+    border: solid 1px #fff;
+
+    &:hover {
+      border: solid 1px;
+
+      &.green {
+        color: @green-light;
+        border-color: @green-light;
+      }
+
+      &.blue {
+        color: @blue-light;
+        border-color: @blue-light;
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) {
+
+    .auth {
+
+      .actions {
+        bottom: 40px;
+
+        button {
+          display: inline-block;
+          margin-right: 4px;
+        }
+      }
+    }
+  }
+}

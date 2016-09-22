@@ -1,0 +1,73 @@
+.engagement {
+  border-bottom: solid 1px #ccc;
+  margin: 20px 10px;
+  padding: 10px 0;
+}
+
+.gradient {
+  display: none;
+  text-align: center;
+  margin: auto;
+}
+
+.img {
+  width: 100%;
+}
+
+.pyramid {
+  width: 90%;
+  margin: auto;
+}
+
+.quotes {
+  margin: 0;
+  padding: 0;
+}
+
+.quote {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.i {
+  color: @blue-light;
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+.span {
+  font-size: 1.5em;
+}
+
+@media (min-width: 500px) {
+
+  .gradient {
+    display: block;
+    width: 90%;
+  }
+
+  .pyramid {
+    width: 60%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .quotes {
+    display: inline-block;
+    width: 40%;
+    vertical-align: middle;
+  }
+
+  .quote {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 800px) {
+
+  .result {
+    display: inline-block;
+    width: 20%;
+  }
+}

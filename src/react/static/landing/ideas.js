@@ -1,6 +1,8 @@
 import React from 'react'
 
-const slides = [
+import styles from './css/ideas.module.css'
+
+const SLIDES = [
   {
     title: 'The Sticky Note',
     text: "Did you know that the sticky note came from a scientist who made a \
@@ -61,13 +63,13 @@ export default class Ideas extends React.Component {
 
   render() {
     let { selected } = this.state
-    let slide = slides[selected]
+    let slide = SLIDES[selected]
     return (
-      <div className="ideas">
+      <div className={styles.ideas}>
         <h2>Find Great Ideas</h2>
-        <div className="slides">
+        <div className={styles.slides}>
           <ul>
-            {slides.map((item, index) => {
+            {SLIDES.map((item, index) => {
               return <li key={item.img} onClick={this.select.bind(this, index)}><img src={`/assets/landing/${item.img}.jpg`} /></li>
             })}
           </ul>

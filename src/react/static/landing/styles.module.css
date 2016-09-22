@@ -1,0 +1,128 @@
+@value theme: '../../../css/theme.module.css';
+@value font-serif from theme;
+
+.landing {
+  margin: -60px 0 0 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background-color: #fff;
+  text-align: center;
+}
+
+.heading {
+  font-size: 2em;
+  display: block;
+  margin: 0;
+  padding: 40px 0 20px 0;
+}
+
+.squeeze {
+  width: 100%;
+}
+
+.banner {
+  height: 350px;
+  top: -50px;
+  margin-bottom: -50px;
+  width: 100%;
+  background-image: url('/assets/landing/banner.jpg');
+  overflow: hidden;
+  position: relative;
+  background-size: 700px 350px;
+  background-position: bottom;
+}
+
+.title {
+  position: absolute;
+  top: 30%;
+  width: 80%;
+  left: 10%;
+  font-family: font-serif;
+  color: #fff;
+  font-size: 2em;
+  line-height: 1em;
+  opacity: 0.8;
+}
+
+.caption {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  color: #fff;
+  font-size: 1em;
+  opacity: 0.8;
+  width: 80%;
+  line-height: 1.5em;
+}
+
+@media (min-width: 500px) {
+
+  .squeeze {
+    width: 80%;
+  }
+
+  .heading {
+    font-size: 2.5em;
+    display: block;
+    margin: 0;
+    padding: 40px 0 20px 0;
+  }
+
+  .banner {
+    background-size: 800px 400px;
+  }
+}
+
+@media (min-width: 800px) {
+
+  .landing {
+    margin: -60px 0 0 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .squeeze {
+    width: 60%;
+  }
+
+  .heading {
+    font-size: 3.5em;
+    display: block;
+    margin: 0;
+    padding: 40px 0 20px 0;
+  }
+
+  .banner {
+    height: 500px;
+    background-size: 1200px 600px;
+  }
+
+  .title {
+    width: 60%;
+    left: 20%;
+    font-size: 3em;
+  }
+
+  .caption {
+    width: 60%;
+    left: 20%;
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .banner {
+    height: 600px;
+    background-size: 1600px 800px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .banner {
+    background-size: 2000px 1000px;
+  }
+}
