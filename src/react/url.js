@@ -25,6 +25,10 @@ export default (props) => {
       context.root = 'stream'
       context.type = ''
       context.id = 0
+      if (context.subdomain !== '') {
+        context.type = 'org'
+        context.id = context.subdomain
+      }
       break
     case 'account':
       context.root = 'account'
@@ -82,6 +86,11 @@ export default (props) => {
       context.root = route[1] ? route[1].path : ''
       context.type = route[2] ? route[2].path : ''
       break
+  }
+  if (typeof route[1].path === 'undefined' && context.subdomain) {
+    context.root = 'stream'
+    context.type = 'org'
+    context.id = context.subdomain
   }
   return context
 }

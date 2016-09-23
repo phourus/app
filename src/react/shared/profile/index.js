@@ -1,36 +1,17 @@
-import React from 'react';
+import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router';
+import { Link } from 'react-router'
 
-import Pic from '../pic';
-import Uploader from '../uploader';
+import Pic from '../pic'
+import Uploader from '../uploader'
 
+import * as actions from './redux/actions'
 import styles from './styles.less'
 
 class Profile extends React.Component {
 
 	componentDidMount() {
-		// this.unsubscribeUser = UserStore.listen((data) => {
-		// 	if (data.user) {
-		// 		this.setState({profile: data.user});
-		// 	}
-		// });
-		// this.unsubscribeOrg = OrgStore.listen((data) => {
-		// 	if (data.lookup) {
-		// 		this.setState({lookup: data.lookup});
-		// 	}
-		// 	if (data.org) {
-		// 		this.setState({profile: data.org});
-		// 	}
-		// });
-		// this.unsubscribePosts = PostStore.listen((data) => {
-		// 	let post = data.post || {};
-		// 	if (post.org) {
-		// 		this.setState({profile: post.org, type: 'org'});
-		// 	} else if (post.user) {
-		// 		this.setState({profile: post.user, type: 'user'});
-		// 	}
-		// });
 		this._load(this.props.url)
 	}
 
@@ -41,27 +22,31 @@ class Profile extends React.Component {
 	}
 
 	render() {
-		let profile = this.props.profile || {};
-		let address = profile.address || {};
 		const { url } = this.props
 		const { root, type } = url
-		let name = '';
+		let profile = this.props.profile || {}
+		let address = profile.address || {}
+		let name = ''
+
 		// stream, account, activity, admin
 		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
-			return false;
+			return false
 		}
+
 		// if stream not (my posts, org posts, user posts)
 		if (root === 'stream' && ['org', 'me', 'user'].indexOf(type) === -1) {
-			return false;
+			return false
 		}
+
+		// name
 		if (profile.first && profile.last) {
-			name = profile.first + ' ' + profile.last;
+			name = profile.first + ' ' + profile.last
 		} else if (profile.username) {
-			name = profile.username;
+			name = profile.username
 		} else if (profile.name) {
-			name = profile.name;
+			name = profile.name
 		} else if (profile.shortname) {
-			name = profile.shortname;
+			name = profile.shortname
 		}
 		return (
 			<div className="profile">
@@ -80,11 +65,11 @@ class Profile extends React.Component {
 					<div className={profile.type + " type"}>{profile.type ? profile.type.toUpperCase() : ""}</div>
 				</div>
 			</div>
-		);
+		)
 	}
 
 	_back() {
-		this.props.history.push("/stream");
+		this.props.history.push("/stream")
 	}
 
 	_load(url) {
@@ -92,47 +77,48 @@ class Profile extends React.Component {
 
 		// ADMIN
 		if (root === 'admin' && id > 0) {
-			//OrgActions.single(id);
+			this.props.actions.get('org', id)
 		}
 		// ACCOUNT
 		if (root === 'account' || root === 'activity' || type === 'me') {
-			let session = this.props.session;
-			return
-			//return this.setState({profile: session.user});
+			this.props.actions.get('me', 0)
 		}
+
 		// STREAM
 		if (root === 'stream') {
 			if (type === 'user') {
-				//UserActions.single(id);
+				this.props.actions.get('user', id)
 			}
 			if (type === 'org') {
-				//OrgActions.single(id);
+				this.props.actions.get('org', id)
 			}
 		}
 	}
 }
 
-let Basic = React.createClass({
-  render: function () {
-    let address = this.props.org.address || {};
-    return (
-      <div className="basic">
-        <div className="name">{this.props.org.name}</div>
-        <div className={this.props.org.type + " type"}>{this.props.org.type.toUpperCase()}</div>
-        {address.city || address.state ? <div>{address.city}{address.city && address.state ? ", " : ""}{address.state}</div> : false}
-        {this.props.org.website ? <div><a href={this.props.org.website} target="_blank">{this.props.org.website}</a></div> : false}
-        {this.props.org.phone ? <div>{this.props.org.phone}</div> : false}
-        {this.props.org.email ? <div><a href={"mailto:" + this.props.org.email + "&Subject=Phourus"}>{this.props.org.email}</a></div> : false}
-      </div>
-    );
-  }
-});
+const Basic = ({ org }) => {
+  const address = org.address || {}
+  return (
+    <div className="basic">
+      <div className="name">{org.name}</div>
+      <div className={org.type + " type"}>{org.type.toUpperCase()}</div>
+      {address.city || address.state ? <div>{address.city}{address.city && address.state ? ", " : ""}{address.state}</div> : false}
+      {org.website ? <div><a href={org.website} target="_blank">{org.website}</a></div> : false}
+      {org.phone ? <div>{org.phone}</div> : false}
+      {org.email ? <div><a href={"mailto:" + org.email + "&Subject=Phourus"}>{org.email}</a></div> : false}
+    </div>
+  )
+}
 
 const mapState = (state, props) => {
   return {
     url: props.url,
-    profile: {}
+    profile: state.profile
   }
 }
 
-export default connect(mapState)(Profile)
+const mapDispatch = (dispatch) => {
+	return {actions: bindActionCreators(actions, dispatch)}
+}
+
+export default connect(mapState, mapDispatch)(Profile)
