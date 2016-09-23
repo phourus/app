@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "448a195538c646e1c897"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "de93f7c61d77ab425357"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -17560,7 +17560,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\nheader nav.home > ul > li,\nnav.static > ul > li {\n  display: inline-block;\n}\nheader nav.home > ul > li > a,\nnav.static > ul > li > a {\n  padding: 12px 4px 15px 4px;\n  display: block;\n  font-size: 0.6em;\n}\nheader nav {\n  width: 70%;\n  float: right;\n  text-align: right;\n}\nheader nav > ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\nheader nav > ul > li {\n  display: inline-block;\n  text-align: center;\n  position: relative;\n  text-transform: uppercase;\n}\nheader nav > ul > li .fa {\n  font-size: 2em;\n  margin-top: 10px;\n}\nheader nav > ul > li a {\n  color: #eee;\n  text-align: center;\n  font-size: 0.6em;\n}\nheader nav > ul > li a span {\n  margin-top: -16px;\n  display: block;\n}\nheader nav > ul > li a:hover {\n  color: #fff;\n}\n@media (min-width: 500px) {\n  header nav.home > ul > li > a,\n  nav.static > ul > li > a {\n    padding: 20px 4px 15px 4px;\n    font-size: 0.8em;\n  }\n  nav > ul > li {\n    width: 80px;\n    height: 60px;\n  }\n  nav > ul > li > div {\n    display: none;\n  }\n  nav > ul > li:hover > div {\n    top: 60px;\n  }\n  nav > ul > li .fa {\n    width: 60px;\n    font-size: 3em;\n  }\n}\n@media (min-width: 800px) {\n  nav {\n    width: 50%;\n  }\n}\n", ""]);
+exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\nheader nav.home,\nnav.static {\n  margin-right: 0px;\n}\nheader nav.home > ul > li,\nnav.static > ul > li {\n  display: inline-block;\n}\nheader nav.home > ul > li > a,\nnav.static > ul > li > a {\n  padding: 12px 4px 15px 4px;\n  display: block;\n  font-size: 0.6em;\n}\nheader nav {\n  float: right;\n  text-align: right;\n  margin-right: 50px;\n}\nheader nav > ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\nheader nav > ul > li {\n  display: inline-block;\n  text-align: center;\n  position: relative;\n  text-transform: uppercase;\n}\nheader nav > ul > li .fa {\n  font-size: 2em;\n  margin-top: 10px;\n}\nheader nav > ul > li a {\n  color: #eee;\n  text-align: center;\n  font-size: 0.6em;\n}\nheader nav > ul > li a span {\n  margin-top: -16px;\n  display: block;\n}\nheader nav > ul > li a:hover {\n  color: #fff;\n}\n@media (min-width: 500px) {\n  header nav.home > ul > li > a,\n  nav.static > ul > li > a {\n    padding: 20px 4px 15px 4px;\n    font-size: 0.8em;\n  }\n  nav > ul > li {\n    width: 80px;\n    height: 60px;\n  }\n  nav > ul > li > div {\n    display: none;\n  }\n  nav > ul > li:hover > div {\n    top: 60px;\n  }\n  nav > ul > li .fa {\n    width: 60px;\n    font-size: 3em;\n  }\n}\n@media (min-width: 800px) {\n  nav {\n    width: 50%;\n  }\n}\n", ""]);
 
 // exports
 
@@ -17588,7 +17588,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "#app > .menu {\n  width: 100%;\n  position: fixed;\n  background-color: #333;\n  left: 0;\n  bottom: 0;\n  height: 40px;\n  display: none;\n  z-index: 9999;\n}\n#app > .menu ul {\n  margin: 0;\n  padding: 0;\n  text-align: center;\n}\n#app > .menu ul li {\n  list-style: none;\n  margin-top: 10px;\n  display: inline-block;\n  margin-right: 20px;\n}\n#app > .menu ul li i {\n  color: #fff;\n  font-size: 1.5em;\n}\n#app > .menu ul li i:hover {\n  color: #aaa;\n}\n@media (min-width: 500px) {\n  #app > .menu {\n    width: 50px;\n    top: 0;\n    height: auto;\n    position: absolute;\n  }\n  #app > .menu ul li {\n    padding-top: 20px;\n    display: block;\n    margin-right: 0px;\n  }\n}\n", ""]);
+exports.push([module.i, "#app > .menu {\n  width: 100%;\n  position: fixed;\n  background-color: #333;\n  left: 0;\n  bottom: 0;\n  height: 40px;\n  display: none;\n  z-index: 9999;\n}\n#app > .menu ul {\n  margin: 0;\n  padding: 0;\n  text-align: center;\n}\n#app > .menu ul li {\n  list-style: none;\n  margin-top: 10px;\n  display: inline-block;\n  margin-right: 20px;\n}\n#app > .menu ul li i {\n  color: #fff;\n  font-size: 1.5em;\n}\n#app > .menu ul li i:hover {\n  color: #aaa;\n}\n@media (min-width: 500px) {\n  #app > .menu {\n    width: 50px;\n    top: 0;\n    height: auto;\n    position: fixed;\n  }\n  #app > .menu ul li {\n    padding-top: 20px;\n    display: block;\n    margin-right: 0px;\n  }\n}\n", ""]);
 
 // exports
 
@@ -22248,7 +22248,7 @@ var changes = exports.changes = function changes(state) {
 };
 
 var owner = exports.owner = (0, _reselect.createSelector)([session, post], function (session, post) {
-  return true;
+  return false;
   var user = session.user;
 
   if (!session.authenticated || !user.id) {
