@@ -1,0 +1,265 @@
+.keywords {
+  top: -30px;
+  height: 40px;
+  border: solid 1px #eee;
+  position: relative;
+  margin-top: 10px;
+  box-sizing: border-box;
+  width: 100%;
+
+  input {
+    position: absolute;
+    max-width: none;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: none;
+    margin: 0px;
+    padding: 4px;
+    height: 100%;
+    font-size: 1.2em;
+    color: #333;
+  }
+
+  button.filter {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    width: 40px;
+    right: 40px;
+    top: 10px;
+    font-size: 1em;
+    color: #eee;
+
+    &:hover {
+      cursor: pointer;
+      color: @gold-light;
+    }
+  }
+
+  button.button {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 40px;
+    right: 0;
+    .rounded(0px);
+
+    i {
+      margin-right: 0;
+    }
+
+    span {
+      display: none;
+    }
+  }
+}
+
+header > div.filter {
+  .Row(100%);
+  background-color: #555;
+  .box-shadow(0px, 0px, 12px, @grey-dark);
+  margin-top: 40px;
+
+  .label {
+    font-size: 0.8em;
+    color: #eee;
+    text-transform: uppercase;
+    padding: 1em;
+    margin: 0;
+    background-color: #333;
+    text-align: left;
+  }
+
+  .types {
+    .Cols(6);
+    text-align: center;
+
+    .label {
+      margin-bottom: 10px;
+    }
+
+    .type {
+      margin: 2px;
+      max-width: 150px;
+      width: 30%;
+      min-width: 100px;
+      font-size: 0.7em;
+    }
+  }
+
+  .sortby {
+    .Cols(6);
+    box-sizing: border-box;
+    border-left: solid 1px #444;
+
+    ul {
+      margin: 0px;
+      padding: 0px;
+      width: 100%;
+
+      li {
+        width: 96%;
+        border-bottom: solid 1px #444;
+        padding: 0.5em 2%;
+        cursor: pointer;
+        color: #eee;
+        font-size: 0.9em;
+        list-style: none;
+
+        .fa {
+          color: @gold-light;
+          margin-right: 10px;
+        }
+
+        &.selected {
+          background-color: #222;
+          font-size: 1.5em;
+
+          .fa {
+            color: @green;
+          }
+        }
+
+        &:hover {
+          background-color: #222;
+          color: @green;
+
+          .fa {
+            color: @green;
+          }
+        }
+      }
+    }
+    button {
+      border: none;
+      width: 50%;
+      text-align: center;
+      height: 40px;
+      cursor: pointer;
+      background-color: #444;
+      color: #eee;
+
+      &:hover {
+        color: @green;
+      }
+
+      &.selected {
+        color: @green;
+        background-color: #222;
+      }
+    }
+  }
+
+  ul {
+    display: inline-block;
+    list-style: none;
+    vertical-align: top;
+
+    li {
+      border-bottom: solid 1px #eee;
+    }
+  }
+
+  ul {
+    li {
+      a#blogs {
+        border-left: solid 4px @green-light;
+      }
+      a#subjects {
+        border-left: solid 4px @blue-light;
+      }
+      a#debates {
+        border-left: solid 4px @red-light;
+      }
+      a#beliefs {
+        border-left: solid 4px @gold-light;
+      }
+    }
+  }
+}
+
+// .filter {
+//   width: 300px;
+//   padding-bottom: 1em;
+//
+//   button {
+//     border: none;
+//   }
+//
+//   .triangle {
+//     margin-right: 118px;
+//   }
+//   .types {
+//     button {
+//       display: inline-block;
+//       width: 100px;
+//     }
+//   }
+//   .dates {
+//     .Row(100%);
+//     margin-left: 10px;
+//
+//     div {
+//       .Cols(6);
+//     }
+//     label {
+//       font-size: 0.8em;
+//       font-style: normal;
+//       display: block;
+//       margin: 0;
+//       padding: 0;
+//     }
+//
+//     button {
+//       display: inline-block;
+//       height: 36px;
+//       width: 30px;
+//       color: white;
+//
+//     }
+//     input {
+//       width: 100px;
+//     }
+//   }
+//
+//   .clear, .apply {
+//     width: 120px;
+//     height: 40px;
+//     .rounded(4px);
+//     color: white;
+//     cursor: pointer;
+//     margin-left: 10px;
+//
+//     &:hover {
+//       background-color: @theme-light;
+//     }
+//   }
+//
+//   .clear {
+//     background-color: @theme;
+//   }
+//
+//   .apply {
+//     background-color: @theme-dark;
+//   }
+// }
+
+@media (min-width: 500px) {
+
+	header > div.filter {
+    margin-top: 50px;
+
+    .types, .sortby {
+      .Cols(6);
+    }
+	}
+}
+
+@media (min-width: 800px) {
+
+	header > div.filter {
+    .Row(50%);
+    margin-top: 10px;
+	}
+}

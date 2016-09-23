@@ -4,41 +4,34 @@ import { Link } from 'react-router'
 import ga from '../../../lib/analytics'
 import util from '../../../lib/util'
 import Search from '../../stream/search'
-import Home from './home'
-import Static from './static'
-import Private from './private'
+import Nav from './nav'
 
 import styles from './styles.less'
+import nav from './css/nav.less'
 
 class Header extends React.Component {
+
   render() {
     const { url, session } = this.props
     const r = url.root
+
+    let type = 'default'
+    if (session.authenticated) {
+      type = 'private'
+    }
     if (['product', 'pricing', 'help'].indexOf(r) > -1) {
-      return <Static />
+      type = 'static'
     }
     if (r === 'home') {
-      return <Home />
+      type = 'home'
     }
     if (!r && !url.subdomain) {
-      return <Home />
+      type = 'home'
     }
     //<Search />
     return  (
-      <header className="header">
-        { !session.authenticated
-          ?  <nav>
-                <ul>
-                  <li className="create">
-                    <Link to="/home">
-                      <i className="fa fa-sign-in" />
-                      Login
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-          : <Private logout={this._logout.bind(this)} />
-        }
+      <header className={type === 'home' ? "header home" : "header"}>
+        <Nav classType={type} logout={this._logout.bind(this)} />
         <div className="brand">
           {url.subdomain
             ? <a href={util.createHomeURL()}></a>

@@ -1,0 +1,100 @@
+@import './../../../../less/theme.less';
+@import './../../../../less/sub/grid.less';
+@import './../../../../less/sub/mixins.less';
+
+header nav.home, nav.static {
+
+   > ul > li {
+     display: inline-block;
+
+    > a {
+      padding: 12px 4px 15px 4px;
+      display: block;
+      font-size: 0.6em;
+    }
+  }
+}
+
+header nav {
+  width: 70%;
+  float: right;
+  text-align: right;
+
+  > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    > li {
+      display: inline-block;
+      text-align: center;
+      position: relative;
+      text-transform: uppercase;
+
+      .fa {
+        font-size: 2em;
+        margin-top: 10px;
+      }
+
+      a {
+        color: #eee;
+        text-align: center;
+        font-size: 0.6em;
+
+        span {
+          margin-top: -16px;
+          display: block;
+        }
+      }
+
+      a:hover {
+        color: #fff;
+      }
+    }
+  }
+}
+
+
+@media (min-width: 500px) {
+
+	header nav.home, nav.static {
+
+		 > ul > li {
+
+		 	> a {
+				padding: 20px 4px 15px 4px;
+				font-size: 0.8em;
+			}
+		}
+	}
+
+  nav {
+
+		> ul {
+
+			> li {
+				width: 80px;
+				height: 60px;
+
+				> div {
+					display: none;
+				}
+
+				&:hover > div {
+					top: 60px;
+				}
+
+				.fa {
+					width: 60px;
+					font-size: 3em;
+				}
+			}
+		}
+  }
+}
+
+@media (min-width: 800px) {
+	nav {
+		width: 50%;
+	}
+}

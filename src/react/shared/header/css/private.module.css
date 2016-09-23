@@ -1,0 +1,11 @@
+.links {
+  font-size: 0.9em;
+  display: inline-block;
+  height: 100%;
+  padding-top: 20px;
+}
+
+.link {
+  padding-top: 20px;
+  margin-left: 10px;
+}
