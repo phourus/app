@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a572198410b267bfa4d5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "bd51c5a8fa4818798855"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -6504,7 +6504,31 @@ exports.locals = {
 };
 
 /***/ },
-/* 33 */
+/* 33 */,
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+exports.__esModule = true;
+exports.connect = exports.Provider = undefined;
+
+var _Provider = __webpack_require__(994);
+
+var _Provider2 = _interopRequireDefault(_Provider);
+
+var _connect = __webpack_require__(995);
+
+var _connect2 = _interopRequireDefault(_connect);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+exports.Provider = _Provider2["default"];
+exports.connect = _connect2["default"];
+
+/***/ },
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6593,7 +6617,7 @@ function del(url, override) {
 }
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 var pIE            = __webpack_require__(95)
@@ -6614,7 +6638,7 @@ exports.f = __webpack_require__(17) ? gOPD : function getOwnPropertyDescriptor(O
 };
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
@@ -6630,30 +6654,6 @@ module.exports = Object.getPrototypeOf || function(O){
     return O.constructor.prototype;
   } return O instanceof Object ? ObjectProto : null;
 };
-
-/***/ },
-/* 36 */,
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-
-exports.__esModule = true;
-exports.connect = exports.Provider = undefined;
-
-var _Provider = __webpack_require__(994);
-
-var _Provider2 = _interopRequireDefault(_Provider);
-
-var _connect = __webpack_require__(995);
-
-var _connect2 = _interopRequireDefault(_connect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-exports.Provider = _Provider2["default"];
-exports.connect = _connect2["default"];
 
 /***/ },
 /* 38 */
@@ -8065,7 +8065,7 @@ if(__webpack_require__(17)){
     , toObject            = __webpack_require__(24)
     , isArrayIter         = __webpack_require__(159)
     , create              = __webpack_require__(70)
-    , getPrototypeOf      = __webpack_require__(35)
+    , getPrototypeOf      = __webpack_require__(37)
     , gOPN                = __webpack_require__(71).f
     , getIterFn           = __webpack_require__(176)
     , uid                 = __webpack_require__(76)
@@ -8080,7 +8080,7 @@ if(__webpack_require__(17)){
     , arrayFill           = __webpack_require__(152)
     , arrayCopyWithin     = __webpack_require__(278)
     , $DP                 = __webpack_require__(18)
-    , $GOPD               = __webpack_require__(34)
+    , $GOPD               = __webpack_require__(36)
     , dP                  = $DP.f
     , gOPD                = $GOPD.f
     , RangeError          = global.RangeError
@@ -12783,7 +12783,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -16727,7 +16727,7 @@ var LIBRARY        = __webpack_require__(69)
   , Iterators      = __webpack_require__(84)
   , $iterCreate    = __webpack_require__(161)
   , setToStringTag = __webpack_require__(85)
-  , getPrototypeOf = __webpack_require__(35)
+  , getPrototypeOf = __webpack_require__(37)
   , ITERATOR       = __webpack_require__(16)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
   , FF_ITERATOR    = '@@iterator'
@@ -16902,7 +16902,7 @@ module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
     function(test, buggy, set){
       try {
-        set = __webpack_require__(54)(Function.call, __webpack_require__(34).f(Object.prototype, '__proto__').set, 2);
+        set = __webpack_require__(54)(Function.call, __webpack_require__(36).f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch(e){ buggy = true; }
@@ -17588,7 +17588,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "#app > .menu {\n  width: 100%;\n  position: fixed;\n  background-color: #333;\n  left: 0;\n  bottom: 0;\n  height: 40px;\n  display: none;\n  z-index: 9999;\n}\n#app > .menu ul {\n  margin: 0;\n  padding: 0;\n  text-align: center;\n}\n#app > .menu ul li {\n  list-style: none;\n  margin-top: 10px;\n  display: inline-block;\n  width: 16%;\n}\n#app > .menu ul li i {\n  color: #fff;\n  font-size: 1.5em;\n}\n#app > .menu ul li i:hover {\n  color: #aaa;\n}\n@media (min-width: 500px) {\n  #app > .menu {\n    width: 50px;\n    top: 0;\n    height: auto;\n    position: fixed;\n  }\n  #app > .menu ul li {\n    padding-top: 20px;\n    display: block;\n    margin-left: 10px;\n  }\n}\n", ""]);
+exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n#app > .menu {\n  width: 100%;\n  position: fixed;\n  background-color: #333;\n  left: 0;\n  bottom: 0;\n  height: 40px;\n  display: none;\n  z-index: 9999;\n}\n#app > .menu ul {\n  margin: 0;\n  padding: 0;\n  text-align: center;\n}\n#app > .menu ul li {\n  list-style: none;\n  margin-top: 10px;\n  display: inline-block;\n  width: 16%;\n}\n#app > .menu ul li i {\n  cursor: default;\n  color: #999;\n  font-size: 1.5em;\n}\n#app > .menu ul li i.fa-home {\n  color: #eee;\n  cursor: pointer;\n}\n#app > .menu ul li i.fa-home:hover {\n  color: #f2c13d;\n}\n#app > .menu ul li i:hover {\n  color: #999;\n}\n#app > .menu ul.authenticated li i {\n  color: #ddd;\n  cursor: pointer;\n}\n#app > .menu ul.authenticated li i:hover {\n  color: #f2c13d;\n}\n@media (min-width: 500px) {\n  #app > .menu {\n    width: 50px;\n    top: 0;\n    height: auto;\n    position: fixed;\n  }\n  #app > .menu ul li {\n    padding-top: 20px;\n    display: block;\n    margin-left: 10px;\n  }\n}\n", ""]);
 
 // exports
 
@@ -21640,7 +21640,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -21687,7 +21687,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -21722,7 +21722,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -22327,7 +22327,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _reactRouter = __webpack_require__(11);
 
@@ -43378,7 +43378,7 @@ var _analytics2 = _interopRequireDefault(_analytics);
 
 var _reactRouter = __webpack_require__(11);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _store = __webpack_require__(606);
 
@@ -43754,7 +43754,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43788,7 +43788,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43829,7 +43829,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43863,7 +43863,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43926,7 +43926,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43951,7 +43951,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43982,7 +43982,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -44019,7 +44019,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(33);
+var _xhr = __webpack_require__(35);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -44583,7 +44583,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _redux = __webpack_require__(45);
 
@@ -45766,7 +45766,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _redux = __webpack_require__(45);
 
@@ -46558,7 +46558,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _redux = __webpack_require__(45);
 
@@ -48044,7 +48044,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _redux = __webpack_require__(45);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _reactRouter = __webpack_require__(11);
 
@@ -51800,7 +51800,7 @@ var _redux = __webpack_require__(45);
 
 var _reactRouter = __webpack_require__(11);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _actions = __webpack_require__(563);
 
@@ -54300,7 +54300,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _reactRouter = __webpack_require__(11);
 
@@ -54714,6 +54714,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(34);
+
 var _reactRouter = __webpack_require__(11);
 
 var _styles = __webpack_require__(1132);
@@ -54740,18 +54742,19 @@ var Menu = function (_React$Component) {
   _createClass(Menu, [{
     key: 'render',
     value: function render() {
+      var authenticated = this.props.session.authenticated;
       return _react2.default.createElement(
         'div',
         { className: 'menu' },
         _react2.default.createElement(
           'ul',
-          null,
+          { className: authenticated ? "authenticated" : "" },
           _react2.default.createElement(
             'li',
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: '/stream' },
+              { to: '/stream', activeClassName: 'active' },
               _react2.default.createElement('i', { className: 'fa fa-home' })
             )
           ),
@@ -54760,7 +54763,7 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: '/create' },
+              { to: '/create', activeClassName: 'active' },
               _react2.default.createElement('i', { className: 'fa fa-pencil' })
             )
           ),
@@ -54769,24 +54772,36 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: '/activity' },
+              { to: '/activity', activeClassName: 'active' },
               _react2.default.createElement('i', { className: 'fa fa-line-chart' })
             )
           ),
           _react2.default.createElement(
             'li',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-folder' })
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/folders', activeClassName: 'active' },
+              _react2.default.createElement('i', { className: 'fa fa-folder' })
+            )
           ),
           _react2.default.createElement(
             'li',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-group' })
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/organizations', activeClassName: 'active' },
+              _react2.default.createElement('i', { className: 'fa fa-group' })
+            )
           ),
           _react2.default.createElement(
             'li',
             null,
-            _react2.default.createElement('i', { className: 'fa fa-link' })
+            _react2.default.createElement(
+              _reactRouter.Link,
+              { to: '/links', activeClassName: 'active' },
+              _react2.default.createElement('i', { className: 'fa fa-link' })
+            )
           )
         )
       );
@@ -54796,7 +54811,13 @@ var Menu = function (_React$Component) {
   return Menu;
 }(_react2.default.Component);
 
-exports.default = Menu;
+var mapState = function mapState(state) {
+  return {
+    session: state.session
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapState)(Menu);
 
 /***/ },
 /* 581 */
@@ -54817,7 +54838,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _redux = __webpack_require__(45);
 
@@ -55444,7 +55465,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _redux = __webpack_require__(45);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _actions = __webpack_require__(275);
 
@@ -55562,7 +55583,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _redux = __webpack_require__(45);
 
@@ -58592,7 +58613,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(37);
+var _reactRedux = __webpack_require__(34);
 
 var _redux = __webpack_require__(45);
 
@@ -60471,7 +60492,7 @@ $export($export.P, 'Function', {bind: __webpack_require__(281)});
 "use strict";
 'use strict';
 var isObject       = __webpack_require__(14)
-  , getPrototypeOf = __webpack_require__(35)
+  , getPrototypeOf = __webpack_require__(37)
   , HAS_INSTANCE   = __webpack_require__(16)('hasInstance')
   , FunctionProto  = Function.prototype;
 // 19.2.3.6 Function.prototype[@@hasInstance](V)
@@ -60807,7 +60828,7 @@ var global            = __webpack_require__(10)
   , toPrimitive       = __webpack_require__(48)
   , fails             = __webpack_require__(12)
   , gOPN              = __webpack_require__(71).f
-  , gOPD              = __webpack_require__(34).f
+  , gOPD              = __webpack_require__(36).f
   , dP                = __webpack_require__(18).f
   , $trim             = __webpack_require__(86).trim
   , NUMBER            = 'Number'
@@ -61161,7 +61182,7 @@ __webpack_require__(47)('freeze', function($freeze){
 
 // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
 var toIObject                 = __webpack_require__(31)
-  , $getOwnPropertyDescriptor = __webpack_require__(34).f;
+  , $getOwnPropertyDescriptor = __webpack_require__(36).f;
 
 __webpack_require__(47)('getOwnPropertyDescriptor', function(){
   return function getOwnPropertyDescriptor(it, key){
@@ -61184,7 +61205,7 @@ __webpack_require__(47)('getOwnPropertyNames', function(){
 
 // 19.1.2.9 Object.getPrototypeOf(O)
 var toObject        = __webpack_require__(24)
-  , $getPrototypeOf = __webpack_require__(35);
+  , $getPrototypeOf = __webpack_require__(37);
 
 __webpack_require__(47)('getPrototypeOf', function(){
   return function getPrototypeOf(it){
@@ -61734,7 +61755,7 @@ $export($export.S + $export.F * __webpack_require__(12)(function(){
 
 // 26.1.4 Reflect.deleteProperty(target, propertyKey)
 var $export  = __webpack_require__(2)
-  , gOPD     = __webpack_require__(34).f
+  , gOPD     = __webpack_require__(36).f
   , anObject = __webpack_require__(8);
 
 $export($export.S, 'Reflect', {
@@ -61781,7 +61802,7 @@ $export($export.S, 'Reflect', {
 /***/ function(module, exports, __webpack_require__) {
 
 // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
-var gOPD     = __webpack_require__(34)
+var gOPD     = __webpack_require__(36)
   , $export  = __webpack_require__(2)
   , anObject = __webpack_require__(8);
 
@@ -61797,7 +61818,7 @@ $export($export.S, 'Reflect', {
 
 // 26.1.8 Reflect.getPrototypeOf(target)
 var $export  = __webpack_require__(2)
-  , getProto = __webpack_require__(35)
+  , getProto = __webpack_require__(37)
   , anObject = __webpack_require__(8);
 
 $export($export.S, 'Reflect', {
@@ -61811,8 +61832,8 @@ $export($export.S, 'Reflect', {
 /***/ function(module, exports, __webpack_require__) {
 
 // 26.1.6 Reflect.get(target, propertyKey [, receiver])
-var gOPD           = __webpack_require__(34)
-  , getPrototypeOf = __webpack_require__(35)
+var gOPD           = __webpack_require__(36)
+  , getPrototypeOf = __webpack_require__(37)
   , has            = __webpack_require__(26)
   , $export        = __webpack_require__(2)
   , isObject       = __webpack_require__(14)
@@ -61917,8 +61938,8 @@ if(setProto)$export($export.S, 'Reflect', {
 
 // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
 var dP             = __webpack_require__(18)
-  , gOPD           = __webpack_require__(34)
-  , getPrototypeOf = __webpack_require__(35)
+  , gOPD           = __webpack_require__(36)
+  , getPrototypeOf = __webpack_require__(37)
   , has            = __webpack_require__(26)
   , $export        = __webpack_require__(2)
   , createDesc     = __webpack_require__(63)
@@ -62527,7 +62548,7 @@ var global         = __webpack_require__(10)
   , createDesc     = __webpack_require__(63)
   , _create        = __webpack_require__(70)
   , gOPNExt        = __webpack_require__(292)
-  , $GOPD          = __webpack_require__(34)
+  , $GOPD          = __webpack_require__(36)
   , $DP            = __webpack_require__(18)
   , $keys          = __webpack_require__(72)
   , gOPD           = $GOPD.f
@@ -63098,7 +63119,7 @@ $export($export.S, 'Object', {
 var $export        = __webpack_require__(2)
   , ownKeys        = __webpack_require__(295)
   , toIObject      = __webpack_require__(31)
-  , gOPD           = __webpack_require__(34)
+  , gOPD           = __webpack_require__(36)
   , createProperty = __webpack_require__(153);
 
 $export($export.S, 'Object', {
@@ -63123,8 +63144,8 @@ $export($export.S, 'Object', {
 var $export                  = __webpack_require__(2)
   , toObject                 = __webpack_require__(24)
   , toPrimitive              = __webpack_require__(48)
-  , getPrototypeOf           = __webpack_require__(35)
-  , getOwnPropertyDescriptor = __webpack_require__(34).f;
+  , getPrototypeOf           = __webpack_require__(37)
+  , getOwnPropertyDescriptor = __webpack_require__(36).f;
 
 // B.2.2.4 Object.prototype.__lookupGetter__(P)
 __webpack_require__(17) && $export($export.P + __webpack_require__(116), 'Object', {
@@ -63147,8 +63168,8 @@ __webpack_require__(17) && $export($export.P + __webpack_require__(116), 'Object
 var $export                  = __webpack_require__(2)
   , toObject                 = __webpack_require__(24)
   , toPrimitive              = __webpack_require__(48)
-  , getPrototypeOf           = __webpack_require__(35)
-  , getOwnPropertyDescriptor = __webpack_require__(34).f;
+  , getPrototypeOf           = __webpack_require__(37)
+  , getOwnPropertyDescriptor = __webpack_require__(36).f;
 
 // B.2.2.5 Object.prototype.__lookupSetter__(P)
 __webpack_require__(17) && $export($export.P + __webpack_require__(116), 'Object', {
@@ -63422,7 +63443,7 @@ var Set                     = __webpack_require__(303)
   , from                    = __webpack_require__(279)
   , metadata                = __webpack_require__(55)
   , anObject                = __webpack_require__(8)
-  , getPrototypeOf          = __webpack_require__(35)
+  , getPrototypeOf          = __webpack_require__(37)
   , ordinaryOwnMetadataKeys = metadata.keys
   , toMetaKey               = metadata.key;
 
@@ -63444,7 +63465,7 @@ metadata.exp({getMetadataKeys: function getMetadataKeys(target /*, targetKey */)
 
 var metadata               = __webpack_require__(55)
   , anObject               = __webpack_require__(8)
-  , getPrototypeOf         = __webpack_require__(35)
+  , getPrototypeOf         = __webpack_require__(37)
   , ordinaryHasOwnMetadata = metadata.has
   , ordinaryGetOwnMetadata = metadata.get
   , toMetaKey              = metadata.key;
@@ -63493,7 +63514,7 @@ metadata.exp({getOwnMetadata: function getOwnMetadata(metadataKey, target /*, ta
 
 var metadata               = __webpack_require__(55)
   , anObject               = __webpack_require__(8)
-  , getPrototypeOf         = __webpack_require__(35)
+  , getPrototypeOf         = __webpack_require__(37)
   , ordinaryHasOwnMetadata = metadata.has
   , toMetaKey              = metadata.key;
 

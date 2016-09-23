@@ -1,3 +1,5 @@
+@import '../../../less/theme.less';
+
 #app > .menu {
   width: 100%;
   position: fixed;
@@ -20,14 +22,33 @@
       width: 16%;
 
       i {
-        color: #fff;
+        cursor: default;
+        color: #999;
         font-size: 1.5em;
 
+        &.fa-home {
+          color: #eee;
+          cursor: pointer;
+
+          &:hover {
+            color: @gold-light;
+          }
+        }
+
         &:hover {
-          color: #aaa;
+          color: #999;
         }
       }
     }
+  }
+}
+
+#app > .menu ul.authenticated li i {
+  color: #ddd;
+  cursor: pointer;
+
+  &:hover {
+    color: @gold-light;
   }
 }
 
