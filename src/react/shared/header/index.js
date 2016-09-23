@@ -23,6 +23,7 @@ class Header extends React.Component {
     if (!r && !url.subdomain) {
       return <Home />
     }
+    //<Search />
     return  (
       <header className="header">
         { !session.authenticated
@@ -44,7 +45,7 @@ class Header extends React.Component {
             : <Link to="/"></Link>
           }
         </div>
-        <Search />
+
       </header>
     )
   }

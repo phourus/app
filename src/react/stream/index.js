@@ -36,12 +36,7 @@ class Stream extends React.Component {
 
 		return (
 			<div className="stream">
-				{!this.props.sidebarVisible
-					? <button className="toggle" onClick={this._sidebar.bind(this)}><i className="fa fa-navicon" /> Show my folders</button>
-					: false
-				}
 				<div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
-				<Sidebar folders={this.props.folders} actions={this.props.actions} sidebar={this._sidebar.bind(this)} sidebarVisible={this.props.sidebarVisible} />
 				<Scroll pageStart={0} loadMore={this._more.bind(this)} hasMore={hasMore} loader={<Loader />}>
 					<Posts {...this.props} />
 				</Scroll>

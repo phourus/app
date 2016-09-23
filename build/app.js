@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9d0efd91db1c7a916c26"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2781ed73aadd61f7e1dd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -6504,8 +6504,7 @@ exports.locals = {
 };
 
 /***/ },
-/* 33 */,
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6594,7 +6593,7 @@ function del(url, override) {
 }
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 var pIE            = __webpack_require__(95)
@@ -6615,7 +6614,7 @@ exports.f = __webpack_require__(17) ? gOPD : function getOwnPropertyDescriptor(O
 };
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
@@ -6633,6 +6632,7 @@ module.exports = Object.getPrototypeOf || function(O){
 };
 
 /***/ },
+/* 36 */,
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -8064,7 +8064,7 @@ if(__webpack_require__(17)){
     , toObject            = __webpack_require__(24)
     , isArrayIter         = __webpack_require__(159)
     , create              = __webpack_require__(70)
-    , getPrototypeOf      = __webpack_require__(36)
+    , getPrototypeOf      = __webpack_require__(35)
     , gOPN                = __webpack_require__(71).f
     , getIterFn           = __webpack_require__(176)
     , uid                 = __webpack_require__(76)
@@ -8079,7 +8079,7 @@ if(__webpack_require__(17)){
     , arrayFill           = __webpack_require__(152)
     , arrayCopyWithin     = __webpack_require__(276)
     , $DP                 = __webpack_require__(18)
-    , $GOPD               = __webpack_require__(35)
+    , $GOPD               = __webpack_require__(34)
     , dP                  = $DP.f
     , gOPD                = $GOPD.f
     , RangeError          = global.RangeError
@@ -12783,7 +12783,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -16727,7 +16727,7 @@ var LIBRARY        = __webpack_require__(69)
   , Iterators      = __webpack_require__(83)
   , $iterCreate    = __webpack_require__(161)
   , setToStringTag = __webpack_require__(84)
-  , getPrototypeOf = __webpack_require__(36)
+  , getPrototypeOf = __webpack_require__(35)
   , ITERATOR       = __webpack_require__(16)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
   , FF_ITERATOR    = '@@iterator'
@@ -16902,7 +16902,7 @@ module.exports = {
   set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
     function(test, buggy, set){
       try {
-        set = __webpack_require__(53)(Function.call, __webpack_require__(35).f(Object.prototype, '__proto__').set, 2);
+        set = __webpack_require__(53)(Function.call, __webpack_require__(34).f(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch(e){ buggy = true; }
@@ -17560,7 +17560,7 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n.auth {\n  position: absolute;\n  bottom: 0px;\n  width: 100%;\n  background: rgba(0, 0, 0, 0.4);\n  color: #fff;\n}\n.actions {\n  position: absolute;\n  bottom: 10px;\n  width: 100%;\n  text-align: center;\n}\n.actions button {\n  margin: 4px auto;\n  background-color: transparent;\n  color: #fff;\n  border: solid 1px #fff;\n}\n.actions button:hover {\n  border: solid 1px;\n}\n.actions button:hover.green {\n  color: #9cd900;\n  border-color: #9cd900;\n}\n.actions button:hover.blue {\n  color: #5faee3;\n  border-color: #5faee3;\n}\n@media (min-width: 500px) {\n  .auth .actions {\n    bottom: 40px;\n  }\n  .auth .actions button {\n    display: inline-block;\n    margin-right: 4px;\n  }\n}\n", ""]);
+exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\n.actions {\n  float: right;\n}\n.actions button.save,\n.actions button.delete,\n.actions button.myposts,\n.actions button.rich {\n  height: 30px;\n  font-size: 0.8em;\n  width: 140px;\n  margin: 0;\n  padding: 4px;\n  display: inline-block;\n  margin-right: 10px;\n  height: 33px;\n  margin: 4px;\n  box-sizing: border-box;\n}\n.actions button.myposts {\n  width: 160px;\n}\n.actions button.rich {\n  width: 200px;\n}\n.actions button.close {\n  background: transparent;\n  background-color: #555;\n  border: none;\n  color: #fff;\n  float: right;\n  padding: 8px;\n  font-size: 1em;\n  margin-left: 10px;\n}\n.actions button.close:hover {\n  color: #f2c13d;\n  cursor: pointer;\n}\n.actions > a.edit {\n  display: block;\n  font-size: 0.6em;\n  float: right;\n  color: #777;\n  text-align: right;\n}\n.actions > a.edit:hover {\n  color: #5faee3;\n}\n.actions > a.edit i {\n  font-size: 1.5em;\n}\n.categories {\n  font-size: 0.8em;\n  text-transform: uppercase;\n  margin-bottom: 20px;\n}\n.categories select {\n  width: 40%;\n  margin-right: 20px;\n  max-width: 160px;\n  display: inline-block;\n}\n.collaborators {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  position: absolute;\n  bottom: 80px;\n}\ndiv.post .collaborators {\n  position: static;\n  margin-bottom: 20px;\n  border-bottom: solid 1px #eee;\n}\n.collaborator {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  font-size: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  color: #999;\n  margin-left: 4px;\n  display: inline-block;\n  margin-bottom: 4px;\n}\n.collaborator a {\n  color: #ccc;\n}\n.collaborator a:hover {\n  border-color: #5faee3;\n  color: #5faee3;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.collaborator a.remove {\n  border: none;\n  background: transparent;\n  display: inline-block;\n  font-size: 1em;\n  color: inherit;\n  margin-left: 10px;\n}\n.collaborator a.remove:hover {\n  color: #fc2727;\n  text-decoration: none;\n  cursor: pointer;\n}\n.collaboratorField {\n  position: relative;\n  display: inline-block;\n  margin-left: 10px;\n}\n.collaboratorField input {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  height: 40px;\n  font-size: 1.1em;\n  color: #333;\n  margin-left: 4px;\n  display: inline-block;\n}\n.collaboratorField button {\n  width: 60px;\n  height: 38px;\n  position: absolute;\n  -webkit-border-radius: 0 15px 15px 0;\n  -moz-border-radius: 0 15px 15px 0;\n  border-radius: 0 15px 15px 0;\n  font-size: 0.5em;\n  border: none;\n  background-color: #217dbb;\n  cursor: pointer;\n  color: #eee;\n  top: 1px;\n  right: 15px;\n}\n.collaboratorField button:hover {\n  background-color: #5faee3;\n}\n.comments .comment {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  font-size: 0.9em;\n  border-bottom: solid 1px #E4E5E6;\n  margin-bottom: 20px;\n}\n.comments .comment:before,\n.comments .comment:after {\n  content: \"\";\n  display: table;\n}\n.comments .comment:after {\n  clear: both;\n}\n.comments .comment .pic {\n  width: 16.66666667%;\n  display: inline-block;\n  vertical-align: top;\n}\n.comments .comment .pic a img {\n  width: 80%;\n}\n.comments .comment .content {\n  width: 83.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.comments .comment .content .date {\n  color: #aaa;\n  font-size: 1em;\n  font-style: italic;\n}\n.comments .create {\n  max-width: 96%;\n  width: 100%;\n  margin: 0 auto;\n  padding: 2%;\n  color: #eee;\n}\n.comments .create:before,\n.comments .create:after {\n  content: \"\";\n  display: table;\n}\n.comments .create:after {\n  clear: both;\n}\n.comments .create .pic {\n  width: 0%;\n  display: none;\n  vertical-align: top;\n}\n.comments .create .pic img {\n  margin: 0;\n  padding: 0;\n  width: 80%;\n}\n.comments .create textarea {\n  display: inline-block;\n  border: none;\n  height: 120px;\n  width: 100%;\n  background-color: #eee;\n}\n.comments .create button.button {\n  margin: 0;\n  padding: 0;\n}\n.details {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  padding: 10px;\n  box-sizing: border-box;\n}\n.details:before,\n.details:after {\n  content: \"\";\n  display: table;\n}\n.details:after {\n  clear: both;\n}\n.details .extra {\n  height: 220px;\n  overflow: hidden;\n  margin: 20px 0;\n}\n.details .extra.excerpt {\n  font-size: 0.9em;\n  font-style: italic;\n  color: #333;\n}\n.details .extra.excerpt > div {\n  max-height: 120px;\n  overflow: hidden;\n}\n.details .extra.event {\n  text-align: center;\n}\n.details .extra.event i {\n  margin-top: 10px;\n  font-size: 6em;\n}\n.details .extra.event .when {\n  font-size: 1.5em;\n  margin: 16px 0;\n}\n.details .extra.event .location {\n  font-weight: bold;\n}\n.details .pic {\n  width: 25%;\n  display: inline-block;\n  vertical-align: top;\n}\n.details .pic img {\n  width: 100%;\n  margin: 0%;\n  padding: 2%;\n  box-sizing: border-box;\n}\n.details .basic {\n  width: 75%;\n  display: inline-block;\n  vertical-align: top;\n  font-size: 0.9em;\n  line-height: 1.1em;\n}\n.details .basic .created {\n  font-size: 0.8em;\n  color: #bbb;\n}\n@media (min-width: 1000px) {\n  .details .pic {\n    width: 25%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .details .basic {\n    width: 75%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n@media (min-width: 1400px) {\n  .details .pic {\n    width: 16.66666667%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .details .basic {\n    width: 58.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\ndiv.post .interact {\n  position: static;\n  margin: 0 0 20px 0;\n  padding: 10px 0;\n}\n.interact {\n  border-top: solid 1px #eee;\n  border-bottom: solid 1px #eee;\n}\n.interact > div {\n  display: inline-block;\n  vertical-align: bottom;\n}\n.interact:hover {\n  cursor: pointer;\n}\n.interact .influence,\n.interact .popularity {\n  width: 60px;\n}\n.interact .popularity > div {\n  width: 60px;\n}\n.interact .stats {\n  width: 110px;\n  padding-bottom: 6px;\n}\n.interact i {\n  font-size: 1.5em;\n}\n@media (min-width: 1000px) {\n  div.posts .interact {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    border-top: dotted 3px #eee;\n    background: transparent;\n    max-width: 100%;\n    width: 100%;\n    margin: 0 auto;\n    text-align: left;\n  }\n  div.posts .interact:before,\n  div.posts .interact:after {\n    content: \"\";\n    display: table;\n  }\n  div.posts .interact:after {\n    clear: both;\n  }\n  div.posts .interact .influence {\n    display: inline-block;\n  }\n}\n.links {\n  width: 38%;\n  margin: 1%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #fff;\n  padding: 20px;\n  box-sizing: border-box;\n}\n.links .fields {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #f7f7f7;\n  box-sizing: border-box;\n  padding: 20px;\n}\n.links .fields textarea {\n  border: solid 1px #DDD;\n  height: 160px;\n}\n.links .fields button {\n  width: 200px;\n  font-size: 2em;\n}\n.links .list {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div {\n  padding: 0 2%;\n  width: 100%;\n  box-sizing: border-box;\n  border-bottom: solid 1px rgba(95, 174, 227, 0.3);\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n}\n.links .list > div > div {\n  width: 91.66666667%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div > div.icon {\n  width: 8.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div > div.icon i {\n  font-size: 2em;\n  display: block;\n}\n.links .list > div > div.icon a.edit {\n  font-size: 1em;\n  display: block;\n  text-align: left;\n}\n.links .list > div a {\n  font-size: 1em;\n  line-height: 1em;\n  text-decoration: underline;\n}\n.links .list > div p {\n  font-size: 0.8em;\n  font-style: italic;\n  margin: 5px 0 0 0;\n  padding: 0;\n  line-height: 1.5em;\n}\n.links .list > div button.remove {\n  float: right;\n  border: none;\n  background: transparent;\n  cursor: pointer;\n}\n.links .list > div button.remove:hover {\n  color: #fc2727;\n}\n.privacy {\n  background-color: #fff;\n  box-sizing: border-box;\n  padding: 20px;\n  min-height: 300px;\n  width: 28%;\n  display: inline-block;\n  vertical-align: top;\n  margin: 1%;\n}\n.privacy input[type=radio] {\n  width: 20px;\n  display: inline;\n}\n.privacy label {\n  display: inline;\n}\n.privacy > div div.contexts,\n.privacy > div button {\n  display: inline-block;\n  vertical-align: middle;\n}\n.privacyToggle {\n  display: inline-block;\n  margin-left: 10px;\n  font-size: 0.9em;\n  color: #3498DB;\n}\n.privacyToggle:hover {\n  cursor: pointer;\n  color: #f2c13d;\n}\n.postItem .share div.toggle {\n  font-size: 0.9em;\n  padding: 10px;\n  color: #444;\n}\n.postItem .share div.toggle:hover {\n  color: #3498DB;\n  cursor: pointer;\n}\n.postItem .share div.toggle i.fa-share {\n  font-size: 2em;\n  margin-right: 10px;\n}\n.postItem .share ul {\n  margin: 0;\n  padding: 0;\n}\n.postItem .share ul li {\n  display: inline-block;\n  margin-right: 10px;\n  padding: 10px;\n}\n.postItem .share ul li:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\n.postItem .share ul li > i {\n  font-size: 1.5em;\n}\n.postItem .share ul li i.fa-close {\n  color: #ED0303;\n}\n.stats {\n  color: #999;\n  font-size: 0.8em;\n  text-align: left;\n  clear: right;\n}\n.stats div {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: center;\n  font-size: 10px;\n  color: #777;\n}\n.stats div strong {\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  font-size: 1.8em;\n}\n.tags {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  position: absolute;\n  bottom: 80px;\n  background-color: #fff;\n}\ndiv.post .tags {\n  position: static;\n  margin-bottom: 20px;\n  border-bottom: solid 1px #eee;\n}\n.edit .tags {\n  width: 24%;\n  margin: 1%;\n  padding: 20px;\n  box-sizing: border-box;\n  min-height: 300px;\n  display: inline-block;\n  vertical-align: top;\n}\n.tag {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  font-size: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  color: #999;\n  margin-left: 4px;\n  display: inline-block;\n  margin-bottom: 4px;\n}\n.tag a {\n  color: #555;\n}\n.tag a:hover {\n  border-color: #5faee3;\n  color: #5faee3;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.tag a.remove {\n  border: none;\n  background: transparent;\n  display: inline-block;\n  font-size: 1em;\n  color: inherit;\n  margin-left: 10px;\n}\n.tag a.remove:hover {\n  color: #fc2727;\n  text-decoration: none;\n  cursor: pointer;\n}\n.tagField {\n  position: relative;\n  display: inline-block;\n  margin-left: 10px;\n}\n.tagField input {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  height: 40px;\n  font-size: 1.1em;\n  color: #333;\n  margin-left: 4px;\n  display: inline-block;\n}\n.tagField button {\n  width: 60px;\n  height: 38px;\n  position: absolute;\n  -webkit-border-radius: 0 15px 15px 0;\n  -moz-border-radius: 0 15px 15px 0;\n  border-radius: 0 15px 15px 0;\n  font-size: 0.5em;\n  border: none;\n  background-color: #217dbb;\n  cursor: pointer;\n  color: #eee;\n  top: 1px;\n  right: 15px;\n}\n.tagField button:hover {\n  background-color: #5faee3;\n}\n.thumb button.button {\n  font-size: 0.7em;\n  height: 40px;\n  width: 120px;\n  display: inline-block;\n}\n.thumb button.button.up,\n.thumb button.button.down {\n  color: #333;\n}\n.thumb button.button:hover.up {\n  color: #9cd900;\n}\n.thumb button.button:hover.down {\n  color: #fc2727;\n}\n.thumb button.button.selected {\n  box-sizing: border-box;\n}\n.thumb button.button.selected.up {\n  color: #8ABF00;\n}\n.thumb button.button.selected.down {\n  color: #ED0303;\n}\n.thumb button.button i {\n  font-size: 3em;\n  opacity: 0.5;\n  float: left;\n}\n.thumb button.button .total {\n  font-size: 1.5em;\n  opacity: 0.9;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  display: block;\n  margin: 12px 2px 0 10px;\n  text-align: left;\n}\n.type {\n  font-size: 0.8em;\n  text-transform: capitalize;\n  -webkit-border-radius: 6px;\n  -moz-border-radius: 6px;\n  border-radius: 6px;\n  color: white;\n  padding: 4px;\n  text-align: center;\n  width: 100px;\n  background-color: #333;\n  margin: 4px 0;\n  cursor: pointer;\n  border: solid 1px transparent;\n}\n.type.blog,\n.type.event {\n  background-color: #8ABF00;\n  color: #fff;\n}\n.type.blog.inverted,\n.type.event.inverted {\n  background-color: #fafafa;\n  border: solid 1px #9cd900;\n  color: #9cd900;\n}\n.type.blog:hover,\n.type.event:hover {\n  background-color: #658c00;\n  color: #eee;\n}\n.type.subject,\n.type.question {\n  background-color: #3498DB;\n  color: #fff;\n}\n.type.subject.inverted,\n.type.question.inverted {\n  background-color: #fafafa;\n  border: solid 1px #5faee3;\n  color: #5faee3;\n}\n.type.subject:hover,\n.type.question:hover {\n  background-color: #217dbb;\n  color: #eee;\n}\n.type.debate,\n.type.poll {\n  background-color: #ED0303;\n  color: #fff;\n}\n.type.debate.inverted,\n.type.poll.inverted {\n  background-color: #fafafa;\n  border: solid 1px #fc2727;\n  color: #fc2727;\n}\n.type.debate:hover,\n.type.poll:hover {\n  background-color: #bb0202;\n  color: #eee;\n}\n.type.quote,\n.type.belief {\n  background-color: #ECB010;\n  color: #fff;\n}\n.type.quote.inverted,\n.type.belief.inverted {\n  background-color: #fafafa;\n  border: solid 1px #f2c13d;\n  color: #f2c13d;\n}\n.type.quote:hover,\n.type.belief:hover {\n  background-color: #bc8c0d;\n  color: #eee;\n}\n.selector {\n  position: absolute;\n  z-index: 99999;\n}\n#content > div.post {\n  margin: auto;\n  margin-top: 20px;\n  min-height: 600px;\n  background: transparent;\n  border: none;\n  /** HANDLE **/\n  /** TITLE **/\n  /** EDITOR **/\n}\n#content > div.post .edit,\n#content > div.post .create {\n  background: transparent;\n}\n#content > div.post .edit .toolbar,\n#content > div.post .create .toolbar {\n  background-color: #fff;\n  border-top: solid 1px #ddd;\n  border-bottom: solid 1px #ddd;\n  position: fixed;\n  top: 60px;\n  height: 40px;\n  width: 100%;\n  left: 0;\n}\n#content > div.post .edit .actions,\n#content > div.post .create .actions {\n  position: fixed;\n  top: 60px;\n  right: 0;\n}\n#content > div.post .single {\n  width: 96%;\n  padding: 2%;\n  margin: 0;\n  background-color: #fff;\n}\n#content > div.post .single .title {\n  font-size: 2em;\n}\n#content > div.post ul {\n  margin: 20px 0 0 0;\n  padding: 0;\n}\n#content > div.post ul li {\n  list-style: none;\n  font-size: 0.8em;\n  color: #444;\n  margin: 0;\n  padding: 0;\n  line-height: 1.4;\n}\n#content > div.post .handle {\n  float: right;\n  cursor: pointer;\n  color: #aaa;\n}\n#content > div.post .handle:hover {\n  color: #888;\n}\n#content > div.post .handle.dragging {\n  color: #8ABF00;\n}\n#content > div.post input.title {\n  width: 100%;\n  max-width: 100%;\n  min-width: 100%;\n}\n#content > div.post input.title.editing:hover,\n#content > div.post input.title.editing:focus {\n  border: solid 1px #3498DB;\n  background-color: #fdfdfd;\n}\n#content > div.post .title {\n  font-size: 1.5em;\n  line-height: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  font-weight: bold;\n  color: #1e2f40;\n  outline: none;\n  margin: 10px 0;\n  padding: 5px;\n}\n#content > div.post .title a {\n  color: #444;\n}\n#content > div.post .title a:hover {\n  color: #ECB010;\n}\n#content > div.post .rte {\n  margin-bottom: 40px;\n  padding-bottom: 20px;\n}\n#content > div.post .ql-editor,\n#content > div.post .ql-container {\n  height: initial;\n  min-height: initial;\n}\n#content > div.post div.ql-toolbar {\n  position: fixed;\n  top: 60px;\n  opacity: 1;\n}\n#content > div.post .quill-contents {\n  background-color: #fff;\n  border: solid 1px #ddd;\n}\n#content > div.post .quill-contents:hover,\n#content > div.post .quill-contents:focus {\n  border-color: #3498DB;\n}\n#content > div.post .ql-container {\n  position: static;\n  z-index: -1;\n}\n#content > div.post .content {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  overflow: hidden;\n}\n#content > div.post .content:before,\n#content > div.post .content:after {\n  content: \"\";\n  display: table;\n}\n#content > div.post .content:after {\n  clear: both;\n}\n#content > div.post .create textarea,\n#content > div.post .edit textarea {\n  min-height: 300px;\n  width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -17574,7 +17574,7 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\n.actions {\n  float: right;\n}\n.actions button.save,\n.actions button.delete,\n.actions button.myposts,\n.actions button.rich {\n  height: 30px;\n  font-size: 0.8em;\n  width: 140px;\n  margin: 0;\n  padding: 4px;\n  display: inline-block;\n  margin-right: 10px;\n  height: 33px;\n  margin: 4px;\n  box-sizing: border-box;\n}\n.actions button.myposts {\n  width: 160px;\n}\n.actions button.rich {\n  width: 200px;\n}\n.actions button.close {\n  background: transparent;\n  background-color: #555;\n  border: none;\n  color: #fff;\n  float: right;\n  padding: 8px;\n  font-size: 1em;\n  margin-left: 10px;\n}\n.actions button.close:hover {\n  color: #f2c13d;\n  cursor: pointer;\n}\n.actions > a.edit {\n  display: block;\n  font-size: 0.6em;\n  float: right;\n  color: #777;\n  text-align: right;\n}\n.actions > a.edit:hover {\n  color: #5faee3;\n}\n.actions > a.edit i {\n  font-size: 1.5em;\n}\n.categories {\n  font-size: 0.8em;\n  text-transform: uppercase;\n  margin-bottom: 20px;\n}\n.categories select {\n  width: 40%;\n  margin-right: 20px;\n  max-width: 160px;\n  display: inline-block;\n}\n.collaborators {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  position: absolute;\n  bottom: 80px;\n}\ndiv.post .collaborators {\n  position: static;\n  margin-bottom: 20px;\n  border-bottom: solid 1px #eee;\n}\n.collaborator {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  font-size: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  color: #999;\n  margin-left: 4px;\n  display: inline-block;\n  margin-bottom: 4px;\n}\n.collaborator a {\n  color: #ccc;\n}\n.collaborator a:hover {\n  border-color: #5faee3;\n  color: #5faee3;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.collaborator a.remove {\n  border: none;\n  background: transparent;\n  display: inline-block;\n  font-size: 1em;\n  color: inherit;\n  margin-left: 10px;\n}\n.collaborator a.remove:hover {\n  color: #fc2727;\n  text-decoration: none;\n  cursor: pointer;\n}\n.collaboratorField {\n  position: relative;\n  display: inline-block;\n  margin-left: 10px;\n}\n.collaboratorField input {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  height: 40px;\n  font-size: 1.1em;\n  color: #333;\n  margin-left: 4px;\n  display: inline-block;\n}\n.collaboratorField button {\n  width: 60px;\n  height: 38px;\n  position: absolute;\n  -webkit-border-radius: 0 15px 15px 0;\n  -moz-border-radius: 0 15px 15px 0;\n  border-radius: 0 15px 15px 0;\n  font-size: 0.5em;\n  border: none;\n  background-color: #217dbb;\n  cursor: pointer;\n  color: #eee;\n  top: 1px;\n  right: 15px;\n}\n.collaboratorField button:hover {\n  background-color: #5faee3;\n}\n.comments .comment {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  font-size: 0.9em;\n  border-bottom: solid 1px #E4E5E6;\n  margin-bottom: 20px;\n}\n.comments .comment:before,\n.comments .comment:after {\n  content: \"\";\n  display: table;\n}\n.comments .comment:after {\n  clear: both;\n}\n.comments .comment .pic {\n  width: 16.66666667%;\n  display: inline-block;\n  vertical-align: top;\n}\n.comments .comment .pic a img {\n  width: 80%;\n}\n.comments .comment .content {\n  width: 83.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.comments .comment .content .date {\n  color: #aaa;\n  font-size: 1em;\n  font-style: italic;\n}\n.comments .create {\n  max-width: 96%;\n  width: 100%;\n  margin: 0 auto;\n  padding: 2%;\n  color: #eee;\n}\n.comments .create:before,\n.comments .create:after {\n  content: \"\";\n  display: table;\n}\n.comments .create:after {\n  clear: both;\n}\n.comments .create .pic {\n  width: 0%;\n  display: none;\n  vertical-align: top;\n}\n.comments .create .pic img {\n  margin: 0;\n  padding: 0;\n  width: 80%;\n}\n.comments .create textarea {\n  display: inline-block;\n  border: none;\n  height: 120px;\n  width: 100%;\n  background-color: #eee;\n}\n.comments .create button.button {\n  margin: 0;\n  padding: 0;\n}\n.details {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  padding: 10px;\n  box-sizing: border-box;\n}\n.details:before,\n.details:after {\n  content: \"\";\n  display: table;\n}\n.details:after {\n  clear: both;\n}\n.details .extra {\n  height: 220px;\n  overflow: hidden;\n  margin: 20px 0;\n}\n.details .extra.excerpt {\n  font-size: 0.9em;\n  font-style: italic;\n  color: #333;\n}\n.details .extra.excerpt > div {\n  max-height: 120px;\n  overflow: hidden;\n}\n.details .extra.event {\n  text-align: center;\n}\n.details .extra.event i {\n  margin-top: 10px;\n  font-size: 6em;\n}\n.details .extra.event .when {\n  font-size: 1.5em;\n  margin: 16px 0;\n}\n.details .extra.event .location {\n  font-weight: bold;\n}\n.details .pic {\n  width: 25%;\n  display: inline-block;\n  vertical-align: top;\n}\n.details .pic img {\n  width: 100%;\n  margin: 0%;\n  padding: 2%;\n  box-sizing: border-box;\n}\n.details .basic {\n  width: 75%;\n  display: inline-block;\n  vertical-align: top;\n  font-size: 0.9em;\n  line-height: 1.1em;\n}\n.details .basic .created {\n  font-size: 0.8em;\n  color: #bbb;\n}\n@media (min-width: 1000px) {\n  .details .pic {\n    width: 25%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .details .basic {\n    width: 75%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n@media (min-width: 1400px) {\n  .details .pic {\n    width: 16.66666667%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .details .basic {\n    width: 58.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\ndiv.post .interact {\n  position: static;\n  margin: 0 0 20px 0;\n  padding: 10px 0;\n}\n.interact {\n  border-top: solid 1px #eee;\n  border-bottom: solid 1px #eee;\n}\n.interact > div {\n  display: inline-block;\n  vertical-align: bottom;\n}\n.interact:hover {\n  cursor: pointer;\n}\n.interact .influence,\n.interact .popularity {\n  width: 60px;\n}\n.interact .popularity > div {\n  width: 60px;\n}\n.interact .stats {\n  width: 110px;\n  padding-bottom: 6px;\n}\n.interact i {\n  font-size: 1.5em;\n}\n@media (min-width: 1000px) {\n  div.posts .interact {\n    position: absolute;\n    left: 0;\n    bottom: 0;\n    border-top: dotted 3px #eee;\n    background: transparent;\n    max-width: 100%;\n    width: 100%;\n    margin: 0 auto;\n    text-align: left;\n  }\n  div.posts .interact:before,\n  div.posts .interact:after {\n    content: \"\";\n    display: table;\n  }\n  div.posts .interact:after {\n    clear: both;\n  }\n  div.posts .interact .influence {\n    display: inline-block;\n  }\n}\n.links {\n  width: 38%;\n  margin: 1%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #fff;\n  min-height: 300px;\n  padding: 20px;\n  box-sizing: border-box;\n}\n.links .fields {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #f7f7f7;\n  box-sizing: border-box;\n  padding: 20px;\n}\n.links .fields textarea {\n  border: solid 1px #DDD;\n  height: 160px;\n}\n.links .fields button {\n  width: 200px;\n  font-size: 2em;\n}\n.links .list {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div {\n  padding: 0 2%;\n  width: 100%;\n  box-sizing: border-box;\n  border-bottom: solid 1px rgba(95, 174, 227, 0.3);\n  margin-bottom: 10px;\n  padding-bottom: 10px;\n}\n.links .list > div > div {\n  width: 91.66666667%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div > div.icon {\n  width: 8.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.links .list > div > div.icon i {\n  font-size: 2em;\n  display: block;\n}\n.links .list > div > div.icon a.edit {\n  font-size: 1em;\n  display: block;\n  text-align: left;\n}\n.links .list > div a {\n  font-size: 1em;\n  line-height: 1em;\n  text-decoration: underline;\n}\n.links .list > div p {\n  font-size: 0.8em;\n  font-style: italic;\n  margin: 5px 0 0 0;\n  padding: 0;\n  line-height: 1.5em;\n}\n.links .list > div button.remove {\n  float: right;\n  border: none;\n  background: transparent;\n  cursor: pointer;\n}\n.links .list > div button.remove:hover {\n  color: #fc2727;\n}\n.privacy {\n  background-color: #fff;\n  box-sizing: border-box;\n  padding: 20px;\n  min-height: 300px;\n  width: 28%;\n  display: inline-block;\n  vertical-align: top;\n  margin: 1%;\n}\n.privacy input[type=radio] {\n  width: 20px;\n  display: inline;\n}\n.privacy label {\n  display: inline;\n}\n.privacy > div div.contexts,\n.privacy > div button {\n  display: inline-block;\n  vertical-align: middle;\n}\n.privacyToggle {\n  display: inline-block;\n  margin-left: 10px;\n  font-size: 0.9em;\n  color: #3498DB;\n}\n.privacyToggle:hover {\n  cursor: pointer;\n  color: #f2c13d;\n}\n.postItem .share div.toggle {\n  font-size: 0.9em;\n  padding: 10px;\n  color: #444;\n}\n.postItem .share div.toggle:hover {\n  color: #3498DB;\n  cursor: pointer;\n}\n.postItem .share div.toggle i.fa-share {\n  font-size: 2em;\n  margin-right: 10px;\n}\n.postItem .share ul {\n  margin: 0;\n  padding: 0;\n}\n.postItem .share ul li {\n  display: inline-block;\n  margin-right: 10px;\n  padding: 10px;\n}\n.postItem .share ul li:hover {\n  background-color: #ddd;\n  cursor: pointer;\n}\n.postItem .share ul li > i {\n  font-size: 1.5em;\n}\n.postItem .share ul li i.fa-close {\n  color: #ED0303;\n}\n.stats {\n  color: #999;\n  font-size: 0.8em;\n  text-align: left;\n  clear: right;\n}\n.stats div {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: center;\n  font-size: 10px;\n  color: #777;\n}\n.stats div strong {\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  font-size: 1.8em;\n}\n.tags {\n  margin-top: 10px;\n  padding-bottom: 10px;\n  position: absolute;\n  bottom: 80px;\n  background-color: #fff;\n}\ndiv.post .tags {\n  position: static;\n  margin-bottom: 20px;\n  border-bottom: solid 1px #eee;\n}\n.edit .tags {\n  width: 24%;\n  margin: 1%;\n  padding: 20px;\n  box-sizing: border-box;\n  min-height: 300px;\n  display: inline-block;\n  vertical-align: top;\n}\n.tag {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  font-size: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  color: #999;\n  margin-left: 4px;\n  display: inline-block;\n  margin-bottom: 4px;\n}\n.tag a {\n  color: #555;\n}\n.tag a:hover {\n  border-color: #5faee3;\n  color: #5faee3;\n  text-decoration: underline;\n  cursor: pointer;\n}\n.tag a.remove {\n  border: none;\n  background: transparent;\n  display: inline-block;\n  font-size: 1em;\n  color: inherit;\n  margin-left: 10px;\n}\n.tag a.remove:hover {\n  color: #fc2727;\n  text-decoration: none;\n  cursor: pointer;\n}\n.tagField {\n  position: relative;\n  display: inline-block;\n  margin-left: 10px;\n}\n.tagField input {\n  border: solid 1px #DDD;\n  padding: 0px 6px;\n  -webkit-border-radius: 16px;\n  -moz-border-radius: 16px;\n  border-radius: 16px;\n  height: 40px;\n  font-size: 1.1em;\n  color: #333;\n  margin-left: 4px;\n  display: inline-block;\n}\n.tagField button {\n  width: 60px;\n  height: 38px;\n  position: absolute;\n  -webkit-border-radius: 0 15px 15px 0;\n  -moz-border-radius: 0 15px 15px 0;\n  border-radius: 0 15px 15px 0;\n  font-size: 0.5em;\n  border: none;\n  background-color: #217dbb;\n  cursor: pointer;\n  color: #eee;\n  top: 1px;\n  right: 15px;\n}\n.tagField button:hover {\n  background-color: #5faee3;\n}\n.thumb button.button {\n  font-size: 0.7em;\n  height: 40px;\n  width: 120px;\n  display: inline-block;\n}\n.thumb button.button.up,\n.thumb button.button.down {\n  color: #333;\n}\n.thumb button.button:hover.up {\n  color: #9cd900;\n}\n.thumb button.button:hover.down {\n  color: #fc2727;\n}\n.thumb button.button.selected {\n  box-sizing: border-box;\n}\n.thumb button.button.selected.up {\n  color: #8ABF00;\n}\n.thumb button.button.selected.down {\n  color: #ED0303;\n}\n.thumb button.button i {\n  font-size: 3em;\n  opacity: 0.5;\n  float: left;\n}\n.thumb button.button .total {\n  font-size: 1.5em;\n  opacity: 0.9;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  display: block;\n  margin: 12px 2px 0 10px;\n  text-align: left;\n}\n.type {\n  font-size: 0.8em;\n  text-transform: capitalize;\n  -webkit-border-radius: 6px;\n  -moz-border-radius: 6px;\n  border-radius: 6px;\n  color: white;\n  padding: 4px;\n  text-align: center;\n  width: 100px;\n  background-color: #333;\n  margin: 4px 0;\n  cursor: pointer;\n  border: solid 1px transparent;\n}\n.type.blog,\n.type.event {\n  background-color: #8ABF00;\n  color: #fff;\n}\n.type.blog.inverted,\n.type.event.inverted {\n  background-color: #fafafa;\n  border: solid 1px #9cd900;\n  color: #9cd900;\n}\n.type.blog:hover,\n.type.event:hover {\n  background-color: #658c00;\n  color: #eee;\n}\n.type.subject,\n.type.question {\n  background-color: #3498DB;\n  color: #fff;\n}\n.type.subject.inverted,\n.type.question.inverted {\n  background-color: #fafafa;\n  border: solid 1px #5faee3;\n  color: #5faee3;\n}\n.type.subject:hover,\n.type.question:hover {\n  background-color: #217dbb;\n  color: #eee;\n}\n.type.debate,\n.type.poll {\n  background-color: #ED0303;\n  color: #fff;\n}\n.type.debate.inverted,\n.type.poll.inverted {\n  background-color: #fafafa;\n  border: solid 1px #fc2727;\n  color: #fc2727;\n}\n.type.debate:hover,\n.type.poll:hover {\n  background-color: #bb0202;\n  color: #eee;\n}\n.type.quote,\n.type.belief {\n  background-color: #ECB010;\n  color: #fff;\n}\n.type.quote.inverted,\n.type.belief.inverted {\n  background-color: #fafafa;\n  border: solid 1px #f2c13d;\n  color: #f2c13d;\n}\n.type.quote:hover,\n.type.belief:hover {\n  background-color: #bc8c0d;\n  color: #eee;\n}\n.selector {\n  position: absolute;\n  z-index: 99999;\n}\n#content > div.post {\n  margin: auto;\n  margin-top: 20px;\n  min-height: 600px;\n  background: transparent;\n  border: none;\n  /** HANDLE **/\n  /** TITLE **/\n  /** EDITOR **/\n}\n#content > div.post .edit,\n#content > div.post .create {\n  background: transparent;\n}\n#content > div.post .edit .toolbar,\n#content > div.post .create .toolbar {\n  background-color: #fff;\n  border-top: solid 1px #ddd;\n  border-bottom: solid 1px #ddd;\n  position: fixed;\n  top: 60px;\n  height: 40px;\n  width: 100%;\n  left: 0;\n}\n#content > div.post .edit .actions,\n#content > div.post .create .actions {\n  position: fixed;\n  top: 60px;\n  right: 0;\n}\n#content > div.post .single {\n  width: 96%;\n  padding: 2%;\n  margin: 0;\n  background-color: #fff;\n}\n#content > div.post .single .title {\n  font-size: 2em;\n}\n#content > div.post ul {\n  margin: 20px 0 0 0;\n  padding: 0;\n}\n#content > div.post ul li {\n  list-style: none;\n  font-size: 0.8em;\n  color: #444;\n  margin: 0;\n  padding: 0;\n  line-height: 1.4;\n}\n#content > div.post .handle {\n  float: right;\n  cursor: pointer;\n  color: #aaa;\n}\n#content > div.post .handle:hover {\n  color: #888;\n}\n#content > div.post .handle.dragging {\n  color: #8ABF00;\n}\n#content > div.post input.title {\n  width: 100%;\n  max-width: 100%;\n  min-width: 100%;\n}\n#content > div.post input.title.editing:hover,\n#content > div.post input.title.editing:focus {\n  border: solid 1px #3498DB;\n  background-color: #fdfdfd;\n}\n#content > div.post .title {\n  font-size: 1.5em;\n  line-height: 1em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  font-weight: bold;\n  color: #1e2f40;\n  outline: none;\n  margin: 10px 0;\n  padding: 5px;\n}\n#content > div.post .title a {\n  color: #444;\n}\n#content > div.post .title a:hover {\n  color: #ECB010;\n}\n#content > div.post .rte {\n  margin-bottom: 40px;\n  padding-bottom: 20px;\n}\n#content > div.post .ql-editor,\n#content > div.post .ql-container {\n  height: initial;\n  min-height: initial;\n}\n#content > div.post div.ql-toolbar {\n  position: fixed;\n  top: 60px;\n  opacity: 1;\n}\n#content > div.post .quill-contents {\n  background-color: #fff;\n  border: solid 1px #ddd;\n}\n#content > div.post .quill-contents:hover,\n#content > div.post .quill-contents:focus {\n  border-color: #3498DB;\n}\n#content > div.post .ql-container {\n  position: static;\n  z-index: -1;\n}\n#content > div.post .content {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  overflow: hidden;\n}\n#content > div.post .content:before,\n#content > div.post .content:after {\n  content: \"\";\n  display: table;\n}\n#content > div.post .content:after {\n  clear: both;\n}\n#content > div.post .create textarea,\n#content > div.post .edit textarea {\n  min-height: 300px;\n  width: 100%;\n}\n", ""]);
+exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\nheader.home {\n  background: transparent;\n  position: absolute;\n}\nheader nav.home > ul > li,\nnav.static > ul > li {\n  display: inline-block;\n}\nheader nav.home > ul > li > a,\nnav.static > ul > li > a {\n  padding: 12px 4px 15px 4px;\n  display: block;\n  font-size: 0.6em;\n  color: #fff;\n}\nheader nav.home > ul > li > a:hover,\nnav.static > ul > li > a:hover {\n  background-color: #fff;\n  opacity: 0.5;\n  color: #333;\n}\nheader nav.static > ul > li > a {\n  color: #555;\n}\nheader nav.static > ul > li > a:hover {\n  background-color: #000;\n  opacity: 0.7;\n  color: #fff;\n}\nheader {\n  width: 100%;\n  height: 50px;\n  position: fixed;\n  background-color: #fff;\n  border-bottom: solid 1px #eee;\n  opacity: 1;\n  z-index: 999;\n}\nheader .brand {\n  width: 30%;\n  float: left;\n}\nheader .brand a {\n  display: block;\n  margin: 14px 0px 0px 0px;\n  padding: 0px;\n  width: 90px;\n  height: 30px;\n  background-repeat: no-repeat;\n  background-size: 100%;\n  background-image: url('/assets/logos/dark/normal.png');\n}\nheader .brand a:hover {\n  background-image: url('/assets/logos/dark/hover.png');\n}\nheader .mylinks {\n  font-size: 0.9em;\n  display: inline-block;\n  height: 100%;\n  padding-top: 20px;\n}\nheader .mylinks a {\n  padding-top: 20px;\n  margin-left: 10px;\n}\nheader.home {\n  border-bottom: none;\n}\nheader.home .brand a {\n  background-image: url('/assets/logos/light/normal.png');\n}\nheader.home .brand a:hover {\n  background-image: url('/assets/logos/light/hover.png');\n}\nheader .keywords {\n  top: -30px;\n  height: 40px;\n  border: solid 1px #eee;\n  position: relative;\n  margin-top: 10px;\n  box-sizing: border-box;\n  width: 100%;\n}\nheader .keywords input {\n  position: absolute;\n  max-width: none;\n  box-sizing: border-box;\n  background-color: #fff;\n  border: none;\n  margin: 0px;\n  padding: 4px;\n  height: 100%;\n  font-size: 1.2em;\n  color: #333;\n}\nheader .keywords button.filter {\n  position: absolute;\n  background-color: transparent;\n  border: none;\n  width: 40px;\n  right: 40px;\n  top: 10px;\n  font-size: 1em;\n  color: #eee;\n}\nheader .keywords button.filter:hover {\n  cursor: pointer;\n  color: #f2c13d;\n}\nheader .keywords button.button {\n  position: absolute;\n  margin: 0px;\n  padding: 0px;\n  height: 100%;\n  width: 40px;\n  right: 0;\n  -webkit-border-radius: 0px;\n  -moz-border-radius: 0px;\n  border-radius: 0px;\n}\nheader .keywords button.button i {\n  margin-right: 0;\n}\nheader .keywords button.button span {\n  display: none;\n}\nheader nav {\n  width: 70%;\n  float: right;\n  text-align: right;\n}\nheader nav > ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\nheader nav > ul > li {\n  display: inline-block;\n  text-align: center;\n  position: relative;\n  text-transform: uppercase;\n}\nheader nav > ul > li > div {\n  display: none;\n}\nheader nav > ul > li:hover > div {\n  display: block;\n  position: absolute;\n  top: 50px;\n  background-color: #f7f7f7;\n  border: solid 1px #ddd;\n  box-sizing: border-box;\n  width: 300px;\n  right: 0;\n  z-index: 9999;\n}\nheader nav > ul > li:hover > div ul {\n  width: 50%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: left;\n  margin: 0;\n  padding: 6px;\n  box-sizing: border-box;\n}\nheader nav > ul > li:hover > div ul > li {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  clear: both;\n}\nheader nav > ul > li:hover > div ul > li > a {\n  display: block;\n  width: 100%;\n  height: 30px;\n  padding-left: 4px;\n  padding-right: 8px;\n  box-sizing: border-box;\n}\nheader nav > ul > li:hover > div ul > li > a > span {\n  display: block;\n  float: right;\n  text-align: right;\n  margin-top: 2px;\n}\nheader nav > ul > li:hover > div ul > li > a i.fa {\n  color: #f2c13d;\n  float: left;\n  width: auto;\n  font-size: 1.2em;\n  display: block;\n}\nheader nav > ul > li:hover > div ul > li > a:hover {\n  background-color: #ddd;\n}\nheader nav > ul > li:hover > div ul .fa {\n  font-size: 0.8em;\n}\nheader nav > ul > li .fa {\n  font-size: 2em;\n  margin-top: 10px;\n}\nheader nav > ul > li a {\n  color: #eee;\n  text-align: center;\n  font-size: 0.6em;\n}\nheader nav > ul > li a span {\n  margin-top: -16px;\n  display: block;\n}\nheader nav > ul > li a:hover {\n  color: #fff;\n}\nheader nav > ul > li.leaders:hover {\n  color: #ED0303;\n  border-bottom: solid 4px #fc2727;\n}\nheader nav > ul > li.posts:hover {\n  color: #217dbb;\n  border-bottom: solid 4px #5faee3;\n}\nheader nav > ul > li.create {\n  background-color: #658c00;\n}\nheader nav > ul > li.create span,\nheader nav > ul > li.create i {\n  color: #fff;\n}\nheader nav > ul > li.create:hover {\n  border-bottom: solid 4px #9cd900;\n}\nheader nav > ul > li.create:hover span,\nheader nav > ul > li.create:hover i {\n  color: #eee;\n}\nheader nav > ul > li.me:hover {\n  color: #ECB010;\n  border-bottom: solid 4px #f2c13d;\n}\nheader nav > ul > li.me:hover + ul {\n  display: block;\n  background-color: #333;\n  list-style: none;\n  width: 120px;\n  position: absolute;\n  right: 0;\n  top: 40px;\n}\nheader nav > ul > li.me:hover + ul li {\n  padding: 4px;\n}\nheader nav > ul > li.me:hover + ul li a {\n  font-size: 0.9em;\n}\nheader nav .notifications {\n  background-color: #ED0303;\n  color: white;\n  font-weight: bold;\n  font-size: 0.4em;\n}\ndiv.spacer {\n  height: 80px !important;\n}\n@media (min-width: 500px) {\n  header nav.home > ul > li > a,\n  nav.static > ul > li > a {\n    padding: 20px 4px 15px 4px;\n    font-size: 0.8em;\n  }\n  header {\n    height: 60px;\n  }\n  header .brand a {\n    margin-top: 9px;\n    width: 180px;\n    height: 60px;\n  }\n  header .keywords button span {\n    display: inline;\n    font-size: 0.8em;\n  }\n  header nav > ul > li {\n    width: 80px;\n    height: 60px;\n  }\n  header nav > ul > li > div {\n    display: none;\n  }\n  header nav > ul > li:hover > div {\n    top: 60px;\n  }\n  header nav > ul > li .fa {\n    width: 60px;\n    font-size: 3em;\n  }\n  div.spacer {\n    height: 100px !important;\n  }\n  .stream .heading {\n    top: 60px;\n  }\n}\n@media (min-width: 800px) {\n  header .brand {\n    width: 25%;\n  }\n  header .keywords {\n    float: left;\n    width: 50%;\n    top: 0px;\n  }\n  header nav {\n    width: 50%;\n  }\n  div.spacer {\n    height: 60px !important;\n  }\n}\nheader > div.filter {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  background-color: #555;\n  box-shadow: 0px 0px 12px #444;\n  -moz-box-shadow: 0px 0px 12px #444;\n  -webkit-box-shadow: 0px 0px 12px #444;\n  margin-top: 40px;\n}\nheader > div.filter:before,\nheader > div.filter:after {\n  content: \"\";\n  display: table;\n}\nheader > div.filter:after {\n  clear: both;\n}\nheader > div.filter .label {\n  font-size: 0.8em;\n  color: #eee;\n  text-transform: uppercase;\n  padding: 1em;\n  margin: 0;\n  background-color: #333;\n  text-align: left;\n}\nheader > div.filter .types {\n  width: 50%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: center;\n}\nheader > div.filter .types .label {\n  margin-bottom: 10px;\n}\nheader > div.filter .types .type {\n  margin: 2px;\n  max-width: 150px;\n  width: 30%;\n  min-width: 100px;\n  font-size: 0.7em;\n}\nheader > div.filter .sortby {\n  width: 50%;\n  display: inline-block;\n  vertical-align: top;\n  box-sizing: border-box;\n  border-left: solid 1px #444;\n}\nheader > div.filter .sortby ul {\n  margin: 0px;\n  padding: 0px;\n  width: 100%;\n}\nheader > div.filter .sortby ul li {\n  width: 96%;\n  border-bottom: solid 1px #444;\n  padding: 0.5em 2%;\n  cursor: pointer;\n  color: #eee;\n  font-size: 0.9em;\n  list-style: none;\n}\nheader > div.filter .sortby ul li .fa {\n  color: #f2c13d;\n  margin-right: 10px;\n}\nheader > div.filter .sortby ul li.selected {\n  background-color: #222;\n  font-size: 1.5em;\n}\nheader > div.filter .sortby ul li.selected .fa {\n  color: #8ABF00;\n}\nheader > div.filter .sortby ul li:hover {\n  background-color: #222;\n  color: #8ABF00;\n}\nheader > div.filter .sortby ul li:hover .fa {\n  color: #8ABF00;\n}\nheader > div.filter .sortby button {\n  border: none;\n  width: 50%;\n  text-align: center;\n  height: 40px;\n  cursor: pointer;\n  background-color: #444;\n  color: #eee;\n}\nheader > div.filter .sortby button:hover {\n  color: #8ABF00;\n}\nheader > div.filter .sortby button.selected {\n  color: #8ABF00;\n  background-color: #222;\n}\nheader > div.filter ul {\n  display: inline-block;\n  list-style: none;\n  vertical-align: top;\n}\nheader > div.filter ul li {\n  border-bottom: solid 1px #eee;\n}\nheader > div.filter ul li a#blogs {\n  border-left: solid 4px #9cd900;\n}\nheader > div.filter ul li a#subjects {\n  border-left: solid 4px #5faee3;\n}\nheader > div.filter ul li a#debates {\n  border-left: solid 4px #fc2727;\n}\nheader > div.filter ul li a#beliefs {\n  border-left: solid 4px #f2c13d;\n}\n@media (min-width: 500px) {\n  header > div.filter {\n    margin-top: 50px;\n  }\n  header > div.filter .types,\n  header > div.filter .sortby {\n    width: 50%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n@media (min-width: 800px) {\n  header > div.filter {\n    max-width: 50%;\n    width: 100%;\n    margin: 0 auto;\n    margin-top: 10px;\n  }\n  header > div.filter:before,\n  header > div.filter:after {\n    content: \"\";\n    display: table;\n  }\n  header > div.filter:after {\n    clear: both;\n  }\n}\n", ""]);
 
 // exports
 
@@ -17588,7 +17588,7 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\nheader.home {\n  background: transparent;\n  position: absolute;\n}\nheader nav.home > ul > li,\nnav.static > ul > li {\n  display: inline-block;\n}\nheader nav.home > ul > li > a,\nnav.static > ul > li > a {\n  padding: 12px 4px 15px 4px;\n  display: block;\n  font-size: 0.6em;\n  color: #fff;\n}\nheader nav.home > ul > li > a:hover,\nnav.static > ul > li > a:hover {\n  background-color: #fff;\n  opacity: 0.5;\n  color: #333;\n}\nheader nav.static > ul > li > a {\n  color: #333;\n}\nheader nav.static > ul > li > a:hover {\n  background-color: #000;\n  opacity: 0.7;\n  color: #fff;\n}\nheader {\n  width: 100%;\n  height: 50px;\n  position: fixed;\n  background-color: #fff;\n  border-bottom: solid 1px #eee;\n  opacity: 1;\n  z-index: 999;\n}\nheader .brand {\n  width: 30%;\n  float: left;\n}\nheader .brand a {\n  display: block;\n  margin: 14px 0px 0px 0px;\n  padding: 0px;\n  width: 90px;\n  height: 30px;\n  background-repeat: no-repeat;\n  background-size: 100%;\n  background-image: url('/assets/logos/dark/normal.png');\n}\nheader .brand a:hover {\n  background-image: url('/assets/logos/dark/hover.png');\n}\nheader .mylinks {\n  font-size: 0.9em;\n  display: inline-block;\n  height: 100%;\n  padding-top: 20px;\n}\nheader .mylinks a {\n  padding-top: 20px;\n  margin-left: 10px;\n}\nheader.home {\n  border-bottom: none;\n}\nheader.home .brand a {\n  background-image: url('/assets/logos/light/normal.png');\n}\nheader.home .brand a:hover {\n  background-image: url('/assets/logos/light/hover.png');\n}\nheader .keywords {\n  top: -30px;\n  height: 40px;\n  border: solid 1px #eee;\n  position: relative;\n  margin-top: 10px;\n  box-sizing: border-box;\n  width: 100%;\n}\nheader .keywords input {\n  position: absolute;\n  max-width: none;\n  box-sizing: border-box;\n  background-color: #fff;\n  border: none;\n  margin: 0px;\n  padding: 4px;\n  height: 100%;\n  font-size: 1.2em;\n  color: #333;\n}\nheader .keywords button.filter {\n  position: absolute;\n  background-color: transparent;\n  border: none;\n  width: 40px;\n  right: 40px;\n  top: 10px;\n  font-size: 1em;\n  color: #eee;\n}\nheader .keywords button.filter:hover {\n  cursor: pointer;\n  color: #f2c13d;\n}\nheader .keywords button.button {\n  position: absolute;\n  margin: 0px;\n  padding: 0px;\n  height: 100%;\n  width: 40px;\n  right: 0;\n  -webkit-border-radius: 0px;\n  -moz-border-radius: 0px;\n  border-radius: 0px;\n}\nheader .keywords button.button i {\n  margin-right: 0;\n}\nheader .keywords button.button span {\n  display: none;\n}\nheader nav {\n  width: 70%;\n  float: right;\n  text-align: right;\n}\nheader nav > ul {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\nheader nav > ul > li {\n  display: inline-block;\n  text-align: center;\n  position: relative;\n  text-transform: uppercase;\n}\nheader nav > ul > li > div {\n  display: none;\n}\nheader nav > ul > li:hover > div {\n  display: block;\n  position: absolute;\n  top: 50px;\n  background-color: #f7f7f7;\n  border: solid 1px #ddd;\n  box-sizing: border-box;\n  width: 300px;\n  right: 0;\n  z-index: 9999;\n}\nheader nav > ul > li:hover > div ul {\n  width: 50%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: left;\n  margin: 0;\n  padding: 6px;\n  box-sizing: border-box;\n}\nheader nav > ul > li:hover > div ul > li {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  clear: both;\n}\nheader nav > ul > li:hover > div ul > li > a {\n  display: block;\n  width: 100%;\n  height: 30px;\n  padding-left: 4px;\n  padding-right: 8px;\n  box-sizing: border-box;\n}\nheader nav > ul > li:hover > div ul > li > a > span {\n  display: block;\n  float: right;\n  text-align: right;\n  margin-top: 2px;\n}\nheader nav > ul > li:hover > div ul > li > a i.fa {\n  color: #f2c13d;\n  float: left;\n  width: auto;\n  font-size: 1.2em;\n  display: block;\n}\nheader nav > ul > li:hover > div ul > li > a:hover {\n  background-color: #ddd;\n}\nheader nav > ul > li:hover > div ul .fa {\n  font-size: 0.8em;\n}\nheader nav > ul > li .fa {\n  font-size: 2em;\n  margin-top: 10px;\n  margin-bottom: 12px;\n}\nheader nav > ul > li a {\n  color: #555;\n  text-align: center;\n  font-size: 0.6em;\n}\nheader nav > ul > li a span {\n  margin-top: -16px;\n  display: block;\n}\nheader nav > ul > li a:hover {\n  color: #333;\n}\nheader nav > ul > li.leaders:hover {\n  color: #ED0303;\n  border-bottom: solid 4px #fc2727;\n}\nheader nav > ul > li.posts:hover {\n  color: #217dbb;\n  border-bottom: solid 4px #5faee3;\n}\nheader nav > ul > li.create {\n  background-color: #658c00;\n}\nheader nav > ul > li.create span,\nheader nav > ul > li.create i {\n  color: #fff;\n}\nheader nav > ul > li.create:hover {\n  border-bottom: solid 4px #9cd900;\n}\nheader nav > ul > li.create:hover span,\nheader nav > ul > li.create:hover i {\n  color: #eee;\n}\nheader nav > ul > li.me:hover {\n  color: #ECB010;\n  border-bottom: solid 4px #f2c13d;\n}\nheader nav > ul > li.me:hover + ul {\n  display: block;\n  background-color: #333;\n  list-style: none;\n  width: 120px;\n  position: absolute;\n  right: 0;\n  top: 40px;\n}\nheader nav > ul > li.me:hover + ul li {\n  padding: 4px;\n}\nheader nav > ul > li.me:hover + ul li a {\n  font-size: 0.9em;\n}\nheader nav .notifications {\n  background-color: #ED0303;\n  color: white;\n  font-weight: bold;\n  font-size: 0.4em;\n}\ndiv.spacer {\n  height: 80px !important;\n}\n@media (min-width: 500px) {\n  header nav.home > ul > li > a,\n  nav.static > ul > li > a {\n    padding: 20px 4px 15px 4px;\n    font-size: 0.8em;\n  }\n  header {\n    height: 60px;\n  }\n  header .brand a {\n    margin-top: 9px;\n    width: 180px;\n    height: 60px;\n  }\n  header .keywords button span {\n    display: inline;\n    font-size: 0.8em;\n  }\n  header nav > ul > li {\n    width: 80px;\n  }\n  header nav > ul > li > div {\n    display: none;\n  }\n  header nav > ul > li:hover > div {\n    top: 60px;\n  }\n  header nav > ul > li .fa {\n    width: 60px;\n    font-size: 3em;\n  }\n  div.spacer {\n    height: 100px !important;\n  }\n  .stream .heading {\n    top: 60px;\n  }\n}\n@media (min-width: 800px) {\n  header .brand {\n    width: 25%;\n  }\n  header .keywords {\n    float: left;\n    width: 50%;\n    top: 0px;\n  }\n  header nav {\n    width: 50%;\n  }\n  div.spacer {\n    height: 60px !important;\n  }\n}\nheader > div.filter {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n  background-color: #555;\n  box-shadow: 0px 0px 12px #444;\n  -moz-box-shadow: 0px 0px 12px #444;\n  -webkit-box-shadow: 0px 0px 12px #444;\n  margin-top: 40px;\n}\nheader > div.filter:before,\nheader > div.filter:after {\n  content: \"\";\n  display: table;\n}\nheader > div.filter:after {\n  clear: both;\n}\nheader > div.filter .label {\n  font-size: 0.8em;\n  color: #eee;\n  text-transform: uppercase;\n  padding: 1em;\n  margin: 0;\n  background-color: #333;\n  text-align: left;\n}\nheader > div.filter .types {\n  width: 50%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: center;\n}\nheader > div.filter .types .label {\n  margin-bottom: 10px;\n}\nheader > div.filter .types .type {\n  margin: 2px;\n  max-width: 150px;\n  width: 30%;\n  min-width: 100px;\n  font-size: 0.7em;\n}\nheader > div.filter .sortby {\n  width: 50%;\n  display: inline-block;\n  vertical-align: top;\n  box-sizing: border-box;\n  border-left: solid 1px #444;\n}\nheader > div.filter .sortby ul {\n  margin: 0px;\n  padding: 0px;\n  width: 100%;\n}\nheader > div.filter .sortby ul li {\n  width: 96%;\n  border-bottom: solid 1px #444;\n  padding: 0.5em 2%;\n  cursor: pointer;\n  color: #eee;\n  font-size: 0.9em;\n  list-style: none;\n}\nheader > div.filter .sortby ul li .fa {\n  color: #f2c13d;\n  margin-right: 10px;\n}\nheader > div.filter .sortby ul li.selected {\n  background-color: #222;\n  font-size: 1.5em;\n}\nheader > div.filter .sortby ul li.selected .fa {\n  color: #8ABF00;\n}\nheader > div.filter .sortby ul li:hover {\n  background-color: #222;\n  color: #8ABF00;\n}\nheader > div.filter .sortby ul li:hover .fa {\n  color: #8ABF00;\n}\nheader > div.filter .sortby button {\n  border: none;\n  width: 50%;\n  text-align: center;\n  height: 40px;\n  cursor: pointer;\n  background-color: #444;\n  color: #eee;\n}\nheader > div.filter .sortby button:hover {\n  color: #8ABF00;\n}\nheader > div.filter .sortby button.selected {\n  color: #8ABF00;\n  background-color: #222;\n}\nheader > div.filter ul {\n  display: inline-block;\n  list-style: none;\n  vertical-align: top;\n}\nheader > div.filter ul li {\n  border-bottom: solid 1px #eee;\n}\nheader > div.filter ul li a#blogs {\n  border-left: solid 4px #9cd900;\n}\nheader > div.filter ul li a#subjects {\n  border-left: solid 4px #5faee3;\n}\nheader > div.filter ul li a#debates {\n  border-left: solid 4px #fc2727;\n}\nheader > div.filter ul li a#beliefs {\n  border-left: solid 4px #f2c13d;\n}\n@media (min-width: 500px) {\n  header > div.filter {\n    margin-top: 50px;\n  }\n  header > div.filter .types,\n  header > div.filter .sortby {\n    width: 50%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n@media (min-width: 800px) {\n  header > div.filter {\n    max-width: 50%;\n    width: 100%;\n    margin: 0 auto;\n    margin-top: 10px;\n  }\n  header > div.filter:before,\n  header > div.filter:after {\n    content: \"\";\n    display: table;\n  }\n  header > div.filter:after {\n    clear: both;\n  }\n}\n", ""]);
+exports.push([module.i, "#app > .menu {\n  width: 100%;\n  position: fixed;\n  background-color: #333;\n  left: 0;\n  bottom: 0;\n  height: 40px;\n  display: none;\n  z-index: 9999;\n}\n#app > .menu ul {\n  margin: 0;\n  padding: 0;\n  text-align: center;\n}\n#app > .menu ul li {\n  list-style: none;\n  margin-top: 10px;\n  display: inline-block;\n  margin-right: 20px;\n}\n#app > .menu ul li i {\n  color: #fff;\n  font-size: 1.5em;\n}\n#app > .menu ul li i:hover {\n  color: #aaa;\n}\n@media (min-width: 500px) {\n  #app > .menu {\n    width: 5%;\n    top: 0;\n    height: 100%;\n  }\n  #app > .menu li {\n    padding-top: 20px;\n    display: block;\n  }\n}\n", ""]);
 
 // exports
 
@@ -17602,7 +17602,7 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "#app > .menu {\n  width: 100%;\n  position: fixed;\n  background-color: #333;\n  left: 0;\n  bottom: 0;\n  height: 40px;\n  display: none;\n  z-index: 9999;\n}\n#app > .menu ul {\n  margin: 0;\n  padding: 0;\n  text-align: center;\n}\n#app > .menu ul li {\n  list-style: none;\n  margin-top: 10px;\n  display: inline-block;\n  margin-right: 20px;\n}\n#app > .menu ul li i {\n  color: #fff;\n  font-size: 1.5em;\n}\n#app > .menu ul li i:hover {\n  color: #aaa;\n}\n@media (min-width: 500px) {\n  #app > .menu {\n    width: 5%;\n    top: 0;\n    height: 100%;\n  }\n  #app > .menu li {\n    padding-top: 20px;\n    display: block;\n  }\n}\n", ""]);
+exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\n.profile {\n  padding: 10px 0;\n  margin-bottom: 20px;\n}\n.profile .type {\n  font-weight: bold;\n  color: #555;\n  font-size: 1em;\n  margin-bottom: 10px;\n  background-color: transparent;\n}\n.profile .type.company {\n  color: #658c00;\n  border: solid 1px #658c00;\n}\n.profile .type.school {\n  color: #217dbb;\n  border: solid 1px #217dbb;\n}\n.profile .type.government {\n  color: #bb0202;\n  border: solid 1px #bb0202;\n}\n.profile .type.group {\n  color: #bc8c0d;\n  border: solid 1px #bc8c0d;\n}\n.profile .detail {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: right;\n}\n.profile .pic {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n  box-sizing: border-box;\n  padding-right: 10px;\n}\n.profile .pic .uploader {\n  position: absolute;\n  left: -9999px;\n}\n.profile .pic img {\n  width: 95%;\n  margin: 0;\n}\n.profile .basic {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.profile .basic .name {\n  font-size: 1.5em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  margin-bottom: 10px;\n}\n@media (min-width: 500px) {\n  .profile {\n    width: 100%;\n    background-color: #fff;\n    padding: 20px;\n    box-sizing: border-box;\n  }\n  .profile .pic {\n    width: 16.66666667%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .name {\n    margin: 0;\n    padding: 0;\n  }\n  .profile .basic {\n    width: 50%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .detail {\n    width: 33.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .back {\n    float: right;\n  }\n  .profile .actions {\n    width: 25%;\n    display: inline-block;\n    vertical-align: top;\n    vertical-align: bottom;\n  }\n  .profile .actions button {\n    float: right;\n  }\n}\n@media (min-width: 800px) {\n  .profile .pic {\n    width: 8.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .basic {\n    width: 58.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .detail {\n    width: 33.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n", ""]);
 
 // exports
 
@@ -17616,27 +17616,13 @@ exports = module.exports = __webpack_require__(7)();
 
 
 // module
-exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\n.profile {\n  padding: 10px 0;\n  margin-bottom: 20px;\n}\n.profile .type {\n  font-weight: bold;\n  color: #555;\n  font-size: 1em;\n  margin-bottom: 10px;\n  background-color: transparent;\n}\n.profile .type.company {\n  color: #658c00;\n  border: solid 1px #658c00;\n}\n.profile .type.school {\n  color: #217dbb;\n  border: solid 1px #217dbb;\n}\n.profile .type.government {\n  color: #bb0202;\n  border: solid 1px #bb0202;\n}\n.profile .type.group {\n  color: #bc8c0d;\n  border: solid 1px #bc8c0d;\n}\n.profile .detail {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n  text-align: right;\n}\n.profile .pic {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n  box-sizing: border-box;\n  padding-right: 10px;\n}\n.profile .pic .uploader {\n  position: absolute;\n  left: -9999px;\n}\n.profile .pic img {\n  width: 95%;\n  margin: 0;\n}\n.profile .basic {\n  width: 33.33333333%;\n  display: inline-block;\n  vertical-align: top;\n}\n.profile .basic .name {\n  font-size: 1.5em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n  margin-bottom: 10px;\n}\n@media (min-width: 500px) {\n  .profile {\n    width: 100%;\n    background-color: #fff;\n    padding: 20px;\n    box-sizing: border-box;\n  }\n  .profile .pic {\n    width: 16.66666667%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .name {\n    margin: 0;\n    padding: 0;\n  }\n  .profile .basic {\n    width: 50%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .detail {\n    width: 33.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .back {\n    float: right;\n  }\n  .profile .actions {\n    width: 25%;\n    display: inline-block;\n    vertical-align: top;\n    vertical-align: bottom;\n  }\n  .profile .actions button {\n    float: right;\n  }\n}\n@media (min-width: 800px) {\n  .profile .pic {\n    width: 8.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .basic {\n    width: 58.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n  .profile .detail {\n    width: 33.33333333%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n", ""]);
+exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\ndiv.posts {\n  clear: right;\n}\ndiv.posts .postItem {\n  width: 98%;\n  margin: 1%;\n  padding: 1%;\n  background-color: #fafafa;\n  border: solid 1px #ccc;\n  box-sizing: border-box;\n  text-align: left;\n}\n@media (min-width: 800px) {\n  div.posts.sidebar {\n    width: 75%;\n    margin-left: 25%;\n  }\n  div.posts.sidebar .postItem {\n    width: 100%;\n  }\n}\n@media (min-width: 1000px) {\n  div.posts {\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-flex-flow: row wrap;\n    -ms-flex-flow: row wrap;\n    flex-flow: row wrap;\n    -webkit-box-align: stretch;\n    -webkit-align-items: stretch;\n    -ms-flex-align: stretch;\n    align-items: stretch;\n    -webkit-align-content: stretch;\n    -ms-flex-line-pack: stretch;\n    align-content: stretch;\n  }\n  div.posts.sidebar {\n    width: 75%;\n    margin-left: 25%;\n  }\n  div.posts.sidebar .postItem {\n    width: 32%;\n  }\n  div.posts .postItem {\n    width: 24%;\n    margin: 1% 1% 1% 0;\n    display: inline-block;\n    box-sizing: border-box;\n    min-height: 500px;\n    padding-bottom: 75px;\n    -webkit-border-radius: 10px;\n    -moz-border-radius: 10px;\n    border-radius: 10px;\n    opacity: 1;\n    transition: opacity 0.5s ease-in-out;\n    -moz-transition: opacity 0.5s ease-in-out;\n    -webkit-transition: opacity 0.5s ease-in-out;\n    position: relative;\n    -webkit-box-flex: 0;\n    -webkit-flex: 0 1 auto;\n    -ms-flex: 0 1 auto;\n    flex: 0 1 auto;\n  }\n  div.posts:hover .postItem:hover {\n    background-color: #fff;\n  }\n}\n#content div.stream {\n  max-width: 100%;\n}\n.stream button.toggle {\n  vertical-align: middle;\n}\n.stream button.toggle i {\n  font-size: 2em;\n  vertical-align: middle;\n}\n.stream button.toggle:hover {\n  color: #3498DB;\n}\n.stream div.total {\n  text-align: right;\n  float: right;\n  margin-right: 2%;\n  color: #555;\n  font-size: 0.8em;\n}\n.stream div.total .of {\n  font-size: 0.8em;\n}\n.stream div.total .number {\n  color: #333;\n  font-weight: bold;\n}\n.stream .loader {\n  margin-top: 100px;\n  margin-bottom: 100px;\n}\n.stream .organizations {\n  width: 90%;\n  margin: 0 5% 0 5%;\n  border-bottom: solid 1px #ccc;\n}\n.stream .organizations .list {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n}\n.stream .organizations .list:before,\n.stream .organizations .list:after {\n  content: \"\";\n  display: table;\n}\n.stream .organizations .list:after {\n  clear: both;\n}\n.stream .organizations .list .org {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #f7f7f7;\n  box-sizing: border-box;\n  padding: 10px;\n  margin: 10px;\n  text-align: center;\n}\n.stream .organizations .list .org .name {\n  font-size: 1.5em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n}\n.stream .organizations .list .org:hover {\n  background-color: #fff;\n  cursor: pointer;\n}\n.stream .organizations .list .org img {\n  width: 100%;\n  max-width: 150px;\n  max-height: 150px;\n}\n.stream .heading {\n  top: 40px;\n  z-index: 1;\n  width: 100%;\n  padding: 0;\n  margin: 0;\n}\n.stream .heading .refine {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n}\n.stream .heading .refine:before,\n.stream .heading .refine:after {\n  content: \"\";\n  display: table;\n}\n.stream .heading .refine:after {\n  clear: both;\n}\n.stream .heading .refine .context {\n  text-align: left;\n  border-left: solid 1px #ddd;\n  box-sizing: border-box;\n}\n.stream .heading .refine .context button {\n  width: 80px;\n  height: 40px;\n  background-color: #fafafa;\n  border-bottom: solid 1px #ddd;\n  border-right: solid 1px #ddd;\n  border-left: none;\n  border-top: none;\n  cursor: pointer;\n  color: #aaa;\n  font-size: 0.8em;\n  -webkit-border-radius: 2px;\n  -moz-border-radius: 2px;\n  border-radius: 2px;\n}\n.stream .heading .refine .context button:hover {\n  background-color: #fafafa;\n  color: #3498DB;\n}\n.stream .heading .refine .context button.selected {\n  height: 44px;\n  border-bottom: solid 4px #5faee3;\n  background-color: #fff;\n  color: #217dbb;\n}\n.stream .heading .refine .toggles {\n  text-align: left;\n}\n.stream .heading .refine .toggles button {\n  background: transparent;\n  border: none;\n  height: 40px;\n  cursor: pointer;\n  color: #777;\n  font-size: 0.8em;\n  text-align: right;\n}\n.stream .heading .refine .toggles button:hover {\n  background-color: #fafafa;\n  color: #3498DB;\n}\n.stream .heading .context {\n  font-size: 0.9em;\n}\n.stream .heading .context img {\n  float: left;\n  height: 40px;\n}\n.stream .heading .context a.close {\n  font-size: 0.9em;\n  color: #111;\n}\n@media (min-width: 500px) {\n  .stream .organizations .list .org {\n    width: 50%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n@media (min-width: 1000px) {\n  .stream .organizations .list .org {\n    width: 25%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n", ""]);
 
 // exports
 
 
 /***/ },
 /* 192 */
-/***/ function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(7)();
-// imports
-
-
-// module
-exports.push([module.i, "/** SANS SERIF **/\n/** SERIF **/\n/** MONOSPACE **/\n/** COLORS **/\n/*---------------------------------------------------\n    LESS Elements 0.9\n  ---------------------------------------------------\n    A set of useful LESS mixins\n    More info at: http://lesselements.com\n  ---------------------------------------------------*/\n/*\n.box-shadow(@arguments) {\n  -webkit-box-shadow: @arguments;\n  -moz-box-shadow: @arguments;\n  box-shadow: @arguments;\n}*/\ndiv.posts .postItem {\n  width: 98%;\n  margin: 1%;\n  padding: 1%;\n  background-color: #fafafa;\n  border: solid 1px #ccc;\n  box-sizing: border-box;\n  text-align: left;\n}\n@media (min-width: 800px) {\n  div.posts.sidebar {\n    width: 75%;\n    margin-left: 25%;\n  }\n  div.posts.sidebar .postItem {\n    width: 100%;\n  }\n}\n@media (min-width: 1000px) {\n  div.posts {\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-flex-flow: row wrap;\n    -ms-flex-flow: row wrap;\n    flex-flow: row wrap;\n    -webkit-box-align: stretch;\n    -webkit-align-items: stretch;\n    -ms-flex-align: stretch;\n    align-items: stretch;\n    -webkit-align-content: stretch;\n    -ms-flex-line-pack: stretch;\n    align-content: stretch;\n  }\n  div.posts.sidebar {\n    width: 75%;\n    margin-left: 25%;\n  }\n  div.posts.sidebar .postItem {\n    width: 32%;\n  }\n  div.posts .postItem {\n    width: 24%;\n    margin: 1% 1% 1% 0;\n    display: inline-block;\n    box-sizing: border-box;\n    min-height: 500px;\n    padding-bottom: 75px;\n    -webkit-border-radius: 10px;\n    -moz-border-radius: 10px;\n    border-radius: 10px;\n    opacity: 1;\n    transition: opacity 0.5s ease-in-out;\n    -moz-transition: opacity 0.5s ease-in-out;\n    -webkit-transition: opacity 0.5s ease-in-out;\n    position: relative;\n    -webkit-box-flex: 0;\n    -webkit-flex: 0 1 auto;\n    -ms-flex: 0 1 auto;\n    flex: 0 1 auto;\n  }\n  div.posts:hover .postItem:hover {\n    background-color: #fff;\n  }\n}\n#content div.stream {\n  max-width: 100%;\n}\n.stream button.toggle {\n  vertical-align: middle;\n}\n.stream button.toggle i {\n  font-size: 2em;\n  vertical-align: middle;\n}\n.stream button.toggle:hover {\n  color: #3498DB;\n}\n.stream div.total {\n  text-align: right;\n  float: right;\n  margin-right: 2%;\n  color: #555;\n  font-size: 0.8em;\n}\n.stream div.total .of {\n  font-size: 0.8em;\n}\n.stream div.total .number {\n  color: #333;\n  font-weight: bold;\n}\n.stream .loader {\n  margin-top: 100px;\n  margin-bottom: 100px;\n}\n.stream .organizations {\n  width: 90%;\n  margin: 0 5% 0 5%;\n  border-bottom: solid 1px #ccc;\n}\n.stream .organizations .list {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n}\n.stream .organizations .list:before,\n.stream .organizations .list:after {\n  content: \"\";\n  display: table;\n}\n.stream .organizations .list:after {\n  clear: both;\n}\n.stream .organizations .list .org {\n  width: 100%;\n  display: inline-block;\n  vertical-align: top;\n  background-color: #f7f7f7;\n  box-sizing: border-box;\n  padding: 10px;\n  margin: 10px;\n  text-align: center;\n}\n.stream .organizations .list .org .name {\n  font-size: 1.5em;\n  font-family: 'open sans', Arial, Helvetica, Verdana, sans-serif;\n}\n.stream .organizations .list .org:hover {\n  background-color: #fff;\n  cursor: pointer;\n}\n.stream .organizations .list .org img {\n  width: 100%;\n  max-width: 150px;\n  max-height: 150px;\n}\n.stream .heading {\n  top: 40px;\n  z-index: 1;\n  width: 100%;\n  padding: 0;\n  margin: 0;\n}\n.stream .heading .refine {\n  max-width: 100%;\n  width: 100%;\n  margin: 0 auto;\n}\n.stream .heading .refine:before,\n.stream .heading .refine:after {\n  content: \"\";\n  display: table;\n}\n.stream .heading .refine:after {\n  clear: both;\n}\n.stream .heading .refine .context {\n  text-align: left;\n  border-left: solid 1px #ddd;\n  box-sizing: border-box;\n}\n.stream .heading .refine .context button {\n  width: 80px;\n  height: 40px;\n  background-color: #fafafa;\n  border-bottom: solid 1px #ddd;\n  border-right: solid 1px #ddd;\n  border-left: none;\n  border-top: none;\n  cursor: pointer;\n  color: #aaa;\n  font-size: 0.8em;\n  -webkit-border-radius: 2px;\n  -moz-border-radius: 2px;\n  border-radius: 2px;\n}\n.stream .heading .refine .context button:hover {\n  background-color: #fafafa;\n  color: #3498DB;\n}\n.stream .heading .refine .context button.selected {\n  height: 44px;\n  border-bottom: solid 4px #5faee3;\n  background-color: #fff;\n  color: #217dbb;\n}\n.stream .heading .refine .toggles {\n  text-align: left;\n}\n.stream .heading .refine .toggles button {\n  background: transparent;\n  border: none;\n  height: 40px;\n  cursor: pointer;\n  color: #777;\n  font-size: 0.8em;\n  text-align: right;\n}\n.stream .heading .refine .toggles button:hover {\n  background-color: #fafafa;\n  color: #3498DB;\n}\n.stream .heading .context {\n  font-size: 0.9em;\n}\n.stream .heading .context img {\n  float: left;\n  height: 40px;\n}\n.stream .heading .context a.close {\n  font-size: 0.9em;\n  color: #111;\n}\n@media (min-width: 500px) {\n  .stream .organizations .list .org {\n    width: 50%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n@media (min-width: 1000px) {\n  .stream .organizations .list .org {\n    width: 25%;\n    display: inline-block;\n    vertical-align: top;\n  }\n}\n", ""]);
-
-// exports
-
-
-/***/ },
-/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)();
@@ -17653,7 +17639,7 @@ exports.locals = {
 };
 
 /***/ },
-/* 194 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)();
@@ -17667,6 +17653,22 @@ exports.push([module.i, ".f15ZtjDZu-BW9qysTII1m {\n  padding-top: 5px;\n  font-s
 exports.locals = {
 	"login": "f15ZtjDZu-BW9qysTII1m",
 	"input": "oIhRI4tXP2HIk6w1yMJPv"
+};
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)();
+// imports
+
+
+// module
+exports.push([module.i, "._1kaZeMQq3xD37IyWzbXqNa {\n  position: absolute;\n  bottom: 0px;\n  width: 100%;\n  background: rgba(0, 0, 0, 0.4);\n  color: #fff;\n}\n", ""]);
+
+// exports
+exports.locals = {
+	"auth": "_1kaZeMQq3xD37IyWzbXqNa"
 };
 
 /***/ },
@@ -21602,7 +21604,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -21649,7 +21651,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -21684,7 +21686,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -22369,7 +22371,7 @@ var _uploader = __webpack_require__(584);
 
 var _uploader2 = _interopRequireDefault(_uploader);
 
-var _styles = __webpack_require__(1135);
+var _styles = __webpack_require__(1134);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -43336,7 +43338,7 @@ function createStructuredSelector(selectors) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(193);
+var content = __webpack_require__(192);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(10)(content, {"sourcemap":true});
@@ -43345,8 +43347,8 @@ if(content.locals) module.exports = content.locals;
 if(true) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept(193, function() {
-			var newContent = __webpack_require__(193);
+		module.hot.accept(192, function() {
+			var newContent = __webpack_require__(192);
 			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
 			update(newContent);
 		});
@@ -43757,7 +43759,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43791,7 +43793,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43832,7 +43834,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43866,7 +43868,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43929,7 +43931,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43954,7 +43956,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -43985,7 +43987,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -44022,7 +44024,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _xhr = __webpack_require__(34);
+var _xhr = __webpack_require__(33);
 
 var http = _interopRequireWildcard(_xhr);
 
@@ -48077,9 +48079,9 @@ var _actions = __webpack_require__(533);
 
 var actions = _interopRequireWildcard(_actions);
 
-var _styles = __webpack_require__(1131);
+var _stylesModule = __webpack_require__(1137);
 
-var _styles2 = _interopRequireDefault(_styles);
+var _stylesModule2 = _interopRequireDefault(_stylesModule);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -48110,7 +48112,7 @@ var Auth = function (_React$Component) {
       }
       return _react2.default.createElement(
         'div',
-        { className: 'auth' },
+        { className: _stylesModule2.default.auth },
         _react2.default.createElement(_signup2.default, _extends({}, this.props, { show: mode === 'signup', showLogin: this._mode.bind(this, 'login') })),
         _react2.default.createElement(_login2.default, _extends({}, this.props, { show: mode === 'login', showForgot: this._mode.bind(this, 'forgot') })),
         _react2.default.createElement(_forgot2.default, _extends({}, this.props, { show: mode === 'forgot', showLogin: this._mode.bind(this, 'login'), showReset: this._mode.bind(this, 'reset') })),
@@ -48176,7 +48178,7 @@ var _alerts = __webpack_require__(269);
 
 var _alerts2 = _interopRequireDefault(_alerts);
 
-var _loginModule = __webpack_require__(1137);
+var _loginModule = __webpack_require__(1136);
 
 var _loginModule2 = _interopRequireDefault(_loginModule);
 
@@ -51833,7 +51835,7 @@ var _edit = __webpack_require__(557);
 
 var _edit2 = _interopRequireDefault(_edit);
 
-var _styles = __webpack_require__(1132);
+var _styles = __webpack_require__(1131);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -54371,7 +54373,7 @@ var _private = __webpack_require__(576);
 
 var _private2 = _interopRequireDefault(_private);
 
-var _styles = __webpack_require__(1133);
+var _styles = __webpack_require__(1132);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -54409,6 +54411,7 @@ var Header = function (_React$Component) {
       if (!r && !url.subdomain) {
         return _react2.default.createElement(_home2.default, null);
       }
+      //<Search />
       return _react2.default.createElement(
         'header',
         { className: 'header' },
@@ -54434,8 +54437,7 @@ var Header = function (_React$Component) {
           'div',
           { className: 'brand' },
           url.subdomain ? _react2.default.createElement('a', { href: _util2.default.createHomeURL() }) : _react2.default.createElement(_reactRouter.Link, { to: '/' })
-        ),
-        _react2.default.createElement(_search2.default, null)
+        )
       );
     }
   }, {
@@ -54728,7 +54730,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(9);
 
-var _styles = __webpack_require__(1134);
+var _styles = __webpack_require__(1133);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -58730,7 +58732,7 @@ var _actions = __webpack_require__(610);
 
 var actions = _interopRequireWildcard(_actions);
 
-var _styles = __webpack_require__(1136);
+var _styles = __webpack_require__(1135);
 
 var _styles2 = _interopRequireDefault(_styles);
 
@@ -58781,12 +58783,6 @@ var Stream = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'stream' },
-				!this.props.sidebarVisible ? _react2.default.createElement(
-					'button',
-					{ className: 'toggle', onClick: this._sidebar.bind(this) },
-					_react2.default.createElement('i', { className: 'fa fa-navicon' }),
-					' Show my folders'
-				) : false,
 				_react2.default.createElement(
 					'div',
 					{ className: 'total' },
@@ -58810,7 +58806,6 @@ var Stream = function (_React$Component) {
 					),
 					' posts'
 				),
-				_react2.default.createElement(_sidebar3.default, { folders: this.props.folders, actions: this.props.actions, sidebar: this._sidebar.bind(this), sidebarVisible: this.props.sidebarVisible }),
 				_react2.default.createElement(
 					_reactInfiniteScroller2.default,
 					{ pageStart: 0, loadMore: this._more.bind(this), hasMore: hasMore, loader: _react2.default.createElement(_loader2.default, null) },
@@ -60689,7 +60684,7 @@ $export($export.P, 'Function', {bind: __webpack_require__(279)});
 "use strict";
 'use strict';
 var isObject       = __webpack_require__(14)
-  , getPrototypeOf = __webpack_require__(36)
+  , getPrototypeOf = __webpack_require__(35)
   , HAS_INSTANCE   = __webpack_require__(16)('hasInstance')
   , FunctionProto  = Function.prototype;
 // 19.2.3.6 Function.prototype[@@hasInstance](V)
@@ -61025,7 +61020,7 @@ var global            = __webpack_require__(11)
   , toPrimitive       = __webpack_require__(48)
   , fails             = __webpack_require__(12)
   , gOPN              = __webpack_require__(71).f
-  , gOPD              = __webpack_require__(35).f
+  , gOPD              = __webpack_require__(34).f
   , dP                = __webpack_require__(18).f
   , $trim             = __webpack_require__(85).trim
   , NUMBER            = 'Number'
@@ -61379,7 +61374,7 @@ __webpack_require__(47)('freeze', function($freeze){
 
 // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
 var toIObject                 = __webpack_require__(31)
-  , $getOwnPropertyDescriptor = __webpack_require__(35).f;
+  , $getOwnPropertyDescriptor = __webpack_require__(34).f;
 
 __webpack_require__(47)('getOwnPropertyDescriptor', function(){
   return function getOwnPropertyDescriptor(it, key){
@@ -61402,7 +61397,7 @@ __webpack_require__(47)('getOwnPropertyNames', function(){
 
 // 19.1.2.9 Object.getPrototypeOf(O)
 var toObject        = __webpack_require__(24)
-  , $getPrototypeOf = __webpack_require__(36);
+  , $getPrototypeOf = __webpack_require__(35);
 
 __webpack_require__(47)('getPrototypeOf', function(){
   return function getPrototypeOf(it){
@@ -61952,7 +61947,7 @@ $export($export.S + $export.F * __webpack_require__(12)(function(){
 
 // 26.1.4 Reflect.deleteProperty(target, propertyKey)
 var $export  = __webpack_require__(2)
-  , gOPD     = __webpack_require__(35).f
+  , gOPD     = __webpack_require__(34).f
   , anObject = __webpack_require__(6);
 
 $export($export.S, 'Reflect', {
@@ -61999,7 +61994,7 @@ $export($export.S, 'Reflect', {
 /***/ function(module, exports, __webpack_require__) {
 
 // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
-var gOPD     = __webpack_require__(35)
+var gOPD     = __webpack_require__(34)
   , $export  = __webpack_require__(2)
   , anObject = __webpack_require__(6);
 
@@ -62015,7 +62010,7 @@ $export($export.S, 'Reflect', {
 
 // 26.1.8 Reflect.getPrototypeOf(target)
 var $export  = __webpack_require__(2)
-  , getProto = __webpack_require__(36)
+  , getProto = __webpack_require__(35)
   , anObject = __webpack_require__(6);
 
 $export($export.S, 'Reflect', {
@@ -62029,8 +62024,8 @@ $export($export.S, 'Reflect', {
 /***/ function(module, exports, __webpack_require__) {
 
 // 26.1.6 Reflect.get(target, propertyKey [, receiver])
-var gOPD           = __webpack_require__(35)
-  , getPrototypeOf = __webpack_require__(36)
+var gOPD           = __webpack_require__(34)
+  , getPrototypeOf = __webpack_require__(35)
   , has            = __webpack_require__(26)
   , $export        = __webpack_require__(2)
   , isObject       = __webpack_require__(14)
@@ -62135,8 +62130,8 @@ if(setProto)$export($export.S, 'Reflect', {
 
 // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
 var dP             = __webpack_require__(18)
-  , gOPD           = __webpack_require__(35)
-  , getPrototypeOf = __webpack_require__(36)
+  , gOPD           = __webpack_require__(34)
+  , getPrototypeOf = __webpack_require__(35)
   , has            = __webpack_require__(26)
   , $export        = __webpack_require__(2)
   , createDesc     = __webpack_require__(63)
@@ -62745,7 +62740,7 @@ var global         = __webpack_require__(11)
   , createDesc     = __webpack_require__(63)
   , _create        = __webpack_require__(70)
   , gOPNExt        = __webpack_require__(290)
-  , $GOPD          = __webpack_require__(35)
+  , $GOPD          = __webpack_require__(34)
   , $DP            = __webpack_require__(18)
   , $keys          = __webpack_require__(72)
   , gOPD           = $GOPD.f
@@ -63316,7 +63311,7 @@ $export($export.S, 'Object', {
 var $export        = __webpack_require__(2)
   , ownKeys        = __webpack_require__(293)
   , toIObject      = __webpack_require__(31)
-  , gOPD           = __webpack_require__(35)
+  , gOPD           = __webpack_require__(34)
   , createProperty = __webpack_require__(153);
 
 $export($export.S, 'Object', {
@@ -63341,8 +63336,8 @@ $export($export.S, 'Object', {
 var $export                  = __webpack_require__(2)
   , toObject                 = __webpack_require__(24)
   , toPrimitive              = __webpack_require__(48)
-  , getPrototypeOf           = __webpack_require__(36)
-  , getOwnPropertyDescriptor = __webpack_require__(35).f;
+  , getPrototypeOf           = __webpack_require__(35)
+  , getOwnPropertyDescriptor = __webpack_require__(34).f;
 
 // B.2.2.4 Object.prototype.__lookupGetter__(P)
 __webpack_require__(17) && $export($export.P + __webpack_require__(116), 'Object', {
@@ -63365,8 +63360,8 @@ __webpack_require__(17) && $export($export.P + __webpack_require__(116), 'Object
 var $export                  = __webpack_require__(2)
   , toObject                 = __webpack_require__(24)
   , toPrimitive              = __webpack_require__(48)
-  , getPrototypeOf           = __webpack_require__(36)
-  , getOwnPropertyDescriptor = __webpack_require__(35).f;
+  , getPrototypeOf           = __webpack_require__(35)
+  , getOwnPropertyDescriptor = __webpack_require__(34).f;
 
 // B.2.2.5 Object.prototype.__lookupSetter__(P)
 __webpack_require__(17) && $export($export.P + __webpack_require__(116), 'Object', {
@@ -63640,7 +63635,7 @@ var Set                     = __webpack_require__(301)
   , from                    = __webpack_require__(277)
   , metadata                = __webpack_require__(54)
   , anObject                = __webpack_require__(6)
-  , getPrototypeOf          = __webpack_require__(36)
+  , getPrototypeOf          = __webpack_require__(35)
   , ordinaryOwnMetadataKeys = metadata.keys
   , toMetaKey               = metadata.key;
 
@@ -63662,7 +63657,7 @@ metadata.exp({getMetadataKeys: function getMetadataKeys(target /*, targetKey */)
 
 var metadata               = __webpack_require__(54)
   , anObject               = __webpack_require__(6)
-  , getPrototypeOf         = __webpack_require__(36)
+  , getPrototypeOf         = __webpack_require__(35)
   , ordinaryHasOwnMetadata = metadata.has
   , ordinaryGetOwnMetadata = metadata.get
   , toMetaKey              = metadata.key;
@@ -63711,7 +63706,7 @@ metadata.exp({getOwnMetadata: function getOwnMetadata(metadataKey, target /*, ta
 
 var metadata               = __webpack_require__(54)
   , anObject               = __webpack_require__(6)
-  , getPrototypeOf         = __webpack_require__(36)
+  , getPrototypeOf         = __webpack_require__(35)
   , ordinaryHasOwnMetadata = metadata.has
   , toMetaKey              = metadata.key;
 
@@ -101595,7 +101590,7 @@ if(true) {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(192);
+var content = __webpack_require__(193);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(10)(content, {"sourcemap":true});
@@ -101604,8 +101599,8 @@ if(content.locals) module.exports = content.locals;
 if(true) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept(192, function() {
-			var newContent = __webpack_require__(192);
+		module.hot.accept(193, function() {
+			var newContent = __webpack_require__(193);
 			if(typeof newContent === 'string') newContent = [[module.i, newContent, '']];
 			update(newContent);
 		});
