@@ -1,11 +1,13 @@
-import React from 'react';
+import React from 'react'
+import { Link } from 'react-router'
 
-import ga from '../../lib/analytics';
-import util from '../../lib/util';
-import { Link } from 'react-router';
+import ga from '../../lib/analytics'
+import util from '../../lib/util'
 
-import Loader from '../shared/loader';
-import Alert from '../shared/alerts';
+import Loader from '../shared/loader'
+import Alert from '../shared/alerts'
+
+import styles from './css/login.module.css'
 
 export default class Login extends React.Component {
 
@@ -42,10 +44,10 @@ export default class Login extends React.Component {
       const name = user.first
 
       return (
-        <div className="login">
+        <div className={styles.login}>
           <span className="welcome">Welcome back{name ? " " + name : ""}! <Link to="/stream">Click here to view posts</Link></span><br />
-          <button className="button blue" onClick={this._posts.bind(this)}>View posts</button>
-          <button className="button blue" onClick={this._account.bind(this)}>View my account</button>
+          <button className="button blue" onClick={this._posts.bind(this)} style={{display: 'inline-block'}}>View posts</button>
+          <button className="button blue" onClick={this._account.bind(this)} style={{display: 'inline-block'}}>View my account</button>
         </div>
       )
     }
@@ -56,21 +58,15 @@ export default class Login extends React.Component {
     // }
 
     return (
-      <div className="login">
+      <div className={styles.login}>
         {alert
           ? <Alert {...alert} />
           : false
         }
-        <label>
-          Email:
-          <input ref="username" className="username" placeholder="your email address" />
-        </label>
-        <label>
-          Password:
-          <input ref="password" className="password" type="password" placeholder="your password" />
-        </label>
-        <button onClick={this._login.bind(this)} className="green button">Login</button>
-        <a href="javascript:void(0)" className="forgotLink" onClick={this.props.showForgot.bind(this)}>Forgot your login information? Click here</a>
+        <input ref="username" className={styles.input} placeholder="your email address" />
+        <input ref="password" className={styles.input} type="password" placeholder="your password" />
+        <button onClick={this._login.bind(this)} className="button blue" style={{display: 'inline-block'}}>Login</button>
+        <a href="javascript:void(0)" onClick={this.props.showForgot.bind(this)}>Forgot your login information? Click here</a>
       </div>
     );
   }

@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 
 import Alert from '../shared/alerts';
 
+
 let emailReg = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 let usernameReg = /^([a-z]|[A-Z]|[0-9]|-){2,20}$/;
 let passwordReg = /^(.){6,20}$/;

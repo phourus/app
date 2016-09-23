@@ -29,7 +29,7 @@ export default (state = initState, action = {}) => {
     case 'RECEIVE_SESSION_GET':
       return update(state, {
         ready: {$set: true},
-        authenticated: {$set: true},
+        authenticated: {$set: isNaN(action.session)},
         user: {$set: action.session}
       })
       break

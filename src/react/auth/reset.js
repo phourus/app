@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import ga from '../../lib/analytics';
 
+import styles from './css/forgot.module.css'
+
 export default React.createClass({
   getDefaultProps: function () {
     return {

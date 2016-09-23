@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 
 import Actions from '../../actions/auth';
 
+import styles from './css/forgot.module.css'
+
 export default React.createClass({
   getInitialState: function () {
     return {

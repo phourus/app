@@ -1,0 +1,11 @@
+.forgot {
+  padding-top: 5px;
+  font-size: 0.9em;
+}
+
+.input {
+  width: 40%;
+  max-width: 350px;
+  display: inline-block;
+  margin-right: 5px;
+}
