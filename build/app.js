@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "70b3bd0bcd5cbada8679"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7a26e814ef560ef2297f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -17709,7 +17709,7 @@ exports = module.exports = __webpack_require__(10)();
 
 
 // module
-exports.push([module.i, "._3FB2lux4wp1a8202_s2269 {\n  border-bottom: solid 1px #ccc;\n  margin: 20px 10px;\n  padding: 10px 0;\n}\n\n._1iMbus16bWSROTeJhNEM_t {\n  display: none;\n  text-align: center;\n  margin: auto;\n}\n\n._2URJtgB2B9ArMVgiSc_z9_ {\n  width: 100%;\n}\n\n._1TzeQHdwoHft_Gybdpgz3K {\n  width: 90%;\n  margin: auto;\n}\n\n._1x6-LzV9UdmOXsYAzQvbvp {\n  margin: 0;\n  padding: 0;\n}\n\n._W1rk5U7NjxWwOzYygq2s {\n  list-style: none;\n  margin-bottom: 20px;\n}\n\n._1lVJuUoZpGMJKWnEeutdqV {\n  color: @blue-light;\n  font-size: 1.5em;\n  margin-right: 10px;\n}\n\n._3wYU0CWrM6OF5E7BOioQlk {\n  font-size: 1.5em;\n}\n\n@media (min-width: 500px) {\n\n  ._1iMbus16bWSROTeJhNEM_t {\n    display: block;\n    width: 90%;\n  }\n\n  ._1TzeQHdwoHft_Gybdpgz3K {\n    width: 60%;\n    display: inline-block;\n    vertical-align: middle;\n  }\n\n  ._1x6-LzV9UdmOXsYAzQvbvp {\n    display: inline-block;\n    width: 40%;\n    vertical-align: middle;\n  }\n\n  ._W1rk5U7NjxWwOzYygq2s {\n    font-size: 1.2em;\n    margin-bottom: 40px;\n  }\n}\n\n@media (min-width: 800px) {\n\n  ._2yUjGpYTcke3wf2xzW3n5y {\n    display: inline-block;\n    width: 20%;\n  }\n}\n", ""]);
+exports.push([module.i, "._3FB2lux4wp1a8202_s2269 {\n  border-bottom: solid 1px #ccc;\n  margin: 40px 10px;\n  padding: 10px 0;\n}\n\n._1iMbus16bWSROTeJhNEM_t {\n  display: none;\n  text-align: center;\n  margin: auto;\n}\n\n._2URJtgB2B9ArMVgiSc_z9_ {\n  width: 100%;\n}\n\n._1TzeQHdwoHft_Gybdpgz3K {\n  width: 90%;\n  margin: auto;\n}\n\n._1x6-LzV9UdmOXsYAzQvbvp {\n  margin: 0;\n  padding: 0;\n}\n\n._W1rk5U7NjxWwOzYygq2s {\n  list-style: none;\n  margin-bottom: 20px;\n}\n\n._1lVJuUoZpGMJKWnEeutdqV {\n  color: @blue-light;\n  font-size: 1.5em;\n  margin-right: 10px;\n}\n\n._3wYU0CWrM6OF5E7BOioQlk {\n  font-size: 1.5em;\n}\n\n@media (min-width: 500px) {\n\n  ._1iMbus16bWSROTeJhNEM_t {\n    display: block;\n    width: 90%;\n  }\n\n  ._1TzeQHdwoHft_Gybdpgz3K {\n    width: 60%;\n    display: inline-block;\n    vertical-align: middle;\n  }\n\n  ._1x6-LzV9UdmOXsYAzQvbvp {\n    display: inline-block;\n    width: 40%;\n    vertical-align: middle;\n  }\n\n  ._W1rk5U7NjxWwOzYygq2s {\n    font-size: 1.2em;\n    margin-bottom: 40px;\n  }\n}\n\n@media (min-width: 800px) {\n\n  ._2yUjGpYTcke3wf2xzW3n5y {\n    display: inline-block;\n    width: 20%;\n  }\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -17749,11 +17749,17 @@ exports = module.exports = __webpack_require__(10)();
 
 
 // module
-exports.push([module.i, "._3vnzae6E44SoMC7syUEvhf  {\n  border-bottom: solid 1px #ccc;\n  margin: 20px 10px;\n  padding: 10px 0;\n}\n", ""]);
+exports.push([module.i, "._3vnzae6E44SoMC7syUEvhf  {\n  border-bottom: solid 1px #ccc;\n  margin: 20px 10px;\n  padding: 10px 0;\n}\n\n.udET1tHeoRJvNz4Yc8jD2 {\n  text-align: left;\n}\n\n._2Tmbo8XFVdvQvTU7XnQQx7 {\n  float: right;\n  border-bottom: 2px solid #ccc;\n  width: 40%;\n}\n\n._3dSE5OPaUekJpBJnyW2RwB {\n  float: left;\n  font-size: 1.3em;\n}\n\n._3CG8VbL3JaeY0So6idQz3T {\n  width: 100px;\n  float: left;\n  clear: right;\n}\n\n._30B32a9jbJfb66h5EcqRN5 {\n  list-style: none;\n  display: inline-block;\n  width: 30%;\n}\n\n.FpT20qNXIu7OsAuaM-pno {\n  text-align: left;\n  color: #555;\n  clear: left;\n  width: 60%;\n}\n", ""]);
 
 // exports
 exports.locals = {
-	"ideas": "_3vnzae6E44SoMC7syUEvhf"
+	"ideas": "_3vnzae6E44SoMC7syUEvhf",
+	"heading": "udET1tHeoRJvNz4Yc8jD2",
+	"slides": "_2Tmbo8XFVdvQvTU7XnQQx7",
+	"title": "_3dSE5OPaUekJpBJnyW2RwB",
+	"img": "_3CG8VbL3JaeY0So6idQz3T",
+	"item": "_30B32a9jbJfb66h5EcqRN5",
+	"text": "FpT20qNXIu7OsAuaM-pno"
 };
 
 /***/ },
@@ -17765,12 +17771,13 @@ exports = module.exports = __webpack_require__(10)();
 
 
 // module
-exports.push([module.i, "._2imrQW-K-cPNeo8pHWYAKY {\n  border-bottom: solid 1px #ccc;\n  margin: 20px 10px;\n  padding: 10px 0;\n}\n\n._1ro-GxDnbymgH3XvQRpSmb {\n  width: 100%;\n}\n\n@media (min-width: 500px) {\n\n  ._1ro-GxDnbymgH3XvQRpSmb {\n    width: 30%;\n    display: inline-block;\n  }\n}\n", ""]);
+exports.push([module.i, "._2imrQW-K-cPNeo8pHWYAKY {\n  border-bottom: solid 1px #ccc;\n  margin: 40px 10px;\n  padding: 10px 0;\n  text-align: left;\n}\n\n._1ro-GxDnbymgH3XvQRpSmb {\n  width: 100%;\n}\n\n._3DUWRGUc_yTuaE2mr2PHN_ {\n  width: 180px;\n}\n\n@media (min-width: 500px) {\n\n  ._1ro-GxDnbymgH3XvQRpSmb {\n    width: 30%;\n    display: inline-block;\n  }\n}\n", ""]);
 
 // exports
 exports.locals = {
 	"information": "_2imrQW-K-cPNeo8pHWYAKY",
-	"stat": "_1ro-GxDnbymgH3XvQRpSmb"
+	"stat": "_1ro-GxDnbymgH3XvQRpSmb",
+	"img": "_3DUWRGUc_yTuaE2mr2PHN_"
 };
 
 /***/ },
@@ -17782,7 +17789,7 @@ exports = module.exports = __webpack_require__(10)();
 exports.i(__webpack_require__(32), undefined);
 
 // module
-exports.push([module.i, ".G9mUuByUaPxVJcs4GUEs7 {\n  margin: -60px 0 0 0 !important;\n  padding: 0 !important;\n  width: 100% !important;\n  max-width: 100% !important;\n  background-color: #fff;\n  text-align: center;\n}\n\n._21Mf2omZnk_F38whSyjFY4 {\n  font-size: 2em;\n  display: block;\n  margin: 0;\n  padding: 40px 0 20px 0;\n}\n\n.fLJoQ5o-_o9oGJvu_W-YJ {\n  width: 100%;\n}\n\n._2DnY3RTisgcQ9UHipgTZzj {\n  height: 350px;\n  top: -50px;\n  margin-bottom: -50px;\n  width: 100%;\n  background-image: url('/assets/landing/banner.jpg');\n  overflow: hidden;\n  position: relative;\n  background-size: 700px 350px;\n  background-position: bottom;\n}\n\n._1ho61ramMKiYkiqURNYYPh {\n  position: absolute;\n  top: 30%;\n  width: 80%;\n  left: 10%;\n  font-family: " + __webpack_require__(32).locals["font-serif"] + ";\n  color: #fff;\n  font-size: 2em;\n  line-height: 1em;\n  opacity: 0.8;\n}\n\n.f0CHLN6BiGym4zIFatTwe {\n  position: absolute;\n  left: 10%;\n  top: 50%;\n  color: #fff;\n  font-size: 1em;\n  opacity: 0.8;\n  width: 80%;\n  line-height: 1.5em;\n}\n\n@media (min-width: 500px) {\n\n  .fLJoQ5o-_o9oGJvu_W-YJ {\n    width: 80%;\n  }\n\n  ._21Mf2omZnk_F38whSyjFY4 {\n    font-size: 2.5em;\n    display: block;\n    margin: 0;\n    padding: 40px 0 20px 0;\n  }\n\n  ._2DnY3RTisgcQ9UHipgTZzj {\n    background-size: 800px 400px;\n  }\n}\n\n@media (min-width: 800px) {\n\n  .G9mUuByUaPxVJcs4GUEs7 {\n    margin: -60px 0 0 0;\n    padding: 0;\n    width: 100%;\n    max-width: 100%;\n    text-align: center;\n  }\n\n  .fLJoQ5o-_o9oGJvu_W-YJ {\n    width: 60%;\n  }\n\n  ._21Mf2omZnk_F38whSyjFY4 {\n    font-size: 3.5em;\n    display: block;\n    margin: 0;\n    padding: 40px 0 20px 0;\n  }\n\n  ._2DnY3RTisgcQ9UHipgTZzj {\n    height: 500px;\n    background-size: 1200px 600px;\n  }\n\n  ._1ho61ramMKiYkiqURNYYPh {\n    width: 60%;\n    left: 20%;\n    font-size: 3em;\n  }\n\n  .f0CHLN6BiGym4zIFatTwe {\n    width: 60%;\n    left: 20%;\n    font-size: 1.5em;\n    line-height: 1.5em;\n  }\n}\n\n@media (min-width: 1200px) {\n  ._2DnY3RTisgcQ9UHipgTZzj {\n    height: 600px;\n    background-size: 1600px 800px;\n  }\n}\n\n@media (min-width: 1600px) {\n  ._2DnY3RTisgcQ9UHipgTZzj {\n    background-size: 2000px 1000px;\n  }\n}\n", ""]);
+exports.push([module.i, ".G9mUuByUaPxVJcs4GUEs7 {\n  margin: -60px 0 0 0 !important;\n  padding: 0 !important;\n  width: 100% !important;\n  max-width: 100% !important;\n  background-color: #fff;\n  text-align: center;\n}\n\n._21Mf2omZnk_F38whSyjFY4 {\n  font-size: 2em;\n  display: block;\n  margin: 0;\n  padding: 40px 0 20px 0;\n}\n\n.fLJoQ5o-_o9oGJvu_W-YJ {\n  width: 100%;\n  margin-left: 0%;\n}\n\n._2DnY3RTisgcQ9UHipgTZzj {\n  height: 350px;\n  top: -50px;\n  margin-bottom: -50px;\n  width: 100%;\n  background-image: url('/assets/landing/banner.jpg');\n  overflow: hidden;\n  position: relative;\n  background-size: 700px 350px;\n  background-position: bottom;\n}\n\n._1ho61ramMKiYkiqURNYYPh {\n  position: absolute;\n  top: 30%;\n  width: 80%;\n  left: 10%;\n  font-family: " + __webpack_require__(32).locals["font-serif"] + ";\n  color: #fff;\n  font-size: 2em;\n  line-height: 1em;\n  opacity: 0.8;\n}\n\n.f0CHLN6BiGym4zIFatTwe {\n  position: absolute;\n  left: 10%;\n  top: 50%;\n  color: #fff;\n  font-size: 1em;\n  opacity: 0.8;\n  width: 80%;\n  line-height: 1.5em;\n}\n\n@media (min-width: 500px) {\n\n  .fLJoQ5o-_o9oGJvu_W-YJ {\n    width: 90%;\n    margin-left: 5%;\n  }\n\n  ._21Mf2omZnk_F38whSyjFY4 {\n    font-size: 2.5em;\n    display: block;\n    margin: 0;\n    padding: 40px 0 20px 0;\n  }\n\n  ._2DnY3RTisgcQ9UHipgTZzj {\n    background-size: 800px 400px;\n  }\n}\n\n@media (min-width: 800px) {\n\n  .G9mUuByUaPxVJcs4GUEs7 {\n    margin: -60px 0 0 0;\n    padding: 0;\n    width: 100%;\n    max-width: 100%;\n    text-align: center;\n  }\n\n  .fLJoQ5o-_o9oGJvu_W-YJ {\n    width: 80%;\n    margin-left: 10%;\n  }\n\n  ._21Mf2omZnk_F38whSyjFY4 {\n    font-size: 3.5em;\n    display: block;\n    margin: 0;\n    padding: 40px 0 20px 0;\n  }\n\n  ._2DnY3RTisgcQ9UHipgTZzj {\n    height: 500px;\n    background-size: 1200px 600px;\n  }\n\n  ._1ho61ramMKiYkiqURNYYPh {\n    width: 60%;\n    left: 20%;\n    font-size: 3em;\n  }\n\n  .f0CHLN6BiGym4zIFatTwe {\n    width: 60%;\n    left: 20%;\n    font-size: 1.5em;\n    line-height: 1.5em;\n  }\n}\n\n@media (min-width: 1200px) {\n  ._2DnY3RTisgcQ9UHipgTZzj {\n    height: 600px;\n    background-size: 1600px 800px;\n  }\n}\n\n@media (min-width: 1600px) {\n  ._2DnY3RTisgcQ9UHipgTZzj {\n    background-size: 2000px 1000px;\n  }\n}\n", ""]);
 
 // exports
 exports.locals = {
@@ -56081,7 +56088,7 @@ var Engagement = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'gradient' },
-          _react2.default.createElement('img', { src: '/assets/landing/gradient.png', className: _engagementModule2.default.img })
+          _react2.default.createElement('img', { src: '/assets/landing/maslow-horizontal.svg', className: _engagementModule2.default.img })
         ),
         _react2.default.createElement(
           'h3',
@@ -56342,46 +56349,51 @@ var Ideas = function (_React$Component) {
       var selected = this.state.selected;
 
       var slide = SLIDES[selected];
+      var slides = SLIDES.slice();
+      slides.splice(selected, 1);
+
       return _react2.default.createElement(
         'div',
         { className: _ideasModule2.default.ideas },
-        _react2.default.createElement(
-          'h2',
-          null,
-          'Find Great Ideas'
-        ),
         _react2.default.createElement(
           'div',
           { className: _ideasModule2.default.slides },
           _react2.default.createElement(
             'ul',
             null,
-            SLIDES.map(function (item, index) {
+            slides.map(function (item, index) {
               return _react2.default.createElement(
                 'li',
-                { key: item.img, onClick: _this3.select.bind(_this3, index) },
+                { key: item.img, onClick: _this3.select.bind(_this3, index), className: _ideasModule2.default.item },
                 _react2.default.createElement('img', { src: '/assets/landing/' + item.img + '.jpg' })
               );
             })
           )
         ),
         _react2.default.createElement(
+          'h2',
+          { className: _ideasModule2.default.heading },
+          'Find Great Ideas'
+        ),
+        _react2.default.createElement('img', { src: '/assets/landing/' + slide.img + '.jpg', className: _ideasModule2.default.img }),
+        _react2.default.createElement(
           'h4',
-          null,
+          { className: _ideasModule2.default.title },
           slide.title
         ),
-        _react2.default.createElement('img', { src: '/assets/landing/' + slide.img + '.jpg' }),
         _react2.default.createElement(
           'p',
-          null,
-          slide.text
-        ),
-        _react2.default.createElement(
-          'a',
-          { href: '' },
-          'Next: ',
-          slide.next,
-          ' »'
+          { className: _ideasModule2.default.text },
+          slide.text,
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'a',
+            { href: '' },
+            'Next: ',
+            slide.next,
+            ' »'
+          )
         )
       );
     }
@@ -56478,10 +56490,14 @@ var Landing = function (_React$Component) {
           ),
           _react2.default.createElement(_auth2.default, _extends({}, this.props, { ref: 'auth', showSignup: this._signup }))
         ),
-        _react2.default.createElement(_ideas2.default, null),
-        _react2.default.createElement(_information2.default, null),
-        _react2.default.createElement(_engagement2.default, null),
-        _react2.default.createElement(_feedback2.default, null)
+        _react2.default.createElement(
+          'div',
+          { className: _stylesModule2.default.squeeze },
+          _react2.default.createElement(_ideas2.default, null),
+          _react2.default.createElement(_information2.default, null),
+          _react2.default.createElement(_engagement2.default, null),
+          _react2.default.createElement(_feedback2.default, null)
+        )
       );
     }
   }, {
@@ -56542,7 +56558,7 @@ exports.default = function () {
     _react2.default.createElement(
       'div',
       { className: _informationModule2.default.stat },
-      _react2.default.createElement('img', { src: '/assets/landing/searching.png' }),
+      _react2.default.createElement('img', { src: '/assets/landing/searching.svg', className: _informationModule2.default.img }),
       _react2.default.createElement(
         'h3',
         null,
@@ -56557,7 +56573,7 @@ exports.default = function () {
     _react2.default.createElement(
       'div',
       { className: _informationModule2.default.stat },
-      _react2.default.createElement('img', { src: '/assets/landing/time.png' }),
+      _react2.default.createElement('img', { src: '/assets/landing/time.svg', className: _informationModule2.default.img }),
       _react2.default.createElement(
         'h3',
         null,
@@ -56572,7 +56588,7 @@ exports.default = function () {
     _react2.default.createElement(
       'div',
       { className: _informationModule2.default.stat },
-      _react2.default.createElement('img', { src: '/assets/landing/cost.png' }),
+      _react2.default.createElement('img', { src: '/assets/landing/cost.svg', className: _informationModule2.default.img }),
       _react2.default.createElement(
         'h3',
         null,

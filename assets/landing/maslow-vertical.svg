@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 73.5 1022.3" enable-background="new 0 0 73.5 1022.3" xml:space="preserve">
+<path fill="none" stroke="#BFD4DB" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	M10.9,999.1c0,0,21.4,11.7,26.1,14.3c4.8-2.6,26.1-14.3,26.1-14.3l-26.1,14.3V8l26.1,14.3c0,0-21.4-11.7-26.1-14.3
+	c-4.8,2.6-26.1,14.3-26.1,14.3"/>
+<g display="none">
+	<text transform="matrix(1 0 0 1 63.1943 65.5475)" display="inline" fill="#808080" font-family="'OpenSans'" font-size="17.8838">unengaged</text>
+</g>
+<g display="none">
+	
+		<text transform="matrix(1 0 0 1 63.1943 953.7863)" display="inline" fill="#808080" font-family="'OpenSans'" font-size="17.8838">engaged</text>
+</g>
+<g>
+	<circle fill="#54A4DB" cx="36.8" cy="212.6" r="15.3"/>
+	<circle fill="#BFD4DB" cx="36.8" cy="365.2" r="15.3"/>
+	<circle fill="#BFD4DB" cx="36.8" cy="517.8" r="15.3"/>
+	<circle fill="#BFD4DB" cx="36.8" cy="670.5" r="15.3"/>
+	<circle fill="#BFD4DB" cx="36.8" cy="823.1" r="15.3"/>
+</g>
+</svg>

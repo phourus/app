@@ -17,10 +17,12 @@ export default class Landing extends React.Component {
           <p className={styles.caption}>Make sure you're on the same page</p>
           <Auth {...this.props} ref="auth" showSignup={this._signup} />
         </div>
-        <Ideas />
-        <Information />
-        <Engagement />
-        <Feedback />
+        <div className={styles.squeeze}>
+          <Ideas />
+          <Information />
+          <Engagement />
+          <Feedback />
+        </div>
       </div>
     )
   }

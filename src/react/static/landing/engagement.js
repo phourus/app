@@ -11,7 +11,7 @@ export default class Engagement extends React.Component {
         <h2>The Key to Engagement</h2>
         <h4>Maslow's Hierarchy of Needs</h4>
         <div className="gradient">
-          <img src="/assets/landing/gradient.png" className={styles.img} />
+          <img src="/assets/landing/maslow-horizontal.svg" className={styles.img} />
         </div>
         <h3>Survival</h3>
         <h4>Unengaged</h4>

@@ -64,20 +64,26 @@ export default class Ideas extends React.Component {
   render() {
     let { selected } = this.state
     let slide = SLIDES[selected]
+    let slides = SLIDES.slice()
+    slides.splice(selected, 1)
+
     return (
       <div className={styles.ideas}>
-        <h2>Find Great Ideas</h2>
         <div className={styles.slides}>
           <ul>
-            {SLIDES.map((item, index) => {
-              return <li key={item.img} onClick={this.select.bind(this, index)}><img src={`/assets/landing/${item.img}.jpg`} /></li>
+            {slides.map((item, index) => {
+              return <li key={item.img} onClick={this.select.bind(this, index)} className={styles.item}><img src={`/assets/landing/${item.img}.jpg`} /></li>
             })}
           </ul>
         </div>
-        <h4>{slide.title}</h4>
-        <img src={`/assets/landing/${slide.img}.jpg`} />
-        <p>{slide.text}</p>
-        <a href="">Next: {slide.next} &raquo;</a>
+        <h2 className={styles.heading}>Find Great Ideas</h2>
+        <img src={`/assets/landing/${slide.img}.jpg`} className={styles.img} />
+        <h4 className={styles.title}>{slide.title}</h4>
+        <p className={styles.text}>
+          {slide.text}
+          <br /><br />
+          <a href="" >Next: {slide.next} &raquo;</a>
+        </p>
       </div>
     )
   }

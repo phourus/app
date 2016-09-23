@@ -19,6 +19,7 @@
 
 .squeeze {
   width: 100%;
+  margin-left: 0%;
 }
 
 .banner {
@@ -59,7 +60,8 @@
 @media (min-width: 500px) {
 
   .squeeze {
-    width: 80%;
+    width: 90%;
+    margin-left: 5%;
   }
 
   .heading {
@@ -85,7 +87,8 @@
   }
 
   .squeeze {
-    width: 60%;
+    width: 80%;
+    margin-left: 10%;
   }
 
   .heading {

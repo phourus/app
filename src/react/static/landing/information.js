@@ -13,17 +13,17 @@ export default () => {
         to the following statistics, on average knowledge workers lose:</p>
       <a href="">How inefficient is your knowledge management? &raquo;</a><br /><br />
       <div className={styles.stat}>
-        <img src="/assets/landing/searching.png" />
+        <img src="/assets/landing/searching.svg" className={styles.img} />
         <h3>3.7 hours lost per week</h3>
         <p>inefficient content search</p>
       </div>
       <div className={styles.stat}>
-        <img src="/assets/landing/time.png" />
+        <img src="/assets/landing/time.svg" className={styles.img} />
         <h3>2.5 hours lost per week</h3>
         <p>inefficient content search</p>
       </div>
       <div className={styles.stat}>
-        <img src="/assets/landing/cost.png" />
+        <img src="/assets/landing/cost.svg" className={styles.img} />
         <h3>$10k+ lost per year</h3>
         <p>per knowledge worker</p>
       </div>
