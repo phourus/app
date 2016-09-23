@@ -22,18 +22,23 @@ class Profile extends React.Component {
 	}
 
 	render() {
-		const { url } = this.props
+		const { url, session } = this.props
 		const { root, type } = url
 		let profile = this.props.profile || {}
 		let address = profile.address || {}
 		let name = ''
 
-		// stream, account, activity, admin
+		// only render if stream, account, admin or activity
 		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
 			return false
 		}
 
-		// if stream not (my posts, org posts, user posts)
+		// only render account, admin or activity if authenticated
+		if (!session.authenticated && ['account', 'admin', 'activity'].indexOf(root) > -1) {
+			return false
+		}
+
+		// only render if stream is my posts, org posts, user posts
 		if (root === 'stream' && ['org', 'me', 'user'].indexOf(type) === -1) {
 			return false
 		}
@@ -52,7 +57,7 @@ class Profile extends React.Component {
 			<div className="profile">
 				{root === 'account' || root === 'admin'
 					? <Uploader img={profile.img} />
-				: <Pic id={profile.id} img={profile.img} type={profile.type} name={profile.type === 'org' ? profile.shortname : profile.username} />
+					: <Pic id={profile.id} img={profile.img} type={profile.type} name={profile.type === 'org' ? profile.shortname : profile.username} />
 				}
 				<div className="basic">
 					<h1 className="name">{name}</h1>
@@ -113,6 +118,7 @@ const Basic = ({ org }) => {
 const mapState = (state, props) => {
   return {
     url: props.url,
+		session: state.session,
     profile: state.profile
   }
 }

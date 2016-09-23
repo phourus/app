@@ -9,6 +9,14 @@ import styles from './styles.less'
 class Account extends React.Component {
 
   render() {
+    // 401
+    if (!this.props.session.authenticated) {
+      return (<div className="account 401">
+        <h2>You need to login first to manage your account</h2>
+        <p>Please log in or create an account to access this page.</p>
+      </div>)
+    }
+
     return (
       <div className="account">
         <h2>My Account</h2>

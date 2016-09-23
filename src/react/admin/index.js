@@ -9,6 +9,22 @@ import styles from './styles.less'
 class Admin extends React.Component {
 
   render() {
+    // 401
+    if (!this.props.session.authenticated) {
+      return (<div className="admin 401">
+        <h2>You need to login first to manage organizations</h2>
+        <p>Please log in or create an account to access this page.</p>
+      </div>)
+    }
+
+    // 403
+    if (!this.props.session.authenticated) {
+      return (<div className="admin 403">
+        <h2>You need to be an administrator to manage this organization</h2>
+        <p>You may need to request administrator access in order to view this page.</p>
+      </div>)
+    }
+
     const Children = React.cloneElement(this.props.children, this.props)
     return (
       <div className="admin">

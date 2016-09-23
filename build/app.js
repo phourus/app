@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8fe57f1007a3d20dc42d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7d9a8194f27bbcde1a35"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -22529,7 +22529,9 @@ var Profile = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var url = this.props.url;
+			var _props = this.props;
+			var url = _props.url;
+			var session = _props.session;
 			var root = url.root;
 			var type = url.type;
 
@@ -22537,12 +22539,17 @@ var Profile = function (_React$Component) {
 			var address = profile.address || {};
 			var name = '';
 
-			// stream, account, activity, admin
+			// only render if stream, account, admin or activity
 			if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
 				return false;
 			}
 
-			// if stream not (my posts, org posts, user posts)
+			// only render account, admin or activity if authenticated
+			if (!session.authenticated && ['account', 'admin', 'activity'].indexOf(root) > -1) {
+				return false;
+			}
+
+			// only render if stream is my posts, org posts, user posts
 			if (root === 'stream' && ['org', 'me', 'user'].indexOf(type) === -1) {
 				return false;
 			}
@@ -22701,6 +22708,7 @@ var Basic = function Basic(_ref) {
 var mapState = function mapState(state, props) {
 	return {
 		url: props.url,
+		session: state.session,
 		profile: state.profile
 	};
 };
@@ -44617,6 +44625,24 @@ var Account = function (_React$Component) {
   _createClass(Account, [{
     key: 'render',
     value: function render() {
+      // 401
+      if (!this.props.session.authenticated) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'account 401' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            'You need to login first to manage your account'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Please log in or create an account to access this page.'
+          )
+        );
+      }
+
       return _react2.default.createElement(
         'div',
         { className: 'account' },
@@ -46588,6 +46614,42 @@ var Admin = function (_React$Component) {
   _createClass(Admin, [{
     key: 'render',
     value: function render() {
+      // 401
+      if (!this.props.session.authenticated) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'admin 401' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            'You need to login first to manage organizations'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Please log in or create an account to access this page.'
+          )
+        );
+      }
+
+      // 403
+      if (!this.props.session.authenticated) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'admin 403' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            'You need to be an administrator to manage this organization'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'You may need to request administrator access in order to view this page.'
+          )
+        );
+      }
+
       var Children = _react2.default.cloneElement(this.props.children, this.props);
       return _react2.default.createElement(
         'div',
