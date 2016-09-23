@@ -21,7 +21,7 @@ export default class Posts extends React.Component {
 			return <h2 style={{textAlign: 'center'}}>No posts found based on your criteria</h2>
 		}
 		return (
-			<div className={this.props.sidebarVisible ? "posts sidebar" : "posts"}>
+			<div className="posts">
 				{this.props.posts.map((item, i) => {
 					let owner = this._owner(item);
 					let location = {};

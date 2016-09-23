@@ -1,7 +1,9 @@
 import React from 'react'
-import Drop from './drop'
+import Drop from '../../stream/drop'
 
-export default class Sidebar extends React.Component {
+import styles from './folders.less'
+
+export default class Folders extends React.Component {
 
   componentDidMount() {
     this.props.actions.collection()
@@ -13,12 +15,8 @@ export default class Sidebar extends React.Component {
       folders.unshift({id: 0, name: 'All Posts'})
     }
 
-    if (!this.props.sidebarVisible) {
-      return false
-    }
     return (
-      <div id="sidebar">
-        <button className="toggle" onClick={this.props.sidebar}><i className="fa fa-angle-right" /> Collapse Sidebar</button>
+      <div id="folders">
         <ul>
           {folders.map((item, index) => {
             return (

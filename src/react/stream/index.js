@@ -6,7 +6,6 @@ import Scroll from 'react-infinite-scroller'
 import Posts from './posts'
 import Organizations from './organizations'
 import Loader from '../shared/loader'
-import Sidebar from './sidebar'
 
 import * as actions from './redux/actions'
 import styles from './styles.less'
@@ -51,15 +50,10 @@ class Stream extends React.Component {
 	_more() {
 		this.props.actions.more()
 	}
-
-  _sidebar() {
-    //this.setState({sidebarVisible: !this.props.sidebarVisible})
-  }
 }
 
 const mapState = (state, props) => {
 	const {
-		sidebarVisible,
 		posts,
 		total,
 		selected,
@@ -71,7 +65,6 @@ const mapState = (state, props) => {
   return {
 		url: props.url,
 		session: state.session,
-		sidebarVisible,
 		posts,
 		total,
 		selected,

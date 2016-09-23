@@ -1,7 +1,6 @@
 import update from 'react-addons-update'
 const initState = {
   ready: false,
-  sidebarVisible: false,
   posts: null,
   total: 0,
   selected: 0,

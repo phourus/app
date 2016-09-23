@@ -19,7 +19,6 @@ import buttonStyles from './less/sub/buttons.less'
 import chartStyles from './less/sub/charts.less'
 
 import helperStyles from './less/sub/helper.less'
-import sidebarStyles from './less/sub/sidebar.less'
 
 class App extends React.Component {
 
