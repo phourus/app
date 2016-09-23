@@ -33,6 +33,14 @@ class Stream extends React.Component {
 		let count = this.props.posts ? this.props.posts.length : 0
 		let total = this.props.total || 0
 
+		// 401
+    if (type === 'me' && !this.props.session.authenticated) {
+      return (<div className="stream 401">
+        <h2>You need to login first to view your posts</h2>
+        <p>Please log in or create an account to view your posts.</p>
+      </div>)
+    }
+
 		return (
 			<div className="stream">
 				<div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>

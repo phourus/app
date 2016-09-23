@@ -43,6 +43,10 @@ class Profile extends React.Component {
 			return false
 		}
 
+		if (root === 'stream' && type === 'me' && !session.authenticated) {
+			return false
+		}
+
 		// name
 		if (profile.first && profile.last) {
 			name = profile.first + ' ' + profile.last

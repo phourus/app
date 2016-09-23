@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7d9a8194f27bbcde1a35"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1db5a5da9dec0e95bbcc"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -22551,6 +22551,10 @@ var Profile = function (_React$Component) {
 
 			// only render if stream is my posts, org posts, user posts
 			if (root === 'stream' && ['org', 'me', 'user'].indexOf(type) === -1) {
+				return false;
+			}
+
+			if (root === 'stream' && type === 'me' && !session.authenticated) {
 				return false;
 			}
 
@@ -58940,6 +58944,24 @@ var Stream = function (_React$Component) {
 			var hasMore = this.props.posts && this.props.posts.length < this.props.total && type !== 'post' && type !== 'edit';
 			var count = this.props.posts ? this.props.posts.length : 0;
 			var total = this.props.total || 0;
+
+			// 401
+			if (type === 'me' && !this.props.session.authenticated) {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'stream 401' },
+					_react2.default.createElement(
+						'h2',
+						null,
+						'You need to login first to view your posts'
+					),
+					_react2.default.createElement(
+						'p',
+						null,
+						'Please log in or create an account to view your posts.'
+					)
+				);
+			}
 
 			return _react2.default.createElement(
 				'div',
