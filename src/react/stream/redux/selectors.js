@@ -1,3 +1,3 @@
 import { createSelector } from 'reselect'
 
-export const params = state => state
+export const params = state => state.stream.params

@@ -6,6 +6,8 @@ import Scroll from 'react-infinite-scroller'
 import Posts from './posts'
 import Organizations from './organizations'
 import Loader from '../shared/loader'
+import Search from './search'
+import Sort from './sort'
 
 import * as actions from './redux/actions'
 import styles from './styles.less'
@@ -18,8 +20,8 @@ class Stream extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.url) {
-			this._load(nextProps.url)
+		if (nextProps.url !== this.props.url) {
+			//this._load(nextProps.url)
 		}
 	}
 
@@ -43,6 +45,8 @@ class Stream extends React.Component {
 
 		return (
 			<div className="stream">
+				<Search {...this.props} />
+				<Sort {...this.props} />
 				<div className="total">Displaying <span className="number">{count}</span> <span className="of">of</span> <span className="number">{total}</span> posts</div>
 				<Scroll pageStart={0} loadMore={this._more.bind(this)} hasMore={hasMore} loader={<Loader />}>
 					<Posts {...this.props} />
@@ -52,11 +56,11 @@ class Stream extends React.Component {
 	}
 
 	_load(url) {
-		this.props.actions.context(url.type, url.id)
+		//this.props.actions.context(url.type, url.id)
 	}
 
 	_more() {
-		this.props.actions.more()
+		//this.props.actions.more()
 	}
 }
 

@@ -3,8 +3,8 @@ import React from 'react'
 export default class Sort extends React.Component {
 
 	render() {
-    let sortBy = this.props.sortBy
-    let direction = this.props.direction
+		const { params } = this.props
+    const { direction, sortBy } = params
 
 		return (
 			<div className="sortby">
@@ -30,13 +30,13 @@ export default class Sort extends React.Component {
     // <li className={(sortBy === 'location') ? "selected" : ""} onClick={this._location}><i className={"fa " + (sortBy === 'location' ? "fa-check" : "fa-globe")} /> Location</li>
     // <li className={(sortBy === 'date') ? "selected" : ""} onClick={this._date}><i className={"fa " + (sortBy === 'date' ? "fa-check" : "fa-calendar")} /> Date</li>
 	}
-	_influence(e) { Actions.sortBy('influence') }
-	_views(e) { Actions.sortBy('totalViews') }
-	_popularity(e) { Actions.sortBy('popularity') }
-	_thumbs(e) { Actions.sortBy('totalThumbs') }
-	_comments(e) { Actions.sortBy('totalComments') }
-	_location(e) { Actions.sortBy('location') }
-	_date(e) { Actions.sortBy('date') }
-	_asc(e) { Actions.direction('ASC') }
-	_desc(e) { Actions.direction('DESC') }
+	_influence(e) { this.props.actions.sortBy('influence') }
+	_views(e) { this.props.actions.sortBy('totalViews') }
+	_popularity(e) { this.props.actions.sortBy('popularity') }
+	_thumbs(e) { this.props.actions.sortBy('totalThumbs') }
+	_comments(e) { this.props.actions.sortBy('totalComments') }
+	_location(e) { this.props.actions.sortBy('location') }
+	_date(e) { this.props.actions.sortBy('date') }
+	_asc(e) { this.props.actions.direction('ASC') }
+	_desc(e) { this.props.actions.direction('DESC') }
 }

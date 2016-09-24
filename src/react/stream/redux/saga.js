@@ -1,4 +1,4 @@
-import { call, put, take, spawn } from 'redux-saga/effects'
+import { call, put, take, spawn, select } from 'redux-saga/effects'
 
 import * as selectors from './selectors'
 
@@ -10,20 +10,9 @@ import orgs from '../../../api/orgs'
 export default function* init() {
   yield [
     spawn(collection),
-    spawn(select),
-    spawn(single),
-    spawn(search),
-    spawn(nextPage),
-    spawn(prevPage),
-    spawn(more),
-    spawn(limit),
-    spawn(sortBy),
-    spawn(direction),
-    spawn(exclude),
-    spawn(type),
-    spawn(context),
-    spawn(folder),
-    spawn(save),
+    spawn(filter),
+    // spawn(save),
+    // spawn(context)
   ]
 }
 
@@ -32,8 +21,8 @@ function* collection() {
     const action = yield take('STREAM_COLLECTION')
     yield put({type: 'REQUEST_STREAM_COLLECTION'})
     try {
-      //const params = yield select()
-      const data = yield call(posts.collection, {context:{}})
+      const params = yield select(selectors.params)
+      const data = yield call(posts.collection, params)
       // concat?
       // if (this.posts) {
       //   this.posts = this.posts.concat(data.rows);
@@ -60,116 +49,45 @@ function* collection() {
   }
 }
 
-function* select (id) {
-  // this.selected = id;
-  // this.scroll = false;
-  // this.trigger({selected: this.selected, scroll: this.scroll});
+function* filter() {
+  while (true) {
+    yield take([
+      'STREAM_EXCLUDE',
+      'STREAM_TYPE',
+      'STREAM_FOLDER',
+      'STREAM_MORE',
+      'STREAM_SEARCH',
+      'STREAM_LIMIT',
+      'STREAM_SORT',
+      'STREAM_DIRECTION'
+    ])
+    yield put({type: 'STREAM_COLLECTION'})
+  }
 }
 
-function* single (id) {
-  // let local = this._local(id);
-  // if (local) {
-  //   this.single = local;
+function* save(postId, folderId) {
+  // let remove = false;
+  // let folder = folderId;
+  // if (folderId === 0 && this.params.folder > 0) {
+  //   remove = true;
+  //   folder = this.params.folder;
   // }
-  // posts.single(id)
+  // folders.folder(postId, folder, remove)
   // .then(data => {
-  //   this.single = data;
-  //   this._collection();
+  //   if (remove) {
+  //     this._folder(folder);
+  //   }
   // })
   // .catch(code => {
-  //   if (code != 200) {
-  //      let alert = {
-  //        action: 'load',
-  //        color: 'red',
-  //        code: code,
-  //        msg: 'Post could not be loaded'
-  //      };
-  //      this.trigger({alert: alert});
-  //      console.warn(alert);
-  //   }
+  //   let alert = {
+  //     action: 'save',
+  //     color: 'red',
+  //     code: code,
+  //     msg: 'Could not save to folder'
+  //   };
+  //   this.trigger({alert: alert});
+  //   console.warn(alert);
   // });
-}
-
-function* local(id) {
-  // check local posts indexed by id for match
-  // closed post, read post status
-  //return false;
-}
-
-function* search(search) {
-  // this.posts = [];
-  // this.params.page = 1;
-  // this.params.search = search;
-  // this._collection();
-}
-
-function* nextPage() {
-  // if ( Math.ceil(this.params.page * this.params.limit) < this.total ) {
-  //   this.params.page++;
-  //   this._collection();
-  // }
-}
-
-function* prevPage() {
-  // if (this.params.page > 1) {
-  //   this.params.page--;
-  //   this._collection();
-  // }
-}
-
-function* more() {
-  // this.params.page++;
-  // this.scroll = true;
-  // this._collection();
-}
-
-function* limit(limit) {
-  // this.params.limit = limit;
-  // this._collection();
-}
-
-function* sortBy(sortBy) {
-  // this.posts = [];
-  // this.params.page = 1;
-  // this.params.sortBy = sortBy;
-  // this._collection();
-}
-
-function* direction(direction) {
-  // this.posts = [];
-  // this.params.page = 1;
-  // this.params.direction = direction;
-  // this._collection();
-}
-
-function* exclude(type) {
-  // this.posts = [];
-  // this.params.page = 1;
-  // let exclude = this.params.exclude;
-  // let index = exclude.indexOf(type);
-  // if (index > -1) {
-  //   exclude.splice(index, 1);
-  // } else {
-  //   exclude.push(type);
-  // }
-  // this.params.exclude = exclude;
-  // this._collection();
-}
-
-function* type(type) {
-  // let types = ['blog', 'event', 'subject', 'question', 'debate', 'poll', 'belief', 'quote'];
-  // this.params.page = 1;
-  // if (this.params.exclude.length === 7) {
-  //   this.params.exclude = [];
-  // } else {
-  //   let index = types.indexOf(type);
-  //   if (index !== -1) {
-  //     types.splice(index, 1);
-  //     this.params.exclude = types;
-  //   }
-  // }
-  // this.posts = [];
-  // this._collection();
 }
 
 function* context(type, id) {
@@ -230,36 +148,4 @@ function* context(type, id) {
   //        console.warn(alert);
   //     }
   //   });
-}
-
-function* folder(id) {
-  // this.posts = null;
-  // this.params.page = 1;
-  // this.params.folder = id;
-  // this._collection();
-}
-
-function* save(postId, folderId) {
-  // let remove = false;
-  // let folder = folderId;
-  // if (folderId === 0 && this.params.folder > 0) {
-  //   remove = true;
-  //   folder = this.params.folder;
-  // }
-  // folders.folder(postId, folder, remove)
-  // .then(data => {
-  //   if (remove) {
-  //     this._folder(folder);
-  //   }
-  // })
-  // .catch(code => {
-  //   let alert = {
-  //     action: 'save',
-  //     color: 'red',
-  //     code: code,
-  //     msg: 'Could not save to folder'
-  //   };
-  //   this.trigger({alert: alert});
-  //   console.warn(alert);
-  // });
 }
