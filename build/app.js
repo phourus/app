@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "00484d432a94089320b7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e1c27296dddb3f2a86c8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -13236,79 +13236,105 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _react2.default.createClass({
-  displayName: "loader",
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  getInitialState: function getInitialState() {
-    return {
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Loader = function (_React$Component) {
+  _inherits(Loader, _React$Component);
+
+  function Loader(props) {
+    _classCallCheck(this, Loader);
+
+    var _this = _possibleConstructorReturn(this, (Loader.__proto__ || Object.getPrototypeOf(Loader)).call(this, props));
+
+    _this.state = {
       slide: 0
     };
-  },
-  getDefaultProps: function getDefaultProps() {
-    return {
-      speed: 200,
-      faded: 0.4,
-      width: 100
-    };
-  },
-  componentDidMount: function componentDidMount() {
-    var _this = this;
+    return _this;
+  }
 
-    this.interval = setInterval(function () {
-      if (_this.state.slide === 3) {
-        _this.setState({ slide: 0 });
-      } else {
-        _this.setState({ slide: _this.state.slide + 1 });
-      }
-    }, this.props.speed);
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    clearInterval(this.interval);
-  },
-  render: function render() {
-    var opacity = this.props.faded;
-    var o = [opacity, opacity, opacity, opacity];
-    o[this.state.slide] = 1;
-    return _react2.default.createElement(
-      "div",
-      { className: "loader" },
-      _react2.default.createElement(
-        "svg",
-        { width: this.props.width, version: "1.1", id: "Logo", x: "0px", y: "0px", viewBox: "20 114 560 560", enableBackground: "new 20 114 560 560" },
+  _createClass(Loader, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.interval = setInterval(function () {
+        if (_this2.state.slide === 3) {
+          _this2.setState({ slide: 0 });
+        } else {
+          _this2.setState({ slide: _this2.state.slide + 1 });
+        }
+      }, this.props.speed);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      clearInterval(this.interval);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var opacity = this.props.faded;
+      var o = [opacity, opacity, opacity, opacity];
+      o[this.state.slide] = 1;
+
+      return _react2.default.createElement(
+        "div",
+        { className: "loader" },
         _react2.default.createElement(
-          "g",
-          null,
+          "svg",
+          { width: this.props.width, version: "1.1", id: "Logo", x: "0px", y: "0px", viewBox: "20 114 560 560", enableBackground: "new 20 114 560 560" },
           _react2.default.createElement(
             "g",
             null,
-            _react2.default.createElement("path", { fill: "#ED0303", opacity: o[2], d: "M170.3,506.2c6.1-63.2,56.1-112.2,119.3-119.3c-4.1-58.1-52-104-111.2-104c-61.2,0-111.2,50-111.2,111.2 C66.3,453.1,112.2,502.1,170.3,506.2z" })
-          ),
-          _react2.default.createElement(
-            "g",
-            null,
-            _react2.default.createElement("path", { fill: "#ECB010", opacity: o[3], d: "M191.8,261.4c63.2,6.1,112.2,56.1,119.3,119.3c58.1-4.1,104-52,104-111.2c0-61.2-50-111.2-111.2-111.2 C244.8,157.3,195.8,203.2,191.8,261.4z" })
-          ),
-          _react2.default.createElement(
-            "g",
-            null,
-            _react2.default.createElement("path", { fill: "#3498DB", opacity: o[0], d: "M317.2,402.1c4.1,58.1,52,104,111.2,104c61.2,0,111.2-50,111.2-111.2c0-59.2-45.9-107.1-104-111.2 C430.4,346,380.5,396,317.2,402.1z" })
-          ),
-          _react2.default.createElement(
-            "g",
-            null,
-            _react2.default.createElement("path", { fill: "#8ABF00", opacity: o[1], d: "M415.1,527.6c-63.2-6.1-112.2-56.1-119.3-119.3c-58.1,4.1-104,52-104,111.2c0,61.2,50,111.2,111.2,111.2 C362.1,631.6,411.1,585.7,415.1,527.6z" })
+            _react2.default.createElement(
+              "g",
+              null,
+              _react2.default.createElement("path", { fill: "#ED0303", opacity: o[2], d: "M170.3,506.2c6.1-63.2,56.1-112.2,119.3-119.3c-4.1-58.1-52-104-111.2-104c-61.2,0-111.2,50-111.2,111.2 C66.3,453.1,112.2,502.1,170.3,506.2z" })
+            ),
+            _react2.default.createElement(
+              "g",
+              null,
+              _react2.default.createElement("path", { fill: "#ECB010", opacity: o[3], d: "M191.8,261.4c63.2,6.1,112.2,56.1,119.3,119.3c58.1-4.1,104-52,104-111.2c0-61.2-50-111.2-111.2-111.2 C244.8,157.3,195.8,203.2,191.8,261.4z" })
+            ),
+            _react2.default.createElement(
+              "g",
+              null,
+              _react2.default.createElement("path", { fill: "#3498DB", opacity: o[0], d: "M317.2,402.1c4.1,58.1,52,104,111.2,104c61.2,0,111.2-50,111.2-111.2c0-59.2-45.9-107.1-104-111.2 C430.4,346,380.5,396,317.2,402.1z" })
+            ),
+            _react2.default.createElement(
+              "g",
+              null,
+              _react2.default.createElement("path", { fill: "#8ABF00", opacity: o[1], d: "M415.1,527.6c-63.2-6.1-112.2-56.1-119.3-119.3c-58.1,4.1-104,52-104,111.2c0,61.2,50,111.2,111.2,111.2 C362.1,631.6,411.1,585.7,415.1,527.6z" })
+            )
           )
         )
-      )
-    );
-  }
-});
+      );
+    }
+  }]);
+
+  return Loader;
+}(_react2.default.Component);
+
+exports.default = Loader;
+
+
+Loader.defaultProps = {
+  speed: 200,
+  faded: 0.4,
+  width: 100
+};
 
 /***/ },
 /* 108 */
@@ -22439,40 +22465,24 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _react2.default.createClass({
-  displayName: "alerts",
-
-  propTypes: {
-    color: _react2.default.PropTypes.string,
-    msg: _react2.default.PropTypes.string,
-    code: _react2.default.PropTypes.number,
-    remove: _react2.default.PropTypes.func.isRequired
-  },
-  render: function render() {
-    return _react2.default.createElement(
+exports.default = function (props) {
+  return _react2.default.createElement(
+    "div",
+    { className: props.color + " alert" },
+    _react2.default.createElement("button", { className: "remove fa fa-remove", onClick: props.remove.bind(undefined) }),
+    _react2.default.createElement(
       "div",
-      { className: this.props.color + " alert" },
-      _react2.default.createElement("button", { className: "remove fa fa-remove", onClick: this._remove }),
-      _react2.default.createElement(
-        "div",
-        { className: "msg" },
-        this.props.msg
-      ),
-      _react2.default.createElement(
-        "div",
-        { className: "code" },
-        "HTTP Status Code: ",
-        this.props.code
-      )
-    );
-  },
-  _remove: function _remove() {
-    if (this.props.remove) {
-      return this.props.remove();
-    }
-    console.warn('Alert remove function not provided');
-  }
-});
+      { className: "msg" },
+      props.msg
+    ),
+    _react2.default.createElement(
+      "div",
+      { className: "code" },
+      "HTTP Status Code: ",
+      props.code
+    )
+  );
+};
 
 /***/ },
 /* 275 */
@@ -49195,6 +49205,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -49211,104 +49223,123 @@ var _forgotModule2 = _interopRequireDefault(_forgotModule);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _react2.default.createClass({
-  displayName: 'reset',
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  getDefaultProps: function getDefaultProps() {
-    return {
-      show: false
-    };
-  },
-  getInitialState: function getInitialState() {
-    return {};
-  },
-  componentDidMount: function componentDidMount() {
-    // this.unsubscribe = Store.listen(data => {
-    //   this.setState(data);
-    // });
-  },
-  render: function render() {
-    if (!this.props.show) {
-      return false;
-    }
-    return _react2.default.createElement(
-      'div',
-      { className: 'reset' },
-      _react2.default.createElement(
-        'p',
-        null,
-        'To reset your password, please enter your email and new password below:'
-      ),
-      _react2.default.createElement(
-        'label',
-        null,
-        'Email:',
-        _react2.default.createElement('input', { onChange: this._email, placeholder: 'your email login' })
-      ),
-      _react2.default.createElement(
-        'label',
-        null,
-        'New Password:',
-        _react2.default.createElement('input', { onChange: this._password, type: 'password', placeholder: 'new password' })
-      ),
-      _react2.default.createElement(
-        'label',
-        null,
-        'Confirm Password:',
-        _react2.default.createElement('input', { onChange: this._confirm, type: 'password', placeholder: 'confirm password' })
-      ),
-      _react2.default.createElement(
-        'button',
-        { onClick: this._reset, className: 'blue button submit' },
-        'Reset my Password'
-      ),
-      _react2.default.createElement(
-        'a',
-        { href: 'javascript:void(0)', onClick: this.props.showLogin },
-        'Cancel'
-      ),
-      this.state.code === 403 && this.state.action === 'reset' ? _react2.default.createElement(
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Reset = function (_React$Component) {
+  _inherits(Reset, _React$Component);
+
+  function Reset(props) {
+    _classCallCheck(this, Reset);
+
+    var _this = _possibleConstructorReturn(this, (Reset.__proto__ || Object.getPrototypeOf(Reset)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Reset, [{
+    key: 'render',
+    value: function render() {
+      if (!this.props.show) {
+        return false;
+      }
+      return _react2.default.createElement(
         'div',
-        { className: 'message red', onClick: this._clear },
-        'There was an error resetting your password. Please try again or ',
+        { className: 'reset' },
         _react2.default.createElement(
-          'a',
-          { href: 'mailto:info@phourus.com&subject=Error' },
-          'contact us.'
-        )
-      ) : false,
-      this.state.code === 200 && this.state.action === 'reset' ? _react2.default.createElement(
-        'div',
-        { className: 'message green', onClick: this._clear },
-        'Your password has been reset. You can now ',
+          'p',
+          null,
+          'To reset your password, please enter your email and new password below:'
+        ),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Email:',
+          _react2.default.createElement('input', { onChange: this._email, placeholder: 'your email login' })
+        ),
+        _react2.default.createElement(
+          'label',
+          null,
+          'New Password:',
+          _react2.default.createElement('input', { onChange: this._password, type: 'password', placeholder: 'new password' })
+        ),
+        _react2.default.createElement(
+          'label',
+          null,
+          'Confirm Password:',
+          _react2.default.createElement('input', { onChange: this._confirm, type: 'password', placeholder: 'confirm password' })
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this._reset, className: 'blue button submit' },
+          'Reset my Password'
+        ),
         _react2.default.createElement(
           'a',
           { href: 'javascript:void(0)', onClick: this.props.showLogin },
-          'login with your new password here.'
-        )
-      ) : false
-    );
-  },
-  _email: function _email(e) {
-    this.setState({ email: e.currentTarget.value });
-  },
-  _password: function _password(e) {
-    this.setState({ password: e.currentTarget.value });
-  },
-  _confirm: function _confirm(e) {
-    this.setState({ confirm: e.currentTarget.value });
-  },
-  _reset: function _reset() {
-    var query = this.props.location.query;
-    if (this.state.password === this.state.confirm && query.token) {
-      this.props.actions.reset(this.state.email, this.state.password, query.token, query.userId);
-      (0, _analytics2.default)('send', 'event', 'account', 'reset');
+          'Cancel'
+        ),
+        this.state.code === 403 && this.state.action === 'reset' ? _react2.default.createElement(
+          'div',
+          { className: 'message red', onClick: this._clear },
+          'There was an error resetting your password. Please try again or ',
+          _react2.default.createElement(
+            'a',
+            { href: 'mailto:info@phourus.com&subject=Error' },
+            'contact us.'
+          )
+        ) : false,
+        this.state.code === 200 && this.state.action === 'reset' ? _react2.default.createElement(
+          'div',
+          { className: 'message green', onClick: this._clear },
+          'Your password has been reset. You can now ',
+          _react2.default.createElement(
+            'a',
+            { href: 'javascript:void(0)', onClick: this.props.showLogin },
+            'login with your new password here.'
+          )
+        ) : false
+      );
     }
-  },
-  _clear: function _clear() {
-    this.setState({ code: null });
-  }
-});
+  }, {
+    key: '_email',
+    value: function _email(e) {
+      this.setState({ email: e.currentTarget.value });
+    }
+  }, {
+    key: '_password',
+    value: function _password(e) {
+      this.setState({ password: e.currentTarget.value });
+    }
+  }, {
+    key: '_confirm',
+    value: function _confirm(e) {
+      this.setState({ confirm: e.currentTarget.value });
+    }
+  }, {
+    key: '_reset',
+    value: function _reset() {
+      var query = this.props.location.query;
+      if (this.state.password === this.state.confirm && query.token) {
+        this.props.actions.reset(this.state.email, this.state.password, query.token, query.userId);
+        (0, _analytics2.default)('send', 'event', 'account', 'reset');
+      }
+    }
+  }, {
+    key: '_clear',
+    value: function _clear() {
+      this.setState({ code: null });
+    }
+  }]);
+
+  return Reset;
+}(_react2.default.Component);
+
+exports.default = Reset;
 
 /***/ },
 /* 541 */
@@ -49651,81 +49682,72 @@ exports.default = _react2.default.createClass({
 });
 
 
-var Progress = _react2.default.createClass({
-  displayName: 'Progress',
-
-  getDefaultProps: function getDefaultProps() {
-    return {
-      step: 0
-    };
-  },
-  render: function render() {
-    return _react2.default.createElement(
+var Progress = function Progress() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
       'div',
-      null,
+      { className: 'steps' },
       _react2.default.createElement(
-        'div',
-        { className: 'steps' },
+        'ul',
+        null,
         _react2.default.createElement(
-          'ul',
+          'li',
           null,
           _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'div',
-              { className: 'label' },
-              'Account Info'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'div',
-              { className: 'label' },
-              'Organizations'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'div',
-              { className: 'label' },
-              'Account Access'
-            )
+            'div',
+            { className: 'label' },
+            'Account Info'
           )
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'progress' },
+        ),
         _react2.default.createElement(
-          'ul',
+          'li',
           null,
           _react2.default.createElement(
-            'li',
-            { className: steps[0] },
-            _react2.default.createElement('div', { className: 'step' })
-          ),
-          _react2.default.createElement('li', { className: 'line' }),
+            'div',
+            { className: 'label' },
+            'Organizations'
+          )
+        ),
+        _react2.default.createElement(
+          'li',
+          null,
           _react2.default.createElement(
-            'li',
-            { className: steps[1] },
-            _react2.default.createElement('div', { className: 'step' })
-          ),
-          _react2.default.createElement('li', { className: 'line' }),
-          _react2.default.createElement(
-            'li',
-            { className: steps[2] },
-            _react2.default.createElement('div', { className: 'step' })
+            'div',
+            { className: 'label' },
+            'Account Access'
           )
         )
       )
-    );
-  }
-});
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'progress' },
+      _react2.default.createElement(
+        'ul',
+        null,
+        _react2.default.createElement(
+          'li',
+          { className: steps[0] },
+          _react2.default.createElement('div', { className: 'step' })
+        ),
+        _react2.default.createElement('li', { className: 'line' }),
+        _react2.default.createElement(
+          'li',
+          { className: steps[1] },
+          _react2.default.createElement('div', { className: 'step' })
+        ),
+        _react2.default.createElement('li', { className: 'line' }),
+        _react2.default.createElement(
+          'li',
+          { className: steps[2] },
+          _react2.default.createElement('div', { className: 'step' })
+        )
+      )
+    )
+  );
+};
 
 /***/ },
 /* 542 */
@@ -51535,36 +51557,6 @@ var List = function List(_ref) {
     )
   );
 };
-
-// let Facebook = React.createClass({
-//   componentDidMount: function () {
-//     window.fbAsyncInit = function() {
-//       FB.init({
-//         appId      : 'your-app-id',
-//         xfbml      : true,
-//         version    : 'v2.5'
-//       });
-//       FB.ui({
-//         method: 'share',
-//         href: 'https://phourus.com/stream/1',
-//       }, function(response){
-//         console.log(response);
-//       });
-//     };
-//     (function(d, s, id){
-//        var js, fjs = d.getElementsByTagName(s)[0];
-//        if (d.getElementById(id)) {return;}
-//        js = d.createElement(s); js.id = id;
-//        js.src = "//connect.facebook.net/en_US/sdk.js";
-//        fjs.parentNode.insertBefore(js, fjs);
-//      }(document, 'script', 'facebook-jssdk'));
-//   },
-//   render: function () {
-//     return (
-//       <script></script>
-//     );
-//   }
-// });
 
 /***/ },
 /* 559 */
@@ -55959,22 +55951,19 @@ var Form = function (_React$Component) {
   }
 
   _createClass(Form, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var session = this.props.session;
-      var user = session.user;
-      if (user && user.email) {}
-      //this.setState({email: user.email})
-
+    key: 'render',
+    value: function render() {
+      // const { session } = this.props
+      // const { user } = session
+      // if (user && user.email) {
+      //   //this.setState({email: user.email})
+      // }
       // this.unsubscribe = Store.listen((data) => {
       //   if (data.code === 200) {
       //     this.setState({email: "", message: "", code: 200});
       //   }
       // });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
+
       return _react2.default.createElement(
         'div',
         { className: 'form' },
@@ -55983,13 +55972,13 @@ var Form = function (_React$Component) {
           null,
           'Your Email:'
         ),
-        _react2.default.createElement('input', { type: 'text', value: this.props.email, onChange: this._email.bind(this) }),
+        _react2.default.createElement('input', { ref: 'email', type: 'text', value: this.props.email }),
         _react2.default.createElement(
           'label',
           null,
           'Your Message:'
         ),
-        _react2.default.createElement('textarea', { value: this.props.message, onChange: this._message.bind(this) }),
+        _react2.default.createElement('textarea', { ref: 'message', value: this.props.message }),
         this.props.code === 200 ? _react2.default.createElement(
           'div',
           { className: 'green' },
@@ -56016,7 +56005,7 @@ var Form = function (_React$Component) {
     key: '_submit',
     value: function _submit() {
       ga('send', 'event', 'contact', 'submit', this.props.email);
-      this.props.actions.contact(this.props.email, this.props.message);
+      this.props.actions.contact(this.refs.email.value, this.refs.message.value);
     }
   }]);
 

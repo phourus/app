@@ -228,44 +228,37 @@ export default React.createClass({
   }
 });
 
-let Progress = React.createClass({
-  getDefaultProps: function () {
-    return {
-      step: 0
-    };
-  },
-  render: function () {
-    return (
-      <div>
-        <div className="steps">
-          <ul>
-            <li>
-              <div className="label">Account Info</div>
-            </li>
-            <li>
-              <div className="label">Organizations</div>
-            </li>
-            <li>
-              <div className="label">Account Access</div>
-            </li>
-          </ul>
-        </div>
-        <div className="progress">
-          <ul>
-            <li className={steps[0]}>
-              <div className="step"></div>
-            </li>
-            <li className="line"></li>
-            <li className={steps[1]}>
-              <div className="step"></div>
-            </li>
-            <li className="line"></li>
-            <li className={steps[2]}>
-              <div className="step"></div>
-            </li>
-          </ul>
-        </div>
+const Progress = () => {
+  return (
+    <div>
+      <div className="steps">
+        <ul>
+          <li>
+            <div className="label">Account Info</div>
+          </li>
+          <li>
+            <div className="label">Organizations</div>
+          </li>
+          <li>
+            <div className="label">Account Access</div>
+          </li>
+        </ul>
       </div>
-    );
-  }
-});
+      <div className="progress">
+        <ul>
+          <li className={steps[0]}>
+            <div className="step"></div>
+          </li>
+          <li className="line"></li>
+          <li className={steps[1]}>
+            <div className="step"></div>
+          </li>
+          <li className="line"></li>
+          <li className={steps[2]}>
+            <div className="step"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  )
+}

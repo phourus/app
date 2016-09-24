@@ -5,26 +5,24 @@ import { contact } from '../redux/actions'
 
 class Form extends React.Component {
 
-  componentDidMount() {
-    let session = this.props.session
-    let user = session.user
-    if (user && user.email) {
-      //this.setState({email: user.email})
-    }
+  render() {
+    // const { session } = this.props
+    // const { user } = session
+    // if (user && user.email) {
+    //   //this.setState({email: user.email})
+    // }
     // this.unsubscribe = Store.listen((data) => {
     //   if (data.code === 200) {
     //     this.setState({email: "", message: "", code: 200});
     //   }
     // });
-  }
 
-  render() {
     return (
       <div className="form">
         <label>Your Email:</label>
-        <input type="text" value={this.props.email} onChange={this._email.bind(this)} />
+        <input ref="email" type="text" value={this.props.email} />
         <label>Your Message:</label>
-        <textarea value={this.props.message} onChange={this._message.bind(this)} />
+        <textarea ref="message" value={this.props.message} />
         {this.props.code === 200 ? <div className="green">Your message has been received</div> : false}
         <button className="button green" onClick={this._submit.bind(this)}>Submit</button>
       </div>
@@ -41,7 +39,7 @@ class Form extends React.Component {
 
   _submit() {
     ga('send', 'event', 'contact', 'submit', this.props.email);
-    this.props.actions.contact(this.props.email, this.props.message);
+    this.props.actions.contact(this.refs.email.value, this.refs.message.value);
   }
 }
 

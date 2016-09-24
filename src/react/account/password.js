@@ -1,54 +1,37 @@
-import React from 'react';
+import React from 'react'
 
-Account.Password = React.createClass({
-  getInitialState: function () {
-    return {
-        current: "",
-        new: "",
-        confirm: ""
-    }
-  },
-  render: function () {
-    let match = (this.state.new === this.state.confirm);
+export default class Password extends React.Component {
+
+  render() {
+    const match = (this.refs.new.value === this.refs.confirm.value)
     return (
       <div id="password">
         <h3>Change Password</h3>
         <div id="user_password" type="password">
           <label>
             Current Password
-            <input placeholder="current password" value={this.state.password} onChange={this._changePassword} type="password" />
+            <input ref="current" placeholder="current password" type="password" />
           </label>
           <label>
             New Password
-            <input placeholder="set new password" value={this.state.new} onChange={this._changeNew} type="password" />
+            <input ref="new" placeholder="set new password" type="password" />
           </label>
           <label className={match ? "" : "error"}>
             Confirm New Password&nbsp;
             {match ? "" : <span className="error">This field should match your new password</span>}
-            <input placeholder="confirm new password" value={this.state.confirm} onChange={this._changeConfirm} type="password" />
+            <input ref="confirm" placeholder="confirm new password" type="password" />
           </label>
         </div>
-        <button id="save_password" className="button green save" onClick={this._submit} disabled={!match}>Update Password</button>
+        <button id="save_password" className="button green save" onClick={this._submit.bind(this)} disabled={!match}>Update Password</button>
       </div>
-    );
-  },
-  _changeCurrent: function (e) {
-    let value = e.currentTarget.value;
-    this.setState({current: value});
-  },
-  _changeNew: function (e) {
-    let value = e.currentTarget.value;
-    this.setState({new: value});
-  },
-  _changeConfirm: function (e) {
-    let value = e.currentTarget.value;
-    this.setState({confirm: value});
-  },
-  _submit: function () {
-    if (this.state.new !== this.state.confirm) {
-      // alert user
-      return;
-    }
-    Actions.changePassword();
+    )
   }
-});
+
+  _submit() {
+    if (this.refs.new.value !== this.refs.confirm.value) {
+      // alert user
+      return
+    }
+    this.props.actions.changePassword()
+  }
+}
