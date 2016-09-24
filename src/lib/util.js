@@ -38,5 +38,17 @@ export default {
       host = parts.join('.');
     }
     return `${protocol}://${shortname}.${host}`
+  },
+  queryString: function (params) {
+    let out = ''
+    for (let key in params) {
+      let value = params[key]
+      if (Array.isArray(value)) {
+
+      } else {
+        out += `${key}=${value}&`
+      }
+    }
+    return out
   }
 };

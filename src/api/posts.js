@@ -1,4 +1,5 @@
 import * as http from '../lib/xhr'
+import util from '../lib/util'
 let base = '/rest/posts/';
 
 export default {
@@ -6,10 +7,12 @@ export default {
     return http.get(base + id);
   },
   collection: function (params) {
-    let query = params;
-    params.contextId = params.context.id;
-    params.contextType = params.context.type;
-    return http.get(base);
+    let query = Object.assign({}, params)
+    query.contextId = params.context.id
+    query.contextType = params.context.type
+    delete query.context
+    const q = util.queryString(query)
+    return http.get(base + '?' + q)
   },
   add: function (model) {
     return http.post(base, model);
