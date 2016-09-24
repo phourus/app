@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "3e9efd2586d2321e397e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6200c7b8648b0b4ca0d8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -44273,7 +44273,7 @@ var App = function (_React$Component) {
       if (this.state.sidebarVisible) {
         className += " visible";
       }
-      if (['product', 'pricing', 'help'].indexOf(root) > -1) {
+      if (['product', 'pricing', 'help', 'privacy', 'terms'].indexOf(root) > -1) {
         classType = "static";
       }
       if (root === 'home') {
@@ -54602,7 +54602,7 @@ var Header = function (_React$Component) {
       if (session.authenticated) {
         type = 'private';
       }
-      if (['product', 'pricing', 'help'].indexOf(r) > -1) {
+      if (['product', 'pricing', 'help', 'privacy', 'terms'].indexOf(r) > -1) {
         type = 'static';
       }
       if (r === 'home') {
@@ -57420,7 +57420,7 @@ exports.default = function () {
     _react2.default.createElement(
       "strong",
       null,
-      "Updated: August 1, 2015"
+      "Updated: August 1, 2016"
     ),
     _react2.default.createElement("br", null),
     _react2.default.createElement(
@@ -58500,7 +58500,7 @@ exports.default = function () {
     _react2.default.createElement(
       "strong",
       null,
-      "Effective: August 1, 2015"
+      "Effective: August 1, 2016"
     ),
     _react2.default.createElement("br", null),
     _react2.default.createElement("br", null),

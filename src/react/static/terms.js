@@ -4,7 +4,7 @@ export default () => {
   return (
     <div className="general">
       <h1>Terms & Conditions</h1>
-      <strong>Effective: August 1, 2015</strong><br /><br />
+      <strong>Effective: August 1, 2016</strong><br /><br />
       <ol>
         <li>Acceptance of Terms.
           <ol>

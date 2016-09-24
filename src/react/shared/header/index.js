@@ -19,7 +19,7 @@ class Header extends React.Component {
     if (session.authenticated) {
       type = 'private'
     }
-    if (['product', 'pricing', 'help'].indexOf(r) > -1) {
+    if (['product', 'pricing', 'help', 'privacy', 'terms'].indexOf(r) > -1) {
       type = 'static'
     }
     if (r === 'home') {

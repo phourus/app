@@ -58,7 +58,7 @@ class App extends React.Component {
     if (this.state.sidebarVisible) {
       className += " visible"
     }
-    if (['product', 'pricing', 'help'].indexOf(root) > -1) {
+    if (['product', 'pricing', 'help', 'privacy', 'terms'].indexOf(root) > -1) {
       classType = "static"
     }
     if (root === 'home') {
