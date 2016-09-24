@@ -26,6 +26,9 @@ function* single() {
       } else {
         const post = yield call(posts.single, action.id)
         yield put({type: 'RECEIVE_POST_SINGLE', id: action.id, post})
+        yield put({type: 'COMMENTS_LIST', params: {postId: action.id}})
+        yield put({type: 'COLLABORATORS_LIST', postId: action.id})
+        yield put({type: 'THUMB_POST', id: action.id})
       }
     } catch (code) {
       const alert = {

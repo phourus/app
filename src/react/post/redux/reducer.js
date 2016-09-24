@@ -4,6 +4,9 @@ const initState = {
   changes: {},
   poll: {},
   vote: {},
+  comments: [],
+  collaborators: [],
+  thumb: {},
   ready: true,
   scroll: false,
   confirmTrash: false,
@@ -100,6 +103,21 @@ export default (state = initState, action = {}) => {
     case 'RECEIVE_VOTE':
       return update(state, {
         ready: { $set: true }
+      })
+      break
+    case 'RECEIVE_COMMENTS_LIST':
+      return update(state, {
+        comments: { $set: action.data }
+      })
+      break
+    case 'RECEIVE_COLLABORATORS_LIST':
+      return update(state, {
+        collaborators: { $set: action.data }
+      })
+      break
+    case 'RECEIVE_THUMB_POST':
+      return update(state, {
+        thumb: { $set: action.data }
       })
       break
     default:

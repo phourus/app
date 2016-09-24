@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e1c27296dddb3f2a86c8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "06f6f52f687e0e867f1d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -52253,6 +52253,9 @@ var initState = (_initState = {
   changes: {},
   poll: {},
   vote: {},
+  comments: [],
+  collaborators: [],
+  thumb: {},
   ready: true,
   scroll: false,
   confirmTrash: false,
@@ -52348,6 +52351,21 @@ exports.default = function () {
     case 'RECEIVE_VOTE':
       return (0, _reactAddonsUpdate2.default)(state, {
         ready: { $set: true }
+      });
+      break;
+    case 'RECEIVE_COMMENTS_LIST':
+      return (0, _reactAddonsUpdate2.default)(state, {
+        comments: { $set: action.data }
+      });
+      break;
+    case 'RECEIVE_COLLABORATORS_LIST':
+      return (0, _reactAddonsUpdate2.default)(state, {
+        collaborators: { $set: action.data }
+      });
+      break;
+    case 'RECEIVE_THUMB_POST':
+      return (0, _reactAddonsUpdate2.default)(state, {
+        thumb: { $set: action.data }
       });
       break;
     default:
@@ -53420,7 +53438,7 @@ function single() {
       switch (_context2.prev = _context2.next) {
         case 0:
           if (false) {
-            _context2.next = 26;
+            _context2.next = 32;
             break;
           }
 
@@ -53447,7 +53465,7 @@ function single() {
             } });
 
         case 10:
-          _context2.next = 17;
+          _context2.next = 23;
           break;
 
         case 12:
@@ -53460,11 +53478,23 @@ function single() {
           return (0, _effects.put)({ type: 'RECEIVE_POST_SINGLE', id: action.id, post: _post });
 
         case 17:
-          _context2.next = 24;
-          break;
+          _context2.next = 19;
+          return (0, _effects.put)({ type: 'COMMENTS_LIST', params: { postId: action.id } });
 
         case 19:
-          _context2.prev = 19;
+          _context2.next = 21;
+          return (0, _effects.put)({ type: 'COLLABORATORS_LIST', postId: action.id });
+
+        case 21:
+          _context2.next = 23;
+          return (0, _effects.put)({ type: 'THUMB_POST', id: action.id });
+
+        case 23:
+          _context2.next = 30;
+          break;
+
+        case 25:
+          _context2.prev = 25;
           _context2.t0 = _context2['catch'](1);
           alert = {
             action: 'single',
@@ -53472,19 +53502,19 @@ function single() {
             code: _context2.t0,
             msg: 'Post could not be loaded'
           };
-          _context2.next = 24;
+          _context2.next = 30;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 24:
+        case 30:
           _context2.next = 0;
           break;
 
-        case 26:
+        case 32:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this, [[1, 19]]);
+  }, _marked[1], this, [[1, 25]]);
 }
 
 function create() {
