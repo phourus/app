@@ -10,6 +10,10 @@ export default class Notifications extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.actions.notifications()
+  }
+
   render() {
     let views = this.props.notifications[0] || []
     let comments = this.props.notifications[1] || []

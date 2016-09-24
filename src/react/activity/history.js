@@ -10,6 +10,10 @@ export default class History extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.actions.history()
+  }
+
   render() {
     let views = this.props.history[0] || []
     let comments = this.props.history[1] || []

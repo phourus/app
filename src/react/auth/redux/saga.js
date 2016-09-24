@@ -40,9 +40,9 @@ function* get() {
     try {
       const token = yield call(storage.get, 'token')
       const session = yield call(account.get)
-      yield call(orgs)
       yield put({type: 'RECEIVE_SESSION_GET', session})
-      gaDimensions(user)
+      yield put({type: 'SESSION_ORGS'})
+      gaDimensions(session)
     } catch(code) {
       if (code !== 401) {
         const alert = {
@@ -96,19 +96,22 @@ function* logout() {
 }
 
 function* orgs() {
-  yield put({type: 'REQUEST_SESSION_ORGS'})
-  try {
-    const data = yield call(account.orgs)
-    yield put({type: 'RECEIVE_SESSION_ORGS', orgs: data})
-  } catch(code) {
-    if (code !== 401) {
-      const alert = {
-        action: 'organizations',
-        color: 'yellow',
-        code,
-        msg: 'Organizations could not be loaded'
+  while (true) {
+    const action = yield take('SESSION_ORGS')
+    try {
+      yield put({type: 'REQUEST_SESSION_ORGS'})
+      const data = yield call(account.orgs)
+      yield put({type: 'RECEIVE_SESSION_ORGS', orgs: data})
+    } catch(code) {
+      if (code !== 401) {
+        const alert = {
+          action: 'organizations',
+          color: 'yellow',
+          code,
+          msg: 'Organizations could not be loaded'
+        }
+        yield put({type: 'ALERT', alert})
       }
-      yield put({type: 'ALERT', alert})
     }
   }
 }

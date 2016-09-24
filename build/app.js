@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1db45808cd5eafc659bf"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3e9efd2586d2321e397e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -45706,6 +45706,11 @@ var History = function (_React$Component) {
   }
 
   _createClass(History, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.actions.history();
+    }
+  }, {
     key: 'render',
     value: function render() {
       var views = this.props.history[0] || [];
@@ -46052,6 +46057,11 @@ var Notifications = function (_React$Component) {
   }
 
   _createClass(Notifications, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.actions.notifications();
+    }
+  }, {
     key: 'render',
     value: function render() {
       var views = this.props.notifications[0] || [];
@@ -46216,7 +46226,18 @@ exports.default = Notifications;
 /***/ function(module, exports) {
 
 "use strict";
-"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var notifications = exports.notifications = function notifications() {
+  return { type: 'ACTIVITY_NOTIFICATIONS' };
+};
+
+var history = exports.history = function history() {
+  return { type: 'ACTIVITY_HISTORY' };
+};
 
 /***/ },
 /* 521 */
@@ -46245,12 +46266,12 @@ exports.default = function () {
   var action = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
   switch (action.type) {
-    case 'ACTIVITY_NOTIFICATIONS':
+    case 'RECEIVE_ACTIVITY_NOTIFICATIONS':
       return (0, _reactAddonsUpdate2.default)(state, {
         notifications: { $set: action.notifications }
       });
       break;
-    case 'ACTIVITY_HISTORY':
+    case 'RECEIVE_ACTIVITY_HISTORY':
       return (0, _reactAddonsUpdate2.default)(state, {
         history: { $set: action.history }
       });
@@ -46289,13 +46310,9 @@ function init() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return (0, _effects.take)('RECEIVE_SESSION_GET');
-
-        case 2:
-          _context.next = 4;
           return [(0, _effects.spawn)(notifications), (0, _effects.spawn)(history)];
 
-        case 4:
+        case 2:
         case 'end':
           return _context.stop();
       }
@@ -46304,81 +46321,109 @@ function init() {
 }
 
 function notifications() {
-  var data, alert;
+  var action, data, alert;
   return regeneratorRuntime.wrap(function notifications$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.prev = 0;
+          if (false) {
+            _context2.next = 19;
+            break;
+          }
+
           _context2.next = 3;
-          return (0, _effects.call)(_account2.default.notifications, {});
+          return (0, _effects.take)('ACTIVITY_NOTIFICATIONS');
 
         case 3:
-          data = _context2.sent;
-          _context2.next = 6;
-          return (0, _effects.put)({ type: 'ACTIVITY_NOTIFICATIONS', notifications: data });
+          action = _context2.sent;
+          _context2.prev = 4;
+          _context2.next = 7;
+          return (0, _effects.call)(_account2.default.notifications, {});
 
-        case 6:
-          _context2.next = 13;
+        case 7:
+          data = _context2.sent;
+          _context2.next = 10;
+          return (0, _effects.put)({ type: 'RECEIVE_ACTIVITY_NOTIFICATIONS', notifications: data });
+
+        case 10:
+          _context2.next = 17;
           break;
 
-        case 8:
-          _context2.prev = 8;
-          _context2.t0 = _context2['catch'](0);
+        case 12:
+          _context2.prev = 12;
+          _context2.t0 = _context2['catch'](4);
           alert = {
             action: 'notifications',
             color: 'yellow',
             code: _context2.t0,
             msg: 'Notifications could not be loaded'
           };
-          _context2.next = 13;
+          _context2.next = 17;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 13:
+        case 17:
+          _context2.next = 0;
+          break;
+
+        case 19:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this, [[0, 8]]);
+  }, _marked[1], this, [[4, 12]]);
 }
 
 function history() {
-  var data, alert;
+  var action, data, alert;
   return regeneratorRuntime.wrap(function history$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.prev = 0;
+          if (false) {
+            _context3.next = 19;
+            break;
+          }
+
           _context3.next = 3;
-          return (0, _effects.call)(_account2.default.history, {});
+          return (0, _effects.take)('ACTIVITY_HISTORY');
 
         case 3:
-          data = _context3.sent;
-          _context3.next = 6;
-          return (0, _effects.put)({ type: 'ACTIVITY_HISTORY', history: data });
+          action = _context3.sent;
+          _context3.prev = 4;
+          _context3.next = 7;
+          return (0, _effects.call)(_account2.default.history, {});
 
-        case 6:
-          _context3.next = 13;
+        case 7:
+          data = _context3.sent;
+          _context3.next = 10;
+          return (0, _effects.put)({ type: 'RECEIVE_ACTIVITY_HISTORY', history: data });
+
+        case 10:
+          _context3.next = 17;
           break;
 
-        case 8:
-          _context3.prev = 8;
-          _context3.t0 = _context3['catch'](0);
+        case 12:
+          _context3.prev = 12;
+          _context3.t0 = _context3['catch'](4);
           alert = {
             action: 'history',
             color: 'yellow',
             code: _context3.t0,
             msg: 'History could not be loaded'
           };
-          _context3.next = 13;
+          _context3.next = 17;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 13:
+        case 17:
+          _context3.next = 0;
+          break;
+
+        case 19:
         case 'end':
           return _context3.stop();
       }
     }
-  }, _marked[2], this, [[0, 8]]);
+  }, _marked[2], this, [[4, 12]]);
 }
 
 /***/ },
@@ -48701,14 +48746,14 @@ function get() {
         case 9:
           session = _context2.sent;
           _context2.next = 12;
-          return (0, _effects.call)(orgs);
+          return (0, _effects.put)({ type: 'RECEIVE_SESSION_GET', session: session });
 
         case 12:
           _context2.next = 14;
-          return (0, _effects.put)({ type: 'RECEIVE_SESSION_GET', session: session });
+          return (0, _effects.put)({ type: 'SESSION_ORGS' });
 
         case 14:
-          gaDimensions(user);
+          gaDimensions(session);
           _context2.next = 23;
           break;
 
@@ -48855,34 +48900,44 @@ function logout() {
 }
 
 function orgs() {
-  var data, alert;
+  var action, data, alert;
   return regeneratorRuntime.wrap(function orgs$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
+          if (false) {
+            _context5.next = 22;
+            break;
+          }
+
+          _context5.next = 3;
+          return (0, _effects.take)('SESSION_ORGS');
+
+        case 3:
+          action = _context5.sent;
+          _context5.prev = 4;
+          _context5.next = 7;
           return (0, _effects.put)({ type: 'REQUEST_SESSION_ORGS' });
 
-        case 2:
-          _context5.prev = 2;
-          _context5.next = 5;
+        case 7:
+          _context5.next = 9;
           return (0, _effects.call)(_account2.default.orgs);
 
-        case 5:
+        case 9:
           data = _context5.sent;
-          _context5.next = 8;
+          _context5.next = 12;
           return (0, _effects.put)({ type: 'RECEIVE_SESSION_ORGS', orgs: data });
 
-        case 8:
-          _context5.next = 16;
+        case 12:
+          _context5.next = 20;
           break;
 
-        case 10:
-          _context5.prev = 10;
-          _context5.t0 = _context5['catch'](2);
+        case 14:
+          _context5.prev = 14;
+          _context5.t0 = _context5['catch'](4);
 
           if (!(_context5.t0 !== 401)) {
-            _context5.next = 16;
+            _context5.next = 20;
             break;
           }
 
@@ -48892,15 +48947,19 @@ function orgs() {
             code: _context5.t0,
             msg: 'Organizations could not be loaded'
           };
-          _context5.next = 16;
+          _context5.next = 20;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 16:
+        case 20:
+          _context5.next = 0;
+          break;
+
+        case 22:
         case 'end':
           return _context5.stop();
       }
     }
-  }, _marked[4], this, [[2, 10]]);
+  }, _marked[4], this, [[4, 14]]);
 }
 
 function request(email) {

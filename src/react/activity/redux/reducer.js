@@ -6,12 +6,12 @@ const initState = {
 
 export default (state = initState, action = {}) => {
   switch(action.type) {
-    case 'ACTIVITY_NOTIFICATIONS':
+    case 'RECEIVE_ACTIVITY_NOTIFICATIONS':
       return update(state, {
         notifications: {$set: action.notifications}
       })
       break
-    case 'ACTIVITY_HISTORY':
+    case 'RECEIVE_ACTIVITY_HISTORY':
       return update(state, {
         history: {$set: action.history}
       })
