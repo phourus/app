@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "06f6f52f687e0e867f1d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1db45808cd5eafc659bf"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -48642,7 +48642,7 @@ var _account2 = _interopRequireDefault(_account);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _marked = [init, request, forgot, reset, password, register, get, login, logout, orgs].map(regeneratorRuntime.mark);
+var _marked = [init, get, login, logout, orgs, request, forgot, reset, password, register].map(regeneratorRuntime.mark);
 
 // ms * sec * min * hours * days;
 var TTL = 1000 * 60 * 60 * 24 * 30;
@@ -48664,7 +48664,7 @@ function init() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return [(0, _effects.spawn)(request), (0, _effects.spawn)(forgot), (0, _effects.spawn)(reset), (0, _effects.spawn)(password), (0, _effects.spawn)(register), (0, _effects.spawn)(get), (0, _effects.spawn)(login), (0, _effects.spawn)(logout), (0, _effects.spawn)(orgs)];
+          return [(0, _effects.spawn)(get), (0, _effects.spawn)(login), (0, _effects.spawn)(logout), (0, _effects.spawn)(orgs), (0, _effects.spawn)(request), (0, _effects.spawn)(forgot), (0, _effects.spawn)(reset), (0, _effects.spawn)(password), (0, _effects.spawn)(register)];
 
         case 2:
         case 'end':
@@ -48674,249 +48674,244 @@ function init() {
   }, _marked[0], this);
 }
 
-function request(email) {
-  var action, _password, alert;
-
-  return regeneratorRuntime.wrap(function request$(_context2) {
+function get() {
+  var token, session, alert;
+  return regeneratorRuntime.wrap(function get$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           if (false) {
-            _context2.next = 23;
+            _context2.next = 27;
             break;
           }
 
           _context2.next = 3;
-          return (0, _effects.take)('AUTH_REGISTER');
+          return (0, _effects.put)({ type: 'REQUEST_SESSION_GET' });
 
         case 3:
-          action = _context2.sent;
-          _context2.prev = 4;
-          _password = Math.random().toString(36).slice(2);
-          _context2.next = 8;
-          return (0, _effects.put)({ type: 'REQUEST_AUTH_REGISTER' });
+          _context2.prev = 3;
+          _context2.next = 6;
+          return (0, _effects.call)(_storage2.default.get, 'token');
 
-        case 8:
-          _context2.next = 10;
-          return (0, _effects.call)(_account2.default.register, action.email, action.password);
+        case 6:
+          token = _context2.sent;
+          _context2.next = 9;
+          return (0, _effects.call)(_account2.default.get);
 
-        case 10:
+        case 9:
+          session = _context2.sent;
           _context2.next = 12;
-          return (0, _effects.put)({ type: 'ALERT', alert: {
-              action: 'request',
-              color: 'green',
-              code: 202,
-              msg: 'Request complete'
-            } });
+          return (0, _effects.call)(orgs);
 
         case 12:
           _context2.next = 14;
-          return (0, _effects.put)({ type: 'RECEIVE_AUTH_REGISTER' });
+          return (0, _effects.put)({ type: 'RECEIVE_SESSION_GET', session: session });
 
         case 14:
-          _context2.next = 21;
+          gaDimensions(user);
+          _context2.next = 23;
           break;
 
-        case 16:
-          _context2.prev = 16;
-          _context2.t0 = _context2['catch'](4);
+        case 17:
+          _context2.prev = 17;
+          _context2.t0 = _context2['catch'](3);
+
+          if (!(_context2.t0 !== 401)) {
+            _context2.next = 23;
+            break;
+          }
+
           alert = {
-            action: 'request',
-            color: 'red',
+            action: 'get',
+            color: 'yellow',
             code: _context2.t0,
-            msg: 'Request unsuccessful'
+            msg: 'Account could not be loaded'
           };
-          _context2.next = 21;
+          _context2.next = 23;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 21:
+        case 23:
+          _context2.next = 25;
+          return (0, _effects.take)('SESSION_GET');
+
+        case 25:
           _context2.next = 0;
           break;
 
-        case 23:
+        case 27:
         case 'end':
           return _context2.stop();
       }
     }
-  }, _marked[1], this, [[4, 16]]);
+  }, _marked[1], this, [[3, 17]]);
 }
 
-function forgot(email) {
-  var action, alert;
-  return regeneratorRuntime.wrap(function forgot$(_context3) {
+function login() {
+  var action, data, alert;
+  return regeneratorRuntime.wrap(function login$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           if (false) {
-            _context3.next = 20;
+            _context3.next = 23;
             break;
           }
 
           _context3.next = 3;
-          return (0, _effects.take)('AUTH_FORGOT');
+          return (0, _effects.take)('SESSION_LOGIN');
 
         case 3:
           action = _context3.sent;
           _context3.prev = 4;
           _context3.next = 7;
-          return (0, _effects.put)({ type: 'REQUEST_AUTH_FORGOT' });
+          return (0, _effects.put)({ type: 'REQUEST_SESSION_LOGIN' });
 
         case 7:
           _context3.next = 9;
-          return (0, _effects.call)(_account2.default.forgot, action.email);
+          return (0, _effects.call)(_account2.default.login, action.email, action.password);
 
         case 9:
-          _context3.next = 11;
-          return (0, _effects.put)({ type: 'RECEIVE_AUTH_FORGOT' });
+          data = _context3.sent;
+          _context3.next = 12;
+          return (0, _effects.call)(_storage2.default.set, 'token', data, TTL);
 
-        case 11:
-          _context3.next = 18;
+        case 12:
+          _context3.next = 14;
+          return (0, _effects.put)({ type: 'SESSION_GET' });
+
+        case 14:
+          _context3.next = 21;
           break;
 
-        case 13:
-          _context3.prev = 13;
+        case 16:
+          _context3.prev = 16;
           _context3.t0 = _context3['catch'](4);
           alert = {
-            action: 'forgot',
+            action: 'login',
             color: 'red',
             code: _context3.t0,
-            msg: 'Password reset link could not be sent'
+            msg: 'Login unsuccessful'
           };
-          _context3.next = 18;
+          _context3.next = 21;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 18:
+        case 21:
           _context3.next = 0;
           break;
 
-        case 20:
+        case 23:
         case 'end':
           return _context3.stop();
       }
     }
-  }, _marked[2], this, [[4, 13]]);
+  }, _marked[2], this, [[4, 16]]);
 }
 
-function reset(email, password, token, userId) {
-  var action, alert;
-  return regeneratorRuntime.wrap(function reset$(_context4) {
+function logout() {
+  var alert;
+  return regeneratorRuntime.wrap(function logout$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           if (false) {
-            _context4.next = 20;
+            _context4.next = 15;
             break;
           }
 
           _context4.next = 3;
-          return (0, _effects.take)('AUTH_RESET');
+          return (0, _effects.take)('SESSION_LOGOUT');
 
         case 3:
-          action = _context4.sent;
-          _context4.prev = 4;
-          _context4.next = 7;
-          return (0, _effects.put)({ type: 'REQUEST_AUTH_RESET' });
+          _context4.prev = 3;
+          _context4.next = 6;
+          return (0, _effects.call)(_storage2.default.del('token'));
 
-        case 7:
-          _context4.next = 9;
-          return (0, _effects.call)(_account2.default.reset, action.email, action.password, action.token, action.userId);
-
-        case 9:
-          _context4.next = 11;
-          return (0, _effects.put)({ type: 'RECEIVE_AUTH_RESET' });
-
-        case 11:
-          _context4.next = 18;
+        case 6:
+          _context4.next = 13;
           break;
 
-        case 13:
-          _context4.prev = 13;
-          _context4.t0 = _context4['catch'](4);
+        case 8:
+          _context4.prev = 8;
+          _context4.t0 = _context4['catch'](3);
           alert = {
-            action: 'reset',
+            action: 'logout',
             color: 'red',
             code: _context4.t0,
-            msg: 'Password reset link could not be sent'
+            msg: 'Logout unsuccessful'
           };
-          _context4.next = 18;
+          _context4.next = 13;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 18:
+        case 13:
           _context4.next = 0;
           break;
 
-        case 20:
+        case 15:
         case 'end':
           return _context4.stop();
       }
     }
-  }, _marked[3], this, [[4, 13]]);
+  }, _marked[3], this, [[3, 8]]);
 }
 
-function password(current, updated) {
-  var action, alert;
-  return regeneratorRuntime.wrap(function password$(_context5) {
+function orgs() {
+  var data, alert;
+  return regeneratorRuntime.wrap(function orgs$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          if (false) {
-            _context5.next = 20;
+          _context5.next = 2;
+          return (0, _effects.put)({ type: 'REQUEST_SESSION_ORGS' });
+
+        case 2:
+          _context5.prev = 2;
+          _context5.next = 5;
+          return (0, _effects.call)(_account2.default.orgs);
+
+        case 5:
+          data = _context5.sent;
+          _context5.next = 8;
+          return (0, _effects.put)({ type: 'RECEIVE_SESSION_ORGS', orgs: data });
+
+        case 8:
+          _context5.next = 16;
+          break;
+
+        case 10:
+          _context5.prev = 10;
+          _context5.t0 = _context5['catch'](2);
+
+          if (!(_context5.t0 !== 401)) {
+            _context5.next = 16;
             break;
           }
 
-          _context5.next = 3;
-          return (0, _effects.take)('AUTH_PASSWORD');
-
-        case 3:
-          action = _context5.sent;
-          _context5.prev = 4;
-          _context5.next = 7;
-          return (0, _effects.put)({ type: 'REQUEST_AUTH_PASSWORD' });
-
-        case 7:
-          _context5.next = 9;
-          return (0, _effects.call)(_account2.default.password, action.current, action.updated);
-
-        case 9:
-          _context5.next = 11;
-          return (0, _effects.put)({ type: 'RECEIVE_AUTH_PASSWORD' });
-
-        case 11:
-          _context5.next = 18;
-          break;
-
-        case 13:
-          _context5.prev = 13;
-          _context5.t0 = _context5['catch'](4);
           alert = {
-            action: 'password',
-            color: 'red',
+            action: 'organizations',
+            color: 'yellow',
             code: _context5.t0,
-            msg: 'Password could not be updated'
+            msg: 'Organizations could not be loaded'
           };
-          _context5.next = 18;
+          _context5.next = 16;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 18:
-          _context5.next = 0;
-          break;
-
-        case 20:
+        case 16:
         case 'end':
           return _context5.stop();
       }
     }
-  }, _marked[4], this, [[4, 13]]);
+  }, _marked[4], this, [[2, 10]]);
 }
 
-function register(email, password, username) {
-  var action, alert;
-  return regeneratorRuntime.wrap(function register$(_context6) {
+function request(email) {
+  var action, _password, alert;
+
+  return regeneratorRuntime.wrap(function request$(_context6) {
     while (1) {
       switch (_context6.prev = _context6.next) {
         case 0:
           if (false) {
-            _context6.next = 20;
+            _context6.next = 23;
             break;
           }
 
@@ -48926,272 +48921,277 @@ function register(email, password, username) {
         case 3:
           action = _context6.sent;
           _context6.prev = 4;
-          _context6.next = 7;
+          _password = Math.random().toString(36).slice(2);
+          _context6.next = 8;
           return (0, _effects.put)({ type: 'REQUEST_AUTH_REGISTER' });
 
-        case 7:
-          _context6.next = 9;
-          return (0, _effects.call)(_account2.default.register, action.email, action.password, action.username);
+        case 8:
+          _context6.next = 10;
+          return (0, _effects.call)(_account2.default.register, action.email, action.password);
 
-        case 9:
-          _context6.next = 11;
+        case 10:
+          _context6.next = 12;
+          return (0, _effects.put)({ type: 'ALERT', alert: {
+              action: 'request',
+              color: 'green',
+              code: 202,
+              msg: 'Request complete'
+            } });
+
+        case 12:
+          _context6.next = 14;
           return (0, _effects.put)({ type: 'RECEIVE_AUTH_REGISTER' });
 
-        case 11:
-          _context6.next = 18;
+        case 14:
+          _context6.next = 21;
           break;
 
-        case 13:
-          _context6.prev = 13;
+        case 16:
+          _context6.prev = 16;
           _context6.t0 = _context6['catch'](4);
           alert = {
-            action: 'register',
+            action: 'request',
             color: 'red',
             code: _context6.t0,
-            msg: 'Registration unsuccessful'
+            msg: 'Request unsuccessful'
           };
-          _context6.next = 18;
+          _context6.next = 21;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 18:
+        case 21:
           _context6.next = 0;
           break;
 
-        case 20:
+        case 23:
         case 'end':
           return _context6.stop();
       }
     }
-  }, _marked[5], this, [[4, 13]]);
+  }, _marked[5], this, [[4, 16]]);
 }
 
-function get() {
-  var token, session, alert;
-  return regeneratorRuntime.wrap(function get$(_context7) {
+function forgot(email) {
+  var action, alert;
+  return regeneratorRuntime.wrap(function forgot$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
           if (false) {
-            _context7.next = 27;
+            _context7.next = 20;
             break;
           }
 
           _context7.next = 3;
-          return (0, _effects.put)({ type: 'REQUEST_SESSION_GET' });
+          return (0, _effects.take)('AUTH_FORGOT');
 
         case 3:
-          _context7.prev = 3;
-          _context7.next = 6;
-          return (0, _effects.call)(_storage2.default.get, 'token');
+          action = _context7.sent;
+          _context7.prev = 4;
+          _context7.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_FORGOT' });
 
-        case 6:
-          token = _context7.sent;
+        case 7:
           _context7.next = 9;
-          return (0, _effects.call)(_account2.default.get);
+          return (0, _effects.call)(_account2.default.forgot, action.email);
 
         case 9:
-          session = _context7.sent;
-          _context7.next = 12;
-          return (0, _effects.call)(orgs);
+          _context7.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_FORGOT' });
 
-        case 12:
-          _context7.next = 14;
-          return (0, _effects.put)({ type: 'RECEIVE_SESSION_GET', session: session });
-
-        case 14:
-          gaDimensions(user);
-          _context7.next = 23;
+        case 11:
+          _context7.next = 18;
           break;
 
-        case 17:
-          _context7.prev = 17;
-          _context7.t0 = _context7['catch'](3);
-
-          if (!(_context7.t0 !== 401)) {
-            _context7.next = 23;
-            break;
-          }
-
+        case 13:
+          _context7.prev = 13;
+          _context7.t0 = _context7['catch'](4);
           alert = {
-            action: 'get',
-            color: 'yellow',
+            action: 'forgot',
+            color: 'red',
             code: _context7.t0,
-            msg: 'Account could not be loaded'
+            msg: 'Password reset link could not be sent'
           };
-          _context7.next = 23;
+          _context7.next = 18;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 23:
-          _context7.next = 25;
-          return (0, _effects.take)('SESSION_GET');
-
-        case 25:
+        case 18:
           _context7.next = 0;
           break;
 
-        case 27:
+        case 20:
         case 'end':
           return _context7.stop();
       }
     }
-  }, _marked[6], this, [[3, 17]]);
+  }, _marked[6], this, [[4, 13]]);
 }
 
-function login() {
-  var action, data, alert;
-  return regeneratorRuntime.wrap(function login$(_context8) {
+function reset(email, password, token, userId) {
+  var action, alert;
+  return regeneratorRuntime.wrap(function reset$(_context8) {
     while (1) {
       switch (_context8.prev = _context8.next) {
         case 0:
           if (false) {
-            _context8.next = 23;
+            _context8.next = 20;
             break;
           }
 
           _context8.next = 3;
-          return (0, _effects.take)('SESSION_LOGIN');
+          return (0, _effects.take)('AUTH_RESET');
 
         case 3:
           action = _context8.sent;
           _context8.prev = 4;
           _context8.next = 7;
-          return (0, _effects.put)({ type: 'REQUEST_SESSION_LOGIN' });
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_RESET' });
 
         case 7:
           _context8.next = 9;
-          return (0, _effects.call)(_account2.default.login, action.email, action.password);
+          return (0, _effects.call)(_account2.default.reset, action.email, action.password, action.token, action.userId);
 
         case 9:
-          data = _context8.sent;
-          _context8.next = 12;
-          return (0, _effects.call)(_storage2.default.set, 'token', data, TTL);
+          _context8.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_RESET' });
 
-        case 12:
-          _context8.next = 14;
-          return (0, _effects.put)({ type: 'SESSION_GET' });
-
-        case 14:
-          _context8.next = 21;
+        case 11:
+          _context8.next = 18;
           break;
 
-        case 16:
-          _context8.prev = 16;
+        case 13:
+          _context8.prev = 13;
           _context8.t0 = _context8['catch'](4);
           alert = {
-            action: 'login',
+            action: 'reset',
             color: 'red',
             code: _context8.t0,
-            msg: 'Login unsuccessful'
+            msg: 'Password reset link could not be sent'
           };
-          _context8.next = 21;
+          _context8.next = 18;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 21:
+        case 18:
           _context8.next = 0;
           break;
 
-        case 23:
+        case 20:
         case 'end':
           return _context8.stop();
       }
     }
-  }, _marked[7], this, [[4, 16]]);
+  }, _marked[7], this, [[4, 13]]);
 }
 
-function logout() {
-  var alert;
-  return regeneratorRuntime.wrap(function logout$(_context9) {
+function password(current, updated) {
+  var action, alert;
+  return regeneratorRuntime.wrap(function password$(_context9) {
     while (1) {
       switch (_context9.prev = _context9.next) {
         case 0:
           if (false) {
-            _context9.next = 15;
+            _context9.next = 20;
             break;
           }
 
           _context9.next = 3;
-          return (0, _effects.take)('SESSION_LOGOUT');
+          return (0, _effects.take)('AUTH_PASSWORD');
 
         case 3:
-          _context9.prev = 3;
-          _context9.next = 6;
-          return (0, _effects.call)(_storage2.default.del('token'));
+          action = _context9.sent;
+          _context9.prev = 4;
+          _context9.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_PASSWORD' });
 
-        case 6:
-          _context9.next = 13;
+        case 7:
+          _context9.next = 9;
+          return (0, _effects.call)(_account2.default.password, action.current, action.updated);
+
+        case 9:
+          _context9.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_PASSWORD' });
+
+        case 11:
+          _context9.next = 18;
           break;
 
-        case 8:
-          _context9.prev = 8;
-          _context9.t0 = _context9['catch'](3);
+        case 13:
+          _context9.prev = 13;
+          _context9.t0 = _context9['catch'](4);
           alert = {
-            action: 'logout',
+            action: 'password',
             color: 'red',
             code: _context9.t0,
-            msg: 'Logout unsuccessful'
+            msg: 'Password could not be updated'
           };
-          _context9.next = 13;
+          _context9.next = 18;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 13:
+        case 18:
           _context9.next = 0;
           break;
 
-        case 15:
+        case 20:
         case 'end':
           return _context9.stop();
       }
     }
-  }, _marked[8], this, [[3, 8]]);
+  }, _marked[8], this, [[4, 13]]);
 }
 
-function orgs() {
-  var data, alert;
-  return regeneratorRuntime.wrap(function orgs$(_context10) {
+function register(email, password, username) {
+  var action, alert;
+  return regeneratorRuntime.wrap(function register$(_context10) {
     while (1) {
       switch (_context10.prev = _context10.next) {
         case 0:
-          _context10.next = 2;
-          return (0, _effects.put)({ type: 'REQUEST_SESSION_ORGS' });
-
-        case 2:
-          _context10.prev = 2;
-          _context10.next = 5;
-          return (0, _effects.call)(_account2.default.orgs);
-
-        case 5:
-          data = _context10.sent;
-          _context10.next = 8;
-          return (0, _effects.put)({ type: 'RECEIVE_SESSION_ORGS', orgs: data });
-
-        case 8:
-          _context10.next = 16;
-          break;
-
-        case 10:
-          _context10.prev = 10;
-          _context10.t0 = _context10['catch'](2);
-
-          if (!(_context10.t0 !== 401)) {
-            _context10.next = 16;
+          if (false) {
+            _context10.next = 20;
             break;
           }
 
+          _context10.next = 3;
+          return (0, _effects.take)('AUTH_REGISTER');
+
+        case 3:
+          action = _context10.sent;
+          _context10.prev = 4;
+          _context10.next = 7;
+          return (0, _effects.put)({ type: 'REQUEST_AUTH_REGISTER' });
+
+        case 7:
+          _context10.next = 9;
+          return (0, _effects.call)(_account2.default.register, action.email, action.password, action.username);
+
+        case 9:
+          _context10.next = 11;
+          return (0, _effects.put)({ type: 'RECEIVE_AUTH_REGISTER' });
+
+        case 11:
+          _context10.next = 18;
+          break;
+
+        case 13:
+          _context10.prev = 13;
+          _context10.t0 = _context10['catch'](4);
           alert = {
-            action: 'organizations',
-            color: 'yellow',
+            action: 'register',
+            color: 'red',
             code: _context10.t0,
-            msg: 'Organizations could not be loaded'
+            msg: 'Registration unsuccessful'
           };
-          _context10.next = 16;
+          _context10.next = 18;
           return (0, _effects.put)({ type: 'ALERT', alert: alert });
 
-        case 16:
+        case 18:
+          _context10.next = 0;
+          break;
+
+        case 20:
         case 'end':
           return _context10.stop();
       }
     }
-  }, _marked[9], this, [[2, 10]]);
+  }, _marked[9], this, [[4, 13]]);
 }
 
 /***/ },

@@ -22,18 +22,96 @@ import account from '../../../api/account'
 
 export default function* init() {
   yield [
+    spawn(get),
+    spawn(login),
+    spawn(logout),
+    spawn(orgs),
     spawn(request),
     spawn(forgot),
     spawn(reset),
     spawn(password),
-    spawn(register),
-    spawn(get),
-    spawn(login),
-    spawn(logout),
-    spawn(orgs)
+    spawn(register)
   ]
 }
 
+function* get() {
+  while (true) {
+    yield put({type: 'REQUEST_SESSION_GET'})
+    try {
+      const token = yield call(storage.get, 'token')
+      const session = yield call(account.get)
+      yield call(orgs)
+      yield put({type: 'RECEIVE_SESSION_GET', session})
+      gaDimensions(user)
+    } catch(code) {
+      if (code !== 401) {
+        const alert = {
+          action: 'get',
+          color: 'yellow',
+          code,
+          msg: 'Account could not be loaded'
+        }
+        yield put({type: 'ALERT', alert})
+      }
+    }
+    yield take('SESSION_GET')
+  }
+}
+
+function* login() {
+  while (true) {
+    const action = yield take('SESSION_LOGIN')
+    try {
+      yield put({type: 'REQUEST_SESSION_LOGIN'})
+      const data = yield call(account.login, action.email, action.password)
+      yield call(storage.set, 'token', data, TTL)
+      yield put({type: 'SESSION_GET'})
+    } catch(code) {
+      const alert = {
+        action: 'login',
+        color: 'red',
+        code: code,
+        msg: 'Login unsuccessful'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
+}
+
+function* logout() {
+  while (true) {
+    yield take('SESSION_LOGOUT')
+    try {
+      yield call(storage.del('token'))
+    } catch(code) {
+      const alert = {
+        action: 'logout',
+        color: 'red',
+        code,
+        msg: 'Logout unsuccessful'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
+}
+
+function* orgs() {
+  yield put({type: 'REQUEST_SESSION_ORGS'})
+  try {
+    const data = yield call(account.orgs)
+    yield put({type: 'RECEIVE_SESSION_ORGS', orgs: data})
+  } catch(code) {
+    if (code !== 401) {
+      const alert = {
+        action: 'organizations',
+        color: 'yellow',
+        code,
+        msg: 'Organizations could not be loaded'
+      }
+      yield put({type: 'ALERT', alert})
+    }
+  }
+}
 
 function* request(email) {
   while (true) {
@@ -131,85 +209,6 @@ function* register(email, password, username) {
         color: 'red',
         code,
         msg: 'Registration unsuccessful'
-      }
-      yield put({type: 'ALERT', alert})
-    }
-  }
-}
-
-function* get() {
-  while (true) {
-    yield put({type: 'REQUEST_SESSION_GET'})
-    try {
-      const token = yield call(storage.get, 'token')
-      const session = yield call(account.get)
-      yield call(orgs)
-      yield put({type: 'RECEIVE_SESSION_GET', session})
-      gaDimensions(user)
-    } catch(code) {
-      if (code !== 401) {
-        const alert = {
-          action: 'get',
-          color: 'yellow',
-          code,
-          msg: 'Account could not be loaded'
-        }
-        yield put({type: 'ALERT', alert})
-      }
-    }
-    yield take('SESSION_GET')
-  }
-}
-
-function* login() {
-  while (true) {
-    const action = yield take('SESSION_LOGIN')
-    try {
-      yield put({type: 'REQUEST_SESSION_LOGIN'})
-      const data = yield call(account.login, action.email, action.password)
-      yield call(storage.set, 'token', data, TTL)
-      yield put({type: 'SESSION_GET'})
-    } catch(code) {
-      const alert = {
-        action: 'login',
-        color: 'red',
-        code: code,
-        msg: 'Login unsuccessful'
-      }
-      yield put({type: 'ALERT', alert})
-    }
-  }
-}
-
-function* logout() {
-  while (true) {
-    yield take('SESSION_LOGOUT')
-    try {
-      yield call(storage.del('token'))
-    } catch(code) {
-      const alert = {
-        action: 'logout',
-        color: 'red',
-        code,
-        msg: 'Logout unsuccessful'
-      }
-      yield put({type: 'ALERT', alert})
-    }
-  }
-}
-
-function* orgs() {
-  yield put({type: 'REQUEST_SESSION_ORGS'})
-  try {
-    const data = yield call(account.orgs)
-    yield put({type: 'RECEIVE_SESSION_ORGS', orgs: data})
-  } catch(code) {
-    if (code !== 401) {
-      const alert = {
-        action: 'organizations',
-        color: 'yellow',
-        code,
-        msg: 'Organizations could not be loaded'
       }
       yield put({type: 'ALERT', alert})
     }
