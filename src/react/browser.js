@@ -2,7 +2,8 @@ import React from 'react'
 import { render } from 'react-dom'
 import ga from '../lib/analytics'
 
-import { Router, browserHistory } from 'react-router'
+import { Router, applyRouterMiddleware, browserHistory } from 'react-router'
+import { useScroll } from 'react-router-scroll'
 // let createBrowserHistory = require('history/lib/createBrowserHistory');
 // let history = createBrowserHistory();
 // history.listen((loc) => {
@@ -17,5 +18,5 @@ const el = document.getElementById("app")
 
 if (module.hot) {
   module.hot.accept()
-  render(<Provider store={store}><Router history={browserHistory} routes={routes} /></Provider>, el)
+  render(<Provider store={store}><Router history={browserHistory} routes={routes} render={applyRouterMiddleware(useScroll())} /></Provider>, el)
 }
