@@ -4,12 +4,17 @@ import express from 'express'
 import React from 'react'
 import ReactDOM from 'react-dom/server'
 import Router, { match } from 'react-router'
+import webpack from 'webpack'
+import webpackMiddleware from 'webpack-dev-middleware'
+import webpackHot from 'webpack-hot-middleware'
+import webpackConfig from './webpack.config.js'
 
 import api from './api/rest'
 // import routes from './src/routes'
 // import server from './src/react/server'
 
 const phourus = express()
+
 
 process.on('uncaughtException', function (err) {
   console.log("---UNCAUGHT EXCEPTION---")
@@ -19,6 +24,15 @@ process.on('uncaughtException', function (err) {
 phourus.use(express.static(__dirname))
 phourus.use('/rest', api)
 
+console.log('ENVIRONMENT', process.env.NODE_ENV)
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Hot Module Replacement enabled')
+  const compiler = webpack(webpackConfig)
+  phourus.use(webpackMiddleware(compiler), {
+    publicPath: webpackConfig.output.publicPath
+  })
+  phourus.use(webpackHot(compiler))
+}
 phourus.get('*', renderIndex)
 
 function renderIndex (req, res) {

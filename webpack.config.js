@@ -1,23 +1,23 @@
-require('babel-polyfill');
-var path = require('path');
-var webpack = require('webpack');
-var values = require('postcss-modules-values');
+require('babel-polyfill')
+var path = require('path')
+var webpack = require('webpack')
+var values = require('postcss-modules-values')
 
 module.exports = {
   devtool: 'source-map',
   entry: [
     'babel-polyfill',
-    // 'webpack-dev-server/client?http://localhost:3000',
-    // 'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client',
     './src/react/browser'
   ],
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, '/build/'),
     filename: 'app.js',
-    publicPath: '/build/'
+    publicPath: 'http://phourus.local:3000/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [
@@ -46,4 +46,4 @@ module.exports = {
   postcss: [
     values
   ]
-};
+}
