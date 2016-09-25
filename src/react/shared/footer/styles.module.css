@@ -1,23 +1,38 @@
 @value theme: '../../../css/theme.module.css';
-@value grey-light, theme-light, green from theme;
+@value grey-dark, grey-light, theme-light, green from theme;
 
 .footer {
-	color: grey-light;
+	width: 90%;
+	margin: auto;
+	color: grey-dark;
 	text-align: center;
 	font-size: 0.8em;
 	line-height: 20px;
+	border-top: solid 1px grey-light;
 	padding: 20px 0px 10px 0px;
-	background-color: #000;
+}
+
+.copyright {
+	display: inline-block;
+	text-align: left;
+	width: 50%;
+}
+
+.contact {
+	display: inline-block;
+	text-align: right;
+	width: 50%;
 }
 
 .muted {
-	color: #777;
+	color: #bbb;
 }
 
 .link {
-	color: theme-light;
+	margin-left: 20px;
+	text-transform: uppercase;
 }
 
-.link:hover {
-	color: green;
+@media (min-width: 500px) {
+
 }
