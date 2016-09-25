@@ -9,6 +9,8 @@ import Details from './components/details'
 import Tags from './components/tags'
 import Stats from './components/stats'
 
+import styles from './styles.less'
+
 export default (props) => {
 	return (
 		<div className="postItem" id={`post${props.post.id}`}>

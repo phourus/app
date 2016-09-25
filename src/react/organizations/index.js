@@ -14,6 +14,15 @@ import styles from './styles.less'
 class Orgs extends React.Component {
 
   render() {
+
+    // 401
+    if (!this.props.session.authenticated) {
+      return (<div className="orgs 401">
+        <h2>You need to login first to view your organizations</h2>
+        <p>Please log in or create an account to access this page.</p>
+      </div>)
+    }
+
     return (
       <div className="organizations">
         <h3>My Organizations</h3>

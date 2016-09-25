@@ -14,6 +14,8 @@ import {
   Post,
   Account,
   Activity,
+  Folders,
+  Links,
   Organizations,
   Admin,
   Details,
@@ -37,6 +39,8 @@ export default (
     <Route path="activity" getComponent={Activity} />
     <Route path="notifications" getComponent={Activity} />
     <Route path="history" getComponent={Activity} />
+    <Route path="folders" getComponent={Folders} />
+    <Route path="links" getComponent={Links} />
     <Route path="organizations" getComponent={Organizations} />
     <Route path="help" getComponent={Help}>
       <Route path=":id" getComponent={Help} />

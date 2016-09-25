@@ -48,6 +48,14 @@ export const Activity = (location, cb) => {
   System.import('./react/activity').then(loadRoute(cb)).catch(errorLoading)
 }
 
+export const Folders = (location, cb) => {
+  System.import('./react/folders').then(loadRoute(cb)).catch(errorLoading)
+}
+
+export const Links = (location, cb) => {
+  System.import('./react/links').then(loadRoute(cb)).catch(errorLoading)
+}
+
 /** ADMIN **/
 export const Organizations = (location, cb) => {
   System.import('./react/organizations').then(loadRoute(cb)).catch(errorLoading)
