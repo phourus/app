@@ -9,6 +9,7 @@ import profile from './shared/profile/redux/saga'
 import general from './static/redux/saga'
 import post from './post/redux/saga'
 import stream from './stream/redux/saga'
+import organizations from './organizations/redux/saga'
 
 export default function* sagas() {
   yield [
@@ -20,6 +21,7 @@ export default function* sagas() {
     spawn(tutorial),
     spawn(general),
     spawn(post),
-    spawn(stream)
+    spawn(stream),
+    spawn(organizations)
   ]
 }

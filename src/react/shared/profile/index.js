@@ -28,13 +28,13 @@ class Profile extends React.Component {
 		let address = profile.address || {}
 		let name = ''
 
-		// only render if stream, account, admin or activity
-		if (['stream', 'account', 'admin', 'activity'].indexOf(root) === -1) {
+		// only render if stream, account, admin, organizations or activity
+		if (['stream', 'account', 'admin', 'organizations', 'activity'].indexOf(root) === -1) {
 			return false
 		}
 
-		// only render account, admin or activity if authenticated
-		if (!session.authenticated && ['account', 'admin', 'activity'].indexOf(root) > -1) {
+		// only render account, admin, organizations or activity if authenticated
+		if (!session.authenticated && ['account', 'admin', 'organizations', 'activity'].indexOf(root) > -1) {
 			return false
 		}
 

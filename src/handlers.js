@@ -49,6 +49,10 @@ export const Activity = (location, cb) => {
 }
 
 /** ADMIN **/
+export const Organizations = (location, cb) => {
+  System.import('./react/organizations').then(loadRoute(cb)).catch(errorLoading)
+}
+
 export const Admin = (location, cb) => {
   System.import('./react/admin').then(loadRoute(cb)).catch(errorLoading)
 }

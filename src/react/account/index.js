@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Info from './info'
-import Orgs from './organizations'
 import * as actions from './redux/actions'
 import styles from './styles.less'
 
@@ -21,7 +20,6 @@ class Account extends React.Component {
       <div className="account">
         <h2>My Account</h2>
         <Info {...this.props} />
-        <Orgs {...this.props} />
       </div>
     )
   }
@@ -29,14 +27,12 @@ class Account extends React.Component {
 
 const mapState = (state) => {
   const {
-    changes,
-    lookup
+    changes
   } = state.account
 
   return {
     session: state.session,
-    changes,
-    lookup,
+    changes
   }
 }
 

@@ -1,7 +1,6 @@
 import update from 'react-addons-update'
 const initState = {
-  changes: {},
-  lookup: []
+  changes: {}
 }
 
 export default (state = initState, action = {}) => {
