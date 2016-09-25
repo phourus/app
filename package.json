@@ -26,7 +26,6 @@
     "history": "1.17.0",
     "influence": "^0.2.0",
     "jsonwebtoken": "^7.1.9",
-    "localStorage": "^1.0.3",
     "mariasql": "^0.2.5",
     "moment": "^2.9.0",
     "mysql": "^2.9.0",

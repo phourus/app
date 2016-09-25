@@ -2,14 +2,43 @@ require('babel-polyfill')
 var path = require('path')
 var webpack = require('webpack')
 var values = require('postcss-modules-values')
+var modules = [
+  //"aws-sdk",
+  "cross-storage",
+  "influence",
+  "moment",
+  "numeral",
+  "react",
+  "react-addons-update",
+  "react-dnd",
+  "react-dnd-html5-backend",
+  "react-dom",
+  "react-dropzone-component",
+  "react-google-analytics",
+  "react-infinite-scroller",
+  "react-joyride",
+  //"react-markdown",
+  "react-quill",
+  "react-redux",
+  "react-router",
+  "react-select",
+  "redux",
+  "redux-saga",
+  "reselect",
+  "universal-fetch",
+  "window-or-global"
+]
 
 module.exports = {
   devtool: 'source-map',
-  entry: [
-    'babel-polyfill',
-    'webpack-hot-middleware/client',
-    './src/react/browser'
-  ],
+  entry: {
+    app: [
+      'babel-polyfill',
+      'webpack-hot-middleware/client',
+      './src/react/browser'
+    ],
+    vendor: modules
+  },
   output: {
     path: path.join(__dirname, '/build/'),
     filename: 'app.js',
@@ -19,6 +48,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
