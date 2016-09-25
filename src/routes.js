@@ -1,58 +1,146 @@
-import React from 'react';
-import {Route, IndexRoute} from 'react-router';
-import App from './app';
-import Landing from './react/static/landing';
-import Product from './react/static/product';
-import Pricing from './react/static/pricing'
-import Help from './react/static/help';
-import Terms from './react/static/terms';
-import Privacy from './react/static/privacy';
-import Stream from './react/stream';
-import Post from './react/post'
-import Account from './react/account';
-import Activity from './react/activity';
-import Admin from './react/admin';
-import Billing from './react/admin/billing';
-import Details from './react/admin/details';
-import Members from './react/admin/members';
-import Teams from './react/admin/teams';
+import React from 'react'
+import {Route, IndexRoute} from 'react-router'
+import App from './app'
 
-let Index = Stream;
-
+let index = './react/stream'
 if (typeof document !== 'undefined') {
-  let subdomain = window.location.hostname;
-  let parts = subdomain.split('.');
+  let subdomain = window.location.hostname
+  let parts = subdomain.split('.')
   if (['phourus', 'www', 'us-west-2'].indexOf(parts[0]) > -1) {
-    Index = Landing;
+    index = './react/static/landing'
   }
 }
 
+function loadRoute(cb) {
+ return (module) => cb(null, module.default)
+}
+
+function errorLoading(err) {
+ console.error('Dynamic page loading failed', err)
+}
+
 export default (<Route component={App} path="/">
-  <IndexRoute component={Index}/>
-  <Route path="stream" component={Stream} />
-  <Route path="home" component={Landing} />
-  <Route path="product" component={Product} />
-  <Route path="pricing" component={Pricing} />
-  <Route path="terms" component={Terms} />
-  <Route path="privacy" component={Privacy} />
-  <Route path="account" component={Account} />
-  <Route path="me" component={Stream} />
-  <Route path="create" component={Post} />
-  <Route path="activity" component={Activity} />
-  <Route path="notifications" component={Activity} />
-  <Route path="history" component={Activity} />
-  <Route path="help" component={Help}>
-    <Route path=":id" component={Help} />
+  <IndexRoute getComponent={
+    (location, cb) => {
+      System.import('./react/static/landing').then(loadRoute(cb)).catch(errorLoading)
+    }
+  }/>
+  <Route path="stream" getComponent={
+    (location, cb) => {
+      System.import('./react/stream').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="home" getComponent={
+    (location, cb) => {
+      System.import('./react/static/landing').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="product" getComponent={
+    (location, cb) => {
+      System.import('./react/static/product').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="pricing" getComponent={
+    (location, cb) => {
+      System.import('./react/static/pricing').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="terms" getComponent={
+    (location, cb) => {
+      System.import('./react/static/terms').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="privacy" getComponent={
+    (location, cb) => {
+      System.import('./react/static/privacy').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="account" getComponent={
+    (location, cb) => {
+      System.import('./react/account').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="me" getComponent={
+    (location, cb) => {
+      System.import('./react/stream').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="create" getComponent={
+    (location, cb) => {
+      System.import('./react/post').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="activity" getComponent={
+    (location, cb) => {
+      System.import('./react/activity').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="notifications" getComponent={
+    (location, cb) => {
+      System.import('./react/activity').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="history" getComponent={
+    (location, cb) => {
+      System.import('./react/activity').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+  <Route path="help" getComponent={
+    (location, cb) => {
+      System.import('./react/static/help').then(loadRoute(cb)).catch(errorLoading)
+    }
+  }>
+    <Route path=":id" getComponent={
+      (location, cb) => {
+        System.import('./react/static/help').then(loadRoute(cb)).catch(errorLoading)
+      }
+    } />
   </Route>
-  <Route path="admin" component={Admin}>
-    <IndexRoute component={Details} />
-    <Route path="details" component={Details} />
-    <Route path="members" component={Members} />
-    <Route path="teams" component={Teams} />
-    <Route path="billing" component={Billing} />
+  <Route path="admin" getComponent={
+    (location, cb) => {
+      System.import('./react/admin').then(loadRoute(cb)).catch(errorLoading)
+    }
+  }>
+    <IndexRoute getComponent={
+      (location, cb) => {
+        System.import('./react/admin/details').then(loadRoute(cb)).catch(errorLoading)
+      }
+    } />
+    <Route path="details" getComponent={
+      (location, cb) => {
+        System.import('./react/admin/details').then(loadRoute(cb)).catch(errorLoading)
+      }
+    } />
+    <Route path="members" getComponent={
+      (location, cb) => {
+        System.import('./react/admin/members').then(loadRoute(cb)).catch(errorLoading)
+      }
+    } />
+    <Route path="teams" getComponent={
+      (location, cb) => {
+        System.import('./react/admin/teams').then(loadRoute(cb)).catch(errorLoading)
+      }
+    } />
+    <Route path="billing" getComponent={
+      (location, cb) => {
+        System.import('./react/admin/billing').then(loadRoute(cb)).catch(errorLoading)
+      }
+    } />
   </Route>
-  <Route path=":user/:post" component={Post}>
-    <Route path="edit" component={Post} />
+  <Route path=":user/:post" getComponent={
+    (location, cb) => {
+      System.import('./react/post').then(loadRoute(cb)).catch(errorLoading)
+    }
+  }>
+    <Route path="edit" getComponent={
+      (location, cb) => {
+        System.import('./react/post').then(loadRoute(cb)).catch(errorLoading)
+      }
+    } />
   </Route>
-  <Route path=":user" component={Stream} />
-</Route>);
+  <Route path=":user" getComponent={
+    (location, cb) => {
+      System.import('./react/stream').then(loadRoute(cb)).catch(errorLoading)
+    }
+  } />
+</Route>)
