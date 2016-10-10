@@ -5,6 +5,7 @@ const initState = {
   total: 0,
   selected: 0,
   scroll: false,
+  showSort: false,
   params: {
     exclude: [],
     search: '',
@@ -103,6 +104,11 @@ export default (state = initState, action = {}) => {
         params: {
           limit: {$set: action.value}
         }
+      })
+      break
+    case 'STREAM_TOGGLE_SORT':
+      return update(state, {
+        showSort: {$set: !state.showSort}
       })
       break
     case 'STREAM_SORT':

@@ -70,6 +70,7 @@ const mapState = (state, props) => {
 		total,
 		selected,
 		scroll,
+		showSort,
 		params,
 		folders
 	} = state.stream
@@ -81,6 +82,7 @@ const mapState = (state, props) => {
 		total,
 		selected,
 		scroll,
+		showSort,
 		params,
 		folders
 	}

@@ -1,6 +1,8 @@
 import React from 'react'
 import ga from '../../lib/analytics'
 
+import styles from './css/search.less'
+
 export default class Search extends React.Component {
 
 	render() {

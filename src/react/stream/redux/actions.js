@@ -34,6 +34,10 @@ export function limit(value) {
   return {type: 'STREAM_LIMIT', value}
 }
 
+export function toggleSort() {
+  return {type: 'STREAM_TOGGLE_SORT'}
+}
+
 export function sortBy(field) {
   return {type: 'STREAM_SORT', field}
 }

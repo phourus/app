@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import ga from '../../../lib/analytics'
 import util from '../../../lib/util'
-import Search from '../../stream/search'
 import Nav from './nav'
 
 import styles from './styles.less'
@@ -28,7 +27,6 @@ class Header extends React.Component {
     if (!r && !url.subdomain) {
       type = 'home'
     }
-    //<Search />
     return  (
       <header className={type === 'home' ? "header home" : "header"}>
         <Nav classType={type} logout={this._logout.bind(this)} />
